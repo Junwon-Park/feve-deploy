@@ -1,10 +1,10 @@
-import express from 'express';
-import 'express-async-errors';
-import cors from 'cors';
-import morgan from 'morgan';
-import helmet from 'helmet';
-import startRoute from './router/start.js';
-import { config } from './config.js';
+const express = require('express');
+require('express-async-errors');
+const cors = require('cors');
+const morgan = require('morgan');
+const helmet = require('helmet');
+const startRoute = require('./router/start.js');
+const { config } = require('./config.js');
 
 const app = express();
 const PORT = config.PORT || 4000;
@@ -24,7 +24,11 @@ const corsOptions = {
   credentials: true,
   optionsSuccessStatus: 200
 };
-app.use(cors(corsOptions));
+const devCors = {
+  origin: '*',
+  optionsSuccessStatus: 200
+};
+app.use(cors(devCors));
 
 // To router
 app.use('/', startRoute);

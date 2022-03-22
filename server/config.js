@@ -1,4 +1,4 @@
-import dotenv from 'dotenv';
+const dotenv = require('dotenv');
 dotenv.config();
 
 function required(key, defaultValue = undefined) {
@@ -9,7 +9,7 @@ function required(key, defaultValue = undefined) {
   return value;
 }
 
-export const config = {
+const config = {
   jwt: {
     accessKey: required('JWT_ACCESS'),
     refreshKey: required('JWT_REFRESH'),
@@ -26,7 +26,10 @@ export const config = {
     host: required('DB_HOST'),
     user: required('DB_USER'),
     database: required('DB_DATABASE'),
-    password: required('DB_PASSWORD')
+    password: required('DB_PASSWORD'),
+    rdbms: required('DB_RDBMS')
   },
   PORT: required('PORT')
 };
+
+module.exports = { config };
