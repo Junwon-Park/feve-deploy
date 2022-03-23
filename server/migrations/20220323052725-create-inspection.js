@@ -1,0 +1,41 @@
+'use strict';
+module.exports = {
+  async up(queryInterface, Sequelize) {
+    await queryInterface.createTable('INSPECTION', {
+      INSPECTION_KEY: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.BIGINT
+      },
+      USER_KEY: {
+        allowNull: false,
+        type: Sequelize.BIGINT
+      },
+      PRODUCT_KEY: {
+        allowNull: false,
+        type: Sequelize.BIGINT
+      },
+      INSPECTION_DATE: {
+        type: Sequelize.DATE
+      },
+      INSPECTION_STATUS: {
+        allowNull: false,
+        type: Sequelize.STRING(1),
+        defaultValue: "0"
+      },
+      INSPECTION_RESULT: {
+        type: Sequelize.STRING(1)
+      },
+      INSPECTION_ADATE: {
+        type: Sequelize.DATE
+      },
+      INSPECTION_RDATE: {
+        type: Sequelize.DATE
+      }
+    });
+  },
+  async down(queryInterface, Sequelize) {
+    await queryInterface.dropTable('INSPECTION');
+  }
+};
