@@ -22,22 +22,13 @@ module.exports = {
       },
       buy_status: {
         allowNull: false,
-        defaultValue: "0",
+        defaultValue: '0',
         type: Sequelize.STRING
       },
       product_key: {
         allowNull: false,
         type: Sequelize.BIGINT
-      },
-      buy_seller_key: {
-        allowNull: false,
-        type: Sequelize.BIGINT
-      },
-      buy_buyer_key: {
-        allowNull: false,
-        type: Sequelize.BIGINT
       }
-    
     });
   },
   async down(queryInterface, Sequelize) {

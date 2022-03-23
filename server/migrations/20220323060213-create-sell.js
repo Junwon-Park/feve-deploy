@@ -1,4 +1,5 @@
 'use strict';
+
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Sell', {
@@ -22,24 +23,12 @@ module.exports = {
       },
       sell_status: {
         allowNull: false,
-        defaultValue: "0",
+        defaultValue: '0',
         type: Sequelize.STRING
-      },
-      product_key: {
-        allowNull: false,
-        type: Sequelize.BIGINT
-      },
-      sell_seller_key: {
-        allowNull: false,
-        type: Sequelize.BIGINT
-      },
-      sell_buyer_key: {
-        allowNull: false,
-        type: Sequelize.BIGINT
       }
-  
     });
   },
+
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('Sell');
   }

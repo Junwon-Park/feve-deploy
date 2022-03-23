@@ -16,18 +16,13 @@ module.exports = {
         allowNull: false,
         type: Sequelize.TEXT
       },
-      USER_KEY: {
-        allowNull: false,
-        type: Sequelize.BIGINT
-        
-      },
       CSCENTER_WDATE: {
         allowNull: false,
         type: Sequelize.DATE
       },
       CSCENTER_STATUS: {
         allowNull: false,
-        defaultValue:"0",
+        defaultValue: '0',
         type: Sequelize.STRING(1)
       },
       CSCENTER_COMMENT: {

@@ -8,21 +8,13 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.BIGINT
       },
-      USER_KEY: {
-        allowNull: false,
-        type: Sequelize.BIGINT
-      },
-      PRODUCT_KEY: {
-        allowNull: false,
-        type: Sequelize.BIGINT
-      },
       INSPECTION_DATE: {
         type: Sequelize.DATE
       },
       INSPECTION_STATUS: {
         allowNull: false,
         type: Sequelize.STRING(1),
-        defaultValue: "0"
+        defaultValue: '0'
       },
       INSPECTION_RESULT: {
         type: Sequelize.STRING(1)
