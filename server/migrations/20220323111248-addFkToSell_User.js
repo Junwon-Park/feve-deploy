@@ -2,8 +2,31 @@
 
 module.exports = {
   async up(queryInterface, Sequelize) {
+    await queryInterface.addColumn("Sell", "product_key", {
+      type: Sequelize.BIGINT,
+      allowNull:false
+    });
+
+    await queryInterface.addConstraint("Sell", {
+
+      fields: ["product_key"],
+      type: "foreign key",
+      name: "product_sell_id_fk",
+
+      references: {
+        table: "Product",
+        field: "product_key",
+
+      },
+
+      onDelete: "cascade",
+      onUpdate: "cascade",
+
+    });
+
     await queryInterface.addColumn('Sell', 'sell_seller_key', {
-      type: Sequelize.BIGINT
+      type: Sequelize.BIGINT,
+      allowNull:false
     });
     await queryInterface.addConstraint('Sell', {
       fields: ['sell_seller_key'],

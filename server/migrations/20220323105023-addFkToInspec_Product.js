@@ -2,11 +2,11 @@
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.addColumn(
-      'INSPECTION',
-      'PRODUCT_KEY',
-      Sequelize.BIGINT
-    );
+    
+    await queryInterface.addColumn("INSPECTION", "PRODUCT_KEY", {
+      type: Sequelize.BIGINT,
+      allowNull: false
+    });
     // foreign key 연결
     await queryInterface.addConstraint('INSPECTION', {
       fields: ['PRODUCT_KEY'],

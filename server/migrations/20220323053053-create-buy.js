@@ -24,11 +24,8 @@ module.exports = {
         allowNull: false,
         defaultValue: '0',
         type: Sequelize.STRING
-      },
-      product_key: {
-        allowNull: false,
-        type: Sequelize.BIGINT
       }
+     
     });
   },
   async down(queryInterface, Sequelize) {

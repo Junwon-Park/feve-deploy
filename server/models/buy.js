@@ -21,8 +21,8 @@ module.exports = (sequelize, DataTypes) => {
       buy_status: {
         type: DataTypes.STRING('1'),
         defaultValue: '0'
-      },
-      product_key: DataTypes.BIGINT
+      }
+     
     },
     {
       sequelize,

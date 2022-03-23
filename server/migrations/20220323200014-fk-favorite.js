@@ -3,7 +3,8 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.addColumn('FAVORITE', 'PRODUCT_KEY', {
-      type: Sequelize.BIGINT
+      type: Sequelize.BIGINT,
+      allowNull: false
     });
     await queryInterface.addConstraint('FAVORITE', {
       fields: ['PRODUCT_KEY'],
@@ -17,8 +18,25 @@ module.exports = {
       onUpdate: 'cascade'
     });
 
+    await queryInterface.addColumn('FAVORITE', 'USER_KEY', {
+      type: Sequelize.BIGINT,
+      allowNull: false
+    });
+    await queryInterface.addConstraint('FAVORITE', {
+      fields: ['USER_KEY'],
+      type: 'foreign key',
+      name: 'USER_FAVORITE_KEY_FK',
+      references: {
+        table: 'User',
+        field: 'USER_KEY'
+      },
+      onDelete: 'cascade',
+      onUpdate: 'cascade'
+    });
+
     await queryInterface.addColumn('PRODUCT', 'PRODUCT_CATE', {
-      type: Sequelize.BIGINT
+      type: Sequelize.BIGINT,
+      allowNull: false
     });
 
     await queryInterface.addConstraint('PRODUCT', {

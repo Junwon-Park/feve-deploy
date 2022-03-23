@@ -7,11 +7,8 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.BIGINT
-      },
-      USER_KEY: {
-        allowNull: false,
-        type: Sequelize.BIGINT
       }
+     
     });
   },
   async down(queryInterface, Sequelize) {

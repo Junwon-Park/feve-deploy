@@ -16,8 +16,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   FAVORITE.init({
-    FAVORITE_KEY: DataTypes.BIGINT,
-    USER_KEY: DataTypes.BIGINT
+    FAVORITE_KEY: DataTypes.BIGINT
+    
   }, {
     sequelize,
     modelName: 'FAVORITE',

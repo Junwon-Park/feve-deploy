@@ -2,7 +2,10 @@
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.addColumn('CSCENTER', 'USER_KEY', Sequelize.BIGINT);
+    await queryInterface.addColumn("CSCENTER", "USER_KEY", {
+      type: Sequelize.BIGINT,
+      allowNull: false
+    });
     // foreign key 연결
     await queryInterface.addConstraint('CSCENTER', {
       fields: ['USER_KEY'],
