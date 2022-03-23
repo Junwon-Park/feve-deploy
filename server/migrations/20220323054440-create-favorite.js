@@ -8,10 +8,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.BIGINT
       },
-      PRODUCT_KEY: {
-        allowNull: false,
-        type: Sequelize.BIGINT
-      },
       USER_KEY: {
         allowNull: false,
         type: Sequelize.BIGINT

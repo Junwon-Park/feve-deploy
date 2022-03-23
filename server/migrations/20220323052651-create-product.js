@@ -8,10 +8,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.BIGINT
       },
-      PRODUCT_CATE: {
-        allowNull: false,
-        type: Sequelize.BIGINT
-      },
       PRODUCT_BRAND: {
         allowNull: false,
         type: Sequelize.STRING(100)

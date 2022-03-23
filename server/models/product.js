@@ -11,27 +11,16 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      models.PRODUCT.belongsTo(models.CATEGORY, {
-        foreignKey:'PRODUCT_CATE'
-      });
+      models.PRODUCT.belongsTo(models.CATEGORY);
 
-      models.PRODUCT.hasMany(models.BUY, {
-        foreignKey:'PRODUCT_KEY'
-      });
-      models.PRODUCT.hasMany(models.CELL, {
-        foreignKey:'PRODUCT_KEY'
-      });
-      models.PRODUCT.hasMany(models.FAVORITE, {
-        foreignKey:'PRODUCT_KEY'
-      });
-      models.PRODUCT.hasMany(models.INSPECTION, {
-        foreignKey:'PRODUCT_KEY'
-      });
+      models.PRODUCT.hasMany(models.BUY);
+      models.PRODUCT.hasMany(models.CELL);
+      models.PRODUCT.hasMany(models.FAVORITE);
+      models.PRODUCT.hasMany(models.INSPECTION);
     }
   }
   PRODUCT.init({
     PRODUCT_KEY : DataTypes.BIGINT,
-    PRODUCT_CATE: DataTypes.BIGINT,
     PRODUCT_BRAND: DataTypes.STRING(100),
     PRODUCT_NAME: DataTypes.STRING(100),
     PRODUCT_MNUM: DataTypes.STRING(100),
