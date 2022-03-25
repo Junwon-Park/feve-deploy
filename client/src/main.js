@@ -17,6 +17,7 @@ Vue.prototype.$axios = axios //다른 데서 사용시 this.$axios로 사용
 
 loadFonts()
 
+
 new Vue({
   router,
   store,

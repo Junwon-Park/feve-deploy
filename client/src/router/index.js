@@ -28,6 +28,9 @@ import List2 from "@/views/List2.vue";
 import List3 from "@/views/List3.vue";
 import Write from "@/views/Write.vue";
 
+import Shoplist from "@/views/shop/Shoplist.vue";
+
+
 
 
 Vue.use(VueRouter);
@@ -97,8 +100,16 @@ const routes = [
     component: Write,
   },
   {
+
     path: "/admin/addProduct",
     component: AddProduct,
+  
+  },
+  
+  {
+    path: "/shop",
+    component: Shoplist,
+
   },
   { path: "/:pathMatch(.*)*", redirect: "/" },
 ];
