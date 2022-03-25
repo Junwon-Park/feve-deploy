@@ -4,6 +4,7 @@ const cors = require('cors');
 const morgan = require('morgan');
 const helmet = require('helmet');
 const startRoute = require('./router/start.js');
+const addproductRoute = require('./router/admin/addproduct.js');
 const { config } = require('./config.js');
 
 const app = express();
@@ -32,6 +33,7 @@ app.use(cors(devCors));
 
 // To router
 app.use('/', startRoute);
+app.use('/addproduct', addproductRoute);
 
 app.use((req, res, next) => {
   res.sendStatus(404);
