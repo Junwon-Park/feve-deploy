@@ -93,11 +93,11 @@
           </div>
           <hr />
           
-          <div class="flex flex-wrap">
-            <div class="w-full lg:w-3/12 xl:w-3/12 px-4 mb-5">
+          <div class="flex">
+            <div class="flex w-auto px-4 mb-5">
               <Category />
             </div>
-            <div class="w-full lg:w-9/12 xl:w-3/12 px-4 mb-5">
+            <div class="w-full px-4 mb-5 flex flex-wrap">
               <div class="w-full lg:w-6/12 xl:w-3/12 px-4 mb-5" v-for="item in items" :key="item.seq">
                 <card-stats v-bind="item" />
               </div>
