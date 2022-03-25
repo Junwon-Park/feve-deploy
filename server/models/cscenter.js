@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
       models.Cscenter.belongsTo(models.User);
     }
   }
-  CSCENTER.init(
+    Cscenter.init(
     {
       CSCENTER_TITLE: DataTypes.STRING(100),
       CSCENTER_CONTENTS: DataTypes.TEXT,
