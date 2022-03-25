@@ -14,6 +14,7 @@ import Dashboard from "@/views/admin/Dashboard.vue";
 import Settings from "@/views/admin/Settings.vue";
 import Tables from "@/views/admin/Tables.vue";
 import Maps from "@/views/admin/Maps.vue";
+import AddProduct from "@/views/admin/AddProduct.vue";
 
 // views for Auth layout
 import Login from "@/views/auth/Login.vue";
@@ -26,6 +27,7 @@ import List from "@/views/List.vue";
 import List2 from "@/views/List2.vue";
 import List3 from "@/views/List3.vue";
 import Write from "@/views/Write.vue";
+
 
 
 Vue.use(VueRouter);
@@ -93,6 +95,10 @@ const routes = [
   {
     path: "/write",
     component: Write,
+  },
+  {
+    path: "/admin/addProduct",
+    component: AddProduct,
   },
   { path: "/:pathMatch(.*)*", redirect: "/" },
 ];
