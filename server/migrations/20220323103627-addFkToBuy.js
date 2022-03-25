@@ -6,14 +6,12 @@ module.exports = {
       type: Sequelize.BIGINT,
       allowNull: false
     });
-
     await queryInterface.addConstraint('Buy', {
       fields: ['product_key'],
       type: 'foreign key',
       name: 'product_buy_id_fk',
-
       references: {
-        table: 'PRODUCT',
+        table: 'Product',
         field: 'PRODUCT_KEY'
       },
 

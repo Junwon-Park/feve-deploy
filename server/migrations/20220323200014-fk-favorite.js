@@ -2,27 +2,27 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.addColumn('FAVORITE', 'PRODUCT_KEY', {
+    await queryInterface.addColumn('Favorite', 'PRODUCT_KEY', {
       type: Sequelize.BIGINT,
       allowNull: false
     });
-    await queryInterface.addConstraint('FAVORITE', {
+    await queryInterface.addConstraint('Favorite', {
       fields: ['PRODUCT_KEY'],
       type: 'foreign key',
       name: 'PRODUCT_FAVORITE_KEY_FK',
       references: {
-        table: 'PRODUCT',
+        table: 'Product',
         field: 'PRODUCT_KEY'
       },
       onDelete: 'cascade',
       onUpdate: 'cascade'
     });
 
-    await queryInterface.addColumn('FAVORITE', 'USER_KEY', {
+    await queryInterface.addColumn('Favorite', 'USER_KEY', {
       type: Sequelize.BIGINT,
       allowNull: false
     });
-    await queryInterface.addConstraint('FAVORITE', {
+    await queryInterface.addConstraint('Favorite', {
       fields: ['USER_KEY'],
       type: 'foreign key',
       name: 'USER_FAVORITE_KEY_FK',
@@ -34,12 +34,11 @@ module.exports = {
       onUpdate: 'cascade'
     });
 
-    await queryInterface.addColumn('PRODUCT', 'PRODUCT_CATE', {
+    await queryInterface.addColumn('Product', 'PRODUCT_CATE', {
       type: Sequelize.BIGINT,
       allowNull: false
     });
-
-    await queryInterface.addConstraint('PRODUCT', {
+    await queryInterface.addConstraint('Product', {
       fields: ['PRODUCT_CATE'],
       type: 'foreign key',
       name: 'CATEGORY_PRODUCT_KEY_FK',
@@ -53,7 +52,7 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.removeColumn('FAVORITE', 'PRODUCT_KEY');
-    await queryInterface.removeColumn('CATEGORY', 'CATEGORY_KEY');
+    await queryInterface.removeColumn('Favorite', 'PRODUCT_KEY');
+    await queryInterface.removeColumn('Category', 'CATEGORY_KEY');
   }
 };

@@ -1,14 +1,14 @@
 'use strict';
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class CSCENTER extends Model {
+  class Cscenter extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      models.cscenter.belongsTo(models.user);
+      models.Cscenter.belongsTo(models.User);
     }
   }
   CSCENTER.init(
@@ -25,8 +25,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: 'CSCENTER'
+      modelName: 'Cscenter'
     }
   );
-  return CSCENTER;
+  return Cscenter;
 };

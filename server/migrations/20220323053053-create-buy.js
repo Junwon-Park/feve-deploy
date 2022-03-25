@@ -25,7 +25,6 @@ module.exports = {
         defaultValue: '0',
         type: Sequelize.STRING
       }
-     
     });
   },
   async down(queryInterface, Sequelize) {

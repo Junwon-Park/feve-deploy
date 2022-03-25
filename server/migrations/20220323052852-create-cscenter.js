@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('CSCENTER', {
+    await queryInterface.createTable('Cscenter', {
       CSCENTER_KEY: {
         allowNull: false,
         autoIncrement: true,
@@ -36,6 +36,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('CSCENTER');
+    await queryInterface.dropTable('Cscenter');
   }
 };

@@ -6,17 +6,14 @@ module.exports = {
       type: Sequelize.BIGINT,
       allowNull: false
     });
-
     await queryInterface.addConstraint('Sell', {
       fields: ['product_key'],
       type: 'foreign key',
       name: 'product_sell_id_fk',
-
       references: {
-        table: 'PRODUCT',
+        table: 'Product',
         field: 'product_key'
       },
-
       onDelete: 'cascade',
       onUpdate: 'cascade'
     });

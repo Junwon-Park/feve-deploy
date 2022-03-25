@@ -8,9 +8,8 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      models.Buy.belongsTo(models.product);
-      models.Buy.belongsTo(models.user);
-      models.Buy.belongsTo(models.user);
+      models.Buy.belongsTo(models.Product);
+      models.Buy.belongsTo(models.User);
     }
   }
   Buy.init(
@@ -22,7 +21,6 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING('1'),
         defaultValue: '0'
       }
-     
     },
     {
       sequelize,
