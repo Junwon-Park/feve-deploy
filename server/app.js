@@ -3,9 +3,13 @@ require('express-async-errors');
 const cors = require('cors');
 const morgan = require('morgan');
 const helmet = require('helmet');
+
+const { config } = require('./config.js');
+
+// Router
 const startRoute = require('./router/start.js');
 const addproductRoute = require('./router/admin/addproduct.js');
-const { config } = require('./config.js');
+const authRouter = require('./router/auth/authRouter.js');
 
 const app = express();
 const PORT = config.PORT || 4000;
@@ -34,6 +38,7 @@ app.use(cors(devCors));
 // To router
 app.use('/', startRoute);
 app.use('/addproduct', addproductRoute);
+app.use('/auth', authRouter);
 
 app.use((req, res, next) => {
   res.sendStatus(404);
