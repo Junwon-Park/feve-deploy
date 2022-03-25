@@ -25,7 +25,7 @@
                         type="text"
                         class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                         placeholder="상품명"
-                        name="product_name"
+                        v-model="product.product_name"
                     />
                   </div>
 
@@ -40,7 +40,7 @@
                         type="text"
                         class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                         placeholder="브랜드명"
-                        name="product_brand"
+                        v-model="product.product_brand"
                     />
                   </div>
 
@@ -48,7 +48,6 @@
                     <label
                         class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                         htmlFor="모델명"
-                        name="product_mnum"
                     >
                       모델명
                     </label>
@@ -56,6 +55,7 @@
                         type="text"
                         class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                         placeholder="모델명"
+                        v-model="product.product_mnum"
                     />
                   </div>
 
@@ -66,8 +66,11 @@
                     >
                       카테고리
                     </label>
-                    <select  id="category" class=" w-full px-3 py-3 shadow" name="product_cate">
+                    <select  id="category" class=" w-full px-3 py-3 shadow" v-model="product.product_cate">
                       <option value="">카테고리 선택</option>
+                      <option value="가가가">가가가</option>
+                      <option value="나나나">나나나</option>
+                      <option value="다다다">다다다</option>
                     </select>
                   </div>
 
@@ -82,24 +85,24 @@
                         type="date"
                         class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                         placeholder="출시일"
-                        name="product_ldate"
+                        v-model="product.product_ldate"
                     />
                   </div>
 
-                  <div class="relative mb-3  mt-8 w-full lg:w-6/12 pr-3 ">
-                    <label
-                        class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                        htmlFor="상품사진경로"
-                    >
-                      사진
-                    </label>
-                    <input
-                        type="file"
-                        class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                        placeholder="사진경로"
-                        name="product_pic"
-                    />
-                  </div>
+<!--                  <div class="relative mb-3  mt-8 w-full lg:w-6/12 pr-3 ">-->
+<!--                    <label-->
+<!--                        class="block uppercase text-blueGray-600 text-xs font-bold mb-2"-->
+<!--                        htmlFor="상품사진경로"-->
+<!--                    >-->
+<!--                      사진-->
+<!--                    </label>-->
+<!--                    <input-->
+<!--                        type="file"-->
+<!--                        class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"-->
+<!--                        placeholder="사진경로"-->
+<!--                        v-model="product_pic"-->
+<!--                    />-->
+<!--                  </div>-->
 
                   <div class="relative mb-3  mt-8 w-full lg:w-6/12 pr-3 ">
                     <label
@@ -112,7 +115,7 @@
                         type="text"
                         class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                         placeholder="상품원가"
-                        name="product_oriprice"
+                        v-model="product.product_oriprice"
                     />
                   </div>
 
@@ -128,7 +131,7 @@
                         cols="80"
                         class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
                         placeholder="상품 설명"
-                        name="product_desc"
+                        v-model="product.product_desc"
                     />
                   </div>
                   <div class="text-center mt-6">
@@ -151,19 +154,20 @@
   </div>
 </template>
 <script>
-
 export default {
   data() {
     return {
-      product_name: '',
-      product_brand: '',
-      product_mnum: '',
-      product_cate: '',
-      product_ldate: '',
-      product_pic: '',
-      product_oriprice: '',
-      product_desc: '',
-      product_wdate:'',
+      product: {
+        product_name: '',
+        product_brand: '',
+        product_mnum: '',
+        product_cate: '',
+        product_ldate: '',
+        //product_pic: '',
+        product_oriprice: '',
+        product_desc: '',
+        product_wdate:'',
+      }
     };
   },
   components: {
@@ -171,24 +175,24 @@ export default {
   },
   methods: {
     formSubmit() {
-        this.axios.post('http://localhost:4000/addProduct', {
-          product_name: this.product_name,
-          product_brand: this.product_brand,
-          product_mnum: this.product_mnum,
-          product_cate: this.product_cate,
-          product_ldate: this.product_ldate,
-          product_pic: this.product_pic,
-          product_oriprice: this.product_oriprice,
-          product_desc: this.product_desc,
-          product_wdate: this.product_desc,
+      this.$axios.post('http://localhost:8080/addproduct', {
+          product_name: this.product.product_name,
+          product_brand: this.product.product_brand,
+          product_mnum: this.product.product_mnum,
+          product_cate: this.product.product_cate,
+          product_ldate: this.product.product_ldate,
+          //product_pic: this.product_pic,
+          product_oriprice: this.product.product_oriprice,
+          product_desc: this.product.product_desc,
+          product_wdate: "2022-02-22",
       })
-          .then((response) => {
-            this.output = response.data
-            this.title = ''
-            this.author = ''
+          .then((res) => {
+            console.log(this.product.product_name);
+            console.log(res);
           })
           .catch((error) => {
-            this.output = error
+            console.log(this.product.product_name);
+            console.log(error);
           })
     }
   }
