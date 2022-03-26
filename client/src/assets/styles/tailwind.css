@@ -633,7 +633,7 @@ select {
      {
   -webkit-appearance: none;
      -moz-appearance: none;
-          appearance: none;
+          appearance: auto;
   padding: 0;
   -webkit-print-color-adjust: exact;
           color-adjust: exact;
