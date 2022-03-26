@@ -12,7 +12,8 @@ async function addproduct(req, res, next) {
     const product_desc=req.body.product_desc;
     const  product_wdate= req.body.product_wdate;
 
-    console.log("콘솔:::::",product_name, product_brand, product_mnum, product_cate, product_ldate, product_oriprice,product_desc, product_wdate );
+   // console.log("콘솔:::::",product_name, product_brand, product_mnum, product_cate, product_ldate, product_oriprice,product_desc, product_wdate );
+
     await Product.create({
         PRODUCT_NAME: product_name,
         PRODUCT_BRAND: product_brand,

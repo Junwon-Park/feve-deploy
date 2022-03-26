@@ -23,26 +23,11 @@
                     </label>
                     <input
                         type="text"
-                        class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        class="border-0 px-3 py-3  placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                         placeholder="상품명"
                         v-model="product.product_name"
                     />
                   </div>
-
-                    <div class="relative mb-3  mt-8 w-full lg:w-6/12 pr-3 ">
-                      <label
-                          class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                          htmlFor="브랜드명"
-                      >
-                        브랜드명
-                      </label>
-                      <input
-                          type="text"
-                          class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                          placeholder="브랜드명"
-                          v-model="product.product_brand"
-                      />
-                    </div>
 
                     <div class="relative mb-3  mt-8 w-full lg:w-6/12 pr-3 ">
                       <label
@@ -72,6 +57,22 @@
                         <option value=2>나나나</option>
                         <option value=3>다다다</option>
                       </select>
+                    </div>
+
+                    <div class="relative mb-3  mt-8 w-full lg:w-6/12 pr-3 ">
+                      <label
+                          class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                          htmlFor="브랜드명"
+                      >
+                        브랜드명
+                      </label>
+                      <input
+                          type="text"
+                          class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                          placeholder="카테고리 선택시 자동 생성됨"
+                          v-model="product.product_brand"
+
+                      />
                     </div>
 
                     <div class="relative mb-3  mt-8 w-full lg:w-6/12 pr-3 ">
@@ -210,6 +211,8 @@ export default {
       })
           .then((res) => {
             console.log(res);
+            alert("상품이 등록되었습니다.");
+            this.$router.push('/admin/dashboard');
           })
           .catch((error) => {
             console.log(error);
