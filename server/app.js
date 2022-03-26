@@ -10,7 +10,15 @@ const { config } = require('./config.js');
 const app = express();
 const PORT = config.PORT || 4000;
 
-app.use(express.json());
+//2022.03.26 사진 용량 초과로 에러나서 추가
+app.use(express.json({
+  limit: '10mb'
+}));
+app.use(express.urlencoded({
+  limit: '10mb',
+  extended: false
+}));
+
 app.use(morgan('tiny'));
 app.use(helmet());
 const whiteListByCors = ['http://localhost:3000'];
