@@ -17,7 +17,7 @@
                   <div class="relative mb-3 mt-8 w-full lg:w-6/12 pr-3 ">
                     <label
                         class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                        htmlFor="full-name"
+                        htmlFor="상품명"
                     >
                       상품명
                     </label>
@@ -29,95 +29,95 @@
                     />
                   </div>
 
-                  <div class="relative mb-3  mt-8 w-full lg:w-6/12 pr-3 ">
-                    <label
-                        class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                        htmlFor="브랜드명"
-                    >
-                      브랜드명
-                    </label>
-                    <input
-                        type="text"
-                        class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                        placeholder="브랜드명"
-                        v-model="product.product_brand"
-                    />
+                    <div class="relative mb-3  mt-8 w-full lg:w-6/12 pr-3 ">
+                      <label
+                          class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                          htmlFor="브랜드명"
+                      >
+                        브랜드명
+                      </label>
+                      <input
+                          type="text"
+                          class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                          placeholder="브랜드명"
+                          v-model="product.product_brand"
+                      />
+                    </div>
+
+                    <div class="relative mb-3  mt-8 w-full lg:w-6/12 pr-3 ">
+                      <label
+                          class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                          htmlFor="모델명"
+                      >
+                        모델명
+                      </label>
+                      <input
+                          type="text"
+                          class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                          placeholder="모델명"
+                          v-model="product.product_mnum"
+                      />
+                    </div>
+
+                    <div class="relative mb-3  mt-8 w-full lg:w-6/12 pr-3 ">
+                      <label
+                          class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                          htmlFor="카테고리"
+                      >
+                        카테고리
+                      </label>
+                      <select  id="category" class=" w-full px-3 py-3 shadow" v-model="product.product_cate">
+                        <option value="">카테고리 선택</option>
+                        <option value=1>가가가</option>
+                        <option value=2>나나나</option>
+                        <option value=3>다다다</option>
+                      </select>
+                    </div>
+
+                    <div class="relative mb-3  mt-8 w-full lg:w-6/12 pr-3 ">
+                      <label
+                          class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                          htmlFor="출시일"
+                      >
+                        출시일
+                      </label>
+                      <input
+                          type="date"
+                          class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                          placeholder="출시일"
+                          v-model="product.product_ldate"
+                      />
+                    </div>
+
+                   <div class="relative mb-3  mt-8 w-full lg:w-6/12 pr-3 ">
+                      <label
+                          class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                          htmlFor="상품사진경로"
+                      >
+                        사진
+                      </label>
+                      <input
+                          type="file"
+                          class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                          placeholder="사진경로"
+                          @change="handleImage"
+                      />
                   </div>
 
-                  <div class="relative mb-3  mt-8 w-full lg:w-6/12 pr-3 ">
-                    <label
-                        class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                        htmlFor="모델명"
-                    >
-                      모델명
-                    </label>
-                    <input
-                        type="text"
-                        class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                        placeholder="모델명"
-                        v-model="product.product_mnum"
-                    />
-                  </div>
-
-                  <div class="relative mb-3  mt-8 w-full lg:w-6/12 pr-3 ">
-                    <label
-                        class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                        htmlFor="카테고리"
-                    >
-                      카테고리
-                    </label>
-                    <select  id="category" class=" w-full px-3 py-3 shadow" v-model="product.product_cate">
-                      <option value="">카테고리 선택</option>
-                      <option value="가가가">가가가</option>
-                      <option value="나나나">나나나</option>
-                      <option value="다다다">다다다</option>
-                    </select>
-                  </div>
-
-                  <div class="relative mb-3  mt-8 w-full lg:w-6/12 pr-3 ">
-                    <label
-                        class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                        htmlFor="출시일"
-                    >
-                      출시일
-                    </label>
-                    <input
-                        type="date"
-                        class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                        placeholder="출시일"
-                        v-model="product.product_ldate"
-                    />
-                  </div>
-
-<!--                  <div class="relative mb-3  mt-8 w-full lg:w-6/12 pr-3 ">-->
-<!--                    <label-->
-<!--                        class="block uppercase text-blueGray-600 text-xs font-bold mb-2"-->
-<!--                        htmlFor="상품사진경로"-->
-<!--                    >-->
-<!--                      사진-->
-<!--                    </label>-->
-<!--                    <input-->
-<!--                        type="file"-->
-<!--                        class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"-->
-<!--                        placeholder="사진경로"-->
-<!--                        v-model="product_pic"-->
-<!--                    />-->
-<!--                  </div>-->
-
-                  <div class="relative mb-3  mt-8 w-full lg:w-6/12 pr-3 ">
-                    <label
-                        class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                        htmlFor="상품원가"
-                    >
-                      상품원가(발매가)
-                    </label>
-                    <input
-                        type="text"
-                        class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                        placeholder="상품원가"
-                        v-model="product.product_oriprice"
-                    />
-                  </div>
+                    <div class="relative mb-3  mt-8 w-full lg:w-6/12 pr-3 ">
+                      <label
+                          class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                          htmlFor="상품원가"
+                      >
+                        상품원가(발매가)
+                      </label>
+                      <input
+                          type="text"
+                          class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                          placeholder="상품원가"
+                          v-model="product.product_oriprice"
+                      />
+                    </div>
 
                   <div class="relative w-full mb-3">
                     <label
@@ -163,10 +163,11 @@ export default {
         product_mnum: '',
         product_cate: '',
         product_ldate: '',
-        //product_pic: '',
+        product_pic: '',
         product_oriprice: '',
         product_desc: '',
         product_wdate:'',
+        imgsrc: require('../../assets/img/icon_question.png')
       }
     };
   },
@@ -174,24 +175,43 @@ export default {
 
   },
   methods: {
+    handleImage(e){
+      this.userimg = e.target.files[0];
+      let self = this;
+      if(e.target.files[0]) {
+        // 파일 읽는 라이브러리
+        const reader = new FileReader();
+
+        // 파일 읽기가 완료되는 시점
+        reader.addEventListener('load', function(e1){
+          // 완료되는 시점!!!!!!!!!!!!!!!
+          self.imgsrc = e1.target.result;
+          // 지금 reader 안에서는 this 못 씀. 그래서 35줄에 this를 self로 변수지정함
+        });
+
+        // 파일 읽기 시작
+        reader.readAsDataURL(e.target.files[0]);
+      }
+      else {
+        self.imgsrc = require('../../assets/img/icon_question.png');
+      }
+    },
     formSubmit() {
       this.$axios.post('http://localhost:8080/addproduct', {
-          product_name: this.product.product_name,
           product_brand: this.product.product_brand,
+          product_name: this.product.product_name,
           product_mnum: this.product.product_mnum,
-          product_cate: this.product.product_cate,
           product_ldate: this.product.product_ldate,
-          //product_pic: this.product_pic,
-          product_oriprice: this.product.product_oriprice,
+          product_pic: "icon_question.png",
           product_desc: this.product.product_desc,
+          product_oriprice: this.product.product_oriprice,
           product_wdate: "2022-02-22",
+          product_cate: this.product.product_cate
       })
           .then((res) => {
-            console.log(this.product.product_name);
             console.log(res);
           })
           .catch((error) => {
-            console.log(this.product.product_name);
             console.log(error);
           })
     }
