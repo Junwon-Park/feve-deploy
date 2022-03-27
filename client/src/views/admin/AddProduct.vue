@@ -47,32 +47,27 @@
                     <div class="relative mb-3  mt-8 w-full lg:w-6/12 pr-3 ">
                       <label
                           class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                          htmlFor="카테고리"
+                          htmlFor="브랜드명"
                       >
-                        카테고리
+                        브랜드명
                       </label>
-                      <select  id="category" class=" w-full px-3 py-3 shadow" v-model="product.product_cate">
-                        <option value="">카테고리 선택</option>
-                        <option value=1>가가가</option>
-                        <option value=2>나나나</option>
-                        <option value=3>다다다</option>
+
+                      <select  id="brand" class=" w-full px-3 py-3 shadow"
+                               @change="secondClassCate($event)" v-model="product.product_brand">
+                        <option v-for="( brand, idx ) in product.product_get_brand" :key="idx" :value="brand['CATEGORY_NAME']">{{  brand['CATEGORY_DESC'] }}</option>
                       </select>
                     </div>
 
                     <div class="relative mb-3  mt-8 w-full lg:w-6/12 pr-3 ">
                       <label
                           class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                          htmlFor="브랜드명"
+                          htmlFor="카테고리"
                       >
-                        브랜드명
+                        카테고리
                       </label>
-                      <input
-                          type="text"
-                          class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                          placeholder="카테고리 선택시 자동 생성됨"
-                          v-model="product.product_brand"
-
-                      />
+                      <select  id="category" class=" w-full px-3 py-3 shadow"  v-model="product.product_cate" disabled >
+                        <option  v-for="( cate, idx ) in product.product_get_cate" :key="idx" :value="cate['CATEGORY_KEY']">{{  cate['CATEGORY_DESC'] }}</option>
+                      </select>
                     </div>
 
                     <div class="relative mb-3  mt-8 w-full lg:w-6/12 pr-3 ">
@@ -160,21 +155,38 @@ export default {
     return {
       product: {
         product_name: '',
-        product_brand: '',
         product_mnum: '',
-        product_cate: '',
         product_ldate: '',
         product_pic: '',
         product_oriprice: '',
         product_desc: '',
         product_wdate:'',
+        product_brand: '',
+        product_get_brand: '',
+        product_cate: '',
+        product_get_cate: '',
+        default: "0",
         imgsrc: require('../../assets/img/icon_question.png')
-      }
+      },
     };
   },
+
   components: {
 
   },
+
+  //돔이 그려지기 시작하면 대분류 카테고리 가져오기
+  created() {
+    let that = this;
+    this.$axios.get('http://localhost:8080/category')
+        .then(function(res){
+          that.product.product_get_brand = res.data;
+        })
+        .catch(function(err){
+          console.log(err);
+        });
+  },
+
   methods: {
     handleImage(e){
       this.userimg = e.target.files[0];
@@ -196,8 +208,9 @@ export default {
         self.imgsrc = require('../../assets/img/icon_question.png');
       }
     },
+
     formSubmit() {
-      this.$axios.post('http://localhost:8080/addproduct', {
+      this.$axios.post('http://localhost:8080/admin/addproduct', {
           product_brand: this.product.product_brand,
           product_name: this.product.product_name,
           product_mnum: this.product.product_mnum,
@@ -208,13 +221,28 @@ export default {
           product_wdate: "2022-02-22",
           product_cate: this.product.product_cate
       })
-          .then((res) => {
-            console.log(res);
+          .then(() => {
             alert("상품이 등록되었습니다.");
             this.$router.push('/admin/dashboard');
           })
           .catch((error) => {
             console.log(error);
+          })
+    },
+
+    //중분류 가져오기
+    secondClassCate( event ){
+      console.log(event.target.value);
+      let that = this;
+      this.$axios.post('http://localhost:8080/category/second', {
+        product_brand: event.target.value,
+      })
+          .then(function(res){
+            that.product.product_get_cate = res.data;
+            document.querySelector('#category').disabled=false;
+          })
+          .catch(function(err){
+            console.log(err);
           })
     }
   }
