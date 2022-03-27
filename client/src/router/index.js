@@ -15,6 +15,7 @@ import Settings from "@/views/admin/Settings.vue";
 import Tables from "@/views/admin/Tables.vue";
 import Maps from "@/views/admin/Maps.vue";
 import AddProduct from "@/views/admin/AddProduct.vue";
+import ProductList from "@/views/admin/ProductList.vue";
 
 // views for Auth layout
 import Login from "@/views/auth/Login.vue";
@@ -58,6 +59,10 @@ const routes = [
         path: "/admin/maps",
         component: Maps,
       },
+      {
+        path: "/admin/productList",
+        component: ProductList,
+      },
     ],
   },
   {
@@ -100,10 +105,8 @@ const routes = [
     component: Write,
   },
   {
-
     path: "/admin/addProduct",
     component: AddProduct,
-  
   },
   
   {
