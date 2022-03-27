@@ -187,7 +187,6 @@ export default {
         reader.addEventListener('load', function(e1){
           // 완료되는 시점!!!!!!!!!!!!!!!
           self.imgsrc = e1.target.result;
-          // 지금 reader 안에서는 this 못 씀. 그래서 35줄에 this를 self로 변수지정함
         });
 
         // 파일 읽기 시작

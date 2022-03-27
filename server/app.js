@@ -5,6 +5,7 @@ const morgan = require('morgan');
 const helmet = require('helmet');
 const startRoute = require('./router/start.js');
 const addproductRoute = require('./router/admin/addproduct.js');
+const loadproductRoute = require('./router/admin/loadproduct.js');
 const { config } = require('./config.js');
 const shoplistRoute = require('./router/shop/shoplist.js');
 
@@ -44,6 +45,7 @@ app.use(cors(devCors));
 app.use('/', startRoute);
 app.use('/addproduct', addproductRoute);
 app.use('/shoplist',shoplistRoute);
+app.use('/loadproduct', loadproductRoute);
 
 app.use((req, res, next) => {
   res.sendStatus(404);
