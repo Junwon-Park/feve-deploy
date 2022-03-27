@@ -210,6 +210,11 @@ export default {
     },
 
     formSubmit() {
+      const curr = new Date();
+      const utc =curr.getTime() + (curr.getTimezoneOffset() * 60 * 1000);
+      const KR_TIME_DIFF = 9 * 60 * 60 * 1000;
+      const kr_curr =new Date(utc + (KR_TIME_DIFF));
+
       this.$axios.post('http://localhost:8080/admin/addproduct', {
           product_brand: this.product.product_brand,
           product_name: this.product.product_name,
@@ -218,7 +223,7 @@ export default {
           product_pic: "icon_question.png",
           product_desc: this.product.product_desc,
           product_oriprice: this.product.product_oriprice,
-          product_wdate: "2022-02-22",
+          product_wdate: kr_curr,
           product_cate: this.product.product_cate
       })
           .then(() => {
