@@ -6,7 +6,7 @@
       <div class="flex flex-wrap items-center">
         <div class="relative w-full px-4 max-w-full flex-grow flex-1">
           <h3 class="font-semibold text-base text-blueGray-700">
-            상품 리스트
+            {{ title }}
           </h3>
         </div>
         <div
@@ -85,48 +85,47 @@
           <th
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
           >
-            1
+            {{ seq }}
           </th>
           <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
           >
-            Lego Firehouse Headquarters <br>
-            레고 고스트 버스터즈 소방본부
+            {{ PRODUCT_NAME }}
           </td>
           <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
           >
-            Lego
+            {{  PRODUCT_BRAND  }}
           </td>
           <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
           >
-            550,000
+            {{  PRODUCT_ORIPRICE  }}
           </td>
           <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
           >
-            Architecture
+            {{  PRODUCT_CATE }}
           </td>
           <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
           >
-            50
+            {{ dealCount }}
           </td>
           <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
           >
-            5
+            {{ inspecCount }}
           </td>
           <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
           >
-            1
+            {{ inspecStatus }}
           </td>
           <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
           >
-            3
+            {{ inspecComplete }}
           </td>
           <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
@@ -145,3 +144,45 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  props: {
+    title: {
+      type: String,
+      default: "리스트",
+    },
+    seq: {
+      type: String,
+      default: "1",
+    },
+    PRODUCT_NAME: {
+      type: String,
+      default: "Lego Firehouse Headquarters",
+    },
+    PRODUCT_BRAND: {
+      type: String,
+      default: "Lego",
+    },
+    PRODUCT_CATE: {
+      type: String,
+      default: "Architecture",
+    },
+    PRODUCT_ORIPRICE: {
+      default: 550000
+    },
+    dealCount: {
+      default: 5
+    },
+    inspecCount: {
+      default: 10
+    },
+    inspecStatus: {
+      default: 2
+    },
+    inspecComplete: {
+      default: 7
+    },
+  },
+}
+</script>
