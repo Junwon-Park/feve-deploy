@@ -6,6 +6,7 @@ const helmet = require('helmet');
 const startRoute = require('./router/start.js');
 const addproductRoute = require('./router/admin/addproduct.js');
 const { config } = require('./config.js');
+const shoplistRoute = require('./router/shop/shoplist.js');
 
 const app = express();
 const PORT = config.PORT || 4000;
@@ -42,6 +43,7 @@ app.use(cors(devCors));
 // To router
 app.use('/', startRoute);
 app.use('/addproduct', addproductRoute);
+app.use('/shoplist',shoplistRoute);
 
 app.use((req, res, next) => {
   res.sendStatus(404);
