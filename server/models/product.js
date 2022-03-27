@@ -31,7 +31,6 @@ module.exports = (sequelize, DataTypes) => {
       PRODUCT_DESC: DataTypes.STRING(500),
       PRODUCT_ORIPRICE: DataTypes.BIGINT,
       PRODUCT_WDATE: DataTypes.DATE,
-      PRODUCT_UDATE: DataTypes.DATE,
       PRODUCT_CATE: DataTypes.BIGINT
     }, {
       sequelize,

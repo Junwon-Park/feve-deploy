@@ -4,6 +4,6 @@ const { loadproduct } = require('../../controller/admin/loadproduct.js');
 
 const router = express.Router();
 
-router.post('/', loadproduct);
+router.get('/', loadproduct);
 
 module.exports = router;
