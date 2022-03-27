@@ -6,6 +6,7 @@ const helmet = require('helmet');
 const startRoute = require('./router/start.js');
 const addproductRoute = require('./router/admin/addproduct.js');
 const loadproductRoute = require('./router/admin/loadproduct.js');
+const categorytRoute = require('./router/common/category.js');
 const { config } = require('./config.js');
 const shoplistRoute = require('./router/shop/shoplist.js');
 
@@ -43,9 +44,10 @@ app.use(cors(devCors));
 
 // To router
 app.use('/', startRoute);
-app.use('/addproduct', addproductRoute);
+app.use('/admin/addproduct', addproductRoute);
+app.use('/admin/loadproduct', loadproductRoute);
+app.use('/category', categorytRoute);
 app.use('/shoplist',shoplistRoute);
-app.use('/loadproduct', loadproductRoute);
 
 app.use((req, res, next) => {
   res.sendStatus(404);
