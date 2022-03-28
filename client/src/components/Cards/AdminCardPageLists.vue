@@ -91,9 +91,15 @@
 <script>
 import AdminCards from "@/components/Cards/AdminCards.vue";
 export default {
-  props: [
-    'items'
-  ],
+  props: {
+    title: {
+      type: String,
+      default: "리스트",
+    },
+    items: {
+      required: true
+    }
+},
   data() {
     return {
     }

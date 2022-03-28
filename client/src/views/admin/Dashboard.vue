@@ -2,7 +2,7 @@
   <div>
     <div class="flex flex-wrap" style="min-height: 80vh;">
       <div class="w-full xl:w-8/12 mb-12 xl:mb-0 px-4 mt-12">
-        <AdminCardPageLists v-bind="items">
+        <AdminCardPageLists v-bind="items" :items="items" :title="title">
           <AdminCards />
         </AdminCardPageLists>
       </div>
@@ -23,9 +23,9 @@ export default {
   name: "dashboard-page",
   data() {
     return {
-      items: [
+      title: "상품리스트",
+      items:
         {
-          title: "상품리스트",
           seq: '',
           PRODUCT_NAME: '',
           PRODUCT_BRAND: '',
@@ -36,7 +36,7 @@ export default {
           // inspecStatus: 0,
           // inspecComplete: 0,
         },
-      ]
+
     }
   },
   components: {

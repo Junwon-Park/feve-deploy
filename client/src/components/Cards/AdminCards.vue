@@ -3,7 +3,7 @@
           <th
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
           >
-            {{ seq }}
+            {{ PRODUCT_KEY }}
           </th>
           <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
@@ -61,13 +61,8 @@
 <script>
 export default {
   props: {
-    title: {
-      type: String,
-      default: "리스트",
-    },
-    seq: {
-      type: String,
-      default: "1",
+    PRODUCT_KEY: {
+      default: 0,
     },
     PRODUCT_NAME: {
       type: String,

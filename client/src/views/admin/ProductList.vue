@@ -100,9 +100,9 @@ export default {
   data() {
     return {
       title: "상품리스트",
-      items: [
+      items:
         {
-          seq: '',
+          PRODUCT_KEY: 0,
           PRODUCT_NAME: '',
           PRODUCT_BRAND: '',
           PRODUCT_CATE: '',
@@ -112,7 +112,7 @@ export default {
           // inspecStatus: 0,
           // inspecComplete: 0,
         },
-      ]
+
     }
   },
   components: {
