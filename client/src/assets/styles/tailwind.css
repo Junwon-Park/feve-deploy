@@ -3298,6 +3298,16 @@ button.text-white,
   color: rgba(56, 189, 248, var(--tw-text-opacity));
 }
 
+button.text-lightBlue-400 {
+  --tw-text-opacity: 1;
+  color: rgba(56, 189, 248, var(--tw-text-opacity));
+}
+
+button:hover.hover\:text-lightBlue-600 {
+  --tw-text-opacity: 1;
+  color: rgba(0, 93, 103, var(--tw-text-opacity));
+}
+
 .text-lightBlue-600 {
   --tw-text-opacity: 1;
   color: rgba(1, 93, 153, var(--tw-text-opacity));
