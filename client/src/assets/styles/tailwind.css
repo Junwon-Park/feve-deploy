@@ -467,8 +467,8 @@ h6 {
  */
 
 a {
-  color: inherit;
-  text-decoration: inherit;
+  color: #333 !important;
+  text-decoration: none !important;
 }
 
 /**
