@@ -40,6 +40,7 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/admin",
+    name:'admin',
     redirect: "/admin/dashboard",
     component: Admin,
     children: [

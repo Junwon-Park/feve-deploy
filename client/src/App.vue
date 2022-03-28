@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-main>
-    <navbar v-if="isAdmin" />
+    <navbar v-if="!isAdmin" />
       <AdminSidebar v-else  />
     <router-view />
     <footer-component />
@@ -15,12 +15,19 @@ import FooterComponent from "@/components/Footers/Footer.vue";
 export default {
   data() {
     return {
-      isAdmin: false,
+      //isAdmin: false,
     };
   },
-  created(){
-    if(document.location.pathname === '/admin'){
-      this.isAdmin = true
+  // created(){
+  //   if(this.$route.path === '/admin/'){
+  //     this.isAdmin = true
+  //   }
+  //   console.log(this.$route.path);
+  // },
+  computed:{
+    isAdmin(){
+      console.log(this.$route);
+      return this.$route.name==='admin'
     }
   },
   components: {
