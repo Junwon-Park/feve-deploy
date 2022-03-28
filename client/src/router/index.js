@@ -21,6 +21,8 @@ import ProductList from "@/views/admin/ProductList.vue";
 import Login from "@/views/auth/Login.vue";
 import Register from "@/views/auth/Register.vue";
 
+import Mypage from "@/views/mypage/Mypage.vue";
+
 // views without layouts
 import Index from "@/views/Index.vue";
 import Profile from "@/views/Profile.vue";
@@ -80,6 +82,10 @@ const routes = [
         component: Register,
       },
     ],
+  },
+  {
+    path: "/mypage",
+    component: Mypage,
   },
   {
     path: "/",

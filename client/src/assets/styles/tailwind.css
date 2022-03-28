@@ -2161,6 +2161,10 @@ select {
   height: 6rem;
 }
 
+.h-40rem {
+  height: 40rem;
+}
+
 .h-auto {
   height: auto;
 }
@@ -2419,6 +2423,8 @@ select {
   margin-bottom: 1.5rem;
 }
 
+
+
 .mt-8 {
   margin-top: 2rem;
 }
@@ -2455,6 +2461,10 @@ select {
   margin-bottom: 6rem;
 }
 
+.mt-7rem{
+  margin-top: 7rem;
+}
+
 .mt-32 {
   margin-top: 8rem;
 }
@@ -2465,6 +2475,10 @@ select {
 
 .mt-64 {
   margin-top: 16rem;
+}
+
+.ml-14rem{
+  margin-left: 14rem;
 }
 
 .mr-auto {
@@ -4040,6 +4054,10 @@ button.text-white,
 
   .md\:text-left {
     text-align: left;
+  }
+
+  .md\:w-13rem {
+    width: 13rem;
   }
 
   .md\:w-64 {
