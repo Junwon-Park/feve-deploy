@@ -293,6 +293,7 @@ pre {
 button {
   background-color: transparent;
   background-image: none;
+  outline: none !important;;
 }
 
 /**
@@ -462,8 +463,13 @@ h6 {
  */
 
 a {
-  color: inherit;
-  text-decoration: inherit;
+  color: #333 !important;
+  text-decoration: #333 !important;
+}
+
+a:hover {
+  transition: .4s;
+  color: #aaa !important;
 }
 
 /**

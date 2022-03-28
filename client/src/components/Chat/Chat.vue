@@ -21,79 +21,59 @@
       </template>
       <v-card>
         <v-card-title>
-          <span class="text-h5">User Profile</span>
+          <span class="text-h5">상담하기</span>
         </v-card-title>
         <v-card-text>
           <v-container>
             <v-row>
               <v-col
                   cols="12"
-                  sm="6"
-                  md="4"
+                  sm="12"
+                  md="12"
               >
-                <v-text-field
-                    label="Legal first name*"
-                    required
-                ></v-text-field>
+                <v-chip>
+                  안녕하세요.
+                </v-chip>
               </v-col>
               <v-col
                   cols="12"
-                  sm="6"
-                  md="4"
+                  sm="12"
+                  md="12"
               >
-                <v-text-field
-                    label="Legal middle name"
-                    hint="example of helper text only on focus"
-                ></v-text-field>
+                <v-chip>
+                  안녕하세요.
+                </v-chip>
+              </v-col>
+
+
+              <v-col
+                  cols="12"
+                  sm="12"
+                  md="12"
+                  class="text-right"
+              >
+                <v-chip
+                    color="orange"
+                    text-color="white">
+                  안녕하세요.
+                </v-chip>
               </v-col>
               <v-col
                   cols="12"
-                  sm="6"
-                  md="4"
+                  sm="12"
+                  md="12"
+                  class="text-right"
               >
-                <v-text-field
-                    label="Legal last name*"
-                    hint="example of persistent helper text"
-                    persistent-hint
-                    required
-                ></v-text-field>
+                <v-chip
+                    color="orange"
+                    text-color="white">
+                  안녕하세요.
+                </v-chip>
               </v-col>
-              <v-col cols="12">
-                <v-text-field
-                    label="Email*"
-                    required
-                ></v-text-field>
-              </v-col>
-              <v-col cols="12">
-                <v-text-field
-                    label="Password*"
-                    type="password"
-                    required
-                ></v-text-field>
-              </v-col>
-              <v-col
-                  cols="12"
-                  sm="6"
-              >
-                <v-select
-                    :items="['0-17', '18-29', '30-54', '54+']"
-                    label="Age*"
-                    required
-                ></v-select>
-              </v-col>
-              <v-col
-                  cols="12"
-                  sm="6"
-              >
-                <v-autocomplete
-                    :items="['Skiing', 'Ice hockey', 'Soccer', 'Basketball', 'Hockey', 'Reading', 'Writing', 'Coding', 'Basejump']"
-                    label="Interests"
-                    multiple
-                ></v-autocomplete>
-              </v-col>
+
             </v-row>
           </v-container>
-          <small>*indicates required field</small>
+          <small>* 상담내용은 따로 저장되지 않으니 주의하시기 바랍니다.</small>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
@@ -102,14 +82,14 @@
               text
               @click="dialog = false"
           >
-            Close
+            취소
           </v-btn>
           <v-btn
-              color="blue darken-1"
+              color="orange darken-1"
               text
               @click="dialog = false"
           >
-            Save
+            상담 완료
           </v-btn>
         </v-card-actions>
       </v-card>
