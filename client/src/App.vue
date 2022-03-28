@@ -4,6 +4,7 @@
     <navbar v-if="!isAdmin" />
       <AdminSidebar v-else  />
     <router-view />
+      <Chat />
     <footer-component />
     </v-main>
   </v-app>
@@ -12,6 +13,7 @@
 import AdminSidebar from '@/components/Sidebar/AdminSidebar';
 import Navbar from "@/components/Navbars/IndexNavbar.vue";
 import FooterComponent from "@/components/Footers/Footer.vue";
+import Chat from "@/components/Chat/Chat.vue"
 export default {
   data() {
     return {
@@ -27,7 +29,8 @@ export default {
   components: {
     Navbar,
     FooterComponent,
-    AdminSidebar
+    AdminSidebar,
+    Chat
   },
 };
 </script>
