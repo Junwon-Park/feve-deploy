@@ -20,7 +20,7 @@
       <div v-for="(tapText,i) in tapTexts" :key='i'>  
         <div v-if="i===0">
           <h6
-            class="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline"
+            class="md:min-w-full text-black text-xs uppercase font-bold block pt-1 pb-4 no-underline"
           >
             쇼핑 정보
           </h6>
@@ -28,7 +28,7 @@
         <div v-else-if="i===3">
           <hr class="my-4 md:min-w-full" />
           <h6
-            class="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline"
+            class="md:min-w-full text-black text-xs uppercase font-bold block pt-1 pb-4 no-underline"
           >
             내 정보
           </h6>
@@ -39,12 +39,10 @@
               <button
                 type="button"
                 @click="onTapClicked(i+1)"
-                class="text-xs uppercase py-3 font-bold block text-lightBlue-400 hover:text-lightBlue-600"
+                class="text-xs uppercase py-3 font-bold block text-blueGray-400 hover:text-black"
                 style="outline:none"
               >
-                <i
-                  :class="[tapIcons[i]]"
-                ></i>
+                <i :class="[tapIcons[i]]"></i>
                 {{tapText}}
               </button>
           </li>
