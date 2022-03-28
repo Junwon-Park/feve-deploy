@@ -3,24 +3,32 @@ require('express-async-errors');
 const cors = require('cors');
 const morgan = require('morgan');
 const helmet = require('helmet');
+
+const { config } = require('./config.js');
+
+// Router
 const startRoute = require('./router/start.js');
+const authRouter = require('./router/auth/authRouter.js');
 const addproductRoute = require('./router/admin/addproduct.js');
 const loadproductRoute = require('./router/admin/loadproduct.js');
 const categorytRoute = require('./router/common/category.js');
-const { config } = require('./config.js');
 const shoplistRoute = require('./router/shop/shoplist.js');
 
 const app = express();
 const PORT = config.PORT || 4000;
 
 //2022.03.26 사진 용량 초과로 에러나서 추가
-app.use(express.json({
-  limit: '10mb'
-}));
-app.use(express.urlencoded({
-  limit: '10mb',
-  extended: false
-}));
+app.use(
+  express.json({
+    limit: '10mb'
+  })
+);
+app.use(
+  express.urlencoded({
+    limit: '10mb',
+    extended: false
+  })
+);
 
 app.use(morgan('tiny'));
 app.use(helmet());
@@ -44,10 +52,12 @@ app.use(cors(devCors));
 
 // To router
 app.use('/', startRoute);
+app.use('/addproduct', addproductRoute);
+app.use('/auth', authRouter);
 app.use('/admin/addproduct', addproductRoute);
 app.use('/admin/loadproduct', loadproductRoute);
 app.use('/category', categorytRoute);
-app.use('/shoplist',shoplistRoute);
+app.use('/shoplist', shoplistRoute);
 
 app.use((req, res, next) => {
   res.sendStatus(404);
