@@ -5,9 +5,7 @@
     <div
       class="md:flex-col md:items-stretch md:min-h-full md:flex-nowrap px-0 flex flex-wrap items-center justify-between w-full mx-auto "
     >
-      <div
-        class="md:flex md:flex-col md:items-stretch md:opacity-100 md:relative md:mt-4 md:shadow-none shadow absolute top-0 left-0 right-0 z-40 overflow-y-auto overflow-x-hidden h-auto items-center flex-1 rounded">
-
+      <div class="md:flex md:flex-col md:items-stretch md:opacity-100 md:relative md:mt-4 md:shadow-none shadow absolute top-0 left-0 right-0 z-40 overflow-y-auto overflow-x-hidden h-auto items-center flex-1 rounded">
         <hr class="my-4 md:min-w-full" />
 
         <button
@@ -41,17 +39,11 @@
               <button
                 type="button"
                 @click="onTapClicked(i+1)"
-                class="text-xs uppercase py-3 font-bold block"
-                :class="[
-                  isActive
-                    ? 'text-emerald-500 hover:text-emerald-600'
-                    : 'text-blueGray-700 hover:text-blueGray-500',
-                ]"
+                class="text-xs uppercase py-3 font-bold block text-lightBlue-400 hover:text-lightBlue-600"
                 style="outline:none"
               >
                 <i
-                  class="mr-2 text-sm"
-                  :class="[tapIcons[i], [isActive ? 'opacity-75' : 'text-blueGray-300']]"
+                  :class="[tapIcons[i]]"
                 ></i>
                 {{tapText}}
               </button>
@@ -70,11 +62,17 @@ export default {
     return {
       tapTexts: ['구매 내역', '판매 내역', '관심 상품', '프로필 정보', '주소록', '결제 정보', '판매 정산 계좌'],
       tapIcons: ['fas fa-clipboard-list', 'fas fa-clipboard-list', 'fas fa-star', 'fas fa-address-card', 'fas fa-address-book', 'fab fa-cc-visa', 'fas fa-calculator'],
+      tapActive: [false, false, false, false, false, false, false],
     };
   },
   methods: {
     onTapClicked: function(viewState){
       this.$emit("onViewStateChanged", viewState);
+      
+      for(let i = 0; i < this.tapActive.length; i++)
+        this.tapActive[i] = false;
+      
+      this.tapActive[viewState] = true;
     },
   },
   components: {
