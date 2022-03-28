@@ -57,7 +57,7 @@ app.use('/auth', authRouter);
 app.use('/admin/addproduct', addproductRoute);
 app.use('/admin/loadproduct', loadproductRoute);
 app.use('/category', categorytRoute);
-app.use('/shoplist', shoplistRoute);
+app.use('/shop/shoplist', shoplistRoute);
 
 app.use((req, res, next) => {
   res.sendStatus(404);
