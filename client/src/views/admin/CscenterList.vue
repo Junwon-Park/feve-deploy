@@ -2,16 +2,14 @@
   <div>
     <div class="flex flex-wrap" style="min-height: 80vh;">
       <div class="w-full mb-12 xl:mb-0 px-4 mt-12">
-        <AdminCardPageLists v-bind="items" :items="items" :title="title">
-                <AdminCards  />
-        </AdminCardPageLists>
+        <AdminCardCscenterPage />
     </div>
     </div>
   </div>
 </template>
 <script>
-import AdminCardPageLists from "@/components/Cards/AdminCardPageLists.vue";
-import AdminCards from "@/components/Cards/AdminCards.vue";
+import AdminCardCscenterPage from "@/components/Cards/AdminCardCscenterPage.vue";
+
 export default {
   data() {
     return {
@@ -32,8 +30,7 @@ export default {
     }
   },
   components: {
-    AdminCards,
-    AdminCardPageLists,
+    AdminCardCscenterPage
   },
 
   created() {

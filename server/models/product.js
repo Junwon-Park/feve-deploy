@@ -37,6 +37,7 @@ module.exports = (sequelize, DataTypes) => {
       modelName: 'Product',
       timestamps: false,
       freezeTableName: true,
+      timezone: 'Asia/Seoul',
       tableName : "Product"
     });
   return Product;

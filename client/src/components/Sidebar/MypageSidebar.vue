@@ -5,9 +5,7 @@
     <div
       class="md:flex-col md:items-stretch md:min-h-full md:flex-nowrap px-0 flex flex-wrap items-center justify-between w-full mx-auto "
     >
-      <div
-        class="md:flex md:flex-col md:items-stretch md:opacity-100 md:relative md:mt-4 md:shadow-none shadow absolute top-0 left-0 right-0 z-40 overflow-y-auto overflow-x-hidden h-auto items-center flex-1 rounded">
-
+      <div class="md:flex md:flex-col md:items-stretch md:opacity-100 md:relative md:mt-4 md:shadow-none shadow absolute top-0 left-0 right-0 z-40 overflow-y-auto overflow-x-hidden h-auto items-center flex-1 rounded">
         <hr class="my-4 md:min-w-full" />
 
         <button
@@ -22,7 +20,7 @@
       <div v-for="(tapText,i) in tapTexts" :key='i'>  
         <div v-if="i===0">
           <h6
-            class="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline"
+            class="md:min-w-full text-black text-xs uppercase font-bold block pt-1 pb-4 no-underline"
           >
             쇼핑 정보
           </h6>
@@ -30,7 +28,7 @@
         <div v-else-if="i===3">
           <hr class="my-4 md:min-w-full" />
           <h6
-            class="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline"
+            class="md:min-w-full text-black text-xs uppercase font-bold block pt-1 pb-4 no-underline"
           >
             내 정보
           </h6>
@@ -41,18 +39,10 @@
               <button
                 type="button"
                 @click="onTapClicked(i+1)"
-                class="text-xs uppercase py-3 font-bold block"
-                :class="[
-                  isActive
-                    ? 'text-emerald-500 hover:text-emerald-600'
-                    : 'text-blueGray-700 hover:text-blueGray-500',
-                ]"
+                class="text-xs uppercase py-3 font-bold block text-blueGray-400 hover:text-black"
                 style="outline:none"
               >
-                <i
-                  class="mr-2 text-sm"
-                  :class="[tapIcons[i], [isActive ? 'opacity-75' : 'text-blueGray-300']]"
-                ></i>
+                <i :class="[tapIcons[i]]"></i>
                 {{tapText}}
               </button>
           </li>
@@ -70,11 +60,17 @@ export default {
     return {
       tapTexts: ['구매 내역', '판매 내역', '관심 상품', '프로필 정보', '주소록', '결제 정보', '판매 정산 계좌'],
       tapIcons: ['fas fa-clipboard-list', 'fas fa-clipboard-list', 'fas fa-star', 'fas fa-address-card', 'fas fa-address-book', 'fab fa-cc-visa', 'fas fa-calculator'],
+      tapActive: [false, false, false, false, false, false, false],
     };
   },
   methods: {
     onTapClicked: function(viewState){
       this.$emit("onViewStateChanged", viewState);
+      
+      for(let i = 0; i < this.tapActive.length; i++)
+        this.tapActive[i] = false;
+      
+      this.tapActive[viewState] = true;
     },
   },
   components: {

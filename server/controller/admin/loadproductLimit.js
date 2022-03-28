@@ -3,7 +3,7 @@ const { Category } = require("../../models");
 const db = require("../../models");
 const Sequelize = require("Sequelize");
 
-async function loadproduct(req, res, next) {
+async function loadproductLimit(req, res, next) {
 
     await db.sequelize.query("SELECT \n" +
         "PRODUCT_KEY \n" +
@@ -14,7 +14,7 @@ async function loadproduct(req, res, next) {
         ",ct.CATEGORY_desc  as PRODUCT_BRAND \n" +
         "from Product\n" +
         "left outer join Category c on c.CATEGORY_KEY =PRODUCT_CATE \n" +
-        "left outer join Category ct on c.CATEGORY_parent=ct.CATEGORY_NAME;", { type: Sequelize.QueryTypes.SELECT })
+        "left outer join Category ct on c.CATEGORY_parent=ct.CATEGORY_NAME  limit 0, 5;", { type: Sequelize.QueryTypes.SELECT })
         .then(result => {
             console.log(result);
             res.json(result);
@@ -22,4 +22,4 @@ async function loadproduct(req, res, next) {
         .catch(err => console.log(err));
 }
 
-module.exports = { loadproduct };
+module.exports = { loadproductLimit };
