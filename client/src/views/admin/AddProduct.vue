@@ -1,7 +1,7 @@
 <template>
   <div>
-    <main class="">
-      <section class="mt-20 relative block py-24 lg:pt-0">
+    <main class="md:ml-64">
+      <section class="mt-16 relative block py-24 lg:pt-0">
         <div class="container mx-auto px-4">
           <div class="flex flex-wrap justify-center">
             <div class="w-full ">
