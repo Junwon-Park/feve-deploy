@@ -99,9 +99,9 @@ import AdminCards from "@/components/Cards/AdminCards.vue";
 export default {
   data() {
     return {
+      title: "상품리스트",
       items: [
         {
-          title: "상품리스트",
           seq: '',
           PRODUCT_NAME: '',
           PRODUCT_BRAND: '',
