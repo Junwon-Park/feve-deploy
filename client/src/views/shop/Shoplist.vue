@@ -32,7 +32,7 @@
         </div>
       </section>
       <section class="relative py-16 bg-blueGray-200">
-        <div class="container mx-auto px-4">
+        <div class="">
           <div
             class="p-8 relative flex flex-col min-w-0 break-words  pd-8 bg-white w-full mb-6 shadow-xl rounded-lg -mt-64"
           >
@@ -43,58 +43,34 @@
           </div>
           <div class="flex flex-wrap items-center mt-5 mb-5 px-6">
             <div class="relative w-full max-w-full flex-grow flex-1 text-right">
-              <h6 class="uppercase  inline-block text-blueGray-400 mb-1 text-xs font-semibold">
-                카테고리
-              </h6>
-              <!-- <h5 class="text-blueGray-500 mx-4 inline-block text-xl font-semibold ">
-                LEGO
-              </h5>
-              <h5 class="text-blueGray-500 inline-block text-xl font-semibold">
-                BEARBRICK
-              </h5> -->
                <div class="text-center">
     <v-chip
       class="ma-2"
     >
-      Default
+      전체
     </v-chip>
 
     <v-chip
       class="ma-2"
       color="primary"
     >
-      Primary
+      레고
     </v-chip>
 
     <v-chip
       class="ma-2"
       color="secondary"
     >
-      Secondary
+      베어브릭
     </v-chip>
 
-    <v-chip
-      class="ma-2"
-      color="red"
-      text-color="white"
-    >
-      Red Chip
-    </v-chip>
-
-    <v-chip
-      class="ma-2"
-      color="green"
-      text-color="white"
-    >
-      Green Chip
-    </v-chip>
   </div>
             </div>
           </div>
           <hr />
           
-          <div class="flex">
-            <div class="flex w-auto px-4 mb-5">
+          <div class="flex mt-5">
+            <div class="flex w-full lg:w-3/12 px-4 mb-5">
               <Category />
             </div>
             <div class="w-full px-4 mb-5 flex flex-wrap">
@@ -118,7 +94,6 @@ import itemPic2 from "@/assets/img/product-lego2.jpg";
 import itemPic3 from "@/assets/img/product-lego3.jpg";
 import itemPic4 from "@/assets/img/product-lego4.jpg";
 
-// import Filter from "./Filter.vue";
 import Category from './Category';
 
 export default {
@@ -191,7 +166,6 @@ export default {
   },
   components: {
     CardStats,
-    // Filter,
     Category
   },
 };
