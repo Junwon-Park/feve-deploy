@@ -165,8 +165,7 @@ export default {
         product_get_brand: '',
         product_cate: '',
         product_get_cate: '',
-        default: "0",
-        imgsrc: require('../../assets/img/icon_question.png')
+        default: "0"
       },
     };
   },
@@ -189,23 +188,14 @@ export default {
 
   methods: {
     handleImage(e){
-      this.userimg = e.target.files[0];
-      let self = this;
-      if(e.target.files[0]) {
-        // 파일 읽는 라이브러리
-        const reader = new FileReader();
-
-        // 파일 읽기가 완료되는 시점
-        reader.addEventListener('load', function(e1){
-          // 완료되는 시점!!!!!!!!!!!!!!!
-          self.imgsrc = e1.target.result;
-        });
-
-        // 파일 읽기 시작
-        reader.readAsDataURL(e.target.files[0]);
+      let imageFile = e.target.files;
+      let that = this;
+      if(imageFile) {
+        let url = URL.createObjectURL(imageFile[0]);
+        that.product.product_pic=url;
       }
       else {
-        self.imgsrc = require('../../assets/img/icon_question.png');
+        that.product.imgsrc = require('../../assets/img/icon_question.png');
       }
     },
 
@@ -220,7 +210,7 @@ export default {
           product_name: this.product.product_name,
           product_mnum: this.product.product_mnum,
           product_ldate: this.product.product_ldate,
-          product_pic: "icon_question.png",
+          product_pic: this.product.product_pic,
           product_desc: this.product.product_desc,
           product_oriprice: this.product.product_oriprice,
           product_wdate: kr_curr,
