@@ -18,6 +18,12 @@ module.exports = (sequelize, DataTypes) => {
   }
   User.init(
     {
+      USER_KEY: {
+        type: DataTypes.BIGINT,
+        primaryKey: true,
+        autoIncrement: true,
+        allowNull: false
+      },
       USER_ID: DataTypes.STRING(20),
       USER_PASSWORD: DataTypes.STRING,
       USER_NAME: DataTypes.STRING(100),
@@ -26,11 +32,17 @@ module.exports = (sequelize, DataTypes) => {
       USER_ADDRESS1: DataTypes.STRING(100),
       USER_ADDRESS2: DataTypes.STRING(100),
       USER_DELETE: DataTypes.STRING(1),
-      USER_ADMIN: DataTypes.STRING(1)
+      USER_ADMIN: DataTypes.STRING(1),
+      createdAt: {
+        allowNull: false,
+        type: DataTypes.DATE
+      }
     },
     {
       sequelize,
-      modelName: 'User'
+      modelName: 'User',
+      tableName: 'User',
+      timestamps: false
     }
   );
   return User;
