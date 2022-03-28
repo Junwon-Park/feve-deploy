@@ -178,11 +178,25 @@
         <ul class="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
           <li class="items-center">
             <router-link
-              class="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
-              to="/admin/cscenterList"
+                to="/admin/cscenterList"
+                v-slot="{ href, navigate, isActive }"
             >
-              <i class="fas fa-newspaper text-blueGray-300 mr-2 text-sm"></i>
-              문의 내역 확인
+              <a
+                  :href="href"
+                  @click="navigate"
+                  class="text-xs uppercase py-3 font-bold block"
+                  :class="[
+                  isActive
+                    ? 'text-emerald-500 hover:text-emerald-600'
+                    : 'text-blueGray-700 hover:text-blueGray-500',
+                ]"
+              >
+                <i
+                    class="fas fa-table mr-2 text-sm"
+                    :class="[isActive ? 'opacity-75' : 'text-blueGray-300']"
+                ></i>
+                문의 내역 확인
+              </a>
             </router-link>
           </li>
         </ul>
