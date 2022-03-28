@@ -6,7 +6,13 @@ const development = {
   password: env.DB_PASSWORD,
   database: env.DB_DATABASE,
   host: env.DB_HOST,
-  dialect: env.DB_RDBMS
+  dialect: env.DB_RDBMS,
+  timezone: 'Asia/Seoul',
+  pool:{
+    max:10,
+    min: 1,
+    idle: 10000
+  }
 };
 
 const production = {
