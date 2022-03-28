@@ -15,19 +15,13 @@ import FooterComponent from "@/components/Footers/Footer.vue";
 export default {
   data() {
     return {
-      //isAdmin: false,
+      isAdmin: false,
     };
   },
-  // created(){
-  //   if(this.$route.path === '/admin/'){
-  //     this.isAdmin = true
-  //   }
-  //   console.log(this.$route.path);
-  // },
-  computed:{
-    isAdmin(){
-      console.log(this.$route);
-      return this.$route.name==='admin'
+  created(){
+    let path =this.$route.path.split('/');
+    if(path[1] === 'admin'){
+      this.isAdmin = true
     }
   },
   components: {
