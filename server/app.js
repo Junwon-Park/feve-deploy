@@ -13,6 +13,8 @@ const addproductRoute = require('./router/admin/addproduct.js');
 const loadproductRoute = require('./router/admin/loadproduct.js');
 const categorytRoute = require('./router/common/category.js');
 const shoplistRoute = require('./router/shop/shoplist.js');
+const buyRouter = require('./router/sold/buyconfirm.js');
+
 
 const app = express();
 const PORT = config.PORT || 4000;
@@ -58,6 +60,7 @@ app.use('/admin/addproduct', addproductRoute);
 app.use('/admin/loadproduct', loadproductRoute);
 app.use('/category', categorytRoute);
 app.use('/shoplist', shoplistRoute);
+app.use("/buy",buyRouter);
 
 app.use((req, res, next) => {
   res.sendStatus(404);

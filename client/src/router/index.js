@@ -32,7 +32,7 @@ import List3 from "@/views/List3.vue";
 import Write from "@/views/Write.vue";
 
 import Shoplist from "@/views/shop/Shoplist.vue";
-
+import Sold from "@/views/sold/Sellpage.vue"
 
 
 
@@ -110,6 +110,10 @@ const routes = [
   {
     path: "/write",
     component: Write,
+  },
+  {
+    path: "/sold",
+    component: Sold,
   },
   {
     path: "/admin/addProduct",
