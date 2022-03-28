@@ -10,7 +10,9 @@
         <AdminCardCscenterPage />
       </div>
       <div class="w-full  mb-12 xl:mb-0 px-4">
-        <AdminCards />
+        <AdminCardPageLists v-bind="inspecItems" :items="inspecItems" :title="title2">
+          <AdminCards />
+        </AdminCardPageLists>
       </div>
     </div>
   </div>
@@ -23,7 +25,8 @@ export default {
   name: "dashboard-page",
   data() {
     return {
-      title: "상품리스트",
+      title: "상품 리스트",
+      title2:"검수 리스트",
       items:
         {
           seq: '',
@@ -36,7 +39,18 @@ export default {
           // inspecStatus: 0,
           // inspecComplete: 0,
         },
-
+      inspecItems:
+          {
+            seq: '',
+            PRODUCT_NAME: '',
+            PRODUCT_BRAND: '',
+            PRODUCT_CATE: '',
+            PRODUCT_ORIPRICE: 0,
+            // dealCount: 0,
+            // inspecCount: 0,
+            // inspecStatus: 0,
+            // inspecComplete: 0,
+          },
     }
   },
   components: {
@@ -46,10 +60,18 @@ export default {
   },
   created() {
     let that = this;
-    this.$axios.get('http://localhost:8080/admin/loadproduct')
+    this.$axios.get('http://localhost:8080/admin/loadproduct/limit')
         .then(function(res){
-          console.log(res);
           that.items = res.data;
+        })
+        .catch(function(err){
+          console.log(err);
+        });
+
+
+    this.$axios.get('http://localhost:8080/admin/loadproduct/limit')
+        .then(function(res){
+          that.inspecItems = res.data;
         })
         .catch(function(err){
           console.log(err);

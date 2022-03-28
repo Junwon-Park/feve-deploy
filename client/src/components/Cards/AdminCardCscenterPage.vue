@@ -12,9 +12,9 @@
         <div
             class="relative w-full px-4 max-w-full flex-grow flex-1 text-right"
         >
-          <router-link to="">
+          <router-link to="/admin/cscenterList">
           <button
-              class="bg-orange-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+              class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
               type="button"
           >자세히 보기
           </button>
@@ -47,6 +47,11 @@
           >
             답변여부
           </th>
+          <th
+              class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold"
+          >
+            상태
+          </th>
         </tr>
         </thead>
         <tbody>
@@ -69,6 +74,15 @@
           <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
           >답변중
+          </td>
+          <td
+              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
+          >
+            <button
+                class="bg-orange-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                type="button"
+            >답변하기
+            </button>
           </td>
         </tr>
         </tbody>

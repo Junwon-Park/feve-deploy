@@ -179,7 +179,7 @@
           <li class="items-center">
             <router-link
               class="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
-              to="/landing"
+              to="/admin/cscenterList"
             >
               <i class="fas fa-newspaper text-blueGray-300 mr-2 text-sm"></i>
               문의 내역 확인
