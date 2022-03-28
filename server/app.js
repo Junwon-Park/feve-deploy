@@ -11,6 +11,7 @@ const startRoute = require('./router/start.js');
 const authRouter = require('./router/auth/authRouter.js');
 const addproductRoute = require('./router/admin/addproduct.js');
 const loadproductRoute = require('./router/admin/loadproduct.js');
+const adminCscenterRoute = require('./router/admin/cscenter.js');
 const categorytRoute = require('./router/common/category.js');
 const shoplistRoute = require('./router/shop/shoplist.js');
 
@@ -56,6 +57,7 @@ app.use('/addproduct', addproductRoute);
 app.use('/auth', authRouter);
 app.use('/admin/addproduct', addproductRoute);
 app.use('/admin/loadproduct', loadproductRoute);
+app.use('/admin/cscenter', loadproductRoute);
 app.use('/category', categorytRoute);
 app.use('/shop/shoplist', shoplistRoute);
 
