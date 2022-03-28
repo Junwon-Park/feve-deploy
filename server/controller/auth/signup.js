@@ -25,6 +25,9 @@ const signup = async (req, res) => {
       let now = new Date();
       const [user, created] = await User.findOrCreate({
         where: {
+          USER_ID
+        },
+        defaults: {
           USER_ID,
           USER_PASSWORD: hashed,
           USER_NAME,
@@ -33,9 +36,7 @@ const signup = async (req, res) => {
           USER_ADDRESS1,
           USER_ADDRESS2,
           USER_DELETE,
-          USER_ADMIN
-        },
-        defaults: {
+          USER_ADMIN,
           createdAt: now
         }
       });
