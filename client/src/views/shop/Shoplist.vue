@@ -89,7 +89,7 @@
 import ProductCards from "@/components/Cards/ProductCards.vue";
 import team2 from "@/assets/img/team-2-800x800.jpg";
 import legoBg from "@/assets/img/bg-lego5.jpg";
-
+import productLego1 from "@/assets/img/product-lego1.jpg";
 import Category from './Category';
 
 export default {
@@ -97,14 +97,16 @@ export default {
     return {
       team2,
       legoBg,
+      productLego1,
+
       items: [
         {
-          PRODUCT_KEY:'',
+          PRODUCT_KEY:0,
           PRODUCT_PIC:'',
           PRODUCT_NAME: '',
           PRODUCT_BRAND: '',
-          PRODUCT_CATE: '',
-          PRODUCT_ORIPRICE: 0,
+          PRODUCT_CATE:0,
+          SELL_PRICE: 0,
         }
       ]
     };
@@ -114,15 +116,27 @@ export default {
     Category
   },
   created() {
-    let that = this;
+    var vm = this;
     this.$axios.get('http://localhost:8080/shop/shoplist')
         .then(function(res){
           console.log(res);
-          that.items = res.data;
+          vm.items = res.data;
         })
         .catch(function(err){
           console.log(err);
         });
-  }
+  },
+  //  computed() {
+  //   var PRODUCT_PIC = this.PRODUCT_PIC;
+  //   this.$axios.get('http://localhost:8080/shop/shoplist')
+  //       .then(function(res){
+  //         console.log(res);
+  //         PRODUCT_PIC = res.data.PRODUCT_PIC;
+  //       })
+  //       .catch(function(err){
+  //         console.log(err);
+  //       });
+  // }
+
 };
 </script>

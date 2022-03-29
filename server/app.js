@@ -14,6 +14,7 @@ const adminCscenterRoute = require('./router/admin/cscenter.js');
 const categorytRoute = require('./router/common/category.js');
 const shoplistRoute = require('./router/shop/shoplist.js');
 const buyRouter = require('./router/sold/buyconfirm.js');
+const minRouter = require('./router/shop/min.js');
 
 const app = express();
 const PORT = config.PORT || 4000;
@@ -61,6 +62,7 @@ app.use('/category', categorytRoute);
 app.use('/shoplist', shoplistRoute);
 app.use('/buy', buyRouter);
 app.use('/shop/shoplist', shoplistRoute);
+app.use('/shop/min', shoplistRoute);
 
 app.use((req, res, next) => {
   res.sendStatus(404);

@@ -6,18 +6,24 @@
       <div class="flex flex-wrap">
         <div class="relative w-full max-w-full flex-grow flex-1">
           <div class="w-full mb-5" style="height: 150px; overflow: hidden;" >
-            <img :src="PRODUCT_PIC" alt="아이템 사진" style="object-fit: cover;">
+            <img :src="require(`@/assets/img/${PRODUCT_PIC}.jpg`)" alt="아이템 사진" style="object-fit: cover;">
           </div>
           <h5 class="text-blueGray-400 uppercase font-bold text-xs">
-            {{ PRODUCT_BRAND }} {{PRODUCT_KEY}}
+            {{ PRODUCT_BRAND }}
+          </h5>
+           <h5 v-if="false">
+           {{PRODUCT_KEY}}
           </h5>
           <span class="font-semibold text-xl text-blueGray-700">
-            {{ PRODUCT_NAME }} {{PRODUCT_CATE}}
+            {{ PRODUCT_NAME }}
+          </span>
+          <span v-if="false">
+            {{PRODUCT_CATE}}
           </span>
         </div>
       </div>
       <p class="text-lg text-black mt-4">
-        <span class="whitespace-nowrap">{{ PRODUCT_ORIPRICE }}원</span>
+        <span class="whitespace-nowrap">{{ SELL_PRICE }}원</span>
       </p>
     </div>
   </div>
@@ -27,7 +33,6 @@ import itemPic5 from "@/assets/img/product-lego5.jpg";
 export default {
   props: {
     PRODUCT_KEY: {
-      type: String,
       default: "0",
     },
     PRODUCT_PIC: {
@@ -42,11 +47,10 @@ export default {
       type: String,
       default: "Standard lego",
     },
-    PRODUCT_ORIPRICE: {
+    SELL_PRICE: {
       default: "350,897",
     },
     PRODUCT_CATE: {
-      type: String,
       default: "3",
     }
   },
