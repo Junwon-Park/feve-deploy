@@ -62,7 +62,7 @@ app.use('/category', categorytRoute);
 app.use('/shoplist', shoplistRoute);
 app.use('/buy', buyRouter);
 app.use('/shop/shoplist', shoplistRoute);
-app.use('/shop/min', shoplistRoute);
+app.use('/shop/min', minRouter);
 
 app.use((req, res, next) => {
   res.sendStatus(404);

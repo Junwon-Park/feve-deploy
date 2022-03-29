@@ -74,7 +74,7 @@
               <Category />
             </div>
             <div class="w-full px-4 mb-5 flex flex-wrap">
-              <div class="w-full lg:w-6/12 xl:w-3/12 px-4 mb-5" v-for="item in items" :key="item.seq">
+              <div class="w-full lg:w-6/12 xl:w-3/12 px-4 mb-5" v-for="item in items" :key="item.PRODUCT_KEY">
                 <ProductCards v-bind="item" />
               </div>
             </div>
@@ -117,8 +117,9 @@ export default {
   },
   created() {
     var vm = this;
-    this.$axios.get('http://localhost:8080/shop/shoplist')
+    this.$axios.get('http://localhost:8080/shop/min')
         .then(function(res){
+          console.log("디비에서 결과 가져옴");
           console.log(res);
           vm.items = res.data;
         })

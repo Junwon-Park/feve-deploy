@@ -8,6 +8,7 @@ async function shoplist(req, res, next) {
         'PRODUCT_DESC', 'PRODUCT_ORIPRICE','PRODUCT_WDATE','PRODUCT_CATE'],
     })
         .then(result => {
+            console.log("**************************************************");
             console.log(result);
             res.json(result);
         })
