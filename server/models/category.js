@@ -15,12 +15,20 @@ module.exports = (sequelize, DataTypes) => {
   Category.init(
     {
       CATEGORY_KEY: {
-        type: DataTypes.BIGINT,
-        primaryKey: true
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: DataTypes.BIGINT
       },
       CATEGORY_PARENT: DataTypes.STRING(3),
-      CATEGORY_NAME: DataTypes.STRING(20),
-      CATEGORY_DESC: DataTypes.STRING(20)
+      CATEGORY_NAME: { 
+        allowNull: false,
+        type: DataTypes.STRING(3) 
+      },
+      CATEGORY_DESC: {
+        allowNull: false,
+        type: DataTypes.STRING(20)
+      }
     },
     {
       sequelize,

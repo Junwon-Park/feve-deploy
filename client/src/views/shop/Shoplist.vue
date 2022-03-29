@@ -113,7 +113,7 @@ export default {
         }
       ],
 
-      cate:'',
+      cate:''
     };
   },
   components: {
