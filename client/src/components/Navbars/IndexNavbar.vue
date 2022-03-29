@@ -12,7 +12,7 @@
           <span
             class="text-blueGray-800 text-4xl font-bold italic leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
           >
-            Notus
+          F E V E
           </span>
         </router-link>
         <button
