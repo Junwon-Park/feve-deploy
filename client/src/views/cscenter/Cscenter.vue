@@ -8,26 +8,15 @@
      
       
      
-      <section class="relative py-20 bg-white-200">
-        <div class="container mx-auto px-10">
+      <section class="relative py-15 bg-white-200">
+        <div class="container mx-auto px-5">
           <div
             class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-auto"
           >
-            <div class="px-10">
-              <div class="flex flex-wrap justify-center">
-                <div
-                  class="w-full lg:w-3/12 px-4 lg:order-10 flex justify-center"
-                >
-                </div> 
-              </div>
-              <div class="text-center mt-20 ">
-                <h3 class="text-4xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2">
-                  고객센터
-                </h3>
-              </div>
-              <div class="mt-10 py-5 border-t border-blueGray-200 text-center">
+            <div class="px-5">
+              <div class="mt-10 py-20 border-t border-blueGray-200 text-center">
                 <div class="flex flex-wrap justify-center">
-                   <div class="w-full mb-12 px-4">
+                   <div class="w-full mb-12 px-5">
                     <card-table />
                   </div>
                 </div>
@@ -41,7 +30,7 @@
 </template>
 <script>
 import CscenterSidebar from "@/components/Sidebar/CscenterSidebar.vue";
-import CardTable from "@/components/Cards/CardTable.vue";
+import CardTable from "@/components/Cards/Cscenter/CscenterNotice.vue";
 
 
 
