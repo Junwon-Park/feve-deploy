@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      models.Cscenter.belongsTo(models.User);
+      models.Cscenter.belongsTo(models.User,{foreignKey:"USER_KEY", targetKey:"USER_KEY"});
     }
   }
     Cscenter.init(
