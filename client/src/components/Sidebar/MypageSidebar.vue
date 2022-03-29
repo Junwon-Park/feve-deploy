@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden shadow-xl bg-white flex flex-wrap items-center justify-between relative md:w-13rem z-10 py-4 px-6 h-40rem"
+    class="md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden shadow-xl bg-white flex flex-wrap items-center justify-between relative md:w-13rem z-10 py-4 px-6"
   >
     <div
       class="md:flex-col md:items-stretch md:min-h-full md:flex-nowrap px-0 flex flex-wrap items-center justify-between w-full mx-auto "
@@ -41,6 +41,7 @@
                 @click="onTapClicked(i+1)"
                 class="text-xs uppercase py-3 font-bold block text-blueGray-400 hover:text-black"
                 style="outline:none"
+                ref="tap+i"
               >
                 <i :class="[tapIcons[i]]"></i>
                 {{tapText}}

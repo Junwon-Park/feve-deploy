@@ -2408,6 +2408,14 @@ select {
   margin-left: 0.75rem;
 }
 
+.ml-3 {
+  margin-left: 0.75rem;
+}
+
+.ml-7rem {
+  margin-left: 7rem;
+}
+
 .mt-4 {
   margin-top: 1rem;
 }
@@ -2470,6 +2478,14 @@ select {
 
 .mb-24 {
   margin-bottom: 6rem;
+}
+
+.mb-32rem {
+  margin-bottom: 32rem;
+}
+
+.mt-7rem{
+  margin-top: 7rem;
 }
 
 .mt-32 {
@@ -2960,6 +2976,10 @@ select {
 
 .pb-64 {
   padding-bottom: 16rem;
+}
+
+.pl-12rem {
+  padding-left: 12rem;
 }
 
 .placeholder-blueGray-300::-webkit-input-placeholder {
