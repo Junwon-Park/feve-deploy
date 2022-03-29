@@ -4,7 +4,7 @@ const { min } = require('../../controller/shop/min.js');
 
 const router = express.Router();
 
-router.get('/', min);
+router.post('/', min);
 
 module.exports = router;
 

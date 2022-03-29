@@ -34,9 +34,11 @@ import List3 from "@/views/List3.vue";
 import Write from "@/views/Write.vue";
 
 import Shoplist from "@/views/shop/Shoplist.vue";
+import Shopview from "@/views/shop/Shopview.vue";
 import Sold from "@/views/sold/Sellpage.vue"
 
 import Cscenter from "@/views/cscenter/Cscenter.vue";
+
 
 
 
@@ -135,6 +137,12 @@ const routes = [
   {
     path: "/shop",
     component: Shoplist,
+
+  },
+
+  {
+    path: "/shopview",
+    component: Shopview,
 
   },
 

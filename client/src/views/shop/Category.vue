@@ -21,21 +21,21 @@
                     <ul>
                         <li >
                             <a href="#" >
-                                <input type="radio" name="depth1" id="architecture" value="architecture" v-model="cate" @click="getValue($event)">
+                                <input type="radio" name="depth1" id="architecture" value="3" v-model="cate" @click="getValue($event)">
                                 <label for="architecture">아키텍처</label>
                             </a>
                             <ul style="display:none;"></ul>
                         </li>
                         <li >
                             <a href="#" >
-                                <input type="radio" name="depth1" id="character" value="character" v-model="cate" @click="getValue($event)">
+                                <input type="radio" name="depth1" id="character" value="4" v-model="cate" @click="getValue($event)">
                                 <label for="character">캐릭터</label>
                             </a>
                             <ul style="display:none;"></ul>
                         </li>
                         <li >
                             <a href="#" >
-                                <input type="radio" name="depth1" id="vehicle" value="vehicle" v-model="cate" @click="getValue($event)">
+                                <input type="radio" name="depth1" id="vehicle" value="5" v-model="cate" @click="getValue($event)">
                                 <label for="vehicle">탈 것</label>
                             </a>
                             <ul style="display:none;"></ul>
@@ -50,21 +50,28 @@
                     <ul>
                         <li >
                             <a href="#" >
-                                <input type="radio" name="depth1" id="fr" value="fr" v-model="cate" @click="getValue($event)">
+                                <input type="radio" name="depth1" id="6" value="fr" v-model="cate" @click="getValue($event)">
                                 <label for="fr">프리사이즈</label>
                             </a>
                             <ul style="display:none;"></ul>
                         </li>
                         <li >
                             <a href="#" >
-                                <input type="radio" name="depth1" id="100" value="100" v-model="cate" @click="getValue($event)">
+                                <input type="radio" name="depth1" id="7" value="100" v-model="cate" @click="getValue($event)">
                                 <label for="100">100%</label>
+                            </a>
+                            <ul style="display:none;"></ul>
+                        </li>
+                        <li >
+                            <a href="#" >
+                                <input type="radio" name="depth1" id="8" value="200" v-model="cate" @click="getValue($event)">
+                                <label for="200">200%</label>
                             </a>
                             <ul style="display:none;"></ul>
                         </li>
                          <li >
                             <a href="#" >
-                                <input type="radio" name="depth1" id="1000" value="1000" v-model="cate" @click="getValue($event)">
+                                <input type="radio" name="depth1" id="9" value="1000" v-model="cate" @click="getValue($event)">
                                 <label for="1000">1000%</label>
                             </a>
                             <ul style="display:none;"></ul>
@@ -128,12 +135,12 @@
 export default{
     data() {
         return {
-            cate: ''
+            cate: '',
         };
     },
     methods:{
         clearAll(){
-            console.log("지우기 선택")
+            console.log("지우기 선택");
             var options = document.getElementsByName("depth1");
             for (var i = 0; i < options.length; i++) {
                 if (options[i].getAttribute('type') === 'radio') {
@@ -143,6 +150,7 @@ export default{
         },
         getValue(event){
             console.log(event.target.value);
+            this.$emit("cate",event.target.value);
         }
 
      

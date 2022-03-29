@@ -33,6 +33,7 @@
       </section>
       <section class="relative py-16 bg-blueGray-200">
         <div class="">
+          <!-- <v-form ref="form" @submit.prevent="send"> -->
           <div
             class="p-8 relative flex flex-col min-w-0 break-words  pd-8 bg-white w-full mb-6 shadow-xl rounded-lg -mt-64"
           >
@@ -71,7 +72,8 @@
           
           <div class="flex mt-5">
             <div class="flex w-full lg:w-3/12 px-4 mb-5">
-              <Category />
+              <Category v-bind="cate" @cate="category"/>
+              <v-chip class="ma-2" type="button" @click="send()">검색</v-chip>
             </div>
             <div class="w-full px-4 mb-5 flex flex-wrap">
               <div class="w-full lg:w-6/12 xl:w-3/12 px-4 mb-5" v-for="item in items" :key="item.PRODUCT_KEY">
@@ -80,6 +82,7 @@
             </div>
           </div>
           </div>
+          
         </div>
       </section>
     </main>
@@ -108,7 +111,9 @@ export default {
           PRODUCT_CATE:0,
           SELL_PRICE: 0,
         }
-      ]
+      ],
+
+      cate:'',
     };
   },
   components: {
@@ -117,7 +122,7 @@ export default {
   },
   created() {
     var vm = this;
-    this.$axios.get('http://localhost:8080/shop/min')
+    this.$axios.post('http://localhost:8080/shop/min')
         .then(function(res){
           console.log("디비에서 결과 가져옴");
           console.log(res);
@@ -127,6 +132,23 @@ export default {
           console.log(err);
         });
   },
+  methods:{
+    send(){		
+        this.$axios.post('http://localhost:8080/shop/min',{
+        cate:this.cate})
+        .then( () => {			
+            alert("서버로 카테고리 값 넘기기");
+            alert(this.cate);
+        })
+        .catch((err)=>{
+          console.log(err);
+        });
+    },
+    category(cate){
+      this.cate=cate;
+      alert(cate);
+    }
+  }
   //  computed() {
   //   var PRODUCT_PIC = this.PRODUCT_PIC;
   //   this.$axios.get('http://localhost:8080/shop/shoplist')
