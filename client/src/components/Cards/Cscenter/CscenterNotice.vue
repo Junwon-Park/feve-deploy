@@ -96,7 +96,7 @@
                   color === 'light' ? 'text-blueGray-600' : 'text-white',
                 ]"
               >
-                [공지] 안녕하세요. Feve 공지 사항 입니다.
+                [공지] 안녕하세요. FEVE 공지 사항 입니다.
               </span>
             </th>
             <td
@@ -150,7 +150,7 @@
                   color === 'light' ? 'text-blueGray-600' : 'text-white',
                 ]"
               >
-                [공지] Feve 사용 안내
+                [공지] FEVE 사용 안내
               </span>
             </th>
             <td
