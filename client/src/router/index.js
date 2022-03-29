@@ -35,6 +35,8 @@ import Write from "@/views/Write.vue";
 import Shoplist from "@/views/shop/Shoplist.vue";
 import Sold from "@/views/sold/Sellpage.vue"
 
+import Cscenter from "@/views/cscenter/Cscenter.vue";
+
 
 
 Vue.use(VueRouter);
@@ -130,6 +132,13 @@ const routes = [
     component: Shoplist,
 
   },
+
+  {
+    path: "/cscenter",
+    component: Cscenter,
+
+  },
+
   { path: "/:pathMatch(.*)*", redirect: "/" },
 ];
 
