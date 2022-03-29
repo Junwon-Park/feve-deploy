@@ -2,6 +2,7 @@
   <div
       class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded"
   >
+
     <div class="rounded-t mb-0 px-4 py-3 border-0">
       <div class="flex flex-wrap items-center">
         <div class="relative w-full px-4 max-w-full flex-grow flex-1">
@@ -25,27 +26,30 @@
         </tr>
         </thead>
         <tbody>
-          <AdminCards v-for="(inspecItems, idx) in items" :key="idx" v-bind="inspecItems"  />
+          <AdminInspecCards  :items="items"  />
         </tbody>
       </table>
     </div>
+
+    <AdminInspecModi @dialog="fDialog" />
+
   </div>
 </template>
 
 <script>
-import AdminCards from "@/components/Cards/Admin/AdminCards.vue";
+import AdminInspecCards from "@/components/Cards/Admin/AdminInspecCards.vue";
+import AdminInspecModi from "@/components/Cards/Admin/AdminInspecModi.vue";
 export default {
   props: {
     title: {
       type: String,
       default: "리스트",
     },
-    items: {
-
-    },
+    items: {},
 },
   data() {
     return {
+      dialog: false,
       table: {
         tablePnum:{
           type: String,
@@ -79,6 +83,14 @@ export default {
           type: String,
           default: "검수 상태",
         },
+        tablePinspecResult:{
+          type: String,
+          default: "검수 결과",
+        },
+        tablePinspecDate:{
+          type: String,
+          default: "검수 완료일",
+        },
         tablePstatus:{
           type: String,
           default: "상태",
@@ -87,7 +99,14 @@ export default {
     }
   },
   components: {
-    AdminCards,
+    AdminInspecCards,
+    AdminInspecModi
+  },
+  methods: {
+    fDialog(){
+      console.log("??");
+      this.dialog=true;
+    }
   },
 }
 </script>
