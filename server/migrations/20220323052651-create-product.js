@@ -40,6 +40,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
+    }).then(function(){
+        queryInterface.addColumn('Product', {
+
+        })
     });
   },
   async down(queryInterface, Sequelize) {

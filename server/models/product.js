@@ -9,12 +9,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      models.Product.belongsTo(models.Category, {foreignKey: "CATEGORY_KEY"});
-
+      models.Product.belongsTo(models.Category);
       models.Product.hasMany(models.Buy);
       models.Product.hasMany(models.Sell);
       models.Product.hasMany(models.Favorite);
-      models.Product.hasMany(models.Inspection);
+      models.Product.hasMany(models.Inspection,{foreignKey:'PRODUCT_KEY', sourceKey:'PRODUCT_KEY'});
     }
   }
   Product.init(
@@ -55,6 +54,10 @@ module.exports = (sequelize, DataTypes) => {
       },
       PRODUCT_WDATE: {
         type:DataTypes.DATE,
+        allowNull: false,
+      },
+      PRODUCT_CATE: {
+        type:DataTypes.BIGINT,
         allowNull: false,
       },
     }, {

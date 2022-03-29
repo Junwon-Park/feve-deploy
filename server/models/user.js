@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       models.User.hasMany(models.Sell);
       models.User.hasMany(models.Cscenter);
       models.User.hasMany(models.Favorite);
-      models.User.hasMany(models.Inspection);
+      models.User.hasMany(models.Inspection, {foreignKey: "USER_KEY", targetKey:"USER_KEY"});
     }
   }
   User.init(
