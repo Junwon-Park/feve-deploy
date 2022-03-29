@@ -8,7 +8,7 @@
   </div>
 </template>
 <script>
-import AdminCardCscenterPage from "@/components/Cards/AdminCardCscenterPage.vue";
+import AdminCardCscenterPage from "@/components/Cards/Admin/AdminCardCscenterPage.vue";
 
 export default {
   data() {

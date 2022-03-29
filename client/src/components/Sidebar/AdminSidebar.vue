@@ -79,7 +79,7 @@
         </h6>
         <!-- Navigation -->
 
-        <ul class="md:flex-col md:min-w-full flex flex-col list-none">
+        <ul class="md:flex-col md:min-w-full  flex-col list-none">
           <li class="items-center">
             <router-link
               to="/admin/productlist"
@@ -139,7 +139,7 @@
         </h6>
         <!-- Navigation -->
 
-        <ul class="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
+        <ul class="md:flex-col md:min-w-full flex-col list-none md:mb-4">
           <li class="items-center">
             <router-link
               class="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
@@ -175,7 +175,7 @@
         </h6>
         <!-- Navigation -->
 
-        <ul class="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
+        <ul class="md:flex-col md:min-w-full flex-col list-none md:mb-4">
           <li class="items-center">
             <router-link
                 to="/admin/cscenterList"

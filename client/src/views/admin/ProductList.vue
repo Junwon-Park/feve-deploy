@@ -10,8 +10,8 @@
   </div>
 </template>
 <script>
-import AdminCardPageLists from "@/components/Cards/AdminCardPageLists.vue";
-import AdminCards from "@/components/Cards/AdminCards.vue";
+import AdminCardPageLists from "@/components/Cards/Admin/AdminCardPageLists.vue";
+import AdminCards from "@/components/Cards/Admin/AdminCards.vue";
 export default {
   data() {
     return {

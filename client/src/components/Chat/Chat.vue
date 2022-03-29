@@ -23,6 +23,7 @@
         <v-card-title>
           <span class="text-h5">상담하기</span>
         </v-card-title>
+        <hr>
         <v-card-text>
           <v-container>
             <v-row>
