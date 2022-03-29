@@ -16,18 +16,36 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Sell.init(
-    {
-      sell_price: DataTypes.BIGINT,
-      sell_sdate: DataTypes.DATE,
-      sell_edate: DataTypes.DATE,
+    { SELL_KEY: {
+      type: DataTypes.BIGINT,
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true
+  },
+      sell_price: {
+        type:DataTypes.BIGINT,
+        allowNull: false,
+      },  
+      sell_sdate: {
+      type:DataTypes.DATE,
+      allowNull: false,
+      },    
+      sell_edate: {
+      type:DataTypes.DATE,
+      allowNull: false,
+      },
       sell_status: {
         type: DataTypes.STRING('1'),
-        defaultValue: '0'
+        defaultValue: '0',
+        allowNull: false,
       }
     },
     {
       sequelize,
-      modelName: 'Sell'
+      modelName: 'Sell',
+      timestamps: false,
+      freezeTableName: true,
+      tableName : "Sell"
     }
   );
   return Sell;

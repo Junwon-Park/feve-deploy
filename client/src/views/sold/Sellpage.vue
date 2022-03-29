@@ -1,6 +1,8 @@
 <template>
+
   <div>
     <main class="profile-page">
+      
       <section class="relative block h-500-px">
         <div
           class="absolute top-0 w-full h-full bg-center bg-cover"          
@@ -32,13 +34,18 @@
           
         </div>
       </section>
+      
+
       <section class="relative py-16 bg-blueGray-200">
+        
         <div class="container mx-auto px-4">
           <div
             class="p-8 relative flex flex-col min-w-0 break-words  pd-8 bg-white w-full mb-6 shadow-xl rounded-lg -mt-64"
           >
           
+ 
           <div class="px-6">
+    
              <h5
                 class="text-xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2 text-center m-3"
               >구매동의</h5>   
@@ -55,7 +62,7 @@
                 </div>
               </div>
               <div class="sold-img">
-                <img src="anguler">
+                <img src="@/assets/img/angular.jpg">
               </div>
             </div>  
           </div>
@@ -157,12 +164,15 @@
 </template>
 <script>
 import anguler from "@/assets/img/angular.jpg";
+import legoBg from "@/assets/img/bg-lego5.jpg";
+
 
 export default {
   data() {
     return {
       anguler,
          checksucess: [],
+          legoBg,
     };
   },
  methods:{
