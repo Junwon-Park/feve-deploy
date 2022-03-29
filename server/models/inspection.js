@@ -14,6 +14,10 @@ module.exports = (sequelize, DataTypes) => {
   }
   Inspection.init(
     {
+      INSPECTION_KEY: {
+        type: DataTypes.BIGINT,
+        primaryKey: true
+    },
       INSPECTION_DATE: DataTypes.DATE,
       INSPECTION_STATUS: {
         type: DataTypes.STRING(1),
@@ -25,7 +29,10 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: 'Inspection'
+      modelName: 'Inspection',
+        timestamps: false,
+        freezeTableName: true,
+        tableName : "Inspection"
     }
   );
   return Inspection;

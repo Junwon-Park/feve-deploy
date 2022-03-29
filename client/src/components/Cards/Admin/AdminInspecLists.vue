@@ -25,7 +25,7 @@
         </tr>
         </thead>
         <tbody>
-          <AdminCards v-for="(item, idx) in items" :key="idx" v-bind="item"  />
+          <AdminCards v-for="(inspecItems, idx) in items" :key="idx" v-bind="inspecItems"  />
         </tbody>
       </table>
     </div>
@@ -41,8 +41,8 @@ export default {
       default: "리스트",
     },
     items: {
-      required: true
-    }
+
+    },
 },
   data() {
     return {
@@ -67,9 +67,9 @@ export default {
           type: String,
           default: "발매가",
         },
-        tablePcount:{
+        tablePseller:{
           type: String,
-          default: "수량",
+          default: "판매자",
         },
         tablePinspeccount:{
           type: String,
@@ -82,9 +82,6 @@ export default {
         tablePstatus:{
           type: String,
           default: "상태",
-        },
-        items: {
-          required: true
         }
       }
     }

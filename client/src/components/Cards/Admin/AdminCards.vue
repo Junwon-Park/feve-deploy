@@ -43,17 +43,23 @@
           <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
           >
+            {{ listName }}
+          </td>
+          <td
+              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
+          >
             <button
                 class="bg-orange-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                 type="button"
             >
-              수정
+              {{ listName===1 ? buttonName='수정' : buttonName='검수' }}
             </button>
             <button
                 class="bg-red-500 text-white active:bg-red-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                 type="button"
+                v-show="listName"
             >
-              삭제기
+              삭제
             </button>
           </td>
         </tr>
@@ -61,6 +67,11 @@
 
 <script>
 export default {
+  data(){
+    return {
+      buttonName: '',
+    }
+  },
   props: {
     PRODUCT_KEY: {
       default: 0,
@@ -89,6 +100,9 @@ export default {
     inspecStatus: {
       default: 2
     },
+    listName: {
+      default: 0
+    }
   },
 }
 </script>

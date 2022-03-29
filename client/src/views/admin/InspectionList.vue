@@ -2,20 +2,17 @@
   <div>
     <div class="flex flex-wrap" style="min-height: 80vh;">
       <div class="w-full mb-12 xl:mb-0 px-4 mt-12">
-        <AdminCardPageLists v-bind="items" :items="items" :title="title">
-                <AdminCards  />
-        </AdminCardPageLists>
+        <AdminInspecLists v-bind="items" :items="items" :title="title"/>
     </div>
     </div>
   </div>
 </template>
 <script>
-import AdminCardPageLists from "@/components/Cards/Admin/AdminCardPageLists.vue";
-import AdminCards from "@/components/Cards/Admin/AdminCards.vue";
+import AdminInspecLists from "@/components/Cards/Admin/AdminInspecLists.vue";
 export default {
   data() {
     return {
-      title: "상품리스트",
+      title: "검수리스트",
       items:
         {
           PRODUCT_KEY: 0,
@@ -27,26 +24,21 @@ export default {
           inspecCount: 0,
           inspecStatus: 0,
           inspecComplete: 0,
+          listName: 0
         },
 
     }
   },
   components: {
-    AdminCards,
-    AdminCardPageLists,
+    AdminInspecLists,
   },
 
   created() {
     let that = this;
-    this.$axios.get('http://localhost:8080/admin/loadproduct')
+    this.$axios.get('http://localhost:8080/admin/loadInspection')
         .then(function(res){
           console.log(res);
           that.items = res.data;
-          that.items.dealCount= 20;
-          that.items.inspecCount= 20;
-          that.items.inspecStatus= 20;
-          that.items.inspecComplete=20;
-          that.items.listName=1;
         })
         .catch(function(err){
           console.log(err);

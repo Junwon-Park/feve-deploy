@@ -54,7 +54,7 @@ export default {
     },
     items: {
       required: true
-    }
+    },
 },
   data() {
     return {
@@ -95,9 +95,6 @@ export default {
           type: String,
           default: "상태",
         },
-        items: {
-          required: true
-        }
       }
     }
   },

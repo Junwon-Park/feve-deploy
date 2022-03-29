@@ -17,6 +17,7 @@ import Maps from "@/views/admin/Maps.vue";
 import AddProduct from "@/views/admin/AddProduct.vue";
 import ProductList from "@/views/admin/ProductList.vue";
 import CscenterList from "@/views/admin/CscenterList.vue";
+import InspectionList from "@/views/admin/InspectionList.vue";
 
 // views for Auth layout
 import Login from "@/views/auth/Login.vue";
@@ -72,6 +73,10 @@ const routes = [
       {
         path: "/admin/cscenterList",
         component: CscenterList,
+      },
+      {
+        path: "/admin/inspectionList",
+        component: InspectionList,
       },
     ],
   },
