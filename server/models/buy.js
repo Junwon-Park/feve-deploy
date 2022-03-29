@@ -14,17 +14,38 @@ module.exports = (sequelize, DataTypes) => {
   }
   Buy.init(
     {
-      buy_price: DataTypes.BIGINT,
-      buy_sdate: DataTypes.DATE,
-      buy_edate: DataTypes.DATE,
+      BUY_KEY: {
+        type: DataTypes.BIGINT,
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true
+      },
+      buy_price: {
+        type:DataTypes.BIGINT,
+        allowNull: false,
+      },
+      buy_sdate: {
+        type:DataTypes.DATE,
+        allowNull: false,
+      },
+      buy_edate: {
+        type:DataTypes.DATE,
+        allowNull: false,
+      },
       buy_status: {
         type: DataTypes.STRING('1'),
-        defaultValue: '0'
+        defaultValue: '0',
+        allowNull: false,
       }
     },
     {
       sequelize,
-      modelName: 'Buy'
+      modelName: 'Buy',
+      timestamps: false,
+      freezeTableName: true,
+      timezone: 'Asia/Seoul',
+      tableName : "Buy"
+      
     }
   );
   return Buy;
