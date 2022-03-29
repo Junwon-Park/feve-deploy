@@ -57,10 +57,6 @@ module.exports = (sequelize, DataTypes) => {
         type:DataTypes.DATE,
         allowNull: false,
       },
-      PRODUCT_CATE: {
-        type:DataTypes.BIGINT,
-        allowNull: false,
-      },
     }, {
       sequelize,
       modelName: 'Product',
