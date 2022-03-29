@@ -4,9 +4,7 @@
 
     <div style="margin-left: 13rem; display: flex;">
       <div v-if= "currentViewState === 0" style="width: 100%">
-        <mypage-simple-user-info
-        class="mt-48"/>
-        <mypage-simple-buy-list/>
+        <mypage-main/>
         <h1>{{currentViewState}}</h1>
       </div>
       <div v-else-if= "currentViewState === 1"  style="width:100%;">
@@ -23,15 +21,13 @@
 <script>
 import MypageSidebar from "@/components/Sidebar/MypageSidebar.vue";
 import CardLineChart from "@/components/Cards/CardLineChart.vue";
-import MypageSimpleUserInfo from '../../components/Cards/Mypage/MypageSimpleUserInfo.vue';
-import MypageSimpleBuyList from '../../components/Cards/Mypage/MypageSimpleBuyList.vue';
+import MypageMain from '@/layouts/mypage/MypageMain.vue';
 
 export default {
   components: {
     MypageSidebar,
     CardLineChart,
-    MypageSimpleUserInfo,
-    MypageSimpleBuyList,
+    MypageMain,
   },
   data() {
     return {

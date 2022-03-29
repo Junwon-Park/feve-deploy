@@ -1,30 +1,63 @@
 <template>
-  <div
-    class="relative flex flex-col min-w-0 break-words bg-white w-full rounded-lg mt-4 mb-32rem"
+  <v-card
+    class="mx-auto flex mb-24"
+    outlined
   >
+  
+  <div class="flex" style="">
+  <v-list-item >
+    <v-list-item-content class="">
+      <v-list-item-subtitle class=" text-center">
+        전체
+      </v-list-item-subtitle>
+      <v-list-item-title class="text-h6 font-bold text-center">
+        0
+      </v-list-item-title>
+    </v-list-item-content>
 
-    <h3 class="text-xl font-semibold leading-normal text-blueGray-700">
-        구매 내역
-    </h3>
+    <hr style="border:0.1px solid gray; width:0.01px; height:60%;">
 
-    <div 
-    class="ml-1"
-    style="width:70%; height: 100%; border: 1px solid gray; border-radius: 0.5em;">
-       
-        <div class="ml-14rem">
-            <h3
-                class="text-xl font-semibold leading-normal mb-4 text-blueGray-700"
-            >
-                JennaStones@naver.com
-            </h3>
+    <v-list-item-content class="">
+      <v-list-item-subtitle class=" text-center">
+        입찰 중
+      </v-list-item-subtitle>
+      <v-list-item-title class="text-h6 font-bold text-center">
+        0
+      </v-list-item-title>
+    </v-list-item-content>
 
-            <button>
-            자세히 보기
-            </button>
-        </div>
-    </div>
+    <v-list-item-content class="">
+      <v-list-item-subtitle class=" text-center">
+        진행 중
+      </v-list-item-subtitle>
+      <v-list-item-title class="text-h6 font-bold text-center">
+        0
+      </v-list-item-title>
+    </v-list-item-content>
+
+    <v-list-item-content class="">
+      <v-list-item-subtitle class=" text-center">
+        종료
+      </v-list-item-subtitle>
+      <v-list-item-title class="text-h6 font-bold text-center">
+        0
+      </v-list-item-title>
+    </v-list-item-content>
+  </v-list-item>
+
   </div>
+    <v-card-actions style="margin-left:42%" >
+      <v-btn
+        outlined
+        rounded
+        text
+      >
+        더보기
+      </v-btn>
+    </v-card-actions>
+  </v-card>
 </template>
+
 <script>
 
 export default {

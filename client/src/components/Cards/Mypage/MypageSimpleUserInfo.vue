@@ -1,7 +1,6 @@
 <template>
   <v-card
-    class="mx-auto flex"
-    max-width="60%"
+    class="mx-auto flex-direction: column"
     outlined
   >
     <v-list-item three-line>
@@ -20,12 +19,11 @@
       ></v-list-item-avatar>
     </v-list-item>
 
-    <v-card-actions >
+    <v-card-actions style="margin-left:42%" >
       <v-btn
         outlined
         rounded
         text
-        class="ml-7rem"
       >
         프로필 수정
       </v-btn>
