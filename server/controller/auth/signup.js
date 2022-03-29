@@ -46,6 +46,7 @@ const signup = async (req, res) => {
           .status(409) // Conflict
           .json({ message: 'Signup failed' });
       else {
+        const { USER_ID, USER_MAIL } = user;
         const accessToken = await genAccToken(user);
         const refreshToken = await genRefToken(user);
 
@@ -57,7 +58,7 @@ const signup = async (req, res) => {
             secure: true,
             maxAge: 72 * 60 * 60 * 10000 // 30d
           })
-          .json({ data: { accessToken, USER_ID } });
+          .json({ data: { accessToken, USER_ID, USER_MAIL } });
       }
     }
   });
