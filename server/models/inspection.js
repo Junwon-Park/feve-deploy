@@ -17,11 +17,14 @@ module.exports = (sequelize, DataTypes) => {
     {
       INSPECTION_KEY: {
         type: DataTypes.BIGINT,
-        primaryKey: true
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
     },
       INSPECTION_DATE: DataTypes.DATE,
       INSPECTION_STATUS: {
         type: DataTypes.STRING(1),
+        allowNull: false,
         defaultValue: '0'
       },
       INSPECTION_RESULT: DataTypes.STRING(1),
