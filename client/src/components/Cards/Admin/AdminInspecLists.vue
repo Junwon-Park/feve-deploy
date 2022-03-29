@@ -26,13 +26,11 @@
         </tr>
         </thead>
         <tbody>
-          <AdminInspecCards  :items="items"  />
+          <AdminInspecCards  :items="items" @sendDialog="cDialog" />
         </tbody>
       </table>
     </div>
-
-    <AdminInspecModi @dialog="fDialog" />
-
+    <AdminInspecModi :dialog="recDialog" />
   </div>
 </template>
 
@@ -49,7 +47,7 @@ export default {
 },
   data() {
     return {
-      dialog: false,
+      recDialog: false,
       table: {
         tablePnum:{
           type: String,
@@ -103,9 +101,9 @@ export default {
     AdminInspecModi
   },
   methods: {
-    fDialog(){
-      console.log("??");
-      this.dialog=true;
+    cDialog(){
+      this.recDialog=true;
+      console.log(this.recDialog)
     }
   },
 }

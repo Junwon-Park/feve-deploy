@@ -13,6 +13,7 @@ export default {
   data() {
     return {
       title: "검수리스트",
+      dialog: false,
       items:
         {
           PRODUCT_KEY: 0,
@@ -36,7 +37,7 @@ export default {
     let that = this;
     this.$axios.get('http://localhost:8080/admin/loadInspection')
         .then(function(res){
-          //that.items=res.data;
+          console.log(res);
           that.items.PRODUCT_KEY= res.data[0].Product.PRODUCT_KEY;
           that.items.PRODUCT_NAME= res.data[0].Product.PRODUCT_NAME;
           that.items.PRODUCT_BRAND= res.data[0].Product.PRODUCT_BRAND;
@@ -51,6 +52,10 @@ export default {
         .catch(function(err){
           console.log(err);
         });
+
   },
+  methods: {
+
+  }
 };
 </script>

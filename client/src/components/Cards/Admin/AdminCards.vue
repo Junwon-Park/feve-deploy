@@ -18,12 +18,12 @@
           <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
           >
-            {{  PRODUCT_ORIPRICE  }}
+            {{  PRODUCT_CATE }}
           </td>
           <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
           >
-            {{  PRODUCT_CATE }}
+            {{  PRODUCT_ORIPRICE  }} 원
           </td>
           <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"

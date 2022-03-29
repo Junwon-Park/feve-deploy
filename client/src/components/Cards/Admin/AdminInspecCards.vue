@@ -75,8 +75,7 @@ export default {
 
   methods: {
     fDialog(){
-      this.$emit('dialog');
-      console.log(this.$emit('diallog'))
+      this.$emit('sendDialog');
     }
   }
 }
