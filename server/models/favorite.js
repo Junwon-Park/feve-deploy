@@ -15,11 +15,19 @@ module.exports = (sequelize, DataTypes) => {
   }
   Favorite.init(
     {
-      FAVORITE_KEY: DataTypes.BIGINT
+      FAVORITE_KEY: {
+        type: DataTypes.BIGINT,
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+      }
     },
     {
       sequelize,
-      modelName: 'Favorite'
+      modelName: 'Favorite',
+      freezeTableName: true,
+      timestamps: false,
+      tableName : "Favorite"
     }
   );
   return Favorite;

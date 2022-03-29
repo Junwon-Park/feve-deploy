@@ -39,6 +39,10 @@ module.exports = {
       PRODUCT_WDATE: {
         allowNull: false,
         type: Sequelize.DATE
+      },
+      PRODUCT_CATE: {
+        type:Sequelize.BIGINT,
+        allowNull: false,
       }
     });
   },

@@ -21,23 +21,51 @@ module.exports = (sequelize, DataTypes) => {
     {
       PRODUCT_KEY: {
           type: DataTypes.BIGINT,
-          primaryKey: true
+          primaryKey: true,
+          allowNull: false,
+          autoIncrement: true,
       },
-      PRODUCT_BRAND: DataTypes.STRING(100),
-      PRODUCT_NAME: DataTypes.STRING(100),
-      PRODUCT_MNUM: DataTypes.STRING(100),
-      PRODUCT_LDATE: DataTypes.DATEONLY,
-      PRODUCT_PIC: DataTypes.STRING(255),
-      PRODUCT_DESC: DataTypes.STRING(500),
-      PRODUCT_ORIPRICE: DataTypes.BIGINT,
-      PRODUCT_WDATE: DataTypes.DATE,
-      PRODUCT_CATE: DataTypes.BIGINT
+      PRODUCT_BRAND: {
+        type: DataTypes.STRING(100),
+        allowNull: false,
+      },
+      PRODUCT_NAME: {
+        type: DataTypes.STRING(100),
+        allowNull: false,
+      }, 
+      PRODUCT_MNUM: {
+        type:DataTypes.STRING(100),
+        allowNull: false,
+      },
+      PRODUCT_LDATE: {
+        type:DataTypes.DATEONLY,
+        allowNull: false,
+      },
+      PRODUCT_PIC: {
+        type:DataTypes.STRING(255),
+        allowNull: false,
+      },
+      PRODUCT_DESC: {
+        type:DataTypes.STRING(500),
+        allowNull: false,
+      },
+      PRODUCT_ORIPRICE: {
+        type:DataTypes.BIGINT,
+        allowNull: false,
+      },
+      PRODUCT_WDATE: {
+        type:DataTypes.DATE,
+        allowNull: false,
+      },
+      PRODUCT_CATE: {
+        type:DataTypes.BIGINT,
+        allowNull: false,
+      },
     }, {
       sequelize,
       modelName: 'Product',
       timestamps: false,
       freezeTableName: true,
-      timezone: 'Asia/Seoul',
       tableName : "Product"
     });
   return Product;
