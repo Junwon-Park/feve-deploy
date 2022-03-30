@@ -16,18 +16,14 @@ export default {
   data() {
     return {
       title: "상품리스트",
-      items:
-        {
+      items: [{
           PRODUCT_KEY: 0,
           PRODUCT_NAME: '',
           PRODUCT_BRAND: '',
           PRODUCT_CATE: '',
           PRODUCT_ORIPRICE: 0,
           dealCount: 0,
-          inspecCount: 0,
-          inspecStatus: 0,
-          inspecComplete: 0,
-        },
+        }],
 
     }
   },
