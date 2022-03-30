@@ -1,10 +1,10 @@
 <template>
         <tr>
-          <th
+          <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
           >
             {{ PRODUCT_KEY }}
-          </th>
+          </td>
           <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
           >
@@ -29,16 +29,6 @@
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
           >
             {{ dealCount }}
-          </td>
-          <td
-              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
-          >
-            {{ inspecCount }}
-          </td>
-          <td
-              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
-          >
-            {{ inspecStatus }}
           </td>
           <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
@@ -87,12 +77,6 @@ export default {
     },
     dealCount: {
       default: 5
-    },
-    inspecCount: {
-      default: 10
-    },
-    inspecStatus: {
-      default: 2
     },
   },
 }

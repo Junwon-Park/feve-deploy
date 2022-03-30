@@ -32,7 +32,7 @@
               class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold"
               v-for="(table, idx) in table" :key="idx"
           >
-            {{ table.default }}
+            {{ table }}
           </th>
         </tr>
         </thead>
@@ -58,44 +58,7 @@ export default {
 },
   data() {
     return {
-      table: {
-        tablePnum:{
-          type: String,
-          default: "번호",
-        },
-        tablePname:{
-          type: String,
-          default: "상품명",
-        },
-        tablePbrand:{
-          type: String,
-          default: "브랜드",
-        },
-        tablePcate:{
-          type: String,
-          default: "카테고리",
-        },
-        tablePoriprice:{
-          type: String,
-          default: "발매가",
-        },
-        tablePcount:{
-          type: String,
-          default: "수량",
-        },
-        tablePinspeccount:{
-          type: String,
-          default: "검수 수량",
-        },
-        tablePinspecstatus:{
-          type: String,
-          default: "검수 상태",
-        },
-        tablePstatus:{
-          type: String,
-          default: "상태",
-        },
-      }
+      table: ["번호", "상품명", "브랜드", "카테고리", "판매자","수량","관리"]
     }
   },
   components: {
