@@ -2,13 +2,13 @@
   <div class="mt-7rem ml-14rem">
     <MypageSidebar :currentViewState="currentViewState" @onViewStateChanged="onViewStateChanged"/>
 
-    <div style="margin-left: 13rem;">
+    <div style="margin-left: 13rem;" class="sm:mt-40 md:mt-40">
       <div v-if= "currentViewState === 0">
-        <mypage-main style="margin-top:13%;"/>
+        <mypage-main/>
         <h1>{{currentViewState}}</h1>
       </div>
       <div v-else-if= "currentViewState === 1">
-        <mypage-buy-list style="margin:auto; max-width:80%; margin-bottom:10%; margin-top:13%;" />
+        <mypage-buy-list style="margin:auto; max-width:80%; margin-bottom:10%;" />
         <h1>{{currentViewState}}</h1>
       </div>
       <div v-else>
