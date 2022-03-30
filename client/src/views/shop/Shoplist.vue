@@ -95,7 +95,8 @@ export default {
         }
       ],
 
-      cate:''
+      cate:'',
+      price:''
     };
   },
   components: {
@@ -127,7 +128,6 @@ export default {
       this.items = e;
     },
     goFilter(event){
-      var vm = this;
       this.$axios.post('http://localhost:8080/shop/min',{
           cate:event.target.value})
       .then( (res) => {			
