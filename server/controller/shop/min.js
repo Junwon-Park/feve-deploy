@@ -6,6 +6,8 @@ const Sequelize = require('Sequelize');
 async function min(req, res, next) {
 
     const cate = req.body.cate;
+    console.log("*********************");
+    console.log("body 값 확인 ==>",req.body, ",cate value : ", req.body.cate);
 
     await db.sequelize.query(
         'SELECT \n' +
@@ -22,8 +24,8 @@ async function min(req, res, next) {
             ',b.SELL_PRICE \n' +
         'FROM Product a, Sell b\n' +
         'WHERE b.PRODUCT_KEY = a.PRODUCT_KEY \n' +
-        'AND a.PRODUCT_CATE = '+
-        '' + 3 + ''+ '\n'+
+        'AND a.PRODUCT_CATE IN ('+
+        '' + cate + ')'+ '\n'+
         'AND b.SELL_PRICE = (SELECT MIN(SELL_PRICE) FROM Sell WHERE PRODUCT_KEY = a.PRODUCT_KEY);', { type: Sequelize.QueryTypes.SELECT })
         .then(result => {
             console.log(result);

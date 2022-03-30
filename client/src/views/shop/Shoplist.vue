@@ -72,7 +72,7 @@
           
           <div class="flex mt-5">
             <div class="flex w-full lg:w-3/12 px-4 mb-5">
-              <Category v-bind="cate" @cate="category"/>
+              <Category v-bind="cate" @changeitems="changeitems($event)"/>
               <v-chip class="ma-2" type="button" @click="send()">검색</v-chip>
             </div>
             <div class="w-full px-4 mb-5 flex flex-wrap">
@@ -122,7 +122,7 @@ export default {
   },
   created() {
     var vm = this;
-    this.$axios.post('http://localhost:8080/shop/min')
+    this.$axios.post('http://localhost:8080/shop/shoplist')
         .then(function(res){
           console.log("디비에서 결과 가져옴");
           console.log(res);
@@ -133,22 +133,11 @@ export default {
         });
   },
   methods:{
-    send(){		
-        this.$axios.post('http://localhost:8080/shop/min',{
-        cate:this.cate})
-        .then( () => {			
-            alert("서버로 카테고리 값 넘기기");
-            alert(this.cate);
-        })
-        .catch((err)=>{
-          console.log(err);
-        });
-    },
-    category(cate){
-      this.cate=cate;
-      alert(cate);
+    changeitems(e){
+      console.log("changeitems의 e 값",e);
+      this.items = e;
     }
-  }
+  
   //  computed() {
   //   var PRODUCT_PIC = this.PRODUCT_PIC;
   //   this.$axios.get('http://localhost:8080/shop/shoplist')
@@ -159,7 +148,7 @@ export default {
   //       .catch(function(err){
   //         console.log(err);
   //       });
-  // }
+  }
 
 };
 </script>

@@ -15,7 +15,7 @@
             <ul >
                 <li>
                     <a href="#" >
-                    <input type="radio" name="depth1" id="lego" value="lego" v-model="cate" @click="getValue($event)">
+                    <input type="radio" name="depth1" id="lego" value="3,4,5" v-model="cate" @click="getValue($event)">
                     <label for="lego">레고</label>
                     </a>
                     <ul>
@@ -135,7 +135,8 @@
 export default{
     data() {
         return {
-            cate: '',
+
+            cate: ''
         };
     },
     methods:{
@@ -150,7 +151,18 @@ export default{
         },
         getValue(event){
             console.log(event.target.value);
-            this.$emit("cate",event.target.value);
+            // this.$emit("cate",event.target.value);
+            this.$axios.post('http://localhost:8080/shop/min',{
+            cate:event.target.value})
+            .then( (res) => {			
+                console.log(res.data);
+                //window.$ref.Shoplist.item =res.data;
+                this.$emit("changeitems",res.data);
+            })
+            .catch((err)=>{
+            console.log(err);
+            });
+            
         }
 
      
