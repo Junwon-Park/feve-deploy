@@ -72,7 +72,7 @@ export default {
     },
   },
   methods:{
-    goView(PRODUCT_KEY){
+    goView(){
       this.$axios.post('http://localhost:8080/shop/shopview')
             .then( (res) => {			
                 console.log(res.data);
