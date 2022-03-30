@@ -45,27 +45,10 @@
           <div class="flex flex-wrap items-center mt-5 mb-5 px-6">
             <div class="relative w-full max-w-full flex-grow flex-1 text-right">
                <div class="text-center">
-    <v-chip
-      class="ma-2"
-    >
-      전체
-    </v-chip>
-
-    <v-chip
-      class="ma-2"
-      color="primary"
-    >
-      레고
-    </v-chip>
-
-    <v-chip
-      class="ma-2"
-      color="secondary"
-    >
-      베어브릭
-    </v-chip>
-
-  </div>
+                <v-chip class="ma-2" > 전체 </v-chip>
+                <v-chip class="ma-2" color="primary" value="3,4,5" @click="goFilter($event)"> 레고 </v-chip>
+                <v-chip class="ma-2" color="secondary" value="6,7,8,9" @click="goFilter($event)"> 베어브릭 </v-chip>
+               </div>
             </div>
           </div>
           <hr />
@@ -73,10 +56,9 @@
           <div class="flex mt-5">
             <div class="flex w-full lg:w-3/12 px-4 mb-5">
               <Category v-bind="cate" @changeitems="changeitems($event)"/>
-              <v-chip class="ma-2" type="button" @click="send()">검색</v-chip>
             </div>
             <div class="w-full px-4 mb-5 flex flex-wrap">
-              <div class="w-full lg:w-6/12 xl:w-3/12 px-4 mb-5" v-for="item in items" :key="item.PRODUCT_KEY">
+              <div class="w-full lg:w-6/12 xl:w-3/12 px-4 mb-5" v-for="(item,i) in items" :key="i">
                 <ProductCards v-bind="item" />
               </div>
             </div>
@@ -109,7 +91,7 @@ export default {
           PRODUCT_NAME: '',
           PRODUCT_BRAND: '',
           PRODUCT_CATE:0,
-          SELL_PRICE: 0,
+          SELL_PRICE: 0
         }
       ],
 
@@ -120,13 +102,20 @@ export default {
     ProductCards,
     Category
   },
-  created() {
+  beforeCreate() {
     var vm = this;
-    this.$axios.post('http://localhost:8080/shop/shoplist')
+    this.$axios.get('http://localhost:8080/shop/shoplist')
         .then(function(res){
-          console.log("디비에서 결과 가져옴");
-          console.log(res);
+          // console.log("디비에서 결과 가져옴", res);
+          // console.log("res.data값은?", res.data);
           vm.items = res.data;
+          // console.log("res.data[0].Sells[0] 값은?",res.data[0].Sells[0]);
+          // console.log("res.data[0].Sells[0].SELL_PRICE의 값은?",res.data[0].Sells[0].SELL_PRICE);
+          // for(const i in vm.items)
+          // {
+          //   console.log(res.data[i].Sells[0].SELL_PRICE);
+          //   vm.items.SELL_PRICE=res.data[i].Sells[0].SELL_PRICE;
+          // }
         })
         .catch(function(err){
           console.log(err);
@@ -136,8 +125,19 @@ export default {
     changeitems(e){
       console.log("changeitems의 e 값",e);
       this.items = e;
+    },
+    goFilter(event){
+      var vm = this;
+      this.$axios.post('http://localhost:8080/shop/min',{
+          cate:event.target.value})
+      .then( (res) => {			
+          console.log(res.data);
+      })
+      .catch((err)=>{
+      console.log(err);
+      });
     }
-  
+
   //  computed() {
   //   var PRODUCT_PIC = this.PRODUCT_PIC;
   //   this.$axios.get('http://localhost:8080/shop/shoplist')

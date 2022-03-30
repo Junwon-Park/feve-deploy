@@ -44,34 +44,34 @@
                 </li>
                 <li>
                     <a href="#" >
-                    <input type="radio" name="depth1" id="bb" value="bb" v-model="cate" @click="getValue($event)">
+                    <input type="radio" name="depth1" id="bb" value="6,7,8,9" v-model="cate" @click="getValue($event)">
                     <label for="bb">베어브릭</label>
                     </a>
                     <ul>
                         <li >
                             <a href="#" >
-                                <input type="radio" name="depth1" id="6" value="fr" v-model="cate" @click="getValue($event)">
+                                <input type="radio" name="depth1" id="fr" value="6" v-model="cate" @click="getValue($event)">
                                 <label for="fr">프리사이즈</label>
                             </a>
                             <ul style="display:none;"></ul>
                         </li>
                         <li >
                             <a href="#" >
-                                <input type="radio" name="depth1" id="7" value="100" v-model="cate" @click="getValue($event)">
+                                <input type="radio" name="depth1" id="100" value="7" v-model="cate" @click="getValue($event)">
                                 <label for="100">100%</label>
                             </a>
                             <ul style="display:none;"></ul>
                         </li>
                         <li >
                             <a href="#" >
-                                <input type="radio" name="depth1" id="8" value="200" v-model="cate" @click="getValue($event)">
+                                <input type="radio" name="depth1" id="200" value="8" v-model="cate" @click="getValue($event)">
                                 <label for="200">200%</label>
                             </a>
                             <ul style="display:none;"></ul>
                         </li>
                          <li >
                             <a href="#" >
-                                <input type="radio" name="depth1" id="9" value="1000" v-model="cate" @click="getValue($event)">
+                                <input type="radio" name="depth1" id="1000" value="9" v-model="cate" @click="getValue($event)">
                                 <label for="1000">1000%</label>
                             </a>
                             <ul style="display:none;"></ul>
@@ -90,35 +90,35 @@
             <ul >
                 <li>
                     <a href="#" >
-                    <input type="radio" name="depth1" id="all" value="all" v-model="cate" @click="getValue($event)">
+                    <input type="radio" name="depth1" id="all" value="0" v-model="price" @click="getPrice($event)">
                     <label for="all">모든가격</label>
                     </a>
                     <ul>
                         <li >
                             <a href="#" >
-                                <input type="radio" name="depth1" id="10" value="10" v-model="cate" @click="getValue($event)">
-                                <label for="architecture">10만원이하</label>
+                                <input type="radio" name="depth1" id="10" value="0,99999" v-model="price" @click="getPrice($event)">
+                                <label for="architecture">10만원 미만</label>
                             </a>
                             <ul style="display:none;"></ul>
                         </li>
                         <li >
                             <a href="#" >
-                                <input type="radio"  name="depth1" id="30" value="30" v-model="cate" @click="getValue($event)">
+                                <input type="radio"  name="depth1" id="30" value="100000,299999" v-model="price" @click="getPrice($event)">
                                 <label for="character">10만원-30만원이하</label>
                             </a>
                             <ul style="display:none;"></ul>
                         </li>
                         <li >
                             <a href="#" >
-                                <input type="radio" name="depth1" id="50" value="50" v-model="cate" @click="getValue($event)">
-                                <label for="vehicle">30만원-50만원이하</label>
+                                <input type="radio" name="depth1" id="50" value="300000,499999" v-model="price" @click="getPrice($event)">
+                                <label for="vehicle">30만원-50만원 이하</label>
                             </a>
                             <ul style="display:none;"></ul>
                         </li>
                         <li >
                             <a href="#" >
-                                <input type="radio" name="depth1" id="up" value="up" v-model="cate" @click="getValue($event)">
-                                <label for="vehicle">50만원이상</label>
+                                <input type="radio" name="depth1" id="up" value="up" v-model="price" @click="getPrice($event)">
+                                <label for="vehicle">50만원 초과</label>
                             </a>
                             <ul style="display:none;"></ul>
                         </li>
@@ -136,7 +136,8 @@ export default{
     data() {
         return {
 
-            cate: ''
+            cate: '',
+            price: ''
         };
     },
     methods:{
@@ -151,9 +152,22 @@ export default{
         },
         getValue(event){
             console.log(event.target.value);
-            // this.$emit("cate",event.target.value);
             this.$axios.post('http://localhost:8080/shop/min',{
-            cate:event.target.value})
+                cate:event.target.value})
+            .then( (res) => {			
+                console.log(res.data);
+                //window.$ref.Shoplist.item =res.data;
+                this.$emit("changeitems",res.data);
+            })
+            .catch((err)=>{
+            console.log(err);
+            });
+            
+        },
+         getPrice(event){
+            console.log(event.target.value);
+            this.$axios.post('http://localhost:8080/shop/min',{
+                price:event.target.value})
             .then( (res) => {			
                 console.log(res.data);
                 //window.$ref.Shoplist.item =res.data;
