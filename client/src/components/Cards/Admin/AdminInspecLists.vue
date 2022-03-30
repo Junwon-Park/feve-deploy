@@ -21,16 +21,27 @@
               class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold"
               v-for="(table, idx) in table" :key="idx"
           >
-            {{ table.default }}
+            {{ table }}
           </th>
         </tr>
         </thead>
         <tbody>
-          <AdminInspecCards  :items="items" @sendDialog="cDialog" />
+          <AdminInspecCards
+              v-for="(item, idx) in items"
+              :key="idx"
+              v-bind="item"
+              :items="items"
+              @click="sendPkey"
+              @sendDialog="cDialog" />
         </tbody>
       </table>
     </div>
-    <AdminInspecModi :dialog="recDialog" />
+    <AdminInspecModi
+        :dialog="recDialog"
+        :table="table"
+        :items="items"
+        :title="title"
+        @sendDialog="sendDialog" />
   </div>
 </template>
 
@@ -43,57 +54,15 @@ export default {
       type: String,
       default: "리스트",
     },
-    items: {},
+    items: {
+      required: true,
+    },
 },
   data() {
     return {
+      sendInspectionKey: 0,
       recDialog: false,
-      table: {
-        tablePnum:{
-          type: String,
-          default: "번호",
-        },
-        tablePname:{
-          type: String,
-          default: "상품명",
-        },
-        tablePbrand:{
-          type: String,
-          default: "브랜드",
-        },
-        tablePcate:{
-          type: String,
-          default: "카테고리",
-        },
-        tablePoriprice:{
-          type: String,
-          default: "발매가",
-        },
-        tablePseller:{
-          type: String,
-          default: "판매자",
-        },
-        tablePinspeccount:{
-          type: String,
-          default: "검수 수량",
-        },
-        tablePinspecstatus:{
-          type: String,
-          default: "검수 상태",
-        },
-        tablePinspecResult:{
-          type: String,
-          default: "검수 결과",
-        },
-        tablePinspecDate:{
-          type: String,
-          default: "검수 완료일",
-        },
-        tablePstatus:{
-          type: String,
-          default: "상태",
-        }
-      }
+      table: ["번호", "상품명", "브랜드", "카테고리", "발매가", "판매자","수량", "검수도착일","검수상태","검수종료일","결과","반송일","관리"]
     }
   },
   components: {
@@ -103,8 +72,24 @@ export default {
   methods: {
     cDialog(){
       this.recDialog=true;
-      console.log(this.recDialog)
-    }
+    },
+    sendDialog(){
+      this.recDialog = false
+    },
+    sendPkey(){
+      let that = this;
+      this.$axios.get('http://localhost:8080/admin/loadInspection/one')
+          .then(function(res){
+            that.items=res.data;
+          })
+          .catch(function(err){
+            console.log(err);
+          });
+      console.log("status",this.$props.items.INSPECTION_KEY)
+    },
   },
+  created(){
+
+  }
 }
 </script>
