@@ -21,6 +21,15 @@
             {{PRODUCT_CATE}}
           </span>
         </div>
+        <!--추가 여기에 해봄-->
+        <div class="absolute w-auto right-0 pl-4 flex-initial" @click="goView(PRODUCT_KEY)">
+          <div
+            class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full"
+            :class="[statIconColor]"
+          >
+            <i :class="[statIconName]"></i>
+          </div>
+        </div>
       </div>
       <p class="text-lg text-black mt-4">
         <span class="whitespace-nowrap">{{ SELL_PRICE }}원</span>
@@ -52,7 +61,26 @@ export default {
     },
     PRODUCT_CATE: {
       default: "3",
-    }
+    },
+    statIconName: {
+      type: String,
+      default: "far fa-chart-bar",
+    },
+    statIconColor: {
+      type: String,
+      default: "bg-red-500",
+    },
   },
+  methods:{
+    goView(PRODUCT_KEY){
+      this.$axios.post('http://localhost:8080/shop/shopview')
+            .then( (res) => {			
+                console.log(res.data);
+            })
+            .catch((err)=>{
+            console.log(err);
+            });
+    }
+  }
 };
 </script>
