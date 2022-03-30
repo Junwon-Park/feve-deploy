@@ -11,8 +11,8 @@ module.exports = (sequelize, DataTypes) => {
      */
 
     static associate(models) {
-      models.Sell.belongsTo(models.Product,{foreignKey: 'product_key', sourceKey: 'sell_key'});
-      models.Sell.belongsTo(models.User,{foreignKey: 'user_key', sourceKey: 'sell_key'});
+      models.Sell.belongsTo(models.Product,{foreignKey: "PRODUCT_KEY", targetKey:'PRODUCT_KEY'});
+      models.Sell.belongsTo(models.User,[{foreignKey: "SELL_BUYER_KEY", targetKey:"USER_KEY"}, {foreignKey: "SELL_SELLER_KEY", targetKey:"USER_KEY"}]);
     }
   }
   Sell.init(

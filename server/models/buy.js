@@ -8,8 +8,8 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      models.Buy.belongsTo(models.Product,{foreignKey: 'product_key', sourceKey: 'buy_key'});
-      models.Buy.belongsTo(models.User,{foreignKey: 'user_key', sourceKey: 'buy_key'});
+      models.Buy.belongsTo(models.Product, {foreignKey: "PRODUCT_KEY", targetKey:'PRODUCT_KEY'});
+      models.Buy.belongsTo(models.User,[{foreignKey: "BUY_BUYER_KEY", targetKey:"USER_KEY"}, {foreignKey: "BUY_SELLER_KEY", targetKey:"USER_KEY"}]);
     }
   }
   Buy.init(

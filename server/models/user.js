@@ -9,11 +9,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      models.User.hasMany(models.Buy);
-      models.User.hasMany(models.Sell);
-      models.User.hasMany(models.Cscenter);
-      models.User.hasMany(models.Favorite);
-      models.User.hasMany(models.Inspection, {foreignKey: "USER_KEY", targetKey:"USER_KEY"});
+      models.User.hasMany(models.Buy, [{foreignKey: "BUY_BUYER_KEY", sourceKey:"USER_KEY"}, {foreignKey: "BUY_SELLER_KEY", sourceKey:"USER_KEY"}]);
+      models.User.hasMany(models.Sell, [{foreignKey: "SELL_SELLER_KEY", sourceKey:"USER_KEY"}, {foreignKey: "SELL_BUYER_KEY", sourceKey:"USER_KEY"}]);
+      models.User.hasMany(models.Cscenter, {foreignKey: "USER_KEY", sourceKey:"USER_KEY"});
+      models.User.hasMany(models.Favorite, {foreignKey: "USER_KEY", sourceKey:"USER_KEY"});
+      models.User.hasMany(models.Inspection, {foreignKey: "USER_KEY", sourceKey:"USER_KEY"});
     }
   }
   User.init(

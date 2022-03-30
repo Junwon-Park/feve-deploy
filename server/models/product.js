@@ -61,6 +61,12 @@ module.exports = (sequelize, DataTypes) => {
         type:DataTypes.BIGINT,
         allowNull: false,
       },
+      PRODUCT_PIC2: {
+        type:DataTypes.STRING(255),
+      },
+      PRODUCT_PIC3: {
+        type:DataTypes.STRING(255),
+      },
     }, {
       sequelize,
       modelName: 'Product',

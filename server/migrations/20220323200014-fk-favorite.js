@@ -34,21 +34,6 @@ module.exports = {
       onUpdate: 'cascade'
     });
 
-    await queryInterface.addColumn('Product', 'PRODUCT_CATE', {
-      type: Sequelize.BIGINT,
-      allowNull: false
-    });
-    await queryInterface.addConstraint('Product', {
-      fields: ['PRODUCT_CATE'],
-      type: 'foreign key',
-      name: 'CATEGORY_PRODUCT_KEY_FK',
-      references: {
-        table: 'Category',
-        field: 'CATEGORY_KEY'
-      },
-      onDelete: 'cascade',
-      onUpdate: 'cascade'
-    });
   },
 
   down: async (queryInterface, Sequelize) => {
