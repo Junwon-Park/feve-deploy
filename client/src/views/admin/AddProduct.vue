@@ -191,11 +191,14 @@ export default {
       let imageFile = e.target.files;
       let that = this;
       if(imageFile) {
-        let url = URL.createObjectURL(imageFile[0]);
-        that.product.product_pic=url;
+        //let url = URL.createObjectURL(imageFile[0]);
+        //that.product.product_pic=url;
+        that.product.product_pic=imageFile[0].name.split('.')[0];
+        // console.log(url.split('/')[3]);
       }
       else {
-        that.product.imgsrc = require('../../assets/img/icon_question.png');
+        //that.product.imgsrc = require('../../assets/img/icon_question.png');
+        that.product.imgsrc = 'icon_question';
       }
     },
 
