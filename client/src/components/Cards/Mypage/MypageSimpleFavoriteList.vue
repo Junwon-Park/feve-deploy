@@ -25,7 +25,7 @@ export default {
       itemPic4,
       items: [
         {
-          seq:1,
+          // seq:1,
           productPic: itemPic1,
           statSubtitle: "월e",
           statTitle:"230,000",
@@ -34,7 +34,6 @@ export default {
           statPercentColor:"text-emerald-500",
           statDescripiron:"Since last month",
         }, {
-          seq:2,
           productPic: itemPic2,
           statSubtitle: "PERFORMANCE",
           statTitle:"530,000",
@@ -43,7 +42,6 @@ export default {
           statPercentColor:"text-emerald-500",
           statDescripiron:"Since last month",
         }, {
-          seq:3,
           productPic: itemPic3,
           statSubtitle: "아키텍처",
           statTitle:"930,000",
@@ -52,7 +50,6 @@ export default {
           statPercentColor:"text-emerald-500",
           statDescripiron:"Since last month",
         }, {
-          seq:4,
           productPic: this.itemPic4,
           statSubtitle: "PERFORMANCE",
           statTitle:"49,65%",
@@ -61,7 +58,6 @@ export default {
           statPercentColor:"text-emerald-500",
           statDescripiron:"Since last month",
         }, {
-          seq:5,
           productPic: itemPic1,
           statSubtitle: "PERFORMANCE",
           statTitle:"49,65%",
@@ -70,7 +66,6 @@ export default {
           statPercentColor:"text-emerald-500",
           statDescripiron:"Since last month",
         }, {
-          seq:6,
           productPic: itemPic2,
           statSubtitle: "PERFORMANCE",
           statTitle:"49,65%",
