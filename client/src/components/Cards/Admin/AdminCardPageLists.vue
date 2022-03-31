@@ -37,15 +37,32 @@
         </tr>
         </thead>
         <tbody>
-          <AdminCards v-for="(item, idx) in items" :key="idx" v-bind="item"  />
+          <AdminCards
+              v-for="(item, idx) in items"
+              :key="idx"
+              v-bind="item"
+              :items="items"
+              @sendDialog="cDialog"
+              @sendItems="sendItems" />
         </tbody>
       </table>
+      <Pagination />
     </div>
+    <AdminProductModi
+        :dialog="recDialog"
+        :table="table"
+        :title="title"
+        :item="item"
+        :receivedProductKey="receivedProductKey"
+        @sendDialog="sendDialog"
+        @updateList="updateList"/>
   </div>
 </template>
 
 <script>
 import AdminCards from "@/components/Cards/Admin/AdminCards.vue";
+import Pagination from "@/components/Pagination.vue" ;
+import AdminProductModi from "@/components/Cards/Admin/AdminProductModi.vue";
 export default {
   props: {
     title: {
@@ -55,14 +72,75 @@ export default {
     items: {
       required: true
     },
-},
+  },
   data() {
     return {
-      table: ["번호", "상품명", "브랜드", "카테고리", "판매자","수량","관리"]
+      table: ["번호", "상품명", "모델명", "브랜드", "카테고리", "발매가", "관리"],
+      receivedProductKey: 0,
+      receivedMnum: "",
+      recDialog: false,
+      item:{
+        INSPECTION_KEY: 0,
+        INSPECTION_DATE: "",
+        INSPECTION_RESULT: "",
+        INSPECTION_STATUS: "",
+        INSPECTION_ADATE: "",
+        INSPECTION_RDATE:"",
+        PRODUCT_KEY: 0,
+        PRODUCT_MNUM: "",
+        USER_ID: "",
+        PRODUCT_NAME: "",
+        PRODUCT_ORIPRICE: 0,
+        PRODUCT_CATE: "",
+        PRODUCT_BRAND: "",
+      }
     }
   },
   components: {
     AdminCards,
+    AdminProductModi,
+    Pagination
   },
+  methods: {
+    sendItems(recP, recM) {
+      let that = this;
+      that.receivedProductKey = recP;
+      that.receivedMnum = recM;
+
+      console.log("키 전달2", this.receivedProductKey, this.receivedMnum);
+      this.$axios.post('http://localhost:8080/admin/loadproduct/one', {
+        sendProductKey: that.receivedProductKey,
+        sendMnum: that.receivedMnum,
+      }).then(function (res) {
+        that.item = res.data[0];
+      }).catch(function (err) {
+        console.log(err);
+      });
+    },
+    cDialog(){
+      this.recDialog=true;
+    },
+    sendDialog(){
+      this.recDialog = false
+    },
+    updateList(newS, newR) {
+      let that = this;
+      that.sendInspectionStatus = newS;
+      that.sendInsepctionResult = newR;
+
+    //   this.$axios.post('http://localhost:8080/admin/updateInspection', {
+    //     sendInspectionStatus: that.sendInspectionStatus,
+    //     sendInsepctionResult: that.sendInsepctionResult,
+    //     sendProductKey: that.receivedProductKey,
+    //     sendUserid: that.receivedUserid,
+    //     sendUserkey: that.receivedUserkey,
+    //   }).then(function (res) {
+    //     console.log(res)
+    //   })
+    //       .catch(function (err) {
+    //         console.log(err);
+    //       });
+    }
+  }
 }
 </script>

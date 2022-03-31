@@ -36,6 +36,7 @@
           />
         </tbody>
       </table>
+      <Pagination />
     </div>
     <AdminInspecModi
         :dialog="recDialog"
@@ -52,6 +53,7 @@
 <script>
 import AdminInspecCards from "@/components/Cards/Admin/AdminInspecCards.vue";
 import AdminInspecModi from "@/components/Cards/Admin/AdminInspecModi.vue";
+import Pagination from "@/components/Pagination.vue" ;
 export default {
   props: {
     title: {
@@ -90,7 +92,8 @@ export default {
   },
   components: {
     AdminInspecCards,
-    AdminInspecModi
+    AdminInspecModi,
+    Pagination,
   },
   methods: {
     cDialog(){
@@ -136,11 +139,5 @@ export default {
       });
     }
   },
-  created(){
-  //console.log("아이템",this.item);
-  },
-  updated(){
-    //console.log("아이템222222",this.item);
-  }
 }
 </script>

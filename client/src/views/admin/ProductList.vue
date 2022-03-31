@@ -22,7 +22,7 @@ export default {
           PRODUCT_BRAND: '',
           PRODUCT_CATE: '',
           PRODUCT_ORIPRICE: 0,
-          dealCount: 0,
+          PRODUCT_MNUM: '',
         }],
 
     }
@@ -38,11 +38,6 @@ export default {
         .then(function(res){
           console.log(res);
           that.items = res.data;
-          that.items.dealCount= 20;
-          that.items.inspecCount= 20;
-          that.items.inspecStatus= 20;
-          that.items.inspecComplete=20;
-          that.items.listName=1;
         })
         .catch(function(err){
           console.log(err);

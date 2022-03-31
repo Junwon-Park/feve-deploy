@@ -56,7 +56,7 @@
                 <v-text-field
                     readonly
                     label="모델명"
-                    :item="item.PRODUCT_MNUM"
+                    :value="item.PRODUCT_MNUM"
                 ></v-text-field>
               </v-col>
 
