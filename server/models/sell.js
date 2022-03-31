@@ -12,7 +12,9 @@ module.exports = (sequelize, DataTypes) => {
 
     static associate(models) {
       models.Sell.belongsTo(models.Product,{foreignKey: "PRODUCT_KEY", targetKey:'PRODUCT_KEY'});
-      models.Sell.belongsTo(models.User,[{foreignKey: "SELL_BUYER_KEY", targetKey:"USER_KEY"}, {foreignKey: "SELL_SELLER_KEY", targetKey:"USER_KEY"}]);
+      models.Sell.belongsTo(models.User,{foreignKey: "SELL_SELLER_KEY",as:"SELL_SELLER", targetKey:"USER_KEY"});
+      models.Sell.belongsTo(models.User,{foreignKey: "SELL_BUYER_KEY",as:"SELL_BUYER", targetKey:"USER_KEY"});
+
     }
   }
   Sell.init(
