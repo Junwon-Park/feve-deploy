@@ -17,7 +17,7 @@
                     <p class="text-sm mb-1">PRODUCT_DESC</p>
                   </div>
                   <hr/>
-                  <div class="mt-3">
+                  <div class="flex mt-3">
                     <div style="width:50%; float:left">
                     <span class="text-left" style="width:50% float:left">최근거래가</span>
                     </div>
@@ -57,6 +57,7 @@
                 <div class="w-full mt-3">
                     배송정보
                 </div>
+                
                 
               </div>
             </div>
