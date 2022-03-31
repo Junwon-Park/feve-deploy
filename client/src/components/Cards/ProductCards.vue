@@ -71,14 +71,18 @@ export default {
   },
   methods:{
     goView(){
-      // this.$axios.post('http://localhost:8080/shop/shopview')
+     
+      console.log("상세보기");
+      console.log(this.PRODUCT_KEY);
+      const id = this.PRODUCT_KEY;
+      console.log(id);
+      // this.$axios.post('http://localhost:8080/shop/shopview/{{id}}')
       //       .then( (res) => {			
       //           console.log(res.data);
       //       })
       //       .catch((err)=>{
       //       console.log(err);
       //       });
-      console.log("상세보기");
     }
   }
 };
