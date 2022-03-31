@@ -84,7 +84,7 @@
             <button
                 class="bg-orange-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                 type="button"
-                @click="fDialog(), seeDetail()"
+                @click="fDialog(), sendItems()"
             >
               검수
             </button>
@@ -102,12 +102,16 @@
 export default {
   data(){
     return {
+
     }
   },
   props: {
     INSPECTION_KEY: {
         default: 0
       },
+    PRODUCT_KEY: {
+      default: 0
+    },
       PRODUCT_BRAND: {
         type: String,
         default:"Lego"
@@ -151,16 +155,20 @@ export default {
   },
 
   created(){
-    console.log("3 ",this.$props)
+    //console.log("3 ",this.$props)
+   // console.log(this.item)
   },
 
   methods: {
     fDialog(){
       this.$emit('sendDialog');
     },
-    seeDetail(){
-      console.log(this.$props.INSPECTION_KEY);
-    },
+    sendItems(){
+      let that = this;
+      let sendProductKey=that.PRODUCT_KEY;
+      let sendUserid=that.USER_ID;
+      this.$emit("sendItems", sendProductKey, sendUserid)
+    }
   }
 }
 </script>

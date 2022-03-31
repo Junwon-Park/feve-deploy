@@ -8,6 +8,6 @@ const router = express.Router();
 
 router.get('/', loadinspection);
 router.get('/limit', loadinspectionLimit);
-router.get('/one', loadinspecone);
+router.post('/one', loadinspecone);
 
 module.exports = router;

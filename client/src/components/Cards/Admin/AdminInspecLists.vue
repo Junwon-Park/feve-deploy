@@ -27,20 +27,23 @@
         </thead>
         <tbody>
           <AdminInspecCards
-              v-for="(item, idx) in items"
-              :key="idx"
-              v-bind="item"
-              :items="items"
-              @click="sendPkey"
-              @sendDialog="cDialog" />
+            v-for="(item, idx) in items"
+            :key="idx"
+            v-bind="item"
+            :items="items"
+            @sendDialog="cDialog"
+            @sendItems="sendItems"
+          />
         </tbody>
       </table>
     </div>
     <AdminInspecModi
         :dialog="recDialog"
         :table="table"
-        :items="items"
         :title="title"
+        :item="item"
+        :receivedProductKey="receivedProductKey"
+        :receivedUserid="receivedUserid"
         @sendDialog="sendDialog" />
   </div>
 </template>
@@ -61,8 +64,24 @@ export default {
   data() {
     return {
       sendInspectionKey: 0,
+      receivedProductKey: 0,
+      receivedUserid:"",
       recDialog: false,
-      table: ["번호", "상품명", "브랜드", "카테고리", "발매가", "판매자","수량", "검수도착일","검수상태","검수종료일","결과","반송일","관리"]
+      table: ["번호", "상품명", "브랜드", "카테고리", "발매가", "판매자","수량", "검수도착일","검수상태","검수종료일","결과","반송일","관리"],
+      item:{
+        INSPECTION_KEY: 0,
+        INSPECTION_DATE: "",
+        INSPECTION_RESULT: "",
+        INSPECTION_STATUS: "",
+        INSPECTION_ADATE: "",
+        INSPECTION_RDATE:"",
+        PRODUCT_KEY: 0,
+        USER_ID: "",
+        PRODUCT_NAME: "",
+        PRODUCT_ORIPRICE: 0,
+        PRODUCT_CATE: "",
+        PRODUCT_BRAND: "",
+      }
     }
   },
   components: {
@@ -76,20 +95,28 @@ export default {
     sendDialog(){
       this.recDialog = false
     },
-    sendPkey(){
-      let that = this;
-      this.$axios.get('http://localhost:8080/admin/loadInspection/one')
-          .then(function(res){
-            that.items=res.data;
-          })
-          .catch(function(err){
-            console.log(err);
-          });
-      console.log("status",this.$props.items.INSPECTION_KEY)
-    },
+    sendItems(recP, recU) {
+      let that=this;
+      that.receivedProductKey=recP;
+      that.receivedUserid=recU;
+
+      console.log("키 전달2", this.receivedProductKey, this.receivedUserid);
+      this.$axios.post('http://localhost:8080/admin/loadInspection/one',{
+        sendProductKey: that.receivedProductKey,
+        sendUserid: that.receivedUserid
+      }).then(function(res){
+        that.item=res.data[0];
+        console.log("res", res);
+      }).catch(function(err){
+        console.log(err);
+      });
+    }
   },
   created(){
-
+  //console.log("아이템",this.item);
+  },
+  updated(){
+    //console.log("아이템222222",this.item);
   }
 }
 </script>

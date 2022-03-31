@@ -5,7 +5,7 @@
         persistent
         max-width="600px"
         :table="table"
-        v-bind="items"
+        :item="item"
     >
       <v-card>
         <v-card-title>
@@ -22,7 +22,7 @@
                 <v-text-field
                     readonly
                     :label="table[1]"
-                    :value="items[0].PRODUCT_NAME"
+                    :value="item.PRODUCT_NAME"
                 ></v-text-field>
               </v-col>
               <v-col
@@ -33,7 +33,7 @@
                 <v-text-field
                     readonly
                     :label="table[2]"
-                    :value="items[0].PRODUCT_BRAND"
+                    :value="item.PRODUCT_BRAND"
                 ></v-text-field>
               </v-col>
               <v-col
@@ -44,7 +44,7 @@
                 <v-text-field
                     readonly
                     :label="table[3]"
-                    :value="items[0].PRODUCT_CATE"
+                    :value="item.PRODUCT_CATE"
                 ></v-text-field>
               </v-col>
               <v-col
@@ -55,7 +55,7 @@
                 <v-text-field
                     readonly
                     :label="table[5]"
-                    :value="items[0].USER_ID"
+                    :value="item.USER_ID"
                 ></v-text-field>
               </v-col>
               <v-col
@@ -65,7 +65,7 @@
               >
                 <v-text-field
                     :label="table[7]"
-                    :value="items[0].INSPECTION_ADATE"
+                    :value="item.INSPECTION_ADATE"
                 ></v-text-field>
               </v-col>
               <v-col
@@ -75,7 +75,7 @@
               >
                 <v-select
                     :label="table[8]"
-                    :items="items[0].INSPECTION_STATUS"
+                    :item="item.INSPECTION_STATUS"
                     required
                 ></v-select>
               </v-col>
@@ -86,13 +86,13 @@
               >
                 <v-select
                     :label="table[10]"
-                    :items="items[0].INSPECTION_RESULT"
+                    :item="item.INSPECTION_RESULT"
                     required
                 ></v-select>
               </v-col>
             </v-row>
           </v-container>
-          <small>*검수 상태와 결과를 입력한 뒤 저장버튼을 눌러주세요.</small>
+          <small>*검수 상태와 결과를 입력한 뒤 저장버튼을 눌러주세요. {{item.PRODUCT_NAME}}</small>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
@@ -124,20 +124,18 @@ export default {
   props: {
     dialog:{},
     table: [],
-    items:{},
     title:{},
+    item:{}
   },
-  mounted(){
-    // console.log(this.$props.table)
-    // console.log(this.$props.items)
-  },
+
   method:{
     sendDialog(){
       this.recDialog = true
     },
     closeDialog(){
       this.dialog=false
-    }
-  }
+    },
+
+  },
 }
 </script>
