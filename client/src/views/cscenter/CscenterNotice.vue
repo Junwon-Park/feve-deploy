@@ -3,6 +3,7 @@
     class="relative flex flex-col min-w-0 break-words w-full mb-auto shadow-lg rounded"
     :class="[color === 'light' ? 'bg-white' : 'bg-emerald-900 text-white']"
   >
+  
     <div class="rounded-t mb-auto px-1 py-10 border-0">
       <div class="flex flex-wrap items-center">
         <div class="relative w-full px-auto max-w-full flex-grow flex-1">
@@ -359,6 +360,7 @@
 <script>
 import TableDropdown from "@/components/Dropdowns/TableDropdown.vue";
 
+
 import cscenter from "@/assets/img/cscenter.jpg";
 import notice from "@/assets/img/notice.jpg";
 import event from "@/assets/img/event.jpg";
@@ -377,6 +379,7 @@ import team4 from "@/assets/img/team-4-470x470.png";
 export default {
   data() {
     return {
+     
       cscenter,
       event,
       notice,

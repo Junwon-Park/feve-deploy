@@ -38,6 +38,9 @@ import Shopview from "@/views/shop/Shopview.vue";
 import Sold from "@/views/sold/Sellpage.vue"
 
 import Cscenter from "@/views/cscenter/Cscenter.vue";
+import CscenterNotice from "@/views/cscenter/CscenterNotice.vue";
+import CscenterQna from "@/views/cscenter/CscenterQna.vue";
+
 
 
 
@@ -151,7 +154,17 @@ const routes = [
     component: Cscenter,
 
   },
+  {
+    path: "/cscenterNotice",
+    component: CscenterNotice,
 
+  },
+  {
+    path: "/cscenterQna",
+    component: CscenterQna,
+
+  },
+ 
   { path: "/:pathMatch(.*)*", redirect: "/" },
 ];
 

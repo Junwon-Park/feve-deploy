@@ -17,7 +17,7 @@
               <div class="mt-10 py-20 border-t border-blueGray-200 text-center">
                 <div class="flex flex-wrap justify-center">
                    <div class="w-full mb-12 px-5">
-                    <card-table />
+                    <CscenterNotice />
                   </div>
                 </div>
               </div>
@@ -30,7 +30,14 @@
 </template>
 <script>
 import CscenterSidebar from "@/components/Sidebar/CscenterSidebar.vue";
-import CardTable from "@/components/Cards/Cscenter/CscenterNotice.vue";
+import CscenterNotice from "@/components/Cards/Cscenter/CscenterNotice.vue";
+
+
+
+
+
+
+
 
 
 
@@ -41,8 +48,10 @@ export default {
     };
   },
   components: {
-    CardTable,
+   
+    CscenterNotice,
     CscenterSidebar,
+    
   },
 };
 </script>
