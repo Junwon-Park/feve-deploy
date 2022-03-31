@@ -1,20 +1,14 @@
 <template>
   <div class="mt-7rem ml-14rem">
-    <MypageSidebar :currentViewState="currentViewState" @onViewStateChanged="onViewStateChanged"/>
+    <mypage-sidebar :currentViewState="currentViewState" @onViewStateChanged="onViewStateChanged"/>
 
     <div style="margin-left: 13rem;" class="sm:mt-40 md:mt-40">
-      <div v-if= "currentViewState === 0">
-        <mypage-main/>
-        <h1>{{currentViewState}}</h1>
-      </div>
-      <div v-else-if= "currentViewState === 1">
-        <mypage-buy-list style="margin:auto; max-width:80%; margin-bottom:10%;" />
-        <h1>{{currentViewState}}</h1>
-      </div>
-      <div v-else>
-        <CardLineChart/>
-        <h1>{{currentViewState}}</h1>
-      </div>
+        <mypage-main v-if= "currentViewState === 0"/>
+
+        <mypage-buy-list v-else-if= "currentViewState === 1"
+        style="margin:auto; max-width:80%; margin-bottom:10%;" />
+        
+        <CardLineChart v-else/>
     </div>
   </div>
 </template>
@@ -29,7 +23,7 @@ export default {
     MypageSidebar,
     CardLineChart,
     MypageMain,
-    MypageBuyList,
+    MypageBuyList
   },
   data() {
     return {

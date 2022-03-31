@@ -22,11 +22,9 @@
           </span>
         </div>
         <!--추가 여기에 해봄-->
-        <div class="absolute w-auto right-0 pl-4 flex-initial" @click="goView(PRODUCT_KEY)">
-          <div
-            class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full"
-            :class="[statIconColor]"
-          >
+        <div class="absolute w-auto right-0 pl-4 flex-initial" @click="goView()">
+          <div class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full" 
+          :class="[statIconColor]">
             <i :class="[statIconName]"></i>
           </div>
         </div>
@@ -73,13 +71,14 @@ export default {
   },
   methods:{
     goView(){
-      this.$axios.post('http://localhost:8080/shop/shopview')
-            .then( (res) => {			
-                console.log(res.data);
-            })
-            .catch((err)=>{
-            console.log(err);
-            });
+      // this.$axios.post('http://localhost:8080/shop/shopview')
+      //       .then( (res) => {			
+      //           console.log(res.data);
+      //       })
+      //       .catch((err)=>{
+      //       console.log(err);
+      //       });
+      console.log("상세보기");
     }
   }
 };

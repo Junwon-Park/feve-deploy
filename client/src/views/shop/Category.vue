@@ -97,28 +97,28 @@
                         <li >
                             <a href="#" >
                                 <input type="radio" name="depth1" id="10" value="10" v-model="price" @click="getPrice($event)">
-                                <label for="architecture">10만원 미만</label>
+                                <label for="10">10만원 미만</label>
                             </a>
                             <ul style="display:none;"></ul>
                         </li>
                         <li >
                             <a href="#" >
                                 <input type="radio"  name="depth1" id="30" value="30" v-model="price" @click="getPrice($event)">
-                                <label for="character">10만원-30만원이하</label>
+                                <label for="30">10만원-30만원이하</label>
                             </a>
                             <ul style="display:none;"></ul>
                         </li>
                         <li >
                             <a href="#" >
                                 <input type="radio" name="depth1" id="50" value="50" v-model="price" @click="getPrice($event)">
-                                <label for="vehicle">30만원-50만원 이하</label>
+                                <label for="50">30만원-50만원 이하</label>
                             </a>
                             <ul style="display:none;"></ul>
                         </li>
                         <li >
                             <a href="#" >
                                 <input type="radio" name="depth1" id="up" value="above" v-model="price" @click="getPrice($event)">
-                                <label for="vehicle">50만원 초과</label>
+                                <label for="above">50만원 초과</label>
                             </a>
                             <ul style="display:none;"></ul>
                         </li>
