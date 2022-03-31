@@ -3,11 +3,11 @@
     class="mx-auto flex mb-24"
     outlined
   >
-    <div class="flex">
-      <v-list-item v-for="(item,i) in names" :key="i">
+    <div class="flex" v-for="(item,i) in names" :key="i">
 
-        <hr v-if="i==1" style="border:0.1px solid gray; width:0.01px; height:60%;">
+      <hr v-if="i==1" style="border:0.1px solid gray; width:0.01px; height:60%; margin-top:0.85rem">
 
+      <v-list-item>
         <v-list-item-content>
           <v-list-item-subtitle class=" text-center">
             {{names[i]}}

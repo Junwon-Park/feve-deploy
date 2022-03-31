@@ -293,7 +293,7 @@ pre {
 button {
   background-color: transparent;
   background-image: none;
-  outline: none !important;;
+  outline: none !important;
 }
 
 /**
@@ -468,7 +468,7 @@ a {
 }
 
 a:hover {
-  transition: .4s;
+  transition: 0.4s;
   color: #aaa !important;
 }
 
@@ -638,6 +638,10 @@ select {
   padding-right: 2.5rem !important;
   -webkit-print-color-adjust: exact !important;
   color-adjust: exact !important;
+}
+
+input[readonly="readonly"] {
+  color: rgba(0,0,0,0.4) !important;;
 }
 
 [multiple] {
@@ -2491,7 +2495,7 @@ select {
   margin-bottom: 32rem;
 }
 
-.mt-7rem{
+.mt-7rem {
   margin-top: 7rem;
 }
 
@@ -3423,6 +3427,11 @@ button:hover.hover\:text-black {
 .text-red-500 {
   --tw-text-opacity: 1;
   color: rgba(239, 68, 68, var(--tw-text-opacity));
+}
+
+.text-gray-400 {
+  --tw-text-opacity: 1;
+  color: rgba(153, 153, 153, var(--tw-text-opacity));
 }
 
 .text-gray-500 {
@@ -4454,4 +4463,27 @@ input[id*="check"]:checked + label::after {
   cursor: pointer;
   vertical-align: middle;
   text-align: center;
+}
+
+.white-bg {
+  width: 680px;
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  margin: auto;
+}
+
+.black-bg {
+  width: 720px;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  padding: 20px;
+  margin: auto;
+}
+
+.sell-button {
+  color: #fff;
+  font-weight: 700;
+  background-color: #ef6253;
 }

@@ -9,7 +9,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       models.Buy.belongsTo(models.Product, {foreignKey: "PRODUCT_KEY", targetKey:'PRODUCT_KEY'});
-      models.Buy.belongsTo(models.User,[{foreignKey: "BUY_BUYER_KEY", targetKey:"USER_KEY"}, {foreignKey: "BUY_SELLER_KEY", targetKey:"USER_KEY"}]);
+      models.Buy.belongsTo(models.User,{foreignKey: "BUY_BUYER_KEY",as:"BUY_BUYER", targetKey:"USER_KEY"});
+      models.Buy.belongsTo(models.User,{foreignKey: "BUY_SELLER_KEY",as:"BUY_SELLER", targetKey:"USER_KEY"});
+
     }
   }
   Buy.init(
@@ -20,19 +22,19 @@ module.exports = (sequelize, DataTypes) => {
         autoIncrement: true,
         primaryKey: true
       },
-      buy_price: {
+      BUY_PRICE: {
         type:DataTypes.BIGINT,
         allowNull: false,
       },
-      buy_sdate: {
+      BUY_SDATE: {
         type:DataTypes.DATE,
         allowNull: false,
       },
-      buy_edate: {
-        type:DataTypes.DATE,
+      BUY_EDATE: {
+        type:DataTypes.DATEONLY,
         allowNull: false,
       },
-      buy_status: {
+      BUY_STATUS: {
         type: DataTypes.STRING('1'),
         defaultValue: '0',
         allowNull: false,
@@ -41,8 +43,8 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: 'Buy',
-      timestamps: false,
       freezeTableName: true,
+      timestamps: false,
       tableName : "Buy"
       
     }

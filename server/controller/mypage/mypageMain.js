@@ -3,9 +3,10 @@ const Op = sequelize.Op;
 const { User } = require('../../models');
 const { Buy } = require('../../models');
 const { Sell } = require('../../models');
+const { Favorite } = require('../../models');
+const { Product } = require('../../models');
 
 async function getSimpleUserInfo(req, res) {
-    console.log("requested getSimpleUserInfo");
   await User.findOne({
         attributes:['USER_NAME', 'USER_MAIL'],
         where:{
@@ -13,14 +14,13 @@ async function getSimpleUserInfo(req, res) {
         }
     })
     .then((result) => {
-        console.log(result);
+        console.log("simpleUserInfo has been responsed from db : ",result);
         res.json(result);
     })
     .catch((err) => console.log(err));
 }
 
 async function getBuyCounts(req, res) {
-    console.log("requested getBuyCount");
     const userKey = req.body.USER_KEY;
     try{
         const total = await Buy.count({
@@ -43,7 +43,7 @@ async function getBuyCounts(req, res) {
         });
 
         buyCounts = [total, wait, progress, done]
-        console.log("buyCount has been responsed from db : " + buyCounts);
+        console.log("buyCount has been responsed from db : ", buyCounts);
         res.json(buyCounts);
     }catch(err){
         console.log(err);
@@ -51,7 +51,6 @@ async function getBuyCounts(req, res) {
 }
 
 async function getSellCounts(req, res) {
-    console.log("requested getSellCount");
     const userKey = req.body.USER_KEY;
     try{
         const total = await Sell.count({
@@ -75,11 +74,35 @@ async function getSellCounts(req, res) {
         });
 
         sellCounts = [total, wait, progress, done]
-        console.log("sellCount has been responsed from db : " + sellCounts);
+        console.log("sellCount has been responsed from db : ", sellCounts);
         res.json(sellCounts);
     }catch(err){
         console.log(err);
     }
 }
 
-module.exports = { getSimpleUserInfo, getBuyCounts, getSellCounts };
+async function getSimpleFavorites(req, res) {
+    const userKey = req.body.USER_KEY;
+    await Product.findAll({
+        //브랜드
+        //이름
+        //사진
+        //즉시구매가 : 판매테이블에서 희망판매가격 가져오면 된다. (우선 오리진)
+        attributes:['PRODUCT_BRAND', 'PRODUCT_NAME', 'PRODUCT_PIC', 'PRODUCT_ORIPRICE'],
+        
+        include:[{
+            model:Favorite,
+            attributes: {exclude: ['FAVORITE_KEY', 'PRODUCT_KEY', 'USER_KEY']},
+            where:{
+                USER_KEY: userKey,
+            },
+        }]
+    })
+    .then((result) => {
+        console.log("simpleFavorites has been responsed from db : ", result);
+        res.json(result);
+    })
+    .catch((err) => console.log(err));
+}
+
+module.exports = { getSimpleUserInfo, getBuyCounts, getSellCounts, getSimpleFavorites };

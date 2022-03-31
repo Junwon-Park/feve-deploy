@@ -44,7 +44,8 @@
         :item="item"
         :receivedProductKey="receivedProductKey"
         :receivedUserid="receivedUserid"
-        @sendDialog="sendDialog" />
+        @sendDialog="sendDialog"
+        @updateList="updateList"/>
   </div>
 </template>
 
@@ -63,9 +64,11 @@ export default {
 },
   data() {
     return {
-      sendInspectionKey: 0,
       receivedProductKey: 0,
       receivedUserid:"",
+      receivedUserkey:0,
+      sendInspectionStatus: 0,
+      sendInsepctionResult: 0,
       recDialog: false,
       table: ["번호", "상품명", "브랜드", "카테고리", "발매가", "판매자","수량", "검수도착일","검수상태","검수종료일","결과","반송일","관리"],
       item:{
@@ -76,6 +79,7 @@ export default {
         INSPECTION_ADATE: "",
         INSPECTION_RDATE:"",
         PRODUCT_KEY: 0,
+        PRODUCT_MNUM: "",
         USER_ID: "",
         PRODUCT_NAME: "",
         PRODUCT_ORIPRICE: 0,
@@ -95,19 +99,39 @@ export default {
     sendDialog(){
       this.recDialog = false
     },
-    sendItems(recP, recU) {
+    sendItems(recP, recU, recUk) {
       let that=this;
       that.receivedProductKey=recP;
       that.receivedUserid=recU;
+      that.receivedUserkey=recUk;
 
       console.log("키 전달2", this.receivedProductKey, this.receivedUserid);
       this.$axios.post('http://localhost:8080/admin/loadInspection/one',{
         sendProductKey: that.receivedProductKey,
-        sendUserid: that.receivedUserid
+        sendUserid: that.receivedUserid,
+        sendUserkey: that.receivedUserkey,
       }).then(function(res){
         that.item=res.data[0];
         console.log("res", res);
       }).catch(function(err){
+        console.log(err);
+      });
+    },
+    updateList(newS, newR){
+      let that = this;
+      that.sendInspectionStatus = newS;
+      that.sendInsepctionResult = newR;
+
+      this.$axios.post('http://localhost:8080/admin/updateInspection', {
+        sendInspectionStatus: that.sendInspectionStatus,
+        sendInsepctionResult: that.sendInsepctionResult,
+        sendProductKey: that.receivedProductKey,
+        sendUserid: that.receivedUserid,
+        sendUserkey: that.receivedUserkey,
+      }).then(function(res){
+            console.log(res)
+      })
+      .catch(function(err){
         console.log(err);
       });
     }

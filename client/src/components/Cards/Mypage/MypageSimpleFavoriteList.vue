@@ -1,21 +1,39 @@
 <template>
     <div class="flex flex-wrap">
-      <div class="w-full lg:w-3/12 xl:w-1/6 px-4 mb-5" v-for="item in items" :key="item.seq">
-        <card-stats v-bind="item" />
+      <div class="w-full xl:w-3/12 lg:w-4/12 md:w-4/12 px-4 mb-5" v-for="item in items" :key="item.PRODUCT_NAME">
+        
+          <div >
+            <img
+              src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+              style="border-radius: 8px;"
+            >
+
+            <h5 class="font-bold underline mt-2">
+              {{ item.PRODUCT_BRAND }}
+            </h5>
+            <h5>
+            {{ item.PRODUCT_NAME }}
+            </h5>
+            <h5 class="font-bold mt-1">
+              {{ item.PRODUCT_ORIPRICE.toLocaleString('ko-KR') }}원
+            </h5>
+            <h5 class="text-gray-400" style="font-size: 0.7rem; line-height: 0.75rem; margin-top:-0.2rem">
+              즉시 구매가
+            </h5>
+          </div>
       </div>
     </div>
 </template>
 
 <script>
-import CardStats from "@/components/Cards/CardStats.vue";
 import itemPic1 from "@/assets/img/product-lego1.jpg";
 import itemPic2 from "@/assets/img/product-lego2.jpg";
 import itemPic3 from "@/assets/img/product-lego3.jpg";
 import itemPic4 from "@/assets/img/product-lego4.jpg";
 
 export default {
-  components: {
-    CardStats,
+  props:{
+    items:Array,
   },
   data() {
     return {
@@ -23,63 +41,6 @@ export default {
       itemPic2,
       itemPic3,
       itemPic4,
-      items: [
-        {
-          seq:'1',
-          productPic: itemPic1,
-          statSubtitle: "월e",
-          statTitle:"230,000",
-          statArrow:"up",
-          statPercent:"12",
-          statPercentColor:"text-emerald-500",
-          statDescripiron:"Since last month",
-        }, {
-          seq:'2',
-          productPic: itemPic2,
-          statSubtitle: "PERFORMANCE",
-          statTitle:"530,000",
-          statArrow:"up",
-          statPercent:"10",
-          statPercentColor:"text-emerald-500",
-          statDescripiron:"Since last month",
-        }, {
-          seq:'3',
-          productPic: itemPic3,
-          statSubtitle: "아키텍처",
-          statTitle:"930,000",
-          statArrow:"up",
-          statPercent:"19",
-          statPercentColor:"text-emerald-500",
-          statDescripiron:"Since last month",
-        }, {
-          seq:'4',
-          productPic: this.itemPic4,
-          statSubtitle: "PERFORMANCE",
-          statTitle:"49,65%",
-          statArrow:"up",
-          statPercent:"12",
-          statPercentColor:"text-emerald-500",
-          statDescripiron:"Since last month",
-        }, {
-          seq:'5',
-          productPic: itemPic1,
-          statSubtitle: "PERFORMANCE",
-          statTitle:"49,65%",
-          statArrow:"up",
-          statPercent:"12",
-          statPercentColor:"text-emerald-500",
-          statDescripiron:"Since last month",
-        }, {
-          seq:'6',
-          productPic: itemPic2,
-          statSubtitle: "PERFORMANCE",
-          statTitle:"49,65%",
-          statArrow:"up",
-          statPercent:"12",
-          statPercentColor:"text-emerald-500",
-          statDescripiron:"Since last month",
-        },
-      ]
     }
   },
 };

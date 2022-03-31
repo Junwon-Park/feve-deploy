@@ -70,13 +70,13 @@
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
 
           >
-            {{ INSPECTION_RDATE }}
+            {{ INSPECTION_RESULT }}
           </td>
           <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
 
           >
-            {{ INSPECTION_RESULT }}
+            {{ INSPECTION_RDATE }}
           </td>
           <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
@@ -87,12 +87,6 @@
                 @click="fDialog(), sendItems()"
             >
               검수
-            </button>
-            <button
-                class="bg-red-500 text-white active:bg-red-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                type="button"
-            >
-              수정
             </button>
           </td>
         </tr>
@@ -144,6 +138,9 @@ export default {
         type: String,
         default:"검수중"
       },
+      USER_KEY: {
+        default: 0
+      },
       USER_ID:   {
         type: String,
         default:"test"
@@ -154,11 +151,6 @@ export default {
 
   },
 
-  created(){
-    //console.log("3 ",this.$props)
-   // console.log(this.item)
-  },
-
   methods: {
     fDialog(){
       this.$emit('sendDialog');
@@ -167,7 +159,8 @@ export default {
       let that = this;
       let sendProductKey=that.PRODUCT_KEY;
       let sendUserid=that.USER_ID;
-      this.$emit("sendItems", sendProductKey, sendUserid)
+      let sendUserkey=that.USER_KEY;
+      this.$emit("sendItems", sendProductKey, sendUserid, sendUserkey);
     }
   }
 }

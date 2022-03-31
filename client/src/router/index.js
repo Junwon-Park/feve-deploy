@@ -36,7 +36,7 @@ import Write from "@/views/Write.vue";
 import Shoplist from "@/views/shop/Shoplist.vue";
 import Shopview from "@/views/shop/Shopview.vue";
 import Sold from "@/views/sold/Sellpage.vue"
-
+import Soldproc from "@/views/sold/Sellconfirmpage.vue";
 import Cscenter from "@/views/cscenter/Cscenter.vue";
 import CscenterNotice from "@/views/cscenter/CscenterNotice.vue";
 import CscenterQna from "@/views/cscenter/CscenterQna.vue";
@@ -131,6 +131,10 @@ const routes = [
   {
     path: "/sold",
     component: Sold,
+  },
+  {
+    path: "/sold/proc",
+    component: Soldproc,
   },
   {
     path: "/admin/addProduct",
