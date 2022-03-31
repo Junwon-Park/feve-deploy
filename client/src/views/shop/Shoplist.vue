@@ -45,9 +45,9 @@
           <div class="flex flex-wrap items-center mt-5 mb-5 px-6">
             <div class="relative w-full max-w-full flex-grow flex-1 text-right">
                <div class="text-center">
-                <v-chip class="ma-2" > 전체 </v-chip>
-                <v-chip class="ma-2" color="primary" value="3,4,5" @click="goFilter($event)"> 레고 </v-chip>
-                <v-chip class="ma-2" color="secondary" value="6,7,8,9" @click="goFilter($event)"> 베어브릭 </v-chip>
+                <v-chip class="ma-2" v-model="cate" @click="goFilter('3,4,5,6,7,8,9')" > 전체 </v-chip>
+                <v-chip class="ma-2" color="primary" v-model="cate" @click="goFilter('3,4,5')"> 레고 </v-chip>
+                <v-chip class="ma-2" color="secondary" v-model="cate" @click="goFilter('6,7,8,9')"> 베어브릭 </v-chip>
                </div>
             </div>
           </div>
@@ -55,7 +55,7 @@
           
           <div class="flex mt-5">
             <div class="flex w-full lg:w-3/12 px-4 mb-5">
-              <Category v-bind="cate" @changeitems="changeitems($event)"/>
+              <Category ref="category" @changeitems="changeitems($event)"/>
             </div>
             <div class="w-full px-4 mb-5 flex flex-wrap">
               <div class="w-full lg:w-6/12 xl:w-3/12 px-4 mb-5" v-for="(item,i) in items" :key="i">
@@ -127,11 +127,14 @@ export default {
       console.log("changeitems의 e 값",e);
       this.items = e;
     },
-    goFilter(event){
+    goFilter(cate){
+      console.log("chip 버튼을 누름");
+      console.log(cate);
       this.$axios.post('http://localhost:8080/shop/min',{
-          cate:event.target.value})
+          cate:cate})
       .then( (res) => {			
           console.log(res.data);
+          this.items=res.data;
       })
       .catch((err)=>{
       console.log(err);
