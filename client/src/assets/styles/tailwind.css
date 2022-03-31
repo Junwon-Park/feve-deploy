@@ -640,6 +640,10 @@ select {
   color-adjust: exact !important;
 }
 
+input[readonly="readonly"] {
+  color: rgba(0,0,0,0.4) !important;;
+}
+
 [multiple] {
   background-image: initial;
   background-position: initial;

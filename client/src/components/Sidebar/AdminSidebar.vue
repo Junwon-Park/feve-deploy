@@ -159,22 +159,8 @@
                     class="fas fa-table mr-2 text-sm"
                     :class="[isActive ? 'opacity-75' : 'text-blueGray-300']"
                 ></i>
-                검수 내역 확인
+                검수 내역
               </a>
-            </router-link>
-          </li>
-
-          <li class="items-center">
-            <router-link
-              class="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
-              to="/auth/register"
-              v-slot="{ href, navigate, isActive }"
-            >
-              <i
-                  class="fas fa-tools mr-2 text-sm"
-                  :class="[isActive ? 'opacity-75' : 'text-blueGray-300']"
-              ></i>
-              검수 상태 변경
             </router-link>
           </li>
         </ul>
@@ -209,7 +195,7 @@
                     class="fas fa-table mr-2 text-sm"
                     :class="[isActive ? 'opacity-75' : 'text-blueGray-300']"
                 ></i>
-                문의 내역 확인
+                문의 내역
               </a>
             </router-link>
           </li>

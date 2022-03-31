@@ -47,6 +47,19 @@
                     :value="item.PRODUCT_CATE"
                 ></v-text-field>
               </v-col>
+
+              <v-col
+                  cols="12"
+                  sm="6"
+                  md="6"
+              >
+                <v-text-field
+                    readonly
+                    label="모델명"
+                    :item="item.PRODUCT_MNUM"
+                ></v-text-field>
+              </v-col>
+
               <v-col
                   cols="12"
                   sm="6"
@@ -60,39 +73,51 @@
               </v-col>
               <v-col
                   cols="12"
-                  sm="6"
-                  md="6"
+                  sm="12"
+                  md="12"
               >
                 <v-text-field
+                    readonly
                     :label="table[7]"
                     :value="item.INSPECTION_ADATE"
                 ></v-text-field>
               </v-col>
+
               <v-col
                   cols="12"
                   sm="6"
                   md="6"
               >
+                <label class="text-xs">검수상태</label>
                 <v-select
-                    :label="table[8]"
-                    :item="item.INSPECTION_STATUS"
+                    v-model="inspectionStatus"
+                    :items="inspectionStatusList"
+                    item-text="name"
+                    item-value="value"
+                    :selected="true"
                     required
                 ></v-select>
               </v-col>
+
               <v-col
                   cols="12"
                   sm="6"
                   md="6"
               >
+                <label class="text-xs">검수결과</label>
                 <v-select
-                    :label="table[10]"
-                    :item="item.INSPECTION_RESULT"
+                    v-model="inspectionResult"
+                    :items="inspectionResultList"
+                    item-text="name"
+                    item-value="value"
+                    :selected="true"
                     required
                 ></v-select>
               </v-col>
             </v-row>
           </v-container>
-          <small>*검수 상태와 결과를 입력한 뒤 저장버튼을 눌러주세요. {{item.PRODUCT_NAME}}</small>
+          <small style="color: orangered">*검수 상태와 결과는 필수 입력입니다.</small><br>
+          <small>*검수 상태와 결과를 입력한 뒤 저장버튼을 눌러주세요.</small>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
@@ -106,7 +131,7 @@
           <v-btn
               color="blue darken-1"
               text
-              @click="dialog = false"
+              @click="updateInspectionList"
           >
             저장
           </v-btn>
@@ -120,6 +145,18 @@
 export default {
   data: () => ({
     dialog: false,
+    inspectionStatus: "",
+    inspectionStatusList:[
+      { name: '검수완료', value: 1 },
+      { name: '검수중', value: 0 },
+    ],
+    inspectionResult: "",
+    inspectionResultList:[
+      { name: '불합격', value: 0 },
+      { name: '합격', value: 1 },
+    ],
+    newInspectionStatus:"",
+    newInspectionResult:"",
   }),
   props: {
     dialog:{},
@@ -128,14 +165,20 @@ export default {
     item:{}
   },
 
-  method:{
+  methods:{
     sendDialog(){
       this.recDialog = true
     },
     closeDialog(){
       this.dialog=false
     },
-
+    updateInspectionList(){
+      let newInspectionStatus=this.inspectionStatus;
+      let newInspectionResult=this.inspectionResult;
+      this.$emit('updateList', newInspectionStatus, newInspectionResult)
+      alert("검수를 완료했습니다.");
+      this.$router.go(this.$router.currentRouter);
+    },
   },
 }
 </script>

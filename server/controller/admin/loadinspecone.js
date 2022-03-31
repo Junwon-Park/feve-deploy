@@ -18,11 +18,13 @@ async function loadinspecone(req, res, next) {
               ,INSPECTION_RESULT\n\
               ,INSPECTION_ADATE\n\
               ,INSPECTION_RDATE\n\
-              ,(case when INSPECTION_STATUS=0 then '검수중' when INSPECTION_STATUS=1 then '검수완료' when INSPECTION_STATUS then '반송' end ) as INSPECTION_STATUS\n\
+              ,INSPECTION_STATUS\n\
+             --  ,(case when INSPECTION_STATUS=0 then '검수중' when INSPECTION_STATUS=1 then '검수완료' when INSPECTION_STATUS then '반송' end ) as INSPECTION_STATUS\n\
               ,i.PRODUCT_KEY\n\
               ,u.USER_ID\n\
               ,p.PRODUCT_NAME\n\
               ,p.PRODUCT_ORIPRICE\n\
+              ,p.PRODUCT_MNUM\n\
               ,c.CATEGORY_DESC  as PRODUCT_CATE\n\
               ,ct.CATEGORY_DESC as PRODUCT_BRAND\n\
               from Inspection i\n\
