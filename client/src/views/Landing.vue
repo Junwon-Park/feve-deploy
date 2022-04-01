@@ -21,36 +21,34 @@
                   Your FIRST RESELL<br />starts with us.
                 </h1>
                 <p class="mt-4 text-lg text-blueGray-600">
-                  첫 리셀을 Notus와 시작해보세요. 
-                </p> 
+                  첫 리셀을 FEVE와 시작해보세요.
+                </p>
                 <div class="mt-12">
-                <router-link to="">
-                  <span
-                    href="javascript:void(0)"
-                    class="get-started text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-emerald-500 active:bg-emerald-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
-                  >
-                    판매하기
-                  </span>
-              </router-link>
+                  <router-link to="">
+                    <span
+                      href="javascript:void(0)"
+                      class="get-started text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-emerald-500 active:bg-emerald-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
+                    >
+                      판매하기
+                    </span>
+                  </router-link>
 
-
-              <router-link to="">
-              <span
-                href="javascript:void(0)"
-                class="github-star ml-1 text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-red-500 active:bg-red-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
-              >
-                구매하기
-              </span>
-              </router-link>
-              
-            </div>
+                  <router-link to="">
+                    <span
+                      href="javascript:void(0)"
+                      class="github-star ml-1 text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-red-500 active:bg-red-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
+                    >
+                      구매하기
+                    </span>
+                  </router-link>
+                </div>
               </div>
             </div>
           </div>
         </div>
         <div
           class="top-auto bottom-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden h-70-px"
-          style="transform: translateZ(0);"
+          style="transform: translateZ(0)"
         >
           <svg
             class="absolute bottom-0 overflow-hidden"
@@ -198,7 +196,7 @@
       <section class="relative py-20">
         <div
           class="bottom-auto top-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden -mt-20 h-20"
-          style="transform: translateZ(0);"
+          style="transform: translateZ(0)"
         >
           <svg
             class="absolute bottom-0 overflow-hidden"
@@ -265,9 +263,7 @@
                         </span>
                       </div>
                       <div>
-                        <h4 class="text-blueGray-500">
-                          Amazing page examples
-                        </h4>
+                        <h4 class="text-blueGray-500">Amazing page examples</h4>
                       </div>
                     </div>
                   </li>
@@ -460,7 +456,7 @@
       <section class="pb-20 relative block bg-blueGray-800">
         <div
           class="bottom-auto top-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden -mt-20 h-20"
-          style="transform: translateZ(0);"
+          style="transform: translateZ(0)"
         >
           <svg
             class="absolute bottom-0 overflow-hidden"
@@ -481,9 +477,7 @@
         <div class="container mx-auto px-4 lg:pt-24 lg:pb-64">
           <div class="flex flex-wrap text-center justify-center">
             <div class="w-full lg:w-6/12 px-4">
-              <h2 class="text-4xl font-semibold text-white">
-                Build something
-              </h2>
+              <h2 class="text-4xl font-semibold text-white">Build something</h2>
               <p class="text-lg leading-relaxed mt-4 mb-4 text-blueGray-400">
                 Put the potentially record low maximum sea ice extent tihs year
                 down to low ice. According to the National Oceanic and
@@ -526,9 +520,7 @@
               >
                 <i class="fas fa-lightbulb text-xl"></i>
               </div>
-              <h5 class="text-xl mt-5 font-semibold text-white">
-                Launch time
-              </h5>
+              <h5 class="text-xl mt-5 font-semibold text-white">Launch time</h5>
               <p class="mt-2 mb-4 text-blueGray-400">
                 Some quick example text to build on the card title and make up
                 the bulk of the card's content.
@@ -545,9 +537,7 @@
                 class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-200"
               >
                 <div class="flex-auto p-5 lg:p-10">
-                  <h4 class="text-2xl font-semibold">
-                    Want to work with us?
-                  </h4>
+                  <h4 class="text-2xl font-semibold">Want to work with us?</h4>
                   <p class="leading-relaxed mt-1 mb-4 text-blueGray-500">
                     Complete this form and we will get back to you in 24 hours.
                   </p>
@@ -611,12 +601,11 @@
   </div>
 </template>
 <script>
-
-import team1 from "@/assets/img/team-1-800x800.jpg";
-import team2 from "@/assets/img/team-2-800x800.jpg";
-import team3 from "@/assets/img/team-3-800x800.jpg";
-import team4 from "@/assets/img/team-4-470x470.png";
-import legoBg from "@/assets/img/bg-lego2.jpg";
+import team1 from '@/assets/img/team-1-800x800.jpg';
+import team2 from '@/assets/img/team-2-800x800.jpg';
+import team3 from '@/assets/img/team-3-800x800.jpg';
+import team4 from '@/assets/img/team-4-470x470.png';
+import legoBg from '@/assets/img/bg-lego2.jpg';
 
 export default {
   data() {
@@ -625,11 +614,9 @@ export default {
       team2,
       team3,
       team4,
-      legoBg,
+      legoBg
     };
   },
-  components: {
-
-  },
+  components: {}
 };
 </script>

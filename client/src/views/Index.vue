@@ -10,25 +10,23 @@
               Your FIRST RESELL<br />starts with us.
             </h2>
             <p class="mt-4 text-lg leading-relaxed text-blueGray-500">
-             첫 리셀을 Notus와 시작해보세요. 
+              첫 리셀을 FEVE와 시작해보세요.
             </p>
             <div class="mt-12">
-             
-                <router-link to="">
-                  <span
-                    class="get-started text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-emerald-500 active:bg-emerald-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
-                  >
-                    판매하기
-                  </span>
+              <router-link to="">
+                <span
+                  class="get-started text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-emerald-500 active:bg-emerald-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
+                >
+                  판매하기
+                </span>
               </router-link>
 
-
               <router-link to="">
-              <span
-                class="github-star ml-1 text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-orange-500 active:bg-red-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
-              >
-                구매하기
-              </span>
+                <span
+                  class="github-star ml-1 text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-orange-500 active:bg-red-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
+                >
+                  구매하기
+                </span>
               </router-link>
             </div>
           </div>
@@ -45,7 +43,7 @@
     <section class="mt-48 md:mt-40 pb-40 relative bg-blueGray-100">
       <div
         class="-mt-20 top-0 bottom-auto left-0 right-0 w-full absolute h-20"
-        style="transform: translateZ(0);"
+        style="transform: translateZ(0)"
       >
         <svg
           class="absolute bottom-0 overflow-hidden"
@@ -109,9 +107,7 @@
                     >
                       <i class="fas fa-sitemap"></i>
                     </div>
-                    <h6 class="text-xl mb-1 font-semibold">
-                      CSS Components
-                    </h6>
+                    <h6 class="text-xl mb-1 font-semibold">CSS Components</h6>
                     <p class="mb-4 text-blueGray-500">
                       Vue Notus comes with a huge number of Fully Coded CSS
                       components.
@@ -157,9 +153,7 @@
                     >
                       <i class="fas fa-file-alt"></i>
                     </div>
-                    <h6 class="text-xl mb-1 font-semibold">
-                      Documentation
-                    </h6>
+                    <h6 class="text-xl mb-1 font-semibold">Documentation</h6>
                     <p class="mb-4 text-blueGray-500">
                       Built by developers for developers. You will love how easy
                       is to to work with Vue Notus.
@@ -294,9 +288,7 @@
                       class="shadow-md rounded-full max-w-full w-16 mx-auto p-2 bg-white"
                       src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/logos/svelte.jpg"
                     />
-                    <p class="text-lg text-white mt-4 font-semibold">
-                      Svelte
-                    </p>
+                    <p class="text-lg text-white mt-4 font-semibold">Svelte</p>
                   </div>
                 </a>
                 <a
@@ -311,9 +303,7 @@
                       class="shadow-md rounded-full max-w-full w-16 mx-auto p-2 bg-white"
                       src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/logos/react.jpg"
                     />
-                    <p class="text-lg text-white mt-4 font-semibold">
-                      ReactJS
-                    </p>
+                    <p class="text-lg text-white mt-4 font-semibold">ReactJS</p>
                   </div>
                 </a>
                 <a
@@ -328,9 +318,7 @@
                       class="shadow-md rounded-full max-w-full w-16 mx-auto p-2 bg-white"
                       src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/logos/nextjs.jpg"
                     />
-                    <p class="text-lg text-white mt-4 font-semibold">
-                      NextJS
-                    </p>
+                    <p class="text-lg text-white mt-4 font-semibold">NextJS</p>
                   </div>
                 </a>
               </div>
@@ -364,9 +352,7 @@
                       class="shadow-md rounded-full max-w-full w-16 mx-auto p-2 bg-white"
                       src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/logos/angular.jpg"
                     />
-                    <p class="text-lg text-white mt-4 font-semibold">
-                      Angular
-                    </p>
+                    <p class="text-lg text-white mt-4 font-semibold">Angular</p>
                   </div>
                 </a>
                 <a
@@ -381,9 +367,7 @@
                       class="shadow-md rounded-full max-w-full w-16 mx-auto p-2 bg-white"
                       src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/logos/vue.jpg"
                     />
-                    <p class="text-lg text-white mt-4 font-semibold">
-                      Vue.js
-                    </p>
+                    <p class="text-lg text-white mt-4 font-semibold">Vue.js</p>
                   </div>
                 </a>
               </div>
@@ -475,9 +459,7 @@
               >
                 <i class="fas fa-file-alt text-xl"></i>
               </div>
-              <h3 class="text-3xl font-semibold">
-                Complex Documentation
-              </h3>
+              <h3 class="text-3xl font-semibold">Complex Documentation</h3>
               <p class="mt-4 text-lg leading-relaxed text-blueGray-500">
                 This extension comes a lot of fully coded examples that help you
                 get started faster. You can adjust the colors and also the
@@ -678,7 +660,7 @@
     <section class="pb-16 bg-blueGray-200 relative pt-32">
       <div
         class="-mt-20 top-0 bottom-auto left-0 right-0 w-full absolute h-20"
-        style="transform: translateZ(0);"
+        style="transform: translateZ(0)"
       >
         <svg
           class="absolute bottom-0 overflow-hidden"
@@ -702,9 +684,7 @@
         >
           <div class="w-full text-center lg:w-8/12">
             <p class="text-4xl text-center">
-              <span role="img" aria-label="love">
-                😍
-              </span>
+              <span role="img" aria-label="love"> 😍 </span>
             </p>
             <h3 class="font-semibold text-3xl">
               Do you love this Starter Kit?
@@ -739,17 +719,18 @@
   </div>
 </template>
 <script>
-import patternVue from "@/assets/img/pattern_vue.png";
-import componentBtn from "@/assets/img/component-btn.png";
-import componentProfileCard from "@/assets/img/component-profile-card.png";
-import componentInfoCard from "@/assets/img/component-info-card.png";
-import componentInfo2 from "@/assets/img/component-info-2.png";
-import componentMenu from "@/assets/img/component-menu.png";
-import componentBtnPink from "@/assets/img/component-btn-pink.png";
-import documentation from "@/assets/img/documentation.png";
-import login from "@/assets/img/login.jpg";
-import profile from "@/assets/img/profile.jpg";
-import landing from "@/assets/img/landing.jpg";
+import patternVue from '@/assets/img/pattern_vue.png';
+import componentBtn from '@/assets/img/component-btn.png';
+import componentProfileCard from '@/assets/img/component-profile-card.png';
+import componentInfoCard from '@/assets/img/component-info-card.png';
+import componentInfo2 from '@/assets/img/component-info-2.png';
+import componentMenu from '@/assets/img/component-menu.png';
+import componentBtnPink from '@/assets/img/component-btn-pink.png';
+import documentation from '@/assets/img/documentation.png';
+import login from '@/assets/img/login.jpg';
+import profile from '@/assets/img/profile.jpg';
+import landing from '@/assets/img/landing.jpg';
+import axios from 'axios';
 
 export default {
   data() {
@@ -765,10 +746,27 @@ export default {
       login,
       profile,
       landing,
+      baseURL: 'http://localhost:8080'
     };
   },
-  components: {
-    
+  methods: {
+    async checkToken() {
+      const checkResult = await axios
+        .get(`${this.baseURL}/auth/checktoken`, { withCredentials: true })
+        .catch((err) => {
+          console.error('Invalid user!!!', err);
+          localStorage.setItem('isLogin', false);
+          localStorage.setItem('userId', null);
+        });
+      if (checkResult) {
+        const accessToken = checkResult.data.data.accessToken;
+        localStorage.setItem('Authorization', accessToken);
+      }
+    }
   },
+  created() {
+    this.checkToken();
+  },
+  components: {}
 };
 </script>

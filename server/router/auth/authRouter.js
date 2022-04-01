@@ -12,7 +12,7 @@ const { signup } = require('../../controller/auth/signup.js');
 
 router.get('/checktoken', auth);
 router.post('/login', loginValidator, login);
-router.post('/logout', logout);
+router.get('/logout', logout);
 router.post('/signup', signupValidator, signup);
 
 module.exports = router;
