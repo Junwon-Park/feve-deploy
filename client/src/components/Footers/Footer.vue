@@ -21,45 +21,19 @@
     </div>
     <div class="container mx-auto px-4">
       <div class="flex flex-wrap text-center lg:text-left">
-        <div class="w-full lg:w-6/12 px-4">
+        <div class="w-full lg:w-6/12 px-4 text-left">
           <h4 class="logo text-3xl font-semibold">FEVE</h4>
-          <h5 class="text-lg mt-0 mb-2 text-blueGray-600">
-            Find us on any of these platforms, we respond 1-2 business days.
+          <h5 class="text-xs mt-5 mb-2 text-blueGray-600">
+            FEVE는 통신판매 중개자로서 통신판매의 당사자가 아니므로 개별 판매자가 등록한 상품정보에 대해서 책임을 지지 않습니다. 단, 거래과정에서 검수하고 보증하는 내용에 대한 책임은 당사에 있습니다.
           </h5>
-          <div class="mt-6 lg:mb-0 mb-6">
-            <button
-              class="bg-white text-lightBlue-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
-              type="button"
-            >
-              <i class="fab fa-twitter"></i>
-            </button>
-            <button
-              class="bg-white text-lightBlue-600 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
-              type="button"
-            >
-              <i class="fab fa-facebook-square"></i>
-            </button>
-            <button
-              class="bg-white text-pink-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
-              type="button"
-            >
-              <i class="fab fa-dribbble"></i>
-            </button>
-            <button
-              class="bg-white text-blueGray-800 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
-              type="button"
-            >
-              <i class="fab fa-github"></i>
-            </button>
-          </div>
         </div>
         <div class="w-full lg:w-6/12 px-4">
           <div class="flex flex-wrap items-top mb-6">
             <div class="w-full lg:w-4/12 px-4 ml-auto">
               <span
-                class="block uppercase text-blueGray-500 text-sm font-semibold mb-2"
+                class="block uppercase text-blueGray-500 text-sm font-semibold mb-2 pb-2 pl-5 "
               >
-                Useful Links
+                이용안내
               </span>
               <ul class="list-unstyled">
                 <li>
@@ -67,7 +41,7 @@
                     class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
                     href="https://www.creative-tim.com/presentation?ref=vn-footer"
                   >
-                    About Us
+                    검수기준
                   </a>
                 </li>
                 <li>
@@ -75,7 +49,7 @@
                     class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
                     href="https://blog.creative-tim.com?ref=vn-footer"
                   >
-                    Blog
+                    이용정책
                   </a>
                 </li>
                 <li>
@@ -83,24 +57,16 @@
                     class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
                     href="https://www.github.com/creativetimofficial?ref=vn-footer"
                   >
-                    Github
-                  </a>
-                </li>
-                <li>
-                  <a
-                    class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                    href="https://www.creative-tim.com/bootstrap-themes/free?ref=vn-footer"
-                  >
-                    Free Products
+                    패널티 정책
                   </a>
                 </li>
               </ul>
             </div>
             <div class="w-full lg:w-4/12 px-4">
               <span
-                class="block uppercase text-blueGray-500 text-sm font-semibold mb-2"
+                class="block uppercase text-blueGray-500 text-sm font-semibold mb-2 pl-5"
               >
-                Other Resources
+                고객지원
               </span>
               <ul class="list-unstyled">
                 <li>
@@ -108,7 +74,7 @@
                     class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
                     href="https://creative-tim.com/terms?ref=vn-footer"
                   >
-                    Terms & Conditions
+                    공지사항
                   </a>
                 </li>
                 <li>
@@ -116,15 +82,7 @@
                     class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
                     href="https://creative-tim.com/privacy?ref=vn-footer"
                   >
-                    Privacy Policy
-                  </a>
-                </li>
-                <li>
-                  <a
-                    class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                    href="https://creative-tim.com/contact-us?ref=vn-footer"
-                  >
-                    Contact Us
+                    자주 묻는 질문
                   </a>
                 </li>
               </ul>
@@ -143,7 +101,7 @@
               href="https://www.creative-tim.com?ref=vn-footer"
               class="text-blueGray-500 hover:text-blueGray-800"
             >
-              Creative Tim && 3조
+              Creative Tim && FEVE
             </a>
             
           </div>

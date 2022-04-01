@@ -1,20 +1,10 @@
 <template>
   <div style="margin-top:100px;">
-    <v-row justify="space-around">
-      <v-icon @click="model--">
-        mdi-minus
-      </v-icon>
-      {{ model }}
-      <v-icon @click="model++">
-        mdi-plus
-      </v-icon>
-    </v-row>
-    <v-carousel cycle v-model="model" height="360px" hide-delimiters>
+    <v-carousel cycle v-model="model" width="100%" hide-delimiters style=" max-height:'360px !important'">
       <v-carousel-item
           v-for="(item, i) in items"
           :key="i"
           :src="item.src"
-          width="100%"
       >
       </v-carousel-item>
     </v-carousel>
@@ -28,15 +18,9 @@ export default {
   data () {
     return {
       items: [
-        {
-          src: slide1,
-        },
-        {
-          src: slide2,
-        },
-        {
-          src: slide3,
-        },
+        { src: slide1, },
+        { src: slide2, },
+        { src: slide3, },
       ],
       model: 0,
     }
