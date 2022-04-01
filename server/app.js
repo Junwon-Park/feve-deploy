@@ -20,6 +20,7 @@ const buyRouter = require('./router/sold/buyconfirm.js');
 const minRouter = require('./router/shop/min.js');
 const mypageMainRouter = require('./router/mypage/mypageMain.js');
 const soldconfirm = require("./router/sold/soldproduct.js");
+const imageRouter = require("./image/image.js");
 
 const app = express();
 const PORT = config.PORT || 4000;
@@ -73,6 +74,7 @@ app.use('/shop/shoplist', shoplistRoute);
 app.use('/shop/min', minRouter);
 app.use('/mypage', mypageMainRouter);
 app.use("/buy/proc",soldconfirm);
+app.use("/getImage", imageRouter);
 
 app.use((req, res, next) => {
   res.sendStatus(404);
