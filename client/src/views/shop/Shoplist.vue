@@ -32,7 +32,7 @@
         </div>
       </section>
       <section class="relative py-16 bg-blueGray-200">
-        <div class="">
+        <div class="container">
           <!-- <v-form ref="form" @submit.prevent="send"> -->
           <div
             class="p-8 relative flex flex-col min-w-0 break-words  pd-8 bg-white w-full mb-6 shadow-xl rounded-lg -mt-64"

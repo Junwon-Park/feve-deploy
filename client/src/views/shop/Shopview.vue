@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="container">
     <main class="profile-page"> 
         <div class="p-8 mt-16 relative flex flex-col min-w-0 break-words  pd-8 bg-white w-full mb-6 shadow-xl rounded-lg -mt-64">
           <div class="flex flex-wrap items-center mt-5 mb-5 px-6 mx-auto">
@@ -88,7 +88,8 @@
                     <shop-card-table/>
                   </div>
                 </div>
-
+                <!--컴포넌트로 구매 확인 공지 넣어주기-->
+                <Notice/>
               
                 
                 
@@ -101,9 +102,13 @@
 </template>
 <script>
 import box from "@/assets/img/box.png";
+
 import ShopCardBarChart from "@/components/Cards/Shop/ShopCardBarChart.vue";
 import ShopCardLineChart from "@/components/Cards/Shop/ShopCardLineChart.vue";
 import ShopCardTable from "@/components/Cards/Shop/ShopCardTable.vue";
+
+import Notice from './Notice';
+
 
 export default {
     data: () => ({
@@ -134,7 +139,9 @@ export default {
     components: {
     ShopCardBarChart,
     ShopCardLineChart,
-    ShopCardTable
-  },
-  }
+    ShopCardTable,
+    Notice
+    
+    }
+}
 </script>
