@@ -61,7 +61,7 @@ export default {
       default: "리스트",
     },
     items: {
-      required: true,
+      required: false,
     },
 },
   data() {

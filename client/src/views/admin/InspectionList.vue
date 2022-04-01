@@ -28,6 +28,7 @@ export default {
           INSPECTION_STATUS: "",
           USER_ID: '',
           inspecCount: 1,
+          isArrayNull: false,
         }],
     }
   },
@@ -40,6 +41,10 @@ export default {
     this.$axios.get('http://localhost:8080/admin/loadInspection')
         .then(function(res){
           that.items=res.data;
+          if(res.data.length===0) {
+            that.items.isArrayNull=false
+          }
+          console.log("isNulllllllllll",that.items.isArrayNull)
         })
         .catch(function(err){
           console.log(err);

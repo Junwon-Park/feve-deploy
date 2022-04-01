@@ -1,95 +1,97 @@
 <template>
-        <tr>
-<!--          <td-->
-<!--              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"-->
-<!--          v-for="(item, idx) in items" :key="idx"-->
-<!--          >-->
-<!--            {{ item }}-->
-<!--          </td>-->
-          <td
-              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
+  <tr v-if="isArrayNull">
+    <td
+        class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
+        colspan="13"
+    >
+      아직 등록된 상품이 없습니다.
+    </td>
+  </tr>
+  <tr  v-else-if="!isArrayNull">
+    <td
+        class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
 
-          >
-            {{ INSPECTION_KEY }}
-          </td>
-          <td
-              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
+    >
+      {{ INSPECTION_KEY }}
+    </td>
+    <td
+        class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
 
-          >
-            {{ PRODUCT_BRAND }}
-          </td>
-          <td
-              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
+    >
+      {{ PRODUCT_BRAND }}
+    </td>
+    <td
+        class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
 
-          >
-            {{ PRODUCT_CATE }}
-          </td>
-          <td
-              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
+    >
+      {{ PRODUCT_CATE }}
+    </td>
+    <td
+        class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
 
-          >
-            {{ PRODUCT_NAME }}
-          </td>
-          <td
-              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
+    >
+      {{ PRODUCT_NAME }}
+    </td>
+    <td
+        class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
 
-          >
-            {{ PRODUCT_ORIPRICE }} 원
-          </td>
-          <td
-              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
+    >
+      {{ PRODUCT_ORIPRICE }} 원
+    </td>
+    <td
+        class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
 
-          >
-            {{ USER_ID }}
-          </td>
-          <td
-              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
+    >
+      {{ USER_ID }}
+    </td>
+    <td
+        class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
 
-          >
-            {{ inspecCount }}
-          </td>
-          <td
-              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
+    >
+      {{ inspecCount }}
+    </td>
+    <td
+        class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
 
-          >
-            {{ INSPECTION_ADATE }}
-          </td>
-          <td
-              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
+    >
+      {{ INSPECTION_ADATE }}
+    </td>
+    <td
+        class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
 
-          >
-            {{ INSPECTION_STATUS }}
-          </td>
-          <td
-              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
+    >
+      {{ INSPECTION_STATUS }}
+    </td>
+    <td
+        class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
 
-          >
-            {{ INSPECTION_DATE }}
-          </td>
-          <td
-              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
+    >
+      {{ INSPECTION_DATE }}
+    </td>
+    <td
+        class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
 
-          >
-            {{ INSPECTION_RESULT }}
-          </td>
-          <td
-              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
+    >
+      {{ INSPECTION_RESULT }}
+    </td>
+    <td
+        class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
 
-          >
-            {{ INSPECTION_RDATE }}
-          </td>
-          <td
-              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
-          >
-            <button
-                class="bg-orange-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                type="button"
-                @click="fDialog(), sendItems()"
-            >
-              검수
-            </button>
-          </td>
-        </tr>
+    >
+      {{ INSPECTION_RDATE }}
+    </td>
+    <td
+        class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
+    >
+      <button
+          class="bg-orange-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+          type="button"
+          @click="fDialog(), sendItems()"
+      >
+        검수
+      </button>
+    </td>
+  </tr>
 </template>
 
 <script>
@@ -148,7 +150,9 @@ export default {
       inspecCount:{
         default: 1
       },
-
+      isArrayNull:  {
+        default: false
+      },
   },
 
   methods: {
@@ -162,6 +166,9 @@ export default {
       let sendUserkey=that.USER_KEY;
       this.$emit("sendItems", sendProductKey, sendUserid, sendUserkey);
     }
+  },
+  created(){
+    console.log(this.isArrayNull)
   }
 }
 </script>
