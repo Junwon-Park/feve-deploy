@@ -43,7 +43,8 @@
               v-bind="item"
               :items="items"
               @sendDialog="cDialog"
-              @sendItems="sendItems" />
+              @sendItems="sendItems"
+              @sendDeleteItem="sendDeleteItem"/>
         </tbody>
       </table>
       <Pagination />
@@ -70,7 +71,7 @@ export default {
       default: "리스트",
     },
     items: {
-      required: true
+      required: false
     },
   },
   data() {
@@ -97,6 +98,7 @@ export default {
         PRODUCT_CATE: "",
         PRODUCT_BRAND: "",
         PRODUCt_LDATE: "",
+        PRODUCT_DELETE: 0,
       }
     }
   },
@@ -111,7 +113,6 @@ export default {
       that.receivedProductKey = recP;
       that.receivedMnum = recM;
 
-      console.log("키 전달2", this.receivedProductKey, this.receivedMnum);
       this.$axios.post('http://localhost:8080/admin/loadproduct/one', {
         sendProductKey: that.receivedProductKey,
         sendMnum: that.receivedMnum,
@@ -121,12 +122,30 @@ export default {
         console.log(err);
       });
     },
+
+    sendDeleteItem(recP, recM) {
+      let that = this;
+      that.receivedProductKey = recP;
+      that.receivedMnum = recM;
+
+      this.$axios.post('http://localhost:8080/admin/deleteProduct', {
+        sendProductKey: that.receivedProductKey,
+        sendMnum: that.receivedMnum,
+      }).then(function (res) {
+        that.item = res.data[0];
+      }).catch(function (err) {
+        console.log(err);
+      });
+    },
+
     cDialog(){
       this.recDialog=true;
     },
+
     sendDialog(){
       this.recDialog = false
     },
+
     updateList(recPk, recN, recM, recL,recP, recD,recO, recB, recC) {
       let that = this;
       that.sendProductKey = recPk;

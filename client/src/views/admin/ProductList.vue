@@ -25,6 +25,7 @@ export default {
           PRODUCT_MNUM: '',
           PRODUCT_PIC: "",
           PRODUCT_DESC: "",
+          isArrayNull: 0
         }],
 
     }
@@ -38,8 +39,10 @@ export default {
     let that = this;
     this.$axios.get('http://localhost:8080/admin/loadproduct')
         .then(function(res){
-          console.log(res);
           that.items = res.data;
+          if(res.data.length===0) {
+               that.isArrayNull=0
+            }
         })
         .catch(function(err){
           console.log(err);

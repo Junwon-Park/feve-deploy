@@ -11,6 +11,7 @@ async function loadproduct(req, res, next) {
         ',PRODUCT_NAME \n' +
         ',PRODUCT_MNUM \n' +
         ',PRODUCT_ORIPRICE \n' +
+        ',PRODUCT_DELETE \n' +
         ',c.CATEGORY_DESC  as PRODUCT_CATE \n' +
         ',ct.CATEGORY_desc  as PRODUCT_BRAND \n' +
         'from Product\n' +
