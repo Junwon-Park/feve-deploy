@@ -1,14 +1,16 @@
 <template>
   <div>
-    <div class="flex flex-wrap" style="min-height: 80vh;">
+    <div class="flex flex-wrap">
       <div class="w-full mb-12 xl:mb-0 px-4 mt-12">
-        <AdminCardCscenterPage />
+        <AdminCardCscenterPage/>
+        <Pagination />
     </div>
     </div>
   </div>
 </template>
 <script>
 import AdminCardCscenterPage from "@/components/Cards/Admin/AdminCardCscenterPage.vue";
+import Pagination from "@/components/Pagination.vue" ;
 
 export default {
   data() {
@@ -29,7 +31,8 @@ export default {
     }
   },
   components: {
-    AdminCardCscenterPage
+    AdminCardCscenterPage,
+    Pagination,
   },
 
   created() {

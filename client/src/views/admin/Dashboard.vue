@@ -1,15 +1,18 @@
 <template>
   <div>
-    <div class="flex flex-wrap" style="min-height: 80vh;">
+    <div class="flex flex-wrap">
 
       <div class="w-full xl:w-8/12 mb-12 xl:mb-0 px-4 mt-12">
 
         <AdminCardPageLists
             :items="items" :title="title"
+            style="min-height: 80vh;"
         />
       </div>
       <div class="w-full xl:w-4/12 px-4 mt-12">
-        <AdminCardCscenterPage />
+        <AdminCardCscenterPage
+            style="min-height: 80vh;"
+        />
       </div>
     </div>
   </div>

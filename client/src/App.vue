@@ -5,7 +5,7 @@
       <AdminSidebar v-else  />
     <router-view />
       <Chat />
-    <footer-component />
+    <footer-component :style="[ isAdmin ?  {'margin-left':'16rem !important'} : {'margin-left': '0 !important'}]" />
     </v-main>
   </v-app>
 </template>

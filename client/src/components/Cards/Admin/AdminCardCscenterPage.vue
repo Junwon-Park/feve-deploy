@@ -11,40 +11,26 @@
         </div>
       </div>
     </div>
-    <div class="block w-full overflow-x-auto">
+    <div class="block w-full overflow-x-auto"  style="min-height: 80vh;">
       <!-- Projects table -->
-      <table class="items-center w-full bg-transparent border-collapse">
+      <table class=" w-full bg-transparent border-collapse">
         <thead class="thead-light">
         <tr>
           <th
               class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold "
+              v-for="(table, idx) in table" :key="idx"
           >
-            제목
-          </th>
-          <th
-              class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold "
-          >
-            작성자
-          </th>
-          <th
-              class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold"
-          >
-            등록시간
-          </th>
-          <th
-              class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold"
-          >
-            답변여부
-          </th>
-          <th
-              class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold"
-          >
-            상태
+            {{ table }}
           </th>
         </tr>
         </thead>
         <tbody>
         <tr>
+          <th
+              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 "
+          >
+            1
+          </th>
           <th
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 "
           >
@@ -80,5 +66,12 @@
   </div>
 </template>
 <script>
+export default {
+  data(){
+    return{
+      table: ["번호", "제목", "작성자", "작성시간", "답변여부", "관리"],
 
+    }
+  }
+}
 </script>

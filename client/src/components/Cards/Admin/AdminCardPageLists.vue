@@ -48,7 +48,6 @@
               @sendUndoDeleteItem="sendUndoDeleteItem" />
         </tbody>
       </table>
-      <Pagination />
     </div>
     <AdminProductModi
         :dialog="recDialog"
@@ -63,7 +62,6 @@
 
 <script>
 import AdminCards from "@/components/Cards/Admin/AdminCards.vue";
-import Pagination from "@/components/Pagination.vue" ;
 import AdminProductModi from "@/components/Cards/Admin/AdminProductModi.vue";
 export default {
   props: {
@@ -106,7 +104,6 @@ export default {
   components: {
     AdminCards,
     AdminProductModi,
-    Pagination
   },
   methods: {
     sendItems(recP, recM) {

@@ -3,12 +3,14 @@
     <div class="flex flex-wrap" style="min-height: 80vh;">
       <div class="w-full mb-12 xl:mb-0 px-4 mt-12">
         <AdminInspecLists v-bind="items" :items="items" :title="title"/>
+        <Pagination />
     </div>
     </div>
   </div>
 </template>
 <script>
 import AdminInspecLists from "@/components/Cards/Admin/AdminInspecLists.vue";
+import Pagination from "@/components/Pagination.vue" ;
 export default {
   data() {
     return {
@@ -34,6 +36,7 @@ export default {
   },
   components: {
     AdminInspecLists,
+    Pagination,
   },
 
   created() {

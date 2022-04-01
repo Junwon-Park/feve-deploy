@@ -12,9 +12,9 @@
         </div>
       </div>
     </div>
-    <div class="block w-full overflow-x-auto">
+    <div class="block w-full overflow-x-auto"  style="min-height: 80vh;">
       <!-- Projects table -->
-      <table class="items-center w-full bg-transparent border-collapse">
+      <table class="items-center w-full bg-transparent border-collapse"  style="min-height: 70vh;">
         <thead>
         <tr>
           <th
@@ -36,7 +36,6 @@
           />
         </tbody>
       </table>
-      <Pagination />
     </div>
     <AdminInspecModi
         :dialog="recDialog"
@@ -53,7 +52,6 @@
 <script>
 import AdminInspecCards from "@/components/Cards/Admin/AdminInspecCards.vue";
 import AdminInspecModi from "@/components/Cards/Admin/AdminInspecModi.vue";
-import Pagination from "@/components/Pagination.vue" ;
 export default {
   props: {
     title: {
@@ -93,7 +91,6 @@ export default {
   components: {
     AdminInspecCards,
     AdminInspecModi,
-    Pagination,
   },
   methods: {
     cDialog(){

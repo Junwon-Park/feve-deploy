@@ -1,10 +1,11 @@
 <template>
   <div>
-    <div class="flex flex-wrap" style="min-height: 80vh;">
+    <div class="flex flex-wrap" >
       <div class="w-full mb-12 xl:mb-0 px-4 mt-12">
-        <AdminCardPageLists v-bind="items" :items="items" :title="title">
+        <AdminCardPageLists v-bind="items" :items="items" :title="title"  style="min-height: 80vh;">
                 <AdminCards  />
         </AdminCardPageLists>
+        <Pagination />
     </div>
     </div>
   </div>
@@ -12,6 +13,7 @@
 <script>
 import AdminCardPageLists from "@/components/Cards/Admin/AdminCardPageLists.vue";
 import AdminCards from "@/components/Cards/Admin/AdminCards.vue";
+import Pagination from "@/components/Pagination.vue" ;
 export default {
   data() {
     return {
@@ -34,6 +36,7 @@ export default {
   components: {
     AdminCards,
     AdminCardPageLists,
+    Pagination,
   },
 
   created() {
