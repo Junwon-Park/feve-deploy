@@ -175,11 +175,11 @@
                 우편번호
               </label>
               <input
+                id="postcode"
                 type="text"
                 class="postCode border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                 placeholder="우편 번호를 입력하세요."
                 readonly
-                value="this.POST_CODE"
               />
               <h1>한국어{{ USER_PASSWORD }}</h1>
             </div>
@@ -191,7 +191,6 @@
 </template>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
-let postcode;
 export default {
   data() {
     return {
@@ -205,22 +204,33 @@ export default {
       POST_CODE: ''
     };
   },
-  updated() {
-    console.log(this.USER_ADDRESS1, typeof this.POST_CODE);
-  },
+  // updated() {
+  //   console.log(this.USER_ADDRESS1, typeof this.POST_CODE);
+  // },
   methods: {
     postCode() {
       new daum.Postcode({
         oncomplete: function (data) {
           const userAddress = document.querySelector('.address');
-          this.POST_CODE = data.zonecode;
-          this.USER_PASSWORD = data.zonecode;
-          console.log(typeof this.POST_CODE);
-          console.log(typeof this.USER_PASSWORD);
-          console.log(data);
-          console.log(this.POST_CODE);
-          console.log(this.USER_PASSWORD);
-          userAddress.textContent = this.POST_CODE;
+
+          let tInput = document.getElementById('postcode');
+          tInput.value = this.POST_CODE;
+          tInput.value = data.zonecode;
+
+          // this.POST_CODE = data.zonecode;
+          // this.USER_PASSWORD = data.zonecode;
+          // console.log(typeof this.POST_CODE);
+          // console.log(typeof this.USER_PASSWORD);
+          // console.log(data);
+          // console.log(this.POST_CODE);
+          // console.log(this.USER_PASSWORD);
+          // userAddress.textContent = this.POST_CODE;
+
+          // let tInput = document.getElementById('postcode');
+          // tInput.value = this.POST_CODE;
+          // console.log("tInput.value: " + tInput.value);
+          // :value="this.POST_CODE"
+
         }
       }).open();
     },
