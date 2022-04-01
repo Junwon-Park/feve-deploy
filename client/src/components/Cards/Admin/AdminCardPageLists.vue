@@ -75,24 +75,28 @@ export default {
   },
   data() {
     return {
-      table: ["번호", "상품명", "모델명", "브랜드", "카테고리", "발매가", "관리"],
+      table: ["번호", "상품명", "모델명", "브랜드", "카테고리", "발매가","관리"],
+      sendProductKey: 0,
       receivedProductKey: 0,
       receivedMnum: "",
       recDialog: false,
+      brandStatus: "",
+      categoryStatus: "",
+      newProductName:"",
+      newProductMnum:"",
+      newProductLdate:"",
+      newProductPic:"",
+      newProductDesc:"",
+      newProductOriprice:"",
       item:{
-        INSPECTION_KEY: 0,
-        INSPECTION_DATE: "",
-        INSPECTION_RESULT: "",
-        INSPECTION_STATUS: "",
-        INSPECTION_ADATE: "",
-        INSPECTION_RDATE:"",
         PRODUCT_KEY: 0,
         PRODUCT_MNUM: "",
-        USER_ID: "",
+        PRODUCT_PIC: "",
         PRODUCT_NAME: "",
         PRODUCT_ORIPRICE: 0,
         PRODUCT_CATE: "",
         PRODUCT_BRAND: "",
+        PRODUCt_LDATE: "",
       }
     }
   },
@@ -123,23 +127,34 @@ export default {
     sendDialog(){
       this.recDialog = false
     },
-    updateList(newS, newR) {
+    updateList(recPk, recN, recM, recL,recP, recD,recO, recB, recC) {
       let that = this;
-      that.sendInspectionStatus = newS;
-      that.sendInsepctionResult = newR;
+      that.sendProductKey = recPk;
+      that.brandStatus = recB,
+      that.categoryStatus = recC,
+      that.newProductName = recN,
+      that.newProductMnum = recM,
+      that.newProductLdate = recL,
+      that.newProductPic = recP,
+      that.newProductDesc = recD,
+      that.newProductOriprice = recO,
 
-    //   this.$axios.post('http://localhost:8080/admin/updateInspection', {
-    //     sendInspectionStatus: that.sendInspectionStatus,
-    //     sendInsepctionResult: that.sendInsepctionResult,
-    //     sendProductKey: that.receivedProductKey,
-    //     sendUserid: that.receivedUserid,
-    //     sendUserkey: that.receivedUserkey,
-    //   }).then(function (res) {
-    //     console.log(res)
-    //   })
-    //       .catch(function (err) {
-    //         console.log(err);
-    //       });
+      this.$axios.post('http://localhost:8080/admin/updateProduct', {
+        sendProductKey: that.sendProductKey,
+        brandStatus: that.brandStatus,
+        categoryStatus:  that.categoryStatus,
+        newProductName: that.newProductName,
+        newProductMnum: that.newProductMnum,
+        newProductLdate: that.newProductLdate,
+        newProductPic: that.newProductPic,
+        newProductDesc: that.newProductDesc,
+        newProductOriprice:  that.newProductOriprice,
+      }).then(function (res) {
+        console.log(res)
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
     }
   }
 }

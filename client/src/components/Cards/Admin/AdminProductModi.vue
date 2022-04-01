@@ -22,6 +22,7 @@
                 <v-text-field
                     :label="table[1]"
                     :value="item.PRODUCT_NAME"
+                    v-model="newProductName"
                 ></v-text-field>
               </v-col>
               <v-col
@@ -32,6 +33,7 @@
                 <v-text-field
                     :label="table[2]"
                     :value="item.PRODUCT_MNUM"
+                    v-model="newProductMnum"
                 ></v-text-field>
               </v-col>
 
@@ -43,6 +45,7 @@
                 <v-text-field
                     :label="table[5]"
                     :value="item.PRODUCT_ORIPRICE"
+                    v-model="newProductOriprice"
                 ></v-text-field>
               </v-col>
               <v-col
@@ -72,8 +75,8 @@
               </v-col>
               <v-col
                   cols="12"
-                  sm="12"
-                  md="12"
+                  sm="6"
+                  md="6"
               >
                 <label
                     class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
@@ -87,6 +90,37 @@
                     placeholder="사진경로"
                     @change="handleImage"
                 />
+              </v-col>
+
+              <v-col
+                  cols="12"
+                  sm="6"
+                  md="6"
+              >
+                <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlFor="출시일"
+                >
+                  출시일
+                </label>
+                <input
+                    type="date"
+                    class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    placeholder="출시일"
+                    v-model="newProductLdate"
+                />
+              </v-col>
+
+              <v-col
+                  cols="12"
+                  sm="12"
+                  md="12"
+              >
+                <v-text-field
+                    label="상세설명"
+                    :value="item.PRODUCT_DESC"
+                    v-model="newProductDesc"
+                ></v-text-field>
               </v-col>
 
             </v-row>
@@ -105,7 +139,7 @@
           <v-btn
               color="blue darken-1"
               text
-              @click="updateInspectionList"
+              @click="updateModifiedList"
           >
             저장
           </v-btn>
@@ -119,10 +153,15 @@
 export default {
   data: () => ({
     dialog: false,
-    brandStatus: "",
-    categoryStatus: "",
-    newProductStatus:"",
-    newProductResult:"",
+      brandStatus: "",
+      categoryStatus: "",
+      newProductName:"",
+      newProductMnum:"",
+      newProductLdate:"",
+      newProductPic:"",
+      newProductDesc:"",
+      newProductOriprice:"",
+    sendProductKey: 0,
     product_get_brand:[],
     product_get_cate: []
   }),
@@ -140,10 +179,28 @@ export default {
     closeDialog(){
       this.dialog=false
     },
-    updateInspectionList(){
-      let newInspectionStatus=this.inspectionStatus;
-      let newInspectionResult=this.inspectionResult;
-      this.$emit('updateList', newInspectionStatus, newInspectionResult)
+    updateModifiedList(){
+      let sendProductKey=this.item.PRODUCT_KEY;
+      let newProductName=this.newProductName;
+      let newProductMnum=this.newProductMnum;
+      let newProductLdate=this.newProductLdate;
+      let newProductPic=this.newProductPic;
+      let newProductDesc=this.newProductDesc;
+      let newProductOriprice=this.newProductOriprice;
+      let brandStatus=this.brandStatus;
+      let categoryStatus=this.categoryStatus;
+
+      this.$emit('updateList',
+        sendProductKey,
+        newProductName,
+        newProductMnum,
+        newProductLdate,
+        newProductPic,
+        newProductDesc,
+        newProductOriprice,
+        brandStatus,
+        categoryStatus
+      );
       alert("상품 수정을 완료했습니다.");
       this.$router.go(this.$router.currentRouter);
     },
@@ -167,11 +224,11 @@ export default {
       if (imageFile) {
         //let url = URL.createObjectURL(imageFile[0]);
         //that.product.product_pic=url;
-        that.product.product_pic = imageFile[0].name.split('.')[0];
+        that.newProductPic = imageFile[0].name.split('.')[0];
         // console.log(url.split('/')[3]);
       } else {
         //that.product.imgsrc = require('../../assets/img/icon_question.png');
-        that.product.imgsrc = 'icon_question';
+        that.newProductPic = 'icon_question';
       }
     }
   },
@@ -185,6 +242,7 @@ export default {
         .catch(function(err){
           console.log(err);
         });
+
   },
 }
 </script>

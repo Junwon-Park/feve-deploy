@@ -23,6 +23,8 @@ export default {
           PRODUCT_CATE: '',
           PRODUCT_ORIPRICE: 0,
           PRODUCT_MNUM: '',
+          PRODUCT_PIC: "",
+          PRODUCT_DESC: "",
         }],
 
     }
