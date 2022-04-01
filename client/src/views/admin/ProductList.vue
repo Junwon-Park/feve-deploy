@@ -25,7 +25,7 @@ export default {
           PRODUCT_MNUM: '',
           PRODUCT_PIC: "",
           PRODUCT_DESC: "",
-          isArrayNull: 0
+          isArrayNull: false
         }],
 
     }
@@ -41,7 +41,7 @@ export default {
         .then(function(res){
           that.items = res.data;
           if(res.data.length===0) {
-               that.isArrayNull=0
+               that.isArrayNull=false
             }
         })
         .catch(function(err){
