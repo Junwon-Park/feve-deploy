@@ -15,8 +15,7 @@ const signup = async (req, res) => {
     USER_PHONE,
     USER_ADDRESS1,
     USER_ADDRESS2,
-    USER_DELETE,
-    USER_ADMIN
+    POST_CODE
   } = req.body;
 
   bcrypt.hash(USER_PASSWORD, config.bcrypt.saltRounds, async (err, hashed) => {
@@ -35,8 +34,7 @@ const signup = async (req, res) => {
           USER_PHONE,
           USER_ADDRESS1,
           USER_ADDRESS2,
-          USER_DELETE,
-          USER_ADMIN,
+          POST_CODE,
           createdAt: now
         }
       });

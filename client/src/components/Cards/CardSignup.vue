@@ -25,6 +25,50 @@
                 class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                 htmlFor="grid-password"
               >
+                아이디
+              </label>
+              <input
+                type="text"
+                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                value=""
+                placeholder="아이디를 입력하세요."
+                v-model="USER_ID"
+              />
+            </div>
+            <div class="relative w-full mb-3">
+              <label
+                class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                htmlFor="grid-password"
+              >
+                비밀번호
+              </label>
+              <input
+                type="password"
+                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                placeholder="비밀번호를 입력하세요."
+                v-model="USER_PASSWORD"
+              />
+            </div>
+            <div class="relative w-full mb-3">
+              <label
+                class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                htmlFor="grid-password"
+              >
+                비밀번호 확인
+              </label>
+              <input
+                type="text"
+                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                placeholder="비밀번호 확인"
+              />
+            </div>
+          </div>
+          <div class="w-full lg:w-6/12 px-4">
+            <div class="relative w-full mb-3">
+              <label
+                class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                htmlFor="grid-password"
+              >
                 이름
               </label>
               <input
@@ -32,10 +76,9 @@
                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                 value=""
                 placeholder="이름을 입력하세요."
+                v-model="USER_NAME"
               />
             </div>
-          </div>
-          <div class="w-full lg:w-6/12 px-4">
             <div class="relative w-full mb-3">
               <label
                 class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
@@ -48,36 +91,21 @@
                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                 value=""
                 placeholder="이메일을 입력하세요."
+                v-model="USER_MAIL"
               />
             </div>
-          </div>
-          <div class="w-full lg:w-6/12 px-4">
             <div class="relative w-full mb-3">
               <label
                 class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                 htmlFor="grid-password"
               >
-                비밀번호
-              </label>
-              <input
-                type="password"
-                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                placeholder="비밀번호를 입력하세요."
-              />
-            </div>
-          </div>
-          <div class="w-full lg:w-6/12 px-4">
-            <div class="relative w-full mb-3">
-              <label
-                class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                htmlFor="grid-password"
-              >
-                비밀번호 확인
+                전화번호
               </label>
               <input
                 type="text"
                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                placeholder="비밀번호 확인"
+                placeholder="010-0000-0000"
+                v-model="USER_PHONE"
               />
             </div>
           </div>
@@ -98,11 +126,29 @@
                 시/군/구
               </label>
               <input
-                type="email"
-                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                value="New York"
+                type="text"
+                class="address border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                placeholder="주소를 입력하세요."
+                readonly
+                v-model="USER_ADDRESS1"
               />
             </div>
+          </div>
+          <div
+            style="
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+            "
+          >
+            <v-btn
+              elevation="2"
+              large
+              color="primary"
+              style="margin-top: 10px"
+              @click="postCode"
+              >주소 검색</v-btn
+            >
           </div>
           <div class="w-full lg:w-12/12 px-4">
             <div class="relative w-full mb-3">
@@ -115,7 +161,8 @@
               <input
                 type="text"
                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                value="상세주소를 입력해주세요."
+                placeholder="상세주소를 입력해주세요."
+                v-model="USER_ADDRESS2"
               />
             </div>
           </div>
@@ -129,9 +176,12 @@
               </label>
               <input
                 type="text"
-                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                value="12345"
+                class="postCode border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                placeholder="우편 번호를 입력하세요."
+                readonly
+                value="this.POST_CODE"
               />
+              <h1>한국어{{ USER_PASSWORD }}</h1>
             </div>
           </div>
         </div>
@@ -139,3 +189,49 @@
     </div>
   </div>
 </template>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+let postcode;
+export default {
+  data() {
+    return {
+      USER_ID: '',
+      USER_PASSWORD: 0,
+      USER_NAME: '',
+      USER_MAIL: '',
+      USER_PHONE: '',
+      USER_ADDRESS1: '',
+      USER_ADDRESS2: '',
+      POST_CODE: ''
+    };
+  },
+  updated() {
+    console.log(this.USER_ADDRESS1, typeof this.POST_CODE);
+  },
+  methods: {
+    postCode() {
+      new daum.Postcode({
+        oncomplete: function (data) {
+          const userAddress = document.querySelector('.address');
+          this.POST_CODE = data.zonecode;
+          this.USER_PASSWORD = data.zonecode;
+          console.log(typeof this.POST_CODE);
+          console.log(typeof this.USER_PASSWORD);
+          console.log(data);
+          console.log(this.POST_CODE);
+          console.log(this.USER_PASSWORD);
+          userAddress.textContent = this.POST_CODE;
+        }
+      }).open();
+    },
+    submitSignUp() {
+      this.USER_NAME = '';
+      this.USER_MAIL = '';
+      this.USER_PHONE = '';
+    },
+    writeUserId() {
+      this.USER_ID = '';
+    }
+  }
+};
+</script>

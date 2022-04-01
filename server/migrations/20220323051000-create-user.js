@@ -38,12 +38,15 @@ module.exports = {
       },
       USER_DELETE: {
         allowNull: false,
-        type: Sequelize.STRING(1)
+        type: Sequelize.STRING(1),
+        defaultValue: '0'
       },
       USER_ADMIN: {
         allowNull: false,
-        type: Sequelize.STRING(1)
+        type: Sequelize.STRING(1),
+        defaultValue: '0'
       },
+      POST_CODE: { type: Sequelize.STRING(10), allowNull: false },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
