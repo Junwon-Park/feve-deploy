@@ -41,7 +41,7 @@ export default {
         .then(function(res){
           that.items = res.data;
           if(res.data.length===0) {
-               that.isArrayNull=false
+               that.items.isArrayNull=false
             }
         })
         .catch(function(err){
