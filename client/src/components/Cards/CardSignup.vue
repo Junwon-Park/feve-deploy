@@ -8,6 +8,7 @@
         <button
           class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
           type="button"
+          @click="submitSignUp"
         >
           가입하기
         </button>
@@ -130,7 +131,6 @@
                 class="address border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                 placeholder="주소를 입력하세요."
                 readonly
-                v-model="USER_ADDRESS1"
               />
             </div>
           </div>
@@ -189,58 +189,69 @@
     </div>
   </div>
 </template>
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
+import axios from 'axios';
 export default {
   data() {
     return {
       USER_ID: '',
-      USER_PASSWORD: 0,
+      USER_PASSWORD: '',
       USER_NAME: '',
       USER_MAIL: '',
       USER_PHONE: '',
       USER_ADDRESS1: '',
       USER_ADDRESS2: '',
-      POST_CODE: ''
+      POST_CODE: '',
+      baseURL: 'http://localhost:8080',
+      clientBaseURL: 'http://localhost:3000'
     };
   },
-  // updated() {
-  //   console.log(this.USER_ADDRESS1, typeof this.POST_CODE);
-  // },
   methods: {
     postCode() {
-      new daum.Postcode({
+      new window.daum.Postcode({
         oncomplete: function (data) {
           const userAddress = document.querySelector('.address');
+          const postCode = document.querySelector('.postCode');
 
-          let tInput = document.getElementById('postcode');
-          tInput.value = this.POST_CODE;
-          tInput.value = data.zonecode;
-
-          // this.POST_CODE = data.zonecode;
-          // this.USER_PASSWORD = data.zonecode;
-          // console.log(typeof this.POST_CODE);
-          // console.log(typeof this.USER_PASSWORD);
-          // console.log(data);
-          // console.log(this.POST_CODE);
-          // console.log(this.USER_PASSWORD);
-          // userAddress.textContent = this.POST_CODE;
-
-          // let tInput = document.getElementById('postcode');
-          // tInput.value = this.POST_CODE;
-          // console.log("tInput.value: " + tInput.value);
-          // :value="this.POST_CODE"
-
+          userAddress.value = data.address;
+          postCode.value = data.zonecode;
         }
       }).open();
     },
-    submitSignUp() {
-      this.USER_NAME = '';
-      this.USER_MAIL = '';
-      this.USER_PHONE = '';
-    },
-    writeUserId() {
-      this.USER_ID = '';
+    async submitSignUp() {
+      const userAddress = document.querySelector('.address');
+      const postCode = document.querySelector('.postCode');
+
+      const checkSignUp = await axios
+        .post(
+          `${this.baseURL}/auth/signup`,
+          {
+            USER_ID: this.USER_ID,
+            USER_PASSWORD: this.USER_PASSWORD,
+            USER_NAME: this.USER_NAME,
+            USER_MAIL: this.USER_MAIL,
+            USER_PHONE: this.USER_PHONE,
+            USER_ADDRESS1: userAddress.value,
+            USER_ADDRESS2: this.USER_ADDRESS2,
+            POST_CODE: postCode.value
+          },
+          { withCredentials: true }
+        )
+        .catch((err) => {
+          console.log('Sign up failed!!!', err);
+        });
+
+      if (checkSignUp) {
+        localStorage.setItem('isLogin', true);
+        localStorage.setItem(
+          'Authorization',
+          checkSignUp.data.data.accessToken
+        );
+        localStorage.setItem('userId', checkSignUp.data.data.USER_ID);
+        alert('회원가입이 완료되었습니다.');
+      }
+      return (location.href = `${this.clientBaseURL}`);
+
     }
   }
 };

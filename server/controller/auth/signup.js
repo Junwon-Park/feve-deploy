@@ -17,7 +17,16 @@ const signup = async (req, res) => {
     USER_ADDRESS2,
     POST_CODE
   } = req.body;
-
+  console.log(
+    USER_ID,
+    USER_PASSWORD,
+    USER_NAME,
+    USER_MAIL,
+    USER_PHONE,
+    USER_ADDRESS1,
+    USER_ADDRESS2,
+    POST_CODE
+  );
   bcrypt.hash(USER_PASSWORD, config.bcrypt.saltRounds, async (err, hashed) => {
     if (err) console.error(new Error(err));
     else {
