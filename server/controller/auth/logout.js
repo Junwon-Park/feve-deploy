@@ -1,5 +1,3 @@
-const jwt = require('jsonwebtoken');
-
 const logout = async (req, res) => {
   res
     .cookie('refreshToken', null, {
@@ -8,7 +6,7 @@ const logout = async (req, res) => {
       secure: true,
       maxAge: 0
     })
-    .status(205) // Reset contents
+    .status(200) // OK
     .json({ data: null, message: 'Logged out successed!!!' });
 };
 

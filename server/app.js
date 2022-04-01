@@ -25,11 +25,7 @@ const app = express();
 const PORT = config.PORT || 4000;
 
 //2022.03.26 사진 용량 초과로 에러나서 추가
-app.use(
-  express.json({
-    limit: '10mb'
-  })
-);
+app.use(express.json());
 app.use(
   express.urlencoded({
     limit: '10mb',
@@ -52,7 +48,8 @@ const corsOptions = {
   optionsSuccessStatus: 200
 };
 const devCors = {
-  origin: '*',
+  origin: 'http://localhost:3000',
+  credentials: true,
   optionsSuccessStatus: 200
 };
 app.use(cors(devCors));

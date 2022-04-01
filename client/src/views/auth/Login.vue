@@ -21,6 +21,7 @@
                   type="email"
                   class="border-0 px-3 py-3 placeholder-blueGray-600 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   placeholder="아이디를 입력하세요."
+                  v-model="inputId"
                 />
               </div>
 
@@ -35,6 +36,7 @@
                   type="password"
                   class="border-0 px-3 py-3 placeholder-blueGray-600 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   placeholder="비밀번호를 입력하세요."
+                  v-model="inputPw"
                 />
               </div>
               <div>
@@ -54,6 +56,7 @@
                 <button
                   class="bg-orange-500 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
                   type="button"
+                  @click="submitLogin"
                 >
                   로그인
                 </button>
@@ -63,17 +66,17 @@
         </div>
         <div class="flex flex-wrap mt-6 relative">
           <div class="w-1/2">
-          <router-link to="">
-            <span class="text-blueGray-100">
-              <small>비밀번호를 잊어버리셨습니까?</small>
-            </span>
+            <router-link to="">
+              <span class="text-blueGray-100">
+                <small>비밀번호를 잊어버리셨습니까?</small>
+              </span>
             </router-link>
           </div>
           <div class="w-1/2 text-right">
             <router-link to="/auth/register">
-            <span class="text-blueGray-100">
-              <small>아직 회원이 아니시라면?</small>
-            </span>
+              <span class="text-blueGray-100">
+                <small>아직 회원이 아니시라면?</small>
+              </span>
             </router-link>
           </div>
         </div>
@@ -82,15 +85,49 @@
   </div>
 </template>
 <script>
-import github from "@/assets/img/github.svg";
-import google from "@/assets/img/google.svg";
+import github from '@/assets/img/github.svg';
+import google from '@/assets/img/google.svg';
+import axios from 'axios';
 
 export default {
   data() {
     return {
       github,
       google,
+      inputId: '',
+      inputPw: '',
+      baseURL: 'http://localhost:8080',
+      clientBaseURL: 'http://localhost:3000'
     };
   },
+  methods: {
+    async submitLogin() {
+      const userData = await axios
+        .post(
+          `${this.baseURL}/auth/login`,
+          { USER_ID: this.inputId, USER_PASSWORD: this.inputPw },
+          {
+            withCredentials: true,
+            headers: { Authorization: `Bearer ${this.accessToken}` }
+          }
+        )
+        .catch((err) => {
+          // Login failed
+          console.error('Login failed!!!', err);
+          alert('로그인에 실패했습니다.');
+          localStorage.setItem('Authorization', null);
+          localStorage.setItem('isLogin', false);
+          return location.reload();
+        });
+
+      if (userData) {
+        // Login successed
+        localStorage.setItem('Authorization', userData.data.data.accessToken);
+        localStorage.setItem('isLogin', true);
+        localStorage.setItem('userId', userData.data.data.USER_ID);
+        return (location.href = `${this.clientBaseURL}`);
+      }
+    }
+  }
 };
 </script>
