@@ -11,6 +11,8 @@
     <h2 class="font-bold">관심 상품</h2>
     <mypage-simple-favorite-list :items="favoriteProducts"/>
 
+    <img src="http://localhost:3000/product/product-lego5.jpg">
+    
     <!-- <img id="img1" src="testImage"> -->
   </div>
 </template>
