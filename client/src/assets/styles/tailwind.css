@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&family=Rock+3D&display=swap');
 /*! tailwindcss v2.0.4 | MIT License | https://tailwindcss.com */
 
 /*! modern-normalize v1.0.0 | MIT License | https://github.com/sindresorhus/modern-normalize */
@@ -57,7 +58,7 @@ Improve consistency of default fonts in all browsers. (https://github.com/sindre
 */
 
 body {
-  font-family: system-ui, -apple-system,
+  font-family: 'IBM Plex Sans KR',Roboto,system-ui, -apple-system,
     /* Firefox supports this but not yet `system-ui` */ "Segoe UI", Roboto,
     Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
 }
@@ -4487,4 +4488,8 @@ input[id*="check"]:checked + label::after {
   color: #fff;
   font-weight: 700;
   background-color: #ef6253;
+}
+
+.logo{
+  font-family: 'Rock 3D', cursive !important;
 }

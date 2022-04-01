@@ -16,15 +16,14 @@ export default {
       title: "상품리스트",
       items:
         {
-          PRODUCT_KEY: 0,
-          PRODUCT_NAME: '',
-          PRODUCT_BRAND: '',
-          PRODUCT_CATE: '',
-          PRODUCT_ORIPRICE: 0,
-          // dealCount: 0,
-          // inspecCount: 0,
-          // inspecStatus: 0,
-          // inspecComplete: 0,
+          CSCENTER_KEY: 0,
+          CSCENTER_TITLE: '',
+          CSCENTER_CONTENTS: '',
+          CSCENTER_WDATE: '',
+          CSCENTER_STATUS: '',
+          CSCENTER_COMMENT: '',
+          CSCENTER_COMMENT_WDATE: '',
+          USER_KEY: '',
         },
 
     }

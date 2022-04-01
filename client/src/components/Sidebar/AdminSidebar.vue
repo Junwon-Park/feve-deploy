@@ -15,10 +15,10 @@
       </button>
       <!-- Brand -->
       <router-link
-        class="md:block text-center text-indigo-500 md:pb-2 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
+        class="logo md:block text-center text-indigo-500 md:pb-2 mr-0 inline-block whitespace-nowrap text-lg uppercase font-bold p-4 px-0"
         to="/admin"
       >
-        Feve ADMIN
+        Feve<br><span class="text-md" style="font-family: 'inherit'">ADMIN</span>
       </router-link>
       <!-- User -->
       <ul class="md:hidden items-center flex flex-wrap list-none">

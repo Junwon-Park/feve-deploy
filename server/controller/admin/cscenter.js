@@ -1,4 +1,4 @@
-const { Product } = require("../../models");
+const { Cscenter } = require("../../models");
 const db = require("../../models");
 
 async function cscenter(req, res, next) {
@@ -14,16 +14,8 @@ async function cscenter(req, res, next) {
 
    // console.log("콘솔:::::",product_name, product_brand, product_mnum, product_cate, product_ldate, product_oriprice,product_desc, product_wdate );
 
-    await Product.create({
-        PRODUCT_NAME: product_name,
-        PRODUCT_BRAND: product_brand,
-        PRODUCT_MNUM: product_mnum,
-        PRODUCT_LDATE: product_ldate,
-        PRODUCT_PIC: req.body.product_pic,
-        PRODUCT_ORIPRICE: product_oriprice,
-        PRODUCT_DESC: product_desc,
-        PRODUCT_WDATE: product_wdate,
-        PRODUCT_CATE: product_cate
+    await Cscenter.findAll({
+
     })
         .then(result => {
             console.log(result);

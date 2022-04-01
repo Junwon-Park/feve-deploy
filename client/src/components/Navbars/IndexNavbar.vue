@@ -10,10 +10,10 @@
       >
         <router-link to="/">
           <span
-            class="text-blueGray-800 text-4xl font-bold italic leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
+            class="logo text-blueGray-800 text-4xl font-bold italic leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
           >
 
-          F E V E
+          FEVE
           </span>
         </router-link>
         <button
