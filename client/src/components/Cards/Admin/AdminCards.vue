@@ -1,5 +1,13 @@
 <template>
-        <tr>
+        <tr v-if="isArrayNull">
+          <td
+              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
+              colspan="7"
+          >
+            아직 등록된 상품이 없습니다.
+          </td>
+        </tr>
+          <tr v-else-if="!isArrayNull">
           <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
           >
@@ -36,7 +44,7 @@
             <button
                 class="bg-orange-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                 type="button"
-                @click="fDialog(),modifyList(), sendItems()"
+                @click="fDialog(), sendItems()"
             >
               수정
             </button>
@@ -81,23 +89,36 @@ export default {
       type: String,
       default: "Lego",
     },
+    PRODUCT_DELETE: {
+      default: 0,
+    },
+    isArrayNull: {
+      default: 0,
+    },
   },
   methods: {
     fDialog(){
       this.$emit('sendDialog');
     },
-    modifyList(){
-      console.log("수정버튼 클릭했땀!!");
-    },
     deleteList(){
-      console.log("삭제버튼 클릭!!");
+      if( confirm("정말 삭제하시겠습니까?") === true )
+        this.sendDeleteItem();
     },
     sendItems(){
       let that = this;
       let sendProductKey=that.PRODUCT_KEY;
       let sendProductMnum=that.PRODUCT_MNUM;
       this.$emit("sendItems", sendProductKey, sendProductMnum, );
+    },
+    sendDeleteItem(){
+      let that = this;
+      let sendProductKey=that.PRODUCT_KEY;
+      let sendProductMnum=that.PRODUCT_MNUM;
+      this.$emit("sendDeleteItem", sendProductKey, sendProductMnum, );
     }
+  },
+  created(){
+    console.log(this.isArrayNull===1)
   }
 }
 </script>
