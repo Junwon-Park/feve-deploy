@@ -46,6 +46,11 @@ module.exports = {
       PRODUCT_PIC3: {
         type: Sequelize.STRING(255)
       },
+      PRODUCT_DELETE: {
+        allowNull: false,
+        type: Sequelize.STRING(1),
+        defaultValue: '0'
+      },
     }).then(function(){
         queryInterface.addColumn('Product', {
 

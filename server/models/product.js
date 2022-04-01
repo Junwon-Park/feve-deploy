@@ -67,6 +67,11 @@ module.exports = (sequelize, DataTypes) => {
       PRODUCT_PIC3: {
         type:DataTypes.STRING(255),
       },
+    PRODUCT_DELETE: {
+        allowNull: false,
+        type: DataTypes.STRING(1),
+        defaultValue: '0'
+    },
     }, {
       sequelize,
       modelName: 'Product',
