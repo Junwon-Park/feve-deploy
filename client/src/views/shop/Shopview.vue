@@ -83,9 +83,9 @@
                 <div class="w-full flex-wrap mt-3 pt-6">
                   <h2>시세</h2>
                   <div class="mt-2">
-                    <card-bar-chart/>
-                    <card-line-chart/>
-                    <card-table/>
+                    <shop-card-bar-chart/>
+                    <shop-card-line-chart/>
+                    <shop-card-table/>
                   </div>
                 </div>
 
@@ -101,9 +101,9 @@
 </template>
 <script>
 import box from "@/assets/img/box.png";
-import CardBarChart from "@/components/Cards/CardBarChart.vue";
-import CardLineChart from "@/components/Cards/CardLineChart.vue";
-import CardTable from "@/components/Cards/CardTable.vue";
+import ShopCardBarChart from "@/components/Cards/Shop/ShopCardBarChart.vue";
+import ShopCardLineChart from "@/components/Cards/Shop/ShopCardLineChart.vue";
+import ShopCardTable from "@/components/Cards/Shop/ShopCardTable.vue";
 
 export default {
     data: () => ({
@@ -132,9 +132,9 @@ export default {
         ],
     }),
     components: {
-    CardBarChart,
-    CardLineChart,
-    CardTable
+    ShopCardBarChart,
+    ShopCardLineChart,
+    ShopCardTable
   },
   }
 </script>
