@@ -150,9 +150,9 @@ export default {
       inspecCount:{
         default: 1
       },
-      isArrayNull:  {
-        default: false
-      },
+    isArrayNull: {
+      default: 0,
+    },
   },
 
   methods: {
