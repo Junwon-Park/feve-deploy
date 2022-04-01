@@ -34,23 +34,7 @@
         </div>
       </section>
       <section class="relative py-16 bg-blueGray-200">
-        <BoxAgreement @click.native="controlModal(true)"/>
-        <Modal @close="controlModal(false)" v-if="isModalOpen">
-      <!-- header slot starts -->
-      <template #title>
-        <div>타이틀</div>
-      </template>
-
-      <!-- content slot starts -->
-      <template #content>
-        <p>콘텐츠 내용</p>
-      </template>
-
-      <!-- footer slot starts -->
-      <template #footer>
-        <button @click="controlModal(false)">동의</button>
-      </template>
-    </Modal>
+      
         <div class="container mx-auto px-4">
           <div
             class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64"

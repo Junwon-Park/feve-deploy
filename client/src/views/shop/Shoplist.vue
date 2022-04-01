@@ -71,7 +71,7 @@
   </div>
 </template>
 <script>
-import ProductCards from "@/components/Cards/ProductCards.vue";
+import ProductCards from "@/components/Cards/Shop/ProductCards.vue";
 import team2 from "@/assets/img/team-2-800x800.jpg";
 import legoBg from "@/assets/img/bg-lego5.jpg";
 import productLego1 from "@/assets/img/product-lego1.jpg";
