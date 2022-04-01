@@ -22,6 +22,7 @@ const minRouter = require('./router/shop/min.js');
 const mypageMainRouter = require('./router/mypage/mypageMain.js');
 const soldconfirm = require("./router/sold/soldproduct.js");
 const imageRouter = require("./image/image.js");
+const cscenterRoute = require("./router/cscenter/cscenter.js");
 
 const app = express();
 const PORT = config.PORT || 4000;
@@ -74,6 +75,7 @@ app.use('/shop/min', minRouter);
 app.use('/mypage', mypageMainRouter);
 app.use("/buy/proc",soldconfirm);
 app.use("/getImage", imageRouter);
+app.use("/cscenter/cscenter", cscenterRoute);
 
 app.use((req, res, next) => {
   res.sendStatus(404);
