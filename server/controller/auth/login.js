@@ -20,7 +20,6 @@ const login = async (req, res) => {
       USER_PASSWORD,
       checkUser.USER_PASSWORD
     );
-
     if (!decodedResult)
       res
         .status(403) // Unauthorized

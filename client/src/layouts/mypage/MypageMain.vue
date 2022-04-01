@@ -11,6 +11,9 @@
     <h2 class="font-bold">관심 상품</h2>
     <mypage-simple-favorite-list :items="favoriteProducts"/>
 
+    <img src="http://localhost:3000/product/product-lego5.jpg">
+    
+    <!-- <img id="img1" src="testImage"> -->
   </div>
 </template>
 
@@ -41,6 +44,7 @@ export default {
           PRODUCT_PIC:'',
         },
       ],
+      testImage:''
     }
   },
   created() {
@@ -48,6 +52,7 @@ export default {
     this.getBuyCounts();
     this.getSellCounts();
     this.getSimpleFavorites();
+    //this.getImage();
   },
   methods: {
     getSimpleUserInfo(){
@@ -100,6 +105,37 @@ export default {
         console.log(error);
       })
     },
+
+    getImage(){
+      this.$axios.get('http://localhost:8080/getImage', {
+        imageName:'product-lego7.jpg'
+      })
+      .then((result) => {
+        console.log("getImage.result: ", result);
+        console.log("getImage.result.data: ", result.data.toString('base64'));
+        // const blob = new Blob(result.data);
+        // this.testImage = URL.createObjectURL(blob);
+        // console.log("getImage.testImage: ", this.testImage);
+
+        // var img = document.getElementById('img1');
+        // img.src = 'data:image/jpeg;base64,' + btoa(result.data);
+        //document.body.appendChild(img);
+
+        var data = '';
+          result.setEncoding('binary');
+            result.on('data', function(chunk) { 
+              data += chunk;
+          });
+          result.on('end', function() {
+              result.rawBody = data;
+          });
+        console.log("finalData: ", data);
+        // this.testImage = 'data:image/png;base64,' + result.data;
+      })       
+      .catch((error) => {
+        console.log(error);
+      })
+    }
   }
 };
 

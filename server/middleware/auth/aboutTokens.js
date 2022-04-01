@@ -21,4 +21,14 @@ const genRefToken = async (source) => {
   return refeshToken;
 };
 
-module.exports = { genAccToken, genRefToken };
+const decodedRefToken = async (refToken) => {
+  const decoded = await jwt.verify(refToken, config.jwt.refreshKey);
+  return decoded;
+};
+
+const decodedAccToken = async (accToken) => {
+  const decoded = await jwt.verify(accToken, config.jwt.accessKey);
+  return decoded;
+};
+
+module.exports = { genAccToken, genRefToken, decodedRefToken, decodedAccToken };
