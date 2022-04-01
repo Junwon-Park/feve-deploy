@@ -3,7 +3,7 @@
     <Slide />
 <!--    <section class="mt-48 md:mt-40 pb-40 relative">-->
 <!--    </section>-->
-    <section class="mt-24 pb-40 relative">
+    <section class="mt-24 pb-40 relative px-12">
       <div class="flex flex-wrap ">
         <div class="w-full md:w-4/12 px-12 md:px-4">
           <div
@@ -23,7 +23,7 @@
         <div class="w-full md:w-6/12  px-4 pt-24 md:pt-0">
           <img
               alt="..."
-              class="max-w-full rounded-lg shadow-xl"
+              class="max-w-full rounded-lg shadow-xl mx-auto"
               style="
                   transform: scale(1) perspective(1040px) rotateY(-11deg)
                     rotateX(2deg) rotate(2deg);
@@ -35,7 +35,7 @@
         <div class="w-full md:w-6/12  px-4 pt-24 md:pt-0">
           <img
               alt="..."
-              class="max-w-full rounded-lg shadow-xl"
+              class="max-w-full rounded-lg shadow-xl mx-auto"
               style="
                   transform: scale(1) perspective(1040px) rotateY(-11deg)
                     rotateX(2deg) rotate(2deg);
