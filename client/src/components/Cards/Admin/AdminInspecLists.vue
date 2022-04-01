@@ -108,7 +108,6 @@ export default {
       that.receivedUserid=recU;
       that.receivedUserkey=recUk;
 
-      console.log("키 전달2", this.receivedProductKey, this.receivedUserid);
       this.$axios.post('http://localhost:8080/admin/loadInspection/one',{
         sendProductKey: that.receivedProductKey,
         sendUserid: that.receivedUserid,

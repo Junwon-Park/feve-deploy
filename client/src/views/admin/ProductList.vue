@@ -24,6 +24,7 @@ export default {
           PRODUCT_ORIPRICE: 0,
           PRODUCT_MNUM: '',
           PRODUCT_PIC: "",
+          PRODUCT_DELETE:'',
           PRODUCT_DESC: "",
           isArrayNull: false
         }],

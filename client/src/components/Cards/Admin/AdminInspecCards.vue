@@ -7,7 +7,7 @@
       아직 등록된 상품이 없습니다.
     </td>
   </tr>
-  <tr  v-else-if="!isArrayNull">
+  <tr v-else-if="!isArrayNull">
     <td
         class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
 

@@ -3,7 +3,7 @@ const db = require('../../models');
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
-async function deleteProduct(req, res, next) {
+async function undoDeleteProduct(req, res, next) {
     const sendProductKey = req.body.sendProductKey;
     const sendMnum = req.body.sendMnum;
 
@@ -11,7 +11,7 @@ async function deleteProduct(req, res, next) {
 
     await Product.update(
         {
-            PRODUCT_DELETE: '1',
+            PRODUCT_DELETE: '0',
         }, {
             where: {
                 PRODUCT_KEY: sendProductKey,
@@ -26,4 +26,4 @@ async function deleteProduct(req, res, next) {
       .catch(err => console.log(err));
 }
 
-module.exports = { deleteProduct };
+module.exports = { undoDeleteProduct };
