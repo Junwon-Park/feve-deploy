@@ -4,7 +4,7 @@
         
           <div >
             <img
-              src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+              :src= "url + item.PRODUCT_PIC"
               style="border-radius: 8px;"
             >
 
@@ -26,22 +26,17 @@
 </template>
 
 <script>
-import itemPic1 from "@/assets/img/product-lego1.jpg";
-import itemPic2 from "@/assets/img/product-lego2.jpg";
-import itemPic3 from "@/assets/img/product-lego3.jpg";
-import itemPic4 from "@/assets/img/product-lego4.jpg";
-
 export default {
   props:{
     items:Array,
   },
   data() {
     return {
-      itemPic1,
-      itemPic2,
-      itemPic3,
-      itemPic4,
+      url: this.$store.getters.LocalUrl + '/product/',
     }
+  },
+  created(){
+    console.log(this.url);
   },
 };
 </script>

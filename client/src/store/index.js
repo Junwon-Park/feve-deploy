@@ -16,7 +16,15 @@ const store = new Vuex.Store({
     userId: localStorage.getItem('userId')
   },
   modules: { authStore },
-  plugins: [authState]
+  plugins: [authState],
+  getters: { 
+    LocalUrl() { 
+        return "http://localhost:3000";
+    }, 
+    ServerUrl() { 
+        return "http://localhost:8080";
+    } 
+  }, 
 });
 
 export default store;

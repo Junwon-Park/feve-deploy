@@ -1,5 +1,6 @@
 <template>
   <div style="margin-left:18%; max-width:60%; margin-bottom:10%">
+
     <mypage-simple-user-info :userInfo="userInfo" style="width:15rem;"/>
 
     <h2 class="mt-20 font-bold">구매 내역</h2>
@@ -11,9 +12,7 @@
     <h2 class="font-bold">관심 상품</h2>
     <mypage-simple-favorite-list :items="favoriteProducts"/>
 
-    <img src="http://localhost:3000/product/product-lego5.jpg">
-    
-    <!-- <img id="img1" src="testImage"> -->
+    <img src="http://localhost:8080/getImage?imageName=product-lego1.jpg" crossorigin>
   </div>
 </template>
 
@@ -44,7 +43,7 @@ export default {
           PRODUCT_PIC:'',
         },
       ],
-      testImage:''
+      testImage:'',
     }
   },
   created() {
@@ -52,7 +51,7 @@ export default {
     this.getBuyCounts();
     this.getSellCounts();
     this.getSimpleFavorites();
-    //this.getImage();
+    this.getImage();
   },
   methods: {
     getSimpleUserInfo(){
@@ -112,25 +111,7 @@ export default {
       })
       .then((result) => {
         console.log("getImage.result: ", result);
-        console.log("getImage.result.data: ", result.data.toString('base64'));
-        // const blob = new Blob(result.data);
-        // this.testImage = URL.createObjectURL(blob);
-        // console.log("getImage.testImage: ", this.testImage);
-
-        // var img = document.getElementById('img1');
-        // img.src = 'data:image/jpeg;base64,' + btoa(result.data);
-        //document.body.appendChild(img);
-
-        var data = '';
-          result.setEncoding('binary');
-            result.on('data', function(chunk) { 
-              data += chunk;
-          });
-          result.on('end', function() {
-              result.rawBody = data;
-          });
-        console.log("finalData: ", data);
-        // this.testImage = 'data:image/png;base64,' + result.data;
+        console.log("getImage.result.data: ", result.data);
       })       
       .catch((error) => {
         console.log(error);
