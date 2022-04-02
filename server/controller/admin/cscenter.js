@@ -5,9 +5,9 @@ const db = require("../../models");
 async function cscenter(req, res, next) {
 
     await Cscenter.findAll({
-        includes: {
+        includes: [{
             model: User,
-        }
+        }]
     })
         .then(result => {
             console.log(result);

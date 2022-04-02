@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="flex flex-wrap">
-      <div class="w-full mb-12 xl:mb-0 px-4 mt-12">
-        <AdminCardCscenterPage/>
+      <div class="w-full mb-12 xl:mb-0 px-4 mt-12" style="min-height: 70vh">
+        <AdminCardCscenterPage v-bind="items" :items="items" :title="title"/>
         <Pagination />
     </div>
     </div>
@@ -15,7 +15,7 @@ import Pagination from "@/components/Pagination.vue" ;
 export default {
   data() {
     return {
-      title: "상품리스트",
+      title: "문의 내역",
       items:
         {
           CSCENTER_KEY: 0,
@@ -26,6 +26,7 @@ export default {
           CSCENTER_COMMENT: '',
           CSCENTER_COMMENT_WDATE: '',
           USER_KEY: '',
+          USER_ID:'',
         },
 
     }
@@ -37,10 +38,13 @@ export default {
 
   created() {
     let that = this;
-    this.$axios.get('http://localhost:8080/admin/loadproduct')
+    this.$axios.get('http://localhost:8080/admin/cscenter')
         .then(function(res){
           console.log(res);
           that.items = res.data;
+          if(res.data.length===0) {
+            that.items.isArrayNull=false
+          }
         })
         .catch(function(err){
           console.log(err);
