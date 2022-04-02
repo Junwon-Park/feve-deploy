@@ -194,7 +194,7 @@ export default {
         //let url = URL.createObjectURL(imageFile[0]);
         //that.product.product_pic=url;
         //that.product.product_pic=imageFile[0].name.split('.')[0];
-        that.product.product_pic=imageFile[0];
+        that.product.product_pic=imageFile[0].name
         // console.log(url.split('/')[3]);
       }
       else {
