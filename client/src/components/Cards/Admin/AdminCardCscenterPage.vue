@@ -11,7 +11,7 @@
         </div>
       </div>
     </div>
-    <div class="block w-full overflow-x-auto"  style="min-height: 80vh;">
+    <div class="block w-full overflow-x-auto">
       <!-- Projects table -->
       <table class=" w-full bg-transparent border-collapse">
         <thead class="thead-light">
