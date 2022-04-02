@@ -49,7 +49,7 @@ module.exports = (sequelize, DataTypes) => {
       sequelize,
       modelName: 'Cscenter',
       freezeTableName:true,
-      tableName:"Inspection",
+      tableName:"Cscenter",
       timestamps:false
       
     }

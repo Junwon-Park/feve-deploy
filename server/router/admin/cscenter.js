@@ -4,6 +4,6 @@ const { cscenter } = require('../../controller/admin/cscenter.js');
 
 const router = express.Router();
 
-router.post('/', cscenter);
+router.get('/', cscenter);
 
 module.exports = router;

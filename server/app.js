@@ -62,7 +62,7 @@ app.use('/auth', authRouter);
 app.use('/addproduct', addproductRoute);
 app.use('/admin/addproduct', addproductRoute);
 app.use('/admin/loadproduct', loadproductRoute);
-app.use('/admin/cscenter', loadproductRoute);
+app.use('/admin/cscenter', adminCscenterRoute);
 app.use('/admin/loadInspection', adminInspectionRoute);
 app.use('/admin/updateInspection', adminUpdateInspectionRoute);
 app.use('/admin/updateProduct', adminUpdateProductRoute);
