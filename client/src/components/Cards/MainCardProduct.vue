@@ -53,7 +53,12 @@ export default {
         title:"가나다",
         desc:"설명중ㅇㅇㅇ",
         price: 550000,
-      }]
+      },{
+        cate:"lego",
+        title:"가나다",
+        desc:"설명중ㅇㅇㅇ",
+        price: 550000,
+      },]
     }
   }
 }

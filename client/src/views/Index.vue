@@ -12,24 +12,24 @@
                 <p class="text-lg text-white mt-4 font-semibold">#LEGO</p>
               </div>
                 <div
-                    class=" bg-orange-500 dark shadow-lg rounded-lg text-center p-3 mt-8 mr-3" style="width:20%"
+                    class=" bg-orange-500 dark  rounded-lg text-center p-3 mt-8 mr-3" style="width:20%"
                 >
                   <p class="text-lg text-white mt-4 font-semibold">#BEARBRICK</p>
                 </div>
                 <div
-                    class=" bg-blueGray-200 shadow-lg rounded-lg text-center p-3 mt-8 mr-3" style="width:20%;"
+                    class=" bg-blueGray-200  rounded-lg text-center p-3 mt-8 mr-3" style="width:20%;"
                 >
                   <p class="text-lg  mt-4 font-semibold">#EVENT</p>
                 </div>
                 <div
-                    class=" bg-blueGray-200 shadow-lg rounded-lg text-center p-3 mt-8 mr-3" style="width:20%;"
+                    class=" bg-blueGray-200  rounded-lg text-center p-3 mt-8 mr-3" style="width:20%;"
                 >
                   <p class="text-lg  mt-4 font-semibold">
                     #인스타그램
                   </p>
                 </div>
                 <div
-                    class=" bg-blueGray-200 shadow-lg rounded-lg text-center p-3 mt-8 mr-3" style="width:20%;"
+                    class=" bg-blueGray-200  rounded-lg text-center p-3 mt-8 mr-3" style="width:20%;"
                 >
                   <p class="text-lg  mt-4 font-semibold">#배송</p>
                 </div>
@@ -92,6 +92,9 @@
       <div class="container mx-auto pb-64">
         <div class="flex flex-wrap justify-center">
           <div class="w-full px-12 md:px-4 ml-auto mr-auto">
+            <h3 class="text-3xl mb-2 font-semibold leading-normal text-white pb-5">
+              #instagram
+            </h3>
           <MainCardStyle />
         </div>
       </div>
