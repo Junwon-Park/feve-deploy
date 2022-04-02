@@ -1,22 +1,53 @@
 <template>
   <div>
     <Slide />
-<!--    <section class="mt-48 md:mt-40 pb-40 relative">-->
-<!--    </section>-->
+    <div class=" mx-auto overflow-hidden pb-20">
+      <div class="flex flex-wrap items-center pt-5">
+        <div class="w-full px-4 mr-auto ml-auto mt-5">
+          <div class="justify-center flex flex-wrap relative items-center flex-col">
+            <div class="my-4 w-full  flex flex-row">
+              <div
+                  class=" bg-emerald-400 rounded-lg text-center p-3  mt-8 mr-3" style="width:20%"
+              >
+                <p class="text-lg text-white mt-4 font-semibold">#LEGO</p>
+              </div>
+                <div
+                    class=" bg-orange-500 dark shadow-lg rounded-lg text-center p-3 mt-8 mr-3" style="width:20%"
+                >
+                  <p class="text-lg text-white mt-4 font-semibold">#BEARBRICK</p>
+                </div>
+                <div
+                    class=" bg-blueGray-200 shadow-lg rounded-lg text-center p-3 mt-8 mr-3" style="width:20%;"
+                >
+                  <p class="text-lg  mt-4 font-semibold">#EVENT</p>
+                </div>
+                <div
+                    class=" bg-blueGray-200 shadow-lg rounded-lg text-center p-3 mt-8 mr-3" style="width:20%;"
+                >
+                  <p class="text-lg  mt-4 font-semibold">
+                    #인스타그램
+                  </p>
+                </div>
+                <div
+                    class=" bg-blueGray-200 shadow-lg rounded-lg text-center p-3 mt-8 mr-3" style="width:20%;"
+                >
+                  <p class="text-lg  mt-4 font-semibold">#배송</p>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <section class="mt-24 pb-40 relative px-12">
       <div class="flex flex-wrap ">
-        <div class="w-full md:w-4/12 px-12 md:px-4">
-          <div
-              class="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-white"
-          >
-            <i class="fas fa-sitemap text-xl"></i>
-          </div>
+        <div class="w-full  px-12 md:px-4">
           <h3 class="text-3xl mb-2 font-semibold leading-normal">
-            BEST SELLER for문 돌릴 예정
+            BEST SELLER
           </h3>
           <hr />
           <MainCardProduct />
         </div>
+        <v-btn outlined color="#999" class="ml-auto mr-auto px-5 mt-10">더 보기</v-btn>
       </div>
 
       <div class="flex flex-wrap mt-32">
@@ -47,260 +78,23 @@
 
 
       <div class="flex flex-wrap mt-24">
-        <div class="w-full md:w-4/12 px-12 md:px-4">
-          <div
-              class="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-white"
-          >
-            <i class="fas fa-sitemap text-xl"></i>
-          </div>
+        <div class="w-full px-12 md:px-4">
           <h3 class="text-3xl mb-2 font-semibold leading-normal">
-            NEW  for문 돌릴 예정
+            NEW
           </h3>
           <hr />
           <MainCardProduct />
         </div>
       </div>
-
-      <div class="container mx-auto overflow-hidden pb-20">
-
-
-        <div class="flex flex-wrap items-center pt-32">
-          <div class="w-full md:w-6/12 px-4 mr-auto ml-auto mt-32">
-            <div class="justify-center flex flex-wrap relative">
-              <div class="my-4 w-full lg:w-6/12 px-4">
-                <a
-                  href="https://www.creative-tim.com/learning-lab/tailwind/svelte/alerts/notus?ref=vn-index"
-                  target="_blank"
-                >
-                  <div class="bg-red-600 shadow-lg rounded-lg text-center p-8">
-                    <img
-                      alt="..."
-                      class="shadow-md rounded-full max-w-full w-16 mx-auto p-2 bg-white"
-                      src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/logos/svelte.jpg"
-                    />
-                    <p class="text-lg text-white mt-4 font-semibold">Svelte</p>
-                  </div>
-                </a>
-                <a
-                  href="https://www.creative-tim.com/learning-lab/tailwind/react/alerts/notus?ref=vn-index"
-                  target="_blank"
-                >
-                  <div
-                    class="bg-lightBlue-500 shadow-lg rounded-lg text-center p-8 mt-8"
-                  >
-                    <img
-                      alt="..."
-                      class="shadow-md rounded-full max-w-full w-16 mx-auto p-2 bg-white"
-                      src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/logos/react.jpg"
-                    />
-                    <p class="text-lg text-white mt-4 font-semibold">ReactJS</p>
-                  </div>
-                </a>
-                <a
-                  href="https://www.creative-tim.com/learning-lab/tailwind/nextjs/alerts/notus?ref=vn-index"
-                  target="_blank"
-                >
-                  <div
-                    class="bg-blueGray-700 shadow-lg rounded-lg text-center p-8 mt-8"
-                  >
-                    <img
-                      alt="..."
-                      class="shadow-md rounded-full max-w-full w-16 mx-auto p-2 bg-white"
-                      src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/logos/nextjs.jpg"
-                    />
-                    <p class="text-lg text-white mt-4 font-semibold">NextJS</p>
-                  </div>
-                </a>
-              </div>
-              <div class="my-4 w-full lg:w-6/12 px-4 lg:mt-16">
-                <a
-                  href="https://www.creative-tim.com/learning-lab/tailwind/js/alerts/notus?ref=vn-index"
-                  target="_blank"
-                >
-                  <div
-                    class="bg-yellow-500 shadow-lg rounded-lg text-center p-8"
-                  >
-                    <img
-                      alt="..."
-                      class="shadow-md rounded-full max-w-full w-16 mx-auto p-2 bg-white"
-                      src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/logos/js.png"
-                    />
-                    <p class="text-lg text-white mt-4 font-semibold">
-                      JavaScript
-                    </p>
-                  </div>
-                </a>
-                <a
-                  href="https://www.creative-tim.com/learning-lab/tailwind/angular/alerts/notus?ref=vn-index"
-                  target="_blank"
-                >
-                  <div
-                    class="bg-red-700 shadow-lg rounded-lg text-center p-8 mt-8"
-                  >
-                    <img
-                      alt="..."
-                      class="shadow-md rounded-full max-w-full w-16 mx-auto p-2 bg-white"
-                      src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/logos/angular.jpg"
-                    />
-                    <p class="text-lg text-white mt-4 font-semibold">Angular</p>
-                  </div>
-                </a>
-                <a
-                  href="https://www.creative-tim.com/learning-lab/tailwind/vue/alerts/notus?ref=vn-index"
-                  target="_blank"
-                >
-                  <div
-                    class="bg-emerald-500 shadow-lg rounded-lg text-center p-8 mt-8"
-                  >
-                    <img
-                      alt="..."
-                      class="shadow-md rounded-full max-w-full w-16 mx-auto p-2 bg-white"
-                      src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/logos/vue.jpg"
-                    />
-                    <p class="text-lg text-white mt-4 font-semibold">Vue.js</p>
-                  </div>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="justify-center text-center flex flex-wrap mt-24">
-        <div class="w-full md:w-6/12 px-12 md:px-4">
-          <p class="mt-4 text-xl leading-relaxed text-blueGray-500">
-            첫 리셀을 FEVE와 시작해보세요.
-          </p>
-          <div class="mt-12">
-            <router-link to="">
-                <span
-                    class="get-started text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-emerald-500 active:bg-emerald-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
-                >
-                  판매하기
-                </span>
-            </router-link>
-
-            <router-link to="">
-                <span
-                    class="github-star ml-1 text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-orange-500 active:bg-red-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
-                >
-                  구매하기
-                </span>
-            </router-link>
-          </div>
-        </div>
-      </div>
     </section>
 
-    <section class="block relative z-1 bg-blueGray-600">
-      <div class="container mx-auto">
-        <div class="justify-center flex flex-wrap">
-          <div class="w-full lg:w-12/12 px-4 -mt-24">
-            <div class="flex flex-wrap">
-              <div class="w-full lg:w-4/12 px-4">
-                <h5 class="text-xl font-semibold pb-4 text-center">
-                  Login Page
-                </h5>
-                <router-link to="/auth/login">
-                  <div
-                    class="hover:-mt-4 relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg ease-linear transition-all duration-150"
-                  >
-                    <img
-                      alt="..."
-                      class="align-middle border-none max-w-full h-auto rounded-lg"
-                      :src="login"
-                    />
-                  </div>
-                </router-link>
-              </div>
-
-              <div class="w-full lg:w-4/12 px-4">
-                <h5 class="text-xl font-semibold pb-4 text-center">
-                  Profile Page
-                </h5>
-                <router-link to="/profile">
-                  <div
-                    class="hover:-mt-4 relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg ease-linear transition-all duration-150"
-                  >
-                    <img
-                      alt="..."
-                      class="align-middle border-none max-w-full h-auto rounded-lg"
-                      :src="profile"
-                    />
-                  </div>
-                </router-link>
-              </div>
-
-              <div class="w-full lg:w-4/12 px-4">
-                <h5 class="text-xl font-semibold pb-4 text-center">
-                  Landing Page
-                </h5>
-                <router-link to="/landing">
-                  <div
-                    class="hover:-mt-4 relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg ease-linear transition-all duration-150"
-                  >
-                    <img
-                      alt="..."
-                      class="align-middle border-none max-w-full h-auto rounded-lg"
-                      :src="landing"
-                    />
-                  </div>
-                </router-link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="py-20 bg-blueGray-600 overflow-hidden">
+    <section class="pt-5 bg-black overflow-hidden">
       <div class="container mx-auto pb-64">
         <div class="flex flex-wrap justify-center">
-          <div class="w-full md:w-5/12 px-12 md:px-4 ml-auto mr-auto md:mt-64">
-            <div
-              class="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-white"
-            >
-              <i class="fas fa-code-branch text-xl"></i>
-            </div>
-            <h3 class="text-3xl mb-2 font-semibold leading-normal text-white">
-              Open Source
-            </h3>
-            <p
-              class="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-400"
-            >
-              Since
-              <a
-                href="https://tailwindcss.com/?ref=creativetim"
-                class="text-blueGray-300"
-                target="_blank"
-              >
-                Tailwind CSS
-              </a>
-              is an open source project we wanted to continue this movement too.
-              You can give this version a try to feel the design and also test
-              the quality of the code!
-            </p>
-            <p
-              class="text-lg font-light leading-relaxed mt-0 mb-4 text-blueGray-400"
-            >
-              Get it free on Github and please help us spread the news with a
-              Star!
-            </p>
-            <a
-              href="https://github.com/creativetimofficial/vue-notus?ref=vn-index"
-              target="_blank"
-              class="github-star mt-4 inline-block text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-700 active:bg-blueGray-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
-            >
-              Github Star
-            </a>
-          </div>
-
-          <div class="w-full md:w-4/12 px-4 mr-auto ml-auto mt-32 relative">
-            <i
-              class="fab fa-github text-blueGray-700 text-55 absolute -top-150-px -right-100 left-auto opacity-80"
-            ></i>
-          </div>
+          <div class="w-full px-12 md:px-4 ml-auto mr-auto">
+          <MainCardStyle />
         </div>
+      </div>
       </div>
     </section>
 
@@ -331,32 +125,30 @@
         >
           <div class="w-full text-center lg:w-8/12">
             <p class="text-4xl text-center">
-              <span role="img" aria-label="love"> 😍 </span>
+              <span role="img" aria-label="love">👋🏼👋🏼</span>
             </p>
             <h3 class="font-semibold text-3xl">
-              Do you love this Starter Kit?
+              <span class="logo text-2xl font-bold">FEVE</span>는 처음이지?
             </h3>
-            <p class="text-blueGray-500 text-lg leading-relaxed mt-4 mb-4">
-              Cause if you do, it can be yours now. Hit the buttons below to
-              navigate to get the Free version for your next project. Build a
-              new web app or give an old project a new look!
+            <p class="mt-4 text-xl leading-relaxed text-blueGray-500">
+              첫 리셀을 <span class="logo text-2xl font-bold">FEVE</span>와 시작해보세요.
             </p>
-            <div class="sm:block flex flex-col mt-10">
-              <a
-                href="https://www.creative-tim.com/learning-lab/tailwind/vue/overview/notus?ref=vn-index"
-                target="_blank"
-                class="get-started text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-2 bg-emerald-500 active:bg-emerald-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
-              >
-                Get started
-              </a>
-              <a
-                href="https://github.com/creativetimofficial/vue-notus?ref=vn-index"
-                target="_blank"
-                class="github-star sm:ml-1 text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-700 active:bg-blueGray-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
-              >
-                <i class="fab fa-github text-lg mr-1"></i>
-                <span>Help With a Star</span>
-              </a>
+            <div class="mt-12">
+              <router-link to="">
+                <span
+                    class="get-started text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-orange-500 active:bg-orange-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
+                >
+                  판매하기
+                </span>
+              </router-link>
+
+              <router-link to="">
+                <span
+                    class="github-star ml-1 text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-600 active:bg-blueGray-200 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
+                >
+                  구매하기
+                </span>
+              </router-link>
             </div>
             <div class="text-center mt-16"></div>
           </div>
@@ -382,7 +174,7 @@ import Slide from '@/components/Cards/Slide.vue';
 import MainCardProduct from '@/components/Cards/MainCardProduct.vue';
 import Banner1 from '@/assets/img/main_ad1.png'
 import Banner2 from '@/assets/img/main_ad2.png'
-
+import MainCardStyle from '@/components/Cards/MainCardStyle.vue';
 export default {
   data() {
     return {
@@ -423,6 +215,7 @@ export default {
   components: {
     Slide,
     MainCardProduct,
+    MainCardStyle,
   }
 };
 </script>
