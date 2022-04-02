@@ -23,7 +23,7 @@
         </v-list-item-title>
         <v-list-item-subtitle>{{ item.desc }}</v-list-item-subtitle>
         <v-list-item-title class="font-semibold mb-1">
-          {{ item.price }}
+          {{ item.price.toLocaleString('ko-KR') }} 원
         </v-list-item-title>
         <small style="color: #999;" class="text-xs">즉시 구매가</small>
       </v-list-item-content>

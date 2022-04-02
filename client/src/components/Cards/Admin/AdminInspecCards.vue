@@ -36,7 +36,7 @@
         class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
 
     >
-      {{ PRODUCT_ORIPRICE }} 원
+      {{ PRODUCT_ORIPRICE.toLocaleString('ko-KR') }} 원
     </td>
     <td
         class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
