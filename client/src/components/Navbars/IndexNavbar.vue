@@ -1,9 +1,9 @@
 <template>
   <nav
-    class="top-0 fixed z-50 w-full flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg shadow bg-white"
+    class="top-0 fixed z-50 w-full flex flex-wrap items-center justify-between navbar-expand-lg shadow bg-white"
   >
     <div
-      class="container px-4 mx-auto flex flex-wrap items-center justify-between"
+      class="container mx-auto flex flex-wrap items-center justify-between"
     >
       <div
         class="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start"
@@ -68,7 +68,7 @@
             </router-link>
           </li>
           <li class="flex items-center" v-if="$store.state.isLogin">
-            <router-link to="/list2">
+            <router-link to="/shop">
               <span
                 class="text-blueGray-800 px-3 py-2 flex items-center text-xs uppercase"
               >
@@ -96,7 +96,7 @@
             </router-link>
           </li>
           <li class="lg flex items-center">
-            <router-link to="/list2">
+            <router-link to="/shop">
               <span
                 class="text-blueGray-800 px-3 py-2 flex items-center text-lg uppercase font-bold"
               >

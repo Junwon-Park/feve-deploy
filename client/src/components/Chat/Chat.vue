@@ -8,20 +8,20 @@
       <template v-slot:activator="{ on, attrs }">
         <v-btn
             class="ma-2"
-            outlined
+
             large
             fab
-            color="red"
+            color="rgb(239, 68, 68)"
             v-bind="attrs"
             v-on="on"
             style="position: fixed; bottom: 40px; right: 40px; z-index: 100"
         >
-            Chat
+            <v-icon color="white">mdi-chat</v-icon>
           </v-btn>
       </template>
       <v-card>
         <v-card-title>
-          <span class="text-h5">상담하기</span>
+          <span class="text-h5">문의하기</span>
         </v-card-title>
         <hr>
         <v-card-text>

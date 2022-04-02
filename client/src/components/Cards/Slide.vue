@@ -1,10 +1,12 @@
 <template>
   <div style="margin-top:100px;">
-    <v-carousel cycle v-model="model" width="100%" hide-delimiters style=" max-height:'360px !important'">
+    <v-carousel cycle v-model="model" hide-delimiters height="100%">
       <v-carousel-item
           v-for="(item, i) in items"
           :key="i"
           :src="item.src"
+          width="100%"
+          style="height:auto !important; width: 100%"
       >
       </v-carousel-item>
     </v-carousel>

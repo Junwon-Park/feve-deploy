@@ -58,9 +58,23 @@ Improve consistency of default fonts in all browsers. (https://github.com/sindre
 */
 
 body {
-  font-family: 'IBM Plex Sans KR',Roboto,system-ui, -apple-system,
+  font-family: Roboto, 'IBM Plex Sans KR', system-ui, -apple-system,
     /* Firefox supports this but not yet `system-ui` */ "Segoe UI", Roboto,
     Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+/* 영어는 Roboto  */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 300;
+  unicode-range:U+0041-005A, U+0061-007A, U+0030-0039;
+}
+
+/* 한국어는 IBM PLEX Sans KR */
+@font-face {
+  font-family: 'IBM Plex Sans KR';
+  unicode-range: U+AC00-D7AF;
 }
 
 /*
@@ -1428,7 +1442,7 @@ input[readonly="readonly"] {
 
 .bg-blueGray-200 {
   --tw-bg-opacity: 1;
-  background-color: rgba(226, 232, 240, var(--tw-bg-opacity));
+  background-color: rgba(244, 244, 244, var(--tw-bg-opacity));
 }
 
 .bg-blueGray-600 {
@@ -1551,7 +1565,7 @@ input[readonly="readonly"] {
 
 .border-blueGray-200 {
   --tw-border-opacity: 1;
-  border-color: rgba(226, 232, 240, var(--tw-border-opacity));
+  border-color: rgba(244, 244, 244, var(--tw-border-opacity));
 }
 
 .border-blueGray-300 {
@@ -3463,7 +3477,7 @@ button:hover.hover\:text-black {
 
 .text-blueGray-200 {
   --tw-text-opacity: 1;
-  color: rgba(226, 232, 240, var(--tw-text-opacity));
+  color: rgba(244, 244, 244, var(--tw-text-opacity));
 }
 
 .text-blueGray-300 {
@@ -4359,12 +4373,12 @@ button:hover.hover\:text-black {
 
   .lg\:text-blueGray-200 {
     --tw-text-opacity: 1;
-    color: rgba(226, 232, 240, var(--tw-text-opacity));
+    color: rgba(244, 244, 244, var(--tw-text-opacity));
   }
 
   .lg\:hover\:text-blueGray-200:hover {
     --tw-text-opacity: 1;
-    color: rgba(226, 232, 240, var(--tw-text-opacity));
+    color: rgba(244, 244, 244, var(--tw-text-opacity));
   }
 
   .lg\:w-auto {
