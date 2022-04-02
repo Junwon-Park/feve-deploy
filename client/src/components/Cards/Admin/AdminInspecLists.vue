@@ -1,6 +1,6 @@
 <template>
   <div
-      class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded"
+      class="relative flex flex-col min-w-0 break-words bg-blueGray-200 w-full mb-6 shadow-lg rounded"
   >
 
     <div class="rounded-t mb-0 px-4 py-3 border-0">
@@ -18,7 +18,7 @@
         <thead>
         <tr>
           <th
-              class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold"
+              class="px-6  bg-gray-200 text-black  align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold"
               v-for="(table, idx) in table" :key="idx"
           >
             {{ table }}

@@ -47,7 +47,6 @@ export default {
           if(res.data.length===0) {
             that.items.isArrayNull=false
           }
-          console.log("isNulllllllllll",that.items.isArrayNull)
         })
         .catch(function(err){
           console.log(err);

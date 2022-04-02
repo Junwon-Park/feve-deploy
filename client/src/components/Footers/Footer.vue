@@ -101,7 +101,7 @@
               href="https://www.creative-tim.com?ref=vn-footer"
               class="text-blueGray-500 hover:text-blueGray-800"
             >
-              Creative Tim && FEVE
+              Creative Tim && <span class="logo">FEVE</span>
             </a>
             
           </div>
