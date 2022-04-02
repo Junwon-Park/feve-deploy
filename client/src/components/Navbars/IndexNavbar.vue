@@ -59,7 +59,7 @@
             </router-link>
           </li>
           <li class="flex items-center" v-if="$store.state.isLogin">
-            <router-link to="/profile">
+            <router-link to="/mypage">
               <span
                 class="text-blueGray-800 px-3 py-2 flex items-center text-xs uppercase"
               >
