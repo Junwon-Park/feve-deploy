@@ -30,7 +30,7 @@ module.exports = {
         type: Sequelize.BIGINT
       },
       CSCENTER_COMMENT_WDATE: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.DATE
       }
     });

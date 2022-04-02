@@ -42,7 +42,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       CSCENTER_COMMENT_WDATE: {
         type:DataTypes.DATE,
-        allowNull: false
+        allowNull: true
     },
   },
     {
