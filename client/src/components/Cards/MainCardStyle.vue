@@ -27,41 +27,52 @@
 </template>
 
 <script>
+import lego1 from "@/assets/img/product-lego1.jpg"
+import lego2 from "@/assets/img/product-lego2.jpg"
+import lego3 from "@/assets/img/product-lego3.jpg"
+import bearbrick1 from "@/assets/img/bg-bearbrick1.jpg"
+import bearbrick2 from "@/assets/img/bg-bearbrick3.jpg"
+import bearbrick3 from "@/assets/img/bg-bearbrick4.jpg"
 export default {
   data(){
     return{
+      lego1,
+      lego2,
+      lego3,
+      bearbrick1,
+      bearbrick2,
       items:[{
-        src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg',
+        src: lego1,
         title:"@deri_s234443",
         desc:"설명중ㅇㅇㅇ",
         price: 550000,
       },{
-        src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg',
-        title:"@deri_s234443",
+        src: lego2,
+        title:"@dongdong",
         desc:"설명중ㅇㅇㅇ",
         price: 550000,
       },{
-        src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg',
-        title:"@deri_s234443",
+        src: lego3,
+        title:"@hahahahahaha",
         desc:"설명중ㅇㅇㅇ",
         price: 550000,
       }, {
-        src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg',
-        title:"@deri_s234443",
+        src: bearbrick1,
+        title:"@______abc",
         desc:"설명중ㅇㅇㅇ",
         price: 550000,
       },{
-        src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg',
-        title:"@deri_s234443",
+        src: bearbrick2,
+        title:"@30389478",
         desc:"설명중ㅇㅇㅇ",
         price: 550000,
       },{
-        src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg',
-        title:"@deri_s234443",
+        src: bearbrick3,
+        title:"@sdfsg4",
         desc:"설명중ㅇㅇㅇ",
         price: 550000,
       },]
     }
-  }
+  },
 }
 </script>
