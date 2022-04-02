@@ -6,13 +6,7 @@
 
 <template>
   <div>
-    <v-tabs  
-    >
-      <v-tab v-for="(item,i) in items" :key="i" style="text-center;  width:33%; flex-direction: column;" >
-        <h6 class="text-h6 font-bold" >{{counts[i]}}</h6>
-        <h6>{{items[i]}}</h6>
-      </v-tab>
-    </v-tabs>
+    <mypage-top-count-tap :items="counts" />
 
       <v-row align="center" justify="center" class="bg-blueGray-100 mt-1">
 
@@ -106,16 +100,29 @@
 
 
 <script>
+import MypageTopCountTap from '@/components/Cards/Mypage/MypageTopCountTap.vue';
 
   export default {
+    components:{
+      MypageTopCountTap,
+    },
     data () {
       return {
-        items: [
-          '구매 입찰', '진행 중', '종료',
-        ],
-        counts:[0,0,0],
+        counts: [
+        {
+          tapName:'구매입찰',
+          count:0,
+        },
+        {
+          tapName:'진행 중',
+          count:0,
+        },
+        {
+          tapName:'종료',
+          count:0,
+        },
+      ],
         periods:[2,4,6],
-
         startDate:'',
         endDate:'',
         startMenu: false,

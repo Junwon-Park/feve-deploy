@@ -16,7 +16,7 @@
 import MypageSidebar from "@/components/Sidebar/MypageSidebar.vue";
 import CardLineChart from "@/components/Cards/CardLineChart.vue";
 import MypageMain from '@/layouts/mypage/MypageMain.vue';
-import MypageBuyList from '@/components/Cards/Mypage/MypageBuyList.vue';
+import MypageBuyList from '@/layouts/mypage/MypageBuyList.vue';
 
 export default {
   components: {
