@@ -11,7 +11,7 @@
 
             large
             fab
-            color="orange"
+            color="rgb(239, 68, 68)"
             v-bind="attrs"
             v-on="on"
             style="position: fixed; bottom: 40px; right: 40px; z-index: 100"
