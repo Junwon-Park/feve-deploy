@@ -36,8 +36,5 @@ export default {
       imageUrl : this.$store.getters.ServerUrl + '/getImage?imageName=',
     }
   },
-  created(){
-    console.log(this.imageUrl + this.items[0].PRODUCT_PIC);
-  },
 };
 </script>
