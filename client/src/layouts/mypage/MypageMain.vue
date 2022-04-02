@@ -12,7 +12,6 @@
     <h2 class="font-bold">관심 상품</h2>
     <mypage-simple-favorite-list :items="favoriteProducts"/>
 
-    <img src="http://localhost:8080/getImage?imageName=product-lego1.jpg" crossorigin>
   </div>
 </template>
 
@@ -43,7 +42,6 @@ export default {
           PRODUCT_PIC:'',
         },
       ],
-      testImage:'',
     }
   },
   created() {
@@ -51,7 +49,6 @@ export default {
     this.getBuyCounts();
     this.getSellCounts();
     this.getSimpleFavorites();
-    this.getImage();
   },
   methods: {
     getSimpleUserInfo(){
@@ -103,20 +100,7 @@ export default {
       .catch((error) => {
         console.log(error);
       })
-    },
-
-    getImage(){
-      this.$axios.get('http://localhost:8080/getImage', {
-        imageName:'product-lego7.jpg'
-      })
-      .then((result) => {
-        console.log("getImage.result: ", result);
-        console.log("getImage.result.data: ", result.data);
-      })       
-      .catch((error) => {
-        console.log(error);
-      })
-    }
+    },    
   }
 };
 

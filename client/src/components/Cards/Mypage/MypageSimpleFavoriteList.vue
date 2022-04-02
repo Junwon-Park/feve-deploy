@@ -4,8 +4,9 @@
         
           <div >
             <img
-              :src= "url + item.PRODUCT_PIC"
+              :src= "imageUrl + item.PRODUCT_PIC"
               style="border-radius: 8px;"
+              crossorigin
             >
 
             <h5 class="font-bold underline mt-2">
@@ -32,11 +33,11 @@ export default {
   },
   data() {
     return {
-      url: this.$store.getters.LocalUrl + '/product/',
+      imageUrl : this.$store.getters.ServerUrl + '/getImage?imageName=',
     }
   },
   created(){
-    console.log(this.url);
+    console.log(this.imageUrl + this.items[0].PRODUCT_PIC);
   },
 };
 </script>
