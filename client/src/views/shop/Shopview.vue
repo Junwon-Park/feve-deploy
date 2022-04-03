@@ -51,7 +51,7 @@
                     </div>
                   </div>
                   
-                  <div class="w-full flex-wrap mt-6 pt-6">
+                  <div class="w-full flex-wrap mt-6">
                     <b class="text-lg">상품정보</b>
                     <div style="border:black;">
                       <div style="width:33%; float:left; padding-right:10px;">
@@ -69,11 +69,11 @@
                     </div>
                   </div>
 
-                  <div class="w-full flex-wrap mt-6 pt-6">
+                  <div class="w-full flex-wrap mt-12 pt-6">
                     <b class="text-lg">배송정보</b>
                     <div class="mt-2">
                       <div style="float:left;">
-                        <img :src="box" alt="..." class="w-16 h-16 rounded-full border-2 border-blueGray-50 shadow"/>
+                        <img :src="box" alt="..." class="w-13 h-13 rounded-full border-2 border-blueGray-50 shadow"/>
                       </div>
                       <div>
                         <p class="mb-2">일반배송 3000원</p>
@@ -85,7 +85,6 @@
                   <div class="w-full flex-wrap mt-3 pt-6">
                     <b class="text-lg">시세</b>
                     <div class="mt-2">
-                      <shop-card-bar-chart/>
                       <shop-card-line-chart/>
                       <shop-card-table/>
                     </div>
@@ -107,11 +106,8 @@
 <script>
 import box from "@/assets/img/box.png";
 import legoBg from "@/assets/img/bg-lego5.jpg";
-
-import ShopCardBarChart from "@/components/Cards/Shop/ShopCardBarChart.vue";
 import ShopCardLineChart from "@/components/Cards/Shop/ShopCardLineChart.vue";
 import ShopCardTable from "@/components/Cards/Shop/ShopCardTable.vue";
-
 import Notice from './Notice';
 
 
@@ -143,7 +139,6 @@ export default {
         ],
     }),
     components: {
-    ShopCardBarChart,
     ShopCardLineChart,
     ShopCardTable,
     Notice

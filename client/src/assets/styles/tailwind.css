@@ -2186,6 +2186,10 @@ input[readonly="readonly"] {
   height: 3rem;
 }
 
+.h-13 {
+  height: 3.5rem;
+}
+
 .h-16 {
   height: 4rem;
 }
@@ -3759,6 +3763,10 @@ button:hover.hover\:text-black {
 
 .w-12 {
   width: 3rem;
+}
+
+.w-13{
+  width: 3.5rem;
 }
 
 .w-16 {
