@@ -5,7 +5,8 @@
       <AdminSidebar v-else  />
     <router-view />
       <Chat />
-    <footer-component :style="[ isAdmin ?  {'margin-left':'16rem !important'} : {'margin-left': '0 !important'}]" />
+    <footer-component
+        :class="{'md:ml-64' :isAdmin}" />
     </v-main>
   </v-app>
 </template>
