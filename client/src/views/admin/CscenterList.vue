@@ -40,11 +40,7 @@ export default {
     let that = this;
     this.$axios.get('http://localhost:8080/admin/cscenter')
         .then(function(res){
-          console.log(res);
-          that.items = res.data;
-          if(res.data.length===0) {
-            that.items.isArrayNull=false
-          }
+          that.items=res.data;
         })
         .catch(function(err){
           console.log(err);

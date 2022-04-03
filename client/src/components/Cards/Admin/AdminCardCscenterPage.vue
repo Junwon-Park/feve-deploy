@@ -25,7 +25,16 @@
         </tr>
         </thead>
         <tbody>
+        <tr v-if="this.$props.items.length===0">
+          <td
+              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
+              colspan="13"
+          >
+            아직 등록된 문의가 없습니다.
+          </td>
+        </tr>
           <AdminAnswerCards
+              v-else
               v-for="(item, idx) in items"
               :key="idx"
               v-bind="item"
@@ -41,7 +50,7 @@
       :table="table"
       :title="title"
       :item="item"
-      :receivedProductKey="receivedProductKey"
+      :receivedCscenterKey="receivedCscenterKey"
       :receivedUserid="receivedUserid"
       @sendDialog="sendDialog"
       @updateList="updateList"/>
@@ -57,17 +66,16 @@ export default {
       default: "리스트",
     },
     items: {
-      required: false,
+      required: true,
     },
   },
   data () {
     return {
       table: ["번호", "제목", "작성자", "작성시간", "답변여부", "관리"],
-      receivedProductKey: 0,
+      receivedCscenterKey: 0,
       receivedUserid:"",
       receivedUserkey:0,
-      sendInspectionStatus: 0,
-      sendInsepctionResult: 0,
+      cscenterComment: 0,
       recDialog: false,
       item:{
         CSCENTER_KEY: 0,
@@ -77,7 +85,7 @@ export default {
         CSCENTER_STATUS: '',
         CSCENTER_COMMENT: '',
         CSCENTER_COMMENT_WDATE: '',
-        USER_KEY: '',
+        USER_KEY: 0,
         USER_ID:'',
       }
     }
@@ -93,14 +101,16 @@ export default {
     sendDialog(){
       this.recDialog = false
     },
-    sendItems(recP, recU, recUk) {
+    sendItems(recC, recU, recUk) {
       let that=this;
-      that.receivedProductKey=recP;
+      that.receivedCscenterKey=recC;
       that.receivedUserid=recU;
       that.receivedUserkey=recUk;
 
-      this.$axios.post('http://localhost:8080/admin/loadInspection/one',{
-        sendProductKey: that.receivedProductKey,
+      console.log(that.receivedCscenterKey)
+
+      this.$axios.post('http://localhost:8080/admin/cscenter/one',{
+        sendCscenterKey: that.receivedCscenterKey,
         sendUserid: that.receivedUserid,
         sendUserkey: that.receivedUserkey,
       }).then(function(res){
@@ -110,16 +120,13 @@ export default {
         console.log(err);
       });
     },
-    updateList(newS, newR){
+    updateList(newS){
       let that = this;
-      that.sendInspectionStatus = newS;
-      that.sendInsepctionResult = newR;
+      that.cscenterComment = newS;
 
-      this.$axios.post('http://localhost:8080/admin/updateInspection', {
-        sendInspectionStatus: that.sendInspectionStatus,
-        sendInsepctionResult: that.sendInsepctionResult,
-        sendProductKey: that.receivedProductKey,
-        sendUserid: that.receivedUserid,
+      this.$axios.post('http://localhost:8080/admin/updateCscenter', {
+        sendCscenterKey: that.receivedCscenterKey,
+        cscenterComment: that.cscenterComment,
         sendUserkey: that.receivedUserkey,
       }).then(function(res){
         console.log(res)
