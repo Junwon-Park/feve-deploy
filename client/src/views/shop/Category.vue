@@ -1,5 +1,5 @@
 <template>
-<div class="text-lg" >
+<div>
     <div>
         <span >필터</span>
         <div>

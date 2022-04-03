@@ -14,9 +14,9 @@
                 <div class="w-full xl:w-6/12 mb-12 xl:mb-0 px-4 mt-12">
                   <div class="w-full">
                     <div class="text-blueGray-800">
-                      <p class="text-base mb-1">PRODUCT_BRAND</p>
+                      <abbr class="text-base mb-1" style="text-decoration:underline">PRODUCT_BRAND</abbr>
                       <p class="text-lg mb-1">PRODUCT_NAME</p>
-                      <p class="text-sm mb-1">PRODUCT_DESC</p>
+                      <p class="text-sm mb-1; text-gray-900">PRODUCT_DESC</p>
                     </div>
                     <hr/>
                     <div class="flex mt-3 pt-3">
@@ -24,15 +24,15 @@
                       <span class="text-left" style="width:50% float:left">최근거래가</span>
                       </div>
                       <div style="width:50%; float:right; text-align:right">
-                      <span class="text-right" style="width:50% float:right">SELL_PRICE</span>
+                      <b class="text-right" style="width:50% float:right">SELL_PRICE</b>
                       </div>
                     </div>
                     
                     <div>
                       <div class="mt-3">
                         <v-btn x-large color="error" dark style="width:49%" class="mr-1 mt-3" > 
-                          <div class="text-lg ">구매</div> 
-                          <div class="text-lg ">10000원</div>
+                          <div>구매</div> 
+                          <div>10000원</div>
                         </v-btn>
                         <v-btn x-large color="success" dark  style="width:49%; float:right" class="ml-1 mt-3"> 
                           <div>판매</div> 
@@ -45,32 +45,32 @@
                             <v-btn icon color="pink">
                             <v-icon>mdi-heart</v-icon>
                             </v-btn>
-                          <div class="text-lg ">관심상품</div>
+                          <div>관심상품</div>
                         </v-btn>
                       </div>
                     </div>
                   </div>
                   
-                  <div class="w-full flex-wrap mt-3 pt-6">
-                    <h2>상품정보</h2>
-                    <div>
+                  <div class="w-full flex-wrap mt-6 pt-6">
+                    <b class="text-lg">상품정보</b>
+                    <div style="border:black;">
                       <div style="width:33%; float:left; padding-right:10px;">
-                        <p>모델명</p>
+                        <p class="mb-1">모델번호</p>
                         <p>PRODUCT_MNUM</p>
                       </div>
                       <div style="width:33%; float:left; padding-right:10px;">
-                        <p>모델명</p>
+                        <p class="mb-1">출시일</p>
                         <p>PRODUCT_LDATE</p>
                       </div>
                       <div style="width:33%; float:right; ">
-                        <p>모델명</p>
+                        <p class="mb-1">발매가</p>
                         <p>PRODUCT_ORIPRICE</p>
                       </div>
                     </div>
                   </div>
 
-                  <div class="w-full flex-wrap mt-3 pt-6">
-                    <h2>배송정보</h2>
+                  <div class="w-full flex-wrap mt-6 pt-6">
+                    <b class="text-lg">배송정보</b>
                     <div class="mt-2">
                       <div style="float:left;">
                         <img :src="box" alt="..." class="w-16 h-16 rounded-full border-2 border-blueGray-50 shadow"/>
@@ -83,7 +83,7 @@
                   </div>
 
                   <div class="w-full flex-wrap mt-3 pt-6">
-                    <h2>시세</h2>
+                    <b class="text-lg">시세</b>
                     <div class="mt-2">
                       <shop-card-bar-chart/>
                       <shop-card-line-chart/>

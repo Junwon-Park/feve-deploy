@@ -29,7 +29,7 @@
         </div>
       </div>
       <p class="text-lg text-black mt-4">
-        <span class="whitespace-nowrap">{{ SELL_PRICE }}원</span>
+        <span class="whitespace-nowrap">{{ SELL_PRICE.toLocaleString('ko-KR') }}원</span>
       </p>
     </div>
   </div>

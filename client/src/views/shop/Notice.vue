@@ -1,6 +1,6 @@
 <template>
     <div class="w-full flex-wrap mt-3 pt-6">
-                  <h2>구매 전 꼭 확인해주세요!</h2>
+                  <b class="text-lg">구매 전 꼭 확인해주세요!</b>
                   <div class="mt-2">
                     <div>
                       <div style="float:left" >배송 기간 안내</div>
@@ -52,7 +52,7 @@
                         </li>
                       </ul>
                     </div>
-                    <div>
+                    <div class="mt-6">
                       <div class="mt-2">
                         <div style="float:left;">
                           <v-icon>fas fa-lock</v-icon>
