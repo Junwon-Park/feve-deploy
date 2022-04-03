@@ -1,13 +1,5 @@
 <template>
-        <tr v-if="isArrayNull">
-          <td
-              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
-              colspan="7"
-          >
-            아직 등록된 상품이 없습니다.
-          </td>
-        </tr>
-          <tr v-else-if="!isArrayNull">
+          <tr>
           <td
               :style="[PRODUCT_DELETE==='1' ? {'text-decoration': 'line-through !important'} : {'text-decoration': 'none !important'}]"
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
@@ -80,8 +72,8 @@
 export default {
   data(){
     return {
-      buttonName: '',
-    }
+
+      }
   },
   props: {
     PRODUCT_KEY: {
@@ -109,9 +101,6 @@ export default {
     PRODUCT_DELETE: {
       type: String,
       default: '0',
-    },
-    isArrayNull: {
-      default: 0,
     },
   },
   methods: {

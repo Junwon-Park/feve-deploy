@@ -14,7 +14,7 @@
     </div>
     <div class="block w-full overflow-x-auto"  style="min-height: 80vh;">
       <!-- Projects table -->
-      <table class="items-center w-full bg-transparent border-collapse"  style="min-height: 70vh;">
+      <table class="items-center w-full bg-transparent border-collapse" >
         <thead>
         <tr>
           <th
@@ -26,7 +26,16 @@
         </tr>
         </thead>
         <tbody>
+        <tr v-if="this.$props.items.length===0">
+          <td
+              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
+              colspan="13"
+          >
+            아직 검수를 요청한 상품이 없습니다.
+          </td>
+        </tr>
           <AdminInspecCards
+              v-else
             v-for="(item, idx) in items"
             :key="idx"
             v-bind="item"

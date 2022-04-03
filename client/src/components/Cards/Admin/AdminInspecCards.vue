@@ -1,13 +1,5 @@
 <template>
-  <tr v-if="isArrayNull">
-    <td
-        class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
-        colspan="13"
-    >
-      아직 등록된 상품이 없습니다.
-    </td>
-  </tr>
-  <tr v-else-if="!isArrayNull">
+  <tr>
     <td
         class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
 
@@ -150,9 +142,6 @@ export default {
       inspecCount:{
         default: 1
       },
-    isArrayNull: {
-      default: 0,
-    },
   },
 
   methods: {
@@ -167,8 +156,5 @@ export default {
       this.$emit("sendItems", sendProductKey, sendUserid, sendUserkey);
     }
   },
-  created(){
-    console.log(this.isArrayNull)
-  }
 }
 </script>

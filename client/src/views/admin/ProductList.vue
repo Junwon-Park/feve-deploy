@@ -28,9 +28,7 @@ export default {
           PRODUCT_PIC: "",
           PRODUCT_DELETE:'',
           PRODUCT_DESC: "",
-          isArrayNull: false
         }],
-
     }
   },
   components: {
@@ -44,9 +42,7 @@ export default {
     this.$axios.get('http://localhost:8080/admin/loadproduct')
         .then(function(res){
           that.items = res.data;
-          if(res.data.length===0) {
-               that.items.isArrayNull=false
-            }
+          console.log(res.data)
         })
         .catch(function(err){
           console.log(err);
