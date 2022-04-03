@@ -27,7 +27,7 @@ module.exports = {
       },
       CSCENTER_COMMENT: {
         allowNull: true,
-        type: Sequelize.BIGINT
+        type: Sequelize.TEXT
       },
       CSCENTER_COMMENT_WDATE: {
         allowNull: true,
