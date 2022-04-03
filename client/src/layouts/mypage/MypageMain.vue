@@ -65,7 +65,7 @@ export default {
       })
     },
     getBuyCounts(){
-      this.$axios.post('http://localhost:8080/mypage/getbuyCounts', {
+      this.$axios.post('http://localhost:8080/mypage/getBuyCounts', {
         USER_KEY : '1', //로그인과 연동시키기
       })
       .then((result) => {
@@ -77,7 +77,7 @@ export default {
       })
     },
     getSellCounts(){
-      this.$axios.post('http://localhost:8080/mypage/getsellCounts', {
+      this.$axios.post('http://localhost:8080/mypage/getSellCounts', {
         USER_KEY : '1', //로그인과 연동시키기
       })
       .then((result) => {

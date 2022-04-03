@@ -9,6 +9,9 @@
 import MypageTopCountTap from '@/components/Cards/Mypage/MypageTopCountTap.vue';
 import MypagePeriodSetter from '@/components/Cards/Mypage/MypagePeriodSetter.vue';
 
+
+//데이터 호출 url과 tapName만 관리해주면
+// buyList, sellList 상관없이 쓸 수 있음.
   export default {
     components:{
       MypageTopCountTap,
@@ -17,18 +20,18 @@ import MypagePeriodSetter from '@/components/Cards/Mypage/MypagePeriodSetter.vue
     data () {
       return {
         curTapIdx:0,
-        tapNames:['구매입찰', '진행 중', '종료'],
+        tapNames:['판매입찰', '진행 중', '종료'],
         counts: [],
         startDate:'',
         endDate:'',
       }
     },
     created() {
-      this.getBuyCounts();
+      this.getSellCounts();
     },
     methods: {
-      getBuyCounts(){
-        this.$axios.post(this.$store.getters.ServerUrl + '/mypage/buyList/getBuyCounts', {
+      getSellCounts(){
+        this.$axios.post(this.$store.getters.ServerUrl + '/mypage/sellList/getSellCounts', {
           USER_KEY : '1', //로그인과 연동시키기
         })
         .then((result) => {
@@ -50,13 +53,13 @@ import MypagePeriodSetter from '@/components/Cards/Mypage/MypagePeriodSetter.vue
         switch(this.curTapIdx)
         {
           case 1: //진행 중
-            url+= '/mypage/buyList/getProgressBuyList'
+            url+= '/mypage/sellList/getProgressSellList'
             break;
           case 2: // 종료
-            url+= '/mypage/buyList/getDoneBuyList'
+            url+= '/mypage/sellList/getDoneSellList'
             break;
           default:
-            url+= '/mypage/buyList/getWaitBuyList';
+            url+= '/mypage/sellList/getWaitSellList';
             break;
         }
 

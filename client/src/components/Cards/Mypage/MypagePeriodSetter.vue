@@ -42,6 +42,7 @@
               v-model="startDate"
               @input="startMenu = false"
               :show-current="false"
+              :max="now"
               locale="ko-KR"
               color="#212121"
             ></v-date-picker>
@@ -76,6 +77,7 @@
               v-model="endDate"
               @input="endMenu = false"
               :show-current="false"
+              :max="now"
               locale="ko-KR"
               color="#212121"
             ></v-date-picker>
@@ -86,7 +88,7 @@
           elevation="2"
           tile
           color="black"
-          @click="onSerchClicked()"
+          @click="onSearchClicked()"
           class="white--text"
         >조회</v-btn>
 
@@ -102,25 +104,34 @@ export default {
     data () {
       return {
         periods:[2,4,6],
-        startDate:'',
-        endDate:'',
         startMenu: false,
         endMenu: false,
+        
+        startDate:'',
+        endDate:'',
+        nowDate: new Date(Date.now() - (new Date().getTimezoneOffset() * 60000)),
+        now:'',
       }
     },
     created(){
-      this.startDate = (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10);
-      this.endDate = (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10);
+        this.endDate = this.startDate = this.now = this.nowDate.toISOString().substr(0,10);
     },
     methods: {
-      onPeriodClicked(i){
-        let now = new Date();
-        this.endDate = (new Date(now - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10);
-
-        let prevMonth = new Date(now.setMonth(now.getMonth() - this.periods[i]));
-        this.startDate = (new Date(prevMonth - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10);
-      },
-      onSerchClicked(){
+        onPeriodClicked(i){
+            this.endDate = this.now;
+            let prevDate = new Date();
+            prevDate.setMonth(this.nowDate.getMonth() - this.periods[i]);
+            this.startDate = prevDate.toISOString().substr(0, 10)
+        },
+        onSearchClicked(){
+            if(this.startDate > this.endDate)
+            {
+                alert("시작 날짜를 끝 날짜보다 이전으로 설정해주세요.");
+            }
+            else
+            {
+                this.$emit("onSearchClicked", this.startDate, this.endDate);
+            }
       },
     }
 }
