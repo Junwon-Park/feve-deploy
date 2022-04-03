@@ -37,7 +37,16 @@
         </tr>
         </thead>
         <tbody>
+        <tr v-if="this.$props.items.length===0">
+          <td
+              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
+              colspan="7"
+          >
+            아직 등록된 상품이 없습니다.
+          </td>
+        </tr>
           <AdminCards
+              v-else
               v-for="(item, idx) in items"
               :key="idx"
               v-bind="item"
@@ -72,6 +81,9 @@ export default {
     items: {
       required: false
     },
+    isArrayNull:{
+      required: false
+    }
   },
   data() {
     return {
@@ -188,6 +200,6 @@ export default {
         console.log(err);
       });
     }
-  }
+  },
 }
 </script>

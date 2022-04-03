@@ -1,15 +1,15 @@
 <template>
   <div
-    class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded"
+    class="relative flex flex-col min-w-0 break-words bg-blueGray-200 w-full mb-6 shadow-lg rounded"
   >
     <div class="rounded-t mb-0 px-4 py-3 bg-transparent">
       <div class="flex flex-wrap items-center">
         <div class="relative w-full max-w-full flex-grow flex-1">
           <h6 class="uppercase text-blueGray-400 mb-1 text-xs font-semibold">
-            Performance
+            통계
           </h6>
           <h2 class="text-blueGray-700 text-xl font-semibold">
-            Total orders
+            판매/구매 입찰 건수
           </h2>
         </div>
       </div>
@@ -22,7 +22,7 @@
   </div>
 </template>
 <script>
-import Chart from "../../../../node_modules/chart.js/dist/chart";
+import Chart from "chart.js";
 export default {
   mounted: function () {
     this.$nextTick(function () {
@@ -30,29 +30,36 @@ export default {
         type: "bar",
         data: {
           labels: [
-            "January",
-            "February",
-            "March",
-            "April",
-            "May",
-            "June",
-            "July",
+            "1월",
+            "2월",
+            "3월",
+            "4월",
+            "5월",
+            "6월",
+            "7월",
+            "8월",
+            "9월",
+            "10월",
+            "11월",
+            "12월",
           ],
           datasets: [
             {
-              label: new Date().getFullYear(),
-              backgroundColor: "#ed64a6",
-              borderColor: "#ed64a6",
-              data: [30, 78, 56, 34, 100, 45, 13],
+              //label: new Date().getFullYear(),
+              label: "판매",
+              backgroundColor: "#01856B",
+              borderColor: "#01856B",
+              data: [30, 78, 56, 34, 100, 45, 13, 78, 56, 34, 100, 44],
               fill: false,
               barThickness: 8,
             },
             {
-              label: new Date().getFullYear() - 1,
+              //label: new Date().getFullYear() - 1,
+              label: "판매",
               fill: false,
-              backgroundColor: "#4c51bf",
-              borderColor: "#4c51bf",
-              data: [27, 68, 86, 74, 10, 4, 87],
+              backgroundColor: "#EF4444",
+              borderColor: "#EF4444",
+              data: [27, 68, 86, 74, 10, 4, 87, 28, 27, 68, 86, 74, ],
               barThickness: 8,
             },
           ],
@@ -74,7 +81,7 @@ export default {
           },
           legend: {
             labels: {
-              fontColor: "rgba(0,0,0,.4)",
+              fontColor: "rgba(0,0,0,.7)",
             },
             align: "end",
             position: "bottom",
@@ -82,10 +89,10 @@ export default {
           scales: {
             xAxes: [
               {
-                display: false,
+                display: true,
                 scaleLabel: {
                   display: true,
-                  labelString: "Month",
+                  labelString: "월별 통계",
                 },
                 gridLines: {
                   borderDash: [2],

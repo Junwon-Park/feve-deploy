@@ -1,15 +1,15 @@
 <template>
   <div
-    class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-blueGray-700"
+    class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-blueGray-200"
   >
     <div class="rounded-t mb-0 px-4 py-3 bg-transparent">
       <div class="flex flex-wrap items-center">
         <div class="relative w-full max-w-full flex-grow flex-1">
-          <h6 class="uppercase text-blueGray-100 mb-1 text-xs font-semibold">
-            Overview
+          <h6 class="uppercase text-blueGray-400 mb-1 text-xs font-semibold">
+            통계
           </h6>
-          <h2 class="text-white text-xl font-semibold">
-            Sales value
+          <h2 class="text-blueGray-700 text-xl font-semibold">
+            총 거래 / 회원 수 비교
           </h2>
         </div>
       </div>
@@ -32,28 +32,35 @@ export default {
         type: "line",
         data: {
           labels: [
-            "January",
-            "February",
-            "March",
-            "April",
-            "May",
-            "June",
-            "July",
+            "1월",
+            "2월",
+            "3월",
+            "4월",
+            "5월",
+            "6월",
+            "7월",
+            "8월",
+            "9월",
+            "10월",
+            "11월",
+            "12월",
           ],
           datasets: [
             {
-              label: new Date().getFullYear(),
-              backgroundColor: "#4c51bf",
-              borderColor: "#4c51bf",
-              data: [65, 78, 66, 44, 56, 67, 75],
+              //label: new Date().getFullYear(),
+              label: "총 거래",
+              backgroundColor: "#A855F7",
+              borderColor: "#A855F7",
+              data: [65, 78, 66, 44, 56, 86, 74, 56, 60, 87, 67, 75],
               fill: false,
             },
             {
-              label: new Date().getFullYear() - 1,
+              //label: new Date().getFullYear() - 1,
+              label: "회원 수",
               fill: false,
-              backgroundColor: "#fff",
-              borderColor: "#fff",
-              data: [40, 68, 86, 74, 56, 60, 87],
+              backgroundColor: "#F97316",
+              borderColor: "#F97316",
+              data: [40, 68, 86, 74, 56, 60, 87, 65, 78, 66, 44, 56],
             },
           ],
         },
@@ -63,11 +70,11 @@ export default {
           title: {
             display: false,
             text: "Sales Charts",
-            fontColor: "white",
+            fontColor: "rgba(0,0,0,.7)",
           },
           legend: {
             labels: {
-              fontColor: "white",
+              fontColor: "rgba(0,0,0,.7)",
             },
             align: "end",
             position: "bottom",
@@ -84,20 +91,19 @@ export default {
             xAxes: [
               {
                 ticks: {
-                  fontColor: "rgba(255,255,255,.7)",
+                  fontColor: "rgba(0,0,0,.7)",
                 },
                 display: true,
                 scaleLabel: {
-                  display: false,
-                  labelString: "Month",
-                  fontColor: "white",
+                  display: true,
+                  labelString: "월별 통계",
                 },
                 gridLines: {
                   display: false,
                   borderDash: [2],
                   borderDashOffset: [2],
                   color: "rgba(33, 37, 41, 0.3)",
-                  zeroLineColor: "rgba(0, 0, 0, 0)",
+                  zeroLineColor: "rgba(33, 37, 41, 0.3)",
                   zeroLineBorderDash: [2],
                   zeroLineBorderDashOffset: [2],
                 },
@@ -106,7 +112,7 @@ export default {
             yAxes: [
               {
                 ticks: {
-                  fontColor: "rgba(255,255,255,.7)",
+                  fontColor: "rgba(0,0,0,.7)",
                 },
                 display: true,
                 scaleLabel: {
@@ -118,8 +124,8 @@ export default {
                   borderDash: [3],
                   borderDashOffset: [3],
                   drawBorder: false,
-                  color: "rgba(255, 255, 255, 0.15)",
-                  zeroLineColor: "rgba(33, 37, 41, 0)",
+                  color: "rgba(33, 37, 41, 0.3)",
+                  zeroLineColor: "rgba(33, 37, 41, 0.3)",
                   zeroLineBorderDash: [2],
                   zeroLineBorderDashOffset: [2],
                 },
