@@ -1,16 +1,18 @@
 <template>
   <div
-    class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-blueGray-700"
+    class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-white"
   >
     <div class="rounded-t mb-0 px-4 py-3 bg-transparent">
       <div class="flex flex-wrap items-center">
         <div class="relative w-full max-w-full flex-grow flex-1">
           <h6 class="uppercase text-blueGray-100 mb-1 text-xs font-semibold">
-            Overview
+            <v-tabs fixed-tabs>
+              <v-tab>전체</v-tab>
+              <v-tab>1개월</v-tab>
+              <v-tab>3개월</v-tab>
+              <v-tab>6개월</v-tab>
+            </v-tabs>
           </h6>
-          <h2 class="text-white text-xl font-semibold">
-            Sales value
-          </h2>
         </div>
       </div>
     </div>
@@ -47,14 +49,7 @@ export default {
               borderColor: "#4c51bf",
               data: [65, 78, 66, 44, 56, 67, 75],
               fill: false,
-            },
-            {
-              label: new Date().getFullYear() - 1,
-              fill: false,
-              backgroundColor: "#fff",
-              borderColor: "#fff",
-              data: [40, 68, 86, 74, 56, 60, 87],
-            },
+            }
           ],
         },
         options: {
@@ -63,11 +58,11 @@ export default {
           title: {
             display: false,
             text: "Sales Charts",
-            fontColor: "white",
+            fontColor: "black",
           },
           legend: {
             labels: {
-              fontColor: "white",
+              fontColor: "black",
             },
             align: "end",
             position: "bottom",
@@ -84,9 +79,9 @@ export default {
             xAxes: [
               {
                 ticks: {
-                  fontColor: "rgba(255,255,255,.7)",
+                  fontColor: "black",
                 },
-                display: true,
+                display: false,
                 scaleLabel: {
                   display: false,
                   labelString: "Month",
@@ -106,7 +101,7 @@ export default {
             yAxes: [
               {
                 ticks: {
-                  fontColor: "rgba(255,255,255,.7)",
+                  fontColor: "black",
                 },
                 display: true,
                 scaleLabel: {
