@@ -6,7 +6,7 @@
       <div class="flex flex-wrap">
         <div class="relative w-full max-w-full flex-grow flex-1">
           <div class="w-full mb-5" style="height: 150px; overflow: hidden;" >
-            <img :src="require(`@/assets/img/${PRODUCT_PIC}.jpg`)" alt="아이템 사진" style="object-fit: cover;">
+            <img :src="imageUrl+ PRODUCT_PIC" alt="아이템 사진" style="object-fit: cover;" crossorigin>
           </div>
           <h5 class="text-blueGray-400 uppercase font-bold text-xs">
             {{ PRODUCT_BRAND }}
@@ -46,6 +46,11 @@
 <script>
 import itemPic5 from "@/assets/img/product-lego5.jpg";
 export default {
+  data(){
+    return{
+      imageUrl : this.$store.getters.ServerUrl + '/getImage?imageName='
+    }
+  },
   props: {
     PRODUCT_KEY: {
       default: "0",
