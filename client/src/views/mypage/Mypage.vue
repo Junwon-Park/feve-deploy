@@ -11,6 +11,9 @@
         <mypage-sell-list v-else-if= "currentViewState === 2"
         style="margin:auto; max-width:80%; margin-bottom:10%;" />
         
+        <mypage-favorite-list v-else-if= "currentViewState === 3"
+        style="margin:auto; max-width:80%; margin-bottom:10%;" />
+
         <CardLineChart v-else/>
     </div>
   </div>
@@ -21,6 +24,7 @@ import CardLineChart from "@/components/Cards/CardLineChart.vue";
 import MypageMain from '@/layouts/mypage/MypageMain.vue';
 import MypageBuyList from '@/layouts/mypage/MypageBuyList.vue';
 import MypageSellList from '@/layouts/mypage/MypageSellList.vue';
+import MypageFavoriteList from '@/layouts/mypage/MypageFavoriteList.vue';
 
 export default {
   components: {
@@ -29,6 +33,7 @@ export default {
     MypageMain,
     MypageBuyList,
     MypageSellList,
+    MypageFavoriteList,
   },
   data() {
     return {

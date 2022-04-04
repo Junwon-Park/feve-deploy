@@ -13,7 +13,7 @@
 
     <div class="grid ">
         <mypage-list-slot 
-        v-for="item in buyLists" :key="item.BUY_KEY"
+        v-for="item in buyList" :key="item.BUY_KEY"
         :item="item"
         :price="item.BUY_PRICE"/>
     </div>
@@ -35,7 +35,6 @@ import MypageListFilter from '../../components/Cards/Mypage/MypageListFilter.vue
     },
     data () {
       return {
-        imageUrl : this.$store.getters.ServerUrl + '/getImage?imageName=',
         curTapIdx:0,
         tapNames:['구매입찰', '진행 중', '종료'],
         counts: [],
@@ -59,7 +58,7 @@ import MypageListFilter from '../../components/Cards/Mypage/MypageListFilter.vue
           }
         ],
         curFilter:'',
-        buyLists:[],
+        buyList:[],
         sortPriceDir: true, //true:오름차순(1 -> 2-> 3) false:내림차순 (3-> 2-> 1)
         sortDateDir: true,  //true:오름차순 false:내림차순
       }
@@ -112,7 +111,7 @@ import MypageListFilter from '../../components/Cards/Mypage/MypageListFilter.vue
         })
         .then((result) => {
           console.log(result.data);
-          this.buyLists = result.data;
+          this.buyList = result.data;
         })
         .catch((error) => {
           console.log(error);
@@ -125,7 +124,7 @@ import MypageListFilter from '../../components/Cards/Mypage/MypageListFilter.vue
           this.sortPrice();
         else if(idx == 1)
           this.sortDate();
-        // console.log(this.buyLists);
+        // console.log(this.buyList);
       },
       
       sortPrice(){
@@ -133,13 +132,13 @@ import MypageListFilter from '../../components/Cards/Mypage/MypageListFilter.vue
         // console.log("sortPrice.priceDir: ", this.sortPriceDir);
         if(this.sortPriceDir)
         {
-          this.buyLists.sort(function(a, b){
+          this.buyList.sort(function(a, b){
             return a.BUY_PRICE - b.BUY_PRICE;
           });
         }
         else
         {
-          this.buyLists.sort(function(a, b){
+          this.buyList.sort(function(a, b){
             return b.BUY_PRICE - a.BUY_PRICE;
           });
         }
@@ -150,13 +149,13 @@ import MypageListFilter from '../../components/Cards/Mypage/MypageListFilter.vue
         // console.log("sortDate.sortDateDir: ", this.sortDateDir);
         if(this.sortDateDir)
         {
-          this.buyLists.sort(function(a, b){
+          this.buyList.sort(function(a, b){
             return Date.parse(a.BUY_EDATE) - Date.parse(b.BUY_EDATE);
           });
         }
         else
         {
-          this.buyLists.sort(function(a, b){
+          this.buyList.sort(function(a, b){
             return Date.parse(b.BUY_EDATE) - Date.parse(a.BUY_EDATE);
           });
         }
