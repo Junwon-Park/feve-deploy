@@ -24,7 +24,7 @@
             아직 등록된 문의가 없습니다.
           </td>
         </tr>
-          <CscenterQnaCards
+          <CscenterFaqCards
               v-else
               v-for="(item, idx) in items"
               :key="idx"
@@ -48,8 +48,8 @@
   </div>
 </template>
 <script>
-import CscenterQnaCards from "@/components/Cards/Cscenter/CscenterQnaCards.vue";
-import CscenterQnaAnswer from "@/components/Cards/Cscenter/CscenterQnaAnswer.vue";
+import CscenterFaqCards from "@/components/Cards/Cscenter/CscenterFaqCards.vue";
+
 export default {
   props:{
     title: {
@@ -62,7 +62,7 @@ export default {
   },
   data () {
     return {
-      table: ["번호", "제목", "작성자", "작성시간", "답변여부", ""],
+      table: ["번호", "제목", "작성자", "작성시간", "", ""],
       receivedCscenterKey: 0,
       receivedUserid:"",
       receivedUserkey:0,
@@ -82,8 +82,8 @@ export default {
     }
   },
   components:{
-    CscenterQnaCards,
-    CscenterQnaAnswer
+   CscenterFaqCards,
+   
   },
   methods: {
     cDialog(){

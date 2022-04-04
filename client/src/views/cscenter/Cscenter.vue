@@ -41,6 +41,7 @@ import CscenterNotice from "@/components/Cards/Cscenter/CscenterNotice.vue";
 
 
 
+
 export default {
   data() {
     return {
@@ -51,6 +52,7 @@ export default {
    
     CscenterNotice,
     CscenterSidebar,
+    
     
   },
 };
