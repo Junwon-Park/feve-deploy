@@ -69,7 +69,7 @@ export default {
         default:"2022-04-01"
       },
     CSCENTER_STATUS: {
-        default: 0
+        default: ""
       },
     CSCENTER_COMMENT:   {
         type: String,

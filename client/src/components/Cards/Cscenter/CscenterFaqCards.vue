@@ -1,48 +1,16 @@
 <template>
-  <tr>
-    <td
-        class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
-
-    >
-      {{ CSCENTER_KEY }}
-    </td>
-    <td
-        class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
-
-    >
-      {{ CSCENTER_TITLE }}
-    </td>
-    <td
-        class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
-
-    >
-      {{ USER_ID }}
-    </td>
-    <td
-        class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
-
-    >
-      {{ CSCENTER_WDATE }}
-    </td>
-    <td
-        class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
-
-    >
-      {{ CSCENTER_STATUS }}
-    </td>
-    <td
-        class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
-    >
-      <button
-          class="bg-orange-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-          type="button"
-          @click="fDialog(), sendItems()"
-          v-if="CSCENTER_STATUS==='0'"
-      >
-        답변하기
-      </button>
-    </td>
-  </tr>
+<div id="__nuxt">
+  <div class="category_list"> 
+    <div class="category_list_items">
+      <a class="nuxt-link-active category category_on">전체</a>
+      <a class="nuxt-link-active category">이용정책</a>
+      <a class="nuxt-link-active category">공통</a>
+      <a class="nuxt-link-active category">구매</a>
+      <a class="nuxt-link-active category">판매</a>
+    </div>
+  </div>
+</div>
+ 
 </template>
 
 <script>
@@ -69,7 +37,7 @@ export default {
         default:"2022-04-01"
       },
     CSCENTER_STATUS: {
-        default: 0
+        default: ""
       },
     CSCENTER_COMMENT:   {
         type: String,
@@ -85,16 +53,7 @@ export default {
   },
 
   methods: {
-    fDialog(){
-      this.$emit('sendDialog');
-    },
-    sendItems(){
-      let that = this;
-      let sendCscenterKey=that.CSCENTER_KEY;
-      let sendUserid=that.USER_ID;
-      let sendUserkey=that.USER_KEY;
-      this.$emit("sendItems", sendCscenterKey, sendUserid, sendUserkey);
-    }
+    
   },
 }
 </script>
