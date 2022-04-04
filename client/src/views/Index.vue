@@ -2,36 +2,46 @@
   <div>
     <Slide />
     <div class=" mx-auto overflow-hidden pb-20">
-      <div class="flex flex-wrap items-center pt-5">
+      <div class="flex items-center pt-5">
         <div class="w-full px-4 mr-auto ml-auto mt-5">
-          <div class="justify-center flex flex-wrap relative items-center flex-col">
-            <div class="my-4 w-full  flex flex-row">
+          <div class="justify-center flex relative items-center flex-col">
+            <div class="my-4 w-full  flex flex-wrap  flex-row">
               <div
-                  class=" bg-emerald-400 rounded-lg text-center p-3  mt-8 mr-3" style="width:20%"
+                  class="w-full md:w-6/12 xl:w-2/12 text-center mt-8 px-3 "
               >
-                <p class="text-lg text-white mt-4 font-semibold">#LEGO</p>
+                <div class="py-3 bg-emerald-400 rounded-lg">
+                  <p class="text-lg text-white mt-4 font-semibold">#LEGO</p>
+                </div>
               </div>
                 <div
-                    class=" bg-orange-500 dark  rounded-lg text-center p-3 mt-8 mr-3" style="width:20%"
+                    class="w-full md:w-6/12 xl:w-2/12 text-center mt-8 px-3 "
                 >
+                  <div class="py-3 bg-orange-500 rounded-lg">
                   <p class="text-lg text-white mt-4 font-semibold">#BEARBRICK</p>
+                  </div>
                 </div>
                 <div
-                    class=" bg-blueGray-200  rounded-lg text-center p-3 mt-8 mr-3" style="width:20%;"
+                    class="w-full md:w-6/12 xl:w-2/12  text-center mt-8 px-3 "
                 >
+                  <div class="py-3 bg-blueGray-200 rounded-lg">
                   <p class="text-lg  mt-4 font-semibold">#EVENT</p>
+                  </div>
                 </div>
                 <div
-                    class=" bg-blueGray-200  rounded-lg text-center p-3 mt-8 mr-3" style="width:20%;"
+                    class="w-full md:w-6/12 xl:w-2/12 text-center mt-8 px-3 "
                 >
+                  <div class="py-3 bg-blueGray-200 rounded-lg">
                   <p class="text-lg  mt-4 font-semibold">
                     #인스타그램
                   </p>
+                  </div>
                 </div>
                 <div
-                    class=" bg-blueGray-200  rounded-lg text-center p-3 mt-8 mr-3" style="width:20%;"
+                    class="w-full md:w-6/12 xl:w-2/12 text-center mt-8 px-3 "
                 >
+                  <div class="py-3 bg-blueGray-200 rounded-lg">
                   <p class="text-lg  mt-4 font-semibold">#배송</p>
+                  </div>
                 </div>
             </div>
           </div>
