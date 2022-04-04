@@ -52,11 +52,11 @@ const routes = [
   {
     path: "/admin",
     name:'admin',
-    redirect: "/admin/dashboard",
+    redirect: "/admin",
     component: Admin,
     children: [
       {
-        path: "/admin/dashboard",
+        path: "/admin",
         component: Dashboard,
       },
       {

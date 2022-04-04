@@ -8,7 +8,7 @@
           <div class="w-full lg:w-6/12 xl:w-3/12 px-4">
             <card-stats
               statSubtitle="총 거래 건수"
-              statTitle="350,897"
+              :statTitle="countTotalDeal+' 건'"
               statArrow="up"
               statPercent="3.48"
               statPercentColor="text-emerald-500"
@@ -19,8 +19,8 @@
           </div>
           <div class="w-full lg:w-6/12 xl:w-3/12 px-4">
             <card-stats
-              statSubtitle="새로 가입한 회원"
-              statTitle="2,356"
+              statSubtitle="총 회원수 "
+              :statTitle="countTotalUser+'명'"
               statArrow="down"
               statPercent="3.48"
               statPercentColor="text-red-500"
@@ -32,7 +32,7 @@
           <div class="w-full lg:w-6/12 xl:w-3/12 px-4">
             <card-stats
               statSubtitle="판매 입찰 건수"
-              statTitle="924"
+              :statTitle="countTotalSell+' 건'"
               statArrow="down"
               statPercent="1.10"
               statPercentColor="text-orange-500"
@@ -44,7 +44,7 @@
           <div class="w-full lg:w-6/12 xl:w-3/12 px-4">
             <card-stats
               statSubtitle="구매 입찰 건수"
-              statTitle="1,924"
+              :statTitle="countTotalBuy+' 건'"
               statArrow="up"
               statPercent="12"
               statDescripiron="어제"
@@ -62,6 +62,20 @@
 import CardStats from "@/components/Cards/Admin/CardStats.vue";
 
 export default {
+  props:{
+    countTotalUser: {
+      default: 0
+    },
+    countTotalBuy: {
+      default: 0
+    },
+    countTotalSell: {
+      default: 0
+    },
+    countTotalDeal: {
+      default: 0
+    },
+  },
   components: {
     CardStats,
   },

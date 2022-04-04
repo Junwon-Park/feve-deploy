@@ -92,7 +92,7 @@ export default {
                 display: true,
                 scaleLabel: {
                   display: true,
-                  labelString: "월별 통계",
+                  labelString: new Date().getFullYear()+" 월별 통계",
                 },
                 gridLines: {
                   borderDash: [2],

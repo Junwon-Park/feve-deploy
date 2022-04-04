@@ -2,15 +2,21 @@
   <div style="padding-bottom: 20vh">
     <div class="flex flex-wrap">
 
-      <HeaderStats class=" w-full"/>
-      <div class="w-full  mb-12 xl:mb-0 px-4 -mt-24">
+      <HeaderStats
+          :countTotalUser="countTotalUser"
+          :countTotalBuy="countTotalBuy"
+          :countTotalSell="countTotalSell"
+          :countTotalDeal="countTotalDeal"
+          class=" w-full"
+      />
 
+      <div class="w-full  mb-12 xl:mb-0 px-4 -mt-24">
         <AdminLineChart
-            :items="items" :title="title"
+            :countUser="countUser" :title="title"
             style="min-height: 30vh;"
         />
       </div>
-<!--      <div class="w-full xl:w-4/12 px-4  -mt-24">-->
+
       <div class="w-full mb-12 xl:mb-0 px-4 mt-8">
         <AdminBarChart
             style="min-height: 30vh;"
@@ -30,18 +36,11 @@ export default {
     return {
       title: "상품 리스트",
       title2: "검수 리스트",
-      items: {
-        seq: '',
-        PRODUCT_NAME: '',
-        PRODUCT_BRAND: '',
-        PRODUCT_CATE: '',
-        PRODUCT_ORIPRICE: 0,
-        listName: 0,
-        dealCount: 0,
-        inspecCount: 0,
-        inspecStatus: 0,
-        inspecComplete: 0,
-      },
+      countUser:[],
+      countTotalUser: 0,
+      countTotalBuy: 0,
+      countTotalSell: 0,
+      countTotalDeal: 0,
     }
   },
   components: {
@@ -51,9 +50,42 @@ export default {
   },
   created() {
     let that = this;
-    this.$axios.get('http://localhost:8080/admin/loadproduct/limit')
+    this.$axios.get('http://localhost:8080/admin/count/user/total')
         .then(function(res){
-          that.items = res.data;
+          that.countTotalUser = res.data[0].cnt;
+        })
+        .catch(function(err){
+          console.log(err);
+        });
+
+    this.$axios.get('http://localhost:8080/admin/count/buy/total')
+        .then(function(res){
+          that.countTotalBuy = res.data[0].cnt;
+        })
+        .catch(function(err){
+          console.log(err);
+        });
+
+    this.$axios.get('http://localhost:8080/admin/count/sell/total')
+        .then(function(res){
+          that.countTotalSell = res.data[0].cnt;
+        })
+        .catch(function(err){
+          console.log(err);
+        });
+
+    this.$axios.get('http://localhost:8080/admin/count/deal/total')
+        .then(function(res){
+          that.countTotalDeal = res.data[0].cnt;
+        })
+        .catch(function(err){
+          console.log(err);
+        });
+
+    this.$axios.get('http://localhost:8080/admin/count/user')
+        .then(function(res){
+          that.countUser = res.data;
+          console.log(that.countUser)
         })
         .catch(function(err){
           console.log(err);

@@ -26,29 +26,33 @@
 import Chart from "chart.js";
 
 export default {
+  props:{
+    countUser: [{}],
+  },
   mounted: function () {
     this.$nextTick(function () {
       var config = {
         type: "line",
         data: {
-          labels: [
-            "1월",
-            "2월",
-            "3월",
-            "4월",
-            "5월",
-            "6월",
-            "7월",
-            "8월",
-            "9월",
-            "10월",
-            "11월",
-            "12월",
-          ],
+          // labels: [
+          //   "1월",
+          //   "2월",
+          //   "3월",
+          //   "4월",
+          //   "5월",
+          //   "6월",
+          //   "7월",
+          //   "8월",
+          //   "9월",
+          //   "10월",
+          //   "11월",
+          //   "12월",
+          // ],
+          labels: this.countUser.ym,
           datasets: [
             {
               //label: new Date().getFullYear(),
-              label: "총 거래",
+              label:"총 거래",
               backgroundColor: "#A855F7",
               borderColor: "#A855F7",
               data: [65, 78, 66, 44, 56, 86, 74, 56, 60, 87, 67, 75],
@@ -60,7 +64,7 @@ export default {
               fill: false,
               backgroundColor: "#F97316",
               borderColor: "#F97316",
-              data: [40, 68, 86, 74, 56, 60, 87, 65, 78, 66, 44, 56],
+              data: this.countUser.cnt,
             },
           ],
         },
@@ -96,7 +100,7 @@ export default {
                 display: true,
                 scaleLabel: {
                   display: true,
-                  labelString: "월별 통계",
+                  labelString:  new Date().getFullYear()+" 월별 통계",
                 },
                 gridLines: {
                   display: false,
@@ -138,5 +142,8 @@ export default {
       window.myLine = new Chart(ctx, config);
     });
   },
+  created(){
+    console.log(this.$props.countUser)
+  }
 };
 </script>
