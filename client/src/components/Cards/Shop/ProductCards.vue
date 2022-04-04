@@ -21,16 +21,25 @@
             {{PRODUCT_CATE}}
           </span>
         </div>
-        <div class="absolute w-auto right-0 pl-4 flex-initial" @click="goView()">
+        <div class="absolute w-auto right-0 pl-4 flex-initial" @click="goView(`${PRODUCT_KEY}`)">
           <div class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full" 
           :class="[statIconColor]">
             <i :class="[statIconName]"></i>
           </div>
         </div>
       </div>
-      <p class="text-lg text-black mt-4">
-        <span class="whitespace-nowrap">{{ SELL_PRICE.toLocaleString('ko-KR') }}원</span>
-      </p>
+      <div v-if="this.SELL_PRICE !== null">
+        <p class="text-base text-black mt-4 mb-0">
+          <b class="whitespace-nowrap">{{ SELL_PRICE.toLocaleString('ko-KR') }}원</b>
+        </p>
+        <p class="text-xs mt-1 text-gray-400">즉시 구매가</p>
+      </div>
+      <div v-else>
+        <p class="text-base text-black mt-4 mb-0">
+          <b class="whitespace-nowrap">구매 입찰</b>
+        </p>
+        <p class="text-xs mt-1 text-gray-400">즉시 구매 불가</p>
+      </div>
     </div>
   </div>
 </template>
@@ -69,19 +78,24 @@ export default {
     },
   },
   methods:{
-    goView(){
+    goView(PRODUCT_KEY){
      
       console.log("상세보기");
       console.log(this.PRODUCT_KEY);
-      const id = this.PRODUCT_KEY;
-      console.log(id);
-      // this.$axios.post('http://localhost:8080/shop/shopview/{{id}}')
-      //       .then( (res) => {			
-      //           console.log(res.data);
-      //       })
-      //       .catch((err)=>{
-      //       console.log(err);
-      //       });
+      console.log(PRODUCT_KEY);
+      this.$router.push({path:'./shopview',
+      name:'Shopview',
+      params:{
+        PRODUCT_KEY:this.PRODUCT_KEY}
+        });
+      // this.$axios.get('http://localhost:8080/shop/shopview/'+id)
+      // .then( (res) => {			
+      //     console.log(res.data);
+      //     this.items=res.data;
+      // })
+      // .catch((err)=>{
+      // console.log(err);
+      // });
     }
   }
 };

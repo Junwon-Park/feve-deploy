@@ -148,7 +148,8 @@ const routes = [
   },
 
   {
-    path: "/shopview",
+    path: "/shopview/:PRODUCT_KEY",
+    name:'Shopview',
     component: Shopview,
 
   },

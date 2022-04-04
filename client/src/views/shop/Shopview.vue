@@ -150,18 +150,29 @@ export default {
     ShopCardTable,
     Notice
     },
-    // created() {
-    // var vm = this;
-    // this.$axios.get('http://localhost:8080/shop/shoplist/${PRODUCT_KEY}')
-    //     .then(function(res){
-    //       console.log("디비에서 결과 가져옴", res);
-    //       console.log("res.data값은?", res.data);
-    //       vm.items = res.data;
-          
-    //     })
-    //     .catch(function(err){
-    //       console.log(err);
-    //     });
-    // }
+    mounted() {
+      this.getView();
+    },
+    methods:{
+      getView(){
+        var vm = this;
+        this.PRODUCT_KEY = this.$route.params.PRODUCT_KEY;
+        console.log("라우터에서 받아오는 product_key 값은", this.$route.params.PRODUCT_KEY);
+        this.$axios.get('http://localhost:8080/shop/shopview/'+ this.PRODUCT_KEY)
+            .then(function(res){
+              console.log("디비에서 결과 가져옴", res);
+              console.log("res.data값은?", res.data);
+              vm.PRODUCT_NAME = res.data.PRODUCT_NAME;
+              vm.PRODUCT_BRAND = res.data.PRODUCT_BRAND;
+              vm.PRODUCT_DESC = res.data.PRODUCT_DESC;
+              vm.PRODUCT_MNUM = res.data.PRODUCT_MNUM;
+              vm.PRODUCT_LDATE = res.data.PRODUCT_LDATE;
+              vm.PRODUCT_ORIPRICE = res.data.PRODUCT_ORIPRICE;
+            })
+            .catch(function(err){
+              console.log(err);
+            });
+      }
+    }
 }
 </script>

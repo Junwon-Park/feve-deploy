@@ -77,7 +77,7 @@ export default {
     var vm = this;
     this.$axios.get('http://localhost:8080/shop/shoplist')
         .then(function(res){
-          // console.log("디비에서 결과 가져옴", res);
+          console.log("디비에서 결과 가져옴", res);
           // console.log("res.data값은?", res.data);
           vm.items = res.data;
           // console.log("res.data[0].Sells[0] 값은?",res.data[0].Sells[0]);
