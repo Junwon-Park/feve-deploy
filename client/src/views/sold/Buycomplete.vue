@@ -2,10 +2,19 @@
 
 <div>
   <div class="pt-24" style="min-height:100vh;">
-    <div>
-    </div>
-    <div> 
-    </div>   
+      <div>
+      </div>
+      <div> 
+        <div style="max-width: 780px; margin:auto" class="pb-24">
+          <div style="box-shadow:none">
+            <div style="border-radius:0; padding-top:0; height:200px; background-color: rgb(235, 240, 245);">
+              <img :src="legoBg" alt="..." style="object-fit:cover; width:100%; height:100%; width: 410px; margin:auto"/>
+
+            </div>  
+          </div>
+        </div>  
+      </div>   
+    </div>  
 </div>
 </template>
 <script>

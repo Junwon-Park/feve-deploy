@@ -13,8 +13,7 @@
         </div>
         <v-list-item-avatar
             tile
-            width="20vw"
-            height="20vw"
+            class=" w-12 h-12"
             color="#f4f4f4"
             rounded="true"
         ></v-list-item-avatar>
