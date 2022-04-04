@@ -3,7 +3,7 @@ const db = require("../../models");
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
-async function countSell(req, res, next) {
+async function countBidBuy(req, res, next) {
     const date = new Date();
     const thisYear= date.getFullYear().toString();
     console.log(thisYear)
@@ -17,7 +17,7 @@ async function countSell(req, res, next) {
             '                select 4 union all select 5 union all select 6 union all select 7 union all \n' +
             '                select 8 union all  select 9 union all select 10 union all select 11 ) as a\n' +
             ') a\n' +
-            'left outer join (select date_format(sell_edate, \'%Y-%m\') as sdate, count(*) as cnt from Sell group by sdate)u on u.sdate = a.date\n' +
+            'left outer join (select date_format(buy_edate, \'%Y-%m\') as sdate, count(*) as cnt from Buy  where buy_status="1" or buy_status="0" group by sdate)u on u.sdate = a.date\n' +
             'where a.Date between date_format( DATE_ADD("'+thisYear+'-12-31", INTERVAL - 1 year ), \'%Y-%m\') and date_format("'+thisYear+'-12-31", \'%Y-%m\')  order by a.date asc;',
             { type: Sequelize.QueryTypes.SELECT }
         )
@@ -28,4 +28,4 @@ async function countSell(req, res, next) {
         .catch(err => console.log(err));
 }
 
-module.exports = { countSell };
+module.exports = { countBidBuy };
