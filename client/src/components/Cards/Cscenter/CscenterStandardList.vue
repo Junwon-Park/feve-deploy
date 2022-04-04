@@ -39,7 +39,7 @@
   </div>
 </template>
 <script>
-import CscenterStandardCards from "@/components/Cards/Cscenter/CscenterFaqCards.vue";
+import CscenterStandardCards from "@/components/Cards/Cscenter/CscenterStandardCards.vue";
 
 export default {
   props:{
