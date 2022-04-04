@@ -31,12 +31,24 @@
                     <div>
                       <div class="mt-3">
                         <v-btn x-large color="error" dark style="width:49%" class="mr-1 mt-3" > 
-                          <div>구매</div> 
-                          <div>{{BUY_PRICE}}</div>
+                          <div v-if="this.SELL_PRICE != 0">
+                            <div>구매</div> 
+                            <div>{{SELL_PRICE.toLocaleString('ko-KR')}}원</div>
+                            <div class="text-xs mt-1">즉시 구매가</div>
+                          </div>
+                          <div v-else>
+                            <div>구매입찰</div> 
+                          </div>
                         </v-btn>
                         <v-btn x-large color="success" dark  style="width:49%; float:right" class="ml-1 mt-3"> 
-                          <div>판매</div> 
-                          <div>{{SELL_PRICE}}</div>
+                          <div v-if="this.BUY_PRICE != 0">
+                            <div>판매</div> 
+                            <div>{{BUY_PRICE.toLocaleString('ko-KR')}}원</div>
+                            <div class="text-xs mt-1">즉시 판매가</div>
+                          </div>
+                          <div v-else>
+                            <div>판매입찰</div> 
+                          </div>
                         </v-btn>
                       </div>
                       
@@ -179,8 +191,24 @@ export default {
               vm.PRODUCT_ORIPRICE = res.data.PRODUCT_ORIPRICE;
               vm.PRODUCT_PIC = res.data.PRODUCT_PIC;
               vm.PRODUCT_KEY = res.data.PRODUCT_KEY;
-              vm.SELL_PRICE = res.data.Sells[0].SELL_PRICE;
-              vm.BUY_PRICE = res.data.Buys[0].BUY_PRICE;
+              console.log("BUYS 배열의 길이는?", res.data.Buys.length);
+              if(res.data.Sells.length!=0)
+              {
+                vm.SELL_PRICE = res.data.Sells[0].SELL_PRICE;
+              }
+              else
+              {
+                vm.SELL_PRICE =0;
+              }
+
+              if(res.data.Buys.length!=0)
+              {
+                vm.BUY_PRICE = res.data.Buys[0].BUY_PRICE;
+              }
+              else
+              {
+                vm.BUY_PRICE =0;
+              }
               
             })
             .catch(function(err){

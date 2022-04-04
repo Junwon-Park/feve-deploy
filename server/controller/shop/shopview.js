@@ -16,19 +16,18 @@ async function shopview(req, res, next) {
                   model: Sell,
                   attributes:[[sequelize.fn('min', sequelize.col('SELL_PRICE')),'SELL_PRICE']],
                   where: {SELL_STATUS:'0'},
-                  require: false
+                  required: false
               },
               {
                 model: Buy,
                 attributes:[[sequelize.fn('max', sequelize.col('BUY_PRICE')),'BUY_PRICE']],
                 where: {BUY_STATUS:'0'},
-                require: false
+                required: false
             }
           ]
 })
     .then(result => {
         console.log(result);
-        console.log(result.PRODUCT_KEY);
         res.json(result);
     })
     .catch(err => console.log(err));
