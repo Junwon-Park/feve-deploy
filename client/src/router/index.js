@@ -40,6 +40,8 @@ import Soldproc from "@/views/sold/Sellconfirmpage.vue";
 import Cscenter from "@/views/cscenter/Cscenter.vue";
 import CscenterNotice from "@/views/cscenter/CscenterNotice.vue";
 import CscenterQna from "@/views/cscenter/CscenterQna.vue";
+import CscenterFaq  from "@/views/cscenter/CscenterFaq.vue";
+import CscenterStandard  from "@/views/cscenter/CscenterStandard.vue";
 
 
 
@@ -167,6 +169,16 @@ const routes = [
   {
     path: "/cscenterQna",
     component: CscenterQna,
+
+  },
+  {
+    path: "/cscenterFaq",
+    component: CscenterFaq,
+
+  },
+  {
+    path: "/cscenterStandard",
+    component: CscenterStandard,
 
   },
  

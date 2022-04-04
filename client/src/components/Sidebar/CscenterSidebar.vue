@@ -52,7 +52,7 @@
           
           <li class="items-center">
             <router-link
-              to="/cscenterNotice"
+              to="/cscenter"
               v-slot="{ href, navigate, isActive }"
             >
               <a
@@ -76,7 +76,7 @@
 
           <li class="items-center">
             <router-link
-              to="/admin/settings"
+              to="/CscenterFaq"
               v-slot="{ href, navigate, isActive }"
             >
               <a
@@ -100,7 +100,7 @@
 
           <li class="items-center">
             <router-link
-              to="/admin/tables"
+              to="/CscenterStandard"
               v-slot="{ href, navigate, isActive }"
             >
               <a
