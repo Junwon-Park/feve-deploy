@@ -1,6 +1,7 @@
 <template>
   <div>
     <main class="profile-page">
+      <CscenterSidebar :currentViewState="currentViewState" @onViewStateChanged="onViewStateChanged"/>
       <section class="relative block h-500-px">
         <div
           class="absolute top-0 w-full h-full bg-center bg-cover"
@@ -73,6 +74,7 @@
   </div>
 </template>
 <script>
+import CscenterSidebar from "@/components/Sidebar/CscenterSidebar.vue";
 import CscenterQnaList from "@/components/Cards/Cscenter/CscenterQnaList.vue";
 import Pagination from "@/components/Pagination.vue" ;
 
@@ -96,6 +98,7 @@ export default {
     }
   },
   components: {
+    CscenterSidebar,
     CscenterQnaList,
     Pagination,
   },
