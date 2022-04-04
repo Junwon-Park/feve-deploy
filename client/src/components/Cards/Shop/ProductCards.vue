@@ -28,9 +28,10 @@
           </div>
         </div>
       </div>
-      <p class="text-lg text-black mt-4">
+      <p class="text-lg text-black mt-4 mb-0">
         <span class="whitespace-nowrap">{{ SELL_PRICE.toLocaleString('ko-KR') }}원</span>
       </p>
+      <p class="text-xs mt-1 text-gray-400">즉시 구매가</p>
     </div>
   </div>
 </template>
