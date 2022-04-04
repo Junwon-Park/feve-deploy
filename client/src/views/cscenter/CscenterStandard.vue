@@ -46,7 +46,7 @@
                 <h3
                   class="text-4xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2"
                 >
-                    자주 묻는 질문
+                    검수 기준 
                 </h3>
               </div>
               <div class="mt-10 py-10 border-t border-blueGray-200 text-center">
@@ -54,7 +54,7 @@
                    <div class="w-full mb-12 px-4">
                     <div class="container">
                       <div class="w-full mb-12 xl:mb-0 px-4 mt-12" style="min-height: 70vh">
-                          <CscenterQnaList v-bind="items" :items="items" :title="title"/>
+                          <CscenterStandardList v-bind="items" :items="items" :title="title"/>
                           <Pagination />
                       </div>
                       
@@ -71,7 +71,7 @@
 </template>
 <script>
 import CscenterSidebar from "@/components/Sidebar/CscenterSidebar.vue";
-import CscenterQnaList from "@/components/Cards/Cscenter/CscenterQnaList.vue";
+import CscenterStandardList from "@/components/Cards/Cscenter/CscenterStandardList.vue";
 import Pagination from "@/components/Pagination.vue" ;
 
 export default {
@@ -95,7 +95,7 @@ export default {
   },
   components: {
     CscenterSidebar,
-    CscenterQnaList,
+    CscenterStandardList,
     Pagination,
   },
 
