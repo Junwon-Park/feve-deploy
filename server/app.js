@@ -25,7 +25,7 @@ const minRouter = require('./router/shop/min.js');
 const mypageMainRouter = require('./router/mypage/mypageMain.js');
 const mypageBuyListRouter = require('./router/mypage/mypageBuyList.js');
 const mypageSellListRouter = require('./router/mypage/mypageSellList.js');
-const soldconfirm = require("./router/sold/soldproduct.js");
+const soldconfirmRouter = require("./router/sold/soldproduct.js");
 const imageRouter = require("./image/image.js");
 const cscenterRoute = require("./router/cscenter/cscenter.js");
 
@@ -83,7 +83,7 @@ app.use('/shop/shopview', shopviewRoute);
 app.use('/mypage', mypageMainRouter);
 app.use('/mypage/buyList', mypageBuyListRouter);
 app.use('/mypage/sellList', mypageSellListRouter);
-app.use("/buy/proc",soldconfirm);
+app.use("/buy/proc",soldconfirmRouter);
 app.use("/getImage", imageRouter);
 app.use("/cscenter/cscenter", cscenterRoute);
 

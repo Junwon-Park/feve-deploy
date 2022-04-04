@@ -4489,6 +4489,23 @@ input[id*="check"]:checked + label::after {
   text-align: center;
 }
 
+.full-images {
+  font-weight: 600;
+  color:  #222;
+  background-color:#fff;
+  width: 100%;
+  font-size: 16px;
+  letter-spacing: -0.16px;
+  height: 52px;
+  line-height: 50px;
+  border-radius: 12px;
+  display: inline-block;
+  cursor: pointer;
+  vertical-align: middle;
+  text-align: center;
+  border : solid 1px;
+}
+
 .white-bg {
   width: 680px;
   background: #fff;

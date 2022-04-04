@@ -35,13 +35,18 @@ import Write from "@/views/Write.vue";
 
 import Shoplist from "@/views/shop/Shoplist.vue";
 import Shopview from "@/views/shop/Shopview.vue";
-import Sold from "@/views/sold/Sellpage.vue"
-import Soldproc from "@/views/sold/Sellconfirmpage.vue";
+import Buy from "@/views/sold/Buypage.vue";
+import Buyproc from "@/views/sold/Buyconfirmpage.vue";
+import Buycomp from "@/views/sold/Buyconecpt.vue";
 import Cscenter from "@/views/cscenter/Cscenter.vue";
 import CscenterNotice from "@/views/cscenter/CscenterNotice.vue";
 import CscenterQna from "@/views/cscenter/CscenterQna.vue";
 import CscenterFaq  from "@/views/cscenter/CscenterFaq.vue";
+
 import CscenterStandard  from "@/views/cscenter/CscenterStandard.vue";
+
+import Buyselect from "@/views/sold/Buyselect.vue";
+import Buycomplete from "@/views/sold/Buycomplete.vue";
 
 
 
@@ -131,12 +136,24 @@ const routes = [
     component: Write,
   },
   {
-    path: "/sold",
-    component: Sold,
+    path: "/buy",
+    component: Buy,
   },
   {
-    path: "/sold/proc",
-    component: Soldproc,
+    path: "/buy/sel",
+    component: Buyselect,
+  },
+  {
+    path: "/buy/proc",
+    component: Buyproc,
+  },
+  {
+    path: "/buy/comp",
+    component: Buycomp,
+  },
+  {
+    path: "/buy/complete",
+    component: Buycomplete,
   },
   {
     path: "/admin/addProduct",

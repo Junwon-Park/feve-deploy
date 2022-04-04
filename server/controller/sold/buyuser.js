@@ -1,0 +1,21 @@
+const { User } = require("../../models");
+const db = require("../../models");
+const sequelize = require("sequelize");
+
+async function buyUser(req, res, next) {
+  // let user = req.body.USER_KEY;
+  await User.findOne({
+    attributes: ['USER_NAME','USER_PHONE', 'USER_ADDRESS1'],
+    where: {
+      USER_KEY: 1  //user
+    }
+})
+    .then(result => {
+        console.log(result);
+        res.json(result);
+    })
+    .catch(err => console.log(err));
+
+}
+
+module.exports = { buyUser };
