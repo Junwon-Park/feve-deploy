@@ -8,7 +8,7 @@
               <div class="flex">
                 <div class="w-full xl:w-6/12 px-4 mt-12">
                   <v-carousel hide-delimiters>
-                      <v-carousel-item v-for="(item,i) in items" :key="i" :src="require(`@/assets/img/${PRODUCT_PIC}.jpg`)"></v-carousel-item>
+                      <v-carousel-item v-for="(item,i) in items" :key="i" :src="item.src" crossorigin></v-carousel-item>
                     </v-carousel>
                 </div>
                 <div class="w-full xl:w-6/12 mb-12 xl:mb-0 px-4 mt-12">
@@ -32,11 +32,11 @@
                       <div class="mt-3">
                         <v-btn x-large color="error" dark style="width:49%" class="mr-1 mt-3" > 
                           <div>구매</div> 
-                          <div>10000원</div>
+                          <div>{{BUY_PRICE}}</div>
                         </v-btn>
                         <v-btn x-large color="success" dark  style="width:49%; float:right" class="ml-1 mt-3"> 
                           <div>판매</div> 
-                          <div>20000원</div>
+                          <div>{{SELL_PRICE}}</div>
                         </v-btn>
                       </div>
                       
@@ -123,9 +123,22 @@ export default {
         'red',
         'orange',
       ],
+
+      PRODUCT_NAME: '',
+      PRODUCT_BRAND: '',
+      PRODUCT_DESC:'',
+      PRODUCT_MNUM:'',
+      PRODUCT_LDATE:'',
+      PRODUCT_ORIPRICE:0,
+      PRODUCT_PIC:'',
+      PRODUCT_KEY:0,
+      SELL_PRICE:0,
+      BUY_PRICE:0,
+
+      // imageUrl : this.$store.getters.ServerUrl + '/getImage?imageName=',
       items: [
           {
-            src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
+            src: "this.$store.getters.ServerUrl + '/getImage?imageName='+ product-lego1.jpg",
           },
           {
             src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg',
@@ -137,14 +150,8 @@ export default {
             src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg',
           },
         ],
+    
       
-      PRODUCT_NAME: '',
-      PRODUCT_BRAND: '',
-      PRODUCT_DESC:'',
-      PRODUCT_MNUM:'',
-      PRODUCT_LDATE:'',
-      PRODUCT_ORIPRICE:0,
-      PRODUCT_PIC:'',
     }),
     components: {
     ShopCardLineChart,
@@ -153,6 +160,7 @@ export default {
     },
     mounted() {
       this.getView();
+      // this.getPrices();
     },
     methods:{
       getView(){
@@ -161,7 +169,7 @@ export default {
         console.log("라우터에서 받아오는 product_key 값은", this.$route.params.PRODUCT_KEY);
         this.$axios.get('http://localhost:8080/shop/shopview/'+ this.PRODUCT_KEY)
             .then(function(res){
-              console.log("디비에서 결과 가져옴", res);
+              // console.log("디비에서 결과 가져옴", res);
               console.log("res.data값은?", res.data);
               vm.PRODUCT_NAME = res.data.PRODUCT_NAME;
               vm.PRODUCT_BRAND = res.data.PRODUCT_BRAND;
@@ -170,11 +178,27 @@ export default {
               vm.PRODUCT_LDATE = res.data.PRODUCT_LDATE;
               vm.PRODUCT_ORIPRICE = res.data.PRODUCT_ORIPRICE;
               vm.PRODUCT_PIC = res.data.PRODUCT_PIC;
+              vm.PRODUCT_KEY = res.data.PRODUCT_KEY;
+              vm.SELL_PRICE = res.data.Sells[0].SELL_PRICE;
+              vm.BUY_PRICE = res.data.Buys[0].BUY_PRICE;
+              
             })
             .catch(function(err){
               console.log(err);
             });
-      }
+      },
+    //   getPrices(){
+    //     console.log("가격 가져오기",this.PRODUCT_KEY);
+    //     this.$axios.post('http://localhost:8080/shop/shopview/getPrices')
+    //   .then( (res) => {			
+    //       console.log(res.data);
+    //       this.items=res.data;
+    //   })
+    //   .catch((err)=>{
+    //   console.log(err);
+    //   });
+    //   },
+
     }
 }
 </script>
