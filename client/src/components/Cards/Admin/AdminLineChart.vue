@@ -30,10 +30,12 @@ export default {
     return{
       month:[],
       userCnt: [],
+      sellCnt: [],
     }
   },
   props:{
     countUser: [],
+    countSell: [],
   },
   methods: {
     makeMonthArray(){
@@ -50,10 +52,24 @@ export default {
           this.userCnt.push(this.countUser[i].cnt)
         }
       }
-      console.log(this.userCnt)
+    },
+    makeSellArray(){
+      for(let i=0; i<this.countSell.length;i++) {
+        if(this.countSell[i].cnt===null) {
+          this.countSell[i].cnt=0
+        }
+        if(this.countSell[i].cnt !=null) {
+          this.sellCnt.push(this.countSell[i].cnt)
+        }
+      }
     }
   },
   mounted: function () {
+
+    this.makeMonthArray()
+    this.makeUserArray()
+    this.makeSellArray()
+
     this.$nextTick(function () {
       var config = {
         type: "line",
@@ -75,7 +91,7 @@ export default {
               fill: false,
               backgroundColor: "#F97316",
               borderColor: "#F97316",
-              data: this.userCnt,
+              data: this.sellCnt,
             },
           ],
         },
@@ -154,8 +170,6 @@ export default {
     });
   },
   created(){
-    this.makeMonthArray()
-    this.makeUserArray()
     console.log(this.$props.countUser)
   }
 };

@@ -12,7 +12,9 @@
 
       <div class="w-full  mb-12 xl:mb-0 px-4 -mt-24">
         <AdminLineChart
-            :countUser="countUser" :title="title"
+            :countUser="countUser"
+            :countSell="countSell"
+            :title="title"
             style="min-height: 30vh;"
         />
       </div>
@@ -37,6 +39,7 @@ export default {
       title: "상품 리스트",
       title2: "검수 리스트",
       countUser:[],
+      countSell:[],
       countTotalUser: 0,
       countTotalBuy: 0,
       countTotalSell: 0,
@@ -48,7 +51,7 @@ export default {
     AdminLineChart,
     HeaderStats
   },
-  created() {
+  beforeCreate() {
     let that = this;
     this.$axios.get('http://localhost:8080/admin/count/user/total')
         .then(function(res){
@@ -85,6 +88,16 @@ export default {
     this.$axios.get('http://localhost:8080/admin/count/user')
         .then(function(res){
           that.countUser = res.data;
+          console.log("유저",that.countUser)
+        })
+        .catch(function(err){
+          console.log(err);
+        });
+
+    this.$axios.get('http://localhost:8080/admin/count/sell')
+        .then(function(res){
+          that.countSell = res.data;
+          console.log("판매",that.countSell)
         })
         .catch(function(err){
           console.log(err);
