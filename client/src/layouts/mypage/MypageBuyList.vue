@@ -4,7 +4,7 @@
     <mypage-period-setter @onSearchClicked="onSearchClicked"
     class="divide-y-gray"/>
     
-    <mypage-buy-list-filter
+    <mypage-list-filter
     :filter="curFilter"
     @onFilterChanged="onFilterChanged"
     @onOrderClicked="onOrderClicked"
@@ -12,9 +12,10 @@
     class="mt-3 divide-y-b-gray"/>
 
     <div class="grid ">
-        <mypage-buy-list-slot 
+        <mypage-list-slot 
         v-for="item in buyLists" :key="item.BUY_KEY"
-        :item="item"/>
+        :item="item"
+        :price="item.BUY_PRICE"/>
     </div>
   </div>
 </template>
@@ -22,15 +23,15 @@
 <script>
 import MypageTopCountTap from '@/components/Cards/Mypage/MypageTopCountTap.vue';
 import MypagePeriodSetter from '@/components/Cards/Mypage/MypagePeriodSetter.vue';
-import MypageBuyListSlot from '../../components/Cards/Mypage/MypageBuyListSlot.vue';
-import MypageBuyListFilter from '../../components/Cards/Mypage/MypageBuyListFilter.vue';
+import MypageListSlot from '../../components/Cards/Mypage/MypageListSlot.vue';
+import MypageListFilter from '../../components/Cards/Mypage/MypageListFilter.vue';
 
   export default {
     components:{
       MypageTopCountTap,
       MypagePeriodSetter,
-      MypageBuyListSlot,
-      MypageBuyListFilter,
+      MypageListSlot,
+      MypageListFilter,
     },
     data () {
       return {
@@ -110,7 +111,7 @@ import MypageBuyListFilter from '../../components/Cards/Mypage/MypageBuyListFilt
           endDate : endDate,
         })
         .then((result) => {
-          //console.log(result.data);
+          console.log(result.data);
           this.buyLists = result.data;
         })
         .catch((error) => {

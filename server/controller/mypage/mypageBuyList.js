@@ -78,7 +78,11 @@ async function getProgressBuyList(req, res) {
                 BUY_SDATE:{[Op.lte]: endDate },
                 BUY_EDATE:{[Op.gte]: startDate },
             }
-        }
+        },
+        include:{
+            model:Product,
+            attributes: ['PRODUCT_NAME', 'PRODUCT_BRAND', 'PRODUCT_PIC'],
+        },
     })
     .then((result) => {
         console.log("getProgressBuyList has been responsed from db : ",result);
@@ -100,7 +104,11 @@ async function getDoneBuyList(req, res) {
                 BUY_SDATE:{[Op.lte]: endDate },
                 BUY_EDATE:{[Op.gte]: startDate },
             }
-        }
+        },
+        include:{
+            model:Product,
+            attributes: ['PRODUCT_NAME', 'PRODUCT_BRAND', 'PRODUCT_PIC'],
+        },
     })
     .then((result) => {
         console.log("getDoneBuyList has been responsed from db : ",result);

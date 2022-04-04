@@ -1,6 +1,7 @@
 const sequelize = require('sequelize');
 const Op = sequelize.Op;
 const { Sell } = require('../../models');
+const { Product } = require('../../models');
 
 async function getSellCounts(req, res) {
     const userKey = req.body.USER_KEY;
@@ -36,7 +37,6 @@ async function getWaitSellList(req, res) {
     const endDate = req.body.endDate;
 
     await Sell.findAll({
-        //attributes:['USER_NAME', 'USER_MAIL'],
         where:{
             SELL_SELLER_KEY: userKey,
             SELL_STATUS: '0',
@@ -44,7 +44,11 @@ async function getWaitSellList(req, res) {
                 SELL_SDATE:{[Op.lte]: endDate },
                 SELL_EDATE:{[Op.gte]: startDate },
             }
-        }
+        },
+        include:{
+            model:Product,
+            attributes: ['PRODUCT_NAME', 'PRODUCT_BRAND', 'PRODUCT_PIC'],
+        },
     })
     .then((result) => {
         console.log("getWaitSellList has been responsed from db : ",result);
@@ -66,7 +70,11 @@ async function getProgressSellList(req, res) {
                 SELL_SDATE:{[Op.lte]: endDate },
                 SELL_EDATE:{[Op.gte]: startDate },
             }
-        }
+        },
+        include:{
+            model:Product,
+            attributes: ['PRODUCT_NAME', 'PRODUCT_BRAND', 'PRODUCT_PIC'],
+        },
     })
     .then((result) => {
         console.log("getProgressSellList has been responsed from db : ",result);
@@ -88,7 +96,11 @@ async function getDoneSellList(req, res) {
                 SELL_SDATE:{[Op.lte]: endDate },
                 SELL_EDATE:{[Op.gte]: startDate },
             }
-        }
+        },
+        include:{
+            model:Product,
+            attributes: ['PRODUCT_NAME', 'PRODUCT_BRAND', 'PRODUCT_PIC'],
+        },
     })
     .then((result) => {
         console.log("getDoneSellList has been responsed from db : ",result);

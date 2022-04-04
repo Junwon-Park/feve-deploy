@@ -15,7 +15,7 @@
                 {{ item.Product.PRODUCT_NAME }}
                 </h5>
                 <h5 class="font-bold mt-1">
-                {{ item.BUY_PRICE.toLocaleString('ko-KR') }}원
+                {{ price.toLocaleString('ko-KR') }}원
                 </h5>
             </div>
             <!-- <h5 class="text-gray-400" style="font-size: 0.7rem; line-height: 0.75rem; margin-top:-0.2rem">
@@ -28,6 +28,7 @@
 export default {
   props:{
     item:Object,
+    price:Number,
   },
   data() {
     return {

@@ -1,33 +1,73 @@
 <template>
   <div>
     <mypage-top-count-tap :counts="counts" :tapNames="tapNames" @onTapChanged="onTapChanged"/>
-    <mypage-period-setter @onSearchClicked="onSearchClicked"/>
+    <mypage-period-setter @onSearchClicked="onSearchClicked"
+    class="divide-y-gray"/>
+    
+    <mypage-list-filter
+    :filter="curFilter"
+    @onFilterChanged="onFilterChanged"
+    @onOrderClicked="onOrderClicked"
+    ref="filter"
+    class="mt-3 divide-y-b-gray"/>
+
+    <div class="grid ">
+        <mypage-list-slot 
+        v-for="item in sellLists" :key="item.SELL_KEY"
+        :item="item"
+        :price="item.sell_price"/>
+    </div>
   </div>
 </template>
 
 <script>
 import MypageTopCountTap from '@/components/Cards/Mypage/MypageTopCountTap.vue';
 import MypagePeriodSetter from '@/components/Cards/Mypage/MypagePeriodSetter.vue';
+import MypageListSlot from '../../components/Cards/Mypage/MypageListSlot.vue';
+import MypageListFilter from '../../components/Cards/Mypage/MypageListFilter.vue';
 
-
-//데이터 호출 url과 tapName만 관리해주면
-// buyList, sellList 상관없이 쓸 수 있음.
   export default {
     components:{
       MypageTopCountTap,
       MypagePeriodSetter,
+      MypageListSlot,
+      MypageListFilter,
     },
     data () {
       return {
+        imageUrl : this.$store.getters.ServerUrl + '/getImage?imageName=',
         curTapIdx:0,
         tapNames:['판매입찰', '진행 중', '종료'],
         counts: [],
         startDate:'',
         endDate:'',
+        filters:[
+          {
+            tapIdx:0,
+            filters:["전체", "입찰중", "기한만료"],
+            orderableColumns:["판매 희망가", "만료일"],
+          },
+          {
+            tapIdx:1,
+            filters:["전체", "발송요청", "발송완료", "입고대기", "입고완료", "검수 중", "검수보류","검수합격", "보류", "거래실패"],
+            orderableColumns:["상태"],
+          },
+          {
+            tapIdx:2,
+            filters:["전체", "배송완료", "취소완료"],
+            orderableColumns:["정산일", "상태"],
+          }
+        ],
+        curFilter:'',
+        sellLists:[],
+        sortPriceDir: true, //true:오름차순(1 -> 2-> 3) false:내림차순 (3-> 2-> 1)
+        sortDateDir: true,  //true:오름차순 false:내림차순
       }
     },
     created() {
       this.getSellCounts();
+      this.curFilter = this.filters[this.curTapIdx];
+      // console.log("BuyList.created.curFilter: ", this.curFilter);
     },
     methods: {
       getSellCounts(){
@@ -46,6 +86,8 @@ import MypagePeriodSetter from '@/components/Cards/Mypage/MypagePeriodSetter.vue
       onTapChanged(idx)
       {
         this.curTapIdx = idx;
+        this.curFilter = this.filters[idx];
+        this.$refs.filter.initSelected();
       },
 
       onSearchClicked(startDate, endDate){
@@ -70,10 +112,58 @@ import MypagePeriodSetter from '@/components/Cards/Mypage/MypagePeriodSetter.vue
         })
         .then((result) => {
           console.log(result.data);
+          this.sellLists = result.data;
         })
         .catch((error) => {
           console.log(error);
         });
+      },
+
+      onOrderClicked(idx){
+        // console.log("sellList.onOrderClicked.idx: ", idx);
+        if(idx == 0)
+          this.sortPrice();
+        else if(idx == 1)
+          this.sortDate();
+        // console.log(this.sellLists);
+      },
+      
+      sortPrice(){
+        this.sortPriceDir = !this.sortPriceDir;
+        // console.log("sortPrice.priceDir: ", this.sortPriceDir);
+        if(this.sortPriceDir)
+        {
+          this.sellLists.sort(function(a, b){
+            return a.sell_price - b.sell_price;
+          });
+        }
+        else
+        {
+          this.sellLists.sort(function(a, b){
+            return b.sell_price - a.sell_price;
+          });
+        }
+      },
+
+      sortDate(){
+        this.sortDateDir = !this.sortDateDir;
+        console.log("sortDate.sortDateDir: ", this.sortDateDir);
+        if(this.sortDateDir)
+        {
+          this.sellLists.sort(function(a, b){
+            return Date.parse(a.sell_edate) - Date.parse(b.sell_edate);
+          });
+        }
+        else
+        {
+          this.sellLists.sort(function(a, b){
+            return Date.parse(b.sell_edate) - Date.parse(a.sell_edate);
+          });
+        }
+      },
+
+      onFilterChanged(selected){
+        console.log("sellList.onFilterChanged.selected: ", selected);
       },
     },
   }
