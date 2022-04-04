@@ -43,7 +43,7 @@ export default {
       }
     },
   },
-  mounted: function () {
+  created: function () {
     this.$nextTick(function () {
       var config = {
         type: "line",
@@ -157,8 +157,5 @@ export default {
       window.myLine = new Chart(ctx, config);
     });
   },
-  created(){
-   // this.makeMonthArray();
-  }
 };
 </script>

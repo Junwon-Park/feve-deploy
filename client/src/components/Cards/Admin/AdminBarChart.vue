@@ -28,7 +28,7 @@ export default {
     bidBuyCnt:[],
     bidSellCnt:[],
   },
-  mounted: function () {
+  created: function () {
     this.$nextTick(function () {
       let config = {
         type: "bar",
