@@ -14,9 +14,9 @@
                 <div class="w-full xl:w-6/12 mb-12 xl:mb-0 px-4 mt-12">
                   <div class="w-full">
                     <div class="text-blueGray-800">
-                      <abbr class="text-base mb-1" style="text-decoration:underline">PRODUCT_BRAND</abbr>
-                      <p class="text-lg mb-1">PRODUCT_NAME</p>
-                      <p class="text-sm mb-1; text-gray-900">PRODUCT_DESC</p>
+                      <abbr class="text-base mb-1" style="text-decoration:underline">{{PRODUCT_BRAND}}</abbr>
+                      <p class="text-lg mb-1">{{PRODUCT_NAME}}</p>
+                      <p class="text-sm mb-1; text-gray-900">{{PRODUCT_DESC}}</p>
                     </div>
                     <hr/>
                     <div class="flex mt-3 pt-3">
@@ -56,15 +56,15 @@
                     <div style="border:black;">
                       <div style="width:33%; float:left; padding-right:10px;">
                         <p class="mb-1">모델번호</p>
-                        <p>PRODUCT_MNUM</p>
+                        <p>{{PRODUCT_MNUM}}</p>
                       </div>
                       <div style="width:33%; float:left; padding-right:10px;">
                         <p class="mb-1">출시일</p>
-                        <p>PRODUCT_LDATE</p>
+                        <p>{{PRODUCT_LDATE}}</p>
                       </div>
                       <div style="width:33%; float:right; ">
                         <p class="mb-1">발매가</p>
-                        <p>PRODUCT_ORIPRICE</p>
+                        <p>{{PRODUCT_ORIPRICE}}</p>
                       </div>
                     </div>
                   </div>
@@ -137,12 +137,31 @@ export default {
             src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg',
           },
         ],
+      
+      PRODUCT_NAME: '',
+      PRODUCT_BRAND: '',
+      PRODUCT_DESC:'',
+      PRODUCT_MNUM:'',
+      PRODUCT_LDATE:'',
+      PRODUCT_ORIPRICE:0,
     }),
     components: {
     ShopCardLineChart,
     ShopCardTable,
     Notice
-    
-    }
+    },
+    // created() {
+    // var vm = this;
+    // this.$axios.get('http://localhost:8080/shop/shoplist/${PRODUCT_KEY}')
+    //     .then(function(res){
+    //       console.log("디비에서 결과 가져옴", res);
+    //       console.log("res.data값은?", res.data);
+    //       vm.items = res.data;
+          
+    //     })
+    //     .catch(function(err){
+    //       console.log(err);
+    //     });
+    // }
 }
 </script>
