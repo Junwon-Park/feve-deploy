@@ -28,10 +28,17 @@
           </div>
         </div>
       </div>
-      <p class="text-lg text-black mt-4 mb-0">
-        <span class="whitespace-nowrap">{{ SELL_PRICE.toLocaleString('ko-KR') }}원</span>
-      </p>
-      <p class="text-xs mt-1 text-gray-400">즉시 구매가</p>
+      <div v-if="this.SELL_PRICE !== null">
+        <p class="text-base text-black mt-4 mb-0">
+          <b class="whitespace-nowrap">{{ SELL_PRICE.toLocaleString('ko-KR') }}원</b>
+        </p>
+        <p class="text-xs mt-1 text-gray-400">즉시 구매가</p>
+      </div>
+      <div v-else>
+        <p class="text-base text-black mt-4 mb-0">
+          <b class="whitespace-nowrap">구매 입찰</b>
+        </p>
+      </div>
     </div>
   </div>
 </template>
