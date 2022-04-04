@@ -1,24 +1,14 @@
 <template>
   <div
-      class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded"
+      class="relative flex flex-col min-w-0 break-words bg-blueGray-200 w-full mb-6 shadow-lg rounded"
   >
-
-    <div class="rounded-t mb-0 px-4 py-3 border-0">
-      <div class="flex flex-wrap items-center">
-        <div class="relative w-full px-4 max-w-full flex-grow flex-1">
-          <h3 class="font-semibold text-base text-blueGray-700">
-            {{ title }}
-          </h3>
-        </div>
-      </div>
-    </div>
     <div class="block w-full overflow-x-auto">
       <!-- Projects table -->
-      <table class="items-center w-full bg-transparent border-collapse">
-        <thead>
+      <table class=" w-full bg-transparent border-collapse">
+        <thead class="thead-light">
         <tr>
           <th
-              class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold"
+              class="px-6  bg-gray-200 text-black  align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold "
               v-for="(table, idx) in table" :key="idx"
           >
             {{ table }}
@@ -26,65 +16,74 @@
         </tr>
         </thead>
         <tbody>
-          <AdminInspecCards
-            v-for="(item, idx) in items"
-            :key="idx"
-            v-bind="item"
-            :items="items"
-            @sendDialog="cDialog"
-            @sendItems="sendItems"
+        <tr v-if="this.$props.items.length===0">
+          <td
+              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
+              colspan="13"
+          >
+            아직 등록된 문의가 없습니다.
+          </td>
+        </tr>
+          <CscenterQnaCards
+              v-else
+              v-for="(item, idx) in items"
+              :key="idx"
+              v-bind="item"
+              :items="items"
+              @sendDialog="cDialog"
+              @sendItems="sendItems"
           />
         </tbody>
       </table>
-      <Pagination />
-    </div> 
+    </div>
+    <CscenterQnaAnswer
+      :dialog="recDialog"
+      :table="table"
+      :title="title"
+      :item="item"
+      :receivedCscenterKey="receivedCscenterKey"
+      :receivedUserid="receivedUserid"
+      @sendDialog="sendDialog"
+      @updateList="updateList"/>
   </div>
 </template>
-
 <script>
-import AdminInspecCards from "@/components/Cards/Admin/AdminInspecCards.vue";
-import AdminInspecModi from "@/components/Cards/Admin/AdminInspecModi.vue";
-import Pagination from "@/components/Pagination.vue" ;
+import CscenterQnaCards from "@/components/Cards/Cscenter/CscenterQnaCards.vue";
+import CscenterQnaAnswer from "@/components/Cards/Cscenter/CscenterQnaAnswer.vue";
 export default {
-  props: {
+  props:{
     title: {
       type: String,
       default: "리스트",
     },
     items: {
-      required: false,
+      required: true,
     },
-},
-  data() {
+  },
+  data () {
     return {
-      receivedProductKey: 0,
+      table: ["번호", "제목", "작성자", "작성시간", "답변여부", "관리"],
+      receivedCscenterKey: 0,
       receivedUserid:"",
       receivedUserkey:0,
-      sendInspectionStatus: 0,
-      sendInsepctionResult: 0,
+      cscenterComment: 0,
       recDialog: false,
-      table: ["번호", "상품명", "브랜드", "카테고리", "발매가", "판매자","수량", "검수도착일","검수상태","검수종료일","결과","반송일","관리"],
       item:{
-        INSPECTION_KEY: 0,
-        INSPECTION_DATE: "",
-        INSPECTION_RESULT: "",
-        INSPECTION_STATUS: "",
-        INSPECTION_ADATE: "",
-        INSPECTION_RDATE:"",
-        PRODUCT_KEY: 0,
-        PRODUCT_MNUM: "",
-        USER_ID: "",
-        PRODUCT_NAME: "",
-        PRODUCT_ORIPRICE: 0,
-        PRODUCT_CATE: "",
-        PRODUCT_BRAND: "",
+        CSCENTER_KEY: 0,
+        CSCENTER_TITLE: '',
+        CSCENTER_CONTENTS: '',
+        CSCENTER_WDATE: '',
+        CSCENTER_STATUS: '',
+        CSCENTER_COMMENT: '',
+        CSCENTER_COMMENT_WDATE: '',
+        USER_KEY: 0,
+        USER_ID:'',
       }
     }
   },
-  components: {
-    AdminInspecCards,
-    AdminInspecModi,
-    Pagination,
+  components:{
+    CscenterQnaCards,
+    CscenterQnaAnswer
   },
   methods: {
     cDialog(){
@@ -93,14 +92,16 @@ export default {
     sendDialog(){
       this.recDialog = false
     },
-    sendItems(recP, recU, recUk) {
+    sendItems(recC, recU, recUk) {
       let that=this;
-      that.receivedProductKey=recP;
+      that.receivedCscenterKey=recC;
       that.receivedUserid=recU;
       that.receivedUserkey=recUk;
 
-      this.$axios.post('http://localhost:8080/admin/loadInspection/one',{
-        sendProductKey: that.receivedProductKey,
+      console.log(that.receivedCscenterKey)
+
+      this.$axios.post('http://localhost:8080/admin/cscenter/one',{
+        sendCscenterKey: that.receivedCscenterKey,
         sendUserid: that.receivedUserid,
         sendUserkey: that.receivedUserkey,
       }).then(function(res){
@@ -110,23 +111,20 @@ export default {
         console.log(err);
       });
     },
-    updateList(newS, newR){
+    updateList(newS){
       let that = this;
-      that.sendInspectionStatus = newS;
-      that.sendInsepctionResult = newR;
+      that.cscenterComment = newS;
 
-      this.$axios.post('http://localhost:8080/admin/updateInspection', {
-        sendInspectionStatus: that.sendInspectionStatus,
-        sendInsepctionResult: that.sendInsepctionResult,
-        sendProductKey: that.receivedProductKey,
-        sendUserid: that.receivedUserid,
+      this.$axios.post('http://localhost:8080/admin/updateCscenter', {
+        sendCscenterKey: that.receivedCscenterKey,
+        cscenterComment: that.cscenterComment,
         sendUserkey: that.receivedUserkey,
       }).then(function(res){
-            console.log(res)
+        console.log(res)
       })
-      .catch(function(err){
-        console.log(err);
-      });
+          .catch(function(err){
+            console.log(err);
+          });
     }
   },
 }
