@@ -66,9 +66,9 @@ export default {
   },
   mounted: function () {
 
-    this.makeMonthArray()
-    this.makeUserArray()
-    this.makeSellArray()
+    this.makeMonthArray();
+    this.makeUserArray();
+    this.makeSellArray();
 
     this.$nextTick(function () {
       var config = {
