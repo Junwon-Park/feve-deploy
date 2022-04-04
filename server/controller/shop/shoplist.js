@@ -22,7 +22,8 @@ async function shoplist(req, res, next) {
         'FROM Product a\n' +
         'LEFT OUTER JOIN Sell b\n'+
         'ON b.PRODUCT_KEY = a.PRODUCT_KEY \n' +
-        'AND b.SELL_PRICE = (SELECT MIN(SELL_PRICE) FROM Sell WHERE PRODUCT_KEY = a.PRODUCT_KEY AND SELL_STATUS=0);', { type: sequelize.QueryTypes.SELECT })
+        'AND b.SELL_PRICE = (SELECT MIN(SELL_PRICE) FROM Sell WHERE PRODUCT_KEY = a.PRODUCT_KEY AND SELL_STATUS=0);'
+        , { type: sequelize.QueryTypes.SELECT })
         .then(result => {
             console.log(result);
             res.json(result);

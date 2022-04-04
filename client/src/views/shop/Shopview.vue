@@ -8,7 +8,7 @@
               <div class="flex">
                 <div class="w-full xl:w-6/12 px-4 mt-12">
                   <v-carousel hide-delimiters>
-                      <v-carousel-item v-for="(item,i) in items" :key="i" :src="item.src"></v-carousel-item>
+                      <v-carousel-item v-for="(item,i) in items" :key="i" :src="require(`@/assets/img/${PRODUCT_PIC}.jpg`)"></v-carousel-item>
                     </v-carousel>
                 </div>
                 <div class="w-full xl:w-6/12 mb-12 xl:mb-0 px-4 mt-12">
@@ -144,6 +144,7 @@ export default {
       PRODUCT_MNUM:'',
       PRODUCT_LDATE:'',
       PRODUCT_ORIPRICE:0,
+      PRODUCT_PIC:'',
     }),
     components: {
     ShopCardLineChart,
@@ -168,6 +169,7 @@ export default {
               vm.PRODUCT_MNUM = res.data.PRODUCT_MNUM;
               vm.PRODUCT_LDATE = res.data.PRODUCT_LDATE;
               vm.PRODUCT_ORIPRICE = res.data.PRODUCT_ORIPRICE;
+              vm.PRODUCT_PIC = res.data.PRODUCT_PIC;
             })
             .catch(function(err){
               console.log(err);

@@ -9,51 +9,15 @@ async function min(req, res, next) {
 
   console.log('*********************');
   console.log(
-    'body 값 확인 ==>',
-    req.body,
-    ',cate value : ',
-    req.body.cate,
-    ' ,price value : ',
-    req.body.price
+    'body 값 확인 ==>',req.body,
+    ',cate value : ', req.body.cate,
+    ',price value : ', req.body.price
   );
 
   if (price === undefined) {
     await db.sequelize
       .query(
         'SELECT \n' +
-          'a.PRODUCT_KEY \n' +
-          ',a.PRODUCT_BRAND \n' +
-          ',a.PRODUCT_NAME \n' +
-          ',a.PRODUCT_MNUM \n' +
-          ',a.PRODUCT_LDATE \n' +
-          ',a.PRODUCT_PIC \n' +
-          ',a.PRODUCT_DESC \n' +
-          ',a.PRODUCT_ORIPRICE \n' +
-          ',a.PRODUCT_WDATE\n' +
-          ',a.PRODUCT_CATE\n' +
-          ',b.SELL_PRICE \n' +
-          'FROM Product a, Sell b\n' +
-          'WHERE b.PRODUCT_KEY = a.PRODUCT_KEY \n' +
-          'AND a.PRODUCT_CATE IN (' +
-          '' +
-          cate +
-          ')' +
-          '\n' +
-          'AND b.SELL_PRICE = (SELECT MIN(SELL_PRICE) FROM Sell WHERE PRODUCT_KEY = a.PRODUCT_KEY)\n;',
-        { type: sequelize.QueryTypes.SELECT }
-      )
-      .then((result) => {
-        console.log(result);
-        res.json(result);
-      })
-      .catch((err) => console.log(err));
-  }
-
-  if (cate === undefined) {
-    if (price === 'all') {
-      await db.sequelize
-        .query(
-          'SELECT \n' +
             'a.PRODUCT_KEY \n' +
             ',a.PRODUCT_BRAND \n' +
             ',a.PRODUCT_NAME \n' +
@@ -65,9 +29,45 @@ async function min(req, res, next) {
             ',a.PRODUCT_WDATE\n' +
             ',a.PRODUCT_CATE\n' +
             ',b.SELL_PRICE \n' +
-            'FROM Product a, Sell b\n' +
-            'WHERE b.PRODUCT_KEY = a.PRODUCT_KEY \n' +
-            'AND b.SELL_PRICE = (SELECT MIN(SELL_PRICE) FROM Sell WHERE PRODUCT_KEY = a.PRODUCT_KEY);',
+        'FROM Product a\n'+
+        'INNER JOIN Sell b\n'+
+        'ON b.PRODUCT_KEY = a.PRODUCT_KEY \n' +
+        'AND a.PRODUCT_CATE IN (' +
+          '' +
+          cate +
+          ')' +
+          '\n' +
+          'AND b.SELL_PRICE = (SELECT MIN(SELL_PRICE) FROM Sell WHERE PRODUCT_KEY = a.PRODUCT_KEY AND SELL_STATUS=0)\n;',
+        { type: sequelize.QueryTypes.SELECT }
+      )
+      .then((result) => {
+        console.log(result);
+        res.json(result);
+      })
+      .catch((err) => console.log(err));
+  }
+
+  else if (cate === undefined) {
+    if (price === 'all') {
+      await db.sequelize
+        .query(
+          'SELECT \n' +
+              'a.PRODUCT_KEY \n' +
+              ',a.PRODUCT_BRAND \n' +
+              ',a.PRODUCT_NAME \n' +
+              ',a.PRODUCT_MNUM \n' +
+              ',a.PRODUCT_LDATE \n' +
+              ',a.PRODUCT_PIC \n' +
+              ',a.PRODUCT_DESC \n' +
+              ',a.PRODUCT_ORIPRICE \n' +
+              ',a.PRODUCT_WDATE\n' +
+              ',a.PRODUCT_CATE\n' +
+              ',b.SELL_PRICE \n' +
+              ',b.SELL_PRICE \n' +
+        'FROM Product a\n' +
+        'INNER JOIN Sell b\n'+
+        'ON b.PRODUCT_KEY = a.PRODUCT_KEY \n' +
+        'AND b.SELL_PRICE = (SELECT MIN(SELL_PRICE) FROM Sell WHERE PRODUCT_KEY = a.PRODUCT_KEY AND SELL_STATUS=0);',
           { type: sequelize.QueryTypes.SELECT }
         )
         .then((result) => {
@@ -79,21 +79,22 @@ async function min(req, res, next) {
       await db.sequelize
         .query(
           'SELECT \n' +
-            'a.PRODUCT_KEY \n' +
-            ',a.PRODUCT_BRAND \n' +
-            ',a.PRODUCT_NAME \n' +
-            ',a.PRODUCT_MNUM \n' +
-            ',a.PRODUCT_LDATE \n' +
-            ',a.PRODUCT_PIC \n' +
-            ',a.PRODUCT_DESC \n' +
-            ',a.PRODUCT_ORIPRICE \n' +
-            ',a.PRODUCT_WDATE\n' +
-            ',a.PRODUCT_CATE\n' +
-            ',b.SELL_PRICE \n' +
-            'FROM Product a, Sell b\n' +
-            'WHERE b.PRODUCT_KEY = a.PRODUCT_KEY \n' +
-            'AND b.SELL_PRICE = (SELECT MIN(SELL_PRICE) FROM Sell WHERE PRODUCT_KEY = a.PRODUCT_KEY)\n' +
-            'AND b.SELL_PRICE < 100000 ;',
+              'a.PRODUCT_KEY \n' +
+              ',a.PRODUCT_BRAND \n' +
+              ',a.PRODUCT_NAME \n' +
+              ',a.PRODUCT_MNUM \n' +
+              ',a.PRODUCT_LDATE \n' +
+              ',a.PRODUCT_PIC \n' +
+              ',a.PRODUCT_DESC \n' +
+              ',a.PRODUCT_ORIPRICE \n' +
+              ',a.PRODUCT_WDATE\n' +
+              ',a.PRODUCT_CATE\n' +
+              ',b.SELL_PRICE \n' +
+          'FROM Product a\n' +
+          'INNER JOIN Sell b\n'+
+          'ON b.PRODUCT_KEY = a.PRODUCT_KEY \n' +
+          'AND b.SELL_PRICE = (SELECT MIN(SELL_PRICE) FROM Sell WHERE PRODUCT_KEY = a.PRODUCT_KEY AND SELL_STATUS=0)\n' +
+          'AND b.SELL_PRICE < 100000 ;',
           { type: sequelize.QueryTypes.SELECT }
         )
         .then((result) => {
@@ -105,21 +106,22 @@ async function min(req, res, next) {
       await db.sequelize
         .query(
           'SELECT \n' +
-            'a.PRODUCT_KEY \n' +
-            ',a.PRODUCT_BRAND \n' +
-            ',a.PRODUCT_NAME \n' +
-            ',a.PRODUCT_MNUM \n' +
-            ',a.PRODUCT_LDATE \n' +
-            ',a.PRODUCT_PIC \n' +
-            ',a.PRODUCT_DESC \n' +
-            ',a.PRODUCT_ORIPRICE \n' +
-            ',a.PRODUCT_WDATE\n' +
-            ',a.PRODUCT_CATE\n' +
-            ',b.SELL_PRICE \n' +
-            'FROM Product a, Sell b\n' +
-            'WHERE b.PRODUCT_KEY = a.PRODUCT_KEY \n' +
-            'AND b.SELL_PRICE = (SELECT MIN(SELL_PRICE) FROM Sell WHERE PRODUCT_KEY = a.PRODUCT_KEY)\n' +
-            'AND b.SELL_PRICE BETWEEN 100000 AND 300000;',
+              'a.PRODUCT_KEY \n' +
+              ',a.PRODUCT_BRAND \n' +
+              ',a.PRODUCT_NAME \n' +
+              ',a.PRODUCT_MNUM \n' +
+              ',a.PRODUCT_LDATE \n' +
+              ',a.PRODUCT_PIC \n' +
+              ',a.PRODUCT_DESC \n' +
+              ',a.PRODUCT_ORIPRICE \n' +
+              ',a.PRODUCT_WDATE\n' +
+              ',a.PRODUCT_CATE\n' +
+              ',b.SELL_PRICE \n' +
+          'FROM Product a\n' +
+          'INNER JOIN Sell b\n'+
+          'ON b.PRODUCT_KEY = a.PRODUCT_KEY \n' +
+          'AND b.SELL_PRICE = (SELECT MIN(SELL_PRICE) FROM Sell WHERE PRODUCT_KEY = a.PRODUCT_KEY AND SELL_STATUS=0)\n' +
+          'AND b.SELL_PRICE BETWEEN 100000 AND 300000;',
           { type: sequelize.QueryTypes.SELECT }
         )
         .then((result) => {
@@ -131,20 +133,21 @@ async function min(req, res, next) {
       await db.sequelize
         .query(
           'SELECT \n' +
-            'a.PRODUCT_KEY \n' +
-            ',a.PRODUCT_BRAND \n' +
-            ',a.PRODUCT_NAME \n' +
-            ',a.PRODUCT_MNUM \n' +
-            ',a.PRODUCT_LDATE \n' +
-            ',a.PRODUCT_PIC \n' +
-            ',a.PRODUCT_DESC \n' +
-            ',a.PRODUCT_ORIPRICE \n' +
-            ',a.PRODUCT_WDATE\n' +
-            ',a.PRODUCT_CATE\n' +
-            ',b.SELL_PRICE \n' +
-            'FROM Product a, Sell b\n' +
-            'WHERE b.PRODUCT_KEY = a.PRODUCT_KEY \n' +
-            'AND b.SELL_PRICE = (SELECT MIN(SELL_PRICE) FROM Sell WHERE PRODUCT_KEY = a.PRODUCT_KEY)\n' +
+              'a.PRODUCT_KEY \n' +
+              ',a.PRODUCT_BRAND \n' +
+              ',a.PRODUCT_NAME \n' +
+              ',a.PRODUCT_MNUM \n' +
+              ',a.PRODUCT_LDATE \n' +
+              ',a.PRODUCT_PIC \n' +
+              ',a.PRODUCT_DESC \n' +
+              ',a.PRODUCT_ORIPRICE \n' +
+              ',a.PRODUCT_WDATE\n' +
+              ',a.PRODUCT_CATE\n' +
+              ',b.SELL_PRICE \n' +
+            'FROM Product a\n' +
+            'INNER JOIN Sell b\n'+
+            'ON b.PRODUCT_KEY = a.PRODUCT_KEY \n' +
+            'AND b.SELL_PRICE = (SELECT MIN(SELL_PRICE) FROM Sell WHERE PRODUCT_KEY = a.PRODUCT_KEY AND SELL_STATUS=0)\n' +
             'AND b.SELL_PRICE BETWEEN 300001 AND 500000;',
           { type: sequelize.QueryTypes.SELECT }
         )
@@ -157,21 +160,22 @@ async function min(req, res, next) {
       await db.sequelize
         .query(
           'SELECT \n' +
-            'a.PRODUCT_KEY \n' +
-            ',a.PRODUCT_BRAND \n' +
-            ',a.PRODUCT_NAME \n' +
-            ',a.PRODUCT_MNUM \n' +
-            ',a.PRODUCT_LDATE \n' +
-            ',a.PRODUCT_PIC \n' +
-            ',a.PRODUCT_DESC \n' +
-            ',a.PRODUCT_ORIPRICE \n' +
-            ',a.PRODUCT_WDATE\n' +
-            ',a.PRODUCT_CATE\n' +
-            ',b.SELL_PRICE \n' +
-            'FROM Product a, Sell b\n' +
-            'WHERE b.PRODUCT_KEY = a.PRODUCT_KEY \n' +
-            'AND b.SELL_PRICE = (SELECT MIN(SELL_PRICE) FROM Sell WHERE PRODUCT_KEY = a.PRODUCT_KEY)\n' +
-            'AND b.SELL_PRICE > 500000;',
+              'a.PRODUCT_KEY \n' +
+              ',a.PRODUCT_BRAND \n' +
+              ',a.PRODUCT_NAME \n' +
+              ',a.PRODUCT_MNUM \n' +
+              ',a.PRODUCT_LDATE \n' +
+              ',a.PRODUCT_PIC \n' +
+              ',a.PRODUCT_DESC \n' +
+              ',a.PRODUCT_ORIPRICE \n' +
+              ',a.PRODUCT_WDATE\n' +
+              ',a.PRODUCT_CATE\n' +
+              ',b.SELL_PRICE \n' +
+          'FROM Product a\n' +
+          'INNER JOIN Sell b\n'+
+          'ON b.PRODUCT_KEY = a.PRODUCT_KEY \n' +
+          'AND b.SELL_PRICE = (SELECT MIN(SELL_PRICE) FROM Sell WHERE PRODUCT_KEY = a.PRODUCT_KEY AND SELL_STATUS=0)\n' +
+          'AND b.SELL_PRICE > 500000;',
           { type: sequelize.QueryTypes.SELECT }
         )
         .then((result) => {
@@ -184,20 +188,21 @@ async function min(req, res, next) {
     await db.sequelize
       .query(
         'SELECT \n' +
-          'a.PRODUCT_KEY \n' +
-          ',a.PRODUCT_BRAND \n' +
-          ',a.PRODUCT_NAME \n' +
-          ',a.PRODUCT_MNUM \n' +
-          ',a.PRODUCT_LDATE \n' +
-          ',a.PRODUCT_PIC \n' +
-          ',a.PRODUCT_DESC \n' +
-          ',a.PRODUCT_ORIPRICE \n' +
-          ',a.PRODUCT_WDATE\n' +
-          ',a.PRODUCT_CATE\n' +
-          ',b.SELL_PRICE \n' +
-          'FROM Product a, Sell b\n' +
-          'WHERE b.PRODUCT_KEY = a.PRODUCT_KEY \n' +
-          'AND b.SELL_PRICE = (SELECT MIN(SELL_PRICE) FROM Sell WHERE PRODUCT_KEY = a.PRODUCT_KEY);',
+            'a.PRODUCT_KEY \n' +
+            ',a.PRODUCT_BRAND \n' +
+            ',a.PRODUCT_NAME \n' +
+            ',a.PRODUCT_MNUM \n' +
+            ',a.PRODUCT_LDATE \n' +
+            ',a.PRODUCT_PIC \n' +
+            ',a.PRODUCT_DESC \n' +
+            ',a.PRODUCT_ORIPRICE \n' +
+            ',a.PRODUCT_WDATE\n' +
+            ',a.PRODUCT_CATE\n' +
+            ',b.SELL_PRICE \n' +
+        'FROM Product a\n' +
+        'INNER JOIN Sell b\n'+
+        'ON b.PRODUCT_KEY = a.PRODUCT_KEY \n' +
+        'AND b.SELL_PRICE = (SELECT MIN(SELL_PRICE) FROM Sell WHERE PRODUCT_KEY = a.PRODUCT_KEY AND SELL_STATUS=0);',
         { type: sequelize.QueryTypes.SELECT }
       )
       .then((result) => {
