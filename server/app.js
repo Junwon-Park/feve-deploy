@@ -21,11 +21,13 @@ const categorytRoute = require('./router/common/category.js');
 const shoplistRoute = require('./router/shop/shoplist.js');
 const shopviewRoute = require('./router/shop/shopview.js');
 const buyRouter = require('./router/sold/buyconfirm.js');
+const soldconfirmRouter = require("./router/sold/soldproduct.js");
 const minRouter = require('./router/shop/min.js');
 const mypageMainRouter = require('./router/mypage/mypageMain.js');
 const mypageBuyListRouter = require('./router/mypage/mypageBuyList.js');
 const mypageSellListRouter = require('./router/mypage/mypageSellList.js');
-const soldconfirmRouter = require("./router/sold/soldproduct.js");
+const mypageFavoriteListRouter = require('./router/mypage/mypageFavoriteList.js');
+const mypageProfileRouter = require('./router/mypage/mypageProfile.js');
 const imageRouter = require("./image/image.js");
 const cscenterRoute = require("./router/cscenter/cscenter.js");
 
@@ -65,6 +67,10 @@ app.use(cors(devCors));
 // To router
 app.use('/auth', authRouter);
 app.use('/addproduct', addproductRoute);
+app.use('/category', categorytRoute);
+app.use("/cscenter/cscenter", cscenterRoute);
+app.use("/getImage", imageRouter);
+
 app.use('/admin/addproduct', addproductRoute);
 app.use('/admin/loadproduct', loadproductRoute);
 app.use('/admin/cscenter', adminCscenterRoute);
@@ -74,18 +80,20 @@ app.use('/admin/updateCscenter', adminUpdateCscenterRoute);
 app.use('/admin/updateProduct', adminUpdateProductRoute);
 app.use('/admin/deleteProduct', adminDeleteProductRoute);
 app.use('/admin/count', adminMainChartRoute);
-app.use('/category', categorytRoute);
+
 app.use('/shoplist', shoplistRoute);
-app.use('/buy', buyRouter);
 app.use('/shop/shoplist', shoplistRoute);
 app.use('/shop/min', minRouter);
 app.use('/shop/shopview', shopviewRoute);
+
+app.use('/buy', buyRouter);
+app.use("/buy/proc",soldconfirmRouter);
+
 app.use('/mypage', mypageMainRouter);
 app.use('/mypage/buyList', mypageBuyListRouter);
 app.use('/mypage/sellList', mypageSellListRouter);
-app.use("/buy/proc",soldconfirmRouter);
-app.use("/getImage", imageRouter);
-app.use("/cscenter/cscenter", cscenterRoute);
+app.use('/mypage/favoriteList', mypageFavoriteListRouter);
+app.use('/mypage/profile', mypageProfileRouter);
 
 app.use((req, res, next) => {
   res.sendStatus(404);

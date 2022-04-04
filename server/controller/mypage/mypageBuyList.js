@@ -1,6 +1,7 @@
 const sequelize = require('sequelize');
 const Op = sequelize.Op;
 const { Buy } = require('../../models');
+const { Product } = require('../../models');
 
 async function getBuyCounts(req, res) {
     const userKey = req.body.USER_KEY;
@@ -36,7 +37,12 @@ async function getWaitBuyList(req, res) {
     const endDate = req.body.endDate;
 
     await Buy.findAll({
-        //attributes:['USER_NAME', 'USER_MAIL'],
+        // attributes:
+        //     [ 
+        //         [sequelize.col(product.PRODUCT_NAME), 'PRODUCT_NAME'],
+        //         [sequelize.col(product.PRODUCT_BRAND), 'PRODUCT_BRAND'],
+        //         [sequelize.col(product.PRODUCT_PIC), 'PRODUCT_PIC'],
+        //     ],            
         where:{
             BUY_BUYER_KEY: userKey,
             BUY_STATUS: '0',
@@ -44,7 +50,13 @@ async function getWaitBuyList(req, res) {
                 BUY_SDATE:{[Op.lte]: endDate },
                 BUY_EDATE:{[Op.gte]: startDate },
             }
-        }
+        },
+        include:{
+            model:Product,
+            //as: 'product',
+            attributes: ['PRODUCT_NAME', 'PRODUCT_BRAND', 'PRODUCT_PIC'],
+        },
+        
     })
     .then((result) => {
         console.log("getWaitBuyList has been responsed from db : ",result);

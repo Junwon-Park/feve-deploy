@@ -1193,6 +1193,16 @@ input[readonly="readonly"] {
   border-bottom-width: calc(1px * var(--tw-divide-y-reverse));
 }
 
+.divide-y-gray {
+  border-width: 1px 0px 1px 0px; 
+  border-color: rgb(52, 64, 83, 0.2);
+}
+
+.divide-y-b-gray {
+  border-width: 0px 0px 1px 0px; 
+  border-color: rgb(52, 64, 83, 0.2);
+}
+
 .divide-x > :not([hidden]) ~ :not([hidden]) {
   --tw-divide-x-reverse: 0;
   border-right-width: calc(1px * var(--tw-divide-x-reverse));

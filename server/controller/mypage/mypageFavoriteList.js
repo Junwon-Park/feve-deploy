@@ -3,7 +3,7 @@ const Op = sequelize.Op;
 const { Favorite } = require('../../models');
 const { Product } = require('../../models');
 
-async function getSimpleFavorites(req, res) {
+async function getFavoriteList(req, res) {
     const userKey = req.body.USER_KEY;
     await Product.findAll({
         //브랜드
@@ -27,4 +27,4 @@ async function getSimpleFavorites(req, res) {
     .catch((err) => console.log(err));
 }
 
-module.exports = { getSimpleFavorites };
+module.exports = { getFavoriteList };

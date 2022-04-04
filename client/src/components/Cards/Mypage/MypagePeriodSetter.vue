@@ -97,6 +97,8 @@
 </template>
 
 <script>
+import moment from 'moment'
+
 export default {
     props:{
         
@@ -124,13 +126,15 @@ export default {
             this.startDate = prevDate.toISOString().substr(0, 10)
         },
         onSearchClicked(){
-            if(this.startDate > this.endDate)
+            if(this.startDate > this.endDate) 
             {
                 alert("시작 날짜를 끝 날짜보다 이전으로 설정해주세요.");
             }
             else
             {
-                this.$emit("onSearchClicked", this.startDate, this.endDate);
+                const beginningOfDay = moment(this.startDate, 'YYYY-MM-DD').startOf('day');
+                const endOfDay = moment(this.endDate, 'YYYY-MM-DD').endOf('day');
+                this.$emit("onSearchClicked", beginningOfDay, endOfDay);
             }
       },
     }
