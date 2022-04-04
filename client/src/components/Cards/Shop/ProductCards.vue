@@ -38,6 +38,7 @@
         <p class="text-base text-black mt-4 mb-0">
           <b class="whitespace-nowrap">구매 입찰</b>
         </p>
+        <p class="text-xs mt-1 text-gray-400">즉시 구매 불가</p>
       </div>
     </div>
   </div>
