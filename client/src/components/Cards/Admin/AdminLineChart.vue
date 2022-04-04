@@ -29,52 +29,40 @@ export default {
   data(){
     return{
       month:[],
-      userCnt: [],
-      sellCnt: [],
     }
   },
   props:{
     countUser: [],
-    countSell: [],
+    userCnt: [],
+    dealCnt: [],
   },
   methods: {
     makeMonthArray(){
-      for(let i=0; i<this.countUser.length;i++) {
-        this.month.push(this.countUser[i].month +'월')
+      for(let i=0; i<this.$props.countUser.length;i++) {
+        this.month.push(this.$props.countUser[i].month +'월')
       }
     },
-    makeUserArray(){
-      for(let i=0; i<this.countUser.length;i++) {
-        if(this.countUser[i].cnt===null) {
-          this.countUser[i].cnt=0
-        }
-        if(this.countUser[i].cnt !=null) {
-          this.userCnt.push(this.countUser[i].cnt)
-        }
-      }
-    },
-    makeSellArray(){
-      for(let i=0; i<this.countSell.length;i++) {
-        if(this.countSell[i].cnt===null) {
-          this.countSell[i].cnt=0
-        }
-        if(this.countSell[i].cnt !=null) {
-          this.sellCnt.push(this.countSell[i].cnt)
-        }
-      }
-    }
   },
-  mounted: function () {
-
-    this.makeMonthArray();
-    this.makeUserArray();
-    this.makeSellArray();
-
+  created: function () {
     this.$nextTick(function () {
       var config = {
         type: "line",
         data: {
-          labels: this.month,
+          //labels: this.month,
+          labels: [
+            "1월",
+            "2월",
+            "3월",
+            "4월",
+            "5월",
+            "6월",
+            "7월",
+            "8월",
+            "9월",
+            "10월",
+            "11월",
+            "12월",
+          ],
           datasets: [
             {
               //label: new Date().getFullYear(),
@@ -82,7 +70,7 @@ export default {
               backgroundColor: "#A855F7",
               borderColor: "#A855F7",
               //data: [65, 78, 66, 44, 56, 86, 74, 56, 60, 87, 67, 75],
-              data: this.userCnt,
+              data: this.dealCnt,
               fill: false,
             },
             {
@@ -91,7 +79,7 @@ export default {
               fill: false,
               backgroundColor: "#F97316",
               borderColor: "#F97316",
-              data: this.sellCnt,
+              data: this.userCnt,
             },
           ],
         },
@@ -169,8 +157,5 @@ export default {
       window.myLine = new Chart(ctx, config);
     });
   },
-  created(){
-    console.log(this.$props.countUser)
-  }
 };
 </script>

@@ -24,7 +24,11 @@
 <script>
 import Chart from "chart.js";
 export default {
-  mounted: function () {
+  props:{
+    bidBuyCnt:[],
+    bidSellCnt:[],
+  },
+  created: function () {
     this.$nextTick(function () {
       let config = {
         type: "bar",
@@ -49,7 +53,8 @@ export default {
               label: "판매",
               backgroundColor: "#01856B",
               borderColor: "#01856B",
-              data: [30, 78, 56, 34, 100, 45, 13, 78, 56, 34, 100, 44],
+              //data: [30, 78, 56, 34, 100, 45, 13, 78, 56, 34, 100, 44],
+              data: this.bidBuyCnt,
               fill: false,
               barThickness: 8,
             },
@@ -59,7 +64,8 @@ export default {
               fill: false,
               backgroundColor: "#EF4444",
               borderColor: "#EF4444",
-              data: [27, 68, 86, 74, 10, 4, 87, 28, 27, 68, 86, 74, ],
+              //data: [27, 68, 86, 74, 10, 4, 87, 28, 27, 68, 86, 74, ],
+              data: this.bidSellCnt,
               barThickness: 8,
             },
           ],

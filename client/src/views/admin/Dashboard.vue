@@ -13,7 +13,8 @@
       <div class="w-full  mb-12 xl:mb-0 px-4 -mt-24">
         <AdminLineChart
             :countUser="countUser"
-            :countSell="countSell"
+            :userCnt="userCnt"
+            :dealCnt="dealCnt"
             :title="title"
             style="min-height: 30vh;"
         />
@@ -21,6 +22,8 @@
 
       <div class="w-full mb-12 xl:mb-0 px-4 mt-8">
         <AdminBarChart
+            :bidBuyCnt="bidBuyCnt"
+            :bidSellCnt="bidSellCnt"
             style="min-height: 30vh;"
         />
       </div>
@@ -39,7 +42,13 @@ export default {
       title: "상품 리스트",
       title2: "검수 리스트",
       countUser:[],
-      countSell:[],
+      countDeal:[],
+      userCnt: [],
+      dealCnt: [],
+      bidBuyArray:[],
+      bidSellArray:[],
+      bidBuyCnt: [],
+      bidSellCnt: [],
       countTotalUser: 0,
       countTotalBuy: 0,
       countTotalSell: 0,
@@ -88,16 +97,66 @@ export default {
     this.$axios.get('http://localhost:8080/admin/count/user')
         .then(function(res){
           that.countUser = res.data;
-          console.log("유저",that.countUser)
+          for(let i=0; i<that.countUser.length;i++) {
+            if(that.countUser[i].cnt===null) {
+              that.userCnt[i]=0
+            }
+            if(that.countUser[i].cnt !=null) {
+              that.userCnt.push(that.countUser[i].cnt)
+            }
+          }
         })
         .catch(function(err){
           console.log(err);
         });
 
-    this.$axios.get('http://localhost:8080/admin/count/sell')
+    this.$axios.get('http://localhost:8080/admin/count/deal')
         .then(function(res){
-          that.countSell = res.data;
-          console.log("판매",that.countSell)
+          that.countDeal = res.data;
+
+          for(let i=0; i<that.countDeal.length;i++) {
+            if(that.countDeal[i].cnt===null) {
+              that.dealCnt[i]=0
+            }
+            if(that.countDeal[i].cnt !=null) {
+              that.dealCnt.push(that.countDeal[i].cnt)
+            }
+          }
+        })
+        .catch(function(err){
+          console.log(err);
+        });
+
+
+    this.$axios.get('http://localhost:8080/admin/count/bid/buy')
+        .then(function(res){
+          that.bidBuyArray = res.data;
+
+          for(let i=0; i<that.bidBuyArray.length;i++) {
+            if(that.bidBuyArray[i].cnt===null) {
+              that.bidBuyCnt[i]=0
+            }
+            if(that.bidBuyArray[i].cnt !=null) {
+              that.bidBuyCnt.push(that.bidBuyArray[i].cnt)
+            }
+          }
+        })
+        .catch(function(err){
+          console.log(err);
+        });
+
+    this.$axios.get('http://localhost:8080/admin/count/bid/sell')
+        .then(function(res){
+          that.bidSellArray = res.data;
+
+          for(let i=0; i<that.bidSellArray.length;i++) {
+            if(that.bidSellArray[i].cnt===null) {
+              that.bidSellCnt[i]=0
+            }
+            if(that.bidSellArray[i].cnt !=null) {
+              that.bidSellCnt.push(that.bidSellArray[i].cnt)
+            }
+          }
         })
         .catch(function(err){
           console.log(err);
