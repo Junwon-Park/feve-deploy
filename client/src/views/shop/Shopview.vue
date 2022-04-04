@@ -30,7 +30,7 @@
                     
                     <div>
                       <div class="mt-3">
-                        <v-btn x-large color="error" dark style="width:49%" class="mr-1 mt-3" > 
+                        <v-btn x-large color="error" dark style="width:49%; height:70px;" class="mr-1 mt-3" > 
                           <div v-if="this.SELL_PRICE != 0">
                             <div>구매</div> 
                             <div>{{SELL_PRICE.toLocaleString('ko-KR')}}원</div>
@@ -40,7 +40,7 @@
                             <div>구매입찰</div> 
                           </div>
                         </v-btn>
-                        <v-btn x-large color="success" dark  style="width:49%; float:right" class="ml-1 mt-3"> 
+                        <v-btn x-large color="success" dark  style="width:49%; float:right; height:70px;" class="ml-1 mt-3"> 
                           <div v-if="this.BUY_PRICE != 0">
                             <div>판매</div> 
                             <div>{{BUY_PRICE.toLocaleString('ko-KR')}}원</div>
@@ -53,7 +53,7 @@
                       </div>
                       
                       <div>
-                        <v-btn x-large style="width:100%; background-color:transparent" class="mt-3" > 
+                        <v-btn x-large style="width:100%; background-color:transparent" class="mt-3" @click="goLike()" > 
                             <v-btn icon color="pink">
                             <v-icon>mdi-heart</v-icon>
                             </v-btn>
@@ -172,7 +172,6 @@ export default {
     },
     mounted() {
       this.getView();
-      // this.getPrices();
     },
     methods:{
       getView(){
@@ -215,17 +214,18 @@ export default {
               console.log(err);
             });
       },
-    //   getPrices(){
-    //     console.log("가격 가져오기",this.PRODUCT_KEY);
-    //     this.$axios.post('http://localhost:8080/shop/shopview/getPrices')
-    //   .then( (res) => {			
-    //       console.log(res.data);
-    //       this.items=res.data;
-    //   })
-    //   .catch((err)=>{
-    //   console.log(err);
-    //   });
-    //   },
+      goLike(){
+        console.log("좋아요 버튼 누름");
+        this.$axios.post('http://localhost:8080/shop/goLike/',
+        {product_key: this.PRODUCT_KEY, user_key:1})
+            .then(function(res){
+              console.log("golike버튼 누른 결과는?", res);
+            })
+            .catch(function(err){
+              console.log(err);
+            });
+      }
+    
 
     }
 }
