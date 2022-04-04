@@ -85,7 +85,6 @@ export default {
     this.$axios.get('http://localhost:8080/admin/count/user')
         .then(function(res){
           that.countUser = res.data;
-          console.log(that.countUser)
         })
         .catch(function(err){
           console.log(err);

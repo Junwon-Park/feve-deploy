@@ -9,9 +9,16 @@ async function countUser(req, res, next) {
     console.log(thisYear)
     await db.sequelize
         .query(
-            ' SELECT CONCAT(MONTH(createdAt)) ym, COUNT(*) as cnt \n' +
-            ' FROM User \n' +
-            'where YEAR(createdAt)="'+thisYear+'" GROUP BY ym;',
+            'select SUBSTRING_INDEX(a.Date, \'-\',-1) as month, u.cnt\n'+
+            'from (\n' +
+            '    select \n' +
+            '\t\tdate_format("2022-12-31" - INTERVAL (a.a) month , \'%Y-%m\') as date\n' +
+            '    from (select 0 as a union all select 1 union all select 2 union all select 3 union all \n' +
+            '                select 4 union all select 5 union all select 6 union all select 7 union all \n' +
+            '                select 8 union all  select 9 union all select 10 union all select 11 ) as a\n' +
+            ') a\n' +
+            'left outer join (select date_format(createdAt, \'%Y-%m\') as sdate, count(*) as cnt from User group by sdate)u on u.sdate = a.date\n' +
+            'where a.Date between date_format( DATE_ADD("'+thisYear+'-12-31", INTERVAL - 1 year ), \'%Y-%m\') and date_format("'+thisYear+'-12-31", \'%Y-%m\')  order by a.date asc;',
             { type: Sequelize.QueryTypes.SELECT }
         )
         .then(result => {

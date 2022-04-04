@@ -26,36 +26,47 @@
 import Chart from "chart.js";
 
 export default {
+  data(){
+    return{
+      month:[],
+      userCnt: [],
+    }
+  },
   props:{
-    countUser: [{}],
+    countUser: [],
+  },
+  methods: {
+    makeMonthArray(){
+      for(let i=0; i<this.countUser.length;i++) {
+        this.month.push(this.countUser[i].month +'월')
+      }
+    },
+    makeUserArray(){
+      for(let i=0; i<this.countUser.length;i++) {
+        if(this.countUser[i].cnt===null) {
+          this.countUser[i].cnt=0
+        }
+        if(this.countUser[i].cnt !=null) {
+          this.userCnt.push(this.countUser[i].cnt)
+        }
+      }
+      console.log(this.userCnt)
+    }
   },
   mounted: function () {
     this.$nextTick(function () {
       var config = {
         type: "line",
         data: {
-          // labels: [
-          //   "1월",
-          //   "2월",
-          //   "3월",
-          //   "4월",
-          //   "5월",
-          //   "6월",
-          //   "7월",
-          //   "8월",
-          //   "9월",
-          //   "10월",
-          //   "11월",
-          //   "12월",
-          // ],
-          labels: this.countUser.ym,
+          labels: this.month,
           datasets: [
             {
               //label: new Date().getFullYear(),
               label:"총 거래",
               backgroundColor: "#A855F7",
               borderColor: "#A855F7",
-              data: [65, 78, 66, 44, 56, 86, 74, 56, 60, 87, 67, 75],
+              //data: [65, 78, 66, 44, 56, 86, 74, 56, 60, 87, 67, 75],
+              data: this.userCnt,
               fill: false,
             },
             {
@@ -64,7 +75,7 @@ export default {
               fill: false,
               backgroundColor: "#F97316",
               borderColor: "#F97316",
-              data: this.countUser.cnt,
+              data: this.userCnt,
             },
           ],
         },
@@ -143,6 +154,8 @@ export default {
     });
   },
   created(){
+    this.makeMonthArray()
+    this.makeUserArray()
     console.log(this.$props.countUser)
   }
 };
