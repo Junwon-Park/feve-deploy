@@ -37,7 +37,7 @@
           class="bg-orange-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
           type="button"
           @click="fDialog(), sendItems()"
-          v-if="CSCENTER_STATUS==='0'"
+          v-if="CSCENTER_STATUS ==='답변중'"
       >
         답변하기
       </button>
@@ -69,7 +69,7 @@ export default {
         default:"건물"
       },
     CSCENTER_STATUS: {
-        default: 0
+        default: '',
       },
     CSCENTER_COMMENT:   {
         type: String,
@@ -96,5 +96,8 @@ export default {
       this.$emit("sendItems", sendCscenterKey, sendUserid, sendUserkey);
     }
   },
+  created(){
+    console.log(this.$props.CSCENTER_STATUS)
+  }
 }
 </script>

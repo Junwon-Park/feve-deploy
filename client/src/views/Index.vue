@@ -49,6 +49,7 @@
       </div>
     </div>
     <section class="mt-24 pb-40 relative px-12">
+<div class="relative w-full flex flex-col min-w-0 break-words"></div>
       <div class="flex flex-wrap ">
         <div class="w-full  px-12 md:px-4">
           <h3 class="text-3xl mb-2 font-semibold leading-normal">
@@ -56,7 +57,7 @@
           </h3>
           <hr />
           <MainCardProduct />
-        </div>
+            </div>
         <v-btn outlined color="#999" class="ml-auto mr-auto px-5 mt-10">더 보기</v-btn>
       </div>
 
