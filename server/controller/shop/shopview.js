@@ -1,9 +1,9 @@
 const { Product } = require("../../models");
 
 async function shopview(req, res, next) {
-//   const product_key = req.body.PRODUCT_KEY;
-//   console.log("product_key는???????????",product_key);
-  const product_key = 1; 
+  const product_key = req.params.PRODUCT_KEY;
+  console.log("product_key는???????????",product_key);
+  
   await Product.findOne({
     where: {
       PRODUCT_KEY: product_key

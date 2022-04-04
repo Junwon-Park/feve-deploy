@@ -21,7 +21,7 @@
             {{PRODUCT_CATE}}
           </span>
         </div>
-        <div class="absolute w-auto right-0 pl-4 flex-initial" @click="goView()">
+        <div class="absolute w-auto right-0 pl-4 flex-initial" @click="goView(`${PRODUCT_KEY}`)">
           <div class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full" 
           :class="[statIconColor]">
             <i :class="[statIconName]"></i>
@@ -69,19 +69,24 @@ export default {
     },
   },
   methods:{
-    goView(){
+    goView(PRODUCT_KEY){
      
       console.log("상세보기");
       console.log(this.PRODUCT_KEY);
-      const id = this.PRODUCT_KEY;
-      console.log(id);
-      // this.$axios.post('http://localhost:8080/shop/shopview/{{id}}')
-      //       .then( (res) => {			
-      //           console.log(res.data);
-      //       })
-      //       .catch((err)=>{
-      //       console.log(err);
-      //       });
+      console.log(PRODUCT_KEY);
+      this.$router.push({path:'./shopview',
+      name:'Shopview',
+      params:{
+        PRODUCT_KEY:this.PRODUCT_KEY}
+        });
+      // this.$axios.get('http://localhost:8080/shop/shopview/'+id)
+      // .then( (res) => {			
+      //     console.log(res.data);
+      //     this.items=res.data;
+      // })
+      // .catch((err)=>{
+      // console.log(err);
+      // });
     }
   }
 };
