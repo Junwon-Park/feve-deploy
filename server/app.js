@@ -30,6 +30,7 @@ const mypageSellListRouter = require('./router/mypage/mypageSellList.js');
 const mypageFavoriteListRouter = require('./router/mypage/mypageFavoriteList.js');
 const mypageProfileRouter = require('./router/mypage/mypageProfile.js');
 const imageRouter = require("./image/image.js");
+const uploadImageRouter = require("./image/uploadImage.js");
 const cscenterRoute = require("./router/cscenter/cscenter.js");
 
 const app = express();
@@ -96,6 +97,9 @@ app.use('/mypage/buyList', mypageBuyListRouter);
 app.use('/mypage/sellList', mypageSellListRouter);
 app.use('/mypage/favoriteList', mypageFavoriteListRouter);
 app.use('/mypage/profile', mypageProfileRouter);
+
+app.use("/getImage", imageRouter);
+app.use("/uploadImage", uploadImageRouter);
 
 app.use((req, res, next) => {
   res.sendStatus(404);

@@ -86,6 +86,7 @@
                     </div>
 
                    <div class="relative mb-3  mt-8 w-full lg:w-6/12 pr-3 ">
+                     <form>
                       <label
                           class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                           htmlFor="상품사진경로"
@@ -94,10 +95,13 @@
                       </label>
                       <input
                           type="file"
+                          id="uploadImg"
+                          name="image"
                           class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                           placeholder="사진경로"
                           @change="handleImage"
                       />
+                     </form>
                   </div>
 
                     <div class="relative mb-3  mt-8 w-full lg:w-6/12 pr-3 ">
@@ -166,8 +170,9 @@ export default {
         product_get_brand: '',
         product_cate: '',
         product_get_cate: '',
-        default: "0"
+        default: "0",
       },
+      uploadServerImg:'',
     };
   },
 
@@ -189,17 +194,12 @@ export default {
 
   methods: {
     handleImage(e){
-      let imageFile = e.target.files;
+      this.uploadServerImg = e.target.files;
       let that = this;
-      if(imageFile) {
-        //let url = URL.createObjectURL(imageFile[0]);
-        //that.product.product_pic=url;
-        //that.product.product_pic=imageFile[0].name.split('.')[0];
-        that.product.product_pic=imageFile[0].name
-        // console.log(url.split('/')[3]);
+      if(this.uploadServerImg) {
+        that.product.product_pic=this.uploadServerImg[0].name;
       }
       else {
-        //that.product.imgsrc = require('../../assets/img/icon_question.png');
         that.product.imgsrc = 'icon_question';
       }
     },
@@ -209,6 +209,8 @@ export default {
       const utc =curr.getTime() + (curr.getTimezoneOffset() * 60 * 1000);
       const KR_TIME_DIFF = 9 * 60 * 60 * 1000;
       const kr_curr =new Date(utc + (KR_TIME_DIFF));
+
+
 
       this.$axios.post('http://localhost:8080/admin/addproduct', {
           product_brand: this.product.product_brand,
@@ -223,10 +225,29 @@ export default {
       })
           .then(() => {
             alert("상품이 등록되었습니다.");
-            this.$router.push('/admin/dashboard');
+            this.$router.push('/admin');
           })
           .catch((error) => {
             console.log(error);
+          });
+
+      // let that = this;
+      let file = this.uploadServerImg[0];
+      const formData = new FormData();
+      formData.append("image", file);
+
+      console.log(file)
+
+      this.$axios.post('http://localhost:8080/uploadImage', formData, {
+        headers: {
+          'content-type': 'multipart/form-data'
+        }
+      })
+          .then(function(res){
+            console.log(res)
+          })
+          .catch(function(err){
+            console.log(err)
           })
     },
 
