@@ -36,7 +36,7 @@
         </tbody>
       </table>
     </div>
-    <CscenterQnaAnswer
+    <CscenterQnaModal
       :dialog="recDialog"
       :table="table"
       :title="title"
@@ -49,7 +49,7 @@
 </template>
 <script>
 import CscenterQnaCards from "@/components/Cards/Cscenter/CscenterQnaCards.vue";
-import CscenterQnaAnswer from "@/components/Cards/Cscenter/CscenterQnaAnswer.vue";
+import CscenterQnaModal from "@/components/Cards/Cscenter/CscenterQnaModal.vue";
 export default {
   props:{
     title: {
@@ -83,7 +83,7 @@ export default {
   },
   components:{
     CscenterQnaCards,
-    CscenterQnaAnswer
+    CscenterQnaModal
   },
   methods: {
     cDialog(){

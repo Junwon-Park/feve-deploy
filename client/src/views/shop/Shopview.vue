@@ -53,8 +53,12 @@
                       </div>
                       
                       <div>
-                        <v-btn x-large style="width:100%; background-color:transparent" class="mt-3" @click="goLike()" > 
-                            <v-btn icon color="pink">
+                        <v-btn x-large style="width:100%; background-color:transparent" class="mt-3"> 
+                            <v-btn v-if="!this.likeStatus" icon color="gray"  @click="goLike()">
+                            <v-icon>mdi-heart</v-icon>
+                            <!-- <v-icon>{{ !goLike? 'mdi-heart' : 'mdi-close' }} </v-icon> -->
+                            </v-btn>
+                            <v-btn v-else icon color="pink"  @click="goDislike()">
                             <v-icon>mdi-heart</v-icon>
                             </v-btn>
                           <div>관심상품</div>
@@ -103,8 +107,6 @@
                   </div>
                   <!--컴포넌트로 구매 확인 공지 넣어주기-->
                   <Notice/>
-                
-                  
                   
                 </div>
               </div>
@@ -162,7 +164,7 @@ export default {
             src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg',
           },
         ],
-    
+      likeStatus:false,
       
     }),
     components: {
@@ -216,14 +218,33 @@ export default {
       },
       goLike(){
         console.log("좋아요 버튼 누름");
-        this.$axios.post('http://localhost:8080/shop/goLike/',
+        this.$axios.post('http://localhost:8080/shop/shopview/'+ this.PRODUCT_KEY + '/goLike',
         {product_key: this.PRODUCT_KEY, user_key:1})
             .then(function(res){
               console.log("golike버튼 누른 결과는?", res);
+              // this.likeStatus= !this.likeStatus;
+              // console.log(this.likeStatus);
             })
             .catch(function(err){
               console.log(err);
             });
+        this.likeStatus = !this.likeStatus;
+        console.log(this.likeStatus);
+      },
+      goDislike(){
+        console.log("좋아요 취소");
+        this.$axios.post('http://localhost:8080/shop/shopview/'+ this.PRODUCT_KEY + '/goDislike',
+        {product_key: this.PRODUCT_KEY, user_key:1})
+            .then(function(res){
+              console.log("goDislike버튼 누른 결과는?", res);
+              // this.likeStatus = !this.likeStatus;
+              // console.log(this.likeStatus);
+            })
+            .catch(function(err){
+              console.log(err);
+            });
+        this.likeStatus = !this.likeStatus;
+        console.log(this.likeStatus);
       }
     
 

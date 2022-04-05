@@ -36,10 +36,10 @@
       <button
           class="bg-orange-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
           type="button"
-          @click="fDialog(), sendItems()"
+          @click="QnaInsert(), send()"
           v-if="CSCENTER_STATUS==='0'"
       >
-        답변하기
+        문의하기
       </button>
     </td>
   </tr>
@@ -85,8 +85,8 @@ export default {
   },
 
   methods: {
-    fDialog(){
-      this.$emit('sendDialog');
+    QnaInsert(){
+      this.$emit('sendQna');
     },
     sendItems(){
       let that = this;
