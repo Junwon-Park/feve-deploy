@@ -74,15 +74,7 @@ export default {
     },
     PRODUCT_CATE: {
       default: "3",
-    },
-    // statIconName: {
-    //   type: String,
-    //   default: "far fa-chart-bar",
-    // },
-    // statIconColor: {
-    //   type: String,
-    //   default: "bg-red-500",
-    // },
+    }
   },
   methods:{
     goView(PRODUCT_KEY){
@@ -95,14 +87,7 @@ export default {
       params:{
         PRODUCT_KEY:this.PRODUCT_KEY}
         });
-      // this.$axios.get('http://localhost:8080/shop/shopview/'+id)
-      // .then( (res) => {			
-      //     console.log(res.data);
-      //     this.items=res.data;
-      // })
-      // .catch((err)=>{
-      // console.log(err);
-      // });
+      
     }
   }
 };
