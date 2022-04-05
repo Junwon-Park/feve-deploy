@@ -170,10 +170,10 @@ export default {
             src: this.imageUrl+this.PRODUCT_PIC,
           },
           {
-            src: this.imageUrl+this.PRODUCT_PIC,
+            src: this.imageUrl+this.PRODUCT_PIC2,
           },
           {
-            src: this.imageUrl+this.PRODUCT_PIC,
+            src: this.imageUrl+this.PRODUCT_PIC3,
           },
         ]
     },

@@ -2,8 +2,8 @@
   <div
     class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0"
   >
-    <div class="flex-auto p-4">
-      <div class="flex flex-wrap">
+    <div class="flex-auto p-4" >
+      <div class="flex flex-wrap" @click="goView(`${PRODUCT_KEY}`)">
         <div class="relative w-full max-w-full flex-grow flex-1">
           <div class="w-full mb-5"  style="overflow: hidden; width:8vw; height: 8vw;">
             <img :src="imageUrl+ PRODUCT_PIC" alt="아이템 사진"
@@ -11,7 +11,7 @@
                  crossorigin>
           </div>
           <h5 class="text-black uppercase  text-sm">
-            {{ PRODUCT_BRAND }} 브랜드 빼실건지 확인 부탁드려영
+            {{ PRODUCT_BRAND }}
           </h5>
            <h5 v-if="false">
            {{PRODUCT_KEY}}
@@ -19,23 +19,23 @@
           <span class=" text-sm font-semibold block">
             {{ PRODUCT_NAME }}
           </span>
-          <span class=" text-xs   block" style="color: #aaa;">
-<!--            {{ PRODUCT_DESC }}--> 설명 안넣으실건지  확인 부탁드려영
-          </span>
+          <!-- <span class=" text-xs   block" style="color: #aaa;">
+           {{ PRODUCT_DESC }}
+          </span> -->
           <span v-if="false">
             {{PRODUCT_CATE}}
           </span>
         </div>
-        <div class="absolute w-auto right-0 pl-4 flex-initial" @click="goView(`${PRODUCT_KEY}`)">
+        <div class="absolute w-auto right-0 pl-4 flex-initial">
         </div>
       </div>
-      <div v-if="this.SELL_PRICE !== null">
+      <div v-if="this.SELL_PRICE !== null" @click="goView(`${PRODUCT_KEY}`)">
         <p class="text-base text-black mt-4 mb-0">
           <b class="whitespace-nowrap">{{ SELL_PRICE.toLocaleString('ko-KR') }}원</b>
         </p>
         <p class="text-xs text-gray-400">즉시 구매가</p>
       </div>
-      <div v-else>
+      <div v-else @click="goView(`${PRODUCT_KEY}`)">
         <p class="text-base text-black mt-4 mb-0">
           <b class="whitespace-nowrap">구매 입찰</b>
         </p>
@@ -75,14 +75,14 @@ export default {
     PRODUCT_CATE: {
       default: "3",
     },
-    statIconName: {
-      type: String,
-      default: "far fa-chart-bar",
-    },
-    statIconColor: {
-      type: String,
-      default: "bg-red-500",
-    },
+    // statIconName: {
+    //   type: String,
+    //   default: "far fa-chart-bar",
+    // },
+    // statIconColor: {
+    //   type: String,
+    //   default: "bg-red-500",
+    // },
   },
   methods:{
     goView(PRODUCT_KEY){
