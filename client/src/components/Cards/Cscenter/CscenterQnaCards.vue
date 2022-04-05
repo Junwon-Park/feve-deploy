@@ -1,4 +1,5 @@
 <template>
+
   <tr>
     <td
         class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
@@ -30,18 +31,17 @@
     >
       {{ CSCENTER_STATUS }}
     </td>
-    <td
+    <!-- <td
         class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
     >
       <button
           class="bg-orange-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
           type="button"
-          @click="QnaInsert(), send()"
-          v-if="CSCENTER_STATUS==='0'"
+          @click="fDialog(), sendItems()"
       >
         문의하기
       </button>
-    </td>
+    </td> -->
   </tr>
 </template>
 
@@ -84,17 +84,17 @@ export default {
     },
   },
 
-  methods: {
-    QnaInsert(){
-      this.$emit('sendQna');
-    },
-    sendItems(){
-      let that = this;
-      let sendCscenterKey=that.CSCENTER_KEY;
-      let sendUserid=that.USER_ID;
-      let sendUserkey=that.USER_KEY;
-      this.$emit("sendItems", sendCscenterKey, sendUserid, sendUserkey);
-    }
-  },
+  // methods: {
+  //   fDialog(){
+  //     this.$emit('sendDialog');
+  //   },
+  //   sendItems(){
+  //     let that = this;
+  //     let sendCscenterKey=that.CSCENTER_KEY;
+  //     let sendUserid=that.USER_ID;
+  //     let sendUserkey=that.USER_KEY;
+  //     this.$emit("sendItems", sendCscenterKey, sendUserid, sendUserkey);
+  //   }
+  // },
 }
 </script>

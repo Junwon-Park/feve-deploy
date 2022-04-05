@@ -36,7 +36,7 @@
         </tbody>
       </table>
     </div>
-    <CscenterQnaModal
+    <!-- <CscenterQnaModal
       :dialog="recDialog"
       :table="table"
       :title="title"
@@ -44,12 +44,16 @@
       :receivedCscenterKey="receivedCscenterKey"
       :receivedUserid="receivedUserid"
       @sendDialog="sendDialog"
-      @updateList="updateList"/>
-  </div>
+      @updateList="updateList"/>-->
+      <!-- <button class="bg-orange-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+              type="button" @click="fDialog(), sendItems()">문의하기</button> -->
+  </div> 
+  
+  
 </template>
 <script>
 import CscenterQnaCards from "@/components/Cards/Cscenter/CscenterQnaCards.vue";
-import CscenterQnaModal from "@/components/Cards/Cscenter/CscenterQnaModal.vue";
+// import CscenterQnaModal from "@/components/Cards/Cscenter/CscenterQnaModal.vue";
 export default {
   props:{
     title: {
@@ -62,7 +66,7 @@ export default {
   },
   data () {
     return {
-      table: ["번호", "제목", "작성자", "작성시간", "답변여부", ""],
+      table: ["번호", "제목", "작성자", "작성시간", "답변여부", "관리"],
       receivedCscenterKey: 0,
       receivedUserid:"",
       receivedUserkey:0,
@@ -83,49 +87,62 @@ export default {
   },
   components:{
     CscenterQnaCards,
-    CscenterQnaModal
+    
   },
   methods: {
-    cDialog(){
-      this.recDialog=true;
-    },
-    sendDialog(){
-      this.recDialog = false
-    },
-    sendItems(recC, recU, recUk) {
-      let that=this;
-      that.receivedCscenterKey=recC;
-      that.receivedUserid=recU;
-      that.receivedUserkey=recUk;
-
-      console.log(that.receivedCscenterKey)
-
-      this.$axios.post('http://localhost:8080/admin/cscenter/one',{
-        sendCscenterKey: that.receivedCscenterKey,
-        sendUserid: that.receivedUserid,
-        sendUserkey: that.receivedUserkey,
-      }).then(function(res){
-        that.item=res.data[0];
-        console.log("res", res);
-      }).catch(function(err){
-        console.log(err);
-      });
-    },
-    updateList(newS){
-      let that = this;
-      that.cscenterComment = newS;
-
-      this.$axios.post('http://localhost:8080/admin/updateCscenter', {
-        sendCscenterKey: that.receivedCscenterKey,
-        cscenterComment: that.cscenterComment,
-        sendUserkey: that.receivedUserkey,
-      }).then(function(res){
-        console.log(res)
-      })
-          .catch(function(err){
-            console.log(err);
-          });
-    }
+    // fDialog(){
+    //   this.$emit('sendDialog');
+    // },
+    // sendItems(){
+    //   let that = this;
+    //   let sendCscenterKey=that.CSCENTER_KEY;
+    //   let sendUserid=that.USER_ID;
+    //   let sendUserkey=that.USER_KEY;
+    //   this.$emit("sendItems", sendCscenterKey, sendUserid, sendUserkey);
+    
   },
+  // methods: {
+  //   cDialog(){
+  //     this.recDialog=true;
+  //   },
+  //   sendDialog(){
+  //     this.recDialog = false
+  //   },
+  //   sendItems(recC, recU, recUk) {
+  //     let that=this;
+  //     that.receivedCscenterKey=recC;
+  //     that.receivedUserid=recU;
+  //     that.receivedUserkey=recUk;
+
+  //     console.log(that.receivedCscenterKey)
+
+  //     this.$axios.post('http://localhost:8080/admin/cscenter/one',{
+  //       sendCscenterKey: that.receivedCscenterKey,
+  //       sendUserid: that.receivedUserid,
+  //       sendUserkey: that.receivedUserkey,
+  //     }).then(function(res){
+  //       that.item=res.data[0];
+  //       console.log("res", res);
+  //     }).catch(function(err){
+  //       console.log(err);
+  //     });
+  //   },
+  //   updateList(newS){
+  //     let that = this;
+  //     that.cscenterComment = newS;
+
+  //     this.$axios.post('http://localhost:8080/admin/updateCscenter', {
+  //       sendCscenterKey: that.receivedCscenterKey,
+  //       cscenterComment: that.cscenterComment,
+  //       sendUserkey: that.receivedUserkey,
+  //     }).then(function(res){
+  //       console.log(res)
+  //     })
+  //         .catch(function(err){
+  //           console.log(err);
+  //         });
+  //   }
+  // },
+  
 }
 </script>

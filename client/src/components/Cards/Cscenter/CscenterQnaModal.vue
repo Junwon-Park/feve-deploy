@@ -166,7 +166,7 @@ export default {
   },
 
   methods:{
-    send(){
+    sendDialog(){
       this.recDialog = true
     },
     closeDialog(){
