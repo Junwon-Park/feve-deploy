@@ -6,7 +6,7 @@
               style="border-radius: 8px; width:5rem; height:5rem; margin-top:1rem; margin-bottom:1rem"
               crossorigin
             >
-            
+
             <div class="ml-3">
                 <h5 class="font-bold underline mt-2">
                 {{ item.PRODUCT_BRAND }}
@@ -15,7 +15,7 @@
                 {{ item.PRODUCT_NAME }}
                 </h5>
                 <h5 class="font-bold mt-1">
-                {{ item.PRODUCT_ORIPRICE.toLocaleString('ko-KR') }}원
+                {{ item.MIN_PRICE.toLocaleString('ko-KR') }}원
                 </h5>
             </div>
             <!-- <h5 class="text-gray-400" style="font-size: 0.7rem; line-height: 0.75rem; margin-top:-0.2rem">

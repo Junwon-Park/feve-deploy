@@ -16,7 +16,7 @@
             {{ item.PRODUCT_NAME }}
             </h5>
             <h5 class="font-bold mt-1">
-              {{ item.PRODUCT_ORIPRICE.toLocaleString('ko-KR') }}원
+              {{ item.MIN_PRICE.toLocaleString('ko-KR') }}원
             </h5>
             <h5 class="text-gray-400" style="font-size: 0.7rem; line-height: 0.75rem; margin-top:-0.2rem">
               즉시 구매가
