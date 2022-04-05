@@ -9,7 +9,7 @@
                 <div class="w-full xl:w-6/12 px-4 mt-12">
                   <v-carousel hide-delimiters style="width:400px; height:400px; border: 1px solid red">
                       <v-carousel-item v-for="(item,i) in items" :key="i" >
-                        <img :src="PRODUCT_PIC" crossorigin style="background: #ccc; width:100% !important; height:100% !important;"/>
+                        <img style="background: #ccc; width:100% !important; height:100% !important;" :src="item.src" crossorigin />
                       </v-carousel-item>
                     </v-carousel>
                 </div>
