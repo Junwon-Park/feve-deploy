@@ -15,15 +15,23 @@
                   공지사항
                 </h1>
               </div>
+
+            <div class="flex flex-wrap mt-5">
+              <div class="relative w-full max-w-full flex-grow flex-1 text-right">
+                <div class="text-left">
+                  <v-chip class="ma-2" color="#f4f4f4"> 전체 </v-chip>
+                  <v-chip class="ma-2" color="#f4f4f4"> 레고 </v-chip>
+                  <v-chip class="ma-2" color="#f4f4f4"> 베어브릭 </v-chip>
+                </div>
+              </div>
+            </div>
               <div class="mt-10  border-t border-blueGray-200 text-center">
                 <div class="flex flex-wrap justify-center">
                    <div class="w-full mb-12 ">
                     <div class="container">
-                      <div class="w-full mb-12 xl:mb-0  mt-12" style="min-height: 70vh">
+                      <div class="w-full mb-12 xl:mb-0  mt-1" style="min-height: 70vh">
                           <CscenterFaqList v-bind="items" :items="items" :title="title"/>
-                          <Pagination />
                       </div>
-                      
                     </div>
                   </div>
                 </div>
@@ -37,7 +45,7 @@
 <script>
 import CscenterSidebar from "@/components/Sidebar/CscenterSidebar.vue";
 import CscenterFaqList from "@/components/Cards/Cscenter/CscenterFaqList.vue";
-import Pagination from "@/components/Pagination.vue" ;
+// import Pagination from "@/components/Pagination.vue" ;
 
 export default {
   data() {
@@ -61,7 +69,7 @@ export default {
   components: {
     CscenterSidebar,
     CscenterFaqList,
-    Pagination,
+    //Pagination,
   },
 
   created() {
