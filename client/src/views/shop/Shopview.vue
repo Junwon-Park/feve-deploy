@@ -8,7 +8,9 @@
               <div class="flex">
                 <div class="w-full xl:w-6/12 px-4 mt-12">
                   <v-carousel hide-delimiters>
-                      <v-carousel-item v-for="(item,i) in items" :key="i" :src="item.src" crossorigin></v-carousel-item>
+                      <v-carousel-item v-for="(item,i) in items" :key="i" >
+                        <img :src="imageUrl+PRODUCT_PIC" crossorigin/>
+                      </v-carousel-item>
                     </v-carousel>
                 </div>
                 <div class="w-full xl:w-6/12 mb-12 xl:mb-0 px-4 mt-12">
@@ -56,7 +58,6 @@
                         <v-btn x-large style="width:100%; background-color:transparent" class="mt-3"> 
                             <v-btn v-if="!this.likeStatus" icon color="gray"  @click="goLike()">
                             <v-icon>mdi-heart</v-icon>
-                            <!-- <v-icon>{{ !goLike? 'mdi-heart' : 'mdi-close' }} </v-icon> -->
                             </v-btn>
                             <v-btn v-else icon color="pink"  @click="goDislike()">
                             <v-icon>mdi-heart</v-icon>
@@ -126,7 +127,10 @@ import Notice from './Notice';
 
 
 export default {
-    data: () => ({
+    data() {
+      return{
+      imageUrl : this.$store.getters.ServerUrl + '/getImage?imageName=',
+      likeStatus:false,
       box,
       legoBg,
       model: 0,
@@ -137,7 +141,6 @@ export default {
         'red',
         'orange',
       ],
-
       PRODUCT_NAME: '',
       PRODUCT_BRAND: '',
       PRODUCT_DESC:'',
@@ -148,25 +151,9 @@ export default {
       PRODUCT_KEY:0,
       SELL_PRICE:0,
       BUY_PRICE:0,
-
-      // imageUrl : this.$store.getters.ServerUrl + '/getImage?imageName=',
-      items: [
-          {
-            src: "this.$store.getters.ServerUrl + '/getImage?imageName='+ product-lego1.jpg",
-          },
-          {
-            src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg',
-          },
-          {
-            src: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg',
-          },
-          {
-            src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg',
-          },
-        ],
-      likeStatus:false,
-      
-    }),
+      items:[]
+      };
+    },
     components: {
     ShopCardLineChart,
     ShopCardTable,
@@ -174,16 +161,31 @@ export default {
     },
     mounted() {
       this.getView();
+      this.countLike();
+      
+    },
+    created(){
+      this.items=[
+          {
+            src: this.imageUrl+this.PRODUCT_PIC,
+          },
+          {
+            src: this.imageUrl+this.PRODUCT_PIC,
+          },
+          {
+            src: this.imageUrl+this.PRODUCT_PIC,
+          },
+        ]
     },
     methods:{
-      getView(){
+      getView:function(){
         var vm = this;
         this.PRODUCT_KEY = this.$route.params.PRODUCT_KEY;
-        console.log("라우터에서 받아오는 product_key 값은", this.$route.params.PRODUCT_KEY);
+        //console.log("라우터에서 받아오는 product_key 값은", this.$route.params.PRODUCT_KEY);
         this.$axios.get('http://localhost:8080/shop/shopview/'+ this.PRODUCT_KEY)
             .then(function(res){
               // console.log("디비에서 결과 가져옴", res);
-              console.log("res.data값은?", res.data);
+              //console.log("res.data값은?", res.data);
               vm.PRODUCT_NAME = res.data.PRODUCT_NAME;
               vm.PRODUCT_BRAND = res.data.PRODUCT_BRAND;
               vm.PRODUCT_DESC = res.data.PRODUCT_DESC;
@@ -192,7 +194,7 @@ export default {
               vm.PRODUCT_ORIPRICE = res.data.PRODUCT_ORIPRICE;
               vm.PRODUCT_PIC = res.data.PRODUCT_PIC;
               vm.PRODUCT_KEY = res.data.PRODUCT_KEY;
-              console.log("BUYS 배열의 길이는?", res.data.Buys.length);
+              //console.log("BUYS 배열의 길이는?", res.data.Buys.length);
               if(res.data.Sells.length!=0)
               {
                 vm.SELL_PRICE = res.data.Sells[0].SELL_PRICE;
@@ -216,36 +218,55 @@ export default {
               console.log(err);
             });
       },
-      goLike(){
-        console.log("좋아요 버튼 누름");
+      goLike:function(){
+        var vm = this;
+        //console.log("좋아요 버튼 누름");
         this.$axios.post('http://localhost:8080/shop/shopview/'+ this.PRODUCT_KEY + '/goLike',
         {product_key: this.PRODUCT_KEY, user_key:1})
             .then(function(res){
               console.log("golike버튼 누른 결과는?", res);
-              // this.likeStatus= !this.likeStatus;
-              // console.log(this.likeStatus);
+              vm.likeStatus= !vm.likeStatus;
+              //console.log(vm.likeStatus);
             })
             .catch(function(err){
               console.log(err);
             });
-        this.likeStatus = !this.likeStatus;
-        console.log(this.likeStatus);
       },
-      goDislike(){
-        console.log("좋아요 취소");
+      goDislike:function(){
+        var vm = this;
+        //console.log("좋아요 취소");
         this.$axios.post('http://localhost:8080/shop/shopview/'+ this.PRODUCT_KEY + '/goDislike',
         {product_key: this.PRODUCT_KEY, user_key:1})
             .then(function(res){
               console.log("goDislike버튼 누른 결과는?", res);
-              // this.likeStatus = !this.likeStatus;
-              // console.log(this.likeStatus);
+              vm.likeStatus = !vm.likeStatus;
+              //console.log(vm.likeStatus);
             })
             .catch(function(err){
               console.log(err);
             });
-        this.likeStatus = !this.likeStatus;
-        console.log(this.likeStatus);
+      },
+      countLike:function(){
+        var vm = this;
+        //console.log("좋아요가 db에 있는지 확인");
+        //console.log("여기서 프로덕트키 제대로 넘기니",this.PRODUCT_KEY);
+        //console.log("원래 맨처음 likestatus 값", this.likeStatus);
+        this.$axios.post('http://localhost:8080/shop/shopview/'+ this.PRODUCT_KEY + '/countLike',
+        {product_key: this.PRODUCT_KEY, user_key:1})
+            .then(function(res){
+              //onsole.log("countLike 결과는?", res);
+              //console.log("갯수는?",res.data);
+              if(res.data >0)
+              {
+                vm.likeStatus = true;
+              }
+               //console.log(vm.likeStatus);
+            })
+            .catch(function(err){
+              console.log(err);
+            });
       }
+      
     
 
     }
