@@ -8,8 +8,8 @@
               <div class="flex">
                 <div class="w-full xl:w-6/12 px-4 mt-12">
                   <v-carousel hide-delimiters>
-                      <v-carousel-item v-for="(item,i) in items" :key="i" >
-                        <img :src="imageUrl+PRODUCT_PIC" crossorigin/>
+                      <v-carousel-item v-for="(item,i) in items" :key="i" style="width:300px !important; height:300px !important;" >
+                        <img :src="item.src" crossorigin style="widht:100% !important; height:100% !important;"/>
                       </v-carousel-item>
                     </v-carousel>
                 </div>
@@ -148,10 +148,22 @@ export default {
       PRODUCT_LDATE:'',
       PRODUCT_ORIPRICE:0,
       PRODUCT_PIC:'',
+      PRODUCT_PIC2:'',
+      PRODUCT_PIC3:'',
       PRODUCT_KEY:0,
       SELL_PRICE:0,
       BUY_PRICE:0,
-      items:[]
+      items:[
+          {
+            src: this.imageUrl+this.PRODUCT_PIC,
+          },
+          {
+            src: this.imageUrl+this.PRODUCT_PIC2,
+          },
+          {
+            src: this.imageUrl+this.PRODUCT_PIC3,
+          }
+          ]
       };
     },
     components: {
@@ -161,22 +173,21 @@ export default {
     },
     mounted() {
       this.getView();
+      console.log(this.items);
+      // this.items[0].src = this.imageUrl + this.PRODUCT_PIC;
+      // this.items[1].src = this.imageUrl + this.PRODUCT_PIC2;
+      // this.items[2].src = this.imageUrl + this.PRODUCT_PIC3;
       this.countLike();
       
     },
-    created(){
-      this.items=[
-          {
-            src: this.imageUrl+this.PRODUCT_PIC,
-          },
-          {
-            src: this.imageUrl+this.PRODUCT_PIC2,
-          },
-          {
-            src: this.imageUrl+this.PRODUCT_PIC3,
-          },
-        ]
-    },
+    // created(){
+    //   this.getView();
+    //   console.log(this.items);
+    //   this.items[0].src = this.imageUrl + this.PRODUCT_PIC;
+    //   this.items[1].src = this.imageUrl + this.PRODUCT_PIC;
+    //   this.items[2].src = this.imageUrl + this.PRODUCT_PIC;
+      
+    // },
     methods:{
       getView:function(){
         var vm = this;
@@ -185,7 +196,7 @@ export default {
         this.$axios.get('http://localhost:8080/shop/shopview/'+ this.PRODUCT_KEY)
             .then(function(res){
               // console.log("디비에서 결과 가져옴", res);
-              //console.log("res.data값은?", res.data);
+              console.log("res.data값은?", res.data);
               vm.PRODUCT_NAME = res.data.PRODUCT_NAME;
               vm.PRODUCT_BRAND = res.data.PRODUCT_BRAND;
               vm.PRODUCT_DESC = res.data.PRODUCT_DESC;
@@ -193,6 +204,8 @@ export default {
               vm.PRODUCT_LDATE = res.data.PRODUCT_LDATE;
               vm.PRODUCT_ORIPRICE = res.data.PRODUCT_ORIPRICE;
               vm.PRODUCT_PIC = res.data.PRODUCT_PIC;
+              vm.PRODUCT_PIC2 = res.data.PRODUCT_PIC2;
+              vm.PRODUCT_PIC3 = res.data.PRODUCT_PIC3;
               vm.PRODUCT_KEY = res.data.PRODUCT_KEY;
               //console.log("BUYS 배열의 길이는?", res.data.Buys.length);
               if(res.data.Sells.length!=0)
@@ -212,7 +225,11 @@ export default {
               {
                 vm.BUY_PRICE =0;
               }
-              
+
+              vm.items[0].src = vm.imageUrl + vm.PRODUCT_PIC;
+              vm.items[1].src = vm.imageUrl + vm.PRODUCT_PIC2;
+              vm.items[2].src = vm.imageUrl + vm.PRODUCT_PIC3;
+              console.log(vm.items[0].src);
             })
             .catch(function(err){
               console.log(err);
