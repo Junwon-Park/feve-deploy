@@ -103,10 +103,10 @@
           <hr />
           <div class="flex flex-wrap">
           <MainCardProduct
-              v-for="(item, idx) in items"
+              v-for="(item, idx) in newItems"
               :key="idx"
               v-bind="item"
-              :items="items" />
+              :items="newItems" />
         </div>
         </div>
       </div>
@@ -229,6 +229,17 @@ export default {
         PRODUCT_PIC: "",
         PRODUCT_DELETE:'',
         PRODUCT_DESC: "",
+      }],
+      newItems:[{
+        PRODUCT_KEY: 0,
+        PRODUCT_NAME: '',
+        PRODUCT_BRAND: '',
+        PRODUCT_CATE: '',
+        PRODUCT_ORIPRICE: 0,
+        PRODUCT_MNUM: '',
+        PRODUCT_PIC: "",
+        PRODUCT_DELETE:'',
+        PRODUCT_DESC: "",
       }]
     };
   },
@@ -253,8 +264,15 @@ export default {
     let that = this;
     this.$axios.get('http://localhost:8080/main/loadproduct')
         .then(function(res){
-          console.log(res)
           that.items=res.data;
+        })
+        .catch(function(err){
+          console.log(err);
+        });
+
+    this.$axios.get('http://localhost:8080/main/loadproduct/new')
+        .then(function(res){
+          that.newItems=res.data;
         })
         .catch(function(err){
           console.log(err);
