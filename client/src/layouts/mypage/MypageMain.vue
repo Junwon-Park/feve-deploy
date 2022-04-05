@@ -1,6 +1,5 @@
 <template>
   <div style="margin-left:18%; max-width:60%; margin-bottom:10%">
-
     <mypage-simple-user-info :userInfo="userInfo" style="width:15rem;"/>
 
     <h2 class="mt-20 font-bold">구매 내역</h2>
@@ -10,8 +9,7 @@
     <mypage-simple-count-list :counts="sellCounts"/>
 
     <h2 class="font-bold">관심 상품</h2>
-    <mypage-simple-favorite-list :items="favoriteProducts"/>
-
+    <mypage-simple-favorite-list :items="favoriteList"/>
   </div>
 </template>
 
@@ -34,21 +32,14 @@ export default {
       },
       buyCounts:[],
       sellCounts:[],
-      favoriteProducts: [
-        {
-          PRODUCT_BRAND:'',
-          PRODUCT_NAME:'',
-          PRODUCT_ORIPRICE:'',
-          PRODUCT_PIC:'',
-        },
-      ],
+      favoriteList: [],
     }
   },
   created() {
     this.getSimpleUserInfo();
     this.getBuyCounts();
     this.getSellCounts();
-    this.getSimpleFavorites();
+    this.getSimpleFavoriteList();
   },
   methods: {
     getSimpleUserInfo(){
@@ -88,18 +79,17 @@ export default {
         console.log(error);
       })
     },
-    getSimpleFavorites(){
-      this.$axios.post('http://localhost:8080/mypage/getSimpleFavorites', {
-        USER_KEY : '1', //로그인과 연동시키기
-      })
-      .then((result) => {
-        //console.log("getSimpleFavorites.result: ", result);
-        this.favoriteProducts = result.data;
-        //console.log("getSimpleFavorites.favoriteProducts: ", this.favoriteProducts);
-      })
-      .catch((error) => {
-        console.log(error);
-      })
+    getSimpleFavoriteList(){
+      this.$axios.post(this.$store.getters.ServerUrl + '/mypage/favoriteList', {
+          USER_KEY : '1', //로그인과 연동시키기
+        })
+        .then((result) => {
+          //console.log(result.data);
+          this.favoriteList = result.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },    
   }
 };

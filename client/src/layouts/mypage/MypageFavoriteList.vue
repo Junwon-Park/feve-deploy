@@ -29,7 +29,7 @@ import MypageFavoriteListSlot from '../../components/Cards/Mypage/MypageFavorite
           USER_KEY : '1', //로그인과 연동시키기
         })
         .then((result) => {
-          console.log(result.data);
+          //console.log(result.data);
           this.list = result.data;
         })
         .catch((error) => {

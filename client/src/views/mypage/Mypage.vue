@@ -4,7 +4,7 @@
 
     <div style="margin-left: 13rem;" class="sm:mt-40 md:mt-40">
         <mypage-main v-if= "currentViewState === 0"/>
-
+      
         <mypage-buy-list v-else-if= "currentViewState === 1"
         style="margin:auto; max-width:80%; margin-bottom:10%;" />
 
@@ -16,6 +16,7 @@
 
         <CardLineChart v-else/>
     </div>
+
   </div>
 </template>
 <script>
