@@ -1,6 +1,6 @@
 <template>
   <div
-      class="relative flex flex-col min-w-0 break-words bg-blueGray-200 w-full mb-6  rounded"
+      class="relative flex flex-col min-w-0 break-words  w-full mb-6  rounded"
   >
           <CscenterFaqCards
           />

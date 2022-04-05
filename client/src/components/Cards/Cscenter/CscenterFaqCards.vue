@@ -3,14 +3,10 @@
 
     <v-expansion-panels
         accordion
-        :elevation="0"
     >
       <v-expansion-panel
           v-for="(item,i) in 5"
           :key="i"
-          style="box-shadow: none !important;"
-
-          :elevation="0"
       >
         <v-expansion-panel-header>제목 넣기 </v-expansion-panel-header>
         <v-expansion-panel-content class="p-5">
