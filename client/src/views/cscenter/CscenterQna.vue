@@ -1,7 +1,7 @@
 <template>
   <div>
     <main class="profile-page">
-      <CscenterSidebar :currentViewState="currentViewState" @onViewStateChanged="onViewStateChanged"/>
+      <CscenterSidebar />
       <section class="relative block h-500-px">
         <div
           class="absolute top-0 w-full h-full bg-center bg-cover"
@@ -68,7 +68,7 @@
                           :receivedUserid="receivedUserid"
                           @sendDialog="sendDialog"
                           @updateList="updateList"/> -->
-                        <v-btn depressed color="primary" @click="fDialog(), sendItems()">
+                        <v-btn depressed color="yellow" to="/CscenterInsert">
                         문의 작성 하기
                         </v-btn>
                         <!-- <button

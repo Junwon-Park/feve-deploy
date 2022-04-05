@@ -3,7 +3,7 @@
     class="top-0 fixed z-50 w-full flex flex-wrap items-center justify-between navbar-expand-lg shadow bg-white"
   >
     <div
-      class="container mx-auto flex flex-wrap items-center justify-between"
+      class=" p-3 mx-auto flex flex-wrap items-center justify-between"
     >
       <div
         class="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start"

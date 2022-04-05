@@ -24,8 +24,8 @@
                     <input
                         type="text"
                         class="border-0 px-3 py-3  placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                        placeholder="제목"
-                        v-model="cscenter.cscenter_title"
+                        placeholder="상품명"
+                        v-model="product.product_name"
                     />
                   </div>
 
@@ -158,111 +158,16 @@
 export default {
   data() {
     return {
-      cscenter: {
-        cscenter_title: '',
-        cscenter_contents: '',
-        cscenter_wdate: '',
-        cscenter_status: '',
-        cscenter_comment: '',
-        cscenter_comment_wdate: '',
-        user_key:'',
-        default: "0",
-      }
-    };
+      
+    }
   },
 
   components: {
 
   },
 
-  //돔이 그려지기 시작하면 대분류 카테고리 가져오기
-  created() {
-    let that = this;
-    this.$axios.get('http://localhost:8080/category')
-        .then(function(res){
-          that.product.product_get_brand = res.data;
-        })
-        .catch(function(err){
-          console.log(err);
-        });
-  },
-
   methods: {
-    handleImage(e){
-      this.uploadServerImg = e.target.files;
-      let that = this;
-      if(this.uploadServerImg) {
-        that.product.product_pic=this.uploadServerImg[0].name;
-      }
-      else {
-        that.product.imgsrc = 'icon_question';
-      }
-    },
-
-    formSubmit() {
-      const curr = new Date();
-      const utc =curr.getTime() + (curr.getTimezoneOffset() * 60 * 1000);
-      const KR_TIME_DIFF = 9 * 60 * 60 * 1000;
-      const kr_curr =new Date(utc + (KR_TIME_DIFF));
-
-
-
-      this.$axios.post('http://localhost:8080/admin/addproduct', {
-          product_brand: this.product.product_brand,
-          product_name: this.product.product_name,
-          product_mnum: this.product.product_mnum,
-          product_ldate: this.product.product_ldate,
-          product_pic: this.product.product_pic,
-          product_desc: this.product.product_desc,
-          product_oriprice: this.product.product_oriprice,
-          product_wdate: kr_curr,
-          product_cate: this.product.product_cate
-      })
-          .then(() => {
-            alert("상품이 등록되었습니다.");
-            this.$router.push('/admin');
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-
-      // let that = this;
-      let file = this.uploadServerImg[0];
-      const formData = new FormData();
-      formData.append("image", file);
-
-      console.log(file)
-
-      this.$axios.post('http://localhost:8080/uploadImage', formData, {
-        headers: {
-          'content-type': 'multipart/form-data'
-        }
-      })
-          .then(function(res){
-            console.log(res)
-          })
-          .catch(function(err){
-            console.log(err)
-          })
-    },
-
-    //중분류 가져오기
-    secondClassCate( event ){
-      console.log(event.target.value);
-      let that = this;
-      this.$axios.post('http://localhost:8080/category/second', {
-        product_brand: event.target.value,
-      })
-          .then(function(res){
-            that.product.product_get_cate = res.data;
-            document.querySelector('#category').disabled=false;
-          })
-          .catch(function(err){
-            console.log(err);
-          })
-    }
+    
   }
 };
 </script>
-
-
