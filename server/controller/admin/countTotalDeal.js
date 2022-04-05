@@ -5,15 +5,16 @@ const Op = Sequelize.Op;
 
 async function countTotalDeal(req, res, next) {
     const date = new Date();
-    const thisYear= date.getFullYear().toString();
+    const thisMonth= date.getMonth().toString();
+    console.log("이번달:::::::::::::::",thisMonth)
 
     await db.sequelize
         .query(
-            'select count(*) as cnt \n' +
-            'from Sell s \n' +
-            'inner join Buy b on s.PRODUCT_KEY=b.PRODUCT_KEY  \n' +
-            'where SELL_STATUS ="2" and buy_status ="2" and  \n'+
-            'YEAR(SELL_EDATE)="'+thisYear+'";',
+           ' select\n' +
+            '(select count(*) from sell where sell_status=\'1\' and month(sell_edate)='+thisMonth+') as sell_count\n' +
+            ',(select count(*) from buy where buy_status=\'1\' and month(buy_edate)='+thisMonth+') as buy_count\n' +
+            ',(select (sell_count + buy_count) from dual) as cnt\n' +
+            'from dual;',
             { type: Sequelize.QueryTypes.SELECT }
         )
         .then(result => {
