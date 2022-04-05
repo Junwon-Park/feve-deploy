@@ -8,7 +8,7 @@
               <div class="flex">
                 <div class="w-full xl:w-6/12 px-4 mt-12">
                   <v-carousel hide-delimiters>
-                      <v-carousel-item v-for="(item,i) in items" :key="i" :src="item.src" crossorigin></v-carousel-item>
+                      <v-carousel-item v-for="(item,i) in items" :key="i" :src="imageUrl+PRODUCT_PIC" crossorigin></v-carousel-item>
                     </v-carousel>
                 </div>
                 <div class="w-full xl:w-6/12 mb-12 xl:mb-0 px-4 mt-12">
@@ -127,6 +127,7 @@ import Notice from './Notice';
 export default {
     data() {
       return{
+      imageUrl : this.$store.getters.ServerUrl + '/getImage?imageName=',
       likeStatus:false,
       box,
       legoBg,
@@ -138,7 +139,6 @@ export default {
         'red',
         'orange',
       ],
-
       PRODUCT_NAME: '',
       PRODUCT_BRAND: '',
       PRODUCT_DESC:'',
@@ -149,11 +149,9 @@ export default {
       PRODUCT_KEY:0,
       SELL_PRICE:0,
       BUY_PRICE:0,
-
-      // imageUrl : this.$store.getters.ServerUrl + '/getImage?imageName=',
       items: [
           {
-            src: "this.$store.getters.ServerUrl + '/getImage?imageName='+ product-lego1.jpg",
+            src:'',
           },
           {
             src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg',
