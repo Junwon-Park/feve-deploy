@@ -1,7 +1,8 @@
 <template>
-  <v-card
-    class="mx-auto flex mb-24"
-    outlined
+  <div
+    class="mx-auto flex mb-24 py-2"
+    style="background: rgba(0,0,0,0.03)"
+
   >
     <div class="flex" v-for="(item,i) in names" :key="i">
 
@@ -28,7 +29,7 @@
         더보기
       </v-btn>
     </v-card-actions>
-  </v-card>
+  </div>
 </template>
 
 <script>

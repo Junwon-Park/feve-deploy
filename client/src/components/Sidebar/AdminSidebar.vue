@@ -193,7 +193,14 @@
           </li>
         </ul>
       </div>
+      <router-link
+          class="logo mt-auto md:block text-center text-indigo-500 md:pb-2 mr-0 inline-block whitespace-nowrap text-lg uppercase font-bold p-4 px-0"
+          to="/"
+      >
+        Feve
+      </router-link>
     </div>
+
   </nav>
 </template>
 ); }

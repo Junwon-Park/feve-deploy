@@ -1,48 +1,48 @@
 <template>
   <v-card
-    class="mx-auto"
+    class="mx-auto w-full"
     outlined
   >
-    <v-list-item style="text-align:center">
-      <v-list-item-content>
-        <v-list-item-title class="text-h5 mt-6">
-          {{userInfo.USER_NAME}}
-        </v-list-item-title>
-        <v-list-item-subtitle class="-mt-12">
-          {{userInfo.USER_MAIL}}
-        </v-list-item-subtitle>
-      </v-list-item-content>
 
-      <!-- <v-list-item-avatar
-        tile
-        size="80"
-        color="grey"
-        class="mr-4 mt-8"
-      ></v-list-item-avatar> -->
-      
-    </v-list-item>
+    <v-list three-line class="mt-4">
+        <v-list-item
+        >
+          <v-list-item-avatar>
+            <v-img
+                :src="account"
+                alt="account icon"></v-img>
+          </v-list-item-avatar>
 
-    <v-card-actions class="justify-center">
-      <v-btn
-        outlined
-        rounded
-        text
-      >
-        프로필 수정
-      </v-btn>
-    </v-card-actions>
+          <v-list-item-content>
+            <v-list-item-title>
+              {{userInfo.USER_NAME}}
+             <small class="block text-blueGray-400"> {{userInfo.USER_MAIL}}</small>
+            </v-list-item-title>
+          </v-list-item-content>
+
+          <v-list-item-action>
+            <v-btn
+                outlined
+                rounded
+                text
+            >
+              프로필 수정
+            </v-btn></v-list-item-action>
+        </v-list-item>
+    </v-list>
+
   </v-card>
 </template>
 
 <script>
-
+import account from "@/assets/img/icon_account.png"
 export default {
   props:{
     userInfo:Object
   },
   data() {
     return {
-      
+      account
     };
   },
  

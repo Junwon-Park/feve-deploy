@@ -5,7 +5,7 @@
 </style>
 
 <template>
-      <v-row align="center" justify="center" class="bg-blueGray-100 mt-1">
+      <v-row align="center" justify="center" class="bg-blueGray-200 mt-0  rounded border-t" style="border-color: #ccc;">
 
         <v-btn v-for="(item, i) in periods" :key="i"
           elevation="2"

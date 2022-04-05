@@ -1,12 +1,12 @@
 <template>
-  <div class="mt-7rem ml-14rem">
+  <div class="mt-48 ml-14rem" style="min-height: 80vh">
     <mypage-sidebar :currentViewState="currentViewState" @onViewStateChanged="onViewStateChanged"/>
 
-    <div style="margin-left: 13rem;" class="sm:mt-40 md:mt-40">
+    <div style="margin-left: 13rem;" class="">
         <mypage-main v-if= "currentViewState === 0"/>
       
         <mypage-buy-list v-else-if= "currentViewState === 1"
-        style="margin:auto; max-width:80%; margin-bottom:10%;" />
+        style=" max-width:80%; margin: 0 auto 10rem;" />
 
         <mypage-sell-list v-else-if= "currentViewState === 2"
         style="margin:auto; max-width:80%; margin-bottom:10%;" />

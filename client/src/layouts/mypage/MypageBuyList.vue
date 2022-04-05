@@ -1,16 +1,15 @@
 
 <template>
-  <div>
+  <div class="w-full">
     <mypage-top-count-tap :counts="counts" :tapNames="tapNames" @onTapChanged="onTapChanged"/>
-    <mypage-period-setter @onSearchClicked="onSearchClicked"
-    class="divide-y-gray"/>
+    <mypage-period-setter @onSearchClicked="onSearchClicked"/>
     
     <mypage-list-filter
     :filter="curFilter"
     @onFilterChanged="onFilterChanged"
     @onOrderClicked="onOrderClicked"
     ref="filter"
-    class="mt-3 divide-y-b-gray"/>
+/>
 
     <div class="grid ">
         <mypage-list-slot 

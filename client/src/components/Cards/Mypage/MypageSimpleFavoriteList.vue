@@ -1,6 +1,9 @@
 <template>
     <div class="flex flex-wrap">
-      <div class="w-full xl:w-3/12 lg:w-4/12 md:w-4/12 px-4 mb-5" v-for="item in items" :key="item.PRODUCT_NAME">
+      <div class="w-full xl:w-3/12 lg:w-4/12 md:w-4/12 px-4 mb-5"
+           style="rgba(0,0,0,0.02)"
+           v-for="item in items" :key="item.PRODUCT_NAME"
+      >
         
           <div >
             <img
@@ -10,7 +13,7 @@
             >
 
             <h5 class="font-bold underline mt-2">
-              {{ item.PRODUCT_BRAND }}
+              {{ item.PRODUCT_BRAND }} sdfsdfsdfdsfdsfsd
             </h5>
             <h5>
             {{ item.PRODUCT_NAME }}

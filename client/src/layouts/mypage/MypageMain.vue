@@ -1,6 +1,6 @@
 <template>
   <div style="margin-left:18%; max-width:60%; margin-bottom:10%">
-    <mypage-simple-user-info :userInfo="userInfo" style="width:15rem;"/>
+    <mypage-simple-user-info :userInfo="userInfo" />
 
     <h2 class="mt-20 font-bold">구매 내역</h2>
     <mypage-simple-count-list :counts="buyCounts"/>
