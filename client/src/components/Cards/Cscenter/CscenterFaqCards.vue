@@ -1,13 +1,19 @@
 <template>
   <v-row justify="center">
-    <v-expansion-panels accordion>
+
+    <v-expansion-panels
+        accordion
+        :elevation="0"
+    >
       <v-expansion-panel
           v-for="(item,i) in 5"
           :key="i"
       >
-        <v-expansion-panel-header>Item</v-expansion-panel-header>
-        <v-expansion-panel-content>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        <v-expansion-panel-header>제목 넣기 </v-expansion-panel-header>
+        <v-expansion-panel-content class="p-5">
+            <div class="text-left bg-blueGray-200 rounded py-5 px-4">
+              내용 넣기
+            </div>
         </v-expansion-panel-content>
       </v-expansion-panel>
     </v-expansion-panels>

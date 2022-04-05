@@ -3,12 +3,6 @@
       class="relative flex flex-col min-w-0 break-words bg-blueGray-200 w-full mb-6 shadow-lg rounded"
   >
           <CscenterFaqCards
-              v-for="(item, idx) in items"
-              :key="idx"
-              v-bind="item"
-              :items="items"
-              @sendDialog="cDialog"
-              @sendItems="sendItems"
           />
 
   </div>

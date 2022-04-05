@@ -2,7 +2,7 @@
   <div>
     <main class="profile-page">
       <CscenterSidebar/>
-      <section class="relative py-16 bg-white mt-24">
+      <section class="relative py-16 bg-white mt-24 md:ml-64">
       
         <div class="container mx-auto px-4">
           <div
