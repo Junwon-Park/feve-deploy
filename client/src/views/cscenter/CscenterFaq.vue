@@ -4,24 +4,22 @@
       <CscenterSidebar/>
       <section class="relative py-16 bg-white mt-24 md:ml-64">
       
-        <div class="container mx-auto px-4">
+        <div class="container mx-auto">
           <div
             class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6  rounded-lg"
           >
-            <div class="px-6">
-             
-              <div class="text-center mt-12">
-                <h3
-                  class="text-4xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2"
+              <div class="relative w-full px-auto max-w-full flex-grow flex-1">
+                <h1
+                    class="font-semibold text-lg text-left "
                 >
-                    자주 묻는 질문
-                </h3>
+                  공지사항
+                </h1>
               </div>
-              <div class="mt-10 py-10 border-t border-blueGray-200 text-center">
+              <div class="mt-10  border-t border-blueGray-200 text-center">
                 <div class="flex flex-wrap justify-center">
-                   <div class="w-full mb-12 px-4">
+                   <div class="w-full mb-12 ">
                     <div class="container">
-                      <div class="w-full mb-12 xl:mb-0 px-4 mt-12" style="min-height: 70vh">
+                      <div class="w-full mb-12 xl:mb-0  mt-12" style="min-height: 70vh">
                           <CscenterFaqList v-bind="items" :items="items" :title="title"/>
                           <Pagination />
                       </div>
@@ -31,7 +29,6 @@
                 </div>
               </div>
             </div>
-          </div>
         </div>
       </section>
     </main>

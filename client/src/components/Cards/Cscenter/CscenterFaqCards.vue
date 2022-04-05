@@ -8,6 +8,7 @@
       <v-expansion-panel
           v-for="(item,i) in 5"
           :key="i"
+          style="box-shadow: 0 !important;"
       >
         <v-expansion-panel-header>제목 넣기 </v-expansion-panel-header>
         <v-expansion-panel-content class="p-5">
