@@ -9,7 +9,7 @@
               <div
                   class="w-full md:w-6/12 xl:w-2/12 text-center mt-8 px-3 "
               >
-                <div class="py-3 bg-emerald-400 rounded-lg">
+                <div class="py-3 bg-emerald-500 rounded-lg">
                   <p class="text-lg text-white mt-4 font-semibold">#LEGO</p>
                 </div>
               </div>
