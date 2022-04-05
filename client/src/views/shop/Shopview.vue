@@ -7,9 +7,9 @@
             <div class="flex flex-wrap items-center mt-5 mb-5 px-6 mx-auto">
               <div class="flex">
                 <div class="w-full xl:w-6/12 px-4 mt-12">
-                  <v-carousel hide-delimiters>
-                      <v-carousel-item v-for="(item,i) in items" :key="i" style="width:300px !important; height:300px !important;" >
-                        <img :src="item.src" crossorigin style="widht:100% !important; height:100% !important;"/>
+                  <v-carousel hide-delimiters style="width:400px; height:400px; border: 1px solid red">
+                      <v-carousel-item v-for="(item,i) in items" :key="i" >
+                        <img :src="PRODUCT_PIC" crossorigin style="background: #ccc; width:100% !important; height:100% !important;"/>
                       </v-carousel-item>
                     </v-carousel>
                 </div>
