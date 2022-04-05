@@ -56,8 +56,8 @@
                       
                       <div>
                         <v-btn x-large style="width:100%; background-color:transparent" class="mt-3"> 
-                            <v-btn v-if="!this.likeStatus" icon color="gray"  @click="goLike()">
-                            <v-icon>mdi-heart</v-icon>
+                            <v-btn v-if="!this.likeStatus" icon color="pink"  @click="goLike()">
+                            <v-icon>mdi-heart-outline</v-icon>
                             </v-btn>
                             <v-btn v-else icon color="pink"  @click="goDislike()">
                             <v-icon>mdi-heart</v-icon>
