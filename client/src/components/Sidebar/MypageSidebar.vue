@@ -60,9 +60,9 @@
 export default {
   data() {
     return {
-      tapTexts: ['구매 내역', '판매 내역', '관심 상품', '프로필 정보', '주소록', '결제 정보', '판매 정산 계좌'],
-      tapIcons: ['fas fa-clipboard-list', 'fas fa-clipboard-list', 'fas fa-star', 'fas fa-address-card', 'fas fa-address-book', 'fab fa-cc-visa', 'fas fa-calculator'],
-      tapActive: [false, false, false, false, false, false, false],
+      tapTexts: ['구매 내역', '판매 내역', '관심 상품', '프로필 정보'], //, '주소록', '결제 정보', '판매 정산 계좌'],
+      tapIcons: ['fas fa-clipboard-list', 'fas fa-clipboard-list', 'fas fa-star', 'fas fa-address-card'], //, 'fas fa-address-book', 'fab fa-cc-visa', 'fas fa-calculator'],
+      tapActive: [false, false, false, false],//, false, false, false],
     };
   },
   methods: {
