@@ -1,10 +1,11 @@
 <template>
-    <v-tabs class="w-full">
+    <v-tabs>
       <v-tab
           v-for="(tapName, i) in tapNames" :key="i"  color="black"
           @click="onTapChanged(i)"
-          class="p-4 black--text"
-          style="text-center;  width:33%; flex-direction: column;" >
+          class="p-4 black--text text-center flex-col"
+          style="flex: 1 !important;"
+          >
         <h6 class="text-h6 font-bold" >{{counts[i]}}</h6>
         <h6 class="pb-4">{{tapName}}</h6>
       </v-tab>
@@ -33,5 +34,8 @@ export default {
 div.v-tabs-slider {
   background-color: #000 !important;
   margin-top: 1px;
+}
+.v-tab {
+  max-width: 33.333% !important;
 }
 </style>

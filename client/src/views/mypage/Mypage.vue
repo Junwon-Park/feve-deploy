@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-48 ml-14rem" style="min-height: 80vh">
+  <div class="mt-48 ml-14rem" style="min-height: 100vh">
     <mypage-sidebar :currentViewState="currentViewState" @onViewStateChanged="onViewStateChanged"/>
 
     <div style="margin-left: 13rem;" class="">

@@ -2,7 +2,8 @@
     <v-form 
     ref="form"
     v-model="valid"
-    lazy-validation>
+    lazy-validation
+    class="bg-blueGray-200 p-4 xl:w-6/12">
         <v-col
         cols="12"
         >
@@ -14,6 +15,8 @@
         >
         <h1>{{profile.USER_ID}}</h1>
         </v-col>
+
+      <hr class="my-4" />
 
         <v-col
         cols="12"
@@ -46,6 +49,8 @@
         ></v-text-field>
         </v-col>
 
+      <hr class="my-4" />
+
         <v-col
         cols="12"
         >
@@ -75,6 +80,8 @@
             :rules="formRule.phone"
         ></v-text-field>
         </v-col>
+
+      <hr class="my-4" />
 
         <v-col
         cols="12"
@@ -231,3 +238,10 @@ export default {
 };
 
 </script>
+
+<style>
+input,
+input[readonly="readonly"]{
+  background: none !important;
+}
+</style>
