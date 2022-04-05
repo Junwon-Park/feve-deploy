@@ -4,14 +4,14 @@
      
     <main class="profile-page">
       
-        <CscenterSidebar :currentViewState="currentViewState" @onViewStateChanged="onViewStateChanged"/>
+        <CscenterSidebar/>
      
       
      
-      <section class="relative py-15 bg-white-200">
+      <section class="relative py-15 bg-white-200 md:ml-64" style="min-height: 90vh;">
         <div class="container mx-auto px-5">
           <div
-            class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-auto"
+            class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6  rounded-lg -mt-auto"
           >
             <div class="px-5">
               <div class="mt-10 py-20 border-t border-blueGray-200 text-center">
@@ -31,16 +31,6 @@
 <script>
 import CscenterSidebar from "@/components/Sidebar/CscenterSidebar.vue";
 import CscenterNotice from "@/components/Cards/Cscenter/CscenterNotice.vue";
-
-
-
-
-
-
-
-
-
-
 
 export default {
   data() {

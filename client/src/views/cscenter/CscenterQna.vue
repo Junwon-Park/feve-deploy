@@ -1,7 +1,7 @@
 <template>
   <div>
     <main class="profile-page">
-      <CscenterSidebar :currentViewState="currentViewState" @onViewStateChanged="onViewStateChanged"/>
+      <CscenterSidebar />
       <section class="relative block h-500-px">
         <div
           class="absolute top-0 w-full h-full bg-center bg-cover"
