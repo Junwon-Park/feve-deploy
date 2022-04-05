@@ -149,20 +149,7 @@ export default {
       PRODUCT_KEY:0,
       SELL_PRICE:0,
       BUY_PRICE:0,
-      items: [
-          {
-            src:'',
-          },
-          {
-            src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg',
-          },
-          {
-            src: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg',
-          },
-          {
-            src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg',
-          },
-        ],
+      items:[]
       };
     },
     components: {
@@ -174,6 +161,22 @@ export default {
       this.getView();
       this.countLike();
       
+    },
+    created(){
+      this.items=[
+          {
+            src: this.imageUrl+this.PRODUCT_PIC,
+          },
+          {
+            src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg',
+          },
+          {
+            src: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg',
+          },
+          {
+            src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg',
+          },
+        ]
     },
     methods:{
       getView:function(){
