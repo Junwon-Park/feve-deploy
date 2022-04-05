@@ -10,22 +10,22 @@
               >
                 <div class="flex-auto p-5 lg:p-10">
                   <h4 class="text-2xl font-semibold">
-                    문의 작성 하기
+                    상품 등록
                   </h4>
 
                   <div class="flex flex-wrap">
                   <div class="relative mb-3 mt-8 w-full lg:w-6/12 pr-3 ">
                     <label
                         class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                        htmlFor="제목"
+                        htmlFor="상품명"
                     >
-                      제목
+                      상품명
                     </label>
                     <input
                         type="text"
                         class="border-0 px-3 py-3  placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                        placeholder="제목"
-                        v-model="cscenter.cscenter_title"
+                        placeholder="상품명"
+                        v-model="product.product_name"
                     />
                   </div>
 
@@ -158,16 +158,21 @@
 export default {
   data() {
     return {
-      cscenter: {
-        cscenter_title: '',
-        cscenter_contents: '',
-        cscenter_wdate: '',
-        cscenter_status: '',
-        cscenter_comment: '',
-        cscenter_comment_wdate: '',
-        user_key:'',
+      product: {
+        product_name: '',
+        product_mnum: '',
+        product_ldate: '',
+        product_pic: '',
+        product_oriprice: '',
+        product_desc: '',
+        product_wdate:'',
+        product_brand: '',
+        product_get_brand: '',
+        product_cate: '',
+        product_get_cate: '',
         default: "0",
-      }
+      },
+      uploadServerImg:'',
     };
   },
 
@@ -264,5 +269,3 @@ export default {
   }
 };
 </script>
-
-
