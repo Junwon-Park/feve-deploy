@@ -42,7 +42,7 @@ import Cscenter from "@/views/cscenter/Cscenter.vue";
 import CscenterNotice from "@/views/cscenter/CscenterNotice.vue";
 import CscenterQna from "@/views/cscenter/CscenterQna.vue";
 import CscenterFaq  from "@/views/cscenter/CscenterFaq.vue";
-
+import CscenterInsert from "@/views/cscenter/CscenterInsert.vue";
 import CscenterStandard  from "@/views/cscenter/CscenterStandard.vue";
 
 import Buyselect from "@/views/sold/Buyselect.vue";
@@ -198,7 +198,11 @@ const routes = [
     component: CscenterStandard,
 
   },
- 
+  {
+    path: "/cscenterInsert",
+    component: CscenterInsert,
+
+  },
   { path: "/:pathMatch(.*)*", redirect: "/" },
 ];
 
