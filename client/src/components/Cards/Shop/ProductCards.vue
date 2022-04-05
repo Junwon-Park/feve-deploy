@@ -5,7 +5,7 @@
     <div class="flex-auto p-4" >
       <div class="flex flex-wrap" @click="goView(`${PRODUCT_KEY}`)">
         <div class="relative w-full max-w-full flex-grow flex-1">
-          <div class="w-full mb-5"  style="overflow: hidden; width:8vw; height: 8vw;">
+          <div class="w-full mb-5"  style="overflow: hidden; width:205px; height: 205px;">
             <img :src="imageUrl+ PRODUCT_PIC" alt="아이템 사진"
                  style="object-fit: cover;border-radius: .5rem;  background: #f4f4f4; width:100%; height: 100%;"
                  crossorigin>
