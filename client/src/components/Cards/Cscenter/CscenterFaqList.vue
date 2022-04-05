@@ -2,56 +2,7 @@
   <div
       class="relative flex flex-col min-w-0 break-words bg-blueGray-200 w-full mb-6 shadow-lg rounded"
   >
-     <div id="faq">
-        <div class="wrap">
-          <div class="menu_list"> 
-            <div class="menu_list_items">
-              <a>전체</a>
-              <a>이용정책</a>
-              <a>공통</a>
-              <a>구매</a>
-              <a>판매</a>
-            </div>
-          </div>
-          <div class="dropdown">
-            <div class="button">
-              dropdown 메뉴 구현
-            </div>
-            <div class="dropdown-content">
-              <div class="content">
-                <a>판매자와 구매자의 건전한 거래를 위하여 아래 사유에 따라 페널티가 부과됩니다. 
-
-                    결제정보 오류로 페널티 결제 실패 시, 이용약관 제24조("서비스수수료")에 따라 별도의 고지없이 재결제를 시도합니다.</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    <div class="block w-full overflow-x-auto">
-      <!-- Projects table -->
-      
-      <table class=" w-full bg-transparent border-collapse">
-        <thead class="thead-light">
-        <tr>
-          <th
-              class="px-6  bg-gray-200 text-black  align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold "
-              v-for="(table, idx) in table" :key="idx"
-          >
-            {{ table }}
-          </th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr v-if="this.$props.items.length===0">
-          <td
-              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
-              colspan="13"
-          >
-            아직 등록된 문의가 없습니다.
-          </td>
-        </tr>
           <CscenterFaqCards
-              v-else
               v-for="(item, idx) in items"
               :key="idx"
               v-bind="item"
@@ -59,9 +10,7 @@
               @sendDialog="cDialog"
               @sendItems="sendItems"
           />
-        </tbody>
-      </table>
-    </div>
+
   </div>
 </template>
 <script>
@@ -101,7 +50,7 @@ export default {
   },
   components:{
    CscenterFaqCards,
-   
+
   },
   methods: {
     cDialog(){

@@ -1,16 +1,17 @@
 <template>
-<div id="__nuxt">
-  <div class="category_list"> 
-    <div class="category_list_items">
-      <a class="nuxt-link-active category category_on">전체</a>
-      <a class="nuxt-link-active category">이용정책</a>
-      <a class="nuxt-link-active category">공통</a>
-      <a class="nuxt-link-active category">구매</a>
-      <a class="nuxt-link-active category">판매</a>
-    </div>
-  </div>
-</div>
- 
+  <v-row justify="center">
+    <v-expansion-panels accordion>
+      <v-expansion-panel
+          v-for="(item,i) in 5"
+          :key="i"
+      >
+        <v-expansion-panel-header>Item</v-expansion-panel-header>
+        <v-expansion-panel-content>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        </v-expansion-panel-content>
+      </v-expansion-panel>
+    </v-expansion-panels>
+  </v-row>
 </template>
 
 <script>
