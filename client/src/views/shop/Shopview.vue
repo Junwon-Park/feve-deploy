@@ -224,7 +224,7 @@ export default {
         this.$axios.post('http://localhost:8080/shop/shopview/'+ this.PRODUCT_KEY + '/goLike',
         {product_key: this.PRODUCT_KEY, user_key:1})
             .then(function(res){
-              //console.log("golike버튼 누른 결과는?", res);
+              console.log("golike버튼 누른 결과는?", res);
               vm.likeStatus= !vm.likeStatus;
               //console.log(vm.likeStatus);
             })
@@ -238,7 +238,7 @@ export default {
         this.$axios.post('http://localhost:8080/shop/shopview/'+ this.PRODUCT_KEY + '/goDislike',
         {product_key: this.PRODUCT_KEY, user_key:1})
             .then(function(res){
-              //console.log("goDislike버튼 누른 결과는?", res);
+              console.log("goDislike버튼 누른 결과는?", res);
               vm.likeStatus = !vm.likeStatus;
               //console.log(vm.likeStatus);
             })
