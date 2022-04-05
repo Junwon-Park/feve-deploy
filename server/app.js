@@ -20,7 +20,6 @@ const adminMainChartRoute = require('./router/admin/main.js');
 const categorytRoute = require('./router/common/category.js');
 const shoplistRoute = require('./router/shop/shoplist.js');
 const shopviewRoute = require('./router/shop/shopview.js');
-const shopGoLikeRoute = require('./router/shop/goLike.js')
 const buyRouter = require('./router/sold/buyconfirm.js');
 const soldconfirmRouter = require("./router/sold/soldproduct.js");
 const minRouter = require('./router/shop/min.js');
@@ -87,7 +86,6 @@ app.use('/shoplist', shoplistRoute);
 app.use('/shop/shoplist', shoplistRoute);
 app.use('/shop/min', minRouter);
 app.use('/shop/shopview', shopviewRoute);
-app.use('/shop/goLike', shopGoLikeRoute);
 
 app.use('/buy', buyRouter);
 app.use("/buy/proc",soldconfirmRouter);
