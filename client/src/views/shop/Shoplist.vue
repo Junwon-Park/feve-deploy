@@ -1,30 +1,30 @@
 <template>
   <div>
+    <Slide />
     <main class="profile-page ">
-      <section class="relative py-16 bg-blueGray-200 mt-24">
+      <section class="relative py-8 bg-white" style="min-height: 100vh;">
         <div class="container">
           <!-- <v-form ref="form" @submit.prevent="send"> -->
           <div
-            class="p-8 relative flex flex-col min-w-0 break-words  pd-8 bg-white w-full mb-6 shadow-xl rounded-lg "
+            class="p-8 relative flex flex-col min-w-0 break-words  pd-8  w-full"
           >
           <div class="px-6">
              <h3
-                class="text-4xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2 text-center"
+                class="text-2xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2 text-center"
               >SHOP</h3>
           </div>
-          <div class="flex flex-wrap items-center mt-5 mb-5 px-6">
-            <div class="relative w-full max-w-full flex-grow flex-1 text-right">
-               <div class="text-center">
-                <v-chip class="ma-2" v-model="cate" @click="goFilter('3,4,5,6,7,8,9')" > 전체 </v-chip>
-                <v-chip class="ma-2" color="primary" v-model="cate" @click="goFilter('3,4,5')"> 레고 </v-chip>
-                <v-chip class="ma-2" color="secondary" v-model="cate" @click="goFilter('6,7,8,9')"> 베어브릭 </v-chip>
-               </div>
+            <div class="flex flex-wrap mt-5">
+              <div class="relative w-full max-w-full flex-grow flex-1 text-right">
+                <div class="text-left">
+                  <v-chip class="ma-2" color="#f4f4f4" v-model="cate" @click="goFilter('3,4,5,6,7,8,9')" > 전체 </v-chip>
+                  <v-chip class="ma-2" color="#f4f4f4"   v-model="cate" @click="goFilter('3,4,5')"> 레고 </v-chip>
+                  <v-chip class="ma-2" color="#f4f4f4"   v-model="cate" @click="goFilter('6,7,8,9')"> 베어브릭 </v-chip>
+                </div>
+              </div>
             </div>
-          </div>
-          <hr />
           
-          <div class="flex mt-5">
-            <div class="flex w-full lg:w-3/12 px-4 mb-5">
+          <div class="flex mt-10">
+            <div class="flex px-4 mb-5" style="width:25%;">
               <Category ref="category" @changeitems="changeitems($event)"/>
             </div>
             <div class="w-full px-4 mb-5 flex flex-wrap">
@@ -46,6 +46,7 @@ import team2 from "@/assets/img/team-2-800x800.jpg";
 import legoBg from "@/assets/img/bg-lego5.jpg";
 import productLego1 from "@/assets/img/product-lego1.jpg";
 import Category from './Category';
+import Slide from '@/components/Cards/Slide.vue';
 
 export default {
   data() {
@@ -71,7 +72,8 @@ export default {
   },
   components: {
     ProductCards,
-    Category
+    Category,
+    Slide
   },
   beforeCreate() {
     var vm = this;
@@ -109,7 +111,7 @@ export default {
       .catch((err)=>{
       console.log(err);
       });
-    }
+    },
 
   //  computed() {
   //   var PRODUCT_PIC = this.PRODUCT_PIC;
