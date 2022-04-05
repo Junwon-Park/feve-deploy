@@ -31,6 +31,7 @@ const mypageProfileRouter = require('./router/mypage/mypageProfile.js');
 const imageRouter = require("./image/image.js");
 const uploadImageRouter = require("./image/uploadImage.js");
 const cscenterRoute = require("./router/cscenter/cscenter.js");
+const mainLoadproductRoute = require('./router/main/loadproduct.js');
 
 const app = express();
 const PORT = config.PORT || 4000;
@@ -98,6 +99,8 @@ app.use('/mypage/profile', mypageProfileRouter);
 
 app.use("/getImage", imageRouter);
 app.use("/uploadImage", uploadImageRouter);
+
+app.use("/main/loadproduct", mainLoadproductRoute);
 
 app.use((req, res, next) => {
   res.sendStatus(404);

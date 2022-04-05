@@ -56,8 +56,15 @@
             BEST SELLER
           </h3>
           <hr />
-          <MainCardProduct />
+
+          <div class="flex flex-wrap">
+          <MainCardProduct
+              v-for="(item, idx) in items"
+              :key="idx"
+              v-bind="item"
+              :items="items" />
             </div>
+          </div>
         <v-btn outlined color="#999" class="ml-auto mr-auto px-5 mt-10">더 보기</v-btn>
       </div>
 
@@ -94,7 +101,13 @@
             NEW
           </h3>
           <hr />
-          <MainCardProduct />
+          <div class="flex flex-wrap">
+          <MainCardProduct
+              v-for="(item, idx) in items"
+              :key="idx"
+              v-bind="item"
+              :items="items" />
+        </div>
         </div>
       </div>
     </section>
@@ -205,7 +218,18 @@ export default {
       login,
       profile,
       landing,
-      baseURL: 'http://localhost:8080'
+      baseURL: 'http://localhost:8080',
+      items:[{
+        PRODUCT_KEY: 0,
+        PRODUCT_NAME: '',
+        PRODUCT_BRAND: '',
+        PRODUCT_CATE: '',
+        PRODUCT_ORIPRICE: 0,
+        PRODUCT_MNUM: '',
+        PRODUCT_PIC: "",
+        PRODUCT_DELETE:'',
+        PRODUCT_DESC: "",
+      }]
     };
   },
   methods: {
@@ -225,6 +249,16 @@ export default {
   },
   created() {
     this.checkToken();
+
+    let that = this;
+    this.$axios.get('http://localhost:8080/main/loadproduct')
+        .then(function(res){
+          console.log(res)
+          that.items=res.data;
+        })
+        .catch(function(err){
+          console.log(err);
+        });
   },
   components: {
     Slide,
