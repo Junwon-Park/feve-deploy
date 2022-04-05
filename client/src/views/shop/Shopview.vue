@@ -8,7 +8,9 @@
               <div class="flex">
                 <div class="w-full xl:w-6/12 px-4 mt-12">
                   <v-carousel hide-delimiters>
-                      <v-carousel-item v-for="(item,i) in items" :key="i" :src="imageUrl+PRODUCT_PIC" crossorigin></v-carousel-item>
+                      <v-carousel-item v-for="(item,i) in items" :key="i" >
+                        <img :src="imageUrl+PRODUCT_PIC" crossorigin/>
+                      </v-carousel-item>
                     </v-carousel>
                 </div>
                 <div class="w-full xl:w-6/12 mb-12 xl:mb-0 px-4 mt-12">
@@ -168,13 +170,10 @@ export default {
             src: this.imageUrl+this.PRODUCT_PIC,
           },
           {
-            src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg',
+            src: this.imageUrl+this.PRODUCT_PIC,
           },
           {
-            src: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg',
-          },
-          {
-            src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg',
+            src: this.imageUrl+this.PRODUCT_PIC,
           },
         ]
     },
