@@ -155,13 +155,13 @@ export default {
       BUY_PRICE:0,
       items:[
           {
-            src: this.imageUrl+this.PRODUCT_PIC,
+            src: '',
           },
           {
-            src: this.imageUrl+this.PRODUCT_PIC2,
+            src: '',
           },
           {
-            src: this.imageUrl+this.PRODUCT_PIC3,
+            src: '',
           }
           ]
       };
@@ -173,26 +173,20 @@ export default {
     },
     mounted() {
       this.getView();
-      console.log(this.items);
-      // this.items[0].src = this.imageUrl + this.PRODUCT_PIC;
-      // this.items[1].src = this.imageUrl + this.PRODUCT_PIC2;
-      // this.items[2].src = this.imageUrl + this.PRODUCT_PIC3;
       this.countLike();
       
     },
-    // created(){
-    //   this.getView();
-    //   console.log(this.items);
-    //   this.items[0].src = this.imageUrl + this.PRODUCT_PIC;
-    //   this.items[1].src = this.imageUrl + this.PRODUCT_PIC;
-    //   this.items[2].src = this.imageUrl + this.PRODUCT_PIC;
-      
-    // },
     methods:{
+      // isEmpty:function(str){
+      //    if(typeof str == "undefined" || str == null || str == "") 
+      //     return true; 
+      //    else 
+      //     return false ; 
+      //    },
+
       getView:function(){
         var vm = this;
         this.PRODUCT_KEY = this.$route.params.PRODUCT_KEY;
-        //console.log("라우터에서 받아오는 product_key 값은", this.$route.params.PRODUCT_KEY);
         this.$axios.get('http://localhost:8080/shop/shopview/'+ this.PRODUCT_KEY)
             .then(function(res){
               // console.log("디비에서 결과 가져옴", res);
@@ -207,29 +201,29 @@ export default {
               vm.PRODUCT_PIC2 = res.data.PRODUCT_PIC2;
               vm.PRODUCT_PIC3 = res.data.PRODUCT_PIC3;
               vm.PRODUCT_KEY = res.data.PRODUCT_KEY;
-              //console.log("BUYS 배열의 길이는?", res.data.Buys.length);
-              if(res.data.Sells.length!=0)
-              {
-                vm.SELL_PRICE = res.data.Sells[0].SELL_PRICE;
-              }
+              vm.items[0].src = vm.imageUrl + vm.PRODUCT_PIC;
+              
+              if(vm.PRODUCT_PIC2 != null)
+                vm.items[1].src = vm.imageUrl + vm.PRODUCT_PIC2;
               else
-              {
+                vm.items[1].src = vm.imageUrl + vm.PRODUCT_PIC;
+
+              if(vm.PRODUCT_PIC3 != null)
+                vm.items[2].src = vm.imageUrl + vm.PRODUCT_PIC3;
+              else
+                vm.items[2].src = vm.imageUrl + vm.PRODUCT_PIC;
+
+
+              if(res.data.Sells.length!=0)
+                vm.SELL_PRICE = res.data.Sells[0].SELL_PRICE;
+              else
                 vm.SELL_PRICE =0;
-              }
 
               if(res.data.Buys.length!=0)
-              {
                 vm.BUY_PRICE = res.data.Buys[0].BUY_PRICE;
-              }
               else
-              {
                 vm.BUY_PRICE =0;
-              }
-
-              vm.items[0].src = vm.imageUrl + vm.PRODUCT_PIC;
-              vm.items[1].src = vm.imageUrl + vm.PRODUCT_PIC2;
-              vm.items[2].src = vm.imageUrl + vm.PRODUCT_PIC3;
-              console.log(vm.items[0].src);
+              
             })
             .catch(function(err){
               console.log(err);
