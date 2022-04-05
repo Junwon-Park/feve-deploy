@@ -58,7 +58,7 @@
                           <Pagination />
                       </div>
                       <div class="form-row float-right">
-                        <v-btn depressed color="primary" @click="controlModal(false)">
+                        <v-btn depressed color="primary" @click="QnaInsert(), send()">
                         문의 작성 하기
                         </v-btn>
                       </div>
@@ -101,6 +101,17 @@ export default {
     CscenterSidebar,
     CscenterQnaList,
     Pagination,
+  },
+  methods: {
+    QnaInsert(){
+      this.$emit('sendQna');
+    },
+    send(){
+      let that = this;
+      let sendCscenterKey=that.CSCENTER_KEY;
+      let sendUserKey=that.USER_KEY;
+      this.$emit("send", sendCscenterKey, sendUserKey);
+    }
   },
 
   created() {
