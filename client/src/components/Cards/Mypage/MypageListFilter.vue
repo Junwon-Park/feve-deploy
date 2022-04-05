@@ -1,9 +1,3 @@
-<style scoped>
-.v-text-field.v-text-field--solo .v-input__control{
-    height: 1rem;
-}
-</style>
-
 <template>
     <div>
       <ul class="mt-6 mb-2">
@@ -38,6 +32,12 @@
         </div>
     </div>
 </template>
+
+<style scoped>
+  /* .v-select:not(){
+    
+  } */
+</style>
 
 <script>
 export default {

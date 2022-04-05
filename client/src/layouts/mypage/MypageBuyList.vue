@@ -1,3 +1,4 @@
+
 <template>
   <div>
     <mypage-top-count-tap :counts="counts" :tapNames="tapNames" @onTapChanged="onTapChanged"/>
