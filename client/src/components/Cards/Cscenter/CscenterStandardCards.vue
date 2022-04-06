@@ -1,50 +1,23 @@
 <template>
-  <tr>
-    <td
-        class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
+  <v-row justify="center">
 
+    <v-expansion-panels
+        accordion
     >
-      {{ CSCENTER_KEY }}
-    </td>
-    <td
-        class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
-
-    >
-      {{ CSCENTER_TITLE }}
-    </td>
-    <td
-        class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
-
-    >
-      {{ USER_ID }}
-    </td>
-    <td
-        class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
-
-    >
-      {{ CSCENTER_WDATE }}
-    </td>
-    <td
-        class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
-
-    >
-      {{ CSCENTER_STATUS }}
-    </td>
-    <td
-        class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
-    >
-      <button
-          class="bg-orange-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-          type="button"
-          @click="fDialog(), sendItems()"
-          v-if="CSCENTER_STATUS==='0'"
+      <v-expansion-panel
+          v-for="(item,i) in 5"
+          :key="i"
       >
-        답변하기
-      </button>
-    </td>
-  </tr>
+        <v-expansion-panel-header>제목 넣기 </v-expansion-panel-header>
+        <v-expansion-panel-content class="p-5">
+          <div class="text-left bg-blueGray-200 rounded py-5 px-4">
+            내용 넣기
+          </div>
+        </v-expansion-panel-content>
+      </v-expansion-panel>
+    </v-expansion-panels>
+  </v-row>
 </template>
-
 <script>
 export default {
   data(){

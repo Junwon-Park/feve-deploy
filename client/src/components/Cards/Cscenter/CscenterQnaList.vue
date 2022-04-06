@@ -1,59 +1,65 @@
 <template>
   <div
-      class="relative flex flex-col min-w-0 break-words bg-blueGray-200 w-full mb-6  rounded"
+      class="relative flex flex-col min-w-0 break-words w-full mb-auto  rounded "
   >
+    <div class="rounded-t mb-auto px-1 py-10 border-0">
+      <div class="flex flex-wrap items-center">
+        <div class="relative w-full px-auto max-w-full flex-grow flex-1">
+          <h1
+              class="font-semibold text-lg text-left "
+          >
+            묻고 답하기
+          </h1>
+        </div>
+      </div>
+    </div>
     <div class="block w-full overflow-x-auto">
       <!-- Projects table -->
-      <table class=" w-full bg-transparent border-collapse">
-        <thead class="thead-light">
+      <table class="items-center w-full bg- border-collapse">
+        <thead>
         <tr>
           <th
-              class="px-6  bg-gray-200 text-black  align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold "
-              v-for="(table, idx) in table" :key="idx"
+              class="text-center px-6 border-b-2 text-black  align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold"
+              colspan="" style="border-color: black;"
           >
-            {{ table }}
+            번호
+          </th>
+          <th
+              class="text-center px-6 border-b-2 text-black  align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold"
+              colspan="" style="border-color: black;"
+          >
+            제목
+          </th>
+          <th
+              class="text-center px-6 border-b-2 text-black  align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold"
+              colspan="" style="border-color: black;"
+          >
+            작성자
+          </th>
+          <th
+              class="text-center px-6 border-b-2 text-black  align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold"
+              colspan="" style="border-color: black;"
+          >
+            작성일
+          </th>
+          <th
+              class="text-center px-6 border-b-2 text-black  align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold"
+              colspan="" style="border-color: black;"
+          >
+            답변여부
           </th>
         </tr>
         </thead>
         <tbody>
-        <tr v-if="this.$props.items.length===0">
-          <td
-              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
-              colspan="13"
-          >
-            아직 등록된 문의가 없습니다.
-          </td>
-        </tr>
-          <CscenterQnaCards
-              v-else
-              v-for="(item, idx) in items"
-              :key="idx"
-              v-bind="item"
-              :items="items"
-              @sendDialog="cDialog"
-              @sendItems="sendItems"
-          />
+         <CscenterQnaCards />
         </tbody>
       </table>
     </div>
-    <!-- <CscenterQnaModal
-      :dialog="recDialog"
-      :table="table"
-      :title="title"
-      :item="item"
-      :receivedCscenterKey="receivedCscenterKey"
-      :receivedUserid="receivedUserid"
-      @sendDialog="sendDialog"
-      @updateList="updateList"/>-->
-      <!-- <button class="bg-orange-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-              type="button" @click="fDialog(), sendItems()">문의하기</button> -->
-  </div> 
-  
-  
+  </div>
 </template>
 <script>
 import CscenterQnaCards from "@/components/Cards/Cscenter/CscenterQnaCards.vue";
-// import CscenterQnaModal from "@/components/Cards/Cscenter/CscenterQnaModal.vue";
+//import CscenterQnaModal from "@/components/Cards/Cscenter/CscenterQnaModal.vue";
 export default {
   props:{
     title: {
