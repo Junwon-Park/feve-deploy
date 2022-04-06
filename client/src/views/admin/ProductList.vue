@@ -48,8 +48,8 @@ export default {
       let that = this;
       that.limitStart = start;
       that.limitEnd = end;
-      that.currentPage= reqpage,
-      console.log(start, end, reqpage)
+      that.currentPage= reqpage;
+      console.log(start, end, reqpage);
 
       this.$axios.post('http://localhost:8080/admin/loadproduct', {
         limitStart: this.limitStart,

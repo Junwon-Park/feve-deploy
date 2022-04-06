@@ -20,8 +20,6 @@ async function loadproduct(req, res, next) {
     const start = req.body.limitStart;
     const end = req.body.limitEnd;
 
-    console.log("limitStart, limitEnd",start, end)
-
   await db.sequelize
     .query(
       'SELECT \n' +

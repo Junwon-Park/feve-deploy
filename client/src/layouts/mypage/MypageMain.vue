@@ -3,13 +3,13 @@
     <mypage-simple-user-info :userInfo="userInfo" />
 
     <h2 class="mt-20 font-bold">구매 내역</h2>
-    <mypage-simple-count-list :counts="buyCounts" :state=1 @onMoreClicked="onMoreClicked"/>
+    <mypage-simple-count-list :counts="buyCounts" :state=1 />
 
     <h2 class="font-bold">판매 내역</h2>
-    <mypage-simple-count-list :counts="sellCounts" :state=2 @onMoreClicked="onMoreClicked"/>
+    <mypage-simple-count-list :counts="sellCounts" :state=2 />
 
     <h2 class="font-bold">관심 상품</h2>
-    <mypage-simple-favorite-list :items="favoriteList"/>
+    <mypage-simple-favorite-list :items="favoriteList" :state=3 />
   </div>
 </template>
 
@@ -17,7 +17,6 @@
 import MypageSimpleUserInfo from '@/components/Cards/Mypage/MypageSimpleUserInfo.vue';
 import MypageSimpleCountList from '@/components/Cards/Mypage/MypageSimpleCountList.vue';
 import MypageSimpleFavoriteList from '@/components/Cards/Mypage/MypageSimpleFavoriteList.vue';
-import {EventBus} from "@/common/EventBus.js"
 
 export default {
   components: {
@@ -81,7 +80,7 @@ export default {
       })
     },
     getSimpleFavoriteList(){
-      this.$axios.post(this.$store.getters.ServerUrl + '/mypage/favoriteList', {
+      this.$axios.post(this.$store.getters.ServerUrl + '/mypage/getSimpleFavoriteList', {
           USER_KEY : '1', //로그인과 연동시키기
         })
         .then((result) => {
@@ -95,10 +94,10 @@ export default {
           console.log(error);
         });
     },
-    onMoreClicked(state){
-      console.log("onMoreClicked: ", state);
-      EventBus.$emit("mypageViewStateChange", state); //1:buyList 2:sellList
-    }
+    // onMoreClicked(state){
+    //   console.log("onMoreClicked: ", state);
+    //   EventBus.$emit("mypageViewStateChange", state); //1:buyList 2:sellList
+    // }
   }
 };
 

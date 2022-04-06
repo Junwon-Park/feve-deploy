@@ -159,7 +159,7 @@ export default {
     newInspectionResult:"",
   }),
   props: {
-    dialog:{},
+    //dialog:{},
     table: [],
     title:{},
     item:{}

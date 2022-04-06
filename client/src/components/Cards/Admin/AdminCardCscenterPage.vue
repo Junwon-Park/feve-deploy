@@ -11,7 +11,7 @@
         </div>
       </div>
     </div>
-    <div class="block w-full overflow-x-auto">
+    <div class="block w-full overflow-x-auto" style="min-height: 58vh;">
       <!-- Projects table -->
       <table class=" w-full bg-transparent border-collapse">
         <thead class="thead-light">
@@ -54,11 +54,18 @@
       :receivedUserid="receivedUserid"
       @sendDialog="sendDialog"
       @updateList="updateList"/>
+
+    <Pagination
+        :pageSize="pageSize"
+        @onPageChanged="onPageChanged"
+    />
   </div>
+
 </template>
 <script>
 import AdminAnswerCards from "@/components/Cards/Admin/AdminAnswerCards.vue";
 import CscenterAnswer from "@/components/Cards/Admin/CscenterAnswer.vue";
+import Pagination from "@/components/Pagination.vue" ;
 export default {
   props:{
     title: {
@@ -68,6 +75,9 @@ export default {
     items: {
       required: true,
     },
+    pageSize:Number,
+    itemPerPage: Number,
+    totalListCount: Number,
   },
   data () {
     return {
@@ -92,7 +102,8 @@ export default {
   },
   components:{
     AdminAnswerCards,
-    CscenterAnswer
+    CscenterAnswer,
+    Pagination,
   },
   methods: {
     cDialog(){
@@ -134,6 +145,16 @@ export default {
           .catch(function(err){
             console.log(err);
           });
+    },
+
+    onPageChanged(page){
+      console.log("페이지 버튼 클릭: ", page +"번");
+      let requestPage = page;
+      let sendStart = (page -1) * this.itemPerPage +1;
+      let sendEnd=page * this.itemPerPage;
+      console.log("sendStart: ",sendStart, "sendEnd: ", sendEnd)
+
+      this.$emit("startend", sendStart, sendEnd, requestPage);
     }
   },
 }

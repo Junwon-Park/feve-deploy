@@ -118,8 +118,6 @@ export default {
       newProductOriprice:"",
       requestPage: 0,
       currentPage: 0,
-      // sendStart: 0,
-      // sendEnd: 0,
       item:{
         PRODUCT_KEY: 0,
         PRODUCT_MNUM: "",

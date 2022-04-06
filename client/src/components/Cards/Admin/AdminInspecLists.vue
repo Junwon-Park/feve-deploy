@@ -12,7 +12,7 @@
         </div>
       </div>
     </div>
-    <div class="block w-full overflow-x-auto"  style="min-height: 80vh;">
+    <div class="block w-full overflow-x-auto"  style="min-height: 58vh;">
       <!-- Projects table -->
       <table class="items-center w-full bg-transparent border-collapse" >
         <thead>
@@ -55,12 +55,18 @@
         :receivedUserid="receivedUserid"
         @sendDialog="sendDialog"
         @updateList="updateList"/>
+
+    <Pagination
+        :pageSize="pageSize"
+        @onPageChanged="onPageChanged"
+    />
   </div>
 </template>
 
 <script>
 import AdminInspecCards from "@/components/Cards/Admin/AdminInspecCards.vue";
 import AdminInspecModi from "@/components/Cards/Admin/AdminInspecModi.vue";
+import Pagination from "@/components/Pagination.vue" ;
 export default {
   props: {
     title: {
@@ -70,6 +76,9 @@ export default {
     items: {
       required: false,
     },
+    pageSize:Number,
+    itemPerPage: Number,
+    totalListCount: Number,
 },
   data() {
     return {
@@ -79,6 +88,8 @@ export default {
       sendInspectionStatus: 0,
       sendInsepctionResult: 0,
       recDialog: false,
+      requestPage: 0,
+      currentPage: 0,
       table: ["번호", "상품명", "브랜드", "카테고리", "발매가", "판매자","수량", "검수도착일","검수상태","검수종료일","결과","반송일","관리"],
       item:{
         INSPECTION_KEY: 0,
@@ -100,6 +111,7 @@ export default {
   components: {
     AdminInspecCards,
     AdminInspecModi,
+    Pagination,
   },
   methods: {
     cDialog(){
@@ -142,6 +154,15 @@ export default {
       .catch(function(err){
         console.log(err);
       });
+    },
+    onPageChanged(page){
+      console.log("페이지 버튼 클릭: ", page +"번");
+      let requestPage = page;
+      let sendStart = (page -1) * this.itemPerPage +1;
+      let sendEnd=page * this.itemPerPage;
+      console.log("sendStart: ",sendStart, "sendEnd: ", sendEnd)
+
+      this.$emit("startend", sendStart, sendEnd, requestPage);
     }
   },
 }

@@ -21,8 +21,8 @@ async function getFavoriteList(req, res) {
     const limitStart = req.body.LIMIT_START;
     const limitEnd = req.body.LIMIT_END;
 
-    console.log("limitStart: ", limitStart);
-    console.log("limitEnd: ", limitEnd);
+    // console.log("limitStart: ", limitStart);
+    // console.log("limitEnd: ", limitEnd);
 
     await db.sequelize
         .query(

@@ -1,8 +1,7 @@
 const sequelize = require('sequelize');
 const Op = sequelize.Op;
-const { User } = require('../../models');
-const { Buy } = require('../../models');
-const { Sell } = require('../../models');
+const db = require('../../models');
+const { User, Buy, Sell } = require('../../models');
 
 async function getSimpleUserInfo(req, res) {
   await User.findOne({
@@ -79,4 +78,28 @@ async function getSellCounts(req, res) {
     }
 }
 
-module.exports = { getSimpleUserInfo, getBuyCounts, getSellCounts };
+async function getSimpleFavoriteList(req, res) {
+    const userKey = req.body.USER_KEY;
+    
+    await db.sequelize
+        .query(
+            'SELECT \n'
+            + 'f.FAVORITE_KEY \n'
+            + ',p.PRODUCT_BRAND \n'
+            + ',p.PRODUCT_NAME \n'
+            + ',p.PRODUCT_PIC \n'
+            + ',(SELECT MIN(s.SELL_PRICE) FROM Sell AS s WHERE p.PRODUCT_KEY = s.PRODUCT_KEY) MIN_PRICE \n'
+            + 'FROM Favorite AS f \n'
+            + 'JOIN Product AS p ON f.PRODUCT_KEY = p.PRODUCT_KEY \n'
+            + 'WHERE USER_KEY =' + userKey + '\n'
+            + 'limit 0, 6;'
+            ,{ type: sequelize.QueryTypes.SELECT }
+        )
+        .then((result) => {
+            console.log("favoriteList has been responsed from db : ", result);
+            res.json(result);
+        })
+        .catch((err) => console.log(err));
+}
+
+module.exports = { getSimpleUserInfo, getBuyCounts, getSellCounts, getSimpleFavoriteList };
