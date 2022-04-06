@@ -165,25 +165,17 @@ export default {
       };
       var ctx = document.getElementById("line-chart").getContext("2d");
       window.myLine = new Chart(ctx, config);
-      window.myLine.update();
     }
   },
   created() {
     this.$nextTick( ()=> {
       this.drawChart();
     });
-
-    console.log(this.userCnt)
-    console.log(this.countUser)
   },
   ready() {
     this.$nextTick(()=> {
       this.drawChart();
     })
   },
-mounted(){
-  window.myLine.update();
-  this.drawChart();
-},
 };
 </script>
