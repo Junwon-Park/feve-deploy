@@ -33,10 +33,13 @@ export default {
       this.drawChart();
     });
   },
-  ready() {
-    this.$nextTick(() =>  {
+  watch:{
+    bidBuyCnt(){
       this.drawChart();
-    })
+    },
+    bidSellCnt(){
+      this.drawChart()
+    },
   },
   methods: {
     drawChart(){
@@ -144,10 +147,12 @@ export default {
       };
       let ctx = document.getElementById("bar-chart").getContext("2d");
       window.myBar = new Chart(ctx, config);
+      window.myBar.update();
     }
   },
   mounted(){
     this.drawChart();
+    window.myBar.update();
   },
 };
 </script>

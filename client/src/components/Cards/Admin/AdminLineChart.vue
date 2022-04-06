@@ -37,6 +37,17 @@ export default {
     userCnt: [],
     dealCnt: [],
   },
+  watch:{
+    countUser(){
+     this.drawChart();
+    },
+    userCnt(){
+      this.drawChart()
+    },
+    dealCnt(){
+      this.drawChart()
+    }
+  },
   methods: {
     makeMonthArray(){
       for(let i=0; i<this.$props.countUser.length;i++) {
@@ -154,12 +165,16 @@ export default {
       };
       var ctx = document.getElementById("line-chart").getContext("2d");
       window.myLine = new Chart(ctx, config);
+      window.myLine.update();
     }
   },
   created() {
     this.$nextTick( ()=> {
       this.drawChart();
     });
+
+    console.log(this.userCnt)
+    console.log(this.countUser)
   },
   ready() {
     this.$nextTick(()=> {
@@ -167,6 +182,7 @@ export default {
     })
   },
 mounted(){
+  window.myLine.update();
   this.drawChart();
 },
 };
