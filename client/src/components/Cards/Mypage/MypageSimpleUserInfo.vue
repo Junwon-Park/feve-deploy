@@ -25,6 +25,7 @@
                 outlined
                 rounded
                 text
+                @click="onModifyClicked"
             >
               프로필 수정
             </v-btn></v-list-item-action>
@@ -36,15 +37,22 @@
 
 <script>
 import account from "@/assets/img/icon_account.png"
+import {EventBus} from "@/common/EventBus.js"
+
 export default {
   props:{
     userInfo:Object
   },
   data() {
     return {
-      account
+      EventBus,
+      account,
     };
   },
- 
+  methods:{
+    onModifyClicked(){
+      EventBus.$emit("mypageViewStateChange", 4); //4:프로필 수정
+    }
+  }
 };
 </script>

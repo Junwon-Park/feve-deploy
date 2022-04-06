@@ -1,8 +1,10 @@
 <template>
-    <div class="flex flex-wrap">
+    <div class="flex flex-wrap" >
       <div class="w-full lg:w-4/12 md:w-4/12 px-4 my-5"
            style="margin-bottom: 15vh;"
            v-for="item in items" :key="item.PRODUCT_NAME"
+           @click="onSlotClicked(item.PRODUCT_NAME)"
+           type="button"
       >
         
           <div style="width: 200px; height: 200px; border-radius: 8px;">
@@ -14,7 +16,7 @@
           </div>
 
             <h5 class="font-bold underline mt-2">
-              {{ item.PRODUCT_BRAND }} sdfsdfsdfdsfdsfsd
+              {{ item.PRODUCT_BRAND }}
             </h5>
             <h5>
             {{ item.PRODUCT_NAME }}
@@ -39,5 +41,10 @@ export default {
       imageUrl : this.$store.getters.ServerUrl + '/getImage?imageName=',
     }
   },
+  methods:{
+    onSlotClicked(name){
+      console.log("onSlotClicked.name: ", name);
+    }
+  }
 };
 </script>
