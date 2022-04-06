@@ -1,8 +1,6 @@
 const express = require('express');
 const { body } = require('express-validator');
-const { loadproduct, loadTotalcntProduct } = require('../../controller/admin/loadproduct.js');
-const { loadproductLimit } = require('../../controller/admin/loadproductLimit.js');
-const { loadproductone } = require('../../controller/admin/loadproductone.js');
+const { loadproduct, loadTotalcntProduct, loadproductLimit, loadproductone } = require('../../controller/admin/loadproduct.js');
 
 const router = express.Router();
 

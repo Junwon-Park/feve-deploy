@@ -34,9 +34,17 @@ export default {
     });
   },
   ready() {
-    this.$nextTick(() =>  {
+    this.$nextTick(()=> {
       this.drawChart();
     })
+  },
+  watch:{
+    bidBuyCnt(){
+      this.drawChart();
+    },
+    bidSellCnt(){
+      this.drawChart()
+    },
   },
   methods: {
     drawChart(){
@@ -145,9 +153,6 @@ export default {
       let ctx = document.getElementById("bar-chart").getContext("2d");
       window.myBar = new Chart(ctx, config);
     }
-  },
-  mounted(){
-    this.drawChart();
   },
 };
 </script>

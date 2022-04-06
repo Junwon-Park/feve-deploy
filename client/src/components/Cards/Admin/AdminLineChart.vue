@@ -37,6 +37,17 @@ export default {
     userCnt: [],
     dealCnt: [],
   },
+  watch:{
+    countUser(){
+     this.drawChart();
+    },
+    userCnt(){
+      this.drawChart()
+    },
+    dealCnt(){
+      this.drawChart()
+    }
+  },
   methods: {
     makeMonthArray(){
       for(let i=0; i<this.$props.countUser.length;i++) {
@@ -166,8 +177,5 @@ export default {
       this.drawChart();
     })
   },
-mounted(){
-  this.drawChart();
-},
 };
 </script>

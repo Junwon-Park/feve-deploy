@@ -1,8 +1,6 @@
 const express = require('express');
 const { body } = require('express-validator');
-const { loadinspection, loadTotalcntinspection } = require('../../controller/admin/loadinspection.js');
-const { loadinspectionLimit } = require('../../controller/admin/loadinspectionLimit.js');
-const { loadinspecone } = require('../../controller/admin/loadinspecone.js');
+const { loadinspection, loadTotalcntinspection, loadinspecone, loadinspectionLimit } = require('../../controller/admin/loadinspection.js');
 
 const router = express.Router();
 

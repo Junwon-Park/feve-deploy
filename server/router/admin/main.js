@@ -1,17 +1,9 @@
 const express = require('express');
 const { body } = require('express-validator');
-const { countUser } = require('../../controller/admin/countUser.js');
-const { countDeal } = require('../../controller/admin/countDeal.js');
-const { countBidSell } = require('../../controller/admin/countBidSell.js');
-const { countBidBuy } = require('../../controller/admin/countBidBuy.js');
-const { countTotalUser } = require('../../controller/admin/countTotalUser.js');
-const { countTotalBuy } = require('../../controller/admin/countTotalBuy.js');
-const { countTotalSell } = require('../../controller/admin/countTotalSell.js');
-const { countTotalDeal } = require('../../controller/admin/countTotalDeal.js');
-const { beforeCountTotalUser } = require('../../controller/admin/beforeCountTotalUser.js');
-const { beforeCountTotalBuy } = require('../../controller/admin/beforeCountTotalBuy.js');
-const { beforeCountTotalSell } = require('../../controller/admin/beforeCountTotalSell.js');
-const { beforeCountTotalDeal } = require('../../controller/admin/beforeCountTotalDeal.js');
+const { countUser, countDeal, countBidSell, countBidBuy } = require('../../controller/admin/count.js');
+const { countTotalUser, countTotalBuy, countTotalSell, countTotalDeal } = require('../../controller/admin/countTotal.js');
+const { beforeCountTotalBuy, beforeCountTotalUser, beforeCountTotalSell, beforeCountTotalDeal } = require('../../controller/admin/beforeCountTotal.js');
+
 
 const router = express.Router();
 
