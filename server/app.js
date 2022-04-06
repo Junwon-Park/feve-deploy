@@ -30,7 +30,8 @@ const mypageFavoriteListRouter = require('./router/mypage/mypageFavoriteList.js'
 const mypageProfileRouter = require('./router/mypage/mypageProfile.js');
 const imageRouter = require("./image/image.js");
 const uploadImageRouter = require("./image/uploadImage.js");
-const cscenterRoute = require("./router/cscenter/cscenter.js");
+
+const cscenterInsertRoute = require("./router/cscenter/cscenterInsert.js");
 const mainLoadproductRoute = require('./router/main/loadproduct.js');
 
 const app = express();
@@ -70,7 +71,8 @@ app.use(cors(devCors));
 app.use('/auth', authRouter);
 app.use('/addproduct', addproductRoute);
 app.use('/category', categorytRoute);
-app.use("/cscenter/cscenter", cscenterRoute);
+
+app.use("/cscenter/cscenterInsert", cscenterInsertRoute)
 app.use("/getImage", imageRouter);
 
 app.use('/admin/addproduct', addproductRoute);
