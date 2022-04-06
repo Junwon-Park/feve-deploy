@@ -111,8 +111,8 @@
                       :RECENT_BUY_PRICE="RECENT_BUY_PRICE"
                       :RECENT_SELL_EDATE="RECENT_SELL_EDATE"
                       :RECENT_BUY_EDATE="RECENT_BUY_EDATE"
-                      :SELL_TABLE_PRICE="SELL_TABLE_PRICE"
-                      :SELL_TABLE_COUNT="SELL_TABLE_COUNT"/>
+                      :arr="arr"
+                      :arr2="arr2"/>
                     </div>
                   </div>
                   <!--컴포넌트로 구매 확인 공지 넣어주기-->
@@ -178,10 +178,8 @@ export default {
             src: '',
           }
           ],
-      SELL_TABLE_PRICE:[],
-      //BUY_TABLE_PRICE:[],
-      SELL_TABLE_COUNT:[],
-      //BUY_TABLE_COUNT:[],
+      arr:[],
+      arr2:[]
       };
     },
     components: {
@@ -291,8 +289,8 @@ export default {
       },
       getRecentPrice: function(){
         var vm = this;
-        console.log("recent sell price 가지러 가는 길");
-        console.log("여기서 프로덕트키 제대로 넘기니",this.PRODUCT_KEY);
+        //console.log("recent sell price 가지러 가는 길");
+        //console.log("여기서 프로덕트키 제대로 넘기니",this.PRODUCT_KEY);
         this.$axios.post('http://localhost:8080/shop/shopview/'+ this.PRODUCT_KEY + '/recentSellPrice',
         {product_key: this.PRODUCT_KEY})
             .then(function(res){
@@ -301,8 +299,8 @@ export default {
               {
                 vm.RECENT_SELL_PRICE = res.data[0].SELL_PRICE;
                 vm.RECENT_SELL_EDATE = res.data[0].SELL_EDATE;
-                console.log(vm.RECENT_SELL_PRICE);
-                console.log(vm.RECENT_SELL_EDATE);
+                //console.log(vm.RECENT_SELL_PRICE);
+                //console.log(vm.RECENT_SELL_EDATE);
               }
               else
               {
@@ -321,8 +319,8 @@ export default {
               {
                 vm.RECENT_BUY_PRICE = res.data[0].BUY_PRICE;
                 vm.RECENT_BUY_EDATE = res.data[0].BUY_EDATE;
-                console.log(vm.RECENT_BUY_PRICE);
-                console.log(vm.RECENT_BUY_EDATE);
+                //console.log(vm.RECENT_BUY_PRICE);
+                //console.log(vm.RECENT_BUY_EDATE);
                 vm.compareDate(); 
               }
               else
@@ -338,7 +336,7 @@ export default {
       },
       compareDate:function(){
         var vm = this;
-        console.log("날짜 비교");
+        //console.log("날짜 비교");
         var a = new Date(vm.RECENT_SELL_DATE);
         var b = new Date(vm.RECENT_BUY_DATE);
         if(a>=b)
@@ -347,39 +345,26 @@ export default {
           vm.RECENT_PRICE = vm.RECENT_BUY_PRICE;
       },
       getTablePrice: function(){
-        console.log("table price 가지러 가는 길");
+        //console.log("table price 가지러 가는 길");
         var vm = this;
         this.$axios.post('http://localhost:8080/shop/shopview/'+ this.PRODUCT_KEY + '/sellTablePrice',
         {product_key: this.PRODUCT_KEY})
             .then(function(res){
-              console.log(res);
-              for(let i=0;i<res.data.length;i++)
-              {
-                vm.SELL_TABLE_PRICE = res.data[i].SELL_PRICE;
-                vm.SELL_TABLE_COUNT = res.data[i].SELL_COUNT;
-                console.log(res.data[i].SELL_PRICE);
-                console.log(res.data[i].SELL_COUNT);
-                console.log(vm.SELL_TABLE_PRICE);
-                console.log(vm.SELL_TABLE_COUNT);
-              }
+              //console.log(res);
+              vm.arr = res.data;
             })
             .catch(function(err){
               console.log(err);
             });
-        // this.$axios.post('http://localhost:8080/shop/shopview/'+ this.PRODUCT_KEY + '/buyTablePrice',
-        // {product_key: this.PRODUCT_KEY})
-        //     .then(function(res){
-        //       console.log(res);
-        //       for(let i=0;i<res.data.length;i++)
-        //       {
-        //         console.log(res.data[i].BUY_PRICE);
-        //         console.log(res.data[i].BUY_COUNT);
-        //       }
-              
-        //     })
-        //     .catch(function(err){
-        //       console.log(err);
-        //     }); 
+        this.$axios.post('http://localhost:8080/shop/shopview/'+ this.PRODUCT_KEY + '/buyTablePrice',
+        {product_key: this.PRODUCT_KEY})
+            .then(function(res){
+              //console.log(res);
+              vm.arr2= res.data;
+            })
+            .catch(function(err){
+              console.log(err);
+            }); 
       },
       
       

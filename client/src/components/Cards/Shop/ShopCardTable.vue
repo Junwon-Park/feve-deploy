@@ -81,6 +81,7 @@
           <tr>
             <th
               class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+              style="width:50%;"
               :class="[
                 color === 'light'
                   ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
@@ -91,6 +92,7 @@
             </th>
             <th
               class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+              style="width:50%;"
               :class="[
                 color === 'light'
                   ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
@@ -102,16 +104,16 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-              <td
+          <tr style="width:50%;" v-for="(item,i) in arr" :key="i" v-bind="item" >
+              <td 
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
             >
-              {{SELL_TABLE_PRICE}}
+              {{item.SELL_PRICE.toLocaleString('ko-KR')}}원
             </td>
-            <td
+            <td 
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
             >
-              {{SELL_TABLE_COUNT}}
+              {{item.SELL_COUNT}}
             </td>
           </tr>
         </tbody>
@@ -121,6 +123,7 @@
           <tr>
             <th
               class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+              style="width:50%;"
               :class="[
                 color === 'light'
                   ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
@@ -131,6 +134,7 @@
             </th>
             <th
               class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+              style="width:50%;"
               :class="[
                 color === 'light'
                   ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
@@ -142,16 +146,16 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <tr style="width:50%;" v-for="(item,i) in arr2" :key="i" v-bind="item">
               <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
             >
-              80,000원
+              {{item.BUY_PRICE.toLocaleString('ko-KR')}}원
             </td>
             <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
             >
-              1
+              {{item.BUY_COUNT}}
             </td>
           </tr>
         </tbody>
@@ -192,12 +196,8 @@ export default {
       type:String,
       deafult:''
     },
-    SELL_TABLE_PRICE:[
-
-    ],
-    SELL_TABLE_COUNT:[
-
-    ]
+    arr:[],
+    arr2:[]
   },
   methods:{
     showRecentTransaction:function(){
