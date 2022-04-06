@@ -166,7 +166,7 @@ export default {
     product_get_cate: []
   }),
   props: {
-    dialog:{},
+    //dialog:{},
     table: [],
     title:{},
     item:{}

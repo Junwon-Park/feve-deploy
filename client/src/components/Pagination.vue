@@ -23,7 +23,7 @@ export default {
     }
   },
   props:{
-    totalList :{
+    totalListCount :{
       required: true,
     },
     listPerPage:{
@@ -34,20 +34,29 @@ export default {
       default: '',
     }
   },
-  methods: {
-    nextPage(){
-      console.log('??D?FS?F?SD?F');
+  watch:{
+    totalListCount:function(){
+      this.initPage();
     }
   },
-  created(){
-    console.log("쿼리 실행 후 가져온 레코드 수: ",this.$props.totalList)
-    console.log("한 페이지당 보여야 하는 레코드 수: ",this.$props.listPerPage)
+  methods: {
+    nextPage(page){
+      console.log("onPageChanged.page: ", page);
+      this.$emit("onPageChanged", page);
+    },
 
-    let that = this;
-    that.pageSize = Math.ceil(this.$props.totalList / this.$props.listPerPage);
-    that.perPage=this.$props.listPerPage;
+    initPage(){
+      console.log("created: 쿼리 실행 후 가져온 레코드 수: ",this.totalListCount);
+      console.log("한 페이지당 보여야 하는 레코드 수: ",this.listPerPage);
 
-    console.log("총 페이지수: ",this.pageSize)
-  }
+      let that = this;
+      that.pageSize = Math.ceil(this.totalListCount / this.listPerPage);
+      //console.log("that.pageSize: ", that.pageSize, "/this.totalListCount:", this.totalListCount, "/this.listPerPage", this.listPerPage);
+      that.perPage=this.listPerPage;
+      
+      console.log("총 페이지수: ",this.pageSize)
+    },
+  },
+
 }
 </script>
