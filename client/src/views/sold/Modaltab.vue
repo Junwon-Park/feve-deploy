@@ -2,7 +2,7 @@
   <div class="text-left">
     <v-dialog v-model="dialog" width="500">
       <template v-slot:activator="{ on, attrs }">
-        <v-btn color="light-gray lighten-2" dark v-bind="attrs" v-on="on">
+        <v-btn color="light-gray lighten-2" dark v-bind="attrs" v-on="on" class="mb-3">
           검수사항
         </v-btn>
       </template>
