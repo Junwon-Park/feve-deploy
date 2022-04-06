@@ -6,20 +6,23 @@ const Sequelize = require('sequelize');
 async function loadNewproduct(req, res, next) {
   await db.sequelize
     .query(
-      'SELECT \n' +
-        'PRODUCT_KEY \n' +
-        ',PRODUCT_NAME \n' +
-        ',PRODUCT_MNUM \n' +
-        ',PRODUCT_ORIPRICE \n' +
-        ',PRODUCT_DELETE \n' +
-        ',PRODUCT_WDATE \n' +
-        ',PRODUCT_PIC \n' +
-        ',c.CATEGORY_DESC  as PRODUCT_CATE \n' +
-        ',ct.CATEGORY_desc  as PRODUCT_BRAND \n' +
-        'from Product\n' +
-        'left outer join Category c on c.CATEGORY_KEY =PRODUCT_CATE \n' +
-        'left outer join Category ct on c.CATEGORY_parent=ct.CATEGORY_NAME\n'+
-        'where PRODUCT_DELETE = "0" order by PRODUCT_WDATE DESC  limit 0, 8',
+        'SELECT \n' +
+        'a.PRODUCT_KEY \n' +
+        ',a.PRODUCT_BRAND \n' +
+        ',a.PRODUCT_NAME \n' +
+        ',a.PRODUCT_MNUM \n' +
+        ',a.PRODUCT_LDATE \n' +
+        ',a.PRODUCT_PIC \n' +
+        ',a.PRODUCT_DESC \n' +
+        ',a.PRODUCT_ORIPRICE \n' +
+        ',a.PRODUCT_WDATE\n' +
+        ',a.PRODUCT_CATE\n' +
+        ',b.SELL_PRICE \n' +
+        'FROM Product a\n' +
+        'LEFT OUTER JOIN Sell b\n'+
+        'ON b.PRODUCT_KEY = a.PRODUCT_KEY \n' +
+        'AND b.SELL_PRICE = (SELECT MIN(SELL_PRICE) FROM Sell WHERE PRODUCT_KEY = a.PRODUCT_KEY AND SELL_STATUS=0)\n' +
+        'where PRODUCT_DELETE = "0" order by PRODUCT_WDATE DESC  limit 0, 8;',
       { type: Sequelize.QueryTypes.SELECT }
     )
     .then((result) => {

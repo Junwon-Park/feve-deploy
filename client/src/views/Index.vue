@@ -65,7 +65,13 @@
               :items="items" />
             </div>
           </div>
-        <v-btn outlined color="#999" class="ml-auto mr-auto px-5 mt-10">더 보기</v-btn>
+
+
+        <router-link to="/shop" class="mx-auto">
+          <v-btn outlined color="#999" class="px-5 mt-10">
+            더 보기
+          </v-btn>
+        </router-link>
       </div>
 
       <div class="flex flex-wrap mt-32">
@@ -109,6 +115,12 @@
               :items="newItems" />
         </div>
         </div>
+
+        <router-link to="/shop" class="mx-auto">
+          <v-btn outlined color="#999" class="px-5 mt-10">
+            더 보기
+          </v-btn>
+        </router-link>
       </div>
     </section>
 
@@ -161,7 +173,7 @@
               첫 리셀을 <span class="logo text-2xl font-bold">FEVE</span>와 시작해보세요.
             </p>
             <div class="mt-12">
-              <router-link to="">
+              <router-link to="/shop">
                 <span
                     class="get-started text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-orange-500 active:bg-orange-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
                 >
@@ -169,7 +181,7 @@
                 </span>
               </router-link>
 
-              <router-link to="">
+              <router-link to="/shop">
                 <span
                     class="github-star ml-1 text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-600 active:bg-blueGray-200 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
                 >
@@ -229,6 +241,7 @@ export default {
         PRODUCT_PIC: "",
         PRODUCT_DELETE:'',
         PRODUCT_DESC: "",
+        SELL_PRICE:0
       }],
       newItems:[{
         PRODUCT_KEY: 0,

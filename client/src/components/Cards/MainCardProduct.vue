@@ -20,7 +20,8 @@
             {{ PRODUCT_NAME}}
           </span>
           <span class="font-semibold text-sm text-blueGray-700 block">
-            {{ PRODUCT_ORIPRICE.toLocaleString('ko-KR') }} 원
+<!--            {{ PRODUCT_ORIPRICE.toLocaleString('ko-KR') }} 원-->
+            {{ SELL_PRICE.toLocaleString('ko-KR') }} 원
           </span>
         </div>
       </div>
@@ -69,6 +70,9 @@ export default {
     PRODUCT_DELETE: {
       type: String,
       default: '0',
+    },
+    SELL_PRICE: {
+      default: 550000
     },
   },
 }
