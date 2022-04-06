@@ -8,11 +8,11 @@
           <div
             class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6  rounded-lg"
           >
-              <div class="relative w-full px-auto max-w-full flex-grow flex-1">
+              <div class="relative w-full px-auto max-w-full flex-grow flex-1 border-b-2 py-4" style="border-color: black;">
                 <h1
                     class="font-semibold text-lg text-left "
                 >
-                  공지사항
+                  자주 묻는 질문
                 </h1>
               </div>
 

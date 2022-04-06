@@ -16,172 +16,57 @@
     <div class="block w-full overflow-x-auto">
       <!-- Projects table -->
       <table class="items-center w-full bg- border-collapse">
-        <colgroup>
-          <col width="10%"/>
-          <col width="*"/>
-          <col width="10%"/>
-        </colgroup>
         <thead>
           <tr>
             <th
-                class="px-6 bg-blueGray-200 text-black  align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold"
-                colspan="2"
+                class="text-left px-6 border-b-2 text-black  align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold"
+                colspan="" style="border-color: black;"
             >
               Title
             </th>
-            <th
-              class="px-6 bg-blueGray-200 text-black  align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold"
-            >
-              작성자
-            </th>
-
           </tr>
         </thead>
         <tbody>
           <tr>
-
-            <td
-                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
-            >
-              <img
-                  :src="event"
-                  class="h-12 w-12 bg-white rounded-full border "
-                  alt="..."
-              />
-            </td>
             <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
             >
-                [공지] 안녕하세요. FEVE 공지 사항 입니다.
-            </td>
-
-            <td
-              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
-            >
-              <div class="flex">
-                <img
-                  :src="cscenter"
-                  alt="..."
-                  class="w-10 h-10 rounded-full border-2 border-blueGray-50 shadow "
-                />
-              </div>
-            </td>
-
-          </tr>
-          <tr>
-
-            <td
-                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
-            >
-              <img
-                  :src="event"
-                  class="h-12 w-12 bg-white rounded-full border "
-                  alt="..."
-              /></td>
-            <td
-              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
-            >
-                [공지] FEVE 사용 안내
-            </td>
-
-            <td
-              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
-            >
-              <div class="flex">
-                <img
-                  :src="cscenter"
-                  alt="..."
-                  class="w-10 h-10 rounded-full border-2 border-blueGray-50 shadow"
-                />
-              </div>
-            </td>
-
-          </tr>
-          <tr>
-
-            <td
-                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
-            >
-              <img
-                  :src="event"
-                  class="h-12 w-12 bg-white rounded-full border "
-                  alt="..."
-              />
-            </td>
-            <td
-              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
-            >
-                [이벤트] 첫 이용 기념 이벤트 실시중!
-            </td>
-
-            <td
-              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
-            >
-              <div class="flex">
-                <img
-                  :src="cscenter"
-                  alt="..."
-                  class="w-10 h-10 rounded-full border-2 border-blueGray-50 shadow"
-                />
-              </div>
+                <span class="block">[공지] 안녕하세요. FEVE 공지 사항 입니다.</span>
+              <small>2022-04-01</small>
             </td>
           </tr>
           <tr>
             <td
-                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
-            >
-              <img
-                  :src="event"
-                  class="h-12 w-12 bg-white rounded-full border "
-                  alt="..."
-              />
-            </td>
-            <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
             >
-              >
-                [이벤트] 리뷰를 남겨 보세요!
+              <span class="block">[공지] FEVE 사용 안내.</span>
+              <small>2022-03-01</small>
             </td>
-
-            <td
-              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
-            >
-              <div class="flex">
-                <img
-                  :src="cscenter"
-                  alt="..."
-                  class="w-10 h-10 rounded-full border-2 border-blueGray-50 shadow"
-                />
-              </div>
-            </td>
-
           </tr>
           <tr>
             <td
-                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
+              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
             >
-              <img
-                  :src="notice"
-                  class="h-12 w-12 bg-white rounded-full border"
-                  alt="..."
-              />
+
+              <span class="block">[이벤트] 첫 이용 기념 이벤트 실시중!</span>
+              <small>2022-02-01</small>
             </td>
+          </tr>
+          <tr>
             <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
             >
-                [공지] 이용약관 안내
+              <span class="block">[이벤트] 리뷰를 남겨 보세요!</span>
+              <small>2022-01-01</small>
             </td>
-
+          </tr>
+          <tr>
             <td
-              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
+              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
             >
-              <div class="flex">
-                <img
-                  :src="cscenter"
-                  alt="..."
-                  class="w-10 h-10 rounded-full border-2 border-blueGray-50 shadow"
-                />
-              </div>
+
+              <span class="block">[공지] 이용약관 안내</span>
+              <small>2022-01-01</small>
             </td>
           </tr>
         </tbody>
