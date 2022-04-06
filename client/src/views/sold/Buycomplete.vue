@@ -116,7 +116,8 @@ export default {
           { 
             PRODUCT_KEY:'0',
             PRODUCT_PIC:'',
-            PRODUCT_NAME: '',
+            
+           PRODUCT_NAME: '',
             PRODUCT_BRAND: '',
             PRODUCT_CATE:0,
             PRODUCT_ORIPRICE:'',
@@ -160,7 +161,7 @@ export default {
           console.log(that.item);
         })
         .catch(function (err) {
-          console.log(err);
+           console.log(err);
         });
   },
 

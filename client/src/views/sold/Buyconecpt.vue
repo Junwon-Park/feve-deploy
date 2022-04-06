@@ -296,7 +296,7 @@
             <div class="text-center mt-6">
               <button
                 class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                type="button" @click="updatebuy()">
+                type="button">
                 작성하기
               </button>
             </div>
@@ -359,22 +359,21 @@ export default {
     };
   },
   methods: {
-    updatebuy() {
-      let thot = this;
-        this.$axios.post("http://localhost:8080/buy/update")
-      .then(function (res) {
-        thot.maxprice = res.data;
-        console.log(res.data);
-        console.log(thot.maxprice.BUY_PRICE);
-        console.log("성공");
+    // updatebuy() {
+    //   let thot = this;
+    //     this.$axios.get("http://localhost:8080/buy/update")
+    //   .then(function (res) {
+    //     console.log(res.data);
+    //     console.log(thot.maxprice.BUY_PRICE);
+    //     console.log("성공");
 
-      }) 
-      .catch(function (err) {
-          console.log(err);
-        });
+    //   }) 
+    //   .catch(function (err) {
+    //       console.log(err);
+    //     });
   
 
-    }
+    // }
 
   },
 
