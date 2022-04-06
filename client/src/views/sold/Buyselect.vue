@@ -2,27 +2,11 @@
 
   <div>
     <main class="profile-page">
-
-      <section class="relative block h-500-px">
-        <div class="absolute top-0 w-full h-full bg-center bg-cover" :style="{ backgroundImage: `url(${legoBg})` }">
-          <span id="blackOverlay" class="w-full h-full absolute opacity-30 bg-white"></span>
-        </div>
-        <div class="top-auto bottom-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden h-70-px"
-          style="transform: translateZ(0);">
-          <svg class="absolute bottom-0 overflow-hidden" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"
-            version="1.1" viewBox="0 0 2560 100" x="0" y="0">
-            <polygon class="text-blueGray-200 fill-current" points="2560 0 2560 100 0 100"></polygon>
-          </svg>
-
-        </div>
-      </section>
-
-
-      <section class="relative py-16 bg-blueGray-200 border-bottom: 2px solid rgb(235, 235, 235);">
+      <section class="relative py-16 bg-blueGray-200 mt-24" style="min-height: 80vh;">
 
         <div class="container mx-auto px-4">
           <div
-            class="p-8 relative flex flex-col min-w-0 break-words  pd-8 bg-white w-full mb-6 shadow-xl rounded-lg -mt-64">
+            class="p-8 relative flex flex-col min-w-0 break-words  pd-8 bg-white w-full mb-6  rounded-lg ">
             <div class="px-6">
               <h5 class="text-xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2 text-center m-3">구매 하기</h5>
             </div>
@@ -52,30 +36,20 @@
             <div class="p-5" style="border-top:8px; background-color:#fff;">
 
               <section class="p-5 m-3 border-bottom: 2px solid rgb(235, 235, 235);">
-                <div class="relative" style="min-weight:484px; 1px solid #ebebeb;">
-                  <div class="p-8" style="overflow-y:auto; background-color:#fafafa;">
-                     <ul style="list_style:none margin:-4px;" >
-                       <li  class="full-images">
-                         <button style="    width: 100%; height: 100%; cursor: pointer;">
-                           <div  style="margin:auto; max-width:90px;">
-                             <span class="block text-sm" style="margin-top:3px;">ONE SIZE</span>
-                             <span class="block text-xs" style=" color:red;">45000원</span>
-                           </div>  
+                  <div class="p-4 mx-auto border xl:w-3/12 rounded text-center" >
+                       <span class="block text-sm" >ONE SIZE</span>
+                       <span class="block text-xs" style=" color:red;">45000원</span>
                             <!-- <div  v-else style="margin:auto; max-width:90px;">
                              <span class="block text-sm" style="margin-top:-3px;">ONE SIZE</span>
                              <span class="block text-s" style="color:red">구매 입찰</span>
                            </div>   -->
-                         </button>
-                       </li>  
-                     </ul>   
                   </div>
-                </div>
               </section>
             </div>
         
-            <div class="text-center mt-6">
-           <a href="http://localhost:3000/buy/" @click="clicked" id="change-button" class="full-image"
-                disabled="disabled">
+            <div class="text-center mt-6 p-4  xl:w-3/12 bg-black mx-auto rounded-lg" >
+           <a href="http://localhost:3000/buy/" @click="clicked" id="change-button"
+                disabled="disabled" style="color: #fafafa !important; ">
                 구매하기
               </a>
             </div>

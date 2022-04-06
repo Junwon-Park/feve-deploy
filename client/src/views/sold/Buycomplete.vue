@@ -1,13 +1,13 @@
 <template>
 
 <div>
-  <div class="pt-24" style="min-height:100vh;">
+  <div class="mt-48" style="min-height:100vh;">
       
       <div> 
-        <div style="max-width: 780px; margin:auto" class="pb-24">
+        <div style="max-width: 780px; margin:auto" class="">
           <div style="box-shadow:none">
-            <div style="border-radius:0; padding-top:0; height:200px; background-color: rgb(235, 240, 245);">
-              <img :src="legoBg" alt="..." style="object-fit:cover; width:100%; height:100%; width: 410px; margin:auto"/>
+            <div style="border-radius: 10px; padding-top:0; width: 200px; height:200px; margin:auto; ">
+              <img :src="legoBg" alt="..." style="object-fit:cover; width:100%; height:100%; "/>
 
             </div>
             <div>
@@ -16,12 +16,18 @@
                    <p class="text-lg" style="font-weight:700; letter-spacing: -.15px;"><strong>구매 입찰이 완료되었습니다.</strong></p> 
                    <p class="text-sm">결제는 거래가 성사되는 시점에<br>등록하신 결제 정보로 자동 처리 됩니다.</p>  
                 </div>  
-                <div class="mt-8 ">
-                  <a href="#" class="inline-block align-middle text-center px-6" style="white-space: nowrap;  line-height: 40px; border: 1px solid #d3d3d3; color:rgba(34,34,34,8); height:42px; border-radius:12px;">내역 상세보기</a>
-                  <a href="#" class="inline-block align-middle text-center px-6" style="white-space: nowrap; margin-left: 8px; line-height: 40px; border: 1px solid #d3d3d3; color:rgba(34,34,34,8); height:42px; border-radius:12px;">shop 바로가기</a>
+                <div class="mt-8 mb-10 ">
+                  <a href="#" class="inline-block align-middle text-center text-sm bg-black  rounded mr-4"
+                  style="padding: 10px 20px ; color: white !important;">
+                    내역 상세보기
+                  </a>
+                  <a href="#" class="inline-block align-middle text-center text-sm bg-black rounded"
+                     style="padding: 10px 20px ; color: white !important;">
+                    shop 바로가기
+                  </a>
                 </div>  
-                    <p>'구매 내역 > 입찰중' 상태에는 입찰 지우기가 가능합니다.</p>
-               <div class="pt- m-3">
+                    <p class="text-sm">'구매 내역 > 입찰중' 상태에는 입찰 지우기가 가능합니다.</p>
+               <div class="pt- m-3 ">
                     <dl class="flex items-center justify-between" style="min-height: 26px;">
                       <dt>
                         <span class="text-sm" style="color:black">구매 희망가</span>
