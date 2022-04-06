@@ -296,7 +296,7 @@
             <div class="text-center mt-6">
               <button
                 class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                type="button" @click="formSubmit()">
+                type="button" @click="updatebuy()">
                 작성하기
               </button>
             </div>
@@ -310,20 +310,26 @@
 
 import legoBg from "@/assets/img/bg-lego5.jpg";
 import box from "@/assets/img/box.png";
-
+// import moment from 'moment'
 export default {
 
 
   data() {
     return {
+      
       box,
+      maxprice:{
+        BUY_PRICE:0,
+      },
       checksucess: [],
       tab: null,
       legoBg,
       text: '판매 희망가',
       month:0,
+      nowDate: new Date(Date.now() - (new Date().getTimezoneOffset() * 60000)),
+
       buy: {
-        
+        maxprice:0,
         product_key:'',
         BUY_PRICE: 0,
         buy_sdate: '',
@@ -353,9 +359,33 @@ export default {
     };
   },
   methods: {
-     
+    updatebuy() {
+      let thot = this;
+        this.$axios.post("http://localhost:8080/buy/update")
+      .then(function (res) {
+        thot.maxprice = res.data;
+        console.log(res.data);
+        console.log(thot.maxprice.BUY_PRICE);
+        console.log("성공");
+
+      }) 
+      .catch(function (err) {
+          console.log(err);
+        });
+  
+
+    }
+
   },
 
+  // created()
+  
+  // {
+  //   if(this.nowdate > moment(this.buy_edate, 'YYYY-MM-DD'))
+  //   {
+
+  //   }
+  // },
 
   beforeCreate() {
     let that = this;
@@ -368,6 +398,7 @@ export default {
       .catch(function (err) {
           console.log(err);
         });
+  
   
    this.$axios.post("http://localhost:8080/buy/comp/user")
       .then(function (res) {
