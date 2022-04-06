@@ -1,5 +1,15 @@
 <template>
     <div class="flex flex-wrap" >
+
+      <v-btn
+        outlined
+        rounded
+        text
+        @click="onMoreClicked"
+      >
+        더보기
+      </v-btn>
+
       <div class="w-full lg:w-4/12 md:w-4/12 px-4 my-5"
            style="margin-bottom: 15vh;"
            v-for="(item, i) in items" :key="i"
@@ -32,8 +42,11 @@
 </template>
 
 <script>
+import {EventBus} from "@/common/EventBus.js"
+
 export default {
   props:{
+    state:Number,
     items:Array,
   },
   data() {
@@ -58,6 +71,12 @@ export default {
     onSlotClicked(name){
       console.log("onSlotClicked.name: ", name);
     },
+    
+    onMoreClicked(event){
+      event.stopPropagation();
+      EventBus.$emit("mypageViewStateChange", this.state);
+    }
+
     // setMinPrices()
     // {
     //   this.minPrices.length = this.items.length;

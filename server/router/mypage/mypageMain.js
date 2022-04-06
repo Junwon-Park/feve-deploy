@@ -1,12 +1,11 @@
 const express = require('express');
-const { getSimpleUserInfo } = require('../../controller/mypage/mypageMain');
-const { getBuyCounts } = require('../../controller/mypage/mypageMain');
-const { getSellCounts } = require('../../controller/mypage/mypageMain');
+const { getSimpleUserInfo, getBuyCounts, getSellCounts, getSimpleFavoriteList } = require('../../controller/mypage/mypageMain');
 
 const router = express.Router();
 
 router.post('/getSimpleUserInfo', getSimpleUserInfo);
 router.post('/getBuyCounts', getBuyCounts);
 router.post('/getSellCounts', getSellCounts);
+router.post('/getSimpleFavoriteList', getSimpleFavoriteList);
 
 module.exports = router;
