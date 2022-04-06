@@ -18,7 +18,7 @@
                 {{ item.PRODUCT_NAME }}
                 </h5>
                 <h5 class="font-bold mt-1">
-                {{ item.MIN_PRICE.toLocaleString('ko-KR') }}원
+                {{ minPrice }}
                 </h5>
             </div>
             <!-- <h5 class="text-gray-400" style="font-size: 0.7rem; line-height: 0.75rem; margin-top:-0.2rem">
@@ -54,7 +54,12 @@ export default {
   data() {
     return {
       imageUrl : this.$store.getters.ServerUrl + '/getImage?imageName=',
+      minPrice:'',
     }
+  },
+  created(){
+    // console.log("this.item.MIN_PRICE: ", this.item.MIN_PRICE);
+    this.minPrice = (this.item.MIN_PRICE == null) ? '-' : this.item.MIN_PRICE.toLocaleString('ko-KR') + "원";
   },
   methods:{
     onSlotClicked(){

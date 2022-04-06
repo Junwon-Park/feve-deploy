@@ -87,6 +87,9 @@ export default {
         .then((result) => {
           //console.log(result.data);
           this.favoriteList = result.data;
+          
+          for(let item of this.favoriteList)
+             item.MIN_PRICE = (item.MIN_PRICE == null) ? '-' : item.MIN_PRICE.toLocaleString('ko-KR') + "원";
         })
         .catch((error) => {
           console.log(error);

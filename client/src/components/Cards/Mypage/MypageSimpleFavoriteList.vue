@@ -2,7 +2,7 @@
     <div class="flex flex-wrap" >
       <div class="w-full lg:w-4/12 md:w-4/12 px-4 my-5"
            style="margin-bottom: 15vh;"
-           v-for="item in items" :key="item.PRODUCT_NAME"
+           v-for="(item, i) in items" :key="i"
            @click="onSlotClicked(item.PRODUCT_NAME)"
            type="button"
       >
@@ -22,7 +22,7 @@
             {{ item.PRODUCT_NAME }}
             </h5>
             <h5 class="font-bold mt-1">
-              {{ item.MIN_PRICE.toLocaleString('ko-KR') }}원
+              {{ item.MIN_PRICE }}
             </h5>
             <h5 class="text-gray-400" style="font-size: 0.7rem; line-height: 0.75rem; margin-top:-0.2rem">
               즉시 구매가
@@ -39,12 +39,42 @@ export default {
   data() {
     return {
       imageUrl : this.$store.getters.ServerUrl + '/getImage?imageName=',
+      // minPrices:[],
     }
   },
+  // created() {
+  //   console.log("created : this.items.length: ", this.items.length);
+  //   // this.minPrices.push();
+  //   // this.items.push();
+  // },
+  // mounted() {
+  //   console.log("mounted : this.items.length: ", this.items.length);
+  // },
+  // updated() {
+  //   console.log("updated : this.items.length: ", this.items.length);
+  //   //this.setMinPrices();
+  // },
   methods:{
     onSlotClicked(name){
       console.log("onSlotClicked.name: ", name);
-    }
+    },
+    // setMinPrices()
+    // {
+    //   this.minPrices.length = this.items.length;
+    //   console.log("this.items.length: ", this.items.length);
+    //   let i = 0;
+    //   for(let item of this.items)
+    //   {
+    //     console.log("item.MIN_PRICE: ", item.MIN_PRICE);
+    //     console.log("this.minPrices[i]: ", this.minPrices[i]);
+        
+    //     //this.minPrices[i] = (item.MIN_PRICE == null) ? '-' : item.MIN_PRICE.toLocaleString('ko-KR') + "원";
+    //     //this.$set(this.minPrices, i, (item.MIN_PRICE == null) ? '-' : item.MIN_PRICE.toLocaleString('ko-KR') + "원");
+    //     // item.MIN_PRICE = (item.MIN_PRICE == null) ? '-' : item.MIN_PRICE.toLocaleString('ko-KR') + "원";
+    //     i++;
+    //   }
+    // }
+
   }
 };
 </script>
