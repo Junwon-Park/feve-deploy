@@ -14,7 +14,7 @@
           </div>
 
             <h5 class="font-bold underline mt-2">
-              {{ item.PRODUCT_BRAND }} sdfsdfsdfdsfdsfsd
+              {{ item.PRODUCT_BRAND }}
             </h5>
             <h5>
             {{ item.PRODUCT_NAME }}
