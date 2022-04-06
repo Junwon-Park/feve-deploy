@@ -1,14 +1,14 @@
 <template>
     <div class="flex flex-wrap">
-      <div class="w-full xl:w-3/12 lg:w-4/12 md:w-4/12 px-4 mb-5"
+      <div class="w-full lg:w-4/12 md:w-4/12 px-4 mb-5"
            style="rgba(0,0,0,0.02)"
            v-for="item in items" :key="item.PRODUCT_NAME"
       >
         
-          <div >
+          <div style="width: 200px; height: 200px; border-radius: 8px;">
             <img
               :src= "imageUrl + item.PRODUCT_PIC"
-              style="border-radius: 8px;"
+              style="object-fit: cover; width: 100%; height: 100%;"
               crossorigin
             >
 

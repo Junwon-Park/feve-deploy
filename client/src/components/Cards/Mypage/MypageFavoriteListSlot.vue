@@ -21,6 +21,16 @@
             <!-- <h5 class="text-gray-400" style="font-size: 0.7rem; line-height: 0.75rem; margin-top:-0.2rem">
               즉시 구매가
             </h5> -->
+            <v-spacer></v-spacer>
+            <v-list-item-action>
+              <v-btn
+                  style="background: #EF6253; color: white;"
+                  rounded
+                  text
+              >
+                구매
+              </v-btn>
+            </v-list-item-action>
           </div>
 </template>
 
