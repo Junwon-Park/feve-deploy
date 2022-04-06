@@ -4,7 +4,22 @@ const db = require("../../models");
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
+async function totalcscenter(req, res, next) {
+    await db.sequelize
+        .query(
+            'select count(*)as totalCnt from cscenter;',
+            { type: Sequelize.QueryTypes.SELECT }
+        )
+        .then(result => {
+            console.log(result);
+            res.send(result);
+        })
+        .catch(err => console.log(err));
+}
+
 async function cscenter(req, res, next) {
+    const start = req.body.limitStart;
+    const end = req.body.limitEnd;
     await db.sequelize
         .query(
             `select
@@ -18,8 +33,9 @@ async function cscenter(req, res, next) {
                 ,u.USER_KEY
                  ,( select USER_ID from User where USER_KEY=c.USER_KEY) as USER_ID
             from Cscenter c
-                     inner join User u on u.USER_KEY = c.USER_KEY;`,
-            { type: Sequelize.QueryTypes.SELECT }
+                     inner join User u on u.USER_KEY = c.USER_KEY `+
+            'limit '+start+', '+end+';'
+            ,{ type: Sequelize.QueryTypes.SELECT }
         )
         .then(result => {
             console.log(result);
@@ -28,4 +44,4 @@ async function cscenter(req, res, next) {
         .catch(err => console.log(err));
 }
 
-module.exports = { cscenter };
+module.exports = { cscenter, totalcscenter };

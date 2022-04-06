@@ -6,7 +6,22 @@ const db = require('../../models');
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
+async function loadTotalcntinspection(req, res, next) {
+    await db.sequelize
+        .query(
+            'select count(*)as totalCnt from inspection;',
+            { type: Sequelize.QueryTypes.SELECT }
+        )
+        .then((result) => {
+            console.log(result);
+            res.json(result);
+        })
+        .catch((err) => console.log(err));
+}
+
 async function loadinspection(req, res, next) {
+    const start = req.body.limitStart;
+    const end = req.body.limitEnd;
     await db.sequelize
         .query(
            `select
@@ -29,8 +44,9 @@ async function loadinspection(req, res, next) {
                      inner join product p on i.PRODUCT_KEY = p.PRODUCT_KEY
                      inner join user u on u.USER_KEY = i.USER_KEY
                      inner join category c on p.PRODUCT_CATE  = c.CATEGORY_KEY
-                     inner join category ct on c.CATEGORY_PARENT = ct.CATEGORY_NAME;`,
-            { type: Sequelize.QueryTypes.SELECT }
+                     inner join category ct on c.CATEGORY_PARENT = ct.CATEGORY_NAME `+
+                'limit '+start+', '+end+';'
+           , { type: Sequelize.QueryTypes.SELECT }
         )
     .then((result) => {
       console.log(result);
@@ -39,4 +55,4 @@ async function loadinspection(req, res, next) {
     .catch((err) => console.log(err));
 }
 
-module.exports = { loadinspection };
+module.exports = { loadinspection, loadTotalcntinspection };
