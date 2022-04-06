@@ -50,27 +50,47 @@
         </thead>
         <tbody>
           <tr>
-              <td
+              <td v-if="RECENT_BUY_PRICE!=0"
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
             >
               {{RECENT_BUY_PRICE.toLocaleString('ko-KR')}}원
             </td>
-            <td
+            <td v-else
+              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
+            >
+              -
+            </td>
+            <td v-if="RECENT_BUY_EDATE!=0"
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
             >
               {{RECENT_BUY_EDATE.substring(0,10)}}
             </td>
+            <td v-else
+              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
+            >
+              -
+            </td>
           </tr>
           <tr>
-              <td
+              <td v-if="RECENT_SELL_PRICE!=0"
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
             >
               {{RECENT_SELL_PRICE.toLocaleString('ko-KR')}}원
             </td>
-            <td
+            <td v-else
+              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
+            >
+              -
+            </td>
+            <td v-if="RECENT_SELL_EDATE!=0"
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
             >
               {{RECENT_SELL_EDATE.substring(0,10)}}
+            </td>
+            <td v-else
+              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
+            >
+              -
             </td>
           </tr>
         </tbody>
@@ -103,7 +123,7 @@
             </th>
           </tr>
         </thead>
-        <tbody>
+        <tbody v-if="arr.length !=0">
           <tr style="width:50%;" v-for="(item,i) in arr" :key="i" v-bind="item" >
               <td 
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
@@ -117,7 +137,22 @@
             </td>
           </tr>
         </tbody>
+        <tbody v-else>
+          <tr style="width:50%;" v-for="(item,i) in arr" :key="i" v-bind="item" >
+              <td 
+              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
+            >
+              -
+            </td>
+            <td 
+              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
+            >
+              -
+            </td>
+          </tr>
+        </tbody>
       </table>
+
       <table class="items-center w-full bg-transparent border-collapse" name="buyBidding" v-show="BT">
         <thead>
           <tr>
@@ -145,7 +180,7 @@
             </th>
           </tr>
         </thead>
-        <tbody>
+        <tbody v-if="arr2.length !=0 ">
           <tr style="width:50%;" v-for="(item,i) in arr2" :key="i" v-bind="item">
               <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
@@ -159,7 +194,22 @@
             </td>
           </tr>
         </tbody>
+        <tbody v-else>
+          <tr style="width:50%;" v-for="(item,i) in arr2" :key="i" v-bind="item">
+              <td
+              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
+            >
+              -
+            </td>
+            <td
+              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
+            >
+              -
+            </td>
+          </tr>
+        </tbody>
       </table>
+
     </div>
   </div>
 </template>

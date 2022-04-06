@@ -6,8 +6,7 @@ const sequelize = require("sequelize");
 async function buyTablePrice(req, res, next) {
 
     console.log("**********************BuyTablePrice Query*********************");
-    const product_key = 1;
-    // const product_key = req.body.PRODUCT_KEY;
+    const product_key = req.body.product_key;
     console.log(product_key);
 
     await db.sequelize.query(
