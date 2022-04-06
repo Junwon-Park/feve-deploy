@@ -371,18 +371,19 @@ export default {
             .then(function(res){
               console.log(res);
               // vm.arr2.BUY_PRICE = (vm.arr2.BUY_PRICE == null) ? '-' : vm.arr2.BUY_PRICE.toLocaleString('ko-KR') + "원";
-              if(res.data.length !=0)
-              {
-                vm.arr2 = res.data;
-                console.log(vm.arr2);
-              }
-              else
-              {
-                vm.arr2.BUY_PRICE = "-";
-                vm.arr2.BUY_COUNT = "-";
-                console.log(vm.arr2.BUY_PRICE);
-                console.log(vm.arr2.BUY_COUNT);
-              }
+              vm.arr2 = res.data;
+              // if(res.data.length !=0)
+              // {
+              //   vm.arr2 = res.data;
+              //   console.log(vm.arr2);
+              // }
+              // else
+              // {
+              //   vm.arr2.BUY_PRICE = "-";
+              //   vm.arr2.BUY_COUNT = "-";
+              //   console.log(vm.arr2.BUY_PRICE);
+              //   console.log(vm.arr2.BUY_COUNT);
+              // }
             })
             .catch(function(err){
               console.log(err);

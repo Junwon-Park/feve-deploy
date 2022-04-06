@@ -222,6 +222,8 @@ export default {
       RT: true,
       BT: false,
       ST: false,
+      // BUY_PRICE:'',
+      // BUY_COUNT:''
     };
   },
   props: {
@@ -249,6 +251,11 @@ export default {
     arr:[],
     arr2:[]
   },
+  // created(){
+  //   console.log("여기서 예외처리중")
+  //   this.BUY_PRICE = (this.arr2.BUY_PRICE == null) ? '-' : this.arr2.BUY_PRICE.toLocaleString('ko-KR') + "원";
+  //   console.log(this.BUY_PRICE);
+  // },
   methods:{
     showRecentTransaction:function(){
       this.RT = true;
