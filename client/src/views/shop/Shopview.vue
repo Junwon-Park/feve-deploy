@@ -25,8 +25,11 @@
                       <div style="width:50%; float:left">
                       <span class="text-left" style="width:50% float:left">최근거래가</span>
                       </div>
-                      <div style="width:50%; float:right; text-align:right">
-                      <b class="text-right" style="width:50% float:right">SELL_PRICE</b>
+                      <div style="width:50%; float:right; text-align:right" v-if="this.RECENT_PRICE!=0">
+                      <b class="text-right recent_price" style="width:50% float:right">{{RECENT_PRICE.toLocaleString('ko-KR')}}원</b>
+                      </div>
+                      <div style="width:50%; float:right; text-align:right" v-else>
+                      <b class="text-right recent_price" style="width:50% float:right">-</b>
                       </div>
                     </div>
                     
@@ -153,6 +156,11 @@ export default {
       PRODUCT_KEY:0,
       SELL_PRICE:0,
       BUY_PRICE:0,
+      RECENT_PRICE:0,
+      RECENT_SELL_PRICE:0,
+      RECENT_BUY_PRICE:0,
+      RECENT_SELL_EDATE:0,
+      RECENT_BUY_EDATE:0,
       items:[
           {
             src: '',
@@ -174,10 +182,10 @@ export default {
     mounted() {
       this.getView();
       this.countLike();
+      this.getRecentPrice();
       
     },
     methods:{
-
       getView:function(){
         var vm = this;
         this.PRODUCT_KEY = this.$route.params.PRODUCT_KEY;
@@ -270,6 +278,69 @@ export default {
             .catch(function(err){
               console.log(err);
             });
+      },
+      getRecentPrice: function(){
+        var vm = this;
+        console.log("recent sell price 가지러 가는 길");
+        console.log("여기서 프로덕트키 제대로 넘기니",this.PRODUCT_KEY);
+        this.$axios.post('http://localhost:8080/shop/shopview/'+ this.PRODUCT_KEY + '/recentSellPrice',
+        {product_key: this.PRODUCT_KEY})
+            .then(function(res){
+              console.log(res);
+              if(res.data.length != 0)
+              {
+                vm.RECENT_SELL_PRICE = res.data[0].SELL_PRICE;
+                vm.RECENT_SELL_EDATE = res.data[0].SELL_EDATE;
+                console.log(vm.RECENT_SELL_PRICE);
+                console.log(vm.RECENT_SELL_EDATE);
+              }
+              else
+              {
+                vm.RECENT_SELL_PRICE = 0;
+                vm.RECENT_SELL_EDATE = 0;
+              }
+            })
+            .catch(function(err){
+              console.log(err);
+            });
+        this.$axios.post('http://localhost:8080/shop/shopview/'+ this.PRODUCT_KEY + '/recentBuyPrice',
+        {product_key: this.PRODUCT_KEY})
+            .then(function(res){
+              console.log(res);
+              if(res.data.length != 0)
+              {
+                vm.RECENT_BUY_PRICE = res.data[0].BUY_PRICE;
+                vm.RECENT_BUY_EDATE = res.data[0].BUY_EDATE;
+                console.log(vm.RECENT_BUY_PRICE);
+                console.log(vm.RECENT_BUY_EDATE);
+                vm.compareDate(); 
+              }
+              else
+              {
+                vm.RECENT_BUY_PRICE = 0;
+                vm.RECENT_BUY_EDATE = 0;
+              }
+              
+            })
+            .catch(function(err){
+              console.log(err);
+            }); 
+      },
+      compareDate:function(){
+        var vm = this;
+        console.log("날짜 비교");
+        var a = new Date(vm.RECENT_SELL_DATE);
+        var b = new Date(vm.RECENT_BUY_DATE);
+        if(a>=b)
+          vm.RECENT_PRICE = vm.RECENT_SELL_PRICE;
+        else
+          vm.RECENT_PRICE = vm.RECENT_BUY_PRICE;
+      },
+      getSellTablePrice: function(){
+        console.log("sell table price 가지러 가는 길");
+      },
+      getBuyTablePrice: function(){
+        console.log("buy table price 가지러 가는 길");
       }
       
     

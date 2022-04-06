@@ -113,8 +113,10 @@
 export default {
   data() {
     return {
-      
     };
+  },
+  mounted() {
+    this.$parent.getRecentPrice();
   },
   components: {
     
@@ -127,6 +129,14 @@ export default {
         return ["light", "dark"].indexOf(value) !== -1;
       },
     },
+    // RECENT_PRICE:0,
+    // RECENT_SELL_PRICE:0,
+    // RECENT_BUY_PRICE:0,
+    // RECENT_SELL_EDATE:0,
+    // RECENT_BUY_EDATE:0,
   },
+  methods:{
+    
+  }
 };
 </script>
