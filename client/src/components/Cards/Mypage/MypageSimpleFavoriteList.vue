@@ -4,6 +4,7 @@
            style="margin-bottom: 15vh;"
            v-for="item in items" :key="item.PRODUCT_NAME"
            @click="onSlotClicked(item.PRODUCT_NAME)"
+           type="button"
       >
         
           <div style="width: 200px; height: 200px; border-radius: 8px;">
