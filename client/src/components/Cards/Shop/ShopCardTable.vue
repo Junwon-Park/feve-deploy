@@ -18,12 +18,12 @@
     <div class="block w-full overflow-x-auto">
       <!-- Projects table -->
       <v-tabs fixed-tabs>
-        <v-tab>체결 거래</v-tab>
-        <v-tab>판매 입찰</v-tab>
-        <v-tab>구매 입찰</v-tab>
+        <v-tab @click="showRecentTransaction">체결 거래</v-tab>
+        <v-tab @click="showSellTable">판매 입찰</v-tab>
+        <v-tab @click="showBuyTable">구매 입찰</v-tab>
       </v-tabs>
      
-      <table class="items-center w-full bg-transparent border-collapse">
+      <table class="items-center w-full bg-transparent border-collapse" name="recentTransaction" v-show="RT">
         <thead>
           <tr>
             <th
@@ -53,18 +53,30 @@
               <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
             >
-              80,000원
+              {{RECENT_BUY_PRICE.toLocaleString('ko-KR')}}원
             </td>
             <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
             >
-              2022-04-03
+              {{RECENT_BUY_EDATE.substring(0,10)}}
+            </td>
+          </tr>
+          <tr>
+              <td
+              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
+            >
+              {{RECENT_SELL_PRICE.toLocaleString('ko-KR')}}원
+            </td>
+            <td
+              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
+            >
+              {{RECENT_SELL_EDATE.substring(0,10)}}
             </td>
           </tr>
         </tbody>
       </table>
 
-      <table class="items-center w-full bg-transparent border-collapse">
+      <table class="items-center w-full bg-transparent border-collapse" name="sellBidding" v-show="ST">
         <thead>
           <tr>
             <th
@@ -104,6 +116,46 @@
           </tr>
         </tbody>
       </table>
+      <table class="items-center w-full bg-transparent border-collapse" name="buyBidding" v-show="BT">
+        <thead>
+          <tr>
+            <th
+              class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+              :class="[
+                color === 'light'
+                  ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
+                  : 'bg-emerald-800 text-emerald-300 border-emerald-700',
+              ]"
+            >
+              구매희망가
+            </th>
+            <th
+              class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+              :class="[
+                color === 'light'
+                  ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
+                  : 'bg-emerald-800 text-emerald-300 border-emerald-700',
+              ]"
+            >
+              수량
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+              <td
+              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
+            >
+              80,000원
+            </td>
+            <td
+              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
+            >
+              1
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </template>
@@ -113,13 +165,10 @@
 export default {
   data() {
     return {
+      RT: true,
+      BT: false,
+      ST: false,
     };
-  },
-  mounted() {
-    this.$parent.getRecentPrice();
-  },
-  components: {
-    
   },
   props: {
     color: {
@@ -129,14 +178,40 @@ export default {
         return ["light", "dark"].indexOf(value) !== -1;
       },
     },
-    // RECENT_PRICE:0,
-    // RECENT_SELL_PRICE:0,
-    // RECENT_BUY_PRICE:0,
-    // RECENT_SELL_EDATE:0,
-    // RECENT_BUY_EDATE:0,
+    RECENT_PRICE:{
+      deafult:0
+    },
+    RECENT_SELL_PRICE:{
+      deafult:0
+    },
+    RECENT_BUY_PRICE:{
+      deafult:0
+    },
+    RECENT_SELL_EDATE:{
+      type:String,
+      deafult:''
+    },
+    RECENT_BUY_EDATE:{
+      type:String,
+      deafult:''
+    },
   },
   methods:{
-    
+    showRecentTransaction:function(){
+      this.RT = true;
+      this.ST = false;
+      this.BT = false; 
+    },
+    showSellTable:function(){
+      this.ST = true;
+      this.RT = false;
+      this.BT = false;
+    },
+    showBuyTable:function(){
+      this.BT = true;
+      this.ST = false;
+      this.RT = false;
+    }
   }
 };
 </script>

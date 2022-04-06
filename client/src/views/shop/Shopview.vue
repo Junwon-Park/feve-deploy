@@ -106,7 +106,11 @@
                     <b class="text-lg">시세</b>
                     <div class="mt-2">
                       <shop-card-line-chart/>
-                      <shop-card-table/>
+                      <shop-card-table
+                      :RECENT_SELL_PRICE="RECENT_SELL_PRICE"
+                      :RECENT_BUY_PRICE="RECENT_BUY_PRICE"
+                      :RECENT_SELL_EDATE="RECENT_SELL_EDATE"
+                      :RECENT_BUY_EDATE="RECENT_BUY_EDATE"/>
                     </div>
                   </div>
                   <!--컴포넌트로 구매 확인 공지 넣어주기-->
@@ -159,8 +163,8 @@ export default {
       RECENT_PRICE:0,
       RECENT_SELL_PRICE:0,
       RECENT_BUY_PRICE:0,
-      RECENT_SELL_EDATE:0,
-      RECENT_BUY_EDATE:0,
+      RECENT_SELL_EDATE:'',
+      RECENT_BUY_EDATE:'',
       items:[
           {
             src: '',
