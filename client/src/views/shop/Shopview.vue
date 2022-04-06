@@ -378,10 +378,10 @@ export default {
               }
               else
               {
-                vm.arr2.SELL_PRICE = 0;
-                vm.arr2.SELL_COUNT = 0;
-                console.log(vm.arr2.SELL_PRICE);
-                console.log(vm.arr2.SELL_COUNT);
+                vm.arr2.BUY_PRICE = "-";
+                vm.arr2.BUY_COUNT = "-";
+                console.log(vm.arr2.BUY_PRICE);
+                console.log(vm.arr2.BUY_COUNT);
               }
             })
             .catch(function(err){
