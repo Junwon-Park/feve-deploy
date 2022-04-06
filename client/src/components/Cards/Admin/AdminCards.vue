@@ -102,6 +102,12 @@ export default {
       type: String,
       default: '0',
     },
+    totalList: {
+      default: 1
+    },
+    perPage: {
+      default: 1
+    },
   },
   methods: {
     fDialog(){
@@ -138,5 +144,8 @@ export default {
       this.$emit("sendUndoDeleteItem", sendProductKey, sendProductMnum, );
     },
   },
+  created(){
+    console.log(this.perPage)
+  }
 }
 </script>

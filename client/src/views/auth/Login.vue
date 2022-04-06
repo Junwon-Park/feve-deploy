@@ -117,6 +117,7 @@ export default {
           alert('로그인에 실패했습니다.');
           localStorage.setItem('Authorization', null);
           localStorage.setItem('isLogin', false);
+          localStorage.setItem('userKey', null);
           return location.reload();
         });
 
@@ -125,6 +126,7 @@ export default {
         localStorage.setItem('Authorization', userData.data.data.accessToken);
         localStorage.setItem('isLogin', true);
         localStorage.setItem('userId', userData.data.data.USER_ID);
+        localStorage.setItem('userKey', userData.data.data.USER_KEY);
         return (location.href = `${this.clientBaseURL}`);
       }
     }

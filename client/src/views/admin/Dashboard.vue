@@ -7,6 +7,10 @@
           :countTotalBuy="countTotalBuy"
           :countTotalSell="countTotalSell"
           :countTotalDeal="countTotalDeal"
+          :beforeCountTotalUser="beforeCountTotalUser"
+          :beforeCountTotalBuy="beforeCountTotalBuy"
+          :beforeCountTotalSell="beforeCountTotalSell"
+          :beforeCountTotalDeal="beforeCountTotalDeal"
           class=" w-full"
       />
 
@@ -53,6 +57,10 @@ export default {
       countTotalBuy: 0,
       countTotalSell: 0,
       countTotalDeal: 0,
+      beforeCountTotalUser: 0,
+      beforeCountTotalBuy: 0,
+      beforeCountTotalSell: 0,
+      beforeCountTotalDeal: 0,
     }
   },
   components: {
@@ -89,6 +97,59 @@ export default {
     this.$axios.get('http://localhost:8080/admin/count/deal/total')
         .then(function(res){
           that.countTotalDeal = res.data[0].cnt;
+        })
+        .catch(function(err){
+          console.log(err);
+        });
+
+    this.$axios.get('http://localhost:8080/admin/count/bef/user/total')
+        .then(function(res){
+          console.log(res)
+          if(res.data[0].cnt===0) {
+            that.beforeCountTotalUser=1
+          } else {
+            that.beforeCountTotalUser = res.data[0].cnt;
+          }
+        })
+        .catch(function(err){
+          console.log(err);
+        });
+
+    this.$axios.get('http://localhost:8080/admin/count/bef/buy/total')
+        .then(function(res){
+          console.log(res)
+          if(res.data[0].cnt===0) {
+            that.beforeCountTotalBuy=1
+          } else {
+            that.beforeCountTotalBuy = res.data[0].cnt;
+          }
+        })
+        .catch(function(err){
+          console.log(err);
+        });
+
+    this.$axios.get('http://localhost:8080/admin/count/bef/sell/total')
+        .then(function(res){
+          console.log(res)
+          if(res.data[0].cnt===0) {
+            that.beforeCountTotalSell=1
+          } else {
+            that.beforeCountTotalSell = res.data[0].cnt;
+          }
+        })
+        .catch(function(err){
+          console.log(err);
+        });
+
+    this.$axios.get('http://localhost:8080/admin/count/bef/deal/total')
+        .then(function(res){
+          console.log(res)
+          if(res.data[0].cnt===0) {
+            that.beforeCountTotalDeal=1
+          } else {
+            that.beforeCountTotalDeal = res.data[0].cnt;
+          }
+          console.log(that.beforeCountTotalDeal)
         })
         .catch(function(err){
           console.log(err);

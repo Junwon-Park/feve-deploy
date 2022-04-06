@@ -3,11 +3,11 @@ const db = require("../../models");
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
-async function countTotalDeal(req, res, next) {
+async function beforeCountTotalDeal(req, res, next) {
     const date = new Date();
-    const thisYear= date.getFullYear().toString();
-    const thisMonth= (date.getMonth()+1).toString();
-    const thisDate= date.getDate().toString();
+    const thisYear= (date.getFullYear()-1).toString();
+    const thisMonth= date.getMonth().toString();
+    const thisDate= (date.getDate()-1).toString();
     await db.sequelize
         .query(
            ' select\n' +
@@ -24,4 +24,4 @@ async function countTotalDeal(req, res, next) {
         .catch(err => console.log(err));
 }
 
-module.exports = { countTotalDeal };
+module.exports = { beforeCountTotalDeal };

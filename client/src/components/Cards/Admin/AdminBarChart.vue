@@ -28,13 +28,13 @@ export default {
     bidBuyCnt:[],
     bidSellCnt:[],
   },
-  created: function () {
-    this.$nextTick(function () {
-      this.drawChart()
+  created() {
+    this.$nextTick(() => {
+      this.drawChart();
     });
   },
   ready() {
-    this.$nextTick(function() {
+    this.$nextTick(() =>  {
       this.drawChart();
     })
   },
@@ -145,6 +145,9 @@ export default {
       let ctx = document.getElementById("bar-chart").getContext("2d");
       window.myBar = new Chart(ctx, config);
     }
-  }
+  },
+  mounted(){
+    this.drawChart();
+  },
 };
 </script>

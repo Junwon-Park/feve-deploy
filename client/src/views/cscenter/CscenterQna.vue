@@ -18,27 +18,6 @@
                           <Pagination />
                       </div>
                        </div>
-                      <div class="form-row float-right">
-                        <!-- <CscenterQnaModal
-                          :dialog="recDialog"
-                          :table="table"
-                          :title="title"
-                          :item="item"
-                          :receivedCscenterKey="receivedCscenterKey"
-                          :receivedUserid="receivedUserid"
-                          @sendDialog="sendDialog"
-                          @updateList="updateList"/> -->
-                        <v-btn depressed color="yellow" to="/CscenterInsert">
-                        문의 작성 하기
-                        </v-btn>
-                        <!-- <button
-                            class="bg-orange-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                            type="button"
-                            @click="fDialog(), sendItems()"
-                        >
-                          문의하기
-                        </button> -->
-                      </div>
                     </div>
                   </div>
                 </div>

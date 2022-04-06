@@ -29,6 +29,7 @@ export default {
   data(){
     return{
       month:[],
+      loaded: false,
     }
   },
   props:{
@@ -155,15 +156,18 @@ export default {
       window.myLine = new Chart(ctx, config);
     }
   },
-  created: function () {
-    this.$nextTick(function () {
+  created() {
+    this.$nextTick( ()=> {
       this.drawChart();
     });
   },
   ready() {
-    this.$nextTick(function() {
+    this.$nextTick(()=> {
       this.drawChart();
     })
   },
+mounted(){
+  this.drawChart();
+},
 };
 </script>

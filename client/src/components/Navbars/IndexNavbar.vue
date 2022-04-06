@@ -2,9 +2,7 @@
   <nav
     class="top-0 fixed z-50 w-full flex flex-wrap items-center justify-between navbar-expand-lg shadow bg-white"
   >
-    <div
-      class=" p-3 mx-auto flex flex-wrap items-center justify-between"
-    >
+    <div class="p-3 mx-auto flex flex-wrap items-center justify-between">
       <div
         class="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start"
       >
@@ -12,8 +10,7 @@
           <span
             class="logo text-blueGray-800 text-4xl font-bold italic leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
           >
-
-          FEVE
+            FEVE
           </span>
         </router-link>
         <button
@@ -106,12 +103,12 @@
           </li>
           <li class="lg flex items-center">
             <router-link to="/Cscenter">
-             <span
-              class=" text-blueGray-800 px-3 py-2 flex items-center text-lg uppercase font-bold"
-              href="/cscenter/Cscenter"
-            >
-              <span class="lg inline-block ml-2">고객센터</span>
-            </span>
+              <span
+                class="text-blueGray-800 px-3 py-2 flex items-center text-lg uppercase font-bold"
+                href="/cscenter/Cscenter"
+              >
+                <span class="lg inline-block ml-2">고객센터</span>
+              </span>
             </router-link>
           </li>
         </ul>
@@ -147,6 +144,7 @@ export default {
       localStorage.setItem('isLogin', false);
       localStorage.setItem('Authorization', accessToken);
       localStorage.setItem('userId', null);
+      localStorage.setItem('userKey', null);
       location.href = `${this.clientBaseURL}`;
     }
   },

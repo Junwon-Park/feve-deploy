@@ -1,6 +1,6 @@
 <template>
   <div>
-    <main class="md:ml-64">
+    <main class="md:ml-12">
       <section class="mt-16 relative block py-24 lg:pt-0">
         <div class="container mx-auto px-4">
           <div class="flex flex-wrap justify-center">

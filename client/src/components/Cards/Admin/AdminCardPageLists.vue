@@ -46,6 +46,7 @@
           </td>
         </tr>
           <AdminCards
+              id="productList"
               v-else
               v-for="(item, idx) in items"
               :key="idx"
@@ -66,12 +67,21 @@
         :receivedProductKey="receivedProductKey"
         @sendDialog="sendDialog"
         @updateList="updateList"/>
+
+    <Pagination
+        :totalList="totalList"
+        :listPerPage="10"
+        :aria-controls="myAriaControls"
+        :total-rows="rows"
+    />
   </div>
 </template>
 
 <script>
 import AdminCards from "@/components/Cards/Admin/AdminCards.vue";
 import AdminProductModi from "@/components/Cards/Admin/AdminProductModi.vue";
+import Pagination from "@/components/Pagination.vue" ;
+
 export default {
   props: {
     title: {
@@ -83,6 +93,14 @@ export default {
     },
     isArrayNull:{
       required: false
+    },
+    totalList:{
+      required: true
+    },
+  },
+  computed:{
+    rows(){
+      return this.items.length
     }
   },
   data() {
@@ -100,6 +118,9 @@ export default {
       newProductPic:"",
       newProductDesc:"",
       newProductOriprice:"",
+      myAriaControls: "productList",
+      perPage: 10,
+      currentPage: 1,
       item:{
         PRODUCT_KEY: 0,
         PRODUCT_MNUM: "",
@@ -116,6 +137,7 @@ export default {
   components: {
     AdminCards,
     AdminProductModi,
+    Pagination,
   },
   methods: {
     sendItems(recP, recM) {
