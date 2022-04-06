@@ -3,25 +3,31 @@
     ref="form"
     v-model="valid"
     lazy-validation
-    class="bg-blueGray-200 p-4 xl:w-6/12">
+    class=" p-4 xl:w-6/12">
         <v-col
         cols="12"
         >
-        <h1>프로필 정보</h1>
+        <h1 class="text-2xl text-black font-bold">프로필 정보</h1>
         </v-col>
-        
-        <v-col
-        cols="12"
-        >
-        <h1>{{profile.USER_ID}}</h1>
-        </v-col>
+
+      <hr class="my-4" style="height: 2.5px; color: #222222;   border:none;
+    background-color: #222222;   /* 크롬, 모질라 등, 기타 브라우저 */" />
+
+        <v-row class="p-4 items-center">
+          <div style="width: 50px; height: 50px;">
+            <img
+                :src="account"
+                alt="account icon"/>
+          </div>
+        <h1 class="text-2xl font-bold ml-4 ">{{profile.USER_ID}}</h1>
+        </v-row>
 
       <hr class="my-4" />
 
         <v-col
         cols="12"
         >
-        <h1>로그인 정보</h1>
+        <h1 class="font-semibold">로그인 정보</h1>
         </v-col>
         
         <v-col
@@ -54,7 +60,7 @@
         <v-col
         cols="12"
         >
-        <h1>개인 정보</h1>
+        <h1 class="font-semibold">개인 정보</h1>
         </v-col>
 
         <v-col
@@ -86,7 +92,7 @@
         <v-col
         cols="12"
         >
-        <h1>배송지 정보</h1>
+        <h1 class="font-semibold">배송지 정보</h1>
         </v-col>
 
         <v-col cols="12">
@@ -125,6 +131,7 @@
 </template>
 
 <script>
+import account from "@/assets/img/icon_account.png"
 export default {
   components: {
   },
@@ -134,7 +141,7 @@ export default {
       profile:{},
       isReadonly:true,
       buttonText:'프로필 수정',
-      
+      account,
       formRule:{
         name: [
             v => !!v || '이름은 필수 입력사항 입니다.',

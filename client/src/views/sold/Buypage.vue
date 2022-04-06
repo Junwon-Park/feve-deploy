@@ -3,26 +3,11 @@
   <div>
     <main class="profile-page">
 
-      <section class="relative block h-500-px">
-        <div class="absolute top-0 w-full h-full bg-center bg-cover" :style="{ backgroundImage: `url(${legoBg})` }">
-          <span id="blackOverlay" class="w-full h-full absolute opacity-30 bg-white"></span>
-        </div>
-        <div class="top-auto bottom-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden h-70-px"
-          style="transform: translateZ(0);">
-          <svg class="absolute bottom-0 overflow-hidden" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"
-            version="1.1" viewBox="0 0 2560 100" x="0" y="0">
-            <polygon class="text-blueGray-200 fill-current" points="2560 0 2560 100 0 100"></polygon>
-          </svg>
-
-        </div>
-      </section>
-
-
-      <section class="relative py-16 bg-blueGray-200">
+      <section class="relative py-16 bg-blueGray-200 mt-12" style="min-height: 90vh;">
 
         <div class="container mx-auto px-4">
           <div
-            class="p-8 relative flex flex-col min-w-0 break-words  pd-8 bg-white w-full mb-6 shadow-xl rounded-lg -mt-64">
+            class="p-8 relative flex flex-col min-w-0 break-words  pd-8 bg-white w-full mb-6  rounded-lg">
 
 
             <div class="px-6">
@@ -143,8 +128,8 @@
             </div>
             <div style="flex items-center no-underline">
               <a href="http://localhost:3000/buy/proc" @click="clicked" id="change-button" class="full-image"
-                disabled="disabled">
-                동의 하기
+                disabled="disabled" style="color: #fafafa !important;">
+                동의하기
               </a>
             </div>
           </div>
@@ -218,3 +203,9 @@ export default {
         };
 
 </script>
+
+<style>
+input[type=checkbox] {
+  display: none !important;
+}
+</style>

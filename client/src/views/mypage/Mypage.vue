@@ -29,6 +29,7 @@ import MypageBuyList from '@/layouts/mypage/MypageBuyList.vue';
 import MypageSellList from '@/layouts/mypage/MypageSellList.vue';
 import MypageFavoriteList from '@/layouts/mypage/MypageFavoriteList.vue';
 import MypageProfile from '../../layouts/mypage/MypageProfile.vue';
+import {EventBus} from "@/common/EventBus.js"
 
 export default {
   components: {
@@ -43,11 +44,29 @@ export default {
   data() {
     return {
       currentViewState : 0,
+      timeOut:0
     }
+  },
+  created(){
+    EventBus.$on("mypageViewStateChange", this.onViewStateChanged);
   },
   methods:{
     onViewStateChanged(viewState){
       this.currentViewState = viewState;
+      this.scrollToTop();
+    },
+    scrollToTop() {
+      if(this.currentViewState == 0)
+      {
+        window.scrollTo(0,0);
+        return;
+      }
+
+      if (document.body.scrollTop!=0 || document.documentElement.scrollTop!=0){
+          window.scrollBy(0,-50);
+          this.timeOut=setTimeout(this.scrollToTop,10);
+      }
+      else clearTimeout(this.timeOut);
     },
   }
 };

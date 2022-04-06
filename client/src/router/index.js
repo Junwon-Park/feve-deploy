@@ -90,6 +90,10 @@ const routes = [
         path: "/admin/inspectionList",
         component: InspectionList,
       },
+      {
+        path: "/admin/addProduct",
+        component: AddProduct,
+      },
     ],
   },
   {
@@ -154,10 +158,6 @@ const routes = [
   {
     path: "/buy/complete",
     component: Buycomplete,
-  },
-  {
-    path: "/admin/addProduct",
-    component: AddProduct,
   },
   
   {

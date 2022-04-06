@@ -2,34 +2,18 @@
 
   <div>
     <main class="profile-page">
-
-      <section class="relative block h-500-px">
-        <div class="absolute top-0 w-full h-full bg-center bg-cover" :style="{ backgroundImage: `url(${legoBg})` }">
-          <span id="blackOverlay" class="w-full h-full absolute opacity-30 bg-white"></span>
-        </div>
-        <div class="top-auto bottom-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden h-70-px"
-          style="transform: translateZ(0);">
-          <svg class="absolute bottom-0 overflow-hidden" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"
-            version="1.1" viewBox="0 0 2560 100" x="0" y="0">
-            <polygon class="text-blueGray-200 fill-current" points="2560 0 2560 100 0 100"></polygon>
-          </svg>
-
-        </div>
-      </section>
-
-
-      <section class="relative py-16 bg-blueGray-200">
+      <section class="relative py-16 bg-blueGray-200 mt-12">
 
         <div class="container mx-auto px-4">
           <div
-            class="p-8 relative flex flex-col min-w-0 break-words  pd-8 bg-white w-full mb-6 shadow-xl rounded-lg -mt-64">
+            class="p-8 relative flex flex-col min-w-0 break-words  pd-8 bg-white w-full mb-6 shadow-xl rounded-lg ">
 
 
-            <div class="px-6">
-              <h5 class="text-xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2 text-center m-3">구매 입찰하기</h5>
+            <div class=" " style="border-bottom: 3px solid black;">
+              <h5 class="text-xl font-semibold leading-normal mb-2 text-black mb-2 text-left m-3">구매 입찰하기</h5>
             </div>
             <div>
-              <div class="flex flex-wrap items-center mt-5 mb-5 px-6">
+              <div class="flex flex-wrap items-center mt-10 mb-5 px-6">
                <div style="padding-top: 0px; padding-right: 16px; padding-bottom: 20px; padding-left: 16px;">
                   <div class="flex items-center" style="width:100% color:#fff">
                     <div class="" style="width:80px; height:80px; flex-shrink: 0; border-radius: 10px; background-clolr: rgb(244,244,244); overflow: hidden;
@@ -53,37 +37,35 @@
             <div class="p-5" style="border-top:8px; background-color:#fff;">
               <ul class="flex rounded-tr p-5 items-center px-4">
                 <li class="text-center flex-1 border-r">
-                  <p class="text-lg">즉시 구매가</p>
+                  <p class="text-lg font-semibold">즉시 구매가</p>
                   <span class="inline-block text-2xl text-right">{{item.PRODUCT_ORIPRICE}}원</span>
                 </li>
-                <li class="text-center flex-1">
+                <li class="text-center flex-1 font-semibold">
                   <p class="text-lg">즉시 구매</p>
                   <span class="inline-block text-2xl">4,500,000원</span>
                 </li>
               </ul>
-              <div class="relative p-5" style="width:70%; margin:auto;">
-                <v-card>
-                  <v-tabs v-model="tab" background-color="#41b979" centered dark icons-and-text
-                    style="border-radius:10px;  margin:auto;">
+              <div class="relative p-5" style="width:100%; margin:auto;">
+                <v-card :elevation="0">
+                  <v-tabs v-model="tab" centered  icons-and-text
+                    style=" margin:auto;">
                     <v-tabs-slider></v-tabs-slider>
 
-                    <v-tab href="#tab-1">
+                    <v-tab href="#tab-1" style="width: 50%;">
                       구매 입찰
-                      <v-icon></v-icon>
                     </v-tab>
 
-                    <v-tab href="#tab-2">
+                    <v-tab href="#tab-2" style="width: 50%;">
                       즉시 구매
-                      <v-icon></v-icon>
                     </v-tab>
 
 
                   </v-tabs>
 
-                  <v-tabs-items v-model="tab">
+                  <v-tabs-items v-model="tab" style="width: 70%; margin:auto;">
                     <v-tab-item v-for="i in 2" :key="i" :value="'tab-' + i">
                       <v-card flat>
-                        <dl class="m-3 justify-between flex mb-5 items-center"
+                        <dl class="p-5 m-3 justify-between flex mb-5 items-center"
                           style="border-bottom: 2px solid #ebebeb;">
                           <dt class="text-s">구매 희망가</dt>
                           <dd class="text-sm"><input type="text" style="adding-left: 2px;

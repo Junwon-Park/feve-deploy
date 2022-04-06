@@ -3,26 +3,11 @@
   <div>
     <main class="profile-page">
 
-      <section class="relative block h-500-px">
-        <div class="absolute top-0 w-full h-full bg-center bg-cover" :style="{ backgroundImage: `url(${legoBg})` }">
-          <span id="blackOverlay" class="w-full h-full absolute opacity-30 bg-white"></span>
-        </div>
-        <div class="top-auto bottom-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden h-70-px"
-          style="transform: translateZ(0);">
-          <svg class="absolute bottom-0 overflow-hidden" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"
-            version="1.1" viewBox="0 0 2560 100" x="0" y="0">
-            <polygon class="text-blueGray-200 fill-current" points="2560 0 2560 100 0 100"></polygon>
-          </svg>
-
-        </div>
-      </section>
-
-
-      <section class="relative py-16 bg-blueGray-200 border-bottom: 2px solid rgb(235, 235, 235);">
+      <section class="relative py-16 bg-blueGray-200 mt-12">
 
         <div class="container mx-auto px-4">
           <div
-            class="p-8 relative flex flex-col min-w-0 break-words  pd-8 bg-white w-full mb-6 shadow-xl rounded-lg -mt-64">
+            class="p-8 relative flex flex-col min-w-0 break-words  pd-8 bg-white w-full mb-6  rounded-lg ">
             <div class="px-6">
               <h5 class="text-xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2 text-center m-3">주문 확정</h5>
             </div>
@@ -296,7 +281,7 @@
             <div class="text-center mt-6">
               <button
                 class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                type="button" @click="formSubmit()">
+                type="button">
                 작성하기
               </button>
             </div>
@@ -310,20 +295,26 @@
 
 import legoBg from "@/assets/img/bg-lego5.jpg";
 import box from "@/assets/img/box.png";
-
+// import moment from 'moment'
 export default {
 
 
   data() {
     return {
+      
       box,
+      maxprice:{
+        BUY_PRICE:0,
+      },
       checksucess: [],
       tab: null,
       legoBg,
       text: '판매 희망가',
       month:0,
+      nowDate: new Date(Date.now() - (new Date().getTimezoneOffset() * 60000)),
+
       buy: {
-        
+        maxprice:0,
         product_key:'',
         BUY_PRICE: 0,
         buy_sdate: '',
@@ -353,9 +344,32 @@ export default {
     };
   },
   methods: {
-     
+    // updatebuy() {
+    //   let thot = this;
+    //     this.$axios.get("http://localhost:8080/buy/update")
+    //   .then(function (res) {
+    //     console.log(res.data);
+    //     console.log(thot.maxprice.BUY_PRICE);
+    //     console.log("성공");
+
+    //   }) 
+    //   .catch(function (err) {
+    //       console.log(err);
+    //     });
+  
+
+    // }
+
   },
 
+  // created()
+  
+  // {
+  //   if(this.nowdate > moment(this.buy_edate, 'YYYY-MM-DD'))
+  //   {
+
+  //   }
+  // },
 
   beforeCreate() {
     let that = this;
@@ -368,6 +382,7 @@ export default {
       .catch(function (err) {
           console.log(err);
         });
+  
   
    this.$axios.post("http://localhost:8080/buy/comp/user")
       .then(function (res) {

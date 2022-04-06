@@ -2,7 +2,8 @@
   <div
     class="mx-auto flex mb-24 py-2"
     style="background: rgba(0,0,0,0.03)"
-
+    @click="onMoreClicked"
+    type="button"
   >
     <div class="flex" v-for="(item,i) in names" :key="i">
 
@@ -25,6 +26,7 @@
         outlined
         rounded
         text
+        @click="onMoreClicked"
       >
         더보기
       </v-btn>
@@ -33,8 +35,11 @@
 </template>
 
 <script>
+import {EventBus} from "@/common/EventBus.js"
+
 export default {
   props:{
+    state:Number,
     counts:Array,
   },
   data() {
@@ -42,6 +47,10 @@ export default {
       names:["전체", "입찰 중", "진행 중", "종료"],
     };
   },
-  
+  methods:{
+    onMoreClicked(){
+      EventBus.$emit("mypageViewStateChange", this.state);
+    }
+  }
 };
 </script>

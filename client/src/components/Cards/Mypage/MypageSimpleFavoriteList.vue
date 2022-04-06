@@ -1,19 +1,22 @@
 <template>
-    <div class="flex flex-wrap">
-      <div class="w-full xl:w-3/12 lg:w-4/12 md:w-4/12 px-4 mb-5"
-           style="rgba(0,0,0,0.02)"
+    <div class="flex flex-wrap" >
+      <div class="w-full lg:w-4/12 md:w-4/12 px-4 my-5"
+           style="margin-bottom: 15vh;"
            v-for="item in items" :key="item.PRODUCT_NAME"
+           @click="onSlotClicked(item.PRODUCT_NAME)"
+           type="button"
       >
         
-          <div >
+          <div style="width: 200px; height: 200px; border-radius: 8px;">
             <img
               :src= "imageUrl + item.PRODUCT_PIC"
-              style="border-radius: 8px;"
+              style="object-fit: cover; width: 100%; height: 100%;"
               crossorigin
             >
+          </div>
 
             <h5 class="font-bold underline mt-2">
-              {{ item.PRODUCT_BRAND }} sdfsdfsdfdsfdsfsd
+              {{ item.PRODUCT_BRAND }}
             </h5>
             <h5>
             {{ item.PRODUCT_NAME }}
@@ -26,7 +29,6 @@
             </h5>
           </div>
       </div>
-    </div>
 </template>
 
 <script>
@@ -39,5 +41,10 @@ export default {
       imageUrl : this.$store.getters.ServerUrl + '/getImage?imageName=',
     }
   },
+  methods:{
+    onSlotClicked(name){
+      console.log("onSlotClicked.name: ", name);
+    }
+  }
 };
 </script>
