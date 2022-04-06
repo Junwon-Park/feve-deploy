@@ -1,7 +1,6 @@
 const express = require('express');
 const { body } = require('express-validator');
-const { cscenter, totalcscenter } = require('../../controller/admin/cscenter.js');
-const { cscenterone } = require('../../controller/admin/cscenterone.js');
+const { cscenter, totalcscenter, cscenterone } = require('../../controller/admin/cscenter.js');
 
 const router = express.Router();
 
