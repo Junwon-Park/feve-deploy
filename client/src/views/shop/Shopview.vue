@@ -110,7 +110,9 @@
                       :RECENT_SELL_PRICE="RECENT_SELL_PRICE"
                       :RECENT_BUY_PRICE="RECENT_BUY_PRICE"
                       :RECENT_SELL_EDATE="RECENT_SELL_EDATE"
-                      :RECENT_BUY_EDATE="RECENT_BUY_EDATE"/>
+                      :RECENT_BUY_EDATE="RECENT_BUY_EDATE"
+                      :SELL_TABLE_PRICE="SELL_TABLE_PRICE"
+                      :SELL_TABLE_COUNT="SELL_TABLE_COUNT"/>
                     </div>
                   </div>
                   <!--컴포넌트로 구매 확인 공지 넣어주기-->
@@ -175,7 +177,11 @@ export default {
           {
             src: '',
           }
-          ]
+          ],
+      SELL_TABLE_PRICE:[],
+      //BUY_TABLE_PRICE:[],
+      SELL_TABLE_COUNT:[],
+      //BUY_TABLE_COUNT:[],
       };
     },
     components: {
@@ -187,7 +193,7 @@ export default {
       this.getView();
       this.countLike();
       this.getRecentPrice();
-      
+      this.getTablePrice();
     },
     methods:{
       getView:function(){
@@ -195,8 +201,8 @@ export default {
         this.PRODUCT_KEY = this.$route.params.PRODUCT_KEY;
         this.$axios.get('http://localhost:8080/shop/shopview/'+ this.PRODUCT_KEY)
             .then(function(res){
-              // console.log("디비에서 결과 가져옴", res);
-              //console.log("res.data값은?", res.data);
+              console.log("디비에서 결과 가져옴", res);
+              console.log("res.data값은?", res.data);
               vm.PRODUCT_NAME = res.data.PRODUCT_NAME;
               vm.PRODUCT_BRAND = res.data.PRODUCT_BRAND;
               vm.PRODUCT_DESC = res.data.PRODUCT_DESC;
@@ -340,12 +346,42 @@ export default {
         else
           vm.RECENT_PRICE = vm.RECENT_BUY_PRICE;
       },
-      getSellTablePrice: function(){
-        console.log("sell table price 가지러 가는 길");
+      getTablePrice: function(){
+        console.log("table price 가지러 가는 길");
+        var vm = this;
+        this.$axios.post('http://localhost:8080/shop/shopview/'+ this.PRODUCT_KEY + '/sellTablePrice',
+        {product_key: this.PRODUCT_KEY})
+            .then(function(res){
+              console.log(res);
+              for(let i=0;i<res.data.length;i++)
+              {
+                vm.SELL_TABLE_PRICE = res.data[i].SELL_PRICE;
+                vm.SELL_TABLE_COUNT = res.data[i].SELL_COUNT;
+                console.log(res.data[i].SELL_PRICE);
+                console.log(res.data[i].SELL_COUNT);
+                console.log(vm.SELL_TABLE_PRICE);
+                console.log(vm.SELL_TABLE_COUNT);
+              }
+            })
+            .catch(function(err){
+              console.log(err);
+            });
+        // this.$axios.post('http://localhost:8080/shop/shopview/'+ this.PRODUCT_KEY + '/buyTablePrice',
+        // {product_key: this.PRODUCT_KEY})
+        //     .then(function(res){
+        //       console.log(res);
+        //       for(let i=0;i<res.data.length;i++)
+        //       {
+        //         console.log(res.data[i].BUY_PRICE);
+        //         console.log(res.data[i].BUY_COUNT);
+        //       }
+              
+        //     })
+        //     .catch(function(err){
+        //       console.log(err);
+        //     }); 
       },
-      getBuyTablePrice: function(){
-        console.log("buy table price 가지러 가는 길");
-      }
+      
       
     
 

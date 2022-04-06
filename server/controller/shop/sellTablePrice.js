@@ -13,10 +13,9 @@ async function sellTablePrice(req, res, next) {
     await db.sequelize.query(
         'SELECT \n' +
             'SELL_PRICE, \n' +
-            'COUNT(SELL_PRICE)\n' +
-        'FROM Sell \n' +
-        'GROUP BY PRODUCT_KEY = '+ 
-        product_key + ';'
+            'COUNT(*) AS SELL_COUNT FROM Sell WHERE PRODUCT_KEY = '+
+            product_key +
+            ' GROUP BY SELL_PRICE;'
         , { type: sequelize.QueryTypes.SELECT })
         .then(result => {
             console.log(result);

@@ -1,4 +1,4 @@
-const { Sell } = require("../../models");
+const { Buy } = require("../../models");
 const db = require("../../models");
 const sequelize = require("sequelize");
 
@@ -13,10 +13,9 @@ async function buyTablePrice(req, res, next) {
     await db.sequelize.query(
         'SELECT \n' +
             'BUY_PRICE, \n' +
-            'COUNT(BUY_PRICE)\n' +
-        'FROM Buy \n' +
-        'GROUP BY PRODUCT_KEY = '+ 
-        product_key + ';'
+            'COUNT(*) AS BUY_COUNT FROM Buy WHERE PRODUCT_KEY = '+
+            product_key +
+            ' GROUP BY BUY_PRICE;'
         , { type: sequelize.QueryTypes.SELECT })
         .then(result => {
             console.log(result);

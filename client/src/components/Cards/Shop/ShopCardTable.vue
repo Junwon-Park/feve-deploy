@@ -106,12 +106,12 @@
               <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
             >
-              80,000원
+              {{SELL_TABLE_PRICE}}
             </td>
             <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
             >
-              1
+              {{SELL_TABLE_COUNT}}
             </td>
           </tr>
         </tbody>
@@ -178,9 +178,6 @@ export default {
         return ["light", "dark"].indexOf(value) !== -1;
       },
     },
-    RECENT_PRICE:{
-      deafult:0
-    },
     RECENT_SELL_PRICE:{
       deafult:0
     },
@@ -195,6 +192,12 @@ export default {
       type:String,
       deafult:''
     },
+    SELL_TABLE_PRICE:[
+
+    ],
+    SELL_TABLE_COUNT:[
+
+    ]
   },
   methods:{
     showRecentTransaction:function(){
