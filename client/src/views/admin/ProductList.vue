@@ -2,7 +2,7 @@
   <div>
     <div class="flex flex-wrap" style="min-height: 90vh">
       <div class="w-full mb-12 xl:mb-0 px-4 mt-24">
-        <AdminCardPageLists v-bind="items" :totalList="totalList" :items="items" :title="title"  style="min-height: 59vh;" />
+        <AdminCardPageLists v-bind="items" :totalListCount="totalListCount" :items="items" :title="title"  style="min-height: 59vh;" />
     </div>
     </div>
   </div>
@@ -13,7 +13,7 @@ export default {
   data() {
     return {
       title: "상품리스트",
-      totalList:0,
+      totalListCount:0,
       items: [{
           PRODUCT_KEY: 0,
           PRODUCT_NAME: '',
@@ -24,7 +24,7 @@ export default {
           PRODUCT_PIC: "",
           PRODUCT_DELETE:'',
           PRODUCT_DESC: "",
-        }],
+        }], 
     }
   },
   components: {
@@ -36,9 +36,9 @@ export default {
     this.$axios.get('http://localhost:8080/admin/loadproduct')
         .then(function(res){
           that.items = res.data;
-          that.totalList=that.items.length;
-          console.log(that.totalList)
-          console.log(that.items.length)
+          that.totalListCount=that.items.length;
+          //this.$set(this, this.totalListCount, that.items.length);
+          console.log("ProductList.totallist: ", that.totalListCount)
         })
         .catch(function(err){
           console.log(err);

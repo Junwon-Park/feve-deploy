@@ -2,14 +2,13 @@
   <div class="text-center mt-auto">
     <v-pagination
         v-model="currentPage"
+        @input="goPage"
         :length="pageSize"
         prev-icon="<"
         next-icon=">"
         color="black"
-        @input="nextPage"
         class="my-5"
         :total-visible="5"
-        :aria-controls="myAriaControls"
     ></v-pagination>
   </div>
 </template>
@@ -23,31 +22,35 @@ export default {
     }
   },
   props:{
-    totalList :{
+    totalListCount :{
       required: true,
     },
     listPerPage:{
       required: true,
-    },
-    myAriaControls: {
-      type: String,
-      default: '',
+    }
+  },
+  watch:{
+    totalListCount:function(){
+      this.initPage();
     }
   },
   methods: {
-    nextPage(){
-      console.log('??D?FS?F?SD?F');
-    }
+    goPage(page){
+      console.log("onPageChanged.page: ", page);
+      this.$emit("onPageChanged", page);
+    },
+
+    initPage(){
+      console.log("created: 쿼리 실행 후 가져온 레코드 수: ",this.totalListCount);
+      console.log("한 페이지당 보여야 하는 레코드 수: ",this.listPerPage);
+
+      let that = this;
+      that.pageSize = Math.ceil(this.totalListCount / this.listPerPage);
+      //console.log("that.pageSize: ", that.pageSize, "/this.totalListCount:", this.totalListCount, "/this.listPerPage", this.listPerPage);
+      that.perPage=this.listPerPage;
+      
+      console.log("총 페이지수: ",this.pageSize)
+    },
   },
-  created(){
-    console.log("쿼리 실행 후 가져온 레코드 수: ",this.$props.totalList)
-    console.log("한 페이지당 보여야 하는 레코드 수: ",this.$props.listPerPage)
-
-    let that = this;
-    that.pageSize = Math.ceil(this.$props.totalList / this.$props.listPerPage);
-    that.perPage=this.$props.listPerPage;
-
-    console.log("총 페이지수: ",this.pageSize)
-  }
 }
 </script>

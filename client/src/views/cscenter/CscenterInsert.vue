@@ -32,7 +32,7 @@
                     <div class="relative mb-3  mt-8 w-full lg:w-6/12 pr-3 ">
                       <label
                           class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                          htmlFor="작성자"
+                          htmlFor="작성자" 
                       >
                         작성자
                       </label>
@@ -103,7 +103,7 @@ export default {
         cscenter_contents: '',
         cscenter_wdate: '',
         cscenter_status: '',
-        user_key: '',
+        user_key: JSON.parse(localStorage.getItem('userKey')),
         default: "0",
       }
     };
@@ -127,6 +127,7 @@ export default {
           cscenter_wdate: kr_curr,
           cscenter_status: this.cscenter.cscenter_status,
           user_key:this.cscenter.user_key
+          
       })
           .then(() => {
             alert("문의가 등록 되었습니다.");

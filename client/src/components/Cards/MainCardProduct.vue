@@ -19,8 +19,10 @@
           <span class="text-sm text-black">
             {{ PRODUCT_NAME}}
           </span>
-          <span class="font-semibold text-sm text-blueGray-700 block">
-<!--            {{ PRODUCT_ORIPRICE.toLocaleString('ko-KR') }} 원-->
+          <span class="font-semibold text-sm text-blueGray-700 block" v-if="!ifNull">
+            -
+          </span>
+          <span class="font-semibold text-sm text-blueGray-700 block" v-else>
             {{ SELL_PRICE.toLocaleString('ko-KR') }} 원
           </span>
         </div>
@@ -38,6 +40,12 @@ export default {
   data(){
     return{
       imageUrl : this.$store.getters.ServerUrl + '/getImage?imageName=',
+      ifNull: false,
+    }
+  },
+  watch:{
+    sellPRice:function(){
+      console.log(this.SELL_PRICE)
     }
   },
   props:{
@@ -53,8 +61,7 @@ export default {
       default: "Lego",
     },
     PRODUCT_CATE: {
-      type: String,
-      default: "Architecture",
+      default: 0,
     },
     PRODUCT_PIC: {
       type: String,
@@ -75,5 +82,8 @@ export default {
       default: 550000
     },
   },
+  created(){
+    this.SELL_PRICE === null ? !this.ifNull : this.ifNull
+  }
 }
 </script>

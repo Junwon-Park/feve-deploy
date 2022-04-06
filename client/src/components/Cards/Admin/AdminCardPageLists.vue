@@ -69,10 +69,11 @@
         @updateList="updateList"/>
 
     <Pagination
-        :totalList="totalList"
+        :totalListCount="totalListCount"
         :listPerPage="10"
         :aria-controls="myAriaControls"
         :total-rows="rows"
+        @onPageChanged="onPageChanged"
     />
   </div>
 </template>
@@ -94,7 +95,7 @@ export default {
     isArrayNull:{
       required: false
     },
-    totalList:{
+    totalListCount:{
       required: true
     },
   },
@@ -221,6 +222,10 @@ export default {
       .catch(function (err) {
         console.log(err);
       });
+    },
+
+    onPageChanged(page){
+      console.log("onPageChanged.page: ", page);
     }
   },
 }

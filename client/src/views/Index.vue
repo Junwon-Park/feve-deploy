@@ -253,6 +253,7 @@ export default {
         PRODUCT_PIC: "",
         PRODUCT_DELETE:'',
         PRODUCT_DESC: "",
+        SELL_PRICE:0
       }]
     };
   },
@@ -290,6 +291,8 @@ export default {
         .catch(function(err){
           console.log(err);
         });
+
+
   },
   components: {
     Slide,

@@ -1,5 +1,5 @@
 <template>
-          <tr>
+    <tr>
           <td
               :style="[PRODUCT_DELETE==='1' ? {'text-decoration': 'line-through !important'} : {'text-decoration': 'none !important'}]"
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
