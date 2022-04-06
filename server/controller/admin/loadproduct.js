@@ -3,7 +3,25 @@ const { Category } = require('../../models');
 const db = require('../../models');
 const Sequelize = require('sequelize');
 
+async function loadTotalcntProduct(req, res, next) {
+  await db.sequelize
+      .query(
+          'select count(*)as totalCnt from product;',
+          { type: Sequelize.QueryTypes.SELECT }
+      )
+      .then((result) => {
+        console.log(result);
+        res.json(result);
+      })
+      .catch((err) => console.log(err));
+}
+
 async function loadproduct(req, res, next) {
+    const start = req.body.limitStart;
+    const end = req.body.limitEnd;
+
+    console.log("limitStart, limitEnd",start, end)
+
   await db.sequelize
     .query(
       'SELECT \n' +
@@ -16,8 +34,9 @@ async function loadproduct(req, res, next) {
         ',ct.CATEGORY_desc  as PRODUCT_BRAND \n' +
         'from Product\n' +
         'left outer join Category c on c.CATEGORY_KEY =PRODUCT_CATE \n' +
-        'left outer join Category ct on c.CATEGORY_parent=ct.CATEGORY_NAME;',
-      { type: Sequelize.QueryTypes.SELECT }
+        'left outer join Category ct on c.CATEGORY_parent=ct.CATEGORY_NAME\n' +
+        'limit '+start+', '+end+';'
+        ,{ type: Sequelize.QueryTypes.SELECT }
     )
     .then((result) => {
       console.log(result);
@@ -26,4 +45,4 @@ async function loadproduct(req, res, next) {
     .catch((err) => console.log(err));
 }
 
-module.exports = { loadproduct };
+module.exports = { loadTotalcntProduct, loadproduct };

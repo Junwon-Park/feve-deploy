@@ -144,8 +144,5 @@ export default {
       this.$emit("sendUndoDeleteItem", sendProductKey, sendProductMnum, );
     },
   },
-  created(){
-    console.log(this.perPage)
-  }
 }
 </script>
