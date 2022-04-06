@@ -1,7 +1,7 @@
 <template>
     <div class="flex flex-wrap">
-      <div class="w-full lg:w-4/12 md:w-4/12 px-4 mb-5"
-           style="rgba(0,0,0,0.02)"
+      <div class="w-full lg:w-4/12 md:w-4/12 px-4 my-5"
+           style="margin-bottom: 15vh;"
            v-for="item in items" :key="item.PRODUCT_NAME"
       >
         
@@ -11,6 +11,7 @@
               style="object-fit: cover; width: 100%; height: 100%;"
               crossorigin
             >
+          </div>
 
             <h5 class="font-bold underline mt-2">
               {{ item.PRODUCT_BRAND }} sdfsdfsdfdsfdsfsd
@@ -26,7 +27,6 @@
             </h5>
           </div>
       </div>
-    </div>
 </template>
 
 <script>
