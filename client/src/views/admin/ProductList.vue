@@ -1,23 +1,19 @@
 <template>
   <div>
-    <div class="flex flex-wrap" >
-      <div class="w-full mb-12 xl:mb-0 px-4 mt-12">
-        <AdminCardPageLists v-bind="items" :items="items" :title="title"  style="min-height: 80vh;">
-                <AdminCards  />
-        </AdminCardPageLists>
-        <Pagination />
+    <div class="flex flex-wrap" style="min-height: 90vh">
+      <div class="w-full mb-12 xl:mb-0 px-4 mt-24">
+        <AdminCardPageLists v-bind="items" :totalList="totalList" :items="items" :title="title"  style="min-height: 59vh;" />
     </div>
     </div>
   </div>
 </template>
 <script>
 import AdminCardPageLists from "@/components/Cards/Admin/AdminCardPageLists.vue";
-import AdminCards from "@/components/Cards/Admin/AdminCards.vue";
-import Pagination from "@/components/Pagination.vue" ;
 export default {
   data() {
     return {
       title: "상품리스트",
+      totalList:0,
       items: [{
           PRODUCT_KEY: 0,
           PRODUCT_NAME: '',
@@ -32,9 +28,7 @@ export default {
     }
   },
   components: {
-    AdminCards,
     AdminCardPageLists,
-    Pagination,
   },
 
   created() {
@@ -42,7 +36,9 @@ export default {
     this.$axios.get('http://localhost:8080/admin/loadproduct')
         .then(function(res){
           that.items = res.data;
-          console.log(res.data)
+          that.totalList=that.items.length;
+          console.log(that.totalList)
+          console.log(that.items.length)
         })
         .catch(function(err){
           console.log(err);

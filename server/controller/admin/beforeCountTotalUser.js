@@ -3,11 +3,12 @@ const db = require("../../models");
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
-async function countTotalUser(req, res, next) {
+async function beforeCountTotalUser(req, res, next) {
     const date = new Date();
-    const thisYear= date.getFullYear().toString();
-    const thisMonth= (date.getMonth()+1).toString();
-    const thisDate= date.getDate().toString();
+    const thisYear= (date.getFullYear()-1).toString();
+    const thisMonth= date.getMonth().toString();
+    const thisDate= (date.getDate()-1).toString();
+    console.log("이번달:::::::::::::::::::",thisMonth)
     await db.sequelize
         .query(
             ' SELECT COUNT(*) as cnt \n' +
@@ -22,4 +23,4 @@ async function countTotalUser(req, res, next) {
         .catch(err => console.log(err));
 }
 
-module.exports = { countTotalUser };
+module.exports = { beforeCountTotalUser };
