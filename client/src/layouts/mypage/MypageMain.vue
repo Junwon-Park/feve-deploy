@@ -93,6 +93,7 @@ export default {
         });
     },
     onMoreClicked(state){
+      console.log("onMoreClicked: ", state);
       EventBus.$emit("mypageViewStateChange", state); //1:buyList 2:sellList
     }
   }

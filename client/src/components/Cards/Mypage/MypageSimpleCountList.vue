@@ -48,7 +48,8 @@ export default {
     };
   },
   methods:{
-    onMoreClicked(){
+    onMoreClicked(event){
+      event.stopPropagation();
       EventBus.$emit("mypageViewStateChange", this.state);
     }
   }

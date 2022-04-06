@@ -1,5 +1,6 @@
 const sequelize = require('sequelize');
 const db = require('../../models');
+const { Favorite } = require('../../models');
 
 async function getFavoriteList(req, res) {
     const userKey = req.body.USER_KEY;
@@ -7,7 +8,8 @@ async function getFavoriteList(req, res) {
     await db.sequelize
         .query(
           'SELECT \n' +
-              'p.PRODUCT_BRAND \n' +
+              'f.FAVORITE_KEY \n' +
+              ',p.PRODUCT_BRAND \n' +
               ',p.PRODUCT_NAME \n' +
               ',p.PRODUCT_PIC \n' +
               ',(SELECT MIN(s.SELL_PRICE) FROM Sell AS s WHERE p.PRODUCT_KEY = s.PRODUCT_KEY) MIN_PRICE\n' +
@@ -23,4 +25,22 @@ async function getFavoriteList(req, res) {
         .catch((err) => console.log(err));
 }
 
-module.exports = { getFavoriteList };
+
+async function deleteFavorite(req, res) {
+  const key = req.body.FAVORITE_KEY;
+
+  const row = await Favorite.findOne({
+    where: { FAVORITE_KEY: key },
+  });
+
+  if (row) {    
+    await row.destroy()
+    .then((result) => {
+      console.log("FAVORITE_KEY: ", key, " has been deleted / result: ", result);
+      res.json(result);
+    })
+    .catch((err) => console.log(err));
+  }
+}
+
+module.exports = { getFavoriteList, deleteFavorite };

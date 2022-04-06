@@ -1,6 +1,9 @@
 <template>
           <div class="divide-y-b-gray flex"
-          style="align-items:center">
+          style="align-items:center"
+          type="button"
+          @click="onSlotClicked"
+          >
             <img
               :src= "imageUrl + item.PRODUCT_PIC"
               style="border-radius: 8px; width:5rem; height:5rem; margin-top:1rem; margin-bottom:1rem"
@@ -30,6 +33,15 @@
               >
                 구매
               </v-btn>
+
+              <h5 
+              class="text-gray-400" 
+              style="font-size: 0.7rem; line-height: 0.75rem; margin-top:-0.2rem; text-decoration: underline;"
+              type="button"
+              @click ="onDeleteClicked"
+              >
+                삭제
+              </h5>
             </v-list-item-action>
           </div>
 </template>
@@ -42,6 +54,15 @@ export default {
   data() {
     return {
       imageUrl : this.$store.getters.ServerUrl + '/getImage?imageName=',
+    }
+  },
+  methods:{
+    onSlotClicked(){
+      console.log("onSlotClicked.name: ", this.item.PRODUCT_NAME);
+    },
+    onDeleteClicked(event){
+      event.stopPropagation();
+      this.$emit("onDeleteClicked", this.item);
     }
   },
 };
