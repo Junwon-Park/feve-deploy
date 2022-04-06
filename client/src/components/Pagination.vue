@@ -2,14 +2,13 @@
   <div class="text-center mt-auto">
     <v-pagination
         v-model="currentPage"
+        @input="goPage"
         :length="pageSize"
         prev-icon="<"
         next-icon=">"
         color="black"
-        @input="nextPage"
         class="my-5"
         :total-visible="5"
-        :aria-controls="myAriaControls"
     ></v-pagination>
   </div>
 </template>
@@ -28,10 +27,6 @@ export default {
     },
     listPerPage:{
       required: true,
-    },
-    myAriaControls: {
-      type: String,
-      default: '',
     }
   },
   watch:{
@@ -40,7 +35,7 @@ export default {
     }
   },
   methods: {
-    nextPage(page){
+    goPage(page){
       console.log("onPageChanged.page: ", page);
       this.$emit("onPageChanged", page);
     },
@@ -57,6 +52,5 @@ export default {
       console.log("총 페이지수: ",this.pageSize)
     },
   },
-
 }
 </script>
