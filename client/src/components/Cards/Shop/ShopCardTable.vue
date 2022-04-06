@@ -199,12 +199,12 @@
               <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
             >
-              -
+              {{item.BUY_PRICE}}
             </td>
             <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
             >
-              -
+              {{item.BUY_COUNT}}
             </td>
           </tr>
         </tbody>
@@ -230,7 +230,6 @@ export default {
     color: {
       default: "light",
       validator: function (value) {
-        // The value must match one of these strings
         return ["light", "dark"].indexOf(value) !== -1;
       },
     },

@@ -358,6 +358,7 @@ export default {
               }
               else
               {
+                vm.arr = res.data;
                 console.log(vm.arr.SELL_PRICE = "-");
                 console.log(vm.arr.SELL_COUNT = "-");
               }
@@ -370,8 +371,9 @@ export default {
         {product_key: this.PRODUCT_KEY})
             .then(function(res){
               console.log(res);
-              // vm.arr2.BUY_PRICE = (vm.arr2.BUY_PRICE == null) ? '-' : vm.arr2.BUY_PRICE.toLocaleString('ko-KR') + "원";
-              vm.arr2 = res.data;
+              vm.arr2.BUY_PRICE = (vm.arr2.BUY_PRICE == null) ? '-' : vm.arr2.BUY_PRICE.toLocaleString('ko-KR') + "원";
+              vm.arr2.BUY_COUNT = (vm.arr2.BUY_COUNT == null) ? '-' : vm.arr2.BUY_COUNT;
+              //vm.arr2 = res.data;
               // if(res.data.length !=0)
               // {
               //   vm.arr2 = res.data;
