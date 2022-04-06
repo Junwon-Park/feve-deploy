@@ -69,10 +69,7 @@
         @updateList="updateList"/>
 
     <Pagination
-        :totalListCount="totalListCount"
-        :listPerPage="10"
-        :aria-controls="myAriaControls"
-        :total-rows="rows"
+        :pageSize="pageSize"
         @onPageChanged="onPageChanged"
     />
   </div>
@@ -95,9 +92,9 @@ export default {
     isArrayNull:{
       required: false
     },
-    totalListCount:{
-      required: true
-    },
+    pageSize:Number,
+    itemPerPage: Number,
+    totalListCount: Number,
   },
   computed:{
     rows(){
@@ -119,9 +116,10 @@ export default {
       newProductPic:"",
       newProductDesc:"",
       newProductOriprice:"",
-      myAriaControls: "productList",
-      perPage: 10,
-      currentPage: 1,
+      requestPage: 0,
+      currentPage: 0,
+      // sendStart: 0,
+      // sendEnd: 0,
       item:{
         PRODUCT_KEY: 0,
         PRODUCT_MNUM: "",
@@ -225,7 +223,13 @@ export default {
     },
 
     onPageChanged(page){
-      console.log("onPageChanged.page: ", page);
+      console.log("페이지 버튼 클릭: ", page +"번");
+      let requestPage = page;
+      let sendStart = (page -1) * this.itemPerPage +1;
+      let sendEnd=page * this.itemPerPage;
+      console.log("sendStart: ",sendStart, "sendEnd: ", sendEnd)
+
+      this.$emit("startend", sendStart, sendEnd, requestPage);
     }
   },
 }
