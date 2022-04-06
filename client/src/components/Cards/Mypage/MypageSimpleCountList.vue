@@ -2,7 +2,8 @@
   <div
     class="mx-auto flex mb-24 py-2"
     style="background: rgba(0,0,0,0.03)"
-
+    @click="onMoreClicked"
+    type="button"
   >
     <div class="flex" v-for="(item,i) in names" :key="i">
 
