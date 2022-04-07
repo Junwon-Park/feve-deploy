@@ -84,17 +84,5 @@ export default {
     },
   },
 
-  // methods: {
-  //   fDialog(){
-  //     this.$emit('sendDialog');
-  //   },
-  //   sendItems(){
-  //     let that = this;
-  //     let sendCscenterKey=that.CSCENTER_KEY;
-  //     let sendUserid=that.USER_ID;
-  //     let sendUserkey=that.USER_KEY;
-  //     this.$emit("sendItems", sendCscenterKey, sendUserid, sendUserkey);
-  //   }
-  // },
 }
 </script>
