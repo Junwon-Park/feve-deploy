@@ -13,6 +13,8 @@
           :length="totalPage"
           :total-visible="7"
           @input="onPageChanged"
+          color="black"
+          class="my-4"
         ></v-pagination>
       </div>
     </div>

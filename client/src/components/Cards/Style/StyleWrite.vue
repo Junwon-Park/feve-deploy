@@ -146,6 +146,7 @@ export default {
       })
           .then(function(){
             alert("게시글을 등록했습니다.")
+            this.$router.go(this.$router.currentRouter);
           })
           .catch(function(err){
             console.log(err);

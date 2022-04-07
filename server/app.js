@@ -19,6 +19,7 @@ const adminDeleteProductRoute = require('./router/admin/deleteProduct.js');
 const adminMainChartRoute = require('./router/admin/main.js');
 const styleAddPostRoute = require('./router/style/addPost.js');
 const styleLoadPostRoute = require('./router/style/loadPost.js');
+const styleFollowRoute = require('./router/style/follow.js');
 const categorytRoute = require('./router/common/category.js');
 const shoplistRoute = require('./router/shop/shoplist.js');
 const shopviewRoute = require('./router/shop/shopview.js');
@@ -91,6 +92,7 @@ app.use('/admin/count', adminMainChartRoute);
 
 app.use('/style/addPost', styleAddPostRoute);
 app.use('/style/loadPost', styleLoadPostRoute);
+app.use('/style/follow', styleFollowRoute);
 
 app.use('/shoplist', shoplistRoute);
 app.use('/shop/shoplist', shoplistRoute);
