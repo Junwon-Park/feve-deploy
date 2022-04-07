@@ -131,7 +131,7 @@ export default {
       })
           .then(() => {
             alert("문의가 등록 되었습니다.");
-            this.$router.push('/cscenter');
+            this.$router.push('/cscenterQna');
           })
           .catch((error) => {
             console.log(error);

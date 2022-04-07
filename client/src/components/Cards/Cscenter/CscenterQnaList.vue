@@ -16,7 +16,7 @@
     <div class="block w-full overflow-x-auto">
       <!-- Projects table -->
       <table class="items-center w-full bg- border-collapse">
-        <thead>
+        <!-- <thead>
         <tr>
           <th
               class="text-center px-6 border-b-2 text-black  align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold"
@@ -49,9 +49,9 @@
             답변여부
           </th>
         </tr>
-        </thead>
+        </thead> -->
         <tbody>
-         <CscenterQnaCards />
+         <CscenterQnaListCard/>
         </tbody>
       </table>
     </div>
@@ -61,8 +61,7 @@
   </div>
 </template>
 <script>
-import CscenterQnaCards from "@/components/Cards/Cscenter/CscenterQnaCards.vue";
-//import CscenterQnaModal from "@/components/Cards/Cscenter/CscenterQnaModal.vue";
+import CscenterQnaListCard from "@/components/Cards/Cscenter/CscenterQnaListCard.vue";
 export default {
   props:{
     title: {
@@ -95,63 +94,11 @@ export default {
     }
   },
   components:{
-    CscenterQnaCards,
+    CscenterQnaListCard,
     
   },
   methods: {
-    // fDialog(){
-    //   this.$emit('sendDialog');
-    // },
-    // sendItems(){
-    //   let that = this;
-    //   let sendCscenterKey=that.CSCENTER_KEY;
-    //   let sendUserid=that.USER_ID;
-    //   let sendUserkey=that.USER_KEY;
-    //   this.$emit("sendItems", sendCscenterKey, sendUserid, sendUserkey);
-    
   },
-  // methods: {
-  //   cDialog(){
-  //     this.recDialog=true;
-  //   },
-  //   sendDialog(){
-  //     this.recDialog = false
-  //   },
-  //   sendItems(recC, recU, recUk) {
-  //     let that=this;
-  //     that.receivedCscenterKey=recC;
-  //     that.receivedUserid=recU;
-  //     that.receivedUserkey=recUk;
-
-  //     console.log(that.receivedCscenterKey)
-
-  //     this.$axios.post('http://localhost:8080/admin/cscenter/one',{
-  //       sendCscenterKey: that.receivedCscenterKey,
-  //       sendUserid: that.receivedUserid,
-  //       sendUserkey: that.receivedUserkey,
-  //     }).then(function(res){
-  //       that.item=res.data[0];
-  //       console.log("res", res);
-  //     }).catch(function(err){
-  //       console.log(err);
-  //     });
-  //   },
-  //   updateList(newS){
-  //     let that = this;
-  //     that.cscenterComment = newS;
-
-  //     this.$axios.post('http://localhost:8080/admin/updateCscenter', {
-  //       sendCscenterKey: that.receivedCscenterKey,
-  //       cscenterComment: that.cscenterComment,
-  //       sendUserkey: that.receivedUserkey,
-  //     }).then(function(res){
-  //       console.log(res)
-  //     })
-  //         .catch(function(err){
-  //           console.log(err);
-  //         });
-  //   }
-  // },
   
 }
 </script>

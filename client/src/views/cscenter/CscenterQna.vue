@@ -14,7 +14,12 @@
                    <div class="w-full mb-12 px-4">
                     <div class="container">
                       <div class="w-full mb-12 xl:mb-0 px-4 mt-12" style="min-height: 70vh">
-                          <CscenterQnaList v-bind="items" :items="items" :title="title"/>
+                          <CscenterQnaCards 
+                          v-bind="items" 
+                          :items="items" 
+                          :title="title"
+                          @startend="startend"
+                          />
                           <Pagination />
                       </div>
                        </div>
@@ -30,7 +35,7 @@
 </template>
 <script>
 import CscenterSidebar from "@/components/Sidebar/CscenterSidebar.vue";
-import CscenterQnaList from "@/components/Cards/Cscenter/CscenterQnaList.vue";
+import CscenterQnaCards from "@/components/Cards/Cscenter/CscenterQnaCards.vue";
 import Pagination from "@/components/Pagination.vue" ;
 
 
@@ -38,6 +43,7 @@ export default {
   data() {
     return {
       title: "문의 내역",
+      
       items:
         {
           CSCENTER_KEY: 0,
@@ -48,7 +54,7 @@ export default {
           CSCENTER_COMMENT: '',
           CSCENTER_COMMENT_WDATE: '',
           USER_KEY: '',
-          USER_ID:'',
+          
         },
 
     }
@@ -56,62 +62,20 @@ export default {
   components: {
     
     CscenterSidebar,
-    CscenterQnaList,
+    CscenterQnaCards,
     Pagination,
   },
-  // },
-  // methods: {
-  //   cDialog(){
-  //     this.recDialog=true;
-  //   },
-  //   sendDialog(){
-  //     this.recDialog = false
-  //   },
-  //   sendItems(recC, recU, recUk) {
-  //     let that=this;
-  //     that.receivedCscenterKey=recC;
-  //     that.receivedUserid=recU;
-  //     that.receivedUserkey=recUk;
+ mthod:{
+   startend(start,end,reqpage) {
+     let that = this;
+     that.limitStart = start;
+     that.limitEnd = end;
+     that.currentPage = reqpage;
+     console.log(start, end, reqpage)
 
-  //     console.log(that.receivedCscenterKey)
-
-  //     this.$axios.post('http://localhost:8080/admin/cscenter/one',{
-  //       sendCscenterKey: that.receivedCscenterKey,
-  //       sendUserid: that.receivedUserid,
-  //       sendUserkey: that.receivedUserkey,
-  //     }).then(function(res){
-  //       that.item=res.data[0];
-  //       console.log("res", res);
-  //     }).catch(function(err){
-  //       console.log(err);
-  //     });
-  //   },
-  //   updateList(newS){
-  //     let that = this;
-  //     that.cscenterComment = newS;
-
-  //     this.$axios.post('http://localhost:8080/admin/updateCscenter', {
-  //       sendCscenterKey: that.receivedCscenterKey,
-  //       cscenterComment: that.cscenterComment,
-  //       sendUserkey: that.receivedUserkey,
-  //     }).then(function(res){
-  //       console.log(res)
-  //     })
-  //         .catch(function(err){
-  //           console.log(err);
-  //         });
-  //   }
-  // },
-
-  created() {
-    let that = this;
-    this.$axios.get('http://localhost:8080/cscenter')
-        .then(function(res){
-          that.items=res.data;
-        })
-        .catch(function(err){
-          console.log(err);
-        });
+     
+   }
+ 
   }
 };
 </script>

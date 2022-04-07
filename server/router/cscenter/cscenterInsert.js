@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.post('/', cscenterinsert);
 router.get('/totalCnt', totalcscenter);
-router.post('/', cscenter);
+router.post('/cscenter', cscenter);
 
 
 module.exports = router;
