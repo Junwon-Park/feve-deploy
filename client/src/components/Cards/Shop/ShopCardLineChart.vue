@@ -36,9 +36,11 @@ export default {
   watch:{
     CHART_PRICES(){
      this.drawChart();
+     console.log(this.CHART_PRICES);
     },
     CHART_DATES(){
       this.drawChart()
+      console.log(this.CHART_DATES);
     }
   },
   methods:{
@@ -108,6 +110,7 @@ export default {
               {
                 ticks: {
                   fontColor: "black",
+                  beginAtZero: true,
                 },
                 display: true,
                 scaleLabel: {

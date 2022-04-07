@@ -103,6 +103,7 @@
                     <b class="text-lg">시세</b>
                     <div class="mt-2">
                       <shop-card-line-chart
+                       
                       :CHART_PRICES="CHART_PRICES"
                       :CHART_DATES="CHART_DATES"/>
 
@@ -182,9 +183,6 @@ export default {
     ShopCardTable_RE,
     Notice
     },
-    // created() {
-      
-    // },
     mounted() {
       this.getView();
       this.countLike();
@@ -304,14 +302,16 @@ export default {
                 for(let i=0; i< res.data.length;i++)
                 {
                   vm.PRICES = res.data;
+                  vm.CHART_PRICES[i] = res.data[i].SELL_PRICE;
+                  vm.CHART_DATES[i] = res.data[i].SELL_EDATE.substring(0,10);
                   vm.PRICES[i].SELL_PRICE = res.data[i].SELL_PRICE.toLocaleString('ko-KR') + "원";
                   //console.log(vm.PRICES[i].SELL_PRICE);
                   //console.log(vm.PRICES[i].SELL_EDATE);
-                  vm.CHART_PRICES = res.data[i].SELL_PRICE;
-                  vm.CHART_DATES = res.data[i].SELL_EDATE;
-                  console.log(vm.CHART_PRICES);
-                  console.log(vm.CHART_DATES);
+                  // console.log(vm.CHART_PRICES);
+                  // console.log(vm.CHART_DATES);
                 }
+                console.log(vm.CHART_PRICES);
+                console.log(vm.CHART_DATES);
               }
             })
             .catch(function(err){
