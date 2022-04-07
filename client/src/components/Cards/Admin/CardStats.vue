@@ -25,10 +25,10 @@
         <span class="mr-2" :class="[statPercentColor]">
           <i
             :class="[
-              statArrow === 'up' ? `fas fa-arrow-up` : `fas fa-arrow-down`,
+              statArrow === 'up' ? `fa-solid fa-plus` : `fa-solid fa-minus`,
             ]"
           ></i>
-          {{ statPercent }}%
+          {{ statPercent }}
         </span>
         <span class="whitespace-nowrap">{{ statDescripiron }}</span>
       </p>
@@ -59,8 +59,8 @@ export default {
       },
     },
     statPercent: {
-      type: String,
-      default: "3.48",
+      type: Number,
+      default: 0,
     },
     // can be any of the text color utilities
     // from tailwindcss
