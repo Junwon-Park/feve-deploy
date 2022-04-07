@@ -17,6 +17,7 @@ const adminUpdateInspectionRoute = require('./router/admin/updateInspection.js')
 const adminUpdateProductRoute = require('./router/admin/updateProduct.js');
 const adminDeleteProductRoute = require('./router/admin/deleteProduct.js');
 const adminMainChartRoute = require('./router/admin/main.js');
+const styleAddPostRoute = require('./router/style/addPost.js');
 const categorytRoute = require('./router/common/category.js');
 const shoplistRoute = require('./router/shop/shoplist.js');
 const shopviewRoute = require('./router/shop/shopview.js');
@@ -30,6 +31,7 @@ const mypageFavoriteListRouter = require('./router/mypage/mypageFavoriteList.js'
 const mypageProfileRouter = require('./router/mypage/mypageProfile.js');
 const imageRouter = require("./image/image.js");
 const uploadImageRouter = require("./image/uploadImage.js");
+const uploadStyleImageRouter = require("./image/uploadStyleImage.js");
 
 const cscenterInsertRoute = require("./router/cscenter/cscenterInsert.js");
 const mainLoadproductRoute = require('./router/main/loadproduct.js');
@@ -85,6 +87,8 @@ app.use('/admin/updateProduct', adminUpdateProductRoute);
 app.use('/admin/deleteProduct', adminDeleteProductRoute);
 app.use('/admin/count', adminMainChartRoute);
 
+app.use('/style/addPost', styleAddPostRoute);
+
 app.use('/shoplist', shoplistRoute);
 app.use('/shop/shoplist', shoplistRoute);
 app.use('/shop/min', minRouter);
@@ -101,6 +105,7 @@ app.use('/mypage/profile', mypageProfileRouter);
 
 app.use("/getImage", imageRouter);
 app.use("/uploadImage", uploadImageRouter);
+app.use("/uploadStyleImage", uploadStyleImageRouter);
 
 app.use("/main/loadproduct", mainLoadproductRoute);
 
