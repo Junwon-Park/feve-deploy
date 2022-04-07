@@ -35,7 +35,7 @@
                     
                     <div>
                       <div class="mt-3">
-                        <v-btn x-large color="error" dark style="width:49%; height:70px;" class="mr-1 mt-3" > 
+                        <v-btn x-large color="error" dark style="width:49%; height:70px;" class="mr-1 mt-3" @click="goBuy"> 
                           <div v-if="this.SELL_PRICE != 0">
                             <div>구매</div> 
                             <div>{{SELL_PRICE.toLocaleString('ko-KR')}}원</div>
@@ -45,7 +45,7 @@
                             <div>구매입찰</div> 
                           </div>
                         </v-btn>
-                        <v-btn x-large color="success" dark  style="width:49%; float:right; height:70px;" class="ml-1 mt-3"> 
+                        <v-btn x-large color="success" dark  style="width:49%; float:right; height:70px;" class="ml-1 mt-3" @click="goSell"> 
                           <div v-if="this.BUY_PRICE != 0">
                             <div>판매</div> 
                             <div>{{BUY_PRICE.toLocaleString('ko-KR')}}원</div>
@@ -391,6 +391,25 @@ export default {
               console.log(err);
             }); 
       },
+      goBuy:function(){
+        console.log("구매 버튼 클릭");
+        console.log("product_key 넘어가는지 확인",this.PRODUCT_KEY);
+        if(this.$route.path!=='/buy') 
+        this.$router.push({path:'/buy',
+        params:{
+          PRODUCT_KEY:this.PRODUCT_KEY}
+          });
+      },
+      goSell:function(){
+        console.log("판매 버튼 클릭");
+        // console.log("product_key 넘어가는지 확인",this.PRODUCT_KEY);
+        // if(this.$route.path!=='/sell') 
+        // this.$router.push({path:'/sell',
+        // params:{
+        //   PRODUCT_KEY:this.PRODUCT_KEY}
+        //   });
+      },
+
       
       
     
