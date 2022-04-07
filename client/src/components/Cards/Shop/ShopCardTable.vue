@@ -199,12 +199,12 @@
               <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
             >
-              -
+              {{item.BUY_PRICE}}
             </td>
             <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
             >
-              -
+              {{item.BUY_COUNT}}
             </td>
           </tr>
         </tbody>
@@ -222,13 +222,14 @@ export default {
       RT: true,
       BT: false,
       ST: false,
+      // BUY_PRICE:'',
+      // BUY_COUNT:''
     };
   },
   props: {
     color: {
       default: "light",
       validator: function (value) {
-        // The value must match one of these strings
         return ["light", "dark"].indexOf(value) !== -1;
       },
     },
@@ -249,6 +250,11 @@ export default {
     arr:[],
     arr2:[]
   },
+  // created(){
+  //   console.log("여기서 예외처리중")
+  //   this.BUY_PRICE = (this.arr2.BUY_PRICE == null) ? '-' : this.arr2.BUY_PRICE.toLocaleString('ko-KR') + "원";
+  //   console.log(this.BUY_PRICE);
+  // },
   methods:{
     showRecentTransaction:function(){
       this.RT = true;
