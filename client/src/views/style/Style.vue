@@ -61,6 +61,7 @@
           <div class="w-full px-4 my-10 flex flex-wrap">
             <div class="w-full lg:w-6/12 xl:w-3/12 px-4 mb-5" v-for="(item, i) in items" :key="i">
               <CardStyle
+                  v-bind="item"
                   :items="item"
               />
             </div>
@@ -80,14 +81,6 @@
 import CardStyle from "@/components/Cards/Style/CardStyle.vue";
 import UserInfo from "@/components/Cards/Style/StyleFollowInfo.vue";
 import StyleWrite from "@/components/Cards/Style/StyleWrite.vue";
-
-import lego1 from "@/assets/img/product-lego1.jpg"
-import lego2 from "@/assets/img/product-lego2.jpg"
-import lego3 from "@/assets/img/product-lego3.jpg"
-import bearbrick1 from "@/assets/img/bg-bearbrick1.jpg"
-import bearbrick2 from "@/assets/img/bg-bearbrick3.jpg"
-import bearbrick3 from "@/assets/img/bg-bearbrick4.jpg"
-
 export default {
   data() {
     return {
@@ -99,37 +92,14 @@ export default {
       },
       tabs: null,
       tabTitle:['NEW','FOLLOW'],
-      items:[{
-        src: lego1,
-        title:"@deri_s234443",
-        desc:"설명중ㅇㅇㅇ",
-        price: 550000,
-      },{
-        src: lego2,
-        title:"@dongdong",
-        desc:"설명중ㅇㅇㅇ",
-        price: 550000,
-      },{
-        src: lego3,
-        title:"@hahahahahaha",
-        desc:"설명중ㅇㅇㅇ",
-        price: 550000,
-      }, {
-        src: bearbrick1,
-        title:"@______abc",
-        desc:"설명중ㅇㅇㅇ",
-        price: 550000,
-      },{
-        src: bearbrick2,
-        title:"@30389478",
-        desc:"설명중ㅇㅇㅇ",
-        price: 550000,
-      },{
-        src: bearbrick3,
-        title:"@sdfsg4",
-        desc:"설명중ㅇㅇㅇ",
-        price: 550000,
-      },]
+      items:{
+        POST_KEY: 0,
+        POST_CONTENS:"",
+        POST_WDATE:"",
+        POST_PIC:"",
+        USER_KEY: 0,
+        USER_ID: ""
+      }
     };
   },
   components: {
@@ -139,6 +109,7 @@ export default {
   },
   created(){
     this.getSimpleUserInfo()
+    this.loadPost()
   },
   methods:{
     getSimpleUserInfo(){
@@ -148,6 +119,18 @@ export default {
           .then((result) => {
             console.log(result)
             this.userInfo = result.data;
+          })
+          .catch((error) => {
+            console.log(error);
+          })
+    },
+    loadPost(){
+     // let that = this;
+      this.$axios.get('http://localhost:8080/style/loadPost')
+          .then((res) => {
+            console.log(res)
+            this.items = res.data;
+            console.log(this.items)
           })
           .catch((error) => {
             console.log(error);
