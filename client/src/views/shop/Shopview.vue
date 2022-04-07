@@ -103,7 +103,9 @@
                     <b class="text-lg">시세</b>
                     <div class="mt-2">
                       <shop-card-line-chart
-                      :PRICES="PRICES"/>
+                      :CHART_PRICES="CHART_PRICES"
+                      :CHART_DATES="CHART_DATES"/>
+
                       <ShopCardTable_RE
                       :PRICES="PRICES"
                       :arr="arr"
@@ -131,6 +133,7 @@ import Notice from './Notice';
 export default {
     data() {
       return{
+      user_key:JSON.parse(localStorage.getItem('userKey')),
       imageUrl : this.$store.getters.ServerUrl + '/getImage?imageName=',
       likeStatus:false,
       box,
@@ -169,7 +172,9 @@ export default {
           ],
       arr:[],
       arr2:[],
-      PRICES:[]
+      PRICES:[],
+      CHART_PRICES:[],
+      CHART_DATES:[]
       };
     },
     components: {
@@ -177,11 +182,14 @@ export default {
     ShopCardTable_RE,
     Notice
     },
+    // created() {
+      
+    // },
     mounted() {
       this.getView();
       this.countLike();
-      this.getRecentPrice();
       this.getTablePrice();
+      this.getRecentPrice();
     },
     methods:{
       getView:function(){
@@ -280,7 +288,7 @@ export default {
         this.$axios.post('http://localhost:8080/shop/shopview/'+ this.PRODUCT_KEY + '/recentPrice',
         {product_key: this.PRODUCT_KEY})
             .then(function(res){
-              //console.log(res);
+              console.log(res);
               if(res.data.length === 0)
               {
                 vm.RECENT_PRICE = '-';
@@ -298,6 +306,11 @@ export default {
                   vm.PRICES = res.data;
                   vm.PRICES[i].SELL_PRICE = res.data[i].SELL_PRICE.toLocaleString('ko-KR') + "원";
                   //console.log(vm.PRICES[i].SELL_PRICE);
+                  //console.log(vm.PRICES[i].SELL_EDATE);
+                  vm.CHART_PRICES = res.data[i].SELL_PRICE;
+                  vm.CHART_DATES = res.data[i].SELL_EDATE;
+                  console.log(vm.CHART_PRICES);
+                  console.log(vm.CHART_DATES);
                 }
               }
             })
@@ -306,19 +319,19 @@ export default {
             })
       },
       getTablePrice: function(){
-        console.log("table price 가지러 가는 길");
+        //console.log("table price 가지러 가는 길");
         var vm = this;
         this.$axios.post('http://localhost:8080/shop/shopview/'+ this.PRODUCT_KEY + '/sellTablePrice',
         {product_key: this.PRODUCT_KEY})
             .then(function(res){
-              console.log(res);
+              //console.log(res);
               if(res.data.length !=0)
               {
                 vm.arr = res.data;
                 for(let i=0; i< res.data.length;i++)
                 {
                   vm.arr[i].SELL_PRICE = res.data[i].SELL_PRICE.toLocaleString('ko-KR') + "원";
-                  console.log(vm.arr[i].SELL_PRICE);
+                  //console.log(vm.arr[i].SELL_PRICE);
                 }
                 //console.log(vm.arr);
               }
@@ -338,14 +351,14 @@ export default {
         this.$axios.post('http://localhost:8080/shop/shopview/'+ this.PRODUCT_KEY + '/buyTablePrice',
         {product_key: this.PRODUCT_KEY})
             .then(function(res){
-              console.log(res);
+              //console.log(res);
               if(res.data.length !=0)
               {
                 vm.arr2 = res.data;
                 for(let i=0; i< res.data.length;i++)
                 {
                   vm.arr2[i].BUY_PRICE = res.data[i].BUY_PRICE.toLocaleString('ko-KR') + "원";
-                  console.log(vm.arr2[i].BUY_PRICE);
+                  //console.log(vm.arr2[i].BUY_PRICE);
                 }
                 //console.log(vm.arr);
               }
