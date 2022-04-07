@@ -222,8 +222,8 @@ export default {
 
     onPageChanged(page){
       let requestPage = page;
-      let sendStart = (page -1) * this.itemPerPage +1;
-      let sendEnd=page * this.itemPerPage;
+      let sendStart = (page -1) * this.itemPerPage;
+      let sendEnd=page * this.itemPerPage -1;
       console.log("sendStart: ",sendStart, "sendEnd: ", sendEnd)
 
       this.$emit("startend", sendStart, sendEnd, requestPage);
