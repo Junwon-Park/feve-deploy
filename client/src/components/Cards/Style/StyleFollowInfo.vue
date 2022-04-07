@@ -21,20 +21,13 @@
           </v-list-item-content>
 
           <v-list-item-action>
-            <v-btn v-if="userInfo.USER_KEY===isLoginUser"
+            <v-btn
                 outlined
                 rounded
                 text
                @click="fDialog()"
             >
               게시글 올리기
-            </v-btn>
-            <v-btn v-else
-                   outlined
-                   rounded
-                   text
-            >
-              팔로우
             </v-btn>
           </v-list-item-action>
         </v-list-item>
@@ -46,7 +39,9 @@
         <v-list-item-content>
         <v-list-item-title>
           게시물
-          <span class="block text-black font-bold">0</span>
+          <span class="block text-black font-bold">
+            {{totalPostCount}}
+          </span>
         </v-list-item-title>
       </v-list-item-content>
       </v-list-item>
@@ -54,7 +49,9 @@
           <v-list-item-content>
             <v-list-item-title>
               팔로우
-              <span class="block text-black font-bold">0</span>
+              <span class="block text-black font-bold">
+                {{ totalFollowerCount }}
+              </span>
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
@@ -62,7 +59,9 @@
           <v-list-item-content>
             <v-list-item-title>
               팔로잉
-              <span class="block text-black font-bold">0</span>
+              <span class="block text-black font-bold">
+                {{ totalFollowingCount }}
+              </span>
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
@@ -74,7 +73,6 @@
 
 <script>
 import account from "@/assets/img/icon_account.png"
-//import {EventBus} from "@/common/EventBus.js"
 
 export default {
   props:{
@@ -82,21 +80,36 @@ export default {
   },
   data() {
     return {
-      //EventBus,
+      user_key: JSON.parse(localStorage.getItem('userKey')),
       account,
-      isLoginUser: JSON.parse(localStorage.getItem('userKey')),
-    };
+      totalFollowerCount: 0,
+      totalFollowingCount: 0,
+      totalPostCount : 0,
+    }
+  },
+  created(){
+    this.countPost()
+    this.follow()
   },
   methods:{
     fDialog(){
       this.$emit('sendDialog');
     },
-
+    countPost(){
+      this.$axios.post('http://localhost:8080/style/loadPost/count', {
+        USER_KEY : this.user_key
+      })
+          .then((res) => {
+            this.totalPostCount = res.data[0].totalPostCount;
+            console.log(res.data)
+          })
+          .catch((error) => {
+            console.log(error);
+          })
+    },
     follow(){
-      if( this.userInfo.USER_KEY != this.user_key){
         this.$axios.post('http://localhost:8080/style/follow/count/following', {
-          following_id : this.$route.params.USER_KEY,
-          follower_id: this.user_key
+          user_key: this.user_key
         })
             .then((res) => {
               this.totalFollowerCount = res.data[0].cnt;
@@ -108,8 +121,7 @@ export default {
 
 
         this.$axios.post('http://localhost:8080/style/follow/count/follower', {
-          following_id : this.$route.params.USER_KEY,
-          follower_id: this.user_key
+          user_key : this.user_key,
         })
             .then((res) => {
               this.totalFollowingCount = res.data[0].cnt;
@@ -118,7 +130,6 @@ export default {
             .catch((error) => {
               console.log(error);
             })
-      }
     }
   }
 };

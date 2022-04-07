@@ -28,7 +28,7 @@
                   {{ userInfo.USER_NAME }}
                 </h3>
                 <div
-                  class="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase"
+                  class="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold "
                 >
                   @ {{ userInfo.USER_ID }}
                 </div>
