@@ -42,8 +42,10 @@
     <v-tabs-items v-model="tabs" class="mt-24">
       <v-tab-item>
         <div class="w-full px-4 mb-5 flex flex-wrap">
-          <div class="w-full lg:w-6/12 xl:w-3/12 px-4 mb-5" v-for="(item, i) in items" :key="i">
-            <CardStyle :items="item" />
+          <div class="w-full lg:w-6/12 xl:w-3/12 px-4 mb-5" v-for="(item, i) in newitems" :key="i">
+            <CardStyle
+                v-bind="item"
+                :items="item" />
           </div>
         </div>
       </v-tab-item>
@@ -85,22 +87,30 @@ export default {
   data() {
     return {
       recDialog: false,
-      userInfo:{
-        USER_NAME:'',
-        USER_MAIL:'',
-        USER_KEY:'',
+      userInfo: {
+        USER_NAME: '',
+        USER_MAIL: '',
+        USER_KEY: '',
       },
       tabs: null,
-      tabTitle:['NEW','FOLLOW'],
-      items:{
+      tabTitle: ['NEW', 'FOLLOW'],
+      items: {
         POST_KEY: 0,
-        POST_CONTENS:"",
-        POST_WDATE:"",
-        POST_PIC:"",
+        POST_CONTENS: "",
+        POST_WDATE: "",
+        POST_PIC: "",
         USER_KEY: 0,
         USER_ID: ""
-      }
-    };
+      },
+      newitems: {
+        POST_KEY: 0,
+        POST_CONTENS: "",
+        POST_WDATE: "",
+        POST_PIC: "",
+        USER_KEY: 0,
+        USER_ID: ""
+      },
+    }
   },
   components: {
     CardStyle,
@@ -110,6 +120,7 @@ export default {
   created(){
     this.getSimpleUserInfo()
     this.loadPost()
+    this.loadAllPost()
   },
   methods:{
     getSimpleUserInfo(){
@@ -126,11 +137,25 @@ export default {
     },
     loadPost(){
      // let that = this;
-      this.$axios.get('http://localhost:8080/style/loadPost')
+      this.$axios.post('http://localhost:8080/style/loadPost', {
+        USER_KEY : JSON.parse(localStorage.getItem('userKey'))
+      })
           .then((res) => {
             console.log(res)
             this.items = res.data;
             console.log(this.items)
+          })
+          .catch((error) => {
+            console.log(error);
+          })
+    },
+    loadAllPost(){
+      // let that = this;
+      this.$axios.get('http://localhost:8080/style/loadPost/all')
+          .then((res) => {
+            console.log(res)
+            this.newitems = res.data;
+            console.log(this.newitems)
           })
           .catch((error) => {
             console.log(error);

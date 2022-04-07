@@ -1,11 +1,11 @@
 const express = require('express');
 const { body } = require('express-validator');
-const { loadPost } = require('../../controller/style/loadPost.js');
+const { loadPost, loadAllPost } = require('../../controller/style/loadPost.js');
 
 const router = express.Router();
 
-router.get('/', loadPost);
-// router.get('/totalCnt', loadTotalcntProduct);
+router.post('/', loadPost);
+router.get('/all', loadAllPost);
 // router.get('/limit', loadproductLimit);
 // router.post('/one',loadproductone);
 
