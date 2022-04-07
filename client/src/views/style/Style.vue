@@ -128,7 +128,6 @@ export default {
         USER_KEY : JSON.parse(localStorage.getItem('userKey'))
       })
           .then((result) => {
-            console.log(result)
             this.userInfo = result.data;
           })
           .catch((error) => {
@@ -140,9 +139,7 @@ export default {
         USER_KEY : JSON.parse(localStorage.getItem('userKey'))
       })
           .then((res) => {
-            console.log(res)
             this.items = res.data;
-            console.log(this.items)
           })
           .catch((error) => {
             console.log(error);
@@ -153,9 +150,7 @@ export default {
         USER_KEY : JSON.parse(localStorage.getItem('userKey'))
       })
           .then((res) => {
-            console.log(res)
             this.newitems = res.data;
-            console.log(this.newitems)
           })
           .catch((error) => {
             console.log(error);
