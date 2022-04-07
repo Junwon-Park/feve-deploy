@@ -41,6 +41,20 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'USER_KEY',
         sourceKey: 'USER_KEY'
       });
+        models.User.hasMany(models.Post,{
+            foreignKey: 'USER_KEY',
+            sourceKey: 'USER_KEY'
+        });
+      models.User.belongsToMany(models.User,{
+          foreignKey: 'followingId',
+          as:'Followers',
+          through: 'Follow'
+      });
+        models.User.belongsToMany(models.User,{
+            foreignKey: 'followerId',
+            as:'Followings',
+            through: 'Follow'
+        });
     }
   }
   User.init(

@@ -102,7 +102,7 @@ export default {
     cscenterComment:"",
   }),
   props: {
-    //dialog:{},
+    dialog:{},
     table: [],
     title:{},
     item:{}

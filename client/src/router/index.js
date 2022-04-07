@@ -48,6 +48,9 @@ import CscenterStandard  from "@/views/cscenter/CscenterStandard.vue";
 import Buyselect from "@/views/sold/Buyselect.vue";
 import Buycomplete from "@/views/sold/Buycomplete.vue";
 
+import Style from "@/views/style/Style.vue";
+import StyleView from "@/views/style/StyleView.vue";
+
 
 
 
@@ -119,6 +122,17 @@ const routes = [
     path: "/",
     component: Index,
   },
+  {
+    path: "/style",
+    component: Style,
+  },
+  {
+    path: "/style/:USER_KEY",
+    name:'StyleView',
+    component: StyleView,
+    props: true,
+  },
+
   {
     path: "/profile",
     component: Profile,

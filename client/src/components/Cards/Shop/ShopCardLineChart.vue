@@ -6,12 +6,12 @@
       <div class="flex flex-wrap items-center">
         <div class="relative w-full max-w-full flex-grow flex-1">
           <h6 class="uppercase text-blueGray-100 mb-1 text-xs font-semibold">
-            <v-tabs fixed-tabs>
+            <!-- <v-tabs fixed-tabs>
               <v-tab>전체</v-tab>
               <v-tab>1개월</v-tab>
               <v-tab>3개월</v-tab>
               <v-tab>6개월</v-tab>
-            </v-tabs>
+            </v-tabs> -->
           </h6>
         </div>
       </div>
@@ -28,26 +28,32 @@
 import Chart from "chart.js";
 
 export default {
-  mounted: function () {
+
+  props:{
+    CHART_PRICES:[],
+    CHART_DATES:[]
+  },
+  watch:{
+    CHART_PRICES(){
+     this.drawChart();
+    },
+    CHART_DATES(){
+      this.drawChart()
+    }
+  },
+  methods:{
+  drawChart() {
     this.$nextTick(function () {
       var config = {
         type: "line",
         data: {
-          labels: [
-            "January",
-            "February",
-            "March",
-            "April",
-            "May",
-            "June",
-            "July",
-          ],
+          labels: this.CHART_DATES,
           datasets: [
             {
-              label: new Date().getFullYear(),
+              label: "거래 가격",
               backgroundColor: "#4c51bf",
               borderColor: "#4c51bf",
-              data: [65, 78, 66, 44, 56, 67, 75],
+              data: this.CHART_PRICES,
               fill: false,
             }
           ],
@@ -125,7 +131,21 @@ export default {
       };
       var ctx = document.getElementById("line-chart").getContext("2d");
       window.myLine = new Chart(ctx, config);
+      })
+    }
+  },
+  mounted() {
+    this.$nextTick( ()=> {
+      this.drawChart();
     });
+    console.log("***********라인차트********")
+    console.log(this.CHART_PRICES);
+    console.log(this.CHART_DATES);
+  },
+  ready() {
+    this.$nextTick(()=> {
+      this.drawChart();
+    })
   },
 };
 </script>

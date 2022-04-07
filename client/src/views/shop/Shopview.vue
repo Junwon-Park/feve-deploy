@@ -25,11 +25,8 @@
                       <div style="width:50%; float:left">
                       <span class="text-left" style="width:50% float:left">최근거래가</span>
                       </div>
-                      <div style="width:50%; float:right; text-align:right" v-if="this.RECENT_PRICE!=0">
-                      <b class="text-right recent_price" style="width:50% float:right">{{RECENT_PRICE.toLocaleString('ko-KR')}}원</b>
-                      </div>
-                      <div style="width:50%; float:right; text-align:right" v-else>
-                      <b class="text-right recent_price" style="width:50% float:right">-</b>
+                      <div style="width:50%; float:right; text-align:right">
+                      <b class="text-right recent_price" style="width:50% float:right">{{RECENT_PRICE}}</b>
                       </div>
                     </div>
                     
@@ -105,19 +102,18 @@
                   <div class="w-full flex-wrap mt-3 pt-6">
                     <b class="text-lg">시세</b>
                     <div class="mt-2">
-                      <shop-card-line-chart/>
-                      <shop-card-table
-                      :RECENT_SELL_PRICE="RECENT_SELL_PRICE"
-                      :RECENT_BUY_PRICE="RECENT_BUY_PRICE"
-                      :RECENT_SELL_EDATE="RECENT_SELL_EDATE"
-                      :RECENT_BUY_EDATE="RECENT_BUY_EDATE"
+                      <shop-card-line-chart
+                      :CHART_PRICES="CHART_PRICES"
+                      :CHART_DATES="CHART_DATES"/>
+
+                      <ShopCardTable_RE
+                      :PRICES="PRICES"
                       :arr="arr"
                       :arr2="arr2"/>
-                    </div>
+                    
                   </div>
-                  <!--컴포넌트로 구매 확인 공지 넣어주기-->
                   <Notice/>
-                  
+                  </div>
                 </div>
               </div>
             </div>
@@ -131,13 +127,13 @@
 import box from "@/assets/img/box.png";
 import legoBg from "@/assets/img/bg-lego5.jpg";
 import ShopCardLineChart from "@/components/Cards/Shop/ShopCardLineChart.vue";
-import ShopCardTable from "@/components/Cards/Shop/ShopCardTable.vue";
+import ShopCardTable_RE from "@/components/Cards/Shop/ShopCardTable_RE.vue";
 import Notice from './Notice';
-
 
 export default {
     data() {
       return{
+      user_key:JSON.parse(localStorage.getItem('userKey')),
       imageUrl : this.$store.getters.ServerUrl + '/getImage?imageName=',
       likeStatus:false,
       box,
@@ -162,11 +158,7 @@ export default {
       PRODUCT_KEY:0,
       SELL_PRICE:0,
       BUY_PRICE:0,
-      RECENT_PRICE:0,
-      RECENT_SELL_PRICE:0,
-      RECENT_BUY_PRICE:0,
-      RECENT_SELL_EDATE:'',
-      RECENT_BUY_EDATE:'',
+      RECENT_PRICE:'',
       items:[
           {
             src: '',
@@ -180,18 +172,24 @@ export default {
           ],
       arr:[],
       arr2:[],
+      PRICES:[],
+      CHART_PRICES:[],
+      CHART_DATES:[]
       };
     },
     components: {
     ShopCardLineChart,
-    ShopCardTable,
+    ShopCardTable_RE,
     Notice
     },
+    // created() {
+      
+    // },
     mounted() {
       this.getView();
       this.countLike();
-      this.getRecentPrice();
       this.getTablePrice();
+      this.getRecentPrice();
     },
     methods:{
       getView:function(){
@@ -217,7 +215,6 @@ export default {
                 vm.items[1].src = vm.imageUrl + vm.PRODUCT_PIC2;
               else
                 vm.items[1].src = vm.imageUrl + vm.PRODUCT_PIC;
-
               if(vm.PRODUCT_PIC3 != null)
                 vm.items[2].src = vm.imageUrl + vm.PRODUCT_PIC3;
               else
@@ -228,7 +225,6 @@ export default {
                 vm.SELL_PRICE = res.data.Sells[0].SELL_PRICE;
               else
                 vm.SELL_PRICE =0;
-
               if(res.data.Buys.length!=0)
                 vm.BUY_PRICE = res.data.Buys[0].BUY_PRICE;
               else
@@ -289,78 +285,63 @@ export default {
       },
       getRecentPrice: function(){
         var vm = this;
-        //console.log("recent sell price 가지러 가는 길");
-        //console.log("여기서 프로덕트키 제대로 넘기니",this.PRODUCT_KEY);
-        this.$axios.post('http://localhost:8080/shop/shopview/'+ this.PRODUCT_KEY + '/recentSellPrice',
+        this.$axios.post('http://localhost:8080/shop/shopview/'+ this.PRODUCT_KEY + '/recentPrice',
         {product_key: this.PRODUCT_KEY})
             .then(function(res){
-              //console.log(res);
-              if(res.data.length != 0)
+              console.log(res);
+              if(res.data.length === 0)
               {
-                vm.RECENT_SELL_PRICE = res.data[0].SELL_PRICE;
-                vm.RECENT_SELL_EDATE = res.data[0].SELL_EDATE;
-                //console.log(vm.RECENT_SELL_PRICE);
-                //console.log(vm.RECENT_SELL_EDATE);
+                vm.RECENT_PRICE = '-';
+                vm.PRICES = res.data;
+                vm.PRICES.SELL_PRICE = '-';
+                vm.PRICES.SELL_EDATE = '-';
+                //console.log(vm.RECENT_PRICE);
+                //console.log(vm.PRICES);
               }
               else
               {
-                vm.RECENT_SELL_PRICE = "0";
-                vm.RECENT_SELL_EDATE = "0";
+                vm.RECENT_PRICE = res.data[0].SELL_PRICE.toLocaleString('ko-KR') + "원";
+                for(let i=0; i< res.data.length;i++)
+                {
+                  vm.PRICES = res.data;
+                  vm.PRICES[i].SELL_PRICE = res.data[i].SELL_PRICE.toLocaleString('ko-KR') + "원";
+                  //console.log(vm.PRICES[i].SELL_PRICE);
+                  //console.log(vm.PRICES[i].SELL_EDATE);
+                  vm.CHART_PRICES = res.data[i].SELL_PRICE;
+                  vm.CHART_DATES = res.data[i].SELL_EDATE;
+                  console.log(vm.CHART_PRICES);
+                  console.log(vm.CHART_DATES);
+                }
               }
             })
             .catch(function(err){
               console.log(err);
-            });
-        this.$axios.post('http://localhost:8080/shop/shopview/'+ this.PRODUCT_KEY + '/recentBuyPrice',
-        {product_key: this.PRODUCT_KEY})
-            .then(function(res){
-              //console.log(res);
-              if(res.data.length != 0)
-              {
-                vm.RECENT_BUY_PRICE = res.data[0].BUY_PRICE;
-                vm.RECENT_BUY_EDATE = res.data[0].BUY_EDATE;
-                //console.log(vm.RECENT_BUY_PRICE);
-                //console.log(vm.RECENT_BUY_EDATE);
-                vm.compareDate(); 
-              }
-              else
-              {
-                vm.RECENT_BUY_PRICE = "0";
-                vm.RECENT_BUY_EDATE = "0";
-              }
-              
             })
-            .catch(function(err){
-              console.log(err);
-            }); 
-      },
-      compareDate:function(){
-        var vm = this;
-        //console.log("날짜 비교");
-        var a = new Date(vm.RECENT_SELL_DATE);
-        var b = new Date(vm.RECENT_BUY_DATE);
-        if(a>=b)
-          vm.RECENT_PRICE = vm.RECENT_SELL_PRICE;
-        else
-          vm.RECENT_PRICE = vm.RECENT_BUY_PRICE;
       },
       getTablePrice: function(){
-        console.log("table price 가지러 가는 길");
+        //console.log("table price 가지러 가는 길");
         var vm = this;
         this.$axios.post('http://localhost:8080/shop/shopview/'+ this.PRODUCT_KEY + '/sellTablePrice',
         {product_key: this.PRODUCT_KEY})
             .then(function(res){
-              console.log(res);
+              //console.log(res);
               if(res.data.length !=0)
               {
                 vm.arr = res.data;
-                console.log(vm.arr);
+                for(let i=0; i< res.data.length;i++)
+                {
+                  vm.arr[i].SELL_PRICE = res.data[i].SELL_PRICE.toLocaleString('ko-KR') + "원";
+                  //console.log(vm.arr[i].SELL_PRICE);
+                }
+                //console.log(vm.arr);
               }
               else
               {
                 vm.arr = res.data;
-                console.log(vm.arr.SELL_PRICE = "-");
-                console.log(vm.arr.SELL_COUNT = "-");
+                vm.arr.SELL_PRICE = '-';
+                vm.arr.SELL_COUNT ='-';
+                //console.log(vm.arr.SELL_PRICE = "-");
+                //console.log(vm.arr.SELL_COUNT = "-");
               }
               
             })
@@ -370,22 +351,25 @@ export default {
         this.$axios.post('http://localhost:8080/shop/shopview/'+ this.PRODUCT_KEY + '/buyTablePrice',
         {product_key: this.PRODUCT_KEY})
             .then(function(res){
-              console.log(res);
-              vm.arr2.BUY_PRICE = (vm.arr2.BUY_PRICE == null) ? '-' : vm.arr2.BUY_PRICE.toLocaleString('ko-KR') + "원";
-              vm.arr2.BUY_COUNT = (vm.arr2.BUY_COUNT == null) ? '-' : vm.arr2.BUY_COUNT;
-              //vm.arr2 = res.data;
-              // if(res.data.length !=0)
-              // {
-              //   vm.arr2 = res.data;
-              //   console.log(vm.arr2);
-              // }
-              // else
-              // {
-              //   vm.arr2.BUY_PRICE = "-";
-              //   vm.arr2.BUY_COUNT = "-";
-              //   console.log(vm.arr2.BUY_PRICE);
-              //   console.log(vm.arr2.BUY_COUNT);
-              // }
+              //console.log(res);
+              if(res.data.length !=0)
+              {
+                vm.arr2 = res.data;
+                for(let i=0; i< res.data.length;i++)
+                {
+                  vm.arr2[i].BUY_PRICE = res.data[i].BUY_PRICE.toLocaleString('ko-KR') + "원";
+                  //console.log(vm.arr2[i].BUY_PRICE);
+                }
+                //console.log(vm.arr);
+              }
+              else
+              {
+                vm.arr2 = res.data;
+                vm.arr2.BUY_PRICE = '-';
+                vm.arr2.BUY_COUNT ='-';
+                //console.log(vm.arr.SELL_PRICE = "-");
+                //console.log(vm.arr.SELL_COUNT = "-");
+              }
             })
             .catch(function(err){
               console.log(err);

@@ -8,7 +8,7 @@ const { recentBuyPrice } = require('../../controller/shop/recentBuyPrice.js');
 const { recentSellPrice } = require('../../controller/shop/recentSellPrice.js');
 const { buyTablePrice } = require('../../controller/shop/buyTablePrice.js');
 const { sellTablePrice } = require('../../controller/shop/sellTablePrice.js');
-
+const { recentPrice } = require('../../controller/shop/recentPrice.js');
 
 const router = express.Router();
 
@@ -20,4 +20,5 @@ router.post('/:PRODUCT_KEY/recentBuyPrice',recentBuyPrice);
 router.post('/:PRODUCT_KEY/recentSellPrice',recentSellPrice);
 router.post('/:PRODUCT_KEY/buyTablePrice',buyTablePrice);
 router.post('/:PRODUCT_KEY/sellTablePrice',sellTablePrice);
+router.post('/:PRODUCT_KEY/recentPrice',recentPrice);
 module.exports = router;

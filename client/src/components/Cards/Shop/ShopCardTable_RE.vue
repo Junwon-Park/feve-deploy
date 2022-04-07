@@ -23,9 +23,9 @@
         <v-tab @click="showBuyTable">구매 입찰</v-tab>
       </v-tabs>
      
-      <table class="items-center w-full bg-transparent border-collapse" name="recentTransaction" v-show="RT">
+      <table class="items-center w-full bg-transparent border-collapse" name="recentTransaction">
         <thead>
-          <tr>
+          <tr  v-show="RT">
             <th
               class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
               :class="[
@@ -47,61 +47,9 @@
               거래일
             </th>
           </tr>
-        </thead>
-        <tbody>
-          <tr>
-              <td v-if="RECENT_BUY_PRICE!=0"
-              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
-            >
-              {{RECENT_BUY_PRICE.toLocaleString('ko-KR')}}원
-            </td>
-            <td v-else
-              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
-            >
-              -
-            </td>
-            <td v-if="RECENT_BUY_EDATE!=0"
-              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
-            >
-              {{RECENT_BUY_EDATE.substring(0,10)}}
-            </td>
-            <td v-else
-              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
-            >
-              -
-            </td>
-          </tr>
-          <tr>
-              <td v-if="RECENT_SELL_PRICE!=0"
-              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
-            >
-              {{RECENT_SELL_PRICE.toLocaleString('ko-KR')}}원
-            </td>
-            <td v-else
-              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
-            >
-              -
-            </td>
-            <td v-if="RECENT_SELL_EDATE!=0"
-              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
-            >
-              {{RECENT_SELL_EDATE.substring(0,10)}}
-            </td>
-            <td v-else
-              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
-            >
-              -
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <table class="items-center w-full bg-transparent border-collapse" name="sellBidding" v-show="ST">
-        <thead>
-          <tr>
+          <tr  v-show="ST">
             <th
               class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
-              style="width:50%;"
               :class="[
                 color === 'light'
                   ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
@@ -112,7 +60,6 @@
             </th>
             <th
               class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
-              style="width:50%;"
               :class="[
                 color === 'light'
                   ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
@@ -122,43 +69,9 @@
               수량
             </th>
           </tr>
-        </thead>
-        <tbody v-if="arr.length !=0">
-          <tr style="width:50%;" v-for="(item,i) in arr" :key="i" v-bind="item" >
-              <td 
-              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
-            >
-              {{item.SELL_PRICE.toLocaleString('ko-KR')}}원
-            </td>
-            <td 
-              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
-            >
-              {{item.SELL_COUNT}}
-            </td>
-          </tr>
-        </tbody>
-        <tbody v-else>
-          <tr style="width:50%;" v-for="(item,i) in arr" :key="i" v-bind="item" >
-              <td 
-              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
-            >
-              -
-            </td>
-            <td 
-              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
-            >
-              -
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <table class="items-center w-full bg-transparent border-collapse" name="buyBidding" v-show="BT">
-        <thead>
-          <tr>
+          <tr v-show="BT">
             <th
               class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
-              style="width:50%;"
               :class="[
                 color === 'light'
                   ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
@@ -169,7 +82,6 @@
             </th>
             <th
               class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
-              style="width:50%;"
               :class="[
                 color === 'light'
                   ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
@@ -180,23 +92,33 @@
             </th>
           </tr>
         </thead>
-        <tbody v-if="arr2.length !=0 ">
-          <tr style="width:50%;" v-for="(item,i) in arr2" :key="i" v-bind="item">
-              <td
+        <tbody>
+          <tr v-show="RT"  v-for="(item,i) in PRICES" :key="i" v-bind="item" style="width:50%;">
+              <td 
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
             >
-              {{item.BUY_PRICE.toLocaleString('ko-KR')}}원
+              {{item.SELL_PRICE}}
             </td>
             <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
             >
-              {{item.BUY_COUNT}}
+              {{item.SELL_EDATE.substring(0,10)}}
             </td>
           </tr>
-        </tbody>
-        <tbody v-else>
-          <tr style="width:50%;" v-for="(item,i) in arr2" :key="i" v-bind="item">
-              <td
+          <tr v-show="ST"  v-for="(item,i) in arr" :key="`A-${i}`" v-bind="item" style="width:50%;">
+              <td 
+              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
+            >
+              {{item.SELL_PRICE}}
+            </td>
+            <td
+              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
+            >
+              {{item.SELL_COUNT}}
+            </td>
+          </tr>
+          <tr v-show="BT"  v-for="(item,i) in arr2" :key="`B-${i}`" v-bind="item" style="width:50%;">
+              <td 
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
             >
               {{item.BUY_PRICE}}
@@ -233,30 +155,11 @@ export default {
         return ["light", "dark"].indexOf(value) !== -1;
       },
     },
-    RECENT_SELL_PRICE:{
-      type:String,
-      deafult:''
-    },
-    RECENT_BUY_PRICE:{
-      type:String,
-      deafult:''
-    },
-    RECENT_SELL_EDATE:{
-      type:String,
-      deafult:''
-    },
-    RECENT_BUY_EDATE:{
-      type:String,
-      deafult:''
-    },
+    PRICES:[],
     arr:[],
     arr2:[]
   },
-  // created(){
-  //   console.log("여기서 예외처리중")
-  //   this.BUY_PRICE = (this.arr2.BUY_PRICE == null) ? '-' : this.arr2.BUY_PRICE.toLocaleString('ko-KR') + "원";
-  //   console.log(this.BUY_PRICE);
-  // },
+  
   methods:{
     showRecentTransaction:function(){
       this.RT = true;
