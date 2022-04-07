@@ -5,7 +5,7 @@ const { loadPost, loadAllPost } = require('../../controller/style/loadPost.js');
 const router = express.Router();
 
 router.post('/', loadPost);
-router.get('/all', loadAllPost);
+router.post('/all', loadAllPost);
 // router.get('/limit', loadproductLimit);
 // router.post('/one',loadproductone);
 

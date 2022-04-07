@@ -45,7 +45,7 @@
           <div class="w-full lg:w-6/12 xl:w-3/12 px-4 mb-5" v-for="(item, i) in newitems" :key="i">
             <CardStyle
                 v-bind="item"
-                :items="item" />
+                :items="item"/>
           </div>
         </div>
       </v-tab-item>
@@ -136,7 +136,6 @@ export default {
           })
     },
     loadPost(){
-     // let that = this;
       this.$axios.post('http://localhost:8080/style/loadPost', {
         USER_KEY : JSON.parse(localStorage.getItem('userKey'))
       })
@@ -150,8 +149,9 @@ export default {
           })
     },
     loadAllPost(){
-      // let that = this;
-      this.$axios.get('http://localhost:8080/style/loadPost/all')
+      this.$axios.post('http://localhost:8080/style/loadPost/all', {
+        USER_KEY : JSON.parse(localStorage.getItem('userKey'))
+      })
           .then((res) => {
             console.log(res)
             this.newitems = res.data;

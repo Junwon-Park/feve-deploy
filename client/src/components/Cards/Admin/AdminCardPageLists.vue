@@ -221,7 +221,6 @@ export default {
     },
 
     onPageChanged(page){
-      console.log("페이지 버튼 클릭: ", page +"번");
       let requestPage = page;
       let sendStart = (page -1) * this.itemPerPage +1;
       let sendEnd=page * this.itemPerPage;
