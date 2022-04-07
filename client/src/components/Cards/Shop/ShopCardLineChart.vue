@@ -21,6 +21,10 @@
       <div class="relative h-350-px">
         <canvas id="line-chart"></canvas>
       </div>
+      <!-- <div class="relative h-350-px" v-if="this.CHART_PRICES.length!=0">
+        <canvas id="line-chart"></canvas>
+      </div>
+      <div v-else style="text-align:center">아직 체결된 거래가 없습니다.</div> -->
     </div>
   </div>
 </template>
@@ -61,6 +65,13 @@ export default {
           ],
         },
         options: {
+      //     plugins:{
+      //       datalabels: {
+      //        formatter: function(value,context) {
+      //         return context.Chart.value + "원";
+      //   }
+      // }
+      //     },
           maintainAspectRatio: false,
           responsive: true,
           title: {
@@ -78,6 +89,11 @@ export default {
           tooltips: {
             mode: "index",
             intersect: false,
+          //   callbacks: {
+          //   label: function(data) {
+          //   return data.CHART_PRICES+"원";
+          //   }
+          //  }
           },
           hover: {
             mode: "nearest",
