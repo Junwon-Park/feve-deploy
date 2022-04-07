@@ -21,6 +21,10 @@
       <div class="relative h-350-px">
         <canvas id="line-chart"></canvas>
       </div>
+      <!-- <div class="relative h-350-px" v-if="this.CHART_PRICES.length!=0">
+        <canvas id="line-chart"></canvas>
+      </div>
+      <div v-else style="text-align:center">아직 체결된 거래가 없습니다.</div> -->
     </div>
   </div>
 </template>
@@ -36,9 +40,11 @@ export default {
   watch:{
     CHART_PRICES(){
      this.drawChart();
+     console.log(this.CHART_PRICES);
     },
     CHART_DATES(){
       this.drawChart()
+      console.log(this.CHART_DATES);
     }
   },
   methods:{
@@ -76,6 +82,13 @@ export default {
           tooltips: {
             mode: "index",
             intersect: false,
+            callbacks: {
+            label: function(data) {
+              //console.log(data.yLabel);
+            return data.yLabel.toLocaleString('ko-KR') + "원";
+            }
+            
+           }
           },
           hover: {
             mode: "nearest",
@@ -108,6 +121,7 @@ export default {
               {
                 ticks: {
                   fontColor: "black",
+                  beginAtZero: true,
                 },
                 display: true,
                 scaleLabel: {
