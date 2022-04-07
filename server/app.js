@@ -31,6 +31,7 @@ const mypageSellListRouter = require('./router/mypage/mypageSellList.js');
 const mypageFavoriteListRouter = require('./router/mypage/mypageFavoriteList.js');
 const mypageProfileRouter = require('./router/mypage/mypageProfile.js');
 const imageRouter = require("./image/image.js");
+const imageStyleRouter = require("./image/styleImage.js");
 const uploadImageRouter = require("./image/uploadImage.js");
 const uploadStyleImageRouter = require("./image/uploadStyleImage.js");
 
@@ -106,6 +107,7 @@ app.use('/mypage/favoriteList', mypageFavoriteListRouter);
 app.use('/mypage/profile', mypageProfileRouter);
 
 app.use("/getImage", imageRouter);
+app.use("/getStyleImage", imageStyleRouter);
 app.use("/uploadImage", uploadImageRouter);
 app.use("/uploadStyleImage", uploadStyleImageRouter);
 
