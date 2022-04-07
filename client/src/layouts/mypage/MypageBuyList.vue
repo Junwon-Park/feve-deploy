@@ -2,21 +2,34 @@
 <template>
   <div class="w-full">
     <mypage-top-count-tap :counts="counts" :tapNames="tapNames" @onTapChanged="onTapChanged"/>
-    <mypage-period-setter @onSearchClicked="onSearchClicked"/>
+    <mypage-period-setter @onSearchClicked="onSearchClicked"
+      class="divide-y-gray"
+    />
     
     <mypage-list-filter
-    :filter="curFilter"
-    @onFilterChanged="onFilterChanged"
-    @onOrderClicked="onOrderClicked"
-    ref="filter"
-/>
+      :filter="curFilter"
+      @onFilterChanged="onFilterChanged"
+      @onOrderClicked="onOrderClicked"
+      ref="filter"
+      class="mt-3 divide-y-b-gray"
+    />
 
     <div class="grid ">
-        <mypage-list-slot 
-        v-for="item in buyList" :key="item.BUY_KEY"
+      <mypage-list-slot 
+        v-for="item in list" :key="item.BUY_KEY"
         :item="item"
         :price="item.BUY_PRICE"/>
     </div>
+
+    <v-pagination
+      v-model="curPage"
+      :length="totalPage"
+      :total-visible="7"
+      @input="onPageChanged"
+      color="black"
+      class="my-4"
+    ></v-pagination>
+
   </div>
 </template>
 
@@ -58,14 +71,22 @@ import MypageListFilter from '../../components/Cards/Mypage/MypageListFilter.vue
           }
         ],
         curFilter:'',
-        buyList:[],
+        getCountUrl:'',
+        getListUrl:'',
+        list:[],
         sortPriceDir: true, //true:오름차순(1 -> 2-> 3) false:내림차순 (3-> 2-> 1)
         sortDateDir: true,  //true:오름차순 false:내림차순
+
+        curPage:1,
+        totalPage:0,
+        slotCountPerPage:10,
+        rowStart:0,
       }
     },
     created() {
       this.getBuyCounts();
       this.curFilter = this.filters[this.curTapIdx];
+      this.setUrl();
       // console.log("BuyList.created.curFilter: ", this.curFilter);
     },
     methods: {
@@ -87,31 +108,89 @@ import MypageListFilter from '../../components/Cards/Mypage/MypageListFilter.vue
         this.curTapIdx = idx;
         this.curFilter = this.filters[idx];
         this.$refs.filter.initSelected();
+
+        this.tapChangedInit();
       },
 
-      onSearchClicked(startDate, endDate){
-        let url = this.$store.getters.ServerUrl;
+      tapChangedInit(){
+        this.list.length = 0;
+        this.totalPage = 0;
+        this.curPage = 1;
+        this.rowStart = 0;
+        this.setRowStart();
+        this.setUrl();
+      },
+
+      setRowStart(){
+        this.rowStart = (this.curPage-1) * this.slotCountPerPage;
+      },
+
+      setUrl()
+      {
         switch(this.curTapIdx)
         {
           case 1: //진행 중
-            url+= '/mypage/buyList/getProgressBuyList'
+          {
+            this.getCountUrl = this.$store.getters.ServerUrl + '/mypage/buyList/getProgressBuyListCount';
+            this.getListUrl =  this.$store.getters.ServerUrl + '/mypage/buyList/getProgressBuyList';
+          }
             break;
           case 2: // 종료
-            url+= '/mypage/buyList/getDoneBuyList'
+          {
+            this.getCountUrl = this.$store.getters.ServerUrl + '/mypage/buyList/getDoneBuyListCount';
+            this.getListUrl =  this.$store.getters.ServerUrl + '/mypage/buyList/getDoneBuyList';
+          }
             break;
           default:
-            url+= '/mypage/buyList/getWaitBuyList';
+          {
+            this.getCountUrl = this.$store.getters.ServerUrl + '/mypage/buyList/getWaitBuyListCount';
+            this.getListUrl =  this.$store.getters.ServerUrl + '/mypage/buyList/getWaitBuyList';
+          }
             break;
         }
+      },
 
-        this.$axios.post(url, {
+      onSearchClicked(startDate, endDate){
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.getListCount();
+        this.getList();
+      },
+
+      onPageChanged(page){
+        // console.log("onPageChanged.page: ", page);
+        this.curPage = page;
+        this.setRowStart();
+        this.getList();
+      },
+
+      getListCount(){
+        this.$axios.post(this.getCountUrl, {
           USER_KEY : '1', //로그인과 연동시키기
-          startDate : startDate,
-          endDate : endDate,
+          startDate : this.startDate,
+          endDate : this.endDate,
         })
         .then((result) => {
           console.log(result.data);
-          this.buyList = result.data;
+          this.totalPage = Math.ceil(result.data / this.slotCountPerPage);  
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      },
+      
+      getList(){
+        //console.log("getList", this.rowStart, this.slotCountPerPage);
+        this.$axios.post(this.getListUrl, {
+          USER_KEY : '1', //로그인과 연동시키기
+          startDate : this.startDate,
+          endDate : this.endDate,
+          limtStart: this.rowStart,
+          limtCount: this.slotCountPerPage,
+        })
+        .then((result) => {
+          console.log(result.data);
+          this.list = result.data;
         })
         .catch((error) => {
           console.log(error);
@@ -124,7 +203,7 @@ import MypageListFilter from '../../components/Cards/Mypage/MypageListFilter.vue
           this.sortPrice();
         else if(idx == 1)
           this.sortDate();
-        // console.log(this.buyList);
+        // console.log(this.list);
       },
       
       sortPrice(){
@@ -132,13 +211,13 @@ import MypageListFilter from '../../components/Cards/Mypage/MypageListFilter.vue
         // console.log("sortPrice.priceDir: ", this.sortPriceDir);
         if(this.sortPriceDir)
         {
-          this.buyList.sort(function(a, b){
+          this.list.sort(function(a, b){
             return a.BUY_PRICE - b.BUY_PRICE;
           });
         }
         else
         {
-          this.buyList.sort(function(a, b){
+          this.list.sort(function(a, b){
             return b.BUY_PRICE - a.BUY_PRICE;
           });
         }
@@ -149,13 +228,13 @@ import MypageListFilter from '../../components/Cards/Mypage/MypageListFilter.vue
         // console.log("sortDate.sortDateDir: ", this.sortDateDir);
         if(this.sortDateDir)
         {
-          this.buyList.sort(function(a, b){
+          this.list.sort(function(a, b){
             return Date.parse(a.BUY_EDATE) - Date.parse(b.BUY_EDATE);
           });
         }
         else
         {
-          this.buyList.sort(function(a, b){
+          this.list.sort(function(a, b){
             return Date.parse(b.BUY_EDATE) - Date.parse(a.BUY_EDATE);
           });
         }
@@ -164,6 +243,7 @@ import MypageListFilter from '../../components/Cards/Mypage/MypageListFilter.vue
       onFilterChanged(selected){
         console.log("buyList.onFilterChanged.selected: ", selected);
       },
+
     },
   }
 </script>"

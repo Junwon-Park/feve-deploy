@@ -2,21 +2,32 @@
   <div>
     <mypage-top-count-tap :counts="counts" :tapNames="tapNames" @onTapChanged="onTapChanged"/>
     <mypage-period-setter @onSearchClicked="onSearchClicked"
-    class="divide-y-gray"/>
+      class="divide-y-gray"
+    />
     
     <mypage-list-filter
-    :filter="curFilter"
-    @onFilterChanged="onFilterChanged"
-    @onOrderClicked="onOrderClicked"
-    ref="filter"
-    class="mt-3 divide-y-b-gray"/>
+      :filter="curFilter"
+      @onFilterChanged="onFilterChanged"
+      @onOrderClicked="onOrderClicked"
+      ref="filter"
+      class="mt-3 divide-y-b-gray"
+    />
 
     <div class="grid ">
-        <mypage-list-slot 
-        v-for="item in sellList" :key="item.SELL_KEY"
+      <mypage-list-slot 
+        v-for="item in list" :key="item.SELL_KEY"
         :item="item"
         :price="item.sell_price"/>
     </div>
+
+    <v-pagination
+      v-model="curPage"
+      :length="totalPage"
+      :total-visible="7"
+      @input="onPageChanged"
+      color="black"
+      class="my-4"
+    ></v-pagination>
   </div>
 </template>
 
@@ -58,15 +69,23 @@ import MypageListFilter from '../../components/Cards/Mypage/MypageListFilter.vue
           }
         ],
         curFilter:'',
-        sellList:[],
+        getCountUrl:'',
+        getListUrl:'',
+        list:[],
         sortPriceDir: true, //true:오름차순(1 -> 2-> 3) false:내림차순 (3-> 2-> 1)
         sortDateDir: true,  //true:오름차순 false:내림차순
+
+        curPage:1,
+        totalPage:0,
+        slotCountPerPage:10,
+        rowStart:0,
       }
     },
     created() {
       this.getSellCounts();
       this.curFilter = this.filters[this.curTapIdx];
-      // console.log("BuyList.created.curFilter: ", this.curFilter);
+      this.setUrl();
+      // console.log("sellList.created.curFilter: ", this.curFilter);
     },
     methods: {
       getSellCounts(){
@@ -87,44 +106,102 @@ import MypageListFilter from '../../components/Cards/Mypage/MypageListFilter.vue
         this.curTapIdx = idx;
         this.curFilter = this.filters[idx];
         this.$refs.filter.initSelected();
+
+        this.tapChangedInit();
       },
 
-      onSearchClicked(startDate, endDate){
-        let url = this.$store.getters.ServerUrl;
+      tapChangedInit(){
+        this.list.length = 0;
+        this.totalPage = 0;
+        this.curPage = 1;
+        this.rowStart = 0;
+        this.setRowStart();
+        this.setUrl();
+      },
+
+      setRowStart(){
+        this.rowStart = (this.curPage-1) * this.slotCountPerPage;
+      },
+
+      setUrl()
+      {
         switch(this.curTapIdx)
         {
           case 1: //진행 중
-            url+= '/mypage/sellList/getProgressSellList'
+          {
+            this.getCountUrl = this.$store.getters.ServerUrl + '/mypage/sellList/getProgressSellListCount';
+            this.getListUrl =  this.$store.getters.ServerUrl + '/mypage/sellList/getProgressSellList';
+          }
             break;
           case 2: // 종료
-            url+= '/mypage/sellList/getDoneSellList'
+          {
+            this.getCountUrl = this.$store.getters.ServerUrl + '/mypage/sellList/getDoneSellListCount';
+            this.getListUrl =  this.$store.getters.ServerUrl + '/mypage/sellList/getDoneSellList';
+          }
             break;
           default:
-            url+= '/mypage/sellList/getWaitSellList';
+          {
+            this.getCountUrl = this.$store.getters.ServerUrl + '/mypage/sellList/getWaitSellListCount';
+            this.getListUrl =  this.$store.getters.ServerUrl + '/mypage/sellList/getWaitSellList';
+          }
             break;
         }
+      },
 
-        this.$axios.post(url, {
+      onSearchClicked(startDate, endDate){
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.getListCount();
+        this.getList();
+      },
+
+      onPageChanged(page){
+        // console.log("onPageChanged.page: ", page);
+        this.curPage = page;
+        this.setRowStart();
+        this.getList();
+      },
+
+      getListCount(){
+        this.$axios.post(this.getCountUrl, {
           USER_KEY : '1', //로그인과 연동시키기
-          startDate : startDate,
-          endDate : endDate,
+          startDate : this.startDate,
+          endDate : this.endDate,
         })
         .then((result) => {
           console.log(result.data);
-          this.sellList = result.data;
+          this.totalPage = Math.ceil(result.data / this.slotCountPerPage);  
         })
         .catch((error) => {
           console.log(error);
         });
       },
 
+      getList(){
+        //console.log("getList", this.rowStart, this.slotCountPerPage);
+        this.$axios.post(this.getListUrl, {
+          USER_KEY : '1', //로그인과 연동시키기
+          startDate : this.startDate,
+          endDate : this.endDate,
+          limtStart: this.rowStart,
+          limtCount: this.slotCountPerPage,
+        })
+        .then((result) => {
+          console.log(result.data);
+          this.list = result.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      },
+      
       onOrderClicked(idx){
         // console.log("sellList.onOrderClicked.idx: ", idx);
         if(idx == 0)
           this.sortPrice();
         else if(idx == 1)
           this.sortDate();
-        // console.log(this.sellList);
+        // console.log(this.list);
       },
       
       sortPrice(){
@@ -132,13 +209,13 @@ import MypageListFilter from '../../components/Cards/Mypage/MypageListFilter.vue
         // console.log("sortPrice.priceDir: ", this.sortPriceDir);
         if(this.sortPriceDir)
         {
-          this.sellList.sort(function(a, b){
+          this.list.sort(function(a, b){
             return a.sell_price - b.sell_price;
           });
         }
         else
         {
-          this.sellList.sort(function(a, b){
+          this.list.sort(function(a, b){
             return b.sell_price - a.sell_price;
           });
         }
@@ -149,13 +226,13 @@ import MypageListFilter from '../../components/Cards/Mypage/MypageListFilter.vue
         console.log("sortDate.sortDateDir: ", this.sortDateDir);
         if(this.sortDateDir)
         {
-          this.sellList.sort(function(a, b){
+          this.list.sort(function(a, b){
             return Date.parse(a.sell_edate) - Date.parse(b.sell_edate);
           });
         }
         else
         {
-          this.sellList.sort(function(a, b){
+          this.list.sort(function(a, b){
             return Date.parse(b.sell_edate) - Date.parse(a.sell_edate);
           });
         }

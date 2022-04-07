@@ -134,6 +134,7 @@ export default {
             {
                 const beginningOfDay = moment(this.startDate, 'YYYY-MM-DD').startOf('day');
                 const endOfDay = moment(this.endDate, 'YYYY-MM-DD').endOf('day');
+                // console.log("endOfDaty", endOfDay);
                 this.$emit("onSearchClicked", beginningOfDay, endOfDay);
             }
       },

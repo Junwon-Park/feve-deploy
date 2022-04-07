@@ -7,17 +7,17 @@ async function getSellCounts(req, res) {
     const userKey = req.body.USER_KEY;
     try{
         const wait = await Sell.count({
-        where: { SELL_SELLER_KEY: userKey, SELL_STATUS: '0' },
+        where: { sell_seller_key: userKey, sell_status: '0' },
         });
 
         const progress = await Sell.count({
-        where: { SELL_SELLER_KEY: userKey, SELL_STATUS: '1' },
+        where: { sell_seller_key: userKey, sell_status: '3' },
         });
 
         const done = await Sell.count({
             where: { 
-                SELL_SELLER_KEY: userKey, 
-                SELL_STATUS: {[Op.or]:['1', '2']}
+                sell_seller_key: userKey, 
+                sell_status: {[Op.or]:['1', '2']}
             },
         });
 
@@ -29,29 +29,67 @@ async function getSellCounts(req, res) {
     }
 }
 
+async function getWaitSellListCount(req, res) {
+    const userKey = req.body.USER_KEY;
+    const startDate = req.body.startDate;
+    const endDate = req.body.endDate;
+    
+    await Sell.count({
+        where:{
+            sell_seller_key: userKey,
+            sell_status: '0',
+            sell_sdate: {[Op.between]: [startDate, endDate]}
+        },
+    })
+    .then((result) => {
+        console.log("getWaitSellListCount has been responsed from db : ",result);
+        res.json(result);
+    })
+    .catch((err) => console.log(err))
+}
+
 // [Op.gte]: 6,               // >= 6
 // [Op.lte]: 10,              // <= 10
 async function getWaitSellList(req, res) {
     const userKey = req.body.USER_KEY;
     const startDate = req.body.startDate;
     const endDate = req.body.endDate;
+    const start = req.body.limtStart;
+    const count = req.body.limtCount;
 
     await Sell.findAll({
         where:{
-            SELL_SELLER_KEY: userKey,
-            SELL_STATUS: '0',
-            [Op.and]:{
-                SELL_SDATE:{[Op.lte]: endDate },
-                SELL_EDATE:{[Op.gte]: startDate },
-            }
+            sell_seller_key: userKey,
+            sell_status: '0',
+            sell_sdate: {[Op.between]: [startDate, endDate]}
         },
         include:{
             model:Product,
             attributes: ['PRODUCT_NAME', 'PRODUCT_BRAND', 'PRODUCT_PIC'],
         },
+        limit:[start, count]
     })
     .then((result) => {
         console.log("getWaitSellList has been responsed from db : ",result);
+        res.json(result);
+    })
+    .catch((err) => console.log(err))
+}
+
+async function getProgressSellListCount(req, res) {
+    const userKey = req.body.USER_KEY;
+    const startDate = req.body.startDate;
+    const endDate = req.body.endDate;
+    
+    await Sell.count({
+        where:{
+            sell_seller_key: userKey,
+            sell_status: '3',
+            sell_sdate: {[Op.between]: [startDate, endDate]}
+        },
+    })
+    .then((result) => {
+        console.log("getProgressSellListCount has been responsed from db : ",result);
         res.json(result);
     })
     .catch((err) => console.log(err))
@@ -64,12 +102,9 @@ async function getProgressSellList(req, res) {
 
     await Sell.findAll({
         where:{
-            SELL_SELLER_KEY: userKey,
-            SELL_STATUS: '3',
-            [Op.and]:{
-                SELL_SDATE:{[Op.lte]: endDate },
-                SELL_EDATE:{[Op.gte]: startDate },
-            }
+            sell_seller_key: userKey,
+            sell_status: '3',
+            sell_sdate: {[Op.between]: [startDate, endDate]}
         },
         include:{
             model:Product,
@@ -83,6 +118,25 @@ async function getProgressSellList(req, res) {
     .catch((err) => console.log(err))
 }
 
+async function getDoneSellListCount(req, res) {
+    const userKey = req.body.USER_KEY;
+    const startDate = req.body.startDate;
+    const endDate = req.body.endDate;
+    
+    await Sell.count({
+        where:{
+            sell_seller_key: userKey,
+            sell_status: {[Op.or]:['1', '2']},
+            sell_sdate: {[Op.between]: [startDate, endDate]}
+        },
+    })
+    .then((result) => {
+        console.log("getDoneSellListCount has been responsed from db : ",result);
+        res.json(result);
+    })
+    .catch((err) => console.log(err))
+}
+
 async function getDoneSellList(req, res) {
     const userKey = req.body.USER_KEY;
     const startDate = req.body.startDate;
@@ -90,12 +144,9 @@ async function getDoneSellList(req, res) {
 
     await Sell.findAll({
         where:{
-            SELL_SELLER_KEY: userKey,
-            SELL_STATUS: {[Op.or]:['1', '2']},
-            [Op.and]:{
-                SELL_SDATE:{[Op.lte]: endDate },
-                SELL_EDATE:{[Op.gte]: startDate },
-            }
+            sell_seller_key: userKey,
+            sell_status: {[Op.or]:['1', '2']},
+            sell_sdate: {[Op.between]: [startDate, endDate]}
         },
         include:{
             model:Product,
@@ -109,4 +160,4 @@ async function getDoneSellList(req, res) {
     .catch((err) => console.log(err))
 }
 
-module.exports = {getSellCounts, getWaitSellList, getProgressSellList, getDoneSellList};
+module.exports = {getSellCounts, getWaitSellList, getProgressSellList, getDoneSellList, getWaitSellListCount, getProgressSellListCount, getDoneSellListCount};
