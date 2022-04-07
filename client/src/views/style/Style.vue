@@ -10,7 +10,7 @@
     >
       <div class="xl:w-4/12 mx-auto">
       <v-text-field
-          prepend-inner-icon="mdi-pound-box"
+          prepend-inner-icon="mdi-pound"
           class="mx-4"
           flat
           outlined
@@ -51,35 +51,40 @@
         <v-tab-item>
           <div class="w-full px-4 mb-5 flex flex-wrap justify-center">
             <div class="w-full lg:w-4/12 xl:w-4/12 px-4 mb-5">
-              <UserInfo :userInfo="userInfo" />
+              <UserInfo
+                  :userInfo="userInfo"
+                  @sendDialog="cDialog"
+              />
             </div>
           </div>
 
           <div class="w-full px-4 my-10 flex flex-wrap">
             <div class="w-full lg:w-6/12 xl:w-3/12 px-4 mb-5" v-for="(item, i) in items" :key="i">
-              <CardStyle :items="item" />
+              <CardStyle
+                  v-bind="item"
+                  :items="item"
+              />
             </div>
           </div>
         </v-tab-item>
-
     </v-tabs-items>
+
+    <StyleWrite
+        :dialog="recDialog"
+        :userInfo="userInfo"
+        @sendDialog="sendDialog"
+    />
   </v-card>
   </div>
 </template>
 <script>
 import CardStyle from "@/components/Cards/Style/CardStyle.vue";
 import UserInfo from "@/components/Cards/Style/StyleFollowInfo.vue";
-
-import lego1 from "@/assets/img/product-lego1.jpg"
-import lego2 from "@/assets/img/product-lego2.jpg"
-import lego3 from "@/assets/img/product-lego3.jpg"
-import bearbrick1 from "@/assets/img/bg-bearbrick1.jpg"
-import bearbrick2 from "@/assets/img/bg-bearbrick3.jpg"
-import bearbrick3 from "@/assets/img/bg-bearbrick4.jpg"
-
+import StyleWrite from "@/components/Cards/Style/StyleWrite.vue";
 export default {
   data() {
     return {
+      recDialog: false,
       userInfo:{
         USER_NAME:'',
         USER_MAIL:'',
@@ -87,45 +92,24 @@ export default {
       },
       tabs: null,
       tabTitle:['NEW','FOLLOW'],
-      items:[{
-        src: lego1,
-        title:"@deri_s234443",
-        desc:"설명중ㅇㅇㅇ",
-        price: 550000,
-      },{
-        src: lego2,
-        title:"@dongdong",
-        desc:"설명중ㅇㅇㅇ",
-        price: 550000,
-      },{
-        src: lego3,
-        title:"@hahahahahaha",
-        desc:"설명중ㅇㅇㅇ",
-        price: 550000,
-      }, {
-        src: bearbrick1,
-        title:"@______abc",
-        desc:"설명중ㅇㅇㅇ",
-        price: 550000,
-      },{
-        src: bearbrick2,
-        title:"@30389478",
-        desc:"설명중ㅇㅇㅇ",
-        price: 550000,
-      },{
-        src: bearbrick3,
-        title:"@sdfsg4",
-        desc:"설명중ㅇㅇㅇ",
-        price: 550000,
-      },]
+      items:{
+        POST_KEY: 0,
+        POST_CONTENS:"",
+        POST_WDATE:"",
+        POST_PIC:"",
+        USER_KEY: 0,
+        USER_ID: ""
+      }
     };
   },
   components: {
     CardStyle,
-    UserInfo
+    UserInfo,
+    StyleWrite,
   },
   created(){
     this.getSimpleUserInfo()
+    this.loadPost()
   },
   methods:{
     getSimpleUserInfo(){
@@ -139,6 +123,24 @@ export default {
           .catch((error) => {
             console.log(error);
           })
+    },
+    loadPost(){
+     // let that = this;
+      this.$axios.get('http://localhost:8080/style/loadPost')
+          .then((res) => {
+            console.log(res)
+            this.items = res.data;
+            console.log(this.items)
+          })
+          .catch((error) => {
+            console.log(error);
+          })
+    },
+    cDialog(){
+      this.recDialog=true;
+    },
+    sendDialog(){
+      this.recDialog = false
     },
   }
 };

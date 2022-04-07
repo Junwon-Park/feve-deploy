@@ -25,6 +25,7 @@
                 outlined
                 rounded
                 text
+               @click="fDialog()"
             >
               게시글 올리기
             </v-btn>
@@ -87,9 +88,9 @@ export default {
     };
   },
   methods:{
-    // onModifyClicked(){
-    //   EventBus.$emit("mypageViewStateChange", 4); //4:프로필 수정
-    // }
+    fDialog(){
+      this.$emit('sendDialog');
+    },
   }
 };
 </script>
