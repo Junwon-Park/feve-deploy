@@ -1,0 +1,145 @@
+<template>
+  <div style="min-height: 100vh" class='mt-48'>
+  <v-card :elevation="0">
+
+    <h1 class="text-center text-4xl mb-10 font-semibold">STYLE</h1>
+    <v-toolbar
+        color="white"
+        flat
+        prominent
+    >
+      <div class="xl:w-4/12 mx-auto">
+      <v-text-field
+          prepend-inner-icon="mdi-pound-box"
+          class="mx-4"
+          flat
+          outlined
+          background-color="white"
+          dart
+          hide-details
+          label="#검색"
+          solo-inverted
+          append-icon="mdi-magnify"
+      ></v-text-field>
+      </div>
+
+      <template v-slot:extension>
+        <v-tabs
+            v-model="tabs"
+            centered
+            color="black"
+        >
+          <v-tab
+              v-for="(tabTitle, idx) in tabTitle"
+              :key="idx"
+          >
+             {{ tabTitle }}
+          </v-tab>
+        </v-tabs>
+      </template>
+    </v-toolbar>
+
+    <v-tabs-items v-model="tabs" class="mt-24">
+      <v-tab-item>
+        <div class="w-full px-4 mb-5 flex flex-wrap">
+          <div class="w-full lg:w-6/12 xl:w-3/12 px-4 mb-5" v-for="(item, i) in items" :key="i">
+            <CardStyle :items="item" />
+          </div>
+        </div>
+      </v-tab-item>
+
+        <v-tab-item>
+          <div class="w-full px-4 mb-5 flex flex-wrap justify-center">
+            <div class="w-full lg:w-4/12 xl:w-4/12 px-4 mb-5">
+              <UserInfo :userInfo="userInfo" />
+            </div>
+          </div>
+
+          <div class="w-full px-4 my-10 flex flex-wrap">
+            <div class="w-full lg:w-6/12 xl:w-3/12 px-4 mb-5" v-for="(item, i) in items" :key="i">
+              <CardStyle :items="item" />
+            </div>
+          </div>
+        </v-tab-item>
+
+    </v-tabs-items>
+  </v-card>
+  </div>
+</template>
+<script>
+import CardStyle from "@/components/Cards/Style/CardStyle.vue";
+import UserInfo from "@/components/Cards/Style/StyleFollowInfo.vue";
+
+import lego1 from "@/assets/img/product-lego1.jpg"
+import lego2 from "@/assets/img/product-lego2.jpg"
+import lego3 from "@/assets/img/product-lego3.jpg"
+import bearbrick1 from "@/assets/img/bg-bearbrick1.jpg"
+import bearbrick2 from "@/assets/img/bg-bearbrick3.jpg"
+import bearbrick3 from "@/assets/img/bg-bearbrick4.jpg"
+
+export default {
+  data() {
+    return {
+      userInfo:{
+        USER_NAME:'',
+        USER_MAIL:'',
+        USER_KEY:'',
+      },
+      tabs: null,
+      tabTitle:['NEW','FOLLOW'],
+      items:[{
+        src: lego1,
+        title:"@deri_s234443",
+        desc:"설명중ㅇㅇㅇ",
+        price: 550000,
+      },{
+        src: lego2,
+        title:"@dongdong",
+        desc:"설명중ㅇㅇㅇ",
+        price: 550000,
+      },{
+        src: lego3,
+        title:"@hahahahahaha",
+        desc:"설명중ㅇㅇㅇ",
+        price: 550000,
+      }, {
+        src: bearbrick1,
+        title:"@______abc",
+        desc:"설명중ㅇㅇㅇ",
+        price: 550000,
+      },{
+        src: bearbrick2,
+        title:"@30389478",
+        desc:"설명중ㅇㅇㅇ",
+        price: 550000,
+      },{
+        src: bearbrick3,
+        title:"@sdfsg4",
+        desc:"설명중ㅇㅇㅇ",
+        price: 550000,
+      },]
+    };
+  },
+  components: {
+    CardStyle,
+    UserInfo
+  },
+  created(){
+    this.getSimpleUserInfo()
+  },
+  methods:{
+    getSimpleUserInfo(){
+      this.$axios.post('http://localhost:8080/mypage/getSimpleUserInfo', {
+        USER_KEY : JSON.parse(localStorage.getItem('userKey'))
+      })
+          .then((result) => {
+            console.log(result)
+            this.userInfo = result.data;
+          })
+          .catch((error) => {
+            console.log(error);
+          })
+    },
+  }
+};
+</script>
