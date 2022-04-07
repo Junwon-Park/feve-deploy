@@ -235,7 +235,7 @@ export default {
       },
       goLike:function(){
         var vm = this;
-        console.log("좋아요 버튼 누름");
+        //console.log("좋아요 버튼 누름");
         this.$axios.post('http://localhost:8080/shop/shopview/'+ this.PRODUCT_KEY + '/goLike',
         {product_key: this.PRODUCT_KEY, user_key:this.user_key})
             .then(function(res){
@@ -249,7 +249,7 @@ export default {
       },
       goDislike:function(){
         var vm = this;
-        console.log("좋아요 취소");
+        //console.log("좋아요 취소");
         this.$axios.post('http://localhost:8080/shop/shopview/'+ this.PRODUCT_KEY + '/goDislike',
         {product_key: this.PRODUCT_KEY, user_key:this.user_key})
             .then(function(res){
@@ -263,13 +263,13 @@ export default {
       },
       countLike:function(){
         var vm = this;
-        console.log("좋아요가 db에 있는지 확인");
+        //console.log("좋아요가 db에 있는지 확인");
         //console.log("여기서 프로덕트키 제대로 넘기니",this.PRODUCT_KEY);
         //console.log("원래 맨처음 likestatus 값", this.likeStatus);
         this.$axios.post('http://localhost:8080/shop/shopview/'+ this.PRODUCT_KEY + '/countLike',
         {product_key: this.PRODUCT_KEY, user_key:this.user_key})
             .then(function(res){
-              console.log("countLike 결과는?", res);
+              //console.log("countLike 결과는?", res);
               //console.log("갯수는?",res.data);
               if(res.data >0)
               {

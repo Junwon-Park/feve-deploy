@@ -65,13 +65,6 @@ export default {
           ],
         },
         options: {
-      //     plugins:{
-      //       datalabels: {
-      //        formatter: function(value,context) {
-      //         return context.Chart.value + "원";
-      //   }
-      // }
-      //     },
           maintainAspectRatio: false,
           responsive: true,
           title: {
@@ -89,11 +82,13 @@ export default {
           tooltips: {
             mode: "index",
             intersect: false,
-          //   callbacks: {
-          //   label: function(data) {
-          //   return data.CHART_PRICES+"원";
-          //   }
-          //  }
+            callbacks: {
+            label: function(data) {
+              //console.log(data.yLabel);
+            return data.yLabel.toLocaleString('ko-KR') + "원";
+            }
+            
+           }
           },
           hover: {
             mode: "nearest",
