@@ -93,7 +93,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-show="RT"  v-for="(item,i) in PRICES" :key="i" v-bind="item">
+          <tr v-show="RT"  v-for="(item,i) in PRICES" :key="i" v-bind="item" style="width:50%;">
               <td 
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
             >
@@ -105,7 +105,7 @@
               {{item.SELL_EDATE.substring(0,10)}}
             </td>
           </tr>
-          <tr v-show="ST"  v-for="(item,i) in arr" :key="i" v-bind="item">
+          <tr v-show="ST"  v-for="(item,i) in arr" :key="i" v-bind="item" style="width:50%;">
               <td 
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
             >
@@ -117,7 +117,7 @@
               {{item.SELL_COUNT}}
             </td>
           </tr>
-          <tr v-show="BT"  v-for="(item,i) in arr2" :key="i" v-bind="item">
+          <tr v-show="BT"  v-for="(item,i) in arr2" :key="i" v-bind="item" style="width:50%;">
               <td 
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
             >

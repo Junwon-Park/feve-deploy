@@ -155,10 +155,6 @@ export default {
       SELL_PRICE:0,
       BUY_PRICE:0,
       RECENT_PRICE:'',
-      // RECENT_SELL_PRICE:'',
-      // RECENT_BUY_PRICE:'',
-      // RECENT_SELL_EDATE:'',
-      // RECENT_BUY_EDATE:'',
       items:[
           {
             src: '',
@@ -210,7 +206,6 @@ export default {
                 vm.items[1].src = vm.imageUrl + vm.PRODUCT_PIC2;
               else
                 vm.items[1].src = vm.imageUrl + vm.PRODUCT_PIC;
-
               if(vm.PRODUCT_PIC3 != null)
                 vm.items[2].src = vm.imageUrl + vm.PRODUCT_PIC3;
               else
@@ -221,7 +216,6 @@ export default {
                 vm.SELL_PRICE = res.data.Sells[0].SELL_PRICE;
               else
                 vm.SELL_PRICE =0;
-
               if(res.data.Buys.length!=0)
                 vm.BUY_PRICE = res.data.Buys[0].BUY_PRICE;
               else
@@ -285,74 +279,30 @@ export default {
         this.$axios.post('http://localhost:8080/shop/shopview/'+ this.PRODUCT_KEY + '/recentPrice',
         {product_key: this.PRODUCT_KEY})
             .then(function(res){
-              console.log(res);
-              // vm.RECENT_PRICE = (res.data.length === 0) ? '-' : res.data[0].SELL_PRICE.toLocaleString('ko-KR') + "원";
+              //console.log(res);
               if(res.data.length === 0)
               {
                 vm.RECENT_PRICE = '-';
-                vm.PRICES = '-';
-                console.log(vm.RECENT_PRICE);
-                console.log(vm.PRICES);
+                vm.PRICES = res.data;
+                vm.PRICES.SELL_PRICE = '-';
+                vm.PRICES.SELL_EDATE = '-';
+                //console.log(vm.RECENT_PRICE);
+                //console.log(vm.PRICES);
               }
               else
               {
                 vm.RECENT_PRICE = res.data[0].SELL_PRICE.toLocaleString('ko-KR') + "원";
-                vm.PRICES = res.data;
-                console.log(vm.RECENT_PRICE);
-                console.log(vm.PRICES);
+                for(let i=0; i< res.data.length;i++)
+                {
+                  vm.PRICES = res.data;
+                  vm.PRICES[i].SELL_PRICE = res.data[i].SELL_PRICE.toLocaleString('ko-KR') + "원";
+                  //console.log(vm.PRICES[i].SELL_PRICE);
+                }
               }
             })
             .catch(function(err){
               console.log(err);
             })
-
-
-
-        // var vm = this;
-        // //console.log("recent sell price 가지러 가는 길");
-        // //console.log("여기서 프로덕트키 제대로 넘기니",this.PRODUCT_KEY);
-        // this.$axios.post('http://localhost:8080/shop/shopview/'+ this.PRODUCT_KEY + '/recentSellPrice',
-        // {product_key: this.PRODUCT_KEY})
-        //     .then(function(res){
-        //       //console.log(res);
-        //       if(res.data.length != 0)
-        //       {
-        //         vm.RECENT_SELL_PRICE = res.data[0].SELL_PRICE;
-        //         vm.RECENT_SELL_EDATE = res.data[0].SELL_EDATE;
-        //         //console.log(vm.RECENT_SELL_PRICE);
-        //         //console.log(vm.RECENT_SELL_EDATE);
-        //       }
-        //       else
-        //       {
-        //         vm.RECENT_SELL_PRICE = "-";
-        //         vm.RECENT_SELL_EDATE = "-";
-        //       }
-        //     })
-        //     .catch(function(err){
-        //       console.log(err);
-        //     });
-        // this.$axios.post('http://localhost:8080/shop/shopview/'+ this.PRODUCT_KEY + '/recentBuyPrice',
-        // {product_key: this.PRODUCT_KEY})
-        //     .then(function(res){
-        //       //console.log(res);
-        //       if(res.data.length != 0)
-        //       {
-        //         vm.RECENT_BUY_PRICE = res.data[0].BUY_PRICE;
-        //         vm.RECENT_BUY_EDATE = res.data[0].BUY_EDATE;
-        //         //console.log(vm.RECENT_BUY_PRICE);
-        //         //console.log(vm.RECENT_BUY_EDATE);
-        //         vm.compareDate(); 
-        //       }
-        //       else
-        //       {
-        //         vm.RECENT_BUY_PRICE = "-";
-        //         vm.RECENT_BUY_EDATE = "-";
-        //       }
-              
-        //     })
-        //     .catch(function(err){
-        //       console.log(err);
-        //     }); 
       },
       compareDate:function(){
         var vm = this;
@@ -365,20 +315,27 @@ export default {
           vm.RECENT_PRICE = vm.RECENT_BUY_PRICE;
       },
       getTablePrice: function(){
-        //console.log("table price 가지러 가는 길");
+        console.log("table price 가지러 가는 길");
         var vm = this;
         this.$axios.post('http://localhost:8080/shop/shopview/'+ this.PRODUCT_KEY + '/sellTablePrice',
         {product_key: this.PRODUCT_KEY})
             .then(function(res){
-              //console.log(res);
+              console.log(res);
               if(res.data.length !=0)
               {
                 vm.arr = res.data;
+                for(let i=0; i< res.data.length;i++)
+                {
+                  vm.arr[i].SELL_PRICE = res.data[i].SELL_PRICE.toLocaleString('ko-KR') + "원";
+                  console.log(vm.arr[i].SELL_PRICE);
+                }
                 //console.log(vm.arr);
               }
               else
               {
                 vm.arr = res.data;
+                vm.arr.SELL_PRICE = '-';
+                vm.arr.SELL_COUNT ='-';
                 //console.log(vm.arr.SELL_PRICE = "-");
                 //console.log(vm.arr.SELL_COUNT = "-");
               }
@@ -390,22 +347,25 @@ export default {
         this.$axios.post('http://localhost:8080/shop/shopview/'+ this.PRODUCT_KEY + '/buyTablePrice',
         {product_key: this.PRODUCT_KEY})
             .then(function(res){
-              //console.log(res);
-              vm.arr2.BUY_PRICE = (res.data.BUY_PRICE == null) ? '-' : res.data.BUY_PRICE.toLocaleString('ko-KR') + "원";
-              vm.arr2.BUY_COUNT = (vm.arr2.BUY_COUNT == null) ? '-' : res.data.BUY_COUNT;
-              //vm.arr2 = res.data;
-              // if(res.data.length !=0)
-              // {
-              //   vm.arr2 = res.data;
-              //   console.log(vm.arr2);
-              // }
-              // else
-              // {
-              //   vm.arr2.BUY_PRICE = "-";
-              //   vm.arr2.BUY_COUNT = "-";
-              //   console.log(vm.arr2.BUY_PRICE);
-              //   console.log(vm.arr2.BUY_COUNT);
-              // }
+              console.log(res);
+              if(res.data.length !=0)
+              {
+                vm.arr2 = res.data;
+                for(let i=0; i< res.data.length;i++)
+                {
+                  vm.arr2[i].BUY_PRICE = res.data[i].BUY_PRICE.toLocaleString('ko-KR') + "원";
+                  console.log(vm.arr2[i].BUY_PRICE);
+                }
+                //console.log(vm.arr);
+              }
+              else
+              {
+                vm.arr2 = res.data;
+                vm.arr2.BUY_PRICE = '-';
+                vm.arr2.BUY_COUNT ='-';
+                //console.log(vm.arr.SELL_PRICE = "-");
+                //console.log(vm.arr.SELL_COUNT = "-");
+              }
             })
             .catch(function(err){
               console.log(err);
