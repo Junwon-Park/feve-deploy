@@ -53,6 +53,10 @@ module.exports = (sequelize, DataTypes) => {
             foreignKey: 'FOLLOWER_ID',
             sourceKey: 'USER_KEY'
         });
+        models.User.hasMany(models.PostComment,{
+            foreignKey: 'USER_KEY',
+            sourceKey: 'USER_KEY'
+        });
     }
   }
   User.init(

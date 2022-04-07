@@ -3,7 +3,11 @@ const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
     class Hashtag extends Model {
         static associate(models) {
-            models.Hashtag.belongsToMany(models.Post, { through: 'PostHashtag' });
+            models.Hashtag.belongsTo(
+                models.Post, {
+                    foreignKey: "POST_KEY",
+                    targetKey:"POST_KEY"
+                });
         }
     }
     Hashtag.init(
