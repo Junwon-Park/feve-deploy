@@ -163,6 +163,7 @@ export default {
       SELL_PRICE:0,
       BUY_PRICE:0,
       RECENT_PRICE:0,
+      RECNET_DATE:'',
       RECENT_SELL_PRICE:0,
       RECENT_BUY_PRICE:0,
       RECENT_SELL_EDATE:'',
@@ -337,30 +338,40 @@ export default {
       compareDate:function(){
         var vm = this;
         //console.log("날짜 비교");
-        var a = new Date(vm.RECENT_SELL_DATE);
-        var b = new Date(vm.RECENT_BUY_DATE);
+        var a = new Date(vm.RECENT_SELL_EDATE);
+        var b = new Date(vm.RECENT_BUY_EDATE);
+        // console.log(a);
+        // console.log(b);
         if(a>=b)
+        {  
           vm.RECENT_PRICE = vm.RECENT_SELL_PRICE;
+          vm.RECENT_DATE = vm.RECENT_SELL_EDATE;
+        }
         else
+        {
           vm.RECENT_PRICE = vm.RECENT_BUY_PRICE;
+          vm.RECENT_DATE = vm.RECENT_BUY_EDATE;
+        }
+        // console.log(vm.RECENT_PRICE);
+        // console.log(vm.RECENT_DATE);
       },
       getTablePrice: function(){
-        console.log("table price 가지러 가는 길");
+        //console.log("table price 가지러 가는 길");
         var vm = this;
         this.$axios.post('http://localhost:8080/shop/shopview/'+ this.PRODUCT_KEY + '/sellTablePrice',
         {product_key: this.PRODUCT_KEY})
             .then(function(res){
-              console.log(res);
+              //console.log(res);
               if(res.data.length !=0)
               {
                 vm.arr = res.data;
-                console.log(vm.arr);
+                //console.log(vm.arr);
               }
               else
               {
                 vm.arr = res.data;
-                console.log(vm.arr.SELL_PRICE = "-");
-                console.log(vm.arr.SELL_COUNT = "-");
+                //console.log(vm.arr.SELL_PRICE = "-");
+                //console.log(vm.arr.SELL_COUNT = "-");
               }
               
             })
@@ -370,9 +381,9 @@ export default {
         this.$axios.post('http://localhost:8080/shop/shopview/'+ this.PRODUCT_KEY + '/buyTablePrice',
         {product_key: this.PRODUCT_KEY})
             .then(function(res){
-              console.log(res);
-              vm.arr2.BUY_PRICE = (vm.arr2.BUY_PRICE == null) ? '-' : vm.arr2.BUY_PRICE.toLocaleString('ko-KR') + "원";
-              vm.arr2.BUY_COUNT = (vm.arr2.BUY_COUNT == null) ? '-' : vm.arr2.BUY_COUNT;
+              //console.log(res);
+              vm.arr2.BUY_PRICE = (res.data.BUY_PRICE == null) ? '-' : res.data.BUY_PRICE.toLocaleString('ko-KR') + "원";
+              vm.arr2.BUY_COUNT = (res.data.BUY_COUNT == null) ? '-' : res.data.BUY_COUNT;
               //vm.arr2 = res.data;
               // if(res.data.length !=0)
               // {
