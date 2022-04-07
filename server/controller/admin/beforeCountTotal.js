@@ -3,11 +3,14 @@ const db = require("../../models");
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
+const date = new Date();
+const thisYear= (date.getFullYear()-1).toString();
+const thisMonth= date.getMonth().toString();
+const thisDate= (date.getDate()-1).toString();
+
+console.log("before:::::::::::::","일", thisDate, "월", thisMonth, "연도", thisYear)
+
 async function beforeCountTotalBuy(req, res, next) {
-    const date = new Date();
-    const thisYear= (date.getFullYear()-1).toString();
-    const thisMonth= date.getMonth().toString();
-    const thisDate= (date.getDate()-1).toString();
     await db.sequelize
         .query(
             'select count(*) as cnt \n' +
@@ -17,17 +20,13 @@ async function beforeCountTotalBuy(req, res, next) {
             ,{ type: Sequelize.QueryTypes.SELECT }
         )
         .then(result => {
-            console.log(result);
+            console.log("before:::::::::::::",result);
             res.send(result);
         })
         .catch(err => console.log(err));
 }
 
 async function beforeCountTotalDeal(req, res, next) {
-    const date = new Date();
-    const thisYear= (date.getFullYear()-1).toString();
-    const thisMonth= date.getMonth().toString();
-    const thisDate= (date.getDate()-1).toString();
     await db.sequelize
         .query(
             ' select\n' +
@@ -38,17 +37,13 @@ async function beforeCountTotalDeal(req, res, next) {
             { type: Sequelize.QueryTypes.SELECT }
         )
         .then(result => {
-            console.log(result);
+            console.log("before:::::::::::::",result);
             res.send(result);
         })
         .catch(err => console.log(err));
 }
 
 async function beforeCountTotalSell(req, res, next) {
-    const date = new Date();
-    const thisYear= (date.getFullYear()-1).toString();
-    const thisMonth= date.getMonth().toString();
-    const thisDate= (date.getDate()-1).toString();
     await db.sequelize
         .query(
             'select count(*) as cnt \n' +
@@ -58,18 +53,13 @@ async function beforeCountTotalSell(req, res, next) {
             ,{ type: Sequelize.QueryTypes.SELECT }
         )
         .then(result => {
-            console.log(result);
+            console.log("before:::::::::::::",result);
             res.send(result);
         })
         .catch(err => console.log(err));
 }
 
 async function beforeCountTotalUser(req, res, next) {
-    const date = new Date();
-    const thisYear= (date.getFullYear()-1).toString();
-    const thisMonth= date.getMonth().toString();
-    const thisDate= (date.getDate()-1).toString();
-    console.log("이번달:::::::::::::::::::",thisMonth)
     await db.sequelize
         .query(
             ' SELECT COUNT(*) as cnt \n' +
@@ -78,7 +68,7 @@ async function beforeCountTotalUser(req, res, next) {
             { type: Sequelize.QueryTypes.SELECT }
         )
         .then(result => {
-            console.log(result);
+            console.log("before:::::::::::::",result);
             res.send(result);
         })
         .catch(err => console.log(err));

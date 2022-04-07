@@ -3,7 +3,7 @@
     class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0"
   >
     <div class="flex-auto p-4" >
-      <div class="flex flex-wrap" @click="goView(`${PRODUCT_KEY}`)">
+      <div class="flex flex-wrap" @click="goView(`${PRODUCT_KEY}`)" style="cursor: pointer;">
         <div class="relative w-full max-w-full flex-grow flex-1">
           <div class="w-full mb-5"  style="overflow: hidden; width:205px; height: 205px;">
             <img :src="imageUrl+ PRODUCT_PIC" alt="아이템 사진"

@@ -3,11 +3,14 @@ const db = require("../../models");
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
+const date = new Date();
+const thisYear= date.getFullYear().toString();
+const thisMonth= (date.getMonth()+1).toString();
+const thisDate= date.getDate().toString();
+
+console.log("일", thisDate, "월", thisMonth, "연도", thisYear)
+
 async function countTotalBuy(req, res, next) {
-    const date = new Date();
-    const thisYear= date.getFullYear().toString();
-    const thisMonth= (date.getMonth()+1).toString();
-    const thisDate= date.getDate().toString();
     await db.sequelize
         .query(
             'select count(*) as cnt \n' +
@@ -17,17 +20,13 @@ async function countTotalBuy(req, res, next) {
             { type: Sequelize.QueryTypes.SELECT }
         )
         .then(result => {
-            console.log(result);
+            console.log("countTotalBuy",result);
             res.send(result);
         })
         .catch(err => console.log(err));
 }
 
 async function countTotalDeal(req, res, next) {
-    const date = new Date();
-    const thisYear= date.getFullYear().toString();
-    const thisMonth= (date.getMonth()+1).toString();
-    const thisDate= date.getDate().toString();
     await db.sequelize
         .query(
             ' select\n' +
@@ -38,17 +37,13 @@ async function countTotalDeal(req, res, next) {
             { type: Sequelize.QueryTypes.SELECT }
         )
         .then(result => {
-            console.log(result);
+            console.log("countTotalDeal", result);
             res.send(result);
         })
         .catch(err => console.log(err));
 }
 
 async function countTotalSell(req, res, next) {
-    const date = new Date();
-    const thisYear= date.getFullYear().toString();
-    const thisMonth= (date.getMonth()+1).toString();
-    const thisDate= date.getDate().toString();
     await db.sequelize
         .query(
             'select count(*) as cnt \n' +
@@ -58,17 +53,13 @@ async function countTotalSell(req, res, next) {
             { type: Sequelize.QueryTypes.SELECT }
         )
         .then(result => {
-            console.log(result);
+            console.log("countTotalSell",result);
             res.send(result);
         })
         .catch(err => console.log(err));
 }
 
 async function countTotalUser(req, res, next) {
-    const date = new Date();
-    const thisYear= date.getFullYear().toString();
-    const thisMonth= (date.getMonth()+1).toString();
-    const thisDate= date.getDate().toString();
     await db.sequelize
         .query(
             ' SELECT COUNT(*) as cnt \n' +
@@ -77,7 +68,7 @@ async function countTotalUser(req, res, next) {
             { type: Sequelize.QueryTypes.SELECT }
         )
         .then(result => {
-            console.log(result);
+            console.log("countTotalUser",result);
             res.send(result);
         })
         .catch(err => console.log(err));

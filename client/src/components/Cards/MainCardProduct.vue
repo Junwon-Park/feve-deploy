@@ -4,7 +4,7 @@
   <div
       class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0"
   >
-    <div class="flex-auto pt-4">
+    <div class="flex-auto pt-4" @click="goView(`${PRODUCT_KEY}`)" style="cursor: pointer;">
       <div class="flex flex-wrap">
         <div class="relative w-full max-w-full flex-grow flex-1">
           <div class="w-full mb-5" style="overflow: hidden; width:15vw; height: 15vw;" >
@@ -84,6 +84,18 @@ export default {
   },
   created(){
     this.SELL_PRICE === null ? !this.ifNull : this.ifNull
+  },
+  methods:{
+    goView(PRODUCT_KEY){
+      console.log("상세보기");
+      console.log(this.PRODUCT_KEY);
+      console.log(PRODUCT_KEY);
+      this.$router.push({path:'./shopview',
+        name:'Shopview',
+        params:{
+          PRODUCT_KEY:this.PRODUCT_KEY}
+      });
+    }
   }
 }
 </script>
