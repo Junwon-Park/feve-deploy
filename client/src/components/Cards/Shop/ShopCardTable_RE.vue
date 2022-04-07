@@ -23,9 +23,9 @@
         <v-tab @click="showBuyTable">구매 입찰</v-tab>
       </v-tabs>
      
-      <table class="items-center w-full bg-transparent border-collapse" name="recentTransaction" v-show="RT">
+      <table class="items-center w-full bg-transparent border-collapse" name="recentTransaction">
         <thead>
-          <tr>
+          <tr  v-show="RT">
             <th
               class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
               :class="[
@@ -45,6 +45,50 @@
               ]"
             >
               거래일
+            </th>
+          </tr>
+          <tr  v-show="ST">
+            <th
+              class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+              :class="[
+                color === 'light'
+                  ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
+                  : 'bg-emerald-800 text-emerald-300 border-emerald-700',
+              ]"
+            >
+              판매희망가
+            </th>
+            <th
+              class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+              :class="[
+                color === 'light'
+                  ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
+                  : 'bg-emerald-800 text-emerald-300 border-emerald-700',
+              ]"
+            >
+              수량
+            </th>
+          </tr>
+          <tr v-show="BT">
+            <th
+              class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+              :class="[
+                color === 'light'
+                  ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
+                  : 'bg-emerald-800 text-emerald-300 border-emerald-700',
+              ]"
+            >
+              구매희망가
+            </th>
+            <th
+              class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+              :class="[
+                color === 'light'
+                  ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
+                  : 'bg-emerald-800 text-emerald-300 border-emerald-700',
+              ]"
+            >
+              수량
             </th>
           </tr>
         </thead>
@@ -91,120 +135,6 @@
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
             >
               -
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <table class="items-center w-full bg-transparent border-collapse" name="sellBidding" v-show="ST">
-        <thead>
-          <tr>
-            <th
-              class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
-              style="width:50%;"
-              :class="[
-                color === 'light'
-                  ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
-                  : 'bg-emerald-800 text-emerald-300 border-emerald-700',
-              ]"
-            >
-              판매희망가
-            </th>
-            <th
-              class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
-              style="width:50%;"
-              :class="[
-                color === 'light'
-                  ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
-                  : 'bg-emerald-800 text-emerald-300 border-emerald-700',
-              ]"
-            >
-              수량
-            </th>
-          </tr>
-        </thead>
-        <tbody v-if="arr.length !=0">
-          <tr style="width:50%;" v-for="(item,i) in arr" :key="i" v-bind="item" >
-              <td 
-              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
-            >
-              {{item.SELL_PRICE.toLocaleString('ko-KR')}}원
-            </td>
-            <td 
-              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
-            >
-              {{item.SELL_COUNT}}
-            </td>
-          </tr>
-        </tbody>
-        <tbody v-else>
-          <tr style="width:50%;" v-for="(item,i) in arr" :key="i" v-bind="item" >
-              <td 
-              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
-            >
-              -
-            </td>
-            <td 
-              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
-            >
-              -
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <table class="items-center w-full bg-transparent border-collapse" name="buyBidding" v-show="BT">
-        <thead>
-          <tr>
-            <th
-              class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
-              style="width:50%;"
-              :class="[
-                color === 'light'
-                  ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
-                  : 'bg-emerald-800 text-emerald-300 border-emerald-700',
-              ]"
-            >
-              구매희망가
-            </th>
-            <th
-              class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
-              style="width:50%;"
-              :class="[
-                color === 'light'
-                  ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
-                  : 'bg-emerald-800 text-emerald-300 border-emerald-700',
-              ]"
-            >
-              수량
-            </th>
-          </tr>
-        </thead>
-        <tbody v-if="arr2.length !=0 ">
-          <tr style="width:50%;" v-for="(item,i) in arr2" :key="i" v-bind="item">
-              <td
-              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
-            >
-              {{item.BUY_PRICE.toLocaleString('ko-KR')}}원
-            </td>
-            <td
-              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
-            >
-              {{item.BUY_COUNT}}
-            </td>
-          </tr>
-        </tbody>
-        <tbody v-else>
-          <tr style="width:50%;" v-for="(item,i) in arr2" :key="i" v-bind="item">
-              <td
-              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
-            >
-              {{item.BUY_PRICE}}
-            </td>
-            <td
-              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
-            >
-              {{item.BUY_COUNT}}
             </td>
           </tr>
         </tbody>
