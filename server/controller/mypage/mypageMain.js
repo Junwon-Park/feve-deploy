@@ -5,7 +5,7 @@ const { User, Buy, Sell } = require('../../models');
 
 async function getSimpleUserInfo(req, res) {
   await User.findOne({
-        attributes:['USER_NAME', 'USER_MAIL'],
+        attributes:['USER_NAME', 'USER_MAIL','USER_KEY'],
         where:{
             USER_KEY: req.body.USER_KEY,
         }
