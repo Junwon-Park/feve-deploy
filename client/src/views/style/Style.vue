@@ -10,7 +10,7 @@
     >
       <div class="xl:w-4/12 mx-auto">
       <v-text-field
-          prepend-inner-icon="mdi-pound-box"
+          prepend-inner-icon="mdi-pound"
           class="mx-4"
           flat
           outlined
@@ -51,24 +51,35 @@
         <v-tab-item>
           <div class="w-full px-4 mb-5 flex flex-wrap justify-center">
             <div class="w-full lg:w-4/12 xl:w-4/12 px-4 mb-5">
-              <UserInfo :userInfo="userInfo" />
+              <UserInfo
+                  :userInfo="userInfo"
+                  @sendDialog="cDialog"
+              />
             </div>
           </div>
 
           <div class="w-full px-4 my-10 flex flex-wrap">
             <div class="w-full lg:w-6/12 xl:w-3/12 px-4 mb-5" v-for="(item, i) in items" :key="i">
-              <CardStyle :items="item" />
+              <CardStyle
+                  :items="item"
+              />
             </div>
           </div>
         </v-tab-item>
-
     </v-tabs-items>
+
+    <StyleWrite
+        :dialog="recDialog"
+        :userInfo="userInfo"
+        @sendDialog="sendDialog"
+    />
   </v-card>
   </div>
 </template>
 <script>
 import CardStyle from "@/components/Cards/Style/CardStyle.vue";
 import UserInfo from "@/components/Cards/Style/StyleFollowInfo.vue";
+import StyleWrite from "@/components/Cards/Style/StyleWrite.vue";
 
 import lego1 from "@/assets/img/product-lego1.jpg"
 import lego2 from "@/assets/img/product-lego2.jpg"
@@ -80,6 +91,7 @@ import bearbrick3 from "@/assets/img/bg-bearbrick4.jpg"
 export default {
   data() {
     return {
+      recDialog: false,
       userInfo:{
         USER_NAME:'',
         USER_MAIL:'',
@@ -122,7 +134,8 @@ export default {
   },
   components: {
     CardStyle,
-    UserInfo
+    UserInfo,
+    StyleWrite,
   },
   created(){
     this.getSimpleUserInfo()
@@ -139,6 +152,12 @@ export default {
           .catch((error) => {
             console.log(error);
           })
+    },
+    cDialog(){
+      this.recDialog=true;
+    },
+    sendDialog(){
+      this.recDialog = false
     },
   }
 };
