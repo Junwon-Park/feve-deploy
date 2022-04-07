@@ -14,6 +14,7 @@
             <div class="ml-8 mb-2">
               {{ POST_CONTENT }}
             </div>
+            <div class="mt-8">
             <v-btn
                 class="ml-6"
                 icon
@@ -21,6 +22,15 @@
             >
               <v-icon>{{ show ? 'mdi-comment' : 'mdi-comment-outline' }}</v-icon>
             </v-btn>
+            <v-btn
+                v-if="USER_KEY===user_key"
+                class="ml-auto"
+                icon
+                @click="deletePost(`${POST_KEY}`)"
+            >
+              <v-icon>{{ show ? 'mdi-delete-empty' : 'mdi-delete-empty-outline' }}</v-icon>
+            </v-btn>
+            </div>
           </v-card-text>
         </v-card-actions>
 
@@ -89,6 +99,7 @@ export default {
   },
   data() {
     return {
+      user_key: JSON.parse(localStorage.getItem('userKey')),
       imageUrl: this.$store.getters.ServerUrl + '/getStyleImage?imageName=',
       show: false,
       messages: [
@@ -113,5 +124,25 @@ export default {
       ],
     }
   },
+  methods:{
+    deletePost(POST_KEY){
+      let that = this;
+        if(confirm("정말로 삭제하시겠습니까? 한번 삭제한 게시물은 되돌릴 수 없습니다.")) {
+
+          that.$axios.post('http://localhost:8080/style/deletePost',{
+            POST_KEY: POST_KEY,
+          })
+        .then(function(){
+          alert("게시글을 삭제했습니다.")
+          that.$router.go(that.$router.currentRouter);
+        })
+        .catch(function(err){
+          console.log(err);
+        });
+        } else {
+          return
+        }
+    }
+  }
 }
 </script>

@@ -139,14 +139,14 @@ export default {
     },
     saveStyleWrite(){
       let that = this;
-      this.$axios.post('http://localhost:8080/style/addPost',{
+      that.$axios.post('http://localhost:8080/style/addPost',{
         post_pic: that.Posts.post_pic,
         post_contents: that.Posts.post_contents,
         user_key: that.userInfo.USER_KEY,
       })
           .then(function(){
             alert("게시글을 등록했습니다.")
-            this.$router.go(this.$router.currentRouter);
+            that.$router.go(that.$router.currentRouter);
           })
           .catch(function(err){
             console.log(err);
