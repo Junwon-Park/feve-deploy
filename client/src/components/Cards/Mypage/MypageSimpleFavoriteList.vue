@@ -1,49 +1,37 @@
 <template>
     <div class="flex flex-wrap" >
-
-      <v-btn
-        outlined
-        rounded
-        text
-        @click="onMoreClicked"
-      >
-        더보기
-      </v-btn>
-
       <div class="w-full lg:w-4/12 md:w-4/12 px-4 my-5"
-           style="margin-bottom: 15vh;"
-           v-for="(item, i) in items" :key="i"
-           @click="onSlotClicked(item.PRODUCT_NAME)"
-           type="button"
+          style="margin-bottom: 15vh;"
+          v-for="(item, i) in items" :key="i"
+          @click="onSlotClicked(item.PRODUCT_NAME)"
+          type="button"
       >
-        
-          <div style="width: 200px; height: 200px; border-radius: 8px;">
-            <img
-              :src= "imageUrl + item.PRODUCT_PIC"
-              style="object-fit: cover; width: 100%; height: 100%;"
-              crossorigin
-            >
-          </div>
+          
+        <div style="width: 200px; height: 200px; border-radius: 8px;">
+          <img
+            :src= "imageUrl + item.PRODUCT_PIC"
+            style="object-fit: cover; width: 100%; height: 100%;"
+            crossorigin
+          >
+        </div>
 
-            <h5 class="font-bold underline mt-2">
-              {{ item.PRODUCT_BRAND }}
-            </h5>
-            <h5>
-            {{ item.PRODUCT_NAME }}
-            </h5>
-            <h5 class="font-bold mt-1">
-              {{ item.MIN_PRICE }}
-            </h5>
-            <h5 class="text-gray-400" style="font-size: 0.7rem; line-height: 0.75rem; margin-top:-0.2rem">
-              즉시 구매가
-            </h5>
-          </div>
+        <h5 class="font-bold underline mt-2">
+          {{ item.PRODUCT_BRAND }}
+        </h5>
+        <h5>
+        {{ item.PRODUCT_NAME }}
+        </h5>
+        <h5 class="font-bold mt-1">
+          {{ item.MIN_PRICE }}
+        </h5>
+        <h5 class="text-gray-400" style="font-size: 0.7rem; line-height: 0.75rem; margin-top:-0.2rem">
+          즉시 구매가
+        </h5>
       </div>
+    </div>
 </template>
 
 <script>
-import {EventBus} from "@/common/EventBus.js"
-
 export default {
   props:{
     state:Number,
@@ -72,11 +60,6 @@ export default {
       console.log("onSlotClicked.name: ", name);
     },
     
-    onMoreClicked(event){
-      event.stopPropagation();
-      EventBus.$emit("mypageViewStateChange", this.state);
-    }
-
     // setMinPrices()
     // {
     //   this.minPrices.length = this.items.length;

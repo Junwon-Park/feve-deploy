@@ -7,9 +7,21 @@
 
     <h2 class="font-bold">판매 내역</h2>
     <mypage-simple-count-list :counts="sellCounts" :state=2 />
+  
+    <v-card-actions style="margin-left:42%" >
+      <h2 class="font-bold" style="margin-left: -76%;">관심 상품</h2>
+      <v-btn
+          outlined
+          rounded
+          text
+          @click="onMoreClicked(3, $event)"
+          style="margin-left:auto"
+        >
+          더보기
+      </v-btn>
+    </v-card-actions>
 
-    <h2 class="font-bold">관심 상품</h2>
-    <mypage-simple-favorite-list :items="favoriteList" :state=3 />
+    <mypage-simple-favorite-list :items="favoriteList"/>
   </div>
 </template>
 
@@ -17,6 +29,7 @@
 import MypageSimpleUserInfo from '@/components/Cards/Mypage/MypageSimpleUserInfo.vue';
 import MypageSimpleCountList from '@/components/Cards/Mypage/MypageSimpleCountList.vue';
 import MypageSimpleFavoriteList from '@/components/Cards/Mypage/MypageSimpleFavoriteList.vue';
+import {EventBus} from "@/common/EventBus.js"
 
 export default {
   components: {
@@ -94,6 +107,10 @@ export default {
           console.log(error);
         });
     },
+    onMoreClicked(state, event){
+      event.stopPropagation();
+      EventBus.$emit("mypageViewStateChange", state);
+    }
     // onMoreClicked(state){
     //   console.log("onMoreClicked: ", state);
     //   EventBus.$emit("mypageViewStateChange", state); //1:buyList 2:sellList
