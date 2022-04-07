@@ -102,7 +102,8 @@
                   <div class="w-full flex-wrap mt-3 pt-6">
                     <b class="text-lg">시세</b>
                     <div class="mt-2">
-                      <shop-card-line-chart/>
+                      <shop-card-line-chart
+                      :PRICES="PRICES"/>
                       <ShopCardTable_RE
                       :PRICES="PRICES"
                       :arr="arr"
@@ -303,16 +304,6 @@ export default {
             .catch(function(err){
               console.log(err);
             })
-      },
-      compareDate:function(){
-        var vm = this;
-        //console.log("날짜 비교");
-        var a = new Date(vm.RECENT_SELL_DATE);
-        var b = new Date(vm.RECENT_BUY_DATE);
-        if(a>=b)
-          vm.RECENT_PRICE = vm.RECENT_SELL_PRICE;
-        else
-          vm.RECENT_PRICE = vm.RECENT_BUY_PRICE;
       },
       getTablePrice: function(){
         console.log("table price 가지러 가는 길");
