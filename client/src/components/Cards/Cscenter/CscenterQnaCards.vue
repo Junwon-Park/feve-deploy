@@ -15,6 +15,9 @@
 
             </th>
           </tr>
+          <div class="form-row float-right">
+      <v-btn depressed color="yellow" to="/CscenterInsert"> 문의 작성 하기 </v-btn>
+    </div>
        </thead>
         <tbody>
         <CscenterQnaList

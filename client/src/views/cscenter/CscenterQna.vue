@@ -14,13 +14,16 @@
                    <div class="w-full mb-12 px-4">
                     <div class="container">
                       <div class="w-full mb-12 xl:mb-0 px-4 mt-12" style="min-height: 70vh">
-                          <CscenterQnaCards 
-                          v-bind="items" 
-                          :items="items" 
-                          :title="title"
+                          <CscenterQnaList 
+                          v-bind="items"
+                          :items="items"
+                          :totalListCount="totalListCount"
+                          :pageSize="pageSize"
+                          :itemPerPage="itemPerPage"
                           @startend="startend"
+                          :title="title"
                           />
-                          <Pagination />
+                         
                       </div>
                        </div>
                     </div>
@@ -35,15 +38,20 @@
 </template>
 <script>
 import CscenterSidebar from "@/components/Sidebar/CscenterSidebar.vue";
-import CscenterQnaCards from "@/components/Cards/Cscenter/CscenterQnaCards.vue";
-import Pagination from "@/components/Pagination.vue" ;
+import CscenterQnaList from "@/components/Cards/Cscenter/CscenterQnaList.vue";
+
 
 
 export default {
   data() {
     return {
       title: "문의 내역",
-      
+       totalListCount:0,
+      limitStart:0,
+      limitEnd:0,
+      currentPage: 0,
+      itemPerPage: 10,
+      pageSize: 0,
       items:
         {
           CSCENTER_KEY: 0,
@@ -62,8 +70,8 @@ export default {
   components: {
     
     CscenterSidebar,
-    CscenterQnaCards,
-    Pagination,
+    CscenterQnaList,
+  
   },
  mthod:{
    startend(start,end,reqpage) {
@@ -73,9 +81,46 @@ export default {
      that.currentPage = reqpage;
      console.log(start, end, reqpage)
 
-     
+     this.$axios.post('http://localhost:8080/cscenter/cscenterInsert/cscenter', {
+        limitStart: this.limitStart,
+        limitEnd: this.limitEnd,
+        requestPage: this.currentPage,
+      })
+          .then(function(res){
+            that.items = res.data;
+            console.log(this.items)
+          })
+          .catch(function(err){
+            console.log(err);
+          });
    }
  
+  },
+  created() {
+    let that = this;
+    this.$axios.get('http://localhost:8080/admin/cscenter/totalCnt')
+        .then(function(res){
+          that.totalListCount = res.data[0].totalCnt;
+          that.pageSize=Math.ceil(that.totalListCount/that.itemPerPage);
+          console.log("페이지 버튼 개수: ",Math.ceil(that.totalListCount/that.itemPerPage))
+        })
+        .catch(function(err){
+          console.log(err);
+        });
+  },
+
+   mounted(){
+    let that = this;
+    this.$axios.post('http://localhost:8080/cscenter/cscenterInsert/cscenter', {
+      limitStart: 0,
+      limitEnd: 10
+    })
+        .then(function(res){
+          that.items = res.data;
+        })
+        .catch(function(err){
+          console.log(err);
+        });
   }
 };
 </script>

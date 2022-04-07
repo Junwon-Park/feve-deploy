@@ -1,104 +1,129 @@
 <template>
   <div
-      class="relative flex flex-col min-w-0 break-words w-full mb-auto  rounded "
+      class="relative flex flex-col min-w-0 break-words bg-blueGray-200 w-full mb-6 shadow-lg rounded"
   >
-    <div class="rounded-t mb-auto px-1 py-10 border-0">
+  <div class="rounded-t mb-0 px-4 py-3 border-0">
       <div class="flex flex-wrap items-center">
-        <div class="relative w-full px-auto max-w-full flex-grow flex-1">
-          <h1
-              class="font-semibold text-lg text-left "
-          >
+        <div class="relative w-full px-4 max-w-full flex-grow flex-1">
+          <h3 class="font-semibold text-base text-blueGray-700">
             묻고 답하기
-          </h1>
+          </h3>
         </div>
       </div>
     </div>
-    <div class="block w-full overflow-x-auto">
+    <div class="block w-full overflow-x-auto" style="min-height: 58vh;">
       <!-- Projects table -->
-      <table class="items-center w-full bg- border-collapse">
-        <!-- <thead>
-        <tr>
-          <th
-              class="text-center px-6 border-b-2 text-black  align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold"
-              colspan="" style="border-color: black;"
-          >
-            번호
-          </th>
-          <th
-              class="text-center px-6 border-b-2 text-black  align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold"
-              colspan="" style="border-color: black;"
-          >
-            제목
-          </th>
-          <th
-              class="text-center px-6 border-b-2 text-black  align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold"
-              colspan="" style="border-color: black;"
-          >
-            작성자
-          </th>
-          <th
-              class="text-center px-6 border-b-2 text-black  align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold"
-              colspan="" style="border-color: black;"
-          >
-            작성일
-          </th>
-          <th
-              class="text-center px-6 border-b-2 text-black  align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold"
-              colspan="" style="border-color: black;"
-          >
-            답변여부
-          </th>
-        </tr>
-        </thead> -->
+      <table class=" w-full bg-transparent border-collapse">
+        <thead class="thead-light">
+          <tr>
+            <th
+              class="px-6  bg-gray-200 text-black  align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold "
+              v-for="(table, idx) in table" :key="idx"
+            >
+              {{ table }}
+
+            </th>
+          </tr>
+       </thead>
         <tbody>
-         <CscenterQnaListCard/>
+        <CscenterQnaListCard
+          v-for="(item, idx) in items"
+          :key="idx"
+          v-bind="item"
+          :items="items"
+          @sendDialog="cDialog"
+          @sendItems="sendItems"
+          />
         </tbody>
       </table>
-    </div>
+   </div>
+     <Pagination
+        :pageSize="pageSize"
+        @onPageChanged="onPageChanged"
+    />
     <div class="form-row float-right">
       <v-btn depressed color="yellow" to="/CscenterInsert"> 문의 작성 하기 </v-btn>
     </div>
   </div>
+   
 </template>
+
 <script>
 import CscenterQnaListCard from "@/components/Cards/Cscenter/CscenterQnaListCard.vue";
+import Pagination from "@/components/Pagination.vue" ;
 export default {
   props:{
     title: {
       type: String,
       default: "리스트",
     },
-    items: {
-      required: true,
+    items:{
+      require: true
     },
+    pageSize:Number,
+    itemPerPage: Number,
+    totalListCount: Number,
   },
-  data () {
+  data(){
+    
     return {
-      table: ["번호", "제목", "작성자", "작성시간", "답변여부", "관리"],
-      receivedCscenterKey: 0,
-      receivedUserid:"",
+      table: ["번호", "제목", "작성자", "작성시간", "답변여부"],
+      receivedCscenterKey:0,
       receivedUserkey:0,
-      cscenterComment: 0,
+      cscenterComment:0,
       recDialog: false,
       item:{
         CSCENTER_KEY: 0,
-        CSCENTER_TITLE: '',
-        CSCENTER_CONTENTS: '',
-        CSCENTER_WDATE: '',
-        CSCENTER_STATUS: '',
-        CSCENTER_COMMENT: '',
-        CSCENTER_COMMENT_WDATE: '',
-        USER_KEY: 0,
-        USER_ID:'',
+        CSCENTER_TITLE:'',
+        CSCENTER_CONTENTS:'',
+        CSCENTER_WDATE:'',
+        CSCENTER_STATUS:'',
+        CSCENTER_COMMENT:'',
+        CSCENTER_COMMENT_WDATE:'',
+        USER_KEY:0
+
       }
     }
   },
-  components:{
-    CscenterQnaListCard,
-    
-  },
+  components: {
+      CscenterQnaListCard,
+      Pagination,
+    },
   methods: {
-  },
+    cDialog(){
+      this.recDialog=true;
+    },
+    sendDialog(){
+      this.recDialog=false;
+    },
+    sendItems(recC, recUk) {
+      let that=this;
+      that.receivedCscenterKey=recC;
+      that.receivedUserkey=recUk;
+
+      console.log(that.receivedCscenterKey)
+
+      this.$axios.post('http://localhost:8080/cscenter/cscenterInsert/cscenter',{
+        sendCscenterKey: that.receivedCscenterKey,
+        sendUserkey: that.receivedUserkey
+      }).then(function(res){
+        that.item=res.data[0];
+        console.log("res", res);
+      }).catch(function(err){
+        console.log(err);
+      });
+    },
+    onPageChanged(page){
+      console.log("페이지 버튼 클릭: ", page +"번");
+      let requestPage = page;
+      let sendStart = (page -1) * this.itemPerPage +1;
+      let sendEnd=page * this.itemPerPage;
+      console.log("sendStart: ",sendStart, "sendEnd: ", sendEnd)
+
+      this.$emit("startend", sendStart, sendEnd, requestPage);
+    }
+
+  }
   
-}
+  }
 </script>
