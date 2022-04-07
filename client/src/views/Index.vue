@@ -270,7 +270,7 @@ export default {
         const accessToken = checkResult.data.data.accessToken;
         localStorage.setItem('Authorization', accessToken);
       }
-    }
+    },
   },
   created() {
     this.checkToken();
