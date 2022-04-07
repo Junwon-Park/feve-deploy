@@ -91,6 +91,35 @@ export default {
     fDialog(){
       this.$emit('sendDialog');
     },
+
+    follow(){
+      if( this.userInfo.USER_KEY != this.user_key){
+        this.$axios.post('http://localhost:8080/style/follow/count/following', {
+          following_id : this.$route.params.USER_KEY,
+          follower_id: this.user_key
+        })
+            .then((res) => {
+              this.totalFollowerCount = res.data[0].cnt;
+              console.log(res.data)
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+
+
+        this.$axios.post('http://localhost:8080/style/follow/count/follower', {
+          following_id : this.$route.params.USER_KEY,
+          follower_id: this.user_key
+        })
+            .then((res) => {
+              this.totalFollowingCount = res.data[0].cnt;
+              console.log(res.data)
+            })
+            .catch((error) => {
+              console.log(error);
+            })
+      }
+    }
   }
 };
 </script>

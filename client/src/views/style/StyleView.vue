@@ -47,7 +47,7 @@
                       <span
                           class="text-xl font-bold block uppercase tracking-wide text-blueGray-600"
                       >
-                        10
+                        {{ totalFollowerCount }}
                       </span>
                       <span class="text-sm text-blueGray-400">팔로워</span>
                     </div>
@@ -55,7 +55,7 @@
                       <span
                           class="text-xl font-bold block uppercase tracking-wide text-blueGray-600"
                       >
-                        89
+                        {{ totalFollowingCount }}
                       </span>
                       <span class="text-sm text-blueGray-400">팔로잉</span>
                     </div>
@@ -69,7 +69,7 @@
                   <div class="mt-5">
                     <button
                         v-if="userInfo.USER_KEY!=user_key"
-                        class="bg-emerald-500 active:bg-emerald-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
+                        class="bg-black active:bg-blueGray-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
                         type="button"
                         @click="follow"
                     >
@@ -128,6 +128,8 @@ export default {
         USER_NAME:"",
       },
       totalPostCount: 0,
+      totalFollowerCount: 0,
+      totalFollowingCount: 0,
     };
   },
   components: {
@@ -170,7 +172,28 @@ export default {
     },
     follow(){
       if( this.userInfo.USER_KEY != this.user_key){
-        console.log(true)
+        this.$axios.post('http://localhost:8080/style/follow/count/following', {
+          user_key : this.$route.params.USER_KEY,
+        })
+            .then((res) => {
+              this.totalFollowerCount = res.data[0].cnt;
+              console.log(res.data)
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+
+
+        this.$axios.post('http://localhost:8080/style/follow/count/follower', {
+          user_key : this.$route.params.USER_KEY,
+        })
+            .then((res) => {
+              this.totalFollowingCount = res.data[0].cnt;
+              console.log(res.data)
+            })
+            .catch((error) => {
+              console.log(error);
+            })
       }
     }
   },
@@ -178,6 +201,7 @@ export default {
     this.getSimpleUserInfo()
     this.loadPost()
     this.countPost()
+    this.follow()
   },
 }
 </script>
