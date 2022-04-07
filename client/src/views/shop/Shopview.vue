@@ -103,14 +103,11 @@
                     <b class="text-lg">시세</b>
                     <div class="mt-2">
                       <shop-card-line-chart/>
-                      <!-- <shop-card-table
-                      :RECENT_SELL_PRICE="RECENT_SELL_PRICE"
-                      :RECENT_BUY_PRICE="RECENT_BUY_PRICE"
-                      :RECENT_SELL_EDATE="RECENT_SELL_EDATE"
-                      :RECENT_BUY_EDATE="RECENT_BUY_EDATE"
+                      <ShopCardTable_RE
+                      :PRICES="PRICES"
                       :arr="arr"
                       :arr2="arr2"/>
-                    </div> -->
+                    
                   </div>
                   <Notice/>
                   </div>
@@ -127,9 +124,8 @@
 import box from "@/assets/img/box.png";
 import legoBg from "@/assets/img/bg-lego5.jpg";
 import ShopCardLineChart from "@/components/Cards/Shop/ShopCardLineChart.vue";
-//import ShopCardTable from "@/components/Cards/Shop/ShopCardTable.vue";
+import ShopCardTable_RE from "@/components/Cards/Shop/ShopCardTable_RE.vue";
 import Notice from './Notice';
-
 
 export default {
     data() {
@@ -176,11 +172,12 @@ export default {
           ],
       arr:[],
       arr2:[],
+      PRICES:[]
       };
     },
     components: {
     ShopCardLineChart,
-    // ShopCardTable,
+    ShopCardTable_RE,
     Notice
     },
     mounted() {
@@ -289,8 +286,21 @@ export default {
         {product_key: this.PRODUCT_KEY})
             .then(function(res){
               console.log(res);
-              vm.RECENT_PRICE = (res.data.length === 0) ? '-' : res.data[0].SELL_PRICE.toLocaleString('ko-KR') + "원";
-              
+              // vm.RECENT_PRICE = (res.data.length === 0) ? '-' : res.data[0].SELL_PRICE.toLocaleString('ko-KR') + "원";
+              if(res.data.length === 0)
+              {
+                vm.RECENT_PRICE = '-';
+                vm.PRICES = '-';
+                console.log(vm.RECENT_PRICE);
+                console.log(vm.PRICES);
+              }
+              else
+              {
+                vm.RECENT_PRICE = res.data[0].SELL_PRICE.toLocaleString('ko-KR') + "원";
+                vm.PRICES = res.data;
+                console.log(vm.RECENT_PRICE);
+                console.log(vm.PRICES);
+              }
             })
             .catch(function(err){
               console.log(err);

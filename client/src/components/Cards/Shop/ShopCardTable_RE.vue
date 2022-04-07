@@ -93,48 +93,40 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-              <td v-if="RECENT_BUY_PRICE!=0"
+          <tr v-show="RT"  v-for="(item,i) in PRICES" :key="i" v-bind="item">
+              <td 
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
             >
-              {{RECENT_BUY_PRICE.toLocaleString('ko-KR')}}원
+              {{item.SELL_PRICE}}
             </td>
-            <td v-else
+            <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
             >
-              -
-            </td>
-            <td v-if="RECENT_BUY_EDATE!=0"
-              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
-            >
-              {{RECENT_BUY_EDATE.substring(0,10)}}
-            </td>
-            <td v-else
-              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
-            >
-              -
+              {{item.SELL_EDATE.substring(0,10)}}
             </td>
           </tr>
-          <tr>
-              <td v-if="RECENT_SELL_PRICE!=0"
+          <tr v-show="ST"  v-for="(item,i) in arr" :key="i" v-bind="item">
+              <td 
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
             >
-              {{RECENT_SELL_PRICE.toLocaleString('ko-KR')}}원
+              {{item.SELL_PRICE}}
             </td>
-            <td v-else
+            <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
             >
-              -
+              {{item.SELL_COUNT}}
             </td>
-            <td v-if="RECENT_SELL_EDATE!=0"
+          </tr>
+          <tr v-show="BT"  v-for="(item,i) in arr2" :key="i" v-bind="item">
+              <td 
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
             >
-              {{RECENT_SELL_EDATE.substring(0,10)}}
+              {{item.BUY_PRICE}}
             </td>
-            <td v-else
+            <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
             >
-              -
+              {{item.BUY_COUNT}}
             </td>
           </tr>
         </tbody>
@@ -163,30 +155,11 @@ export default {
         return ["light", "dark"].indexOf(value) !== -1;
       },
     },
-    RECENT_SELL_PRICE:{
-      type:String,
-      deafult:''
-    },
-    RECENT_BUY_PRICE:{
-      type:String,
-      deafult:''
-    },
-    RECENT_SELL_EDATE:{
-      type:String,
-      deafult:''
-    },
-    RECENT_BUY_EDATE:{
-      type:String,
-      deafult:''
-    },
+    PRICES:[],
     arr:[],
     arr2:[]
   },
-  // created(){
-  //   console.log("여기서 예외처리중")
-  //   this.BUY_PRICE = (this.arr2.BUY_PRICE == null) ? '-' : this.arr2.BUY_PRICE.toLocaleString('ko-KR') + "원";
-  //   console.log(this.BUY_PRICE);
-  // },
+  
   methods:{
     showRecentTransaction:function(){
       this.RT = true;
