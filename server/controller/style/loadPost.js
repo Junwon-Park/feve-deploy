@@ -54,7 +54,7 @@ async function countAllPost(req, res, next) {
     const user_key = req.body.USER_KEY;
     await db.sequelize
         .query(
-            'select count(*) as totalPostCount  from post where USER_KEY='+10+';'
+            'select count(*) as totalPostCount  from post where USER_KEY='+user_key+';'
             ,{ type: Sequelize.QueryTypes.SELECT }
         )
         .then((result) => {

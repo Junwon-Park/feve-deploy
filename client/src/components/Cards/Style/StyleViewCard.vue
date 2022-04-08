@@ -29,7 +29,7 @@
                 @click="showComment()"
             >
               <v-icon>{{ show ? 'mdi-comment' : 'mdi-comment-outline' }}</v-icon>
-              <span class="ml-1 text-black">{{ totalCommentCount }}</span>
+              <span class="ml-1 text-black">{{ totalCommentCount.toLocaleString('ko-KR') }}</span>
             </v-btn>
             </div>
           </v-card-text>
@@ -165,7 +165,6 @@ export default {
       })
           .then((res) => {
             this.totalCommentCount = res.data[0].cnt;
-            console.log(res.data)
           })
           .catch((error) => {
             console.log(error);
@@ -179,10 +178,8 @@ export default {
         POST_KEY: this.POST_KEY,
       })
       .then(function(res){
-        console.log(res.data)
         res.data.forEach(function(value){
           let commentDate = value['COMMENT_WDATE'].replace('T', ' ').split('.')[0];
-          console.log(commentDate); //출력
           value['COMMENT_WDATE']=that.timeForToday(commentDate);
         });
         that.messages=res.data;
