@@ -37,6 +37,16 @@
         </tbody>
       </table>
    </div>
+   <CscenterQnaView
+      :dialog="recDialog"
+      :table="table"
+      :title="title"
+      :item="item"
+      :receivedCscenterKey="receivedCscenterKey"
+      :receivedUserid="receivedUserid"
+      @sendDialog="sendDialog"
+      @updateList="updateList"/>
+
      <Pagination
         :pageSize="pageSize"
         @onPageChanged="onPageChanged"
@@ -49,6 +59,7 @@
 </template>
 
 <script>
+import CscenterQnaView from "@/components/Cards/Cscenter/CscenterQnaView.vue";
 import CscenterQnaListCard from "@/components/Cards/Cscenter/CscenterQnaListCard.vue";
 import Pagination from "@/components/Pagination.vue" ;
 export default {
@@ -86,6 +97,7 @@ export default {
     }
   },
   components: {
+      CscenterQnaView,
       CscenterQnaListCard,
       Pagination,
     },
