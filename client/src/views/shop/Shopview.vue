@@ -4,8 +4,8 @@
       <section class="relative py-16 bg-blueGray-200 mt-24">
         <div class="container">
           <div class="p-8 relative flex flex-col min-w-0 break-words  pd-8 bg-white w-full mb-6 shadow-xl rounded-lg ">
-            <div class="flex flex-wrap items-center mt-5 mb-5 px-6 mx-auto">
-              <div class="flex">
+            <div class="w-full flex flex-wrap items-center mt-5 mb-5 px-6 mx-auto">
+              <div class="flex flex-wrap">
                 <div class="w-full xl:w-6/12 px-4 mt-12">
                   <v-carousel hide-delimiters width="400" height="400">
                       <v-carousel-item v-for="(item,i) in items" :key="i" >
@@ -32,7 +32,7 @@
                     
                     <div>
                       <div class="mt-3">
-                        <v-btn x-large color="error" dark style="width:49%; height:70px;" class="mr-1 mt-3" @click="goBuy"> 
+                        <v-btn x-large dark style="background: #EF6253; width:49%; height:70px;" class=" mr-1 mt-3" @click="goBuy">
                           <div v-if="this.SELL_PRICE != 0">
                             <div>구매</div> 
                             <div>{{SELL_PRICE.toLocaleString('ko-KR')}}원</div>
@@ -42,7 +42,7 @@
                             <div>구매입찰</div> 
                           </div>
                         </v-btn>
-                        <v-btn x-large color="success" dark  style="width:49%; float:right; height:70px;" class="ml-1 mt-3" @click="goSell"> 
+                        <v-btn x-large dark  style="background:#41B979; width:49%; float:right; height:70px;" class="ml-1 mt-3" @click="goSell">
                           <div v-if="this.BUY_PRICE != 0">
                             <div>판매</div> 
                             <div>{{BUY_PRICE.toLocaleString('ko-KR')}}원</div>
@@ -70,7 +70,7 @@
                   
                   <div class="w-full flex-wrap mt-6">
                     <b class="text-lg">상품정보</b>
-                    <div style="border:black;">
+                    <div class="text-center mt-2  text-sm" style="border:black;">
                       <div style="width:33%; float:left; padding-right:10px;">
                         <p class="mb-1">모델번호</p>
                         <p>{{PRODUCT_MNUM}}</p>
@@ -93,8 +93,8 @@
                         <img :src="box" alt="..." class="w-13 h-13 rounded-full border-2 border-blueGray-50 shadow"/>
                       </div>
                       <div>
-                        <p class="mb-2">일반배송 3000원</p>
-                        <p class="mb-2"> 검수 후 배송 ・ 5-7일 내 도착 예정</p>
+                        <p class="mb-2 text-sm">일반배송 3000원</p>
+                        <p class="mb-2  text-sm"> 검수 후 배송 ・ 5-7일 내 도착 예정</p>
                       </div>
                     </div>
                   </div>

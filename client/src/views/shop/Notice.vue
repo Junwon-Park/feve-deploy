@@ -3,11 +3,11 @@
                   <b class="text-lg">구매 전 꼭 확인해주세요!</b>
                   <div class="mt-2">
                     <div>
-                      <div style="float:left" >배송 기간 안내</div>
+                      <div class="text-sm" style="float:left" >배송 기간 안내</div>
                       <div class="ml-auto relative" @click="detailOnOff('1')">
                            <img :src="downArrow" alt="..." class="h-8 w-8"/>
                       </div>
-                      <ul v-show="isStatusOn1">
+                      <ul v-show="isStatusOn1" class="text-xs" >
                           <li> FEVE는 최대한 빠르게 모든 상품을 배송하기 위해 노력하고 있습니다. 
                             배송 시간은 판매자가 검수를 위하여 상품을 검수센터로 보내는 속도에 따라 차이가 있습니다.</li>
                           <li>[일반 구매]</li>
@@ -21,11 +21,11 @@
                       </ul>
                     </div>
                     <div>
-                      <div style="float:left" >검수 안내</div>
+                      <div style="float:left" class="text-sm" >검수 안내</div>
                       <div class="ml-auto relative" @click="detailOnOff('2')">
                            <img :src="downArrow" alt="..." class="h-8 w-8"/>
                       </div>
-                      <ul v-show="isStatusOn2">
+                      <ul v-show="isStatusOn2" class="text-xs" >
                           <li>판매자의 상품이 검수센터에 도착하면 전담 검수팀이 철저한 분석과 검사로 정가품 확인을 진행합니다.</li>
                           <li> - 검수센터에서는 정가품 여부를 확인하기 위하여, 지속적으로 데이터를 쌓고 분석하여 기록하고 있습니다.</li>
                           <li> - 업계 전문가로 구성된 검수팀은 박스와 상품의 라벨에서 바느질, 접착, 소재 등 모든 것을 검수합니다.</li>
@@ -36,11 +36,11 @@
                       </ul>
                     </div>
                     <div>
-                      <div style="float:left" >구매 환불/취소/교환 안내</div>
+                      <div style="float:left" class="text-sm" >구매 환불/취소/교환 안내</div>
                       <div class="ml-auto relative" @click="detailOnOff('3')">
                            <img :src="downArrow" alt="..." class="h-8 w-8"/>
                       </div>
-                      <ul v-show="isStatusOn3">
+                      <ul v-show="isStatusOn3" class="text-xs" >
                         <li>
                           FEVE 익명 거래를 기반으로 판매자가 판매하는 상품을 구매자가 실시간으로 구매하여 거래를 체결합니다.
                         </li>
@@ -54,22 +54,22 @@
                     </div>
                     <div class="mt-6">
                       <div class="mt-2">
-                        <div style="float:left;">
-                          <v-icon>fas fa-lock</v-icon>
+                        <div class="mr-2" style="float:left;">
+                          <v-icon >fas fa-lock</v-icon>
                         </div>
                         <div>
-                          <p class="mb-2">100% 정품 보증</p>
-                          <p class="mb-2">FEVE는 검수한 상품이 정품이 아닐 경우, 구매가의 3배를 보상합니다.</p>
+                          <p class="mb-4 text-sm">100% 정품 보증</p>
+                          <p class="mb-4 text-xs">FEVE는 검수한 상품이 정품이 아닐 경우, 구매가의 3배를 보상합니다.</p>
                         </div>
                       </div>
                     
-                      <div class="mt-2">
-                        <div style="float:left;">
+                      <div class="mt-6">
+                        <div class="mr-2"  style="float:left;">
                           <v-icon>fas fa-search</v-icon>
                         </div>
                         <div>
-                          <p class="mb-2">엄격한 검수</p>
-                          <p class="mb-2">모든 상품은 검수센터에 도착한 후, 상품별 전문가 그룹의 체계적인 시스템을 거쳐 검수를 진행합니다.</p>
+                          <p class="mb-4 text-sm" >엄격한 검수</p>
+                          <p class="mb-4 text-xs" >모든 상품은 검수센터에 도착한 후, 상품별 전문가 그룹의 체계적인 시스템을 거쳐 검수를 진행합니다.</p>
                         </div>
                       </div>
                     </div>
