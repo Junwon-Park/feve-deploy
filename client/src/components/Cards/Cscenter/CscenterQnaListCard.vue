@@ -6,15 +6,18 @@
     >
       {{ CSCENTER_KEY }}
     </td>
+    <span @click="goView(), sendItems()">
     <td
         class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
-
+       
+        style="cursor:pointer;"
     >
-      {{ CSCENTER_TITLE }}
+      {{ CSCENTER_TITLE }} 
     </td>
+    </span>
     <td
         class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
-
+        
     >
       {{ USER_ID }}
     </td>
@@ -73,6 +76,9 @@ export default {
   },
 
   methods: {
+    goView(){
+      this.$emit('sendDialog');
+    },
     fDialog(){
       this.$emit('sendDialog');
     },

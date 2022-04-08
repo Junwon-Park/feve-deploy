@@ -98,7 +98,7 @@ export default {
   },
   created() {
     let that = this;
-    this.$axios.get('http://localhost:8080/admin/cscenter/totalCnt')
+    this.$axios.get('http://localhost:8080/cscenter/cscenterInsert/totalCnt')
         .then(function(res){
           that.totalListCount = res.data[0].totalCnt;
           that.pageSize=Math.ceil(that.totalListCount/that.itemPerPage);
