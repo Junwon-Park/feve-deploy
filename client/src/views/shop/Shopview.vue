@@ -179,7 +179,8 @@ export default {
       PRICES:[],
       CHART_PRICES:[],
       CHART_DATES:[],
-      likeTotal:''
+      likeTotal:'',
+      currentViewState : 0,
       };
     },
     components: {
@@ -192,6 +193,7 @@ export default {
       this.countLike();
       this.countLikeTotal();
       this.getTablePrice();
+      this.scrollToTop();
     //   setTimeout(() => {
     //   this.getRecentPrice()
     // }, 1000)
@@ -434,8 +436,14 @@ export default {
         //   PRODUCT_KEY:this.PRODUCT_KEY}
         //   });
       },
+      scrollToTop() {
 
-      
+        if(this.currentViewState == 0)
+        {
+          window.scrollTo(0,0);
+          return;
+        }
+      }
       
     
 
