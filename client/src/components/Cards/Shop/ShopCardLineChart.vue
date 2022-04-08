@@ -36,16 +36,16 @@ export default {
   // mounted:async function(){
   //   this.drawChart();
   // },
-  watch:{
-    CHART_PRICES(){
-     this.drawChart();
-     console.log(this.CHART_PRICES);
-    },
-    CHART_DATES(){
-      this.drawChart()
-      console.log(this.CHART_DATES);
-    }
-  },
+  // watch:{
+  //   CHART_PRICES(){
+  //    this.drawChart();
+  //    console.log(this.CHART_PRICES);
+  //   },
+  //   CHART_DATES(){
+  //     this.drawChart()
+  //     console.log(this.CHART_DATES);
+  //   }
+  // },
   methods:{
   drawChart() {
     this.$nextTick(function () {
