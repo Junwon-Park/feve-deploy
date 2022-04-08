@@ -51,6 +51,16 @@
       </v-tab-item>
 
         <v-tab-item>
+          <div class="w-full px-4 my-10 flex flex-wrap">
+            <div class="w-full lg:w-6/12 xl:w-3/12 px-4 mb-5" v-for="(item, i) in items" :key="i">
+              <CardStyle
+                  v-bind="item"
+                  :items="item"
+              />
+            </div>
+          </div>
+        </v-tab-item>
+        <v-tab-item>
           <div class="w-full px-4 mb-5 flex flex-wrap justify-center">
             <div class="w-full lg:w-4/12 xl:w-4/12 px-4 mb-5">
               <UserInfo
@@ -59,7 +69,6 @@
               />
             </div>
           </div>
-
           <div class="w-full px-4 my-10 flex flex-wrap">
             <div class="w-full lg:w-6/12 xl:w-3/12 px-4 mb-5" v-for="(item, i) in items" :key="i">
               <CardStyle
@@ -93,7 +102,8 @@ export default {
         USER_KEY: '',
       },
       tabs: null,
-      tabTitle: ['NEW', 'FOLLOW'],
+      followtabs: null,
+      tabTitle: ['NEW','FEED', 'FOLLOW'],
       items: {
         POST_KEY: 0,
         POST_CONTENS: "",

@@ -148,7 +148,8 @@ export default {
           .then(function( res ){
             console.log(res.data.POST_KEY)
             that.post_key=res.data.POST_KEY;
-            alert("게시글을 등록했습니다.") /that.$router.go(that.$router.currentRouter);
+            alert("게시글을 등록했습니다.");
+            that.$router.go(that.$router.currentRouter);
           })
           .catch(function(err){
             console.log(err);
