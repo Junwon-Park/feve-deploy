@@ -2,7 +2,7 @@ const { Product } = require("../../models");
 const sequelize = require("sequelize");
 
 
-async function buyconfirm(req, res, next) {
+async function sellconfirm(req, res, next) {
   const productkey =req.body.PRODUCT_KEY;
   console.log(productkey);
   await Product.findOne({
@@ -20,5 +20,5 @@ async function buyconfirm(req, res, next) {
 
 
 }
-module.exports = { buyconfirm };
+module.exports = { sellconfirm };
 

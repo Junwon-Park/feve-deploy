@@ -1,0 +1,175 @@
+<template>
+
+<div>
+  <div class="mt-48" style="min-height:100vh;">
+      
+      <div> 
+        <div style="max-width: 780px; margin:auto" class="">
+          <div style="box-shadow:none">
+            <div style="border-radius: 10px; padding-top:0; width: 200px; height:200px; margin:auto; ">
+              <img :src="legoBg" alt="..." style="object-fit:cover; width:100%; height:100%; "/>
+
+            </div>
+            <div>
+              <div class="px-6 text-center py-12">
+                <div class="text-center">
+                   <p class="text-lg" style="font-weight:700; letter-spacing: -.15px;"><strong>판매 입찰이 완료되었습니다.</strong></p> 
+                   <p class="text-sm">결제는 거래가 성사되는 시점에<br>등록하신 결제 정보로 자동 처리 됩니다.</p>  
+                </div>  
+                <div class="mt-8 mb-10 ">
+                  <a href="#" class="inline-block align-middle text-center text-sm bg-black  rounded mr-4"
+                  style="padding: 10px 20px ; color: white !important;">
+                    내역 상세보기
+                  </a>
+                  <a href="#" class="inline-block align-middle text-center text-sm bg-black rounded"
+                     style="padding: 10px 20px ; color: white !important;">
+                    shop 바로가기
+                  </a>
+                </div>  
+                    <p class="text-sm">'판매 내역 > 입찰중' 상태에는 입찰 지우기가 가능합니다.</p>
+               <div class="pt- m-3 ">
+                    <dl class="flex items-center justify-between" style="min-height: 26px;">
+                      <dt>
+                        <span class="text-sm" style="color:black">판매 희망가</span>
+                      </dt>
+                      <dd class="text-right text-sm" style="color:#222">
+                        <strong>{{sell.SELL_PRICE.toLocaleString('ko-KR')}}원</strong></dd>
+                    </dl>
+                  </div>
+
+                  <div class="pt- m-3">
+                    <dl class="flex items-center justify-between" style="min-height: 26px;">
+                      <dt>
+                        <span class="text-sm" style="color:gray">포인트</span>
+                      </dt>
+                      <dd class="text-right text-sm" style="color:#222">
+                        <strong>-</strong></dd>
+                    </dl>
+                  </div>
+
+                  <div class="pt- m-3">
+                    <dl class="flex items-center justify-between" style="min-height: 26px;">
+                      <dt>
+                        <span class="text-sm" style="color:gray">검수비</span>
+                      </dt>
+                      <dd class="text-right text-sm" style="color:#222">
+                        <strong>무료</strong></dd>
+                    </dl>
+                  </div>
+
+                  <div class="pt- m-3">
+                    <dl class="flex items-center justify-between" style="min-height: 26px;">
+                      <dt>
+                        <span class="text-sm" style="color:gray">수수료</span>
+                      </dt>
+                      <dd class="text-right text-sm" style="color:#222">
+                        <strong>무료</strong></dd>
+                    </dl>
+                  </div>
+
+                  <div class="pt- m-3">
+                    <dl class="flex items-center justify-between" style="min-height: 26px;">
+                      <dt>
+                        <span class="text-sm" style="color:gray">배송비</span>
+                      </dt>
+                      <dd class="text-right text-sm" style="color:#222">
+                        <strong>무료</strong></dd>
+                    </dl>
+                  </div>     
+              </div>
+                
+          </div>
+          
+        </div> 
+       </div>  
+      </div>   
+    </div>  
+</div>
+</template>
+<script>
+
+import legoBg from "@/assets/img/bg-lego5.jpg";
+import box from "@/assets/img/box.png";
+
+export default {
+
+
+  data() {
+    return {
+      box,
+      checksucess: [],
+      tab: null,
+      legoBg,
+      text: '판매 희망가',
+      month:0,
+      sell: {
+        
+        product_key:'',
+        SELL_PRICE: 0,
+        buy_sdate: '',
+        buy_edate: '',
+        buy_status:'',
+        default: "0"
+      },
+
+      user: {
+        USER_NAME:'',
+        USER_PHONE:0,
+        USER_ADDRESS1:''
+      },
+
+       item: 
+          { 
+            PRODUCT_KEY:'0',
+            PRODUCT_PIC:'',    
+            PRODUCT_NAME: '',
+            PRODUCT_BRAND: '',
+            PRODUCT_CATE:0,
+            PRODUCT_ORIPRICE:'',
+          },
+
+    
+
+    };
+  },
+  methods: {
+     
+  },
+
+
+  beforeCreate() {
+    let that = this;
+    this.$axios.post("http://localhost:8080/sell/comp")
+      .then(function (res) {
+        that.sell = res.data;
+      
+      }) 
+      .catch(function (err) {
+          console.log(err);
+        });
+  
+   this.$axios.post("http://localhost:8080/sell/comp/user")
+      .then(function (res) {
+        that.user = res.data;
+        console.log(that.user.USER_NAME);
+      
+      }) 
+      .catch(function (err) {
+          console.log(err);
+        });
+
+      this.$axios.post('http://localhost:8080/buy')
+        .then(function (res) {
+          console.log(res);
+          that.item = res.data;
+          console.log(that.item);
+        })
+        .catch(function (err) {
+           console.log(err);
+        });
+  },
+
+
+}
+
+</script>

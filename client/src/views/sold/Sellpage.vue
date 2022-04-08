@@ -3,45 +3,38 @@
   <div>
     <main class="profile-page">
 
-      <section class="relative block h-500-px">
-        <div class="absolute top-0 w-full h-full bg-center bg-cover" :style="{ backgroundImage: `url(${legoBg})` }">
-          <span id="blackOverlay" class="w-full h-full absolute opacity-30 bg-white"></span>
-        </div>
-        <div class="top-auto bottom-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden h-70-px"
-          style="transform: translateZ(0);">
-          <svg class="absolute bottom-0 overflow-hidden" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"
-            version="1.1" viewBox="0 0 2560 100" x="0" y="0">
-            <polygon class="text-blueGray-200 fill-current" points="2560 0 2560 100 0 100"></polygon>
-          </svg>
-
-        </div>
-      </section>
-
-
-      <section class="relative py-16 bg-blueGray-200">
+      <section class="relative py-16 bg-blueGray-200 mt-12" style="min-height: 90vh;">
 
         <div class="container mx-auto px-4">
           <div
-            class="p-8 relative flex flex-col min-w-0 break-words  pd-8 bg-white w-full mb-6 shadow-xl rounded-lg -mt-64">
+            class="p-8 relative flex flex-col min-w-0 break-words  pd-8 bg-white w-full mb-6  rounded-lg">
 
 
             <div class="px-6">
 
-              <h5 class="text-xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2 text-center m-3">구매동의</h5>
-              <h6 class="text-3xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2 text-center m-3">구매하시기 전에 꼭
+              <h5 class="text-xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2 text-center m-3">판매동의</h5>
+              <h6 class="text-3xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2 text-center m-3">판매하시기 전에 꼭
                 확인하세요!!</h6>
+                
             </div>
             <div>
               <div class="flex flex-wrap items-center mt-5 mb-5 px-6">
-                <div class="container m-3">
-                  <div class="sold-content">
-                    <div class="mr-2 break-words" style="word-break: keep-all;"><span
-                        class="m-2 text-xxl text-left"><strong>상품명 : {{item.PRODUCT_NAME}}</strong></span>
-                      <p class="m-2 text-xxl text-left">브랜드 명: {{item.PRODUCT_BRAND}}</p>
-                      <span class="m-2 text-xxl text-left"><strong>카테고리 :{{item.PRODUCT_CATE}}</strong></span>
+               <div style="padding-top: 0px; padding-right: 16px; padding-bottom: 20px; padding-left: 16px;">
+                  <div class="flex items-center" style="width:100% color:#fff">
+                    <div class="" style="width:80px; height:80px; flex-shrink: 0; border-radius: 10px; background-clolr: rgb(244,244,244); overflow: hidden;
+                position: relative;">
+                                               <img :src="legoBg" alt="..."/>
+    
                     </div>
-                  </div>
-                  <div class="sold-img">
+                    <div style="overflow:hidden; -webkit-box-flex: 1; -ms-flex: 1; flex: 1; padding-left: 16px;">
+                      <strong
+                        style="display: block; line-height: 17px;font-size: 14px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">-</strong>
+                      <p
+                        style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; line-height: 17px;margin-top: 1px;font-size: 14px;">
+                             {{item.PRODUCT_NAME}} 
+                          </p>
+                      <p style="line-height: 16px;font-size: 13px;letter-spacing: -.07px;">{{item.PRODUCT_BRAND}}</p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -53,7 +46,7 @@
                   <li style="list-style:none border-top:none" class="border-b-2 m-4">
                     <div class="flex items-center no-underline">
                       <div class="mr-2 break-words" style="word-break: keep-all;">
-                        <p class="text-sm"><strong>구매하실 상품 맞으신가요?</strong></p>
+                        <p class="text-sm"><strong>판매하실 상품 맞으신가요?</strong></p>
 
                         <p class="mt-1 text-xs  ml-auto">상품 이미지 모델번호 출시일 상품명 사이즈 한 번 더 확인했습니다.</p>
                       </div>
@@ -72,6 +65,8 @@
                         <p class="text-sm"><strong>제조사에서 불량으로 인정하지 않는 기준은 하자로 판단하지 않습니다</strong></p>
 
                         <p class="mt-1 text-xs  ml-auto">박스/패키치와 상품 컨디션에 민감하시다면 검수 기준을 반드시 확인하시기 바랍니다.</p>
+                                              <modaltab/>
+
                       </div>
                       <div class="ml-auto relative ">
                         <input id="check2" class="checkboxconfirm" type="checkbox">
@@ -117,7 +112,7 @@
                   <li style="list-style:none border-top:none " class="border-b-2 m-4">
                     <div class="flex items-center no-underline">
                       <div class="mr-2 break-words " style="word-break: keep-all;">
-                        <p class="text-sm"><strong>구매하실 상품 맞으신가요?</strong></p>
+                        <p class="text-sm"><strong>판매하실 상품 맞으신가요?</strong></p>
 
                         <p class="mt-1 text-xs  ml-auto">상품 이미지 모델번호 출시일 상품명 사이즈 한 번 더 확인했습니다.</p>
                       </div>
@@ -132,20 +127,22 @@
               </div>
             </div>
             <div style="flex items-center no-underline">
-              <a href="http://localhost:3000" @click="clicked" id="change-button" class="full-image"
-                disabled="disabled">
-                동의 하기
+              <a href="http://localhost:3000/sell/proc" @click="clicked" id="change-button" class="full-image"
+                disabled="disabled" style="color: #fafafa !important;">
+                동의하기
               </a>
             </div>
           </div>
         </div>
       </section>
+      
     </main>
   </div>
 </template>
 <script>
 import anguler from "@/assets/img/angular.jpg";
 import legoBg from "@/assets/img/bg-lego5.jpg";
+import modaltab from "./Modaltab.vue";
 
 
 export default {
@@ -162,13 +159,14 @@ export default {
             PRODUCT_BRAND: '',
             PRODUCT_CATE:0,
           },
+        
           
     }
   },
   
   beforeCreate() {
       var vm = this;
-      this.$axios.post('http://localhost:8080/buy')
+      this.$axios.post('http://localhost:8080/sell')
         .then(function (res) {
           console.log(res);
           vm.item = res.data;
@@ -193,14 +191,21 @@ export default {
           event.preventDefault();
 
         }
-      }
-
+      },
+  
+  
 
     },
-        // components: {
-        //   Buycard,
+         components: {
+           modaltab,
             
-        //  },
+          },
         };
 
 </script>
+
+<style>
+input[type=checkbox] {
+  display: none !important;
+}
+</style>
