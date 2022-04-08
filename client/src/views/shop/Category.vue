@@ -134,7 +134,7 @@ export default{
     },
     methods:{
         clearAll(){
-            console.log("지우기 선택");
+            //console.log("지우기 선택");
             var options = document.getElementsByName("depth1");
             for (var i = 0; i < options.length; i++) {
                 if (options[i].getAttribute('type') === 'radio') {
@@ -144,11 +144,11 @@ export default{
             this.$parent.getProductList();
         },
         getValue(event){
-            console.log(event.target.value);
+            //console.log(event.target.value);
             this.$axios.post('http://localhost:8080/shop/filterCate',{
                 cate:event.target.value})
             .then( (res) => {			
-                console.log(res.data);
+                //console.log(res.data);
                 //window.$ref.Shoplist.item =res.data;
                 this.$emit("changeitems",res.data);
             })
@@ -158,13 +158,13 @@ export default{
 
         },
          getPrice(event) {
-           console.log(event.target.value);
+           //console.log(event.target.value);
            this.$axios.post('http://localhost:8080/shop/filterPrice', {
              price: event.target.value
            })
                .then((res) => {
-                 console.log(res);
-                 console.log(res.data);
+                 //console.log(res);
+                 //console.log(res.data);
                  //window.$ref.Shoplist.item =res.data;
                  this.$emit("changeitems", res.data);
                })

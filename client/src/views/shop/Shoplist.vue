@@ -83,7 +83,7 @@ export default {
       var vm = this;
       this.$axios.get('http://localhost:8080/shop/shoplist')
         .then(function(res){
-          console.log("디비에서 결과 가져옴", res);
+          //console.log("디비에서 결과 가져옴", res);
           vm.items = res.data;
         })
         .catch(function(err){
@@ -91,16 +91,16 @@ export default {
         });
     },
     changeitems(e){
-      console.log("changeitems의 e 값",e);
+      //console.log("changeitems의 e 값",e);
       this.items = e;
     },
     goFilter(cate){
-      console.log("chip 버튼을 누름");
-      console.log(cate);
+      //console.log("chip 버튼을 누름");
+      //console.log(cate);
       this.$axios.post('http://localhost:8080/shop/filterCate',{
           cate:cate})
       .then( (res) => {			
-          console.log(res.data);
+          //console.log(res.data);
           this.items=res.data;
       })
       .catch((err)=>{
