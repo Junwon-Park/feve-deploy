@@ -14,11 +14,12 @@ async function loadComment(req, res, next) {
             ',c.USER_KEY\n' +
             ',u.USER_ID\n' +
             'from PostComment c\n' +
-            'inner join USER u on c.USER_KEY = u.USER_KEY;'
+            'inner join USER u on c.USER_KEY = u.USER_KEY ' +
+            'where c.POST_KEY= '+post_key+';'
             ,{ type: Sequelize.QueryTypes.SELECT }
         )
         .then((result) => {
-            console.log(result);
+            console.log(result)
             res.json(result);
         })
         .catch((err) => console.log(err));
