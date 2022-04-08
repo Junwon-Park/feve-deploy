@@ -43,9 +43,8 @@
       :title="title"
       :item="item"
       :receivedCscenterKey="receivedCscenterKey"
-      :receivedUserid="receivedUserid"
-      @sendDialog="sendDialog"
-      @updateList="updateList"/>
+      
+      @sendDialog="sendDialog"/>
 
      <Pagination
         :pageSize="pageSize"
@@ -128,8 +127,8 @@ export default {
     onPageChanged(page){
       console.log("페이지 버튼 클릭: ", page +"번");
       let requestPage = page;
-      let sendStart = (page -1) * this.itemPerPage +1;
-      let sendEnd=page * this.itemPerPage;
+      let sendStart = (page -1) * this.itemPerPage;
+      let sendEnd=page * this.itemPerPage-1;
       console.log("sendStart: ",sendStart, "sendEnd: ", sendEnd)
 
       this.$emit("startend", sendStart, sendEnd, requestPage);

@@ -82,13 +82,6 @@
           >
             돌아가기
           </v-btn>
-          <v-btn
-              color="blue darken-1"
-              text
-              @click="updateCscenterList"
-          >
-            저장
-          </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
