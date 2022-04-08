@@ -15,20 +15,21 @@
               {{ POST_CONTENT }}
             </div>
             <div class="mt-8">
+              <v-btn
+                  v-if="USER_KEY===user_key"
+                  class="ml-auto"
+                  icon
+                  @click="deletePost(`${POST_KEY}`)"
+              >
+                <v-icon>{{ show ? 'mdi-delete-empty' : 'mdi-delete-empty-outline' }}</v-icon>
+              </v-btn>
             <v-btn
-                class="ml-6"
+                class="ml-2"
                 icon
-                @click="show = !show"
+                @click="showComment()"
             >
               <v-icon>{{ show ? 'mdi-comment' : 'mdi-comment-outline' }}</v-icon>
-            </v-btn>
-            <v-btn
-                v-if="USER_KEY===user_key"
-                class="ml-auto"
-                icon
-                @click="deletePost(`${POST_KEY}`)"
-            >
-              <v-icon>{{ show ? 'mdi-delete-empty' : 'mdi-delete-empty-outline' }}</v-icon>
+              <span class="ml-1 text-black">{{ totalCommentCount }}</span>
             </v-btn>
             </div>
           </v-card-text>
@@ -37,12 +38,19 @@
         <v-expand-transition>
           <div v-show="show">
             <v-divider></v-divider>
-            <v-card-text>
-              <v-timeline
-                  align-top
-                  dense
-              >
-                <v-timeline-item
+            <v-row class="pl-10 pr-10 mt-5">
+                <v-textarea
+                    v-model="postcomment_content"
+                    class="mx-2"
+                    label="댓글을 남겨주세요!"
+                    no-resize
+                    rows="1"
+                    prepend-icon="mdi-comment"
+                ></v-textarea>
+                <v-icon @click="addComment(`${POST_KEY}`)">mdi-send-circle</v-icon>
+            </v-row>
+            <v-card-text class="pl-10 pr-10 mb-5">
+                <v-text-item
                     v-for="message in messages"
                     :key="message.time"
                     :color="message.color"
@@ -50,12 +58,12 @@
                 >
                   <div>
                     <div class="font-weight-normal">
-                      <strong>{{ message.from }}</strong> @{{ message.time }}
+                      <strong class="text-">{{ message.USER_ID }}</strong>
+                      <small class="ml-2">@ {{ message.COMMENT_WDATE }}</small>
                     </div>
-                    <div>{{ message.message }}</div>
+                    <div>{{ message.COMMENT_CONTENT }}</div>
                   </div>
-                </v-timeline-item>
-              </v-timeline>
+                </v-text-item>
             </v-card-text>
           </div>
         </v-expand-transition>
@@ -102,26 +110,14 @@ export default {
       user_key: JSON.parse(localStorage.getItem('userKey')),
       imageUrl: this.$store.getters.ServerUrl + '/getStyleImage?imageName=',
       show: false,
-      messages: [
-        {
-          from: 'You',
-          message: `Sure, I'll see you later.`,
-          time: '10:42am',
+      postcomment_content: "",
+      totalCommentCount: "",
+      messages: [{
+          USER_ID: "",
+          COMMENT_CONTENT: "",
+          COMMENT_WDATE: "",
           color: 'deep-purple lighten-1',
-        },
-        {
-          from: 'John Doe',
-          message: 'Yeah, sure. Does 1:00pm work?',
-          time: '10:37am',
-          color: 'green',
-        },
-        {
-          from: 'You',
-          message: 'Did you still want to grab lunch today?',
-          time: '9:47am',
-          color: 'deep-purple lighten-1',
-        },
-      ],
+        }],
     }
   },
   methods:{
@@ -142,7 +138,84 @@ export default {
         } else {
           return
         }
-    }
+    },
+    showComment(){
+      this.show=!this.show
+    },
+
+    addComment(POST_KEY){
+      let that = this;
+
+      that.$axios.post('http://localhost:8080/style/addComment',{
+        POST_KEY: POST_KEY,
+        USER_KEY: this.user_key,
+        POSTCOMMENT_CONTENT: this.postcomment_content,
+
+      })
+      .then(function(){
+        that.$router.go(that.$router.currentRouter);
+      })
+      .catch(function(err){
+        console.log(err);
+      });
+    },
+
+    countPost(){
+      this.$axios.post('http://localhost:8080/style/addComment/count', {
+        POST_KEY: this.POST_KEY,
+      })
+          .then((res) => {
+            this.totalCommentCount = res.data[0].cnt;
+            console.log(res.data)
+          })
+          .catch((error) => {
+            console.log(error);
+          })
+    },
+
+    loadComment(){
+      let that = this;
+
+      that.$axios.post('http://localhost:8080/style/loadComment',{
+        POST_KEY: this.POST_KEY,
+      })
+          .then(function(res){
+            let commentDate=(res.data[0].COMMENT_WDATE.replace('T', ' ')).split('.')[0];
+            res.data[0].COMMENT_WDATE=that.timeForToday(commentDate);
+            console.log(res.data)
+            that.messages=res.data;
+          })
+          .catch(function(err){
+            console.log(err);
+          });
+    },
+
+     timeForToday(value) {
+        const today = new Date();
+        const timeValue = new Date(value);
+
+        const betweenTime = Math.floor((today.getTime() - timeValue.getTime()) / 1000 / 60);
+        if (betweenTime < 1) return '방금 전';
+        if (betweenTime < 60) {
+          return `${betweenTime}분 전`;
+        }
+
+        const betweenTimeHour = Math.floor(betweenTime / 60);
+        if (betweenTimeHour < 24) {
+          return `${betweenTimeHour}시간 전`;
+        }
+
+        const betweenTimeDay = Math.floor(betweenTime / 60 / 24);
+        if (betweenTimeDay < 365) {
+          return `${betweenTimeDay}일 전`;
+        }
+
+        return `${Math.floor(betweenTimeDay / 365)}년 전`;
+      },
+  },
+  created(){
+    this.countPost()
+    this.loadComment()
   }
 }
 </script>

@@ -44,13 +44,18 @@ import CscenterQna from "@/views/cscenter/CscenterQna.vue";
 import CscenterFaq  from "@/views/cscenter/CscenterFaq.vue";
 import CscenterInsert from "@/views/cscenter/CscenterInsert.vue";
 import CscenterStandard  from "@/views/cscenter/CscenterStandard.vue";
-
 import Buyselect from "@/views/sold/Buyselect.vue";
 import Buycomplete from "@/views/sold/Buycomplete.vue";
 
 import Style from "@/views/style/Style.vue";
 import StyleView from "@/views/style/StyleView.vue";
 
+
+import Sellselect from "@/views/sold/Sellselect.vue";
+import Sellcomplete from "@/views/sold/Sellcomplete.vue";
+import Sell from "@/views/sold/Sellpage.vue";
+import Sellproc from "@/views/sold/Sellconfirmpage.vue";
+import Sellcomp from "@/views/sold/Sellconecpt.vue";
 
 
 
@@ -172,6 +177,26 @@ const routes = [
   {
     path: "/buy/complete",
     component: Buycomplete,
+  },
+  {
+    path: "/sell",
+    component: Sell,
+  },
+  {
+    path: "/sell/sel",
+    component: Sellselect,
+  },
+  {
+    path: "/sell/proc",
+    component: Sellproc,
+  },
+  {
+    path: "/sell/comp",
+    component: Sellcomp,
+  },
+  {
+    path: "/sell/complete",
+    component: Sellcomplete,
   },
   
   {
