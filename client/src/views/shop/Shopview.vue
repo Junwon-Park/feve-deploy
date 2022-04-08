@@ -205,8 +205,8 @@ export default {
         this.PRODUCT_KEY = this.$route.params.PRODUCT_KEY;
         this.$axios.get('http://localhost:8080/shop/shopview/'+ this.PRODUCT_KEY)
             .then(function(res){
-              //console.log("디비에서 결과 가져옴", res);
-              //console.log("res.data값은?", res.data);
+              console.log("디비에서 결과 가져옴", res);
+              console.log("res.data값은?", res.data);
               vm.PRODUCT_NAME = res.data[0].PRODUCT_NAME;
               vm.PRODUCT_BRAND = res.data[0].PRODUCT_BRAND;
               vm.PRODUCT_DESC = res.data[0].PRODUCT_DESC;

@@ -24,7 +24,7 @@ async function shopview(req, res, next) {
         ',a.PRODUCT_CATE\n' +
         ',(SELECT MIN(SELL_PRICE) FROM Sell WHERE PRODUCT_KEY = ' + product_key + ' AND SELL_STATUS=0) as SELL_PRICE \n' +
         ',(SELECT MAX(BUY_PRICE) FROM Buy WHERE PRODUCT_KEY = ' + product_key + ' AND BUY_STATUS=0) as BUY_PRICE \n' +
-    'FROM Product a, Sell, Buy\n' +
+    'FROM Product a\n' +
     'WHERE a.PRODUCT_KEY = '+ product_key + ';'
     , { type: sequelize.QueryTypes.SELECT })
 //   await Product.findOne({

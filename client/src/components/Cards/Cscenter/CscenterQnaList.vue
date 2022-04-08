@@ -33,7 +33,7 @@
           v-bind="item"
           :items="items"
           @sendDialog="cDialog"
-          @sendItems="sendItems"
+          
           />
         </tbody>
       </table>
@@ -43,15 +43,15 @@
       </div>
    </div>
    <CscenterQnaView
-      v-bind="item"
+      
       :dialog="recDialog"
       :table="table"
       :title="title"
-      :items="items"
+      :item="item"
       :receivedCscenterKey="receivedCscenterKey"
       
       @sendDialog="sendDialog"
-      @sendItems="sendItems"/>
+      />
 
      <Pagination
         :pageSize="pageSize"

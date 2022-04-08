@@ -5,7 +5,7 @@
         persistent
         max-width="900px"
         :table="table"
-        :items="items"
+        :item="item"
     >
       <v-card>
         <v-card-title>
@@ -22,7 +22,7 @@
                 <v-text-field
                     readonly
                     :label="table[1]"
-                    :value="[CSCENTER_TITLE]"
+                    :value="item.CSCENTER_TITLE"
                 ></v-text-field>
               </v-col>
               <v-col
@@ -97,29 +97,29 @@ export default {
   props: {
       dialog:{},
       table:[],
-      item:[],
-    CSCENTER_KEY: {
-        default: 0
-      },
-    CSCENTER_TITLE: {
-        type: String,
-        default:"Lego"
-      },
-    CSCENTER_CONTENTS:  {
-        type: String,
-        default:"Architecture"
-      },
-    CSCENTER_WDATE:  {
-        type: String,
-        default:"건물"
-      },
-    CSCENTER_STATUS: {
-        default: '',
-      },
-    CSCENTER_COMMENT:   {
-        type: String,
-        default:"2022-03-31"
-      }
+      item:{},
+    // CSCENTER_KEY: {
+    //     default: 0
+    //   },
+    // CSCENTER_TITLE: {
+    //     type: String,
+    //     default:"Lego"
+    //   },
+    // CSCENTER_CONTENTS:  {
+    //     type: String,
+    //     default:"Architecture"
+    //   },
+    // CSCENTER_WDATE:  {
+    //     type: String,
+    //     default:"건물"
+    //   },
+    // CSCENTER_STATUS: {
+    //     default: '',
+    //   },
+    // CSCENTER_COMMENT:   {
+    //     type: String,
+    //     default:"2022-03-31"
+    //   }
   },
 
   methods:{
@@ -129,12 +129,12 @@ export default {
     closeDialog(){
       this.dialog=false
     },
-   sendItems(){
-      let that = this;
-      let sendCscenterKey=that.CSCENTER_KEY;
-      let sendUserkey=that.USER_KEY;
-      this.$emit("sendItems", sendCscenterKey, sendUserkey);
-    },
+//    sendItems(){
+//       let that = this;
+//       let sendCscenterKey=that.CSCENTER_KEY;
+//       let sendUserkey=that.USER_KEY;
+//       this.$emit("sendItems", sendCscenterKey, sendUserkey);
+//     },
   },
   created(){
     console.log(this.$props.item)
