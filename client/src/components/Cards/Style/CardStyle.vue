@@ -23,8 +23,8 @@
 
           </div>
         </div>
-        <div class="relative w-full max-w-full flex-grow flex-1">
-          <div class="relative w-full mb-5 mx-auto relative overflow-hidden pl-8 pr-8">
+        <div class="relative mx-auto  max-w-full flex-grow flex-1" style="width:320px;">
+          <div class="relative  mb-5 mx-auto relative overflow-hidden">
             <span class="text-xs text-blueGray-400 font-semibold" v-for="(ht, idx) in hashtag" :key="idx">#{{ ht }} </span>
           </div>
         </div>
@@ -91,12 +91,12 @@ export default {
 
     makeHashtagArray(){
       let that = this;
-      console.log(that.HASHTAG_TITLE)
-      console.log(typeof that.HASHTAG_TITLE)
-
-      let hashtagArray = that.HASHTAG_TITLE.split(',');
-      that.hashtag=hashtagArray;
-      console.log(that.hashtag)
+      if( that.HASHTAG_TITLE != null ) {
+        let hashtagArray = that.HASHTAG_TITLE.split(',');
+        that.hashtag=hashtagArray;
+      } else {
+        return
+      }
     },
   },
 }
