@@ -102,16 +102,18 @@
                   <div class="w-full flex-wrap mt-3 pt-6">
                     <b class="text-lg">시세</b>
                     <div class="mt-2">
-                      <shop-card-line-chart
-                       
-                      :CHART_PRICES="CHART_PRICES"
-                      :CHART_DATES="CHART_DATES"/>
-
-                      <ShopCardTable_RE
-                      :PRICES="PRICES"
-                      :arr="arr"
-                      :arr2="arr2"/>
-                    
+                      <div>
+                        <shop-card-line-chart v-if="this.CHART_PRICES.length !=0"
+                        :CHART_PRICES="CHART_PRICES"
+                        :CHART_DATES="CHART_DATES"/>
+                        <div style="text-align:center" v-else>아직 체결된 거래가 없습니다</div>
+                      </div>
+                      <div class="mt-6">
+                        <ShopCardTable_RE
+                        :PRICES="PRICES"
+                        :arr="arr"
+                        :arr2="arr2"/>
+                      </div>
                   </div>
                   <Notice/>
                   </div>
@@ -187,7 +189,10 @@ export default {
       this.getView();
       this.countLike();
       this.getTablePrice();
-      this.getRecentPrice();
+      setTimeout(() => {
+      this.getRecentPrice()
+    }, 1000)
+      //this.getRecentPrice();
     },
     methods:{
       getView:function(){
@@ -195,8 +200,8 @@ export default {
         this.PRODUCT_KEY = this.$route.params.PRODUCT_KEY;
         this.$axios.get('http://localhost:8080/shop/shopview/'+ this.PRODUCT_KEY)
             .then(function(res){
-              console.log("디비에서 결과 가져옴", res);
-              console.log("res.data값은?", res.data);
+              //console.log("디비에서 결과 가져옴", res);
+              //console.log("res.data값은?", res.data);
               vm.PRODUCT_NAME = res.data[0].PRODUCT_NAME;
               vm.PRODUCT_BRAND = res.data[0].PRODUCT_BRAND;
               vm.PRODUCT_DESC = res.data[0].PRODUCT_DESC;
@@ -236,7 +241,14 @@ export default {
       },
       goLike:function(){
         var vm = this;
-        //console.log("좋아요 버튼 누름");
+        console.log("좋아요 버튼 누름");
+        if(this.user_key == null )
+        { 
+          alert("로그인 후 이용해 주세요");
+          this.$router.push({path:'/auth'});
+        }
+        else
+        {  
         this.$axios.post('http://localhost:8080/shop/shopview/'+ this.PRODUCT_KEY + '/goLike',
         {product_key: this.PRODUCT_KEY, user_key:this.user_key})
             .then(function(res){
@@ -247,6 +259,7 @@ export default {
             .catch(function(err){
               console.log(err);
             });
+        }
       },
       goDislike:function(){
         var vm = this;
@@ -276,7 +289,7 @@ export default {
               {
                 vm.likeStatus = true;
               }
-               console.log(vm.likeStatus);
+               //console.log(vm.likeStatus);
             })
             .catch(function(err){
               console.log(err);
@@ -287,15 +300,15 @@ export default {
         this.$axios.post('http://localhost:8080/shop/shopview/'+ this.PRODUCT_KEY + '/recentPrice',
         {product_key: this.PRODUCT_KEY})
             .then(function(res){
-              //console.log(res);
+              console.log(res);
               if(res.data.length === 0)
               {
                 vm.RECENT_PRICE = '-';
                 vm.PRICES = res.data;
                 vm.PRICES.SELL_PRICE = '-';
                 vm.PRICES.SELL_EDATE = '-';
-                //console.log(vm.RECENT_PRICE);
-                //console.log(vm.PRICES);
+                console.log(vm.RECENT_PRICE);
+                console.log(vm.PRICES);
               }
               else
               {
@@ -311,8 +324,8 @@ export default {
                   // console.log(vm.CHART_PRICES);
                   // console.log(vm.CHART_DATES);
                 }
-                //console.log(vm.CHART_PRICES);
-                //console.log(vm.CHART_DATES);
+                console.log(vm.CHART_PRICES);
+                console.log(vm.CHART_DATES);
               }
             })
             .catch(function(err){
@@ -379,11 +392,22 @@ export default {
       goBuy:function(){
         console.log("구매 버튼 클릭");
         console.log("product_key 넘어가는지 확인",this.PRODUCT_KEY);
-        if(this.$route.path!=='/buy') 
-        this.$router.push({path:'/buy',
-        params:{
-          PRODUCT_KEY:this.PRODUCT_KEY}
+        if(this.user_key == null )
+        { 
+          alert("로그인 후 이용해 주세요");
+          this.$router.push({path:'/auth'});
+        }  
+        else{
+          this.$router.push({path:'/buy',
+          params:{
+            PRODUCT_KEY:this.PRODUCT_KEY}
           });
+        //   if(this.$route.path!=='/buy') 
+        // this.$router.push({path:'/buy',
+        // params:{
+        //   PRODUCT_KEY:this.PRODUCT_KEY}
+        //   });
+        }
       },
       goSell:function(){
         console.log("판매 버튼 클릭");
