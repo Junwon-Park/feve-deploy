@@ -25,7 +25,7 @@
           
           <div class="flex mt-10">
             <div class="flex px-4 mb-5" style="width:25%;">
-              <Category ref="category" @changeitems="changeitems($event)"/>
+              <Category ref="category" @changeitems="changeitems($event)" />
             </div>
             <div class="w-full px-4 mb-5 flex flex-wrap">
               <div class="w-full lg:w-6/12 xl:w-3/12 px-4 mb-5" v-for="(item,i) in items" :key="i">
@@ -97,7 +97,7 @@ export default {
     goFilter(cate){
       console.log("chip 버튼을 누름");
       console.log(cate);
-      this.$axios.post('http://localhost:8080/shop/filter',{
+      this.$axios.post('http://localhost:8080/shop/filterCate',{
           cate:cate})
       .then( (res) => {			
           console.log(res.data);

@@ -141,10 +141,11 @@ export default{
                         options[i].checked = false;
                 }
             }
+            this.$parent.getProductList();
         },
         getValue(event){
             console.log(event.target.value);
-            this.$axios.post('http://localhost:8080/shop/filter',{
+            this.$axios.post('http://localhost:8080/shop/filterCate',{
                 cate:event.target.value})
             .then( (res) => {			
                 console.log(res.data);
@@ -158,7 +159,7 @@ export default{
         },
          getPrice(event) {
            console.log(event.target.value);
-           this.$axios.post('http://localhost:8080/shop/filter', {
+           this.$axios.post('http://localhost:8080/shop/filterPrice', {
              price: event.target.value
            })
                .then((res) => {
