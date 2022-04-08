@@ -38,13 +38,15 @@
       </table>
    </div>
    <CscenterQnaView
+      v-bind="item"
       :dialog="recDialog"
       :table="table"
       :title="title"
-      :item="item"
+      :items="items"
       :receivedCscenterKey="receivedCscenterKey"
       
-      @sendDialog="sendDialog"/>
+      @sendDialog="sendDialog"
+      @sendItems="sendItems"/>
 
      <Pagination
         :pageSize="pageSize"
