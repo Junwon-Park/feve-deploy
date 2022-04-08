@@ -188,8 +188,10 @@ export default {
         POST_KEY: this.POST_KEY,
       })
       .then(function(res){
+        console.log(res.data)
         res.data.forEach(function(value){
-          let commentDate = value['COMMENT_WDATE'].replace('T', ' ').split('.')[0];
+          let commentDate = value['COMMENT_WDATE'];
+          console.log(commentDate)
           value['COMMENT_WDATE']=that.timeForToday(commentDate);
         });
         that.messages=res.data;
@@ -200,8 +202,14 @@ export default {
     },
 
      timeForToday(value) {
-        const today = new Date();
+       const curr=new Date();
+      const utc =curr.getTime() + (curr.getTimezoneOffset() * 60 * 1000);
+       const KR_TIME_DIFF = 9 * 60 * 60 * 1000;
+       const today = new Date(utc + (KR_TIME_DIFF));
+       console.log(today)
         const timeValue = new Date(value);
+       console.log(timeValue.getTime())
+       console.log(value)
 
         const betweenTime = Math.floor((today.getTime() - timeValue.getTime()) / 1000 / 60);
         if (betweenTime < 1) return '방금 전';
