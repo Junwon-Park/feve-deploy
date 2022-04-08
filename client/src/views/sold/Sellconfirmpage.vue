@@ -2,43 +2,34 @@
 
   <div>
     <main class="profile-page">
-
-      <section class="relative block h-500-px">
-        <div class="absolute top-0 w-full h-full bg-center bg-cover" :style="{ backgroundImage: `url(${legoBg})` }">
-          <span id="blackOverlay" class="w-full h-full absolute opacity-30 bg-white"></span>
-        </div>
-        <div class="top-auto bottom-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden h-70-px"
-          style="transform: translateZ(0);">
-          <svg class="absolute bottom-0 overflow-hidden" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"
-            version="1.1" viewBox="0 0 2560 100" x="0" y="0">
-            <polygon class="text-blueGray-200 fill-current" points="2560 0 2560 100 0 100"></polygon>
-          </svg>
-
-        </div>
-      </section>
-
-
-      <section class="relative py-16 bg-blueGray-200">
+      <section class="relative py-16 bg-blueGray-200 mt-12">
 
         <div class="container mx-auto px-4">
           <div
-            class="p-8 relative flex flex-col min-w-0 break-words  pd-8 bg-white w-full mb-6 shadow-xl rounded-lg -mt-64">
+            class="p-8 relative flex flex-col min-w-0 break-words  pd-8 bg-white w-full mb-6 shadow-xl rounded-lg ">
 
 
-            <div class="px-6">
-              <h5 class="text-xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2 text-center m-3">구매 입찰하기</h5>
+            <div class=" " style="border-bottom: 3px solid black;">
+              <h5 class="text-xl font-semibold leading-normal mb-2 text-black mb-2 text-left m-3">판매 입찰하기</h5>
             </div>
-            <div class="flex flex-wrap items-center mt-5 mb-5 px-6">
-              <div class="container m-3">
-                <div class="sold-content">
-                  <div class="mr-2 break-words" style="word-break: keep-all;"><span
-                      class="m-2 text-xxl text-left"><strong>대충 상품 설명하는중</strong></span>
-                    <p class="m-2 text-xxl text-left">대충 상품 설명하는중</p>
-                    <span class="m-2 text-xxl text-left"><strong>대충 상품 설명하는중</strong></span>
+            <div>
+              <div class="flex flex-wrap items-center mt-10 mb-5 px-6">
+               <div style="padding-top: 0px; padding-right: 16px; padding-bottom: 20px; padding-left: 16px;">
+                  <div class="flex items-center" style="width:100% color:#fff">
+                    <div class="" style="width:80px; height:80px; flex-shrink: 0; border-radius: 10px; background-clolr: rgb(244,244,244); overflow: hidden;
+                position: relative;">
+                      <img :src="legoBg" alt="..."/> 
+                    </div>
+                    <div style="overflow:hidden; -webkit-box-flex: 1; -ms-flex: 1; flex: 1; padding-left: 16px;">
+                      <strong
+                        style="display: block; line-height: 17px;font-size: 14px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">-</strong>
+                      <p
+                        style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; line-height: 17px;margin-top: 1px;font-size: 14px;">
+                        상품 명
+                      </p>
+                      <p style="line-height: 16px;font-size: 13px;letter-spacing: -.07px;">상품브랜드</p>
+                    </div>
                   </div>
-                </div>
-                <div class="sold-img">
-                  <img src="@/assets/img/angular.jpg">
                 </div>
               </div>
             </div>
@@ -46,65 +37,88 @@
             <div class="p-5" style="border-top:8px; background-color:#fff;">
               <ul class="flex rounded-tr p-5 items-center px-4">
                 <li class="text-center flex-1 border-r">
-                  <p class="text-lg">즉시 구매가</p>
-                  <span class="inline-block text-2xl">4,500,000원</span>
+                  <p class="text-lg font-semibold">즉시 구매가</p>
+                  <span class="inline-block text-2xl text-right">{{buy[0].buy_price.toLocaleString('ko-KR')}}원</span>
                 </li>
-                <li class="text-center flex-1">
-                  <p class="text-lg">즉시 구매</p>
-                  <span class="inline-block text-2xl">4,500,000원</span>
+                <li class="text-center flex-1 font-semibold">
+                  <p class="text-lg">즉시 판매가</p>
+                  <span class="inline-block text-2xl">{{max.SELL_PRICE.toLocaleString('ko-KR')}}원</span>
                 </li>
               </ul>
-              <div class="relative p-5" style="width:70%; margin:auto;">
-                <v-card>
-                  <v-tabs v-model="tab" background-color="#41b979" centered dark icons-and-text
-                    style="border-radius:10px;  margin:auto;">
+              <div class="relative p-5" style="width:100%; margin:auto;">
+                <v-card :elevation="0">
+                  <v-tabs v-model="tab" centered  icons-and-text
+                    style=" margin:auto;">
                     <v-tabs-slider></v-tabs-slider>
 
-                    <v-tab href="#tab-1">
+                    <v-tab href="#tab-1" style="width: 50%;">
                       구매 입찰
-                      <v-icon></v-icon>
                     </v-tab>
 
-                    <v-tab href="#tab-2">
+                    <v-tab href="#tab-2" style="width: 50%;">
                       즉시 구매
-                      <v-icon>mdi-heart</v-icon>
                     </v-tab>
 
 
                   </v-tabs>
 
-                  <v-tabs-items v-model="tab">
-                    <v-tab-item v-for="i in 2" :key="i" :value="'tab-' + i">
+                  <v-tabs-items v-model="tab" style="width: 70%; margin:auto;">
+                    <v-tab-item :value="'tab-1'">
                       <v-card flat>
-                        <dl class="m-3 justify-between flex mb-5 items-center"
+                        <dl class="p-5 m-3 justify-between flex mb-5 items-center"
                           style="border-bottom: 2px solid #ebebeb;">
                           <dt class="text-s">구매 희망가</dt>
-                          <dd class="text-sm"><input type="text" style="adding-left: 2px;
-                            line-height: 26px; font-size: 20px;letter-spacing: -.3px;font-weight: 700; text-align:right" 
-                            autocomplete="off" placeholder="희망가 입력" v-model="buy.buy_price">
-                           <span class="text-sm">원</span>
-                            </dd>
+                          <dd class="text-sm"><input type="text"
+                              style="adding-left: 2px;
+                            line-height: 26px; font-size: 20px;letter-spacing: -.3px;font-weight: 700; text-align:right" autocomplete="off"
+                              placeholder="희망가 입력" v-model="sell.sell_price">
+                            <span class="text-sm">원</span>
+                          </dd>
                         </dl>
-                          <div class="pt-6 text-xs m-4" style="letter-spacing: -.07px;">
-                            <p class="pt-6 text-sm text-right" style="color:gray">*총 결제 금액은 다음 화면에서 계산됩니다</p>
-                          </div>
-                         <div>
-                   <v-row justify="center" class="text-center m-4">
-                    <label
-                          class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                          htmlFor="출시일"
-                      >
-                        마감 기한
-                      </label>
-                      <input
-                          type="date"
-                          class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                          placeholder="경매날짜"  v-model="buy.buy_edate"
-                      />
-              </v-row>
-            </div> 
+                        <div class="pt-6 text-xs m-4" style="letter-spacing: -.07px;">
+                          <p class="pt-6 text-sm text-right" style="color:gray">*총 결제 금액은 다음 화면에서 계산됩니다</p>
+                        </div>
+                        <div>
+                          <v-row justify="center" class="text-center m-4">
+                            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="출시일">
+                            </label>
+                            <input type="date"
+                              class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                              placeholder="경매날짜" v-model="sell.sell_edate" />
+                          </v-row>
+                        </div>
                       </v-card>
                     </v-tab-item>
+
+                  </v-tabs-items>
+                  <v-tabs-items v-model="tab" style="width: 70%; margin:auto;">
+                    <v-tab-item :value="'tab-2'">
+                      <v-card flat>
+                        <dl class="p-5 m-3 justify-between flex mb-5 items-center"
+                          style="border-bottom: 2px solid #ebebeb;">
+                          <dt class="text-s">구매 희망가</dt>
+                          <dd class="text-sm"><input type="text"
+                              style="adding-left: 2px;
+                            line-height: 26px; font-size: 20px;letter-spacing: -.3px;font-weight: 700; text-align:right" autocomplete="off"
+                              placeholder="희망가 입력" v-model="sell.sell_price">
+                            <span class="text-sm">원</span>
+                          </dd>
+                        </dl>
+                        <div class="pt-6 text-xs m-4" style="letter-spacing: -.07px;">
+                          <p class="pt-6 text-sm text-right" style="color:gray">*총 결제 금액은 다음 화면에서 계산됩니다</p>
+                        </div>
+                        <div>
+                          <v-row justify="center" class="text-center m-4">
+                            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="출시일">
+                            </label>
+                            <input type="date"
+                              class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                              placeholder="경매날짜" v-model="sell.sell_edate" />
+                          </v-row>
+                        </div>
+                      </v-card>
+                    </v-tab-item>
+
                   </v-tabs-items>
                 </v-card>
               </div>
@@ -138,16 +152,43 @@ export default {
       tab: null,
       text: '판매 희망가',
       month:0,
-      buy: {
-        buy_buyer_key:'',
+     sell: {
+        sell_buyer_key:'',
         product_key:'',
-        buy_price: 0,
-        buy_sdate: '',
-        buy_edate: '',
-        buy_status:'',
-        buy_seller_key:'',
+        sell_price: 0,
+        sell_sdate: '',
+        sell_edate: '',
+        sell_status:'',
+        sell_seller_key:JSON.parse(localStorage.getItem('userKey')),
+        
         default: "0"
-      }
+      },
+      buy:{
+          buy_price:0,
+          buy_sdate:'',
+          buy_edate:'',
+          buy_key:0,
+      },
+
+       max: {
+        product_key:'',
+        SELL_PRICE: 0,
+        SELL_SDATE: '',
+        SELL_EDATE: '',
+        SELL_STATUS:'',
+
+        default: "0"
+      },
+
+       item: 
+          { 
+            PRODUCT_KEY:'0',
+            PRODUCT_PIC:'',
+            PRODUCT_NAME: '',
+            PRODUCT_BRAND: '',
+            PRODUCT_CATE:0,
+            PRODUCT_ORIPRICE:'',
+          },
 
     };
   },
@@ -158,32 +199,65 @@ export default {
       const KR_TIME_DIFF = 9 * 60 * 60 * 1000;
       const kr_curr =new Date(utc + (KR_TIME_DIFF));
       console.log("시작전");
+
       let vm=this;
-      this.$axios.post('http://localhost:8080/buy/proc', {
-          buy_buyer_key: 1,
-          product_key: 1,
-          buy_price: vm.buy.buy_price,
-          buy_edate: vm.buy.buy_edate,
-          buy_status: 1,
-          buy_seller_key: 1,
-          buy_sdate: kr_curr,
+      this.$axios.post('http://localhost:8080/sell/proc', {
+          sell_price: vm.sell.sell_price,
+          sell_edate: vm.sell.sell_edate,
+          sell_status: 0,
+          sell_seller_key:vm.sell.sell_seller_key,
+          product_key: 1, //상품 키 받아와야함
+          sell_sdate: kr_curr,
       })
           .then(() => {
             alert("입찰 되었습니다.");
-            this.$router.push('/buy');
+            this.$router.push("http://localhost:3000/");
           })
           .catch((error) => {
             alert("실패");
+            this.$router.push("http://localhost:3000/");
             console.log(error);
           })
     },
   },
 
+  beforeCreate() {
+    this.$axios.post("http://localhost:8080/buy/comp")
+      .then(function (res) {
+        that.buy = res.data;
+        console.log(that.buy);
+        console.log(that.buy[0].buy_price); 
+      }) 
+      .catch(function (err) {
+          console.log(err);
+        });
+
+      var vm = this;
+      this.$axios.post('http://localhost:8080/sell')
+        .then(function (res) {
+          console.log(res);
+          vm.item = res.data;
+          console.log(vm.item);
+        })
+        .catch(function (err) {
+          console.log(err);
+        });
+  let that = this;
+    this.$axios.post("http://localhost:8080/sell/comp")
+      .then(function (res) {
+        that.max = res.data;
+        console.log(that.max);
+        console.log(that.max.SELL_PRICE); 
+      }) 
+      .catch(function (err) {
+          console.log(err);
+        });      
+    },
+
   watch:{
 	  buy_price(a){
       if (isNaN(a) == true){
         alert('숫자만 입력해주세요');
-        this.month = 1;
       }
     },
 	}

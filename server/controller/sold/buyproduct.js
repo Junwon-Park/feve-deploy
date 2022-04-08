@@ -8,8 +8,7 @@ const Op = sequelize.Op;
   const buy_edate = req.body.buy_edate;
   const buy_status = req.body.buy_status;
   const product_key = req.body.product_key;
-  const buy_buyer_key = req.body.buy_buyer_key;
-  const buy_seller_key = req.body.buy_seller_key;
+  const buy_buyer_key = req.body.buy_buyer_key; //USER키 받아와야함
 
    await Buy.create({
      BUY_PRICE: buy_price,
@@ -18,7 +17,6 @@ const Op = sequelize.Op;
      BUY_STATUS: buy_status,
      PRODUCT_KEY: product_key,
      BUY_BUYER_KEY: buy_buyer_key,
-     BUY_SELLER_KEY:buy_seller_key,
    }).then(result =>{
        console.log(result);
        console.log(result.BUY_EDATE);

@@ -38,11 +38,11 @@
               <ul class="flex rounded-tr p-5 items-center px-4">
                 <li class="text-center flex-1 border-r">
                   <p class="text-lg font-semibold">즉시 구매가</p>
-                  <span class="inline-block text-2xl text-right">{{item.PRODUCT_ORIPRICE}}원</span>
+                  <span class="inline-block text-2xl text-right">{{max[0].buy_price.toLocaleString('ko-KR')}}원</span>
                 </li>
                 <li class="text-center flex-1 font-semibold">
-                  <p class="text-lg">즉시 구매</p>
-                  <span class="inline-block text-2xl">4,500,000원</span>
+                  <p class="text-lg">즉시 판매가</p>
+                  <span class="inline-block text-2xl">{{sell.SELL_PRICE.toLocaleString('ko-KR')}}원</span>
                 </li>
               </ul>
               <div class="relative p-5" style="width:100%; margin:auto;">
@@ -127,7 +127,7 @@ export default {
       text: '판매 희망가',
       month:0,
       buy: {
-        buy_buyer_key:'',
+        buy_buyer_key:JSON.parse(localStorage.getItem('userKey')),
         product_key:'',
         buy_price: 0,
         buy_sdate: '',
@@ -147,6 +147,17 @@ export default {
             PRODUCT_CATE:0,
             PRODUCT_ORIPRICE:'',
           },
+       sell:{
+          SELL_PRICE:0,
+      },
+
+       max: {
+        buy_price: 0,
+        buy_sdate: '',
+        buy_edate: '',
+        buy_key:0,
+        default: "0"
+      },    
 
     };
   },
@@ -157,23 +168,23 @@ export default {
       const KR_TIME_DIFF = 9 * 60 * 60 * 1000;
       const kr_curr =new Date(utc + (KR_TIME_DIFF));
       console.log("시작전");
-      let vm=this;
+      let vs=this;
       this.$axios.post('http://localhost:8080/buy/proc', {
-          buy_buyer_key: 1,
+          buy_buyer_key: vs.buy.buy_buyer_key,
           product_key: 1,
-          buy_price: vm.buy.buy_price,
-          buy_edate: vm.buy.buy_edate,
-          buy_status: 1,
-          buy_seller_key: 1,
+          buy_price: vs.buy.buy_price,
+          buy_edate: vs.buy.buy_edate,
+          buy_status: 0,
           buy_sdate: kr_curr,
       })
           .then(() => {
             alert("입찰 되었습니다.");
-            this.$router.replace('/buy/comp');
-            // location.href = "blog.naver.com";
+            //this.$router.replace('/buy/comp');
+            this.$router.push("http://localhost:3000/");
           })
           .catch((error) => {
-            alert("실패");
+            alert("실패하셨습니다");
+            this.$router.push("http://localhost:3000/");
             console.log(error);
           })
     },
@@ -190,6 +201,26 @@ export default {
         .catch(function (err) {
           console.log(err);
         });
+      let thot = this;
+       this.$axios.post("http://localhost:8080/buy/comp")
+      .then(function (res) {
+        thot.max = res.data;
+        console.log(thot.max);
+        console.log(thot.max.buy_price); 
+      }) 
+      .catch(function (err) {
+          console.log(err);
+        });
+
+    
+  let that = this;
+    this.$axios.post("http://localhost:8080/sell/comp")
+      .then(function (res) {
+        that.sell = res.data;
+      }) 
+      .catch(function (err) {
+          console.log(err);
+        });     
     },
 
   watch:{

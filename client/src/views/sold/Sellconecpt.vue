@@ -129,8 +129,8 @@
                         <dl style="justify-between items-center">
                           <dt class="text-sm" style="font-weight: 700;
                    letter-spacing: -.01px;">정산 금액</dt>
-                          <dd class="text-right" style="display:block; color: red;     margin-inline-start: 40px;">
-                            <span class="text-lg">{{buy[0].buy_price.toLocaleString('ko-KR')}}</span>
+                          <dd class="text-right" style="display:block; color: #31b46e;     margin-inline-start: 40px;">
+                            <span class="text-lg">{{sell.SELL_PRICE.toLocaleString('ko-KR')}}</span>
                             <span class="text-lg">원</span>
 
                           </dd>
@@ -145,7 +145,7 @@
                         <span class="text-sm" style="color:black">판매 희망가</span>
                       </dt>
                       <dd class="text-right text-sm" style="color:#222">
-                        <strong>{{buy[0].buy_price.toLocaleString('ko-KR')}}원</strong></dd>
+                        <strong>{{sell.SELL_PRICE.toLocaleString('ko-KR')}}원</strong></dd>
                     </dl>
                   </div>
 
@@ -304,7 +304,9 @@ export default {
     return {
       
       box,
-    
+      maxprice:{
+        BUY_PRICE:0,
+      },
       checksucess: [],
       tab: null,
       legoBg,
@@ -312,13 +314,13 @@ export default {
       month:0,
       nowDate: new Date(Date.now() - (new Date().getTimezoneOffset() * 60000)),
 
-      buy: {
-        buy_key:0,
-        buy_price:0,
-        product_key:'',
-        buy_sdate: '',
-        buy_edate: '',
-        buy_status:'',
+      sell: {
+        SELL_KEY:0,
+        product_key:0,
+        sell_price: 0,
+        sell_sdate: '',
+        sell_edate: '',
+        sell_status:'',
         default: "0"
       },
 
@@ -343,22 +345,32 @@ export default {
     };
   },
   methods: {
-  
     updatebuy() {
-      var vm = this;
-      console.log("buy키는~~~~ ",vm.buy.buy_key);
-      this.$axios.post("http://localhost:8080/buy/update", {
+        this.$axios.post("http://localhost:8080/sell/update",{
           user_key: JSON.parse(localStorage.getItem('userKey')),
-          buy_key: vm.buy.BUY_KEY
+          sell_key: this.sell.SELL_KEY
         })
-        .then(function (res) {
-          console.log(res);
-          console.log("updat성공");
+      .then(function (res) {
+        console.log(typeof res.data[1]);
+        console.log("성공");
+       this.$router.push("http://localhost:3000/sell/complete") 
 
-        })
-        .catch(function (err) {
+        if(res.data[1] === 1)
+        {
+          this.$router.push("http://localhost:3000/sell/complete") 
+
+        }
+        else
+        {
+          alert("구매에 실패하셨습니다");
+        this.$router.push("http://localhost:3000/") 
+
+        }
+      }) 
+      .catch(function (err) {
           console.log(err);
         });
+  
 
     }
 
@@ -375,18 +387,18 @@ export default {
 
   beforeCreate() {
     let that = this;
-    this.$axios.post("http://localhost:8080/buy/comp")
+    this.$axios.post("http://localhost:8080/sell/comp")
       .then(function (res) {
-        that.buy = res.data;
-        console.log(that.buy);
-        console.log(that.buy[0].buy_price); 
+        that.sell = res.data;
+        console.log(that.sell);
+        console.log(that.sell.SELL_PRICE); 
       }) 
       .catch(function (err) {
           console.log(err);
         });
   
   
-   this.$axios.post("http://localhost:8080/buy/comp/user")
+   this.$axios.post("http://localhost:8080/sell/comp/user")
       .then(function (res) {
         that.user = res.data;
         console.log(that.user.USER_NAME);
@@ -396,7 +408,7 @@ export default {
           console.log(err);
         });
 
-      this.$axios.post('http://localhost:8080/buy')
+      this.$axios.post('http://localhost:8080/sell')
         .then(function (res) {
           console.log(res);
           that.item = res.data;

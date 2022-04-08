@@ -26,8 +26,10 @@ const styleFollowRoute = require('./router/style/follow.js');
 const categorytRoute = require('./router/common/category.js');
 const shoplistRoute = require('./router/shop/shoplist.js');
 const shopviewRoute = require('./router/shop/shopview.js');
-const buyRouter = require('./router/sold/buyconfirm.js');
-const soldconfirmRouter = require("./router/sold/soldproduct.js");
+const buyconfirmRouter = require('./router/sold/buyconfirm.js');
+const buyRouter = require("./router/sold/buyproduct.js");
+const sellconfirmRouter = require('./router/sold/sellconfirm.js');
+const sellRouter = require("./router/sold/sellproduct.js");
 const minRouter = require('./router/shop/min.js');
 const mypageMainRouter = require('./router/mypage/mypageMain.js');
 const mypageBuyListRouter = require('./router/mypage/mypageBuyList.js');
@@ -105,8 +107,10 @@ app.use('/shop/shoplist', shoplistRoute);
 app.use('/shop/min', minRouter);
 app.use('/shop/shopview', shopviewRoute);
 
-app.use('/buy', buyRouter);
-app.use("/buy/proc",soldconfirmRouter);
+app.use('/buy',buyconfirmRouter);
+app.use('/buy/proc',buyRouter);
+app.use('/sell', sellconfirmRouter);
+app.use('/sell/proc', sellRouter);
 
 app.use('/mypage', mypageMainRouter);
 app.use('/mypage/buyList', mypageBuyListRouter);
