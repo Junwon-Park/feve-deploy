@@ -1,10 +1,10 @@
 const express = require('express');
 const { body } = require('express-validator');
-const { min } = require('../../controller/shop/min.js');
+const { filterPrice } = require('../../controller/shop/filterPrice.js');
 
 const router = express.Router();
 
-router.post('/', min);
+router.post('/', filterPrice);
 
 module.exports = router;
 

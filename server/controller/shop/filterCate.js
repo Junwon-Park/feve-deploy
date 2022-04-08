@@ -1,12 +1,21 @@
-const { Product } = require("../../models");
-const { Sell } = require("../../models");
-const db = require("../../models");
-const sequelize = require("sequelize");
+const { Product } = require('../../models');
+const { Sell } = require('../../models');
+const db = require('../../models');
+const sequelize = require('sequelize');
 
+async function filterCate(req, res, next) {
+  const cate = req.body.cate;
+  const price = req.body.price;
 
-async function shoplist(req, res, next) {
-
-    await db.sequelize.query(
+  console.log('*********************');
+  console.log(
+    'body 값 확인 ==>',req.body,
+    ',cate value : ', req.body.cate,
+    ',price value : ', req.body.price
+  );
+{
+    await db.sequelize
+      .query(
         'SELECT \n' +
             'a.PRODUCT_KEY \n' +
             ',a.PRODUCT_BRAND \n' +
@@ -32,14 +41,16 @@ async function shoplist(req, res, next) {
             ',a.PRODUCT_WDATE\n' +
             ',a.PRODUCT_CATE\n' +
             'FROM Product a\n'+
-            'WHERE a.PRODUCT_DELETE = 0)a;'
-        , { type: sequelize.QueryTypes.SELECT })
-        .then(result => {
-            console.log(result);
-            res.json(result);
-        })
-        .catch(err => console.log(err));
+            'WHERE a.PRODUCT_DELETE = 0 AND a.PRODUCT_CATE IN ( '+ cate +' )) a;',
+        { type: sequelize.QueryTypes.SELECT }
+      )
+      .then((result) => {
+        console.log(result);
+        res.json(result);
+      })
+      .catch((err) => console.log(err));
+  }
 
 }
 
-module.exports = { shoplist };
+module.exports = { filterCate };
