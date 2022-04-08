@@ -102,16 +102,18 @@
                   <div class="w-full flex-wrap mt-3 pt-6">
                     <b class="text-lg">시세</b>
                     <div class="mt-2">
-                      <shop-card-line-chart
-                       
-                      :CHART_PRICES="CHART_PRICES"
-                      :CHART_DATES="CHART_DATES"/>
-
-                      <ShopCardTable_RE
-                      :PRICES="PRICES"
-                      :arr="arr"
-                      :arr2="arr2"/>
-                    
+                      <div>
+                        <shop-card-line-chart v-if="this.CHART_PRICES.length !=0"
+                        :CHART_PRICES="CHART_PRICES"
+                        :CHART_DATES="CHART_DATES"/>
+                        <div style="text-align:center" v-else>아직 체결된 거래가 없습니다</div>
+                      </div>
+                      <div class="mt-6">
+                        <ShopCardTable_RE
+                        :PRICES="PRICES"
+                        :arr="arr"
+                        :arr2="arr2"/>
+                      </div>
                   </div>
                   <Notice/>
                   </div>
@@ -187,7 +189,10 @@ export default {
       this.getView();
       this.countLike();
       this.getTablePrice();
-      this.getRecentPrice();
+      setTimeout(() => {
+      this.getRecentPrice()
+    }, 1000)
+      //this.getRecentPrice();
     },
     methods:{
       getView:function(){

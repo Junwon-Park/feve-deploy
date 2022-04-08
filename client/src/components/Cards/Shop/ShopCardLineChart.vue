@@ -21,10 +21,6 @@
       <div class="relative h-350-px">
         <canvas id="line-chart"></canvas>
       </div>
-      <!-- <div class="relative h-350-px" v-if="this.CHART_PRICES.length!=0">
-        <canvas id="line-chart"></canvas>
-      </div>
-      <div v-else style="text-align:center">아직 체결된 거래가 없습니다.</div> -->
     </div>
   </div>
 </template>
@@ -37,6 +33,9 @@ export default {
     CHART_PRICES:[],
     CHART_DATES:[]
   },
+  // mounted:async function(){
+  //   this.drawChart();
+  // },
   watch:{
     CHART_PRICES(){
      this.drawChart();
@@ -148,7 +147,7 @@ export default {
       })
     }
   },
-  mounted() {
+  created() {
     this.$nextTick( ()=> {
       this.drawChart();
     });
@@ -161,5 +160,6 @@ export default {
       this.drawChart();
     })
   },
+  
 };
 </script>
