@@ -20,6 +20,8 @@ const adminMainChartRoute = require('./router/admin/main.js');
 const styleAddPostRoute = require('./router/style/addPost.js');
 const styleLoadPostRoute = require('./router/style/loadPost.js');
 const styleDeletePostRoute = require('./router/style/deletePost.js');
+const styleAddCommentRoute = require('./router/style/addComment.js');
+const styleLoadCommentRoute = require('./router/style/loadComment.js');
 const styleFollowRoute = require('./router/style/follow.js');
 const categorytRoute = require('./router/common/category.js');
 const shoplistRoute = require('./router/shop/shoplist.js');
@@ -95,6 +97,8 @@ app.use('/style/addPost', styleAddPostRoute);
 app.use('/style/loadPost', styleLoadPostRoute);
 app.use('/style/deletePost', styleDeletePostRoute);
 app.use('/style/follow', styleFollowRoute);
+app.use('/style/addComment', styleAddCommentRoute);
+app.use('/style/loadComment', styleLoadCommentRoute);
 
 app.use('/shoplist', shoplistRoute);
 app.use('/shop/shoplist', shoplistRoute);
