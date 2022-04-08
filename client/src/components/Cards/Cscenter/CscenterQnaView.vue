@@ -5,11 +5,11 @@
         persistent
         max-width="900px"
         :table="table"
-        :item="item"
+        :items="items"
     >
       <v-card>
         <v-card-title>
-          <span class="text-h5">{{ title }}</span>
+          <span class="text-h5">문의 내역 확인하기</span>
         </v-card-title>
         <v-card-text>
           <v-container>
@@ -22,7 +22,7 @@
                 <v-text-field
                     readonly
                     :label="table[1]"
-                    :value="item.CSCENTER_TITLE"
+                    :value="[CSCENTER_TITLE]"
                 ></v-text-field>
               </v-col>
               <v-col
@@ -33,7 +33,7 @@
                 <v-text-field
                     readonly
                     :label="table[2]"
-                    :value="item.USER_ID"
+                    :value="{ CSCENTER_KEY }"
                 ></v-text-field>
               </v-col>
               <v-col
@@ -49,7 +49,7 @@
                     rows="4"
                     row-height="30"
                     shaped
-                    :value="item.CSCENTER_CONTENTS"
+                    :value="{ CSCENTER_CONTENTS}"
                 ></v-textarea>
               </v-col>
 
@@ -65,7 +65,7 @@
                     rows="4"
                     row-height="30"
                     shaped
-                    v-model="cscenterComment"
+                    :value="{ CSCENTER_COMMENT }"
                 ></v-textarea>
               </v-col>
 
@@ -95,10 +95,31 @@ export default {
     cscenterComment:"",
   }),
   props: {
-    dialog:{},
-    table: [],
-    title:{},
-    item:{}
+      dialog:{},
+      table:[],
+      item:[],
+    CSCENTER_KEY: {
+        default: 0
+      },
+    CSCENTER_TITLE: {
+        type: String,
+        default:"Lego"
+      },
+    CSCENTER_CONTENTS:  {
+        type: String,
+        default:"Architecture"
+      },
+    CSCENTER_WDATE:  {
+        type: String,
+        default:"건물"
+      },
+    CSCENTER_STATUS: {
+        default: '',
+      },
+    CSCENTER_COMMENT:   {
+        type: String,
+        default:"2022-03-31"
+      }
   },
 
   methods:{
@@ -108,11 +129,11 @@ export default {
     closeDialog(){
       this.dialog=false
     },
-    updateCscenterList(){
-      let cscenterComment=this.cscenterComment;
-      this.$emit('updateList', cscenterComment)
-      alert("답변을 등록했습니다.");
-      this.$router.go(this.$router.currentRouter);
+   sendItems(){
+      let that = this;
+      let sendCscenterKey=that.CSCENTER_KEY;
+      let sendUserkey=that.USER_KEY;
+      this.$emit("sendItems", sendCscenterKey, sendUserkey);
     },
   },
   created(){

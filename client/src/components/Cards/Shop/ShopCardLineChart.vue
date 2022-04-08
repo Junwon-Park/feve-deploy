@@ -151,9 +151,9 @@ export default {
     this.$nextTick( ()=> {
       this.drawChart();
     });
-    console.log("***********라인차트********")
-    console.log(this.CHART_PRICES);
-    console.log(this.CHART_DATES);
+    //console.log("***********라인차트********")
+    //console.log(this.CHART_PRICES);
+    //console.log(this.CHART_DATES);
   },
   ready() {
     this.$nextTick(()=> {
