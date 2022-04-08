@@ -3,6 +3,9 @@ require('express-async-errors');
 const cors = require('cors');
 const morgan = require('morgan');
 const helmet = require('helmet');
+const fs = require('fs');
+const { Server } = require('socket.io');
+const moment = require('moment');
 
 const { config } = require('./config.js');
 
@@ -80,6 +83,7 @@ app.use(cors(devCors));
 
 // To router
 app.use('/auth', authRouter);
+
 app.use('/addproduct', addproductRoute);
 app.use('/category', categorytRoute);
 
@@ -135,6 +139,37 @@ app.use((error, req, res, next) => {
   res.sendStatus(500);
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT} successfully!!!`);
+let server;
+if (fs.existsSync('./certKey/key.pem') && fs.existsSync('./certKey/cert.pem')) {
+  const privateKey = fs.readFileSync(__dirname + '/certKey/key.pem', 'utf8');
+  const certificate = fs.readFileSync(__dirname + '/certKey/cert.pem', 'utf8');
+  const credentials = { key: privateKey, cert: certificate };
+
+  server = https.createServer(credentials, app);
+  server.listen(PORT, () =>
+    console.log(`HTTPS server running on port ${PORT} successfully!!!`)
+  );
+} else {
+  server = app.listen(PORT, () => {
+    console.log(`HTTP server running on port ${PORT} successfully!!!`);
+  });
+}
+
+const io = new Server(server, {
+  cors: {
+    origin: 'http://localhost:3000',
+    credentials: true
+  },
+  allowEIO3: true
 });
+
+io.on('connection', function (socket) {
+  socket.on('chat', (msg) => {
+    console.log(msg);
+    msg.sender = 1;
+    msg.messageTime = moment().format('HH:mm');
+    socket.broadcast.emit('chat', msg);
+  });
+});
+
+module.exports = { server, io };

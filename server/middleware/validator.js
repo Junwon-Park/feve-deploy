@@ -12,7 +12,7 @@ const loginValidator = [
   body('USER_ID')
     .trim()
     .notEmpty()
-    .isLength({ min: 8, max: 12 })
+    .isLength({ min: 8, max: 15 })
     .withMessage('username should be at least 8 ~ 12 characters'),
   body('USER_PASSWORD')
     .trim()

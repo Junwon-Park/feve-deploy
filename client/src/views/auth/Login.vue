@@ -66,9 +66,9 @@
         </div>
         <div class="flex flex-wrap mt-6 relative">
           <div class="w-1/2">
-            <router-link to="">
+            <router-link to="/auth/findpassword">
               <span class="text-blueGray-100">
-                <small>비밀번호를 잊어버리셨습니까?</small>
+                <small>비밀번호를 잊어버리셨습니까? / 비밀번호 변경</small>
               </span>
             </router-link>
           </div>
@@ -95,16 +95,14 @@ export default {
       github,
       google,
       inputId: '',
-      inputPw: '',
-      baseURL: 'http://localhost:8080',
-      clientBaseURL: 'http://localhost:3000'
+      inputPw: ''
     };
   },
   methods: {
     async submitLogin() {
       const userData = await axios
         .post(
-          `${this.baseURL}/auth/login`,
+          `${this.$store.getters.ServerUrl}/auth/login`,
           { USER_ID: this.inputId, USER_PASSWORD: this.inputPw },
           {
             withCredentials: true,
@@ -126,8 +124,9 @@ export default {
         localStorage.setItem('Authorization', userData.data.data.accessToken);
         localStorage.setItem('isLogin', true);
         localStorage.setItem('userId', userData.data.data.USER_ID);
+        localStorage.setItem('userAdmin', userData.data.data.USER_ADMIN);
         localStorage.setItem('userKey', userData.data.data.USER_KEY);
-        return (location.href = `${this.clientBaseURL}`);
+        return (location.href = `${this.$store.getters.LocalUrl}`);
       }
     }
   }

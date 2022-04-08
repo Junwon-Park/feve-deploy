@@ -2,7 +2,7 @@
   <nav
     class="top-0 fixed z-50 w-full flex flex-wrap items-center justify-between navbar-expand-lg shadow bg-white"
   >
-    <div class="p-3 mx-auto flex flex-wrap items-center justify-between">
+    <div class="container mx-auto flex flex-wrap items-center justify-between">
       <div
         class="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start"
       >
@@ -27,6 +27,16 @@
         id="example-navbar-warning"
       >
         <ul class="flex flex-col lg:flex-row list-none lg:ml-auto">
+          <li class="flex items-center" v-if="isAdmin">
+            <router-link to="/admin">
+              <span
+                class="text-blueGray-800 px-3 py-2 flex items-center text-xs uppercase"
+              >
+                <span class="lg inline-block ml-2"> 관리자 페이지 </span>
+              </span>
+            </router-link>
+          </li>
+
           <li class="flex items-center" v-if="!$store.state.isLogin">
             <router-link to="/auth/login">
               <span
@@ -125,9 +135,7 @@ export default {
   data() {
     return {
       navbarOpen: false,
-      clientBaseURL: 'http://localhost:3000',
-      baseURL: 'http://localhost:8080',
-      userId: ''
+      isAdmin: JSON.parse(localStorage.getItem('userAdmin'))
     };
   },
   methods: {
@@ -136,7 +144,9 @@ export default {
     },
     async submitLogout() {
       const logout = await axios
-        .get(`${this.baseURL}/auth/logout`, { withCredentials: true })
+        .get(`${this.$store.getters.ServerUrl}/auth/logout`, {
+          withCredentials: true
+        })
         .catch((err) => {
           console.error('logoutError', err);
         });
@@ -144,8 +154,13 @@ export default {
       localStorage.setItem('isLogin', false);
       localStorage.setItem('Authorization', accessToken);
       localStorage.setItem('userId', null);
+      localStorage.setItem('userAdmin', null);
       localStorage.setItem('userKey', null);
+
       location.href = `${this.clientBaseURL}`;
+    },
+    getAdminPage() {
+      location.href = `${this.$store.getters.adminPage}`;
     }
   },
   components: {
