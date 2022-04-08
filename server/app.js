@@ -30,7 +30,7 @@ const buyconfirmRouter = require('./router/sold/buyconfirm.js');
 const buyRouter = require("./router/sold/buyproduct.js");
 const sellconfirmRouter = require('./router/sold/sellconfirm.js');
 const sellRouter = require("./router/sold/sellproduct.js");
-const minRouter = require('./router/shop/min.js');
+const filterRouter = require('./router/shop/filter.js');
 const mypageMainRouter = require('./router/mypage/mypageMain.js');
 const mypageBuyListRouter = require('./router/mypage/mypageBuyList.js');
 const mypageSellListRouter = require('./router/mypage/mypageSellList.js');
@@ -104,7 +104,7 @@ app.use('/style/loadComment', styleLoadCommentRoute);
 
 app.use('/shoplist', shoplistRoute);
 app.use('/shop/shoplist', shoplistRoute);
-app.use('/shop/min', minRouter);
+app.use('/shop/filter', filterRouter);
 app.use('/shop/shopview', shopviewRoute);
 
 app.use('/buy',buyconfirmRouter);

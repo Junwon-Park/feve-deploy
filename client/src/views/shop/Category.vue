@@ -144,7 +144,7 @@ export default{
         },
         getValue(event){
             console.log(event.target.value);
-            this.$axios.post('http://localhost:8080/shop/min',{
+            this.$axios.post('http://localhost:8080/shop/filter',{
                 cate:event.target.value})
             .then( (res) => {			
                 console.log(res.data);
@@ -158,7 +158,7 @@ export default{
         },
          getPrice(event) {
            console.log(event.target.value);
-           this.$axios.post('http://localhost:8080/shop/min', {
+           this.$axios.post('http://localhost:8080/shop/filter', {
              price: event.target.value
            })
                .then((res) => {

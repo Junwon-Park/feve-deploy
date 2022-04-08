@@ -97,7 +97,7 @@ export default {
     goFilter(cate){
       console.log("chip 버튼을 누름");
       console.log(cate);
-      this.$axios.post('http://localhost:8080/shop/min',{
+      this.$axios.post('http://localhost:8080/shop/filter',{
           cate:cate})
       .then( (res) => {			
           console.log(res.data);

@@ -3,7 +3,7 @@ const { Sell } = require('../../models');
 const db = require('../../models');
 const sequelize = require('sequelize');
 
-async function min(req, res, next) {
+async function filter(req, res, next) {
   const cate = req.body.cate;
   const price = req.body.price;
 
@@ -241,4 +241,4 @@ async function min(req, res, next) {
   // }
 }
 
-module.exports = { min };
+module.exports = { filter };
