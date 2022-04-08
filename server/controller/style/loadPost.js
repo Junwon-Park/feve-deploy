@@ -12,6 +12,7 @@ async function loadAllPost(req, res, next) {
             ',DATE(p.POST_WDATE) as POST_WDATE\n' +
             ',p.POST_PIC \n' +
             ',p.USER_KEY \n' +
+            ',(select GROUP_CONCAT(HASHTAG_TITLE) from hashtag h where p.POST_KEY=h.POST_KEY) as HASHTAG_TITLE\n' +
             ',u.USER_ID\n' +
             'from Post p\n' +
             'inner join User u on p.USER_KEY = u.USER_KEY;'

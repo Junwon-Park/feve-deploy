@@ -167,7 +167,6 @@ export default {
       })
           .then((res) => {
             this.totalPostCount = res.data[0].totalPostCount;
-            console.log(res.data)
           })
           .catch((error) => {
             console.log(error);
@@ -180,7 +179,6 @@ export default {
         })
             .then((res) => {
               this.totalFollowerCount = res.data[0].cnt;
-              console.log(res.data)
             })
             .catch((error) => {
               console.log(error);
@@ -192,7 +190,6 @@ export default {
         })
             .then((res) => {
               this.totalFollowingCount = res.data[0].cnt;
-              console.log(res.data)
             })
             .catch((error) => {
               console.log(error);

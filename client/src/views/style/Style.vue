@@ -100,7 +100,8 @@ export default {
         POST_WDATE: "",
         POST_PIC: "",
         USER_KEY: 0,
-        USER_ID: ""
+        USER_ID: "",
+        HASHTAG_TITLE: "",
       },
       newitems: {
         POST_KEY: 0,
@@ -108,7 +109,8 @@ export default {
         POST_WDATE: "",
         POST_PIC: "",
         USER_KEY: 0,
-        USER_ID: ""
+        USER_ID: "",
+        HASHTAG_TITLE: "",
       },
     }
   },
