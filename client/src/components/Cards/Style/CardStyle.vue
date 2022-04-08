@@ -5,7 +5,7 @@
       elevation="0"
       @click="goView(`${USER_KEY}`)"
   >
-      <div class="flex"
+      <div class="flex flex-col"
          style="background: none !important"
     >
         <div class="relative w-full max-w-full flex-grow flex-1">
@@ -23,6 +23,11 @@
 
           </div>
         </div>
+        <div class="relative w-full max-w-full flex-grow flex-1">
+          <div class="relative w-full mb-5 mx-auto relative overflow-hidden pl-8 pr-8">
+            <span class="text-xs text-blueGray-400 font-semibold" v-for="(ht, idx) in hashtag" :key="idx">#{{ ht }} </span>
+          </div>
+        </div>
       </div>
   </v-card>
 </template>
@@ -33,6 +38,7 @@ export default {
     return{
       user_key:JSON.parse(localStorage.getItem('userKey')),
       imageUrl : this.$store.getters.ServerUrl + '/getStyleImage?imageName=',
+      hashtag:[],
     }
   },
   props:{
@@ -60,12 +66,20 @@ export default {
       type: String,
     default: "Lego Firehouse Headquarters",
     },
+    HASHTAG_TITLE:{
+      type: String,
+      default: "",
+    },
+  },
+  watch:{
+    HASHTAG_TITLE: function(){
+      this.makeHashtagArray()
+    }
   },
   created(){
-    console.log(this.$props.USER_KEY)
+    this.makeHashtagArray()
   },
   methods:{
-
     goView(USER_KEY){
       console.log("USER_KEY:::::::::",USER_KEY)
         this.$router.push({path:'./style',
@@ -73,7 +87,17 @@ export default {
           params:{
             USER_KEY:USER_KEY}
         });
-    }
+    },
+
+    makeHashtagArray(){
+      let that = this;
+      console.log(that.HASHTAG_TITLE)
+      console.log(typeof that.HASHTAG_TITLE)
+
+      let hashtagArray = that.HASHTAG_TITLE.split(',');
+      that.hashtag=hashtagArray;
+      console.log(that.hashtag)
+    },
   },
 }
 </script>

@@ -1,6 +1,7 @@
 const { PostComment } = require('../../models');
 const db = require('../../models');
 const Sequelize = require('sequelize');
+const moment=require('moment')
 
 async function loadComment(req, res, next) {
     const post_key = req.body.POST_KEY;
