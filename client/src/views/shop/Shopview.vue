@@ -63,6 +63,7 @@
                             <v-icon>mdi-heart</v-icon>
                             </v-btn>
                           <div>관심상품</div>
+                          <div>{{likeTotal}}</div>
                         </v-btn>
                       </div>
                     </div>
@@ -177,7 +178,8 @@ export default {
       arr2:[],
       PRICES:[],
       CHART_PRICES:[],
-      CHART_DATES:[]
+      CHART_DATES:[],
+      likeTotal:''
       };
     },
     components: {
@@ -188,6 +190,7 @@ export default {
     mounted() {
       this.getView();
       this.countLike();
+      this.countLikeTotal();
       this.getTablePrice();
     //   setTimeout(() => {
     //   this.getRecentPrice()
@@ -295,12 +298,25 @@ export default {
               console.log(err);
             });
       },
+      countLikeTotal:function(){
+        var vm = this;
+        console.log("좋아요 몇개인지 확인");
+        this.$axios.post('http://localhost:8080/shop/shopview/'+ this.PRODUCT_KEY + '/countLikeTotal',
+        {product_key: this.PRODUCT_KEY})
+            .then(function(res){
+              console.log("countLikeTotal 결과는?", res);
+              vm.likeTotal = res.data;
+            })
+            .catch(function(err){
+              console.log(err);
+            });
+      },
       getRecentPrice: function(){
         var vm = this;
         this.$axios.post('http://localhost:8080/shop/shopview/'+ this.PRODUCT_KEY + '/recentPrice',
         {product_key: this.PRODUCT_KEY})
             .then(function(res){
-              console.log(res);
+              //console.log(res);
               if(res.data.length === 0)
               {
                 vm.RECENT_PRICE = '-';
@@ -324,8 +340,8 @@ export default {
                   // console.log(vm.CHART_PRICES);
                   // console.log(vm.CHART_DATES);
                 }
-                console.log(vm.CHART_PRICES);
-                console.log(vm.CHART_DATES);
+                //console.log(vm.CHART_PRICES);
+                //console.log(vm.CHART_DATES);
               }
             })
             .catch(function(err){
