@@ -5,13 +5,11 @@ const sequelize = require('sequelize');
 
 async function filterCate(req, res, next) {
   const cate = req.body.cate;
-  const price = req.body.price;
 
   console.log('*********************');
   console.log(
     'body 값 확인 ==>',req.body,
-    ',cate value : ', req.body.cate,
-    ',price value : ', req.body.price
+    ',cate value : ', req.body.cate
   );
 {
     await db.sequelize
