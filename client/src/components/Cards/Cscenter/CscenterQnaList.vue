@@ -1,11 +1,11 @@
 <template>
   <div
-      class="relative flex flex-col min-w-0 break-words bg-blueGray-200 w-full mb-6 shadow-lg rounded"
+      class="relative flex flex-col min-w-0 break-words  w-full mb-6  rounded"
   >
   <div class="rounded-t mb-0 px-4 py-3 border-0">
       <div class="flex flex-wrap items-center">
-        <div class="relative w-full px-4 max-w-full flex-grow flex-1">
-          <h3 class="font-semibold text-base text-blueGray-700">
+        <div class="relative w-full  max-w-full flex-grow flex-1">
+          <h3 class="font-semibold text-base text-black text-left">
             묻고 답하기
           </h3>
         </div>
@@ -17,7 +17,8 @@
         <thead class="thead-light">
           <tr>
             <th
-              class="px-6  bg-gray-200 text-black  align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold "
+              class="px-6  border-b-2  text-black  align-middle border border-solid  py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold "
+              style="border-color: black"
               v-for="(table, idx) in table" :key="idx"
             >
               {{ table }}
@@ -36,6 +37,10 @@
           />
         </tbody>
       </table>
+
+      <div class="form-row float-right mt-10">
+        <v-btn depressed color="black" style="color: white !important;;" to="/CscenterInsert"> 문의 작성 하기 </v-btn>
+      </div>
    </div>
    <CscenterQnaView
       :dialog="recDialog"
@@ -50,9 +55,6 @@
         :pageSize="pageSize"
         @onPageChanged="onPageChanged"
     />
-    <div class="form-row float-right">
-      <v-btn depressed color="yellow" to="/CscenterInsert"> 문의 작성 하기 </v-btn>
-    </div>
   </div>
    
 </template>
