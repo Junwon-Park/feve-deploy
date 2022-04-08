@@ -1,6 +1,6 @@
 const express = require('express');
 const { body } = require('express-validator');
-const { addPost } = require('../../controller/style/addPost.js');
+const { addPost, loadHashtag } = require('../../controller/style/addPost.js');
 
 const router = express.Router();
 

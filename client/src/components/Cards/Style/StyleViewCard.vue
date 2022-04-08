@@ -1,36 +1,41 @@
 <template>
   <v-container class="border mb-24">
     <v-row justify="space-around">
-      <v-card class="w-full " :elevation="0">
+      <v-card class="w-full pl-10 pr-10" :elevation="0">
         <img
             :src="imageUrl+POST_PIC" crossorigin
         >
         <v-card-actions>
 
           <v-card-text>
-            <div class="font-semibold ml-8 mb-2">
+            <div class="mb-10">
+              <span class="font-semibold text-blueGray-400 ml-1" v-for="(ht, idx) in hashtag" :key="idx">
+                #{{ ht }}
+              </span>
+            </div>
+            <div class="font-semibold mb-2">
               {{ POST_WDATE }}
             </div>
-            <div class="ml-8 mb-2">
+            <div class="mb-2">
               {{ POST_CONTENT }}
             </div>
-            <div class="mt-8">
-              <v-btn
-                  v-if="USER_KEY===user_key"
-                  class="ml-auto"
-                  icon
-                  @click="deletePost(`${POST_KEY}`)"
-              >
-                <v-icon>{{ show ? 'mdi-delete-empty' : 'mdi-delete-empty-outline' }}</v-icon>
-              </v-btn>
+            <div class="mt-8 ">
             <v-btn
-                class="ml-2"
                 icon
                 @click="showComment()"
             >
               <v-icon>{{ show ? 'mdi-comment' : 'mdi-comment-outline' }}</v-icon>
               <span class="ml-1 text-black">{{ totalCommentCount.toLocaleString('ko-KR') }}</span>
             </v-btn>
+              <v-btn
+                  v-if="USER_KEY===user_key"
+                  class="ml-5"
+                  icon
+                  @click="deletePost(`${POST_KEY}`)"
+              >
+                <v-icon>{{ show ? 'mdi-delete-empty' : 'mdi-delete-empty-outline' }}</v-icon>
+                삭제
+              </v-btn>
             </div>
           </v-card-text>
         </v-card-actions>
@@ -38,7 +43,7 @@
         <v-expand-transition>
           <div v-show="show">
             <v-divider></v-divider>
-            <v-row class="pl-10 pr-10 mt-5">
+            <v-row class=" mt-5">
                 <v-textarea
                     v-model="postcomment_content"
                     class="mx-2"
@@ -49,7 +54,7 @@
                 ></v-textarea>
                 <v-icon @click="addComment(`${POST_KEY}`)">mdi-send-circle</v-icon>
             </v-row>
-            <v-card-text class="pl-10 pr-10 mt-5">
+            <v-card-text class=" mt-5">
                 <div
                     v-for="message in messages"
                     :key="message.time"
@@ -104,6 +109,10 @@ export default {
       type: String,
       default: "",
     },
+    HASHTAG_TITLE:{
+      type: String,
+      default: "",
+    },
   },
   data() {
     return {
@@ -112,6 +121,7 @@ export default {
       show: false,
       postcomment_content: "",
       totalCommentCount: "",
+      hashtag:[],
       messages: [{
           USER_ID: "",
           COMMENT_CONTENT: "",
@@ -211,10 +221,16 @@ export default {
 
         return `${Math.floor(betweenTimeDay / 365)}년 전`;
       },
+    makeHashtagArray(){
+      let that = this;
+      let hashtagArray = that.HASHTAG_TITLE.split(',');
+      that.hashtag=hashtagArray;
+    },
   },
   created(){
     this.countPost()
     this.loadComment()
+    this.makeHashtagArray()
   }
 }
 </script>

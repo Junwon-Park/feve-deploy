@@ -55,13 +55,12 @@
                   cols="12"
                   sm="12"
                   md="12">
-                <h5>#해시태그</h5>
+                <h5>#해시태그 <small>(입력 후 엔터 혹은 선택)</small></h5>
                 <v-combobox
                     v-model="chips"
                     :items="items"
                     chips
                     clearable
-                    label="Your favorite hobbies"
                     multiple
                     prepend-icon="mdi-pound"
                     :elevation="0"
@@ -116,6 +115,7 @@ export default {
     chips: [],
     items: ['Lego', 'BearBrick', 'Architecture', 'Character', 'Vehicle', '100%', '200%', '1000%'],
     dialog: false,
+    post_key: 0,
     Posts:{
       post_contents:"",
       post_pic:"",
@@ -143,10 +143,12 @@ export default {
         post_pic: that.Posts.post_pic,
         post_contents: that.Posts.post_contents,
         user_key: that.userInfo.USER_KEY,
+        hashtag: that.chips
       })
-          .then(function(){
-            alert("게시글을 등록했습니다.")
-            that.$router.go(that.$router.currentRouter);
+          .then(function( res ){
+            console.log(res.data.POST_KEY)
+            that.post_key=res.data.POST_KEY;
+            alert("게시글을 등록했습니다.") /that.$router.go(that.$router.currentRouter);
           })
           .catch(function(err){
             console.log(err);
@@ -160,12 +162,12 @@ export default {
           'content-type': 'multipart/form-data'
         }
       })
-          .then(function(res){
-            console.log(res)
-          })
-          .catch(function(err){
-            console.log(err)
-          })
+      .then(function(res){
+        console.log(res)
+      })
+      .catch(function(err){
+        console.log(err)
+      })
     },
     handleImage(e){
       this.uploadServerImg = e.target.files;
@@ -182,7 +184,6 @@ export default {
       this.chips = [...this.chips]
     },
   },
-
   created() {
 
   },

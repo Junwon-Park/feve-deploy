@@ -126,6 +126,7 @@ export default {
         USER_KEY: 0,
         USER_ID: "",
         USER_NAME:"",
+        HASHTAG_TITLE: "",
       },
       totalPostCount: 0,
       totalFollowerCount: 0,
@@ -148,7 +149,9 @@ export default {
           })
     },
     loadPost(){
-      this.$axios.post('http://localhost:8080/style/loadPost', {
+
+      let that = this;
+      that.$axios.post('http://localhost:8080/style/loadPost', {
         USER_KEY : this.$route.params.USER_KEY
       })
           .then((res) => {
