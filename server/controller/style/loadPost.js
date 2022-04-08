@@ -16,7 +16,7 @@ async function loadAllPost(req, res, next) {
             ',u.USER_ID\n' +
             'from Post p\n' +
             'inner join User u on p.USER_KEY = u.USER_KEY\n' +
-            'order by POST_WDATE desc;'
+            'order by p.POST_WDATE desc;'
             ,{ type: Sequelize.QueryTypes.SELECT }
         )
         .then((result) => {
@@ -43,8 +43,7 @@ async function loadPost(req, res, next) {
           ',(select GROUP_CONCAT(HASHTAG_TITLE) from hashtag h where p.POST_KEY=h.POST_KEY) as HASHTAG_TITLE\n' +
           'from Post p\n' +
           'inner join User u on p.USER_KEY = u.USER_KEY  \n' +
-          'where p.USER_KEY='+user_key +
-          ' order by POST_WDATE desc;'
+          'where p.USER_KEY='+user_key +' order by POST_WDATE desc;'
           ,{ type: Sequelize.QueryTypes.SELECT }
       )
       .then((result) => {
