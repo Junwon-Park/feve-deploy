@@ -41,16 +41,23 @@
         </p>
         <p class="text-xs text-gray-400">즉시 구매 불가</p>
       </div>
-      <v-icon  style="font-size: 20px;"> mdi-heart-outline </v-icon> <span class="text-xs">1,156</span>
+      <!-- <div v-if="!this.likeStatus" >
+      <v-icon  style="font-size: 20px;" @click="this.$refs.goLike()"> mdi-heart-outline </v-icon> <span class="text-xs">1,156</span>
+      </div>
+      <div v-else>
+      <v-icon style="font-size: 20px;" @click="this.$refs.goDislike()"> mdi-heart </v-icon> <span class="text-xs">1,156</span>
+      </div> -->
     </div>
   </div>
 </template>
 <script>
 import itemPic5 from "@/assets/img/product-lego5.jpg";
+
 export default {
   data(){
     return{
-      imageUrl : this.$store.getters.ServerUrl + '/getImage?imageName='
+      imageUrl : this.$store.getters.ServerUrl + '/getImage?imageName=',
+      likeStatus:false,
     }
   },
   props: {
@@ -87,7 +94,6 @@ export default {
       params:{
         PRODUCT_KEY:this.PRODUCT_KEY}
         });
-      
     }
   }
 };
