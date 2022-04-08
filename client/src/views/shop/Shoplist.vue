@@ -112,17 +112,6 @@ export default {
       console.log(err);
       });
     },
-
-  //  computed() {
-  //   var PRODUCT_PIC = this.PRODUCT_PIC;
-  //   this.$axios.get('http://localhost:8080/shop/shoplist')
-  //       .then(function(res){
-  //         console.log(res);
-  //         PRODUCT_PIC = res.data.PRODUCT_PIC;
-  //       })
-  //       .catch(function(err){
-  //         console.log(err);
-  //       });
   }
 
 };

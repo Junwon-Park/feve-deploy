@@ -189,10 +189,10 @@ export default {
       this.getView();
       this.countLike();
       this.getTablePrice();
-      setTimeout(() => {
-      this.getRecentPrice()
-    }, 1000)
-      //this.getRecentPrice();
+    //   setTimeout(() => {
+    //   this.getRecentPrice()
+    // }, 1000)
+      this.getRecentPrice();
     },
     methods:{
       getView:function(){
