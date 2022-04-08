@@ -16,7 +16,7 @@
             <div class="flex flex-wrap mt-5">
               <div class="relative w-full max-w-full flex-grow flex-1 text-right">
                 <div class="text-left">
-                  <v-chip class="ma-2" color="#f4f4f4" v-model="cate" @click="goFilter('3,4,5,6,7,8,9')" > 전체 </v-chip>
+                  <v-chip class="ma-2" color="#f4f4f4" v-model="cate" @click="getProductList()" > 전체 </v-chip>
                   <v-chip class="ma-2" color="#f4f4f4"   v-model="cate" @click="goFilter('3,4,5')"> 레고 </v-chip>
                   <v-chip class="ma-2" color="#f4f4f4"   v-model="cate" @click="goFilter('6,7,8,9')"> 베어브릭 </v-chip>
                 </div>
@@ -75,26 +75,21 @@ export default {
     Category,
     Slide
   },
-  beforeCreate() {
-    var vm = this;
-    this.$axios.get('http://localhost:8080/shop/shoplist')
+  created() {
+    this.getProductList()
+  },
+  methods:{
+    getProductList:function(){
+      var vm = this;
+      this.$axios.get('http://localhost:8080/shop/shoplist')
         .then(function(res){
           console.log("디비에서 결과 가져옴", res);
-          // console.log("res.data값은?", res.data);
           vm.items = res.data;
-          // console.log("res.data[0].Sells[0] 값은?",res.data[0].Sells[0]);
-          // console.log("res.data[0].Sells[0].SELL_PRICE의 값은?",res.data[0].Sells[0].SELL_PRICE);
-          // for(const i in vm.items)
-          // {
-          //   console.log(res.data[i].Sells[0].SELL_PRICE);
-          //   vm.items.SELL_PRICE=res.data[i].Sells[0].SELL_PRICE;
-          // }
         })
         .catch(function(err){
           console.log(err);
         });
-  },
-  methods:{
+    },
     changeitems(e){
       console.log("changeitems의 e 값",e);
       this.items = e;
