@@ -73,7 +73,7 @@ export default {
     CscenterQnaList,
   
   },
- mthod:{
+ methods:{
    startend(start,end,reqpage) {
      let that = this;
      that.limitStart = start;
