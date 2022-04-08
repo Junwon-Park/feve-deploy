@@ -18,7 +18,7 @@ async function loadComment(req, res, next) {
             ,{ type: Sequelize.QueryTypes.SELECT }
         )
         .then((result) => {
-            console.log(result);
+            console.log(result)
             res.json(result);
         })
         .catch((err) => console.log(err));

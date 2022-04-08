@@ -49,12 +49,12 @@
                 ></v-textarea>
                 <v-icon @click="addComment(`${POST_KEY}`)">mdi-send-circle</v-icon>
             </v-row>
-            <v-card-text class="pl-10 pr-10 mb-5">
-                <v-text-item
+            <v-card-text class="pl-10 pr-10 mt-5">
+                <div
                     v-for="message in messages"
                     :key="message.time"
-                    :color="message.color"
                     small
+                    class=" mb-5"
                 >
                   <div>
                     <div class="font-weight-normal">
@@ -63,7 +63,7 @@
                     </div>
                     <div>{{ message.COMMENT_CONTENT }}</div>
                   </div>
-                </v-text-item>
+                </div>
             </v-card-text>
           </div>
         </v-expand-transition>
@@ -116,7 +116,6 @@ export default {
           USER_ID: "",
           COMMENT_CONTENT: "",
           COMMENT_WDATE: "",
-          color: 'deep-purple lighten-1',
         }],
     }
   },
@@ -179,15 +178,18 @@ export default {
       that.$axios.post('http://localhost:8080/style/loadComment',{
         POST_KEY: this.POST_KEY,
       })
-          .then(function(res){
-            let commentDate=(res.data[0].COMMENT_WDATE.replace('T', ' ')).split('.')[0];
-            res.data[0].COMMENT_WDATE=that.timeForToday(commentDate);
-            console.log(res.data)
-            that.messages=res.data;
-          })
-          .catch(function(err){
-            console.log(err);
-          });
+      .then(function(res){
+        console.log(res.data)
+        res.data.forEach(function(value){
+          let commentDate = value['COMMENT_WDATE'].replace('T', ' ').split('.')[0];
+          console.log(commentDate); //출력
+          value['COMMENT_WDATE']=that.timeForToday(commentDate);
+        });
+        that.messages=res.data;
+      })
+      .catch(function(err){
+        console.log(err);
+      });
     },
 
      timeForToday(value) {
