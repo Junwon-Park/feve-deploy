@@ -1,18 +1,4 @@
 <template>
-      <table class=" w-full bg-transparent border-collapse">
-        <thead class="thead-light">
-          <tr>
-            <th
-              class="px-6  border-b-2  text-black  align-middle border border-solid  py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold "
-              style="border-color: black"
-              v-for="(table, idx) in table" :key="idx"
-            >
-              {{ table }}
-
-            </th>
-          </tr>
-       </thead>
-        <tbody>
         <tr>
           <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-2 text-center"
@@ -28,14 +14,12 @@
                 small
                 color="black"
                 style="color: white !important;"
-                v-if="follower"
+                v-if="following"
                 @click="followStatus">
               팔로우
             </v-btn>
           </td>
         </tr>
-        </tbody>
-      </table>
 </template>
 
 <script>
@@ -43,7 +27,7 @@ export default {
   props:{
       USER_ID: {
         type: String,
-        default: ""
+        default: "abcde"
       },
     follower: {
         type: Boolean,
@@ -52,9 +36,13 @@ export default {
       type: Boolean,
     }
   },
+  watch:{
+    USER_ID: function(){
+      console.log(this.USER_ID)
+    }
+  },
   data(){
     return{
-      table: ['아이디','상태'],
     }
   },
   components: {
@@ -66,6 +54,11 @@ export default {
     }
   },
   created(){
+    console.log("props: ", this.USER_ID)
+    console.log("props: ", this.follower)
+    console.log("props: ", this.following)
+  },
+  updated(){
     console.log("props: ", this.USER_ID)
     console.log("props: ", this.follower)
     console.log("props: ", this.following)

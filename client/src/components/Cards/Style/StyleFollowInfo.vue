@@ -82,29 +82,67 @@
         max-width="350"
         >
       <v-card class="p-4">
-        <v-card-title class="text-xs font-semibold" v-if="follower===true">
+        <span class="text-md font-semibold" v-if="follower===true">
             FOLLOW
-        </v-card-title>
-        <v-card-title class="text-xs font-semibold" v-else>
+        </span>
+        <span class="text-md font-semibold" v-else>
           FOLLOWING
-        </v-card-title>
-        <StyleFollowTable
-            v-if="follower"
-            :followList="followList"
-            :follower="follower"
-            v-bind="followList"
-        />
-        <StyleFollowTable
-            v-if="following"
-            :following="following"
-            :followingList="followingList"
-            :v-bind="followingList"
-        />
+        </span>
+        <div v-if="follower">
+          <table class=" w-full bg-transparent border-collapse">
+            <thead class="thead-light">
+            <tr>
+              <th
+                  class="px-6  border-b-2  text-black  align-middle border border-solid  py-2 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold "
+                  style="border-color: black"
+                  v-for="(table, idx) in table" :key="idx"
+              >
+                {{ table }}
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+          <StyleFollowTable
+              v-for="(followList, idx) in followList"
+              :key="idx"
+              :followList="followList"
+              :follower="follower"
+              v-bind="followList"
+          />
+
+            </tbody>
+          </table>
+        </div>
+        <div v-if="following">
+          <table class=" w-full bg-transparent border-collapse">
+            <thead class="thead-light">
+            <tr>
+              <th
+                  class="px-6  border-b-2  text-black  align-middle border border-solid  py-2 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold "
+                  style="border-color: black"
+                  v-for="(table, idx) in table" :key="idx"
+              >
+                {{ table }}
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+          <StyleFollowTable
+              v-for="(followingList, idx) in followingList"
+              :key="idx"
+              :following="following"
+              :followingList="followingList"
+              :v-bind="followingList"
+          />
+            </tbody>
+          </table>
+        </div>
         <v-card-actions>
           <v-spacer></v-spacer>
 
           <v-btn
-              color="green darken-1"
+              color="white "
+              style="background: black !important;"
               text
               @click="dialog = false"
           >
@@ -132,6 +170,7 @@ export default {
       dialog: false,
       follower: false,
       following: false,
+      table: ['아이디','상태'],
       totalFollowerCount: 0,
       totalFollowingCount: 0,
       totalPostCount : 0,
@@ -211,6 +250,7 @@ export default {
           .then((res) => {
             that.followingList = res.data;
             console.log(res.data)
+            console.log(that.followingList)
           })
           .catch((error) => {
             console.log(error);
