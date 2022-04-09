@@ -72,7 +72,9 @@ async function getWaitBuyList(req, res) {
     const start = req.body.limitStart;
     const count = req.body.limitCount;
     const state = req.body.state; 
-
+    const orderColumn = req.body.orderColumn;
+    const orderDir = req.body.orderDir;
+    
     await Buy.findAll({
         where:{
             BUY_BUYER_KEY: userKey,
@@ -83,7 +85,8 @@ async function getWaitBuyList(req, res) {
             model:Product,
             attributes: ['PRODUCT_NAME', 'PRODUCT_BRAND', 'PRODUCT_PIC'],
         },
-        limit:[start, count]
+        limit:[start, count],
+        order:getSeqOrderCondition(orderColumn, orderDir),
     })
     .then((result) => {
         console.log("getWaitBuyList has been responsed from db : ",result);
@@ -92,6 +95,13 @@ async function getWaitBuyList(req, res) {
     .catch((err) => console.log(err));
 }
 
+function getSeqOrderCondition(orderColumn, orderDir)
+{
+    if(orderColumn.length == 0)
+        return "";
+    else
+        return [[orderColumn, orderDir]]
+}
 
 async function getProgressBuyListCount(req, res) {
     
@@ -246,6 +256,8 @@ async function getDoneBuyList(req, res) {
     const start = req.body.limitStart;
     const count = req.body.limitCount;
     const state = req.body.state; 
+    const orderColumn = req.body.orderColumn;
+    const orderDir = req.body.orderDir;
 
     await Buy.findAll({
         where:{
@@ -257,7 +269,8 @@ async function getDoneBuyList(req, res) {
             model:Product,
             attributes: ['PRODUCT_NAME', 'PRODUCT_BRAND', 'PRODUCT_PIC'],
         },
-        limit:[start, count]
+        limit:[start, count],
+        order:getSeqOrderCondition(orderColumn, orderDir),
     })
     .then((result) => {
         console.log("getDoneBuyList has been responsed from db : ",result);

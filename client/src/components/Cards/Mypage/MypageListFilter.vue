@@ -26,7 +26,7 @@
             ></v-select>
 
             <div>
-              <a href="#" v-for="(column, i) in filter.orderableColumns" :key="i"
+              <a href="#" v-for="(column, i) in filter.orderTexts" :key="i"
                 @click="onOrderClicked(i)">
                   <span>{{column}}</span> &nbsp;&nbsp;
               </a>
