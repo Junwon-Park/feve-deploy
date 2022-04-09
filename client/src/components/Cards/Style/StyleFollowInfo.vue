@@ -170,7 +170,7 @@ export default {
       dialog: false,
       follower: false,
       following: false,
-      table: ['아이디','상태'],
+      table: ['아이디'],
       totalFollowerCount: 0,
       totalFollowingCount: 0,
       totalPostCount : 0,
@@ -250,7 +250,7 @@ export default {
           .then((res) => {
             that.followingList = res.data;
             console.log(res.data)
-            console.log(that.followingList)
+            console.log("following list::::::",that.followingList)
           })
           .catch((error) => {
             console.log(error);

@@ -1,23 +1,16 @@
 <template>
         <tr>
-          <td
+          <td v-if="!following"
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-2 text-center"
 
           >
-            {{ USER_ID }}
+            {{ followList.USER_ID }}
           </td>
-          <td
+          <td v-else
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-2 text-center"
 
           >
-            <v-btn
-                small
-                color="black"
-                style="color: white !important;"
-                v-if="following"
-                @click="followStatus">
-              팔로우
-            </v-btn>
+            {{ followingList.USER_ID }}
           </td>
         </tr>
 </template>
@@ -25,6 +18,12 @@
 <script>
 export default {
   props:{
+    followingList:{
+      type: Object
+    },
+  followList:{
+    type: Object
+  },
       USER_ID: {
         type: String,
         default: "abcde"
@@ -34,11 +33,6 @@ export default {
     },
     following: {
       type: Boolean,
-    }
-  },
-  watch:{
-    USER_ID: function(){
-      console.log(this.USER_ID)
     }
   },
   data(){
@@ -53,15 +47,5 @@ export default {
 
     }
   },
-  created(){
-    console.log("props: ", this.USER_ID)
-    console.log("props: ", this.follower)
-    console.log("props: ", this.following)
-  },
-  updated(){
-    console.log("props: ", this.USER_ID)
-    console.log("props: ", this.follower)
-    console.log("props: ", this.following)
-  }
   }
 </script>
