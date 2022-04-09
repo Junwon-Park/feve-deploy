@@ -6,7 +6,7 @@
         <mypage-main v-if= "currentViewState === 0"/>
       
         <mypage-buy-list v-else-if= "currentViewState === 1"
-        style=" max-width:80%; margin: 0 auto 10rem;" />
+        style="margin:auto; max-width:80%; margin-bottom:10%;" />
 
         <mypage-sell-list v-else-if= "currentViewState === 2"
         style="margin:auto; max-width:80%; margin-bottom:10%;" />

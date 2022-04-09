@@ -25,17 +25,17 @@ async function getBuyCounts(req, res) {
         });
 
         const wait = await Buy.count({
-        where: { BUY_BUYER_KEY: userKey, BUY_STATUS: '0' },
+        where: { BUY_BUYER_KEY: userKey, BUY_STATUS: {[Op.or]:['0', '2']} },
         });
 
         const progress = await Buy.count({
-        where: { BUY_BUYER_KEY: userKey, BUY_STATUS: '1' },
+        where: { BUY_BUYER_KEY: userKey, BUY_STATUS: '3' },
         });
 
         const done = await Buy.count({
             where: { 
                 BUY_BUYER_KEY: userKey, 
-                BUY_STATUS: {[Op.or]:['1', '2']}
+                BUY_STATUS: {[Op.or]:['1', '4']},
             },
         });
 
@@ -55,18 +55,18 @@ async function getSellCounts(req, res) {
         });
 
         const wait = await Sell.count({
-        where: { SELL_SELLER_KEY: userKey, SELL_STATUS: '0' },
+        where: { SELL_SELLER_KEY: userKey, SELL_STATUS: {[Op.or]:['0', '2']} },
         });
 
         const progress = await Sell.count({
-            where: { SELL_SELLER_KEY: userKey, SELL_STATUS: '1' },
+            where: { SELL_SELLER_KEY: userKey, SELL_STATUS: '3' },
         });
         
         //where: { [Op.and]: [ { authorId: 12 }, { status: 'active' } ] }
         const done = await Sell.count({
             where: { 
                 SELL_SELLER_KEY: userKey, 
-                SELL_STATUS: {[Op.or]:['1', '2']}
+                SELL_STATUS: {[Op.or]:['1', '4']},
             },
         });
 

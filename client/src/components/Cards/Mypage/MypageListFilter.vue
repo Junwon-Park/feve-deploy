@@ -10,24 +10,26 @@
       </ul>
 
 <!-- <select v-model="formData[word.name]" :name="word.name">
-    <option v-for="(option, index) in word.fieldProps.opts" :key="index" :value="option.value" :selected="index === 0 ? 'selected' : ''">
+    <option v-for="(option, index) in word.fieldProps.opts" :key="index" :value="option.value" :strSelected="index === 0 ? 'strSelected' : ''">
         {{ option.value }}
     </option>
 </select> -->
         <div class="grid">
-            <v-select
-                v-model="selected"
-                :items="filter.filters"
-                @change="onFilterChanged"
+            <v-select v-if="filterObjs.length > 0"
+                v-model="selectedObj"
+                :items="filterObjs"
+                @change="onFilterChanged()"
+                item-value="index"
+                item-text="text"
                 outlined
                 style="width:10rem;"
             ></v-select>
 
             <div>
-                <a href="#" v-for="(column, i) in filter.orderableColumns" :key="i"
+              <a href="#" v-for="(column, i) in filter.orderableColumns" :key="i"
                 @click="onOrderClicked(i)">
-                    <span>{{column}}</span> &nbsp;&nbsp;
-                </a>
+                  <span>{{column}}</span> &nbsp;&nbsp;
+              </a>
             </div>
         </div>
     </div>
@@ -44,19 +46,40 @@ export default {
   props:{
       filter:Object,
   },
+  watch:{
+    filter(){
+      this.initSelected();
+    }
+  },
   data() {
     return {
-        selected:'',
+        filterObjs:[],
+        selectedObj:Object,
     }
   },
   created(){
       this.initSelected();
-    //   console.log("filter.selected : ", this.selected);
+    //   console.log("filter.strSelected : ", this.strSelected);
   },
   methods:{
       initSelected()
       {
-        this.selected = this.filter.filters[0];
+        this.filterObjs=[];
+        if(this.filter.slotStates.length > 0)
+        {
+          let i = 0;
+          for(let state of this.filter.slotStates)
+          {
+            this.filterObjs.push({
+              index:i,
+              text:state
+            })
+            i++;
+          }
+        
+          this.selectedObj = this.filterObjs[0];
+        }
+        
       },
 
       onOrderClicked(idx){
@@ -64,8 +87,10 @@ export default {
       },
 
       onFilterChanged(){
-          this.$emit("onFilterChanged", this.selected);
+        //console.log("FilterChanged.index: ", this.selectedObj);
+        this.$emit("onFilterChanged", this.selectedObj);
       },
+
   }
 };
 </script>

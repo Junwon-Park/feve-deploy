@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="w-full">
     <mypage-top-count-tap :counts="counts" :tapNames="tapNames" @onTapChanged="onTapChanged"/>
     <mypage-period-setter @onSearchClicked="onSearchClicked"
       class="divide-y-gray"
@@ -18,16 +18,16 @@
         v-for="item in list" :key="item.SELL_KEY"
         :item="item"
         :price="item.sell_price"/>
-    </div>
 
-    <v-pagination
-      v-model="curPage"
-      :length="totalPage"
-      :total-visible="7"
-      @input="onPageChanged"
-      color="black"
-      class="my-4"
-    ></v-pagination>
+      <v-pagination
+        v-model="curPage"
+        :length="totalPage"
+        :total-visible="7"
+        @input="onPageChanged"
+        color="black"
+        class="my-4"
+      ></v-pagination>
+    </div>
   </div>
 </template>
 
@@ -54,17 +54,17 @@ import MypageListFilter from '../../components/Cards/Mypage/MypageListFilter.vue
         filters:[
           {
             tapIdx:0,
-            filters:["전체", "입찰중", "기한만료"],
+            slotStates:["전체", "입찰중", "기한만료"],
             orderableColumns:["판매 희망가", "만료일"],
           },
           {
             tapIdx:1,
-            filters:["전체", "발송요청", "발송완료", "입고대기", "입고완료", "검수 중", "검수보류","검수합격", "보류", "거래실패"],
+            slotStates:["전체", "발송요청", "발송완료", "입고대기", "입고완료", "검수 중", "검수보류","검수합격", "보류", "거래실패"],
             orderableColumns:["상태"],
           },
           {
             tapIdx:2,
-            filters:["전체", "배송완료", "취소완료"],
+            slotStates:["전체", "배송완료", "취소완료"],
             orderableColumns:["정산일", "상태"],
           }
         ],
@@ -151,6 +151,11 @@ import MypageListFilter from '../../components/Cards/Mypage/MypageListFilter.vue
       onSearchClicked(startDate, endDate){
         this.startDate = startDate;
         this.endDate = endDate;
+        
+        this.curPage = 1;
+        this.rowStart = 0;
+        this.setRowStart();
+        
         this.getListCount();
         this.getList();
       },
@@ -178,7 +183,7 @@ import MypageListFilter from '../../components/Cards/Mypage/MypageListFilter.vue
       },
 
       getList(){
-        //console.log("getList", this.rowStart, this.slotCountPerPage);
+        console.log("getList", this.rowStart, this.slotCountPerPage);
         this.$axios.post(this.getListUrl, {
           USER_KEY : '1', //로그인과 연동시키기
           startDate : this.startDate,
