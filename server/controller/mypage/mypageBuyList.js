@@ -39,7 +39,7 @@ async function getWaitBuyListCount(req, res) {
     await Buy.count({
         where:{
             BUY_BUYER_KEY: userKey,
-            BUY_STATUS: getBuyStatusCondition(state),
+            BUY_STATUS: getWaitStatusCondition(state),
             BUY_SDATE: {[Op.between]: [startDate, endDate]}
         }
     })
@@ -50,24 +50,19 @@ async function getWaitBuyListCount(req, res) {
     .catch((err) => console.log(err))
 }
 
-function getBuyStatusCondition(state)
+function getWaitStatusCondition(state)
 {
-    let condition;
     switch(state){
         case 1:{
-            condition = '0';
-            break;
+            return '0';
         }
         case 2:{
-            condition = '2';
-            break;
+            return '2';
         }
         default:{
-            condition = {[Op.or]:['0', '2']};
-            break;
+            return {[Op.or]:['0', '2']};
         }
     }
-    return condition;
 }
 
 async function getWaitBuyList(req, res) {
@@ -81,7 +76,7 @@ async function getWaitBuyList(req, res) {
     await Buy.findAll({
         where:{
             BUY_BUYER_KEY: userKey,
-            BUY_STATUS: getBuyStatusCondition(state),
+            BUY_STATUS: getWaitStatusCondition(state),
             BUY_SDATE: {[Op.between]: [startDate, endDate]}
         },
         include:{
@@ -187,7 +182,6 @@ async function getProgressBuyList(req, res) {
         ,b.BUY_EDATE	
         ,b.BUY_STATUS	
         ,b.BUY_SELLER_KEY
-        ,p.PRODUCT_KEY
         ,p.PRODUCT_CATE
         ,p.PRODUCT_BRAND
         ,p.PRODUCT_NAME
@@ -232,22 +226,17 @@ async function getDoneBuyListCount(req, res) {
 
 function getDoneStatusCondition(state)
 {
-    let condition;
     switch(state){
         case 1:{
-            condition = '1';
-            break;
+            return '1';
         }
         case 2:{
-            condition = '4';
-            break;
+            return '4';
         }
         default:{
-            condition = {[Op.or]:['1', '4']};
-            break;
+            return {[Op.or]:['1', '4']};
         }
     }
-    return condition;
 }
 
 async function getDoneBuyList(req, res) {

@@ -241,7 +241,7 @@ import moment from 'moment'
                 //STATUS Null일때 입고완료로 처리.
                 slot.strState = this.curFilter.slotStates[4];
               }
-              else if(slot.INSPECTION_STATUS == 0) 
+              else if(slot.INSPECTION_STATUS == 0) //검수중
                 slot.strState = this.curFilter.slotStates[5];
               else
               {
