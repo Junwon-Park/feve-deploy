@@ -72,6 +72,8 @@ async function getWaitSellList(req, res) {
     const start = req.body.limitStart;
     const count = req.body.limitCount;
     const state = req.body.state; 
+    const orderColumn = req.body.orderColumn;
+    const orderDir = req.body.orderDir;
 
     await Sell.findAll({
         where:{
@@ -83,13 +85,22 @@ async function getWaitSellList(req, res) {
             model:Product,
             attributes: ['PRODUCT_NAME', 'PRODUCT_BRAND', 'PRODUCT_PIC'],
         },
-        limit:[start, count]
+        limit:[start, count],
+        order:getSeqOrderCondition(orderColumn, orderDir),
     })
     .then((result) => {
         console.log("getWaitSellList has been responsed from db : ",result);
         res.json(result);
     })
     .catch((err) => console.log(err))
+}
+
+function getSeqOrderCondition(orderColumn, orderDir)
+{
+    if(orderColumn.length == 0)
+        return "";
+    else
+        return [[orderColumn, orderDir]]
 }
 
 async function getProgressSellListCount(req, res) {
@@ -244,6 +255,8 @@ async function getDoneSellList(req, res) {
     const start = req.body.limitStart;
     const count = req.body.limitCount;
     const state = req.body.state; 
+    const orderColumn = req.body.orderColumn;
+    const orderDir = req.body.orderDir;
 
     await Sell.findAll({
         where:{
@@ -255,7 +268,8 @@ async function getDoneSellList(req, res) {
             model:Product,
             attributes: ['PRODUCT_NAME', 'PRODUCT_BRAND', 'PRODUCT_PIC'],
         },
-        limit:[start, count]
+        limit:[start, count],
+        order:getSeqOrderCondition(orderColumn, orderDir),
     })
     .then((result) => {
         console.log("getDoneSellList has been responsed from db : ",result);

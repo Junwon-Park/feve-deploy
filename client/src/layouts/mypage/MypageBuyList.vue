@@ -304,41 +304,6 @@ import moment from 'moment'
         this.getList();
       },
       
-      // sortPrice(){
-      //   this.sortPriceDir = !this.sortPriceDir;
-      //   // console.log("sortPrice.priceDir: ", this.sortPriceDir);
-      //   if(this.sortPriceDir)
-      //   {
-      //     this.list.sort(function(a, b){
-      //       return a.BUY_PRICE - b.BUY_PRICE;
-      //     });
-      //   }
-      //   else
-      //   {
-      //     this.list.sort(function(a, b){
-      //       return b.BUY_PRICE - a.BUY_PRICE;
-      //     });
-      //   }
-      // },
-
-      // sortDate(){
-      //   this.sortDateDir = !this.sortDateDir;
-      //   //console.log("sortDate.sortDateDir: ", this.sortDateDir);
-        
-      //   if(this.sortDateDir)
-      //   {
-      //     this.list.sort(function(a, b){
-      //       return Date.parse(a.BUY_EDATE) - Date.parse(b.BUY_EDATE);
-      //     });
-      //   }
-      //   else
-      //   {
-      //     this.list.sort(function(a, b){
-      //       return Date.parse(b.BUY_EDATE) - Date.parse(a.BUY_EDATE);
-      //     });
-      //   }
-      // },
-
       onFilterChanged(selected){
         //console.log("buyList.onFilterChanged.selected: ", selected);
         this.selectedFilterIdx = selected;

@@ -56,17 +56,20 @@ import moment from 'moment'
           {
             tapIdx:0,
             slotStates:["전체", "입찰중", "기한만료"],
-            orderableColumns:["판매 희망가", "만료일"],
+            orderTexts:["판매 희망가", "만료일"],
+            orderColumn:["sell_price", "sell_edate"],
           },
           {
             tapIdx:1,
             slotStates:["전체", "발송요청", "발송완료", "입고대기", "입고완료", "검수 중", "검수보류","검수합격", "보류", "거래실패"],
-            orderableColumns:["상태"],
+            orderTexts:["상태"],
+            orderColumn:["sell_status"],
           },
           {
             tapIdx:2,
             slotStates:["전체", "배송완료", "취소완료"],
-            orderableColumns:["상태"],
+            orderTexts:["상태"],
+            orderColumn:["sell_status"],
           }
         ],
         curFilter:'',
@@ -83,6 +86,11 @@ import moment from 'moment'
 
         reqObj:Object,
         selectedFilterIdx:0,
+
+        curOrderIdx: -1,
+        orderColumn: String,
+        strOrderDirs:["ASC","DESC"],
+        orderDir: 0,
       }
     },
     created() {
@@ -113,6 +121,8 @@ import moment from 'moment'
         this.curFilter = this.filters[idx];
         
         this.selectedFilterIdx = 0;
+        this.initOrder();
+
         this.list.length = 0;
         this.totalPage = 0;
         this.goToFirstPage();
@@ -127,6 +137,12 @@ import moment from 'moment'
 
       setRowStart(){
         this.rowStart = (this.curPage-1) * this.slotCountPerPage;
+      },
+
+      initOrder(){
+        this.curOrderIdx = -1,
+        this.orderColumn ='';
+        this.orderDir = 0;
       },
 
       setUrl()
@@ -158,6 +174,7 @@ import moment from 'moment'
         this.startDate = startDate;
         this.endDate = endDate;
         
+        this.initOrder();
         this.goToFirstPage();
         this.getListCount();
         this.getList();
@@ -189,12 +206,14 @@ import moment from 'moment'
       getList(){
         //console.log("getList", this.rowStart, this.slotCountPerPage);
         this.$axios.post(this.getListUrl, {
-          USER_KEY : '1', //로그인과 연동시키기
-          startDate : this.startDate,
-          endDate : this.endDate,
-          limitStart: this.rowStart,
-          limitCount: this.slotCountPerPage,
-          state : this.selectedFilterIdx,
+          USER_KEY    : '1', //로그인과 연동시키기
+          startDate   : this.startDate,
+          endDate     : this.endDate,
+          limitStart  : this.rowStart,
+          limitCount  : this.slotCountPerPage,
+          state       : this.selectedFilterIdx,
+          orderColumn : this.orderColumn,
+          orderDir    : this.strOrderDirs[this.orderDir],
         })
         .then((result) => {
           console.log(result.data);
@@ -270,47 +289,20 @@ import moment from 'moment'
 
       onOrderClicked(idx){
         // console.log("sellList.onOrderClicked.idx: ", idx);
-        if(idx == 0)
-          this.sortPrice();
-        else if(idx == 1)
-          this.sortDate();
-        // console.log(this.list);
+        
+        //0:ASC(오름차순) 1:DESC(내림차순)
+        if(this.curOrderIdx == idx)
+          this.orderDir = (++this.orderDir) % 2;  
+        else
+          this.orderDir = 0;
+
+        this.curOrderIdx = idx;
+        this.orderColumn = this.curFilter.orderColumn[idx];
+
+        this.goToFirstPage();
+        this.getList();
       },
       
-      sortPrice(){
-        this.sortPriceDir = !this.sortPriceDir;
-        // console.log("sortPrice.priceDir: ", this.sortPriceDir);
-        if(this.sortPriceDir)
-        {
-          this.list.sort(function(a, b){
-            return a.sell_price - b.sell_price;
-          });
-        }
-        else
-        {
-          this.list.sort(function(a, b){
-            return b.sell_price - a.sell_price;
-          });
-        }
-      },
-
-      sortDate(){
-        this.sortDateDir = !this.sortDateDir;
-        //console.log("sortDate.sortDateDir: ", this.sortDateDir);
-        if(this.sortDateDir)
-        {
-          this.list.sort(function(a, b){
-            return Date.parse(a.sell_edate) - Date.parse(b.sell_edate);
-          });
-        }
-        else
-        {
-          this.list.sort(function(a, b){
-            return Date.parse(b.sell_edate) - Date.parse(a.sell_edate);
-          });
-        }
-      },
-
       onFilterChanged(selected){
         //console.log("sellList.onFilterChanged.selected: ", selected);
         this.selectedFilterIdx = selected;
