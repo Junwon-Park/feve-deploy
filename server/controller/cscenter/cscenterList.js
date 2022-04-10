@@ -43,5 +43,33 @@ async function cscenter(req, res, next) {
         })
         .catch(err => console.log(err));
 }
+async function cscenterone(req, res, next) {
+    const sendCscenterKey = req.body.sendCscenterKey;
+    const receivedUserkey = req.body.sendUserkey;
 
-module.exports = { cscenter, totalcscenter };
+    console.log(sendCscenterKey,receivedUserkey )
+
+    await db.sequelize
+        .query(
+            "select\n\
+        CSCENTER_KEY\n\
+       ,CSCENTER_TITLE\n\
+       ,(case when CSCENTER_STATUS=0 then '답변중' when CSCENTER_STATUS=1 then '답변완료' end ) as CSCENTER_STATUS\n\
+       ,CSCENTER_WDATE\n\
+       ,CSCENTER_CONTENTS\n\
+       ,CSCENTER_COMMENT\n\
+       ,CSCENTER_COMMENT_WDATE\n\
+       ,( select USER_ID from User where USER_KEY=c.USER_KEY) as USER_ID\n\
+   from Cscenter c\n\
+   inner join User u on u.USER_KEY = c.USER_KEY\n\
+             where c.CSCENTER_KEY="+sendCscenterKey+" and u.user_key="+receivedUserkey+";",
+            { type: Sequelize.QueryTypes.SELECT }
+        )
+        .then(result => {
+            console.log(result);
+            res.json(result);
+        })
+        .catch(err => console.log(err));
+}
+
+module.exports = { cscenter, totalcscenter, cscenterone };

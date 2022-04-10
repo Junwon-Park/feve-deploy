@@ -33,6 +33,7 @@
           v-bind="item"
           :items="items"
           @sendDialog="cDialog"
+          @sendItems="sendItems"
           
           />
         </tbody>
@@ -43,13 +44,12 @@
       </div>
    </div>
    <CscenterQnaView
-      
       :dialog="recDialog"
       :table="table"
-      :title="title"
       :item="item"
       :receivedCscenterKey="receivedCscenterKey"
-      
+      :receivedUserkey="receivedUserkey"
+     
       @sendDialog="sendDialog"
       />
 
@@ -83,6 +83,7 @@ export default {
     return {
       table: ["번호", "제목", "작성자", "작성시간", "답변여부"],
       receivedCscenterKey:0,
+      receivedUserid:"",
       receivedUserkey:0,
       cscenterComment:0,
       recDialog: false,
@@ -94,7 +95,8 @@ export default {
         CSCENTER_STATUS:'',
         CSCENTER_COMMENT:'',
         CSCENTER_COMMENT_WDATE:'',
-        USER_KEY:0
+        USER_KEY:0,
+        USER_ID:'',
 
       }
     }
@@ -114,13 +116,16 @@ export default {
     sendItems(recC, recUk) {
       let that=this;
       that.receivedCscenterKey=recC;
+      
       that.receivedUserkey=recUk;
 
       console.log(that.receivedCscenterKey)
+      console.log(that.receivedUserkey)
 
-      this.$axios.post('http://localhost:8080/cscenter/cscenterInsert/cscenter',{
+      this.$axios.post('http://localhost:8080/cscenter/cscenterInsert/one',{
         sendCscenterKey: that.receivedCscenterKey,
-        sendUserkey: that.receivedUserkey
+        sendUserkey: that.receivedUserkey,
+        
       }).then(function(res){
         that.item=res.data[0];
         console.log("res", res);

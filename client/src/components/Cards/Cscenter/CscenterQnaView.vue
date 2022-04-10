@@ -33,7 +33,7 @@
                 <v-text-field
                     readonly
                     :label="table[2]"
-                    :value="{ CSCENTER_KEY }"
+                    :value="item.USER_KEY"
                 ></v-text-field>
               </v-col>
               <v-col
@@ -49,7 +49,7 @@
                     rows="4"
                     row-height="30"
                     shaped
-                    :value="{ CSCENTER_CONTENTS}"
+                    :value="item.CSCENTER_CONTENTS"
                 ></v-textarea>
               </v-col>
 
@@ -61,11 +61,11 @@
                 <v-textarea
                     outlined
                     auto-grow
-                    label="답변 작성하기"
+                    label="답변"
                     rows="4"
                     row-height="30"
                     shaped
-                    :value="{ CSCENTER_COMMENT }"
+                    :value="item.CSCENTER_COMMENT"
                 ></v-textarea>
               </v-col>
 
@@ -91,36 +91,14 @@
 <script>
 export default {
   data: () => ({
-    dialog: false,
-    cscenterComment:"",
+    dialog: false
+   
   }),
   props: {
       dialog:{},
       table:[],
-      item:{},
-    // CSCENTER_KEY: {
-    //     default: 0
-    //   },
-    // CSCENTER_TITLE: {
-    //     type: String,
-    //     default:"Lego"
-    //   },
-    // CSCENTER_CONTENTS:  {
-    //     type: String,
-    //     default:"Architecture"
-    //   },
-    // CSCENTER_WDATE:  {
-    //     type: String,
-    //     default:"건물"
-    //   },
-    // CSCENTER_STATUS: {
-    //     default: '',
-    //   },
-    // CSCENTER_COMMENT:   {
-    //     type: String,
-    //     default:"2022-03-31"
-    //   }
-  },
+      item:{}
+      },
 
   methods:{
     sendDialog(){
@@ -128,13 +106,7 @@ export default {
     },
     closeDialog(){
       this.dialog=false
-    },
-//    sendItems(){
-//       let that = this;
-//       let sendCscenterKey=that.CSCENTER_KEY;
-//       let sendUserkey=that.USER_KEY;
-//       this.$emit("sendItems", sendCscenterKey, sendUserkey);
-//     },
+    }
   },
   created(){
     console.log(this.$props.item)
