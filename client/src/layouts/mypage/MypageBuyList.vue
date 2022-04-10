@@ -17,8 +17,11 @@
       <mypage-list-slot 
         v-for="item in list" :key="item.BUY_KEY"
         :item="item"
+        :slotKey="item.BUY_KEY"
         :price="item.BUY_PRICE"
-        :eDate="item.strEDate"/>
+        :eDate="item.strEDate"
+        @onFinalizeClicked="onFinalizeClicked"
+        />
 
       <v-pagination
         v-model="curPage"
@@ -39,284 +42,318 @@ import MypageListSlot from '../../components/Cards/Mypage/MypageListSlot.vue';
 import MypageListFilter from '../../components/Cards/Mypage/MypageListFilter.vue';
 import moment from 'moment'
 
-  export default {
-    components:{
-      MypageTopCountTap,
-      MypagePeriodSetter,
-      MypageListSlot,
-      MypageListFilter,
+export default {
+  components:{
+    MypageTopCountTap,
+    MypagePeriodSetter,
+    MypageListSlot,
+    MypageListFilter,
+  },
+  data () {
+    return {
+      curTapIdx:0,
+      tapNames:['구매입찰', '진행 중', '종료'],
+      counts: [],
+      startDate:'',
+      endDate:'',
+      filters:[
+        {
+          tapIdx:0,
+          slotStates: ["전체", "입찰중", "기한만료"],
+          orderTexts:["구매 희망가", "만료일"],
+          orderColumn:["BUY_PRICE", "BUY_EDATE"],
+        },
+        {
+          tapIdx:1,
+          slotStates:["전체", "대기 중", "발송완료", "입고대기", "입고완료", "검수 중", "검수보류","검수합격", "배송 중", "거래실패"],
+          orderTexts:["상태"],
+          orderColumn:["BUY_STATUS"],
+        },
+        {
+          tapIdx:2,
+          slotStates:["전체", "구매확정", "구매취소"],
+          orderTexts:["구매일", "상태"],
+          orderColumn:["BUY_EDATE", "BUY_STATUS"],
+        }
+      ],
+      curFilter:'',
+      getCountUrl:'',
+      getListUrl:'',
+      list:[],
+      sortPriceDir: true, //true:오름차순(1 -> 2-> 3) false:내림차순 (3-> 2-> 1)
+      sortDateDir: true,  //true:오름차순 false:내림차순
+
+      curPage:1,
+      totalPage:0,
+      slotCountPerPage:10,
+      rowStart:0,
+
+      reqObj:Object,
+      selectedFilterIdx:0,
+
+      curOrderIdx: -1,
+      orderColumn: String,
+      strOrderDirs:["ASC","DESC"],
+      orderDir: 0,
+
+      finalizeDecision: 0,
+    }
+  },
+  created() {
+    moment.locale('ko-KR');
+
+    this.getBuyCounts();
+    this.curFilter = this.filters[this.curTapIdx];
+    this.setUrl();
+    // console.log("BuyList.created.curFilter: ", this.curFilter);
+  },
+  methods: {
+    getUserKey()
+    {
+      //return '1';
+      return localStorage.getItem('userKey');
     },
-    data () {
-      return {
-        curTapIdx:0,
-        tapNames:['구매입찰', '진행 중', '종료'],
-        counts: [],
-        startDate:'',
-        endDate:'',
-        filters:[
-          {
-            tapIdx:0,
-            slotStates: ["전체", "입찰중", "기한만료"],
-            orderTexts:["구매 희망가", "만료일"],
-            orderColumn:["BUY_PRICE", "BUY_EDATE"],
-          },
-          {
-            tapIdx:1,
-            slotStates:["전체", "대기 중", "발송완료", "입고대기", "입고완료", "검수 중", "검수보류","검수합격", "배송 중", "거래실패"],
-            orderTexts:["상태"],
-            orderColumn:["BUY_STATUS"],
-          },
-          {
-            tapIdx:2,
-            slotStates:["전체", "구매확정", "구매취소"],
-            orderTexts:["구매일", "상태"],
-            orderColumn:["BUY_EDATE", "BUY_STATUS"],
-          }
-        ],
-        curFilter:'',
-        getCountUrl:'',
-        getListUrl:'',
-        list:[],
-        sortPriceDir: true, //true:오름차순(1 -> 2-> 3) false:내림차순 (3-> 2-> 1)
-        sortDateDir: true,  //true:오름차순 false:내림차순
 
-        curPage:1,
-        totalPage:0,
-        slotCountPerPage:10,
-        rowStart:0,
+    getBuyCounts(){
+      this.$axios.post(this.$store.getters.ServerUrl + '/mypage/buyList/getBuyCounts', {
+        USER_KEY : this.getUserKey(),
+      })
+      .then((result) => {
+        //console.log(result.data);
+        this.counts = result.data;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    },
 
-        reqObj:Object,
-        selectedFilterIdx:0,
+    onTapChanged(idx)
+    {
+      this.curTapIdx = idx;
+      this.curFilter = this.filters[idx];
+      
+      this.selectedFilterIdx = 0;
+      this.initOrder();
 
-        curOrderIdx: -1,
-        orderColumn: String,
-        strOrderDirs:["ASC","DESC"],
-        orderDir: 0,
+      this.list.length = 0;
+      this.totalPage = 0;
+      this.goToFirstPage();
+      this.setUrl();
+    },
+    
+    goToFirstPage(){
+      this.curPage = 1;
+      this.rowStart = 0;
+      this.setRowStart();
+    },
+
+    setRowStart(){
+      this.rowStart = (this.curPage-1) * this.slotCountPerPage;
+    },
+
+    initOrder(){
+      this.curOrderIdx = -1,
+      this.orderColumn ='';
+      this.orderDir = 0;
+    },
+
+    setUrl()
+    {
+      switch(this.curTapIdx)
+      {
+        case 1: //진행 중
+        {
+          this.getCountUrl = this.$store.getters.ServerUrl + '/mypage/buyList/getProgressBuyListCount';
+          this.getListUrl =  this.$store.getters.ServerUrl + '/mypage/buyList/getProgressBuyList';
+        }
+          break;
+        case 2: // 종료
+        {
+          this.getCountUrl = this.$store.getters.ServerUrl + '/mypage/buyList/getDoneBuyListCount';
+          this.getListUrl =  this.$store.getters.ServerUrl + '/mypage/buyList/getDoneBuyList';
+        }
+          break;
+        default:
+        {
+          this.getCountUrl = this.$store.getters.ServerUrl + '/mypage/buyList/getWaitBuyListCount';
+          this.getListUrl =  this.$store.getters.ServerUrl + '/mypage/buyList/getWaitBuyList';
+        }
+          break;
       }
     },
-    created() {
-      moment.locale('ko-KR');
 
-      this.getBuyCounts();
-      this.curFilter = this.filters[this.curTapIdx];
-      this.setUrl();
-      // console.log("BuyList.created.curFilter: ", this.curFilter);
+    onSearchClicked(startDate, endDate){
+      this.startDate = startDate;
+      this.endDate = endDate;
+
+      this.initOrder();
+      this.goToFirstPage();
+      this.getListCount();
+      this.getList();
     },
-    methods: {
-      getUserKey()
+
+    onPageChanged(page){
+      //console.log("onPageChanged.page: ", page);
+      this.curPage = page;
+      this.setRowStart();
+      this.getList();
+    },
+
+    getListCount(){
+      this.$axios.post(this.getCountUrl, {
+        USER_KEY : this.getUserKey(),
+        startDate : this.startDate,
+        endDate : this.endDate,
+        state : this.selectedFilterIdx,
+      })
+      .then((result) => {
+        //console.log(result.data);
+        this.totalPage = Math.ceil(result.data / this.slotCountPerPage);  
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    },
+    
+    getList(){
+      //console.log("getList", this.rowStart, this.slotCountPerPage);
+      this.$axios.post(this.getListUrl, {
+        USER_KEY    : this.getUserKey(),
+        startDate   : this.startDate,
+        endDate     : this.endDate,
+        limitStart  : this.rowStart,
+        limitCount  : this.slotCountPerPage,
+        state       : this.selectedFilterIdx,
+        orderColumn : this.orderColumn,
+        orderDir    : this.strOrderDirs[this.orderDir],
+      })
+      .then((result) => {
+        console.log(result.data);
+        this.list = result.data;
+        this.initSlotsData();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    },
+
+    initSlotsData()
+    {
+      for(let slot of this.list)
       {
-        return localStorage.getItem('userKey');
-      },
+        slot.strEDate = moment(slot.BUY_EDATE).format('ll');
 
-      getBuyCounts(){
-        this.$axios.post(this.$store.getters.ServerUrl + '/mypage/buyList/getBuyCounts', {
-          USER_KEY : this.getUserKey(),
-        })
-        .then((result) => {
-          //console.log(result.data);
-          this.counts = result.data;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-      },
-
-      onTapChanged(idx)
-      {
-        this.curTapIdx = idx;
-        this.curFilter = this.filters[idx];
-        
-        this.selectedFilterIdx = 0;
-        this.initOrder();
-
-        this.list.length = 0;
-        this.totalPage = 0;
-        this.goToFirstPage();
-        this.setUrl();
-      },
-      
-      goToFirstPage(){
-        this.curPage = 1;
-        this.rowStart = 0;
-        this.setRowStart();
-      },
-
-      setRowStart(){
-        this.rowStart = (this.curPage-1) * this.slotCountPerPage;
-      },
-
-      initOrder(){
-        this.curOrderIdx = -1,
-        this.orderColumn ='';
-        this.orderDir = 0;
-      },
-
-      setUrl()
-      {
-        switch(this.curTapIdx)
+        // 0.대기 1.성공(구매확정) 2.실패(기간만료) 3.진행중 4.실패(구매취소:반품)
+        switch(slot.BUY_STATUS)
         {
-          case 1: //진행 중
-          {
-            this.getCountUrl = this.$store.getters.ServerUrl + '/mypage/buyList/getProgressBuyListCount';
-            this.getListUrl =  this.$store.getters.ServerUrl + '/mypage/buyList/getProgressBuyList';
-          }
+          //성공
+          case '1':{ 
+            slot.strState = this.curFilter.slotStates[1];
             break;
-          case 2: // 종료
-          {
-            this.getCountUrl = this.$store.getters.ServerUrl + '/mypage/buyList/getDoneBuyListCount';
-            this.getListUrl =  this.$store.getters.ServerUrl + '/mypage/buyList/getDoneBuyList';
           }
+          //기간지남
+          case '2':{
+            slot.strState = this.curFilter.slotStates[2];
             break;
-          default:
-          {
-            this.getCountUrl = this.$store.getters.ServerUrl + '/mypage/buyList/getWaitBuyListCount';
-            this.getListUrl =  this.$store.getters.ServerUrl + '/mypage/buyList/getWaitBuyList';
           }
-            break;
-        }
-      },
-
-      onSearchClicked(startDate, endDate){
-        this.startDate = startDate;
-        this.endDate = endDate;
-
-        this.initOrder();
-        this.goToFirstPage();
-        this.getListCount();
-        this.getList();
-      },
-
-      onPageChanged(page){
-        //console.log("onPageChanged.page: ", page);
-        this.curPage = page;
-        this.setRowStart();
-        this.getList();
-      },
-
-      getListCount(){
-        this.$axios.post(this.getCountUrl, {
-          USER_KEY : this.getUserKey(),
-          startDate : this.startDate,
-          endDate : this.endDate,
-          state : this.selectedFilterIdx,
-        })
-        .then((result) => {
-          //console.log(result.data);
-          this.totalPage = Math.ceil(result.data / this.slotCountPerPage);  
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-      },
-      
-      getList(){
-        //console.log("getList", this.rowStart, this.slotCountPerPage);
-        this.$axios.post(this.getListUrl, {
-          USER_KEY    : this.getUserKey(),
-          startDate   : this.startDate,
-          endDate     : this.endDate,
-          limitStart  : this.rowStart,
-          limitCount  : this.slotCountPerPage,
-          state       : this.selectedFilterIdx,
-          orderColumn : this.orderColumn,
-          orderDir    : this.strOrderDirs[this.orderDir],
-        })
-        .then((result) => {
-          console.log(result.data);
-          this.list = result.data;
-          this.initSlotsData();
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-      },
-
-      initSlotsData()
-      {
-        for(let slot of this.list)
-        {
-          slot.strEDate = moment(slot.BUY_EDATE).format('ll');
-
-          // 0.대기 1.성공(구매확정) 2.실패(기간만료) 3.진행중 4.실패(구매취소:반품)
-          switch(slot.BUY_STATUS)
-          {
-            //성공
-            case '1':{ 
-              slot.strState = this.curFilter.slotStates[1];
-              break;
+          //진행중
+          case '3':{
+            //temp code - 진행중일때만 임시로 data 가공.
+            slot.Product = {
+              PRODUCT_BRAND: slot.PRODUCT_BRAND,
+              PRODUCT_NAME: slot.PRODUCT_NAME,
+              PRODUCT_PIC: slot.PRODUCT_PIC,
+            };
+            //slotStates:["전체", "대기 중", "발송완료", "입고대기", "입고완료", "검수 중", "검수보류","검수합격", "배송 중", "거래실패"],
+            //INSPECTION_STATUS 0:검수 진행중, 1:검수 완료
+            if(slot.INSPECTION_STATUS == null) 
+            {
+              //STATUS Null일때 입고완료로 처리.
+              slot.strState = this.curFilter.slotStates[4];
             }
-            //기간지남
-            case '2':{
-              slot.strState = this.curFilter.slotStates[2];
-              break;
-            }
-            //진행중
-            case '3':{
-              //temp code - 진행중일때만 임시로 data 가공.
-              slot.Product = {
-                PRODUCT_BRAND: slot.PRODUCT_BRAND,
-                PRODUCT_NAME: slot.PRODUCT_NAME,
-                PRODUCT_PIC: slot.PRODUCT_PIC,
-              };
-              //slotStates:["전체", "대기 중", "발송완료", "입고대기", "입고완료", "검수 중", "검수보류","검수합격", "배송 중", "거래실패"],
-              //INSPECTION_STATUS 0:검수 진행중, 1:검수 완료
-              if(slot.INSPECTION_STATUS == null) 
-              {
-                //STATUS Null일때 입고완료로 처리.
-                slot.strState = this.curFilter.slotStates[4];
-              }
-              else if(slot.INSPECTION_STATUS == 0) //검수중
-                slot.strState = this.curFilter.slotStates[5];
+            else if(slot.INSPECTION_STATUS == 0) //검수중
+              slot.strState = this.curFilter.slotStates[5];
+            else
+            {
+              //INSPECTION_RESULt 0:불합격, 1:합격
+              if(slot.INSPECTION_RESULT == 1) 
+                slot.strState = this.curFilter.slotStates[7];
               else
               {
-                //INSPECTION_RESULt 0:불합격, 1:합격
-                if(slot.INSPECTION_RESULT == 1) 
-                  slot.strState = this.curFilter.slotStates[7];
-                else
-                {
-                  //검수 완료인데 RESULT 없는경우도 다 검수보류로 처리한다.
-                  slot.strState = this.curFilter.slotStates[6];
-                }
+                //검수 완료인데 RESULT 없는경우도 다 검수보류로 처리한다.
+                slot.strState = this.curFilter.slotStates[6];
               }
-              break;
             }
-            case '4':{
-              slot.strState = this.curFilter.slotStates[2];
-              break;
-            }
-            //대기중
-            default:{
-              slot.strState = this.curFilter.slotStates[1];
-              break;
-            }
+            break;
+          }
+          case '4':{
+            slot.strState = this.curFilter.slotStates[2];
+            break;
+          }
+          //대기중
+          default:{
+            slot.strState = this.curFilter.slotStates[1];
+            break;
           }
         }
-      },
+      }
+    },
 
-      onOrderClicked(idx){
-        // console.log("buyList.onOrderClicked.idx: ", idx);
-        
-        //0:ASC(오름차순) 1:DESC(내림차순)
-        if(this.curOrderIdx == idx)
-          this.orderDir = (++this.orderDir) % 2;  
-        else
-          this.orderDir = 0;
-
-        this.curOrderIdx = idx;
-        this.orderColumn = this.curFilter.orderColumn[idx];
-
-        this.goToFirstPage();
-        this.getList();
-      },
+    onOrderClicked(idx){
+      // console.log("buyList.onOrderClicked.idx: ", idx);
       
-      onFilterChanged(selected){
-        //console.log("buyList.onFilterChanged.selected: ", selected);
-        this.selectedFilterIdx = selected;
-        this.goToFirstPage();
-        this.getListCount();
-        this.getList();
-      },
+      //0:ASC(오름차순) 1:DESC(내림차순)
+      if(this.curOrderIdx == idx)
+        this.orderDir = (++this.orderDir) % 2;  
+      else
+        this.orderDir = 0;
+
+      this.curOrderIdx = idx;
+      this.orderColumn = this.curFilter.orderColumn[idx];
+
+      this.goToFirstPage();
+      this.getList();
+    },
+    
+    onFilterChanged(selected){
+      //console.log("buyList.onFilterChanged.selected: ", selected);
+      this.selectedFilterIdx = selected;
+      this.goToFirstPage();
+      this.getListCount();
+      this.getList();
+    },
+
+    onFinalizeClicked(buy_key, decision){
+      this.finalizeDecision = decision;
+      //console.log("onAcceptClicked().buy_key:", buy_key, "decision: ", decision);
+      this.$axios.post(this.$store.getters.ServerUrl + '/mypage/buyList/finalize', {
+        BUY_KEY : buy_key,
+        decision: decision,
+      })
+      .then((result) => {
+        //console.log(result.data);
+        if(result.data[0] == 1)
+        {
+          if(this.finalizeDecision == 0)
+            alert("최종 구매 확정 하셨습니다. 감사합니다.");
+          else
+            alert("최종 구매 취소 하셨습니다.");
+
+          this.getBuyCounts();
+          this.goToFirstPage();
+          this.getListCount();
+          this.getList();
+        }
+        else
+        {
+          alert("알 수 없는 에러 발생. 다시 시도 해주세요.");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
 
     },
-  }
+  },
+}
 </script>"

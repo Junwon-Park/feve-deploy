@@ -38,7 +38,30 @@
                 {{ eDate }}
               </h5>
             </div>
-                
+            &nbsp;
+            
+            <div v-if="IsFinalize()" >
+            <v-spacer></v-spacer>
+            <v-list-item-action>
+              <v-btn
+                  style="background: #EF6253; color: white;"
+                  rounded
+                  text
+                  @click="onFinalizeClicked(0)"
+              >
+                구매확정
+              </v-btn>
+
+              <v-btn
+                  style="background: #EF6253; color: white;"
+                  rounded
+                  text
+                  @click="onFinalizeClicked(1)"
+              >
+                구매취소
+              </v-btn>
+              </v-list-item-action>
+            </div>
           </div>
 </template>
 
@@ -46,15 +69,34 @@
 
 export default {
   props:{
+    slotKey:Number,
     item:Object,
     price:Number,
-    state:Number,
     eDate:String,
   },
   data() {
     return {
       imageUrl : this.$store.getters.ServerUrl + '/getImage?imageName=',
     }
+  },
+  methods: {
+    IsFinalize(){
+      // console.log("isFinalize.state: ", this.item.BUY_STATUS);
+      // console.log("isFinalize.INSPECTION_STATUS: ", this.item.INSPECTION_STATUS);
+      // console.log("isFinalize.INSPECTION_RESULT: ", this.item.INSPECTION_RESULT);
+
+      if(this.item.BUY_STATUS == null || this.item.BUY_STATUS != '3' || this.item.INSPECTION_STATUS == null || this.item.INSPECTION_RESULT == null)
+        return false;
+
+      if(this.item.INSPECTION_STATUS == 1 && this.item.INSPECTION_RESULT == 1)
+        return true;
+      
+      return false;
+    },
+
+    onFinalizeClicked(decision){
+      this.$emit("onFinalizeClicked", this.slotKey, decision);
+    },
   },
 };
 </script>

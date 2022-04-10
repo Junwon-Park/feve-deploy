@@ -297,4 +297,36 @@ async function getDoneBuyList(req, res) {
     .catch((err) => console.log(err))
 } 
 
-module.exports = {getBuyCounts, getWaitBuyList, getProgressBuyList, getDoneBuyList, getWaitBuyListCount, getProgressBuyListCount, getDoneBuyListCount};
+async function updateFinalize(req, res) {
+    const buyKey = req.body.BUY_KEY;
+    const decision = req.body.decision;
+    
+    let status;
+    //decision 0:accept, 1:cancel
+    if(decision == 0)
+        status = 1;
+    else
+        status = 4;
+
+    await Buy.update(
+        {
+            BUY_STATUS: status,
+        }, 
+        {
+            where: { BUY_KEY:buyKey }
+        }
+    )
+    .then((result) => {
+        console.log("updateFinalize has been responsed from db : ",result);
+        res.json(result);
+        //jResult = JSON.parse(result);
+    })
+    .catch((err) => console.log(err))
+} 
+
+module.exports = {
+    getBuyCounts
+    ,getWaitBuyList, getProgressBuyList, getDoneBuyList
+    ,getWaitBuyListCount, getProgressBuyListCount, getDoneBuyListCount
+    ,updateFinalize
+};

@@ -1,5 +1,5 @@
 const express = require('express');
-const { getBuyCounts } = require('../../controller/mypage/mypageBuyList');
+const { getBuyCounts, updateFinalize } = require('../../controller/mypage/mypageBuyList');
 const { getWaitBuyList, getProgressBuyList, getDoneBuyList } = require('../../controller/mypage/mypageBuyList');
 const { getWaitBuyListCount, getProgressBuyListCount, getDoneBuyListCount } = require('../../controller/mypage/mypageBuyList');
 
@@ -13,5 +13,7 @@ router.post('/getDoneBuyList', getDoneBuyList);
 router.post('/getWaitBuyListCount', getWaitBuyListCount);
 router.post('/getProgressBuyListCount', getProgressBuyListCount);
 router.post('/getDoneBuyListCount', getDoneBuyListCount);
+
+router.post('/finalize', updateFinalize);
 
 module.exports = router;
