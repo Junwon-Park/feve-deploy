@@ -180,6 +180,8 @@ async function getProgressSellList(req, res) {
     const endDate = req.body.endDate;
     const start = req.body.limitStart;
     const count = req.body.limitCount;
+    //const orderColumn = req.body.orderColumn;
+    const orderDir = req.body.orderDir;
 
     const query = `
     SELECT
@@ -203,6 +205,7 @@ async function getProgressSellList(req, res) {
     JOIN Product AS p ON b.product_key = p.PRODUCT_KEY
     WHERE b.sell_seller_key = ${userKey} AND b.sell_status = 3 AND b.sell_edate BETWEEN '${startDate}' AND '${endDate}'
     ${ getProgressStatusCondition(state) }
+    ${ getMysqlOrderCondition(orderDir) }
     LIMIT ${start}, ${count} ;`;
 
     await db.sequelize.query(query , { type: sequelize.QueryTypes.SELECT })
@@ -211,6 +214,20 @@ async function getProgressSellList(req, res) {
         res.json(result);
     })
     .catch((err) => console.log(err))
+}
+
+function getMysqlOrderCondition(orderDir)
+{
+    //orderDir "ASC" : 입고완료 -> 검수중 -> 보류(불합격) -> 합격
+    //orderDir "DESC" : 합격 -> 보류(불합격) -> 검수중 -> 입고완료
+    if(orderDir == "DESC")
+    {
+        return `ORDER BY INSPECTION_RESULT DESC, INSPECTION_STATUS DESC`
+    }
+    else
+    {
+        return `ORDER BY INSPECTION_STATUS ASC, INSPECTION_RESULT ASC`
+    }
 }
 
 async function getDoneSellListCount(req, res) {

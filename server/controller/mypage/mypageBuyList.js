@@ -181,6 +181,8 @@ async function getProgressBuyList(req, res) {
     const endDate = req.body.endDate;
     const start = req.body.limitStart;
     const count = req.body.limitCount;
+    //const orderColumn = req.body.orderColumn;
+    const orderDir = req.body.orderDir;
     
     const query = `
     SELECT
@@ -204,7 +206,8 @@ async function getProgressBuyList(req, res) {
     JOIN Product AS p ON b.PRODUCT_KEY = p.PRODUCT_KEY
     WHERE b.BUY_BUYER_KEY = ${userKey} AND b.BUY_STATUS = 3 AND b.BUY_EDATE BETWEEN '${startDate}' AND '${endDate}'
     ${ getProgressStatusCondition(state) }
-    LIMIT ${start}, ${count} ;`;
+    ${ getMysqlOrderCondition(orderDir) }
+    LIMIT ${start}, ${count};`;
 
     await db.sequelize.query(query , { type: sequelize.QueryTypes.SELECT })
     .then((result) => {
@@ -212,6 +215,21 @@ async function getProgressBuyList(req, res) {
         res.json(result);
     })
     .catch((err) => console.log(err))
+}
+
+//*** 여러개의 order by 를 사용할 경우 왼쪽부터 순차적으로 진행되기 때문에 순서를 고려해야 한다.
+function getMysqlOrderCondition(orderDir)
+{
+    //orderDir "ASC" : 입고완료 -> 검수중 -> 보류(불합격) -> 합격
+    //orderDir "DESC" : 합격 -> 보류(불합격) -> 검수중 -> 입고완료
+    if(orderDir == "DESC")
+    {
+        return `ORDER BY INSPECTION_RESULT DESC, INSPECTION_STATUS DESC`
+    }
+    else
+    {
+        return `ORDER BY INSPECTION_STATUS ASC, INSPECTION_RESULT ASC`
+    }
 }
 
 async function getDoneBuyListCount(req, res) {
