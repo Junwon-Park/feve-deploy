@@ -3,7 +3,7 @@
       <div class="w-full lg:w-4/12 md:w-4/12 px-4 my-5"
           style="margin-bottom: 15vh;"
           v-for="(item, i) in items" :key="i"
-          @click="onSlotClicked(item.PRODUCT_NAME)"
+          @click="onSlotClicked(i)"
           type="button"
       >
           
@@ -56,8 +56,15 @@ export default {
   //   //this.setMinPrices();
   // },
   methods:{
-    onSlotClicked(name){
-      console.log("onSlotClicked.name: ", name);
+    onSlotClicked(idx){
+      // console.log("onSlotClicked.idx: ", idx);
+      // console.log("onSlotClicked.key: ", this.items[idx].PRODUCT_KEY);
+      this.$router.push({path:'./shopview',
+        name:'Shopview',
+        params:{
+          PRODUCT_KEY:this.items[idx].PRODUCT_KEY
+        }
+      });
     },
     
     // setMinPrices()

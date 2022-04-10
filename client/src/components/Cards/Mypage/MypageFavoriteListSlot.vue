@@ -63,7 +63,13 @@ export default {
   },
   methods:{
     onSlotClicked(){
-      console.log("onSlotClicked.name: ", this.item.PRODUCT_NAME);
+      //console.log("onSlotClicked.name: ", this.item.PRODUCT_NAME);
+      this.$router.push({path:'./shopview',
+        name:'Shopview',
+        params:{
+          PRODUCT_KEY:this.item.PRODUCT_KEY
+        }
+      });
     },
     onDeleteClicked(event){
       event.stopPropagation();

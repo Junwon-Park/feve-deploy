@@ -26,16 +26,17 @@ async function getFavoriteList(req, res) {
 
     await db.sequelize
         .query(
-          'SELECT \n'
-            + 'f.FAVORITE_KEY \n'
-            + ',p.PRODUCT_BRAND \n'
-            + ',p.PRODUCT_NAME \n'
-            + ',p.PRODUCT_PIC \n'
-            + ',(SELECT MIN(s.SELL_PRICE) FROM Sell AS s WHERE p.PRODUCT_KEY = s.PRODUCT_KEY) MIN_PRICE \n'
-          + 'FROM Favorite AS f \n'
-          + 'JOIN Product AS p ON f.PRODUCT_KEY = p.PRODUCT_KEY \n'
-          + 'WHERE USER_KEY =' + userKey + '\n'
-          + 'limit ' + limitStart + ', ' + limitEnd + ';'
+          `SELECT
+            f.FAVORITE_KEY
+            ,p.PRODUCT_KEY
+            ,p.PRODUCT_BRAND
+            ,p.PRODUCT_NAME
+            ,p.PRODUCT_PIC
+            ,(SELECT MIN(s.SELL_PRICE) FROM Sell AS s WHERE p.PRODUCT_KEY = s.PRODUCT_KEY) MIN_PRICE
+          FROM Favorite AS f
+          JOIN Product AS p ON f.PRODUCT_KEY = p.PRODUCT_KEY
+          WHERE USER_KEY = ${userKey}
+          limit ${limitStart}, ${limitEnd};`
           ,{ type: sequelize.QueryTypes.SELECT }
         )
         .then((result) => {
