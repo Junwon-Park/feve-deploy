@@ -68,12 +68,20 @@
                 >
                   <div class="mt-5">
                     <button
-                        v-if="userInfo.USER_KEY!=user_key"
+                        v-if="userInfo.USER_KEY!=user_key && isfollow===''"
                         class="bg-black active:bg-blueGray-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
                         type="button"
                         @click="follow"
                     >
                       팔로우
+                    </button>
+                    <button
+                        v-if="isfollow!=''"
+                        class="bg-black active:bg-blueGray-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
+                        type="button"
+                        @click="unfollow"
+                    >
+                      팔로잉
                     </button>
                   </div>
                 </div>
@@ -131,6 +139,9 @@ export default {
       totalPostCount: 0,
       totalFollowerCount: 0,
       totalFollowingCount: 0,
+      isfollow:false,
+      followStatus: false,
+      unfollowStatus: false,
     };
   },
   components: {
@@ -173,35 +184,73 @@ export default {
           })
     },
     follow(){
+      let that = this;
       if( this.userInfo.USER_KEY != this.user_key){
-        this.$axios.post('http://localhost:8080/style/follow/count/following', {
-          user_key : this.$route.params.USER_KEY,
+        this.$axios.post('http://localhost:8080/style/follow', {
+          follower_id: this.user_key,
+          following_id : this.$route.params.USER_KEY,
         })
-            .then((res) => {
-              this.totalFollowerCount = res.data[0].cnt;
+            .then(() => {
+              this.followStatus=true;
+              that.$router.go(that.$router.currentRouter);
             })
             .catch((error) => {
               console.log(error);
             });
-
-
-        this.$axios.post('http://localhost:8080/style/follow/count/follower', {
-          user_key : this.$route.params.USER_KEY,
-        })
-            .then((res) => {
-              this.totalFollowingCount = res.data[0].cnt;
-            })
-            .catch((error) => {
-              console.log(error);
-            })
       }
+    },
+    unfollow(){
+      let that = this;
+      this.$axios.post('http://localhost:8080/style/follow/unfollow', {
+        follower_id: this.user_key,
+        following_id : this.$route.params.USER_KEY,
+      })
+          .then(() => {
+            this.unfollowStatus=true;
+            that.$router.go(that.$router.currentRouter);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+    },
+    followCount(){
+      this.$axios.post('http://localhost:8080/style/follow/count/following', {
+        user_key : this.$route.params.USER_KEY,
+      })
+          .then((res) => {
+            this.totalFollowerCount = res.data[0].cnt;
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+
+      this.$axios.post('http://localhost:8080/style/follow/count/follower', {
+        user_key : this.$route.params.USER_KEY,
+      })
+          .then((res) => {
+            this.totalFollowingCount = res.data[0].cnt;
+          })
+          .catch((error) => {
+            console.log(error);
+          })
+      this.$axios.post('http://localhost:8080/style/follow/isfollow', {
+        follower_id: this.user_key,
+        following_id : this.$route.params.USER_KEY,
+      })
+          .then((res) => {
+            console.log(res.data)
+            this.isfollow = res.data;
+          })
+          .catch((error) => {
+            console.log(error);
+          })
     }
   },
   created(){
     this.getSimpleUserInfo()
     this.loadPost()
     this.countPost()
-    this.follow()
+    this.followCount()
   },
 }
 </script>

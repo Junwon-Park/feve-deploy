@@ -41,10 +41,15 @@ import MypageFavoriteListSlot from '../../components/Cards/Mypage/MypageFavorite
       this.getFavoriteListCount();
     },
     methods: {
+      getUserKey()
+      {
+        return localStorage.getItem('userKey');
+      },
+
       getFavoriteListCount()
       {
         this.$axios.post(this.$store.getters.ServerUrl + '/mypage/favoriteList/getCount', {
-          USER_KEY : '1', //로그인과 연동시키기
+          USER_KEY : this.getUserKey(),
         })
         .then((result) => {
           // console.log(result.data);
@@ -68,7 +73,7 @@ import MypageFavoriteListSlot from '../../components/Cards/Mypage/MypageFavorite
         // console.log("this.end : ", this.end);
 
         this.$axios.post(this.$store.getters.ServerUrl + '/mypage/favoriteList', {
-          USER_KEY : '1', //로그인과 연동시키기
+          USER_KEY : this.getUserKey(),
           LIMIT_START : this.start,
           LIMIT_END : this.end,
         })

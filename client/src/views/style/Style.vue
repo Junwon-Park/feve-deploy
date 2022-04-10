@@ -51,6 +51,16 @@
       </v-tab-item>
 
         <v-tab-item>
+          <div class="w-full px-4 my-10 flex flex-wrap">
+            <div class="w-full lg:w-6/12 xl:w-3/12 px-4 mb-5" v-for="(item, i) in followitems" :key="i">
+              <CardStyle
+                  v-bind="item"
+                  :items="item"
+              />
+            </div>
+          </div>
+        </v-tab-item>
+        <v-tab-item>
           <div class="w-full px-4 mb-5 flex flex-wrap justify-center">
             <div class="w-full lg:w-4/12 xl:w-4/12 px-4 mb-5">
               <UserInfo
@@ -59,9 +69,8 @@
               />
             </div>
           </div>
-
           <div class="w-full px-4 my-10 flex flex-wrap">
-            <div class="w-full lg:w-6/12 xl:w-3/12 px-4 mb-5" v-for="(item, i) in items" :key="i">
+            <div class="w-full lg:w-6/12 xl:w-3/12 px-4 mb-5" v-for="(item, i) in myitems" :key="i">
               <CardStyle
                   v-bind="item"
                   :items="item"
@@ -93,8 +102,9 @@ export default {
         USER_KEY: '',
       },
       tabs: null,
-      tabTitle: ['NEW', 'FOLLOW'],
-      items: {
+      followtabs: null,
+      tabTitle: ['NEW','FEED', 'FOLLOW'],
+      followitems: {
         POST_KEY: 0,
         POST_CONTENS: "",
         POST_WDATE: "",
@@ -112,6 +122,15 @@ export default {
         USER_ID: "",
         HASHTAG_TITLE: "",
       },
+      myitems: {
+        POST_KEY: 0,
+        POST_CONTENS: "",
+        POST_WDATE: "",
+        POST_PIC: "",
+        USER_KEY: 0,
+        USER_ID: "",
+        HASHTAG_TITLE: "",
+      },
     }
   },
   components: {
@@ -121,8 +140,9 @@ export default {
   },
   created(){
     this.getSimpleUserInfo()
-    this.loadPost()
+    this.loadFollowPost()
     this.loadAllPost()
+    this.loadMyPost()
   },
   methods:{
     getSimpleUserInfo(){
@@ -136,17 +156,43 @@ export default {
             console.log(error);
           })
     },
-    loadPost(){
+    // loadPost(){
+    //   this.$axios.post('http://localhost:8080/style/loadPost', {
+    //     USER_KEY : JSON.parse(localStorage.getItem('userKey'))
+    //   })
+    //       .then((res) => {
+    //         this.followitems = res.data;
+    //       })
+    //       .catch((error) => {
+    //         console.log(error);
+    //       })
+    // },
+
+    loadMyPost(){
       this.$axios.post('http://localhost:8080/style/loadPost', {
         USER_KEY : JSON.parse(localStorage.getItem('userKey'))
       })
           .then((res) => {
-            this.items = res.data;
+            this.myitems = res.data;
+            console.log(res.data)
           })
           .catch((error) => {
             console.log(error);
           })
     },
+
+    loadFollowPost(){
+      this.$axios.post('http://localhost:8080/style/loadPost/follow', {
+        USER_KEY : JSON.parse(localStorage.getItem('userKey'))
+      })
+          .then((res) => {
+            this.followitems = res.data;
+          })
+          .catch((error) => {
+            console.log(error);
+          })
+    },
+
     loadAllPost(){
       this.$axios.post('http://localhost:8080/style/loadPost/all', {
         USER_KEY : JSON.parse(localStorage.getItem('userKey'))

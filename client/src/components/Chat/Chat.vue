@@ -91,30 +91,33 @@ export default {
   }),
   methods: {
     setFocus() {
-      console.log('updated', this.$refs);
       this.$nextTick(() => {
         this.$refs.inputFocus.focus();
       });
     },
     sendMessage() {
-      this.$socket.emit('chat', {
-        message: this.inputMessage,
-        sender: 0,
-        messageTime: moment().format('HH:mm')
-      });
-      this.chat.push({
-        message: this.inputMessage,
-        sender: 0,
-        messageTime: moment().format('HH:mm')
-      });
-      this.inputMessage = '';
+      if (this.inputMessage.length !== 0) {
+        this.$socket.emit('chat', {
+          message: this.inputMessage,
+          sender: 0,
+          messageTime: moment().format('HH:mm')
+        });
+        this.chat.push({
+          message: this.inputMessage,
+          sender: 0,
+          messageTime: moment().format('HH:mm')
+        });
+        this.inputMessage = '';
+      }
     },
     submitEnter() {
-      this.$socket.emit('chat', {
-        message: this.inputMessage,
-        sender: 0,
-        messageTime: moment().format('HH:mm')
-      });
+      if (this.inputMessage.length !== 0) {
+        this.$socket.emit('chat', {
+          message: this.inputMessage,
+          sender: 0,
+          messageTime: moment().format('HH:mm')
+        });
+      }
     }
   },
   updated() {
