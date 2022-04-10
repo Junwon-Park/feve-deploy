@@ -167,9 +167,14 @@ export default {
     this.getProfile();
   },
   methods: {
+    getUserKey()
+    {
+      return localStorage.getItem('userKey');
+    },
+
     getProfile(){
       this.$axios.post(this.$store.getters.ServerUrl + '/mypage/profile', {
-        USER_KEY : '1', //로그인과 연동시키기
+        USER_KEY : this.getUserKey(),
       })
       .then((result) => {
         console.log(result.data);
@@ -221,7 +226,7 @@ export default {
 
     saveProfile(){
         this.$axios.post(this.$store.getters.ServerUrl + '/mypage/profile/save', {
-        USER_KEY : '1', //로그인과 연동시키기
+        USER_KEY : this.getUserKey(),
         USER_NAME : this.profile.USER_NAME,
         USER_PASSWORD : this.profile.USER_PASSWORD,
         USER_MAIL : this.profile.USER_MAIL,

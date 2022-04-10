@@ -55,9 +55,14 @@ export default {
     this.getSimpleFavoriteList();
   },
   methods: {
+    getUserKey()
+    {
+      return localStorage.getItem('userKey');
+    },
+
     getSimpleUserInfo(){
       this.$axios.post('http://localhost:8080/mypage/getSimpleUserInfo', {
-        USER_KEY : '1', //로그인과 연동시키기
+        USER_KEY : this.getUserKey(),
       })
       .then((result) => {
         // console.log(result.data);
@@ -70,7 +75,7 @@ export default {
     },
     getBuyCounts(){
       this.$axios.post('http://localhost:8080/mypage/getBuyCounts', {
-        USER_KEY : '1', //로그인과 연동시키기
+        USER_KEY : this.getUserKey(),
       })
       .then((result) => {
         // console.log(result.data);
@@ -82,7 +87,7 @@ export default {
     },
     getSellCounts(){
       this.$axios.post('http://localhost:8080/mypage/getSellCounts', {
-        USER_KEY : '1', //로그인과 연동시키기
+        USER_KEY : this.getUserKey(),
       })
       .then((result) => {
         // console.log(result.data);
@@ -94,7 +99,7 @@ export default {
     },
     getSimpleFavoriteList(){
       this.$axios.post(this.$store.getters.ServerUrl + '/mypage/getSimpleFavoriteList', {
-          USER_KEY : '1', //로그인과 연동시키기
+          USER_KEY : this.getUserKey(),
         })
         .then((result) => {
           //console.log(result.data);

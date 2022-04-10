@@ -103,9 +103,14 @@ import moment from 'moment'
       // console.log("BuyList.created.curFilter: ", this.curFilter);
     },
     methods: {
+      getUserKey()
+      {
+        return localStorage.getItem('userKey');
+      },
+
       getBuyCounts(){
         this.$axios.post(this.$store.getters.ServerUrl + '/mypage/buyList/getBuyCounts', {
-          USER_KEY : '1', //로그인과 연동시키기
+          USER_KEY : this.getUserKey(),
         })
         .then((result) => {
           //console.log(result.data);
@@ -190,7 +195,7 @@ import moment from 'moment'
 
       getListCount(){
         this.$axios.post(this.getCountUrl, {
-          USER_KEY : '1', //로그인과 연동시키기
+          USER_KEY : this.getUserKey(),
           startDate : this.startDate,
           endDate : this.endDate,
           state : this.selectedFilterIdx,
@@ -207,7 +212,7 @@ import moment from 'moment'
       getList(){
         //console.log("getList", this.rowStart, this.slotCountPerPage);
         this.$axios.post(this.getListUrl, {
-          USER_KEY    : '1', //로그인과 연동시키기
+          USER_KEY    : this.getUserKey(),
           startDate   : this.startDate,
           endDate     : this.endDate,
           limitStart  : this.rowStart,
