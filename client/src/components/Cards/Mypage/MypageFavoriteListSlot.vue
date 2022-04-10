@@ -30,6 +30,7 @@
                   style="background: #EF6253; color: white;"
                   rounded
                   text
+                  @click="onBuyButtonClicked"
               >
                 구매
               </v-btn>
@@ -38,7 +39,7 @@
               class="text-gray-400" 
               style="font-size: 0.7rem; line-height: 0.75rem; margin-top:-0.2rem; text-decoration: underline;"
               type="button"
-              @click ="onDeleteClicked"
+              @click="onDeleteClicked"
               >
                 삭제
               </h5>
@@ -71,6 +72,18 @@ export default {
         }
       });
     },
+
+    onBuyButtonClicked(event)
+    {
+      event.stopPropagation();
+
+      this.$router.push({path:'/buy',
+          params:{
+            PRODUCT_KEY:this.item.PRODUCT_KEY
+            }
+          });
+    },
+
     onDeleteClicked(event){
       event.stopPropagation();
       this.$emit("onDeleteClicked", this.item);
