@@ -208,7 +208,7 @@ export default {
               console.log("디비에서 결과 가져옴", res);
               console.log("res.data값은?", res.data);
               vm.PRODUCT_NAME = res.data[0].PRODUCT_NAME;
-              vm.PRODUCT_BRAND = res.data[0].PRODUCT_BRAND;
+              vm.PRODUCT_BRAND = res.data[0].PRODUCT_BRAND =='LE'? '레고':'베어브릭';
               vm.PRODUCT_DESC = res.data[0].PRODUCT_DESC;
               vm.PRODUCT_MNUM = res.data[0].PRODUCT_MNUM;
               vm.PRODUCT_LDATE = res.data[0].PRODUCT_LDATE;
