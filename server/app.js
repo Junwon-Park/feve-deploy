@@ -11,6 +11,7 @@ const { config } = require('./config.js');
 
 // Router
 const authRouter = require('./router/auth/authRouter.js');
+
 const addproductRoute = require('./router/admin/addproduct.js');
 const loadproductRoute = require('./router/admin/loadproduct.js');
 const adminCscenterRoute = require('./router/admin/cscenter.js');
