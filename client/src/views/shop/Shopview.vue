@@ -72,11 +72,13 @@
                   <div class="w-full flex-wrap mt-6">
                     <b class="text-lg">상품정보</b>
                     <div class="text-center mt-2  text-sm" style="border:black;">
-                      <div style="width:33%; float:left; padding-right:10px;">
-                        <p class="mb-1">모델번호</p>
-                        <p>{{PRODUCT_MNUM}}</p>
+                      <div style="width:33%; float:left; padding-right:10px; border-right-style: solid; border-right-width: 1px;">
+                        <div>
+                          <p class="mb-1">모델번호</p>
+                          <p>{{PRODUCT_MNUM}}</p>
+                        </div>
                       </div>
-                      <div style="width:33%; float:left; padding-right:10px;">
+                      <div style="width:33%; float:left; padding-right:10px; border-right-style: solid; border-right-width: 1px;">
                         <p class="mb-1">출시일</p>
                         <p>{{PRODUCT_LDATE}}</p>
                       </div>
@@ -429,18 +431,18 @@ export default {
       },
       goSell:function(){
         console.log("판매 버튼 클릭");
-        // if(this.user_key == null )
-        // { 
-        //   alert("로그인 후 이용해 주세요");
-        //   this.$router.push({path:'/auth'});
-        // }  
-        // else{
-        //   this.$router.push({path:'/sell' ,
-        //   // name:'Sellselect',
-        //   params:{
-        //     PRODUCT_KEY:this.PRODUCT_KEY}
-        //   });
-        // }
+        if(this.user_key == null )
+        { 
+          alert("로그인 후 이용해 주세요");
+          this.$router.push({path:'/auth'});
+        }  
+        else{
+          this.$router.push({path:'/sell' ,
+          name:'Sellselect',
+          params:{
+            PRODUCT_KEY:this.PRODUCT_KEY}
+          });
+        }
       },
       scrollToTop() {
 

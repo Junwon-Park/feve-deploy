@@ -189,7 +189,8 @@ const routes = [
     component: Buycomplete
   },
   {
-    path: '/sell',
+    path: '/sell/:PRODUCT_KEY',
+    name: 'Buyselect',
     component: Sellselect
   },
   {
@@ -207,13 +208,6 @@ const routes = [
   {
     path: '/buy/proc/complete',
     component: Sellcomplete
-  },
- 
-
-
-  {
-    path: '/shop',
-    component: Shoplist
   },
   {
     path: '/shop',
