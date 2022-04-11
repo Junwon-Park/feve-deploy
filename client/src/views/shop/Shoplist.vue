@@ -83,19 +83,19 @@ export default {
       var vm = this;
       this.$axios.get('http://localhost:8080/shop/shoplist')
         .then(function(res){
-          console.log("디비에서 결과 가져옴", res);
+          //console.log("디비에서 결과 가져옴", res);
           vm.items = res.data;
           for(var i=0; i<res.data.length;i++)
           {  
             if(res.data[i].PRODUCT_BRAND =='LE')
               {
                 vm.items[i].PRODUCT_BRAND = "레고";
-                console.log(vm.items[i].PRODUCT_BRAND);
+                //console.log(vm.items[i].PRODUCT_BRAND);
               }
             else
              {
               vm.items[i].PRODUCT_BRAND = "베어브릭";
-              console.log(vm.items[i].PRODUCT_BRAND);
+              //console.log(vm.items[i].PRODUCT_BRAND);
              }
           }
         })

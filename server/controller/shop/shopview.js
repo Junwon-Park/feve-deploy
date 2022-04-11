@@ -6,7 +6,7 @@ const sequelize = require("sequelize");
 
 async function shopview(req, res, next) {
   const product_key = req.params.PRODUCT_KEY;
-  console.log("product_key는???????????",product_key);
+  //console.log("product_key는???????????",product_key);
 
   await db.sequelize.query(
     'SELECT DISTINCT\n' +
