@@ -45,7 +45,7 @@
                     readonly
                     filled
                     auto-grow
-                    label="내용"
+                    label="문의 내용"
                     rows="4"
                     row-height="30"
                     shaped
@@ -62,7 +62,7 @@
                     readonly
                     outlined
                     auto-grow
-                    label="답변"
+                    label="관리자 답변 내용"
                     rows="4"
                     row-height="30"
                     shaped
@@ -98,7 +98,12 @@ export default {
   props: {
       dialog:{},
       table:[],
-      item:{}
+      item:{
+        CSCENTER_COMMENT:{
+          default:'답변 대기 중 입니다.'
+        }
+
+      }
       },
 
   methods:{

@@ -45,6 +45,7 @@ import CscenterQna from '@/views/cscenter/CscenterQna.vue';
 import CscenterFaq from '@/views/cscenter/CscenterFaq.vue';
 import CscenterInsert from '@/views/cscenter/CscenterInsert.vue';
 import CscenterStandard from '@/views/cscenter/CscenterStandard.vue';
+import CscenterNotice1 from '@/views/cscenter/CscenterNotice1.vue';
 import Buyselect from '@/views/sold/Buyselect.vue';
 import Buycomplete from '@/views/sold/Buycomplete.vue';
 
@@ -241,6 +242,10 @@ const routes = [
   {
     path: '/cscenterInsert',
     component: CscenterInsert
+  },
+  {
+    path: '/cscenterNotice1',
+    component: CscenterNotice1
   },
   { path: '/:pathMatch(.*)*', redirect: '/' }
 ];
