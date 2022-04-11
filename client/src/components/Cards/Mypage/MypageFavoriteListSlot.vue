@@ -77,11 +77,21 @@ export default {
       minPrice:'',
     }
   },
+  watch:{
+    item: function() {
+          // console.log('Prop changed: ', newVal, ' | was: ', oldVal)
+          this.setMinPrice();
+    },
+  },
   created(){
-    // console.log("this.item.MIN_PRICE: ", this.item.MIN_PRICE);
-    this.minPrice = (this.item.MIN_PRICE == null) ? '-' : this.item.MIN_PRICE.toLocaleString('ko-KR') + "원";
+    this.setMinPrice();
   },
   methods:{
+    setMinPrice(){
+      //console.log("this.item.MIN_PRICE: ", this.item.MIN_PRICE);
+      this.minPrice = (this.item.MIN_PRICE == null) ? '-' : this.item.MIN_PRICE.toLocaleString('ko-KR') + "원";
+    },
+
     onSlotClicked(){
       //console.log("onSlotClicked.name: ", this.item.PRODUCT_NAME);
       this.$router.push({path:'./shopview',

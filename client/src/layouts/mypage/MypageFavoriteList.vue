@@ -90,12 +90,13 @@ import MypageFavoriteListSlot from '../../components/Cards/Mypage/MypageFavorite
       },
 
       onDeleteFavorite(item){
-        // console.log("onDeleteFavorite.name: ", item.PRODUCT_NAME);
+        // console.log("onDeleteFavorite.name: ", item.FAVORITE_KEY);
         this.$axios.post(this.$store.getters.ServerUrl + '/mypage/favoriteList/delete', {
           FAVORITE_KEY : item.FAVORITE_KEY,
         })
         .then(() => {
-          // console.log(result);
+          this.curPage = 1;
+          this.setIndexs();
           this.getFavoriteList();
         })
         .catch((error) => {
