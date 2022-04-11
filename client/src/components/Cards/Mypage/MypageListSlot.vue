@@ -1,48 +1,46 @@
 <template>
-  <v-row class="divide-y-b-gray"
-  style="align-items:center">
+  <v-row class="divide-y-b-gray mt-4" style="align-self:center">
     
-    <v-col cols="12">
+    <v-col style="align-self:center" class="flex">
       <img
         :src= "imageUrl + item.Product.PRODUCT_PIC"
-        style="border-radius: 8px; width:5rem; height:5rem; margin-top:1rem; margin-bottom:1rem"
+        style="border-radius:8px; width:5rem; height:5rem;"
         crossorigin
       >
+      <v-col>
+      <h5 class="font-bold underline">
+        {{ item.Product.PRODUCT_BRAND }}
+      </h5>
+      <h5>
+        {{ item.Product.PRODUCT_NAME }}
+      </h5>
+      </v-col>
     </v-col>
       
-    <v-col cols="12" class="ml-3" :align-self="center">
-        <h5 class="font-bold underline mt-2">
-        {{ item.Product.PRODUCT_BRAND }}
-        </h5>
-        <h5>
-        {{ item.Product.PRODUCT_NAME }}
-        </h5>
-    </v-col>
-
-    <!-- <h5 class="text-gray-400" style="font-size: 0.7rem; line-height: 0.75rem; margin-top:-0.2rem">즉시 구매가</h5> -->
-
-    <v-col cols="12" :align-self="center">
-      <h5 class="font-bold underline mt-2">
+    <v-col style="align-self:center">
+      <h5 class="font-bold underline">
       {{ item.strState }}
       </h5>
     </v-col>
 
-    <v-col cols="12" :align-self="center">
-      <h5 class="font-bold mt-1">
+    <v-col style="align-self:center">
+      <h5 class="font-bold">
         {{ price.toLocaleString('ko-KR') }}원
       </h5>
     </v-col>
       
-    <v-col cols="12" :align-self="center">
+    <v-col style="align-self:center">
       <h5>
         {{ eDate }}
       </h5>
     </v-col>
       
     <!-- <v-list-item-action > -->
-      <v-col cols="12" :align-self="center" v-if="IsFinalize()">
+      <v-col class="flex">
+      <v-col style="align-self:center"
+      v-if="IsFinalize()">
         <v-btn
-          style="background: #EF6253; color: white;"
+          style="background: #EF6253; color: white; border-radius: 8px;"
           rounded
           text
           @click="onFinalizeClicked(0)"
@@ -51,9 +49,10 @@
         </v-btn>
       </v-col>
 
-      <v-col cols="12" :align-self="center" v-if="IsFinalize()">
+      <v-col style="align-self:center"
+      v-if="IsFinalize()">
         <v-btn
-          style="background: #EF6253; color: white;"
+          style="background: #999999; color: white; border-radius: 8px;"
           rounded
           text
           @click="onFinalizeClicked(1)"
@@ -61,7 +60,8 @@
           구매취소
         </v-btn>
       </v-col>
-    <!-- </v-list-item-action> -->
+      </v-col>
+     <!-- </v-list-item-action> -->
     
   </v-row>
 </template>

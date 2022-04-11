@@ -10,7 +10,7 @@
       :filter="curFilter"
       @onFilterChanged="onFilterChanged"
       @onOrderClicked="onOrderClicked"
-      class="mt-3 divide-y-b-gray"
+      class="divide-y-b-gray"
     />
 
     <div class="grid ">
