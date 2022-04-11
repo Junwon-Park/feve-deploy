@@ -28,18 +28,22 @@
             <div>
               <a href="#" v-for="(column, i) in filter.orderTexts" :key="i"
                 @click="onOrderClicked(i)">
-                  <span>{{column}}</span> &nbsp;&nbsp;
+                  <span >{{column}} </span> 
+                  <span v-if="orderIdx == i">
+                    <span v-if="orderDir == 0">
+                      &#9660;
+                    </span>
+                    <span v-else>
+                      &#9650;
+                    </span>
+                  </span>
+                  &nbsp;&nbsp;
               </a>
             </div>
         </div>
     </div>
 </template>
 
-<style scoped>
-  /* .v-select:not(){
-    
-  } */
-</style>
 
 <script>
 export default {
@@ -55,6 +59,8 @@ export default {
     return {
         filterObjs:[],
         selectedObj:Object,
+        orderIdx:-1,
+        orderDir:0,
     }
   },
   created(){
@@ -80,10 +86,21 @@ export default {
           this.selectedObj = this.filterObjs[0];
         }
         
+        this.initOrder();
+      },
+
+      initOrder(){
+        this.orderIdx = -1;
       },
 
       onOrderClicked(idx){
         this.$emit("onOrderClicked", idx);
+        if(this.orderIdx == idx)
+          this.orderDir = (++this.orderDir) % 2;  
+        else
+          this.orderDir = 0;
+
+        this.orderIdx = idx;
       },
 
       onFilterChanged(){

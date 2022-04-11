@@ -8,6 +8,7 @@
     
     <mypage-list-filter
       :filter="curFilter"
+      ref="listFilter"
       @onFilterChanged="onFilterChanged"
       @onOrderClicked="onOrderClicked"
       class="divide-y-b-gray"
@@ -158,6 +159,8 @@ export default {
       this.curOrderIdx = -1,
       this.orderColumn ='';
       this.orderDir = 0;
+
+      this.$refs.listFilter.initOrder();
     },
 
     setUrl()
@@ -314,8 +317,12 @@ export default {
       this.curOrderIdx = idx;
       this.orderColumn = this.curFilter.orderColumn[idx];
 
-      this.goToFirstPage();
-      this.getList();
+      if(this.list != null && this.list.length > 0)
+      {
+        this.goToFirstPage();
+        this.getListCount();
+        this.getList();
+      }
     },
     
     onFilterChanged(selected){
