@@ -167,18 +167,19 @@ const routes = [
   },
   {
     path: '/buy/sel/:PRODUCT_KEY',
+    name: 'Buy',
     component: Buy
   },
   {
-    path: '/buy/proc/:PRODUCT_KEY',
+    path: '/buy/:PRODUCT_KEY/sel/proc',
     component: Buyproc
   },
   {
-    path: '/buy/proc/com/:PRODUCT_KEY',
+    path: '/buy/:PRODUCT_KEY/sel/proc/co',
     component: Buycomp
   },
   {
-    path: '/buy/proc/complete/:PRODUCT_KEY',
+    path: '/buy/:PRODUCT_KEY/sel/proc/co/complete',
     component: Buycomplete
   },
   {
