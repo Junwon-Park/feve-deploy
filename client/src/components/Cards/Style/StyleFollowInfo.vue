@@ -202,7 +202,7 @@ export default {
       })
           .then((res) => {
             that.totalPostCount = res.data[0].totalPostCount;
-            console.log(res.data)
+            //console.log(res.data)
           })
           .catch((error) => {
             console.log(error);
@@ -215,7 +215,7 @@ export default {
         })
             .then((res) => {
               that.totalFollowerCount = res.data[0].cnt;
-              console.log(res.data)
+              //console.log(res.data)
             })
             .catch((error) => {
               console.log(error);
@@ -226,7 +226,7 @@ export default {
         })
             .then((res) => {
               that.totalFollowingCount = res.data[0].cnt;
-              console.log(res.data)
+              //console.log(res.data)
             })
             .catch((error) => {
               console.log(error);
@@ -237,8 +237,8 @@ export default {
       })
           .then((res) => {
             that.followList = res.data;
-            console.log(res.data)
-            console.log(that.followList)
+            //console.log(res.data)
+            //console.log(that.followList)
           })
           .catch((error) => {
             console.log(error);
@@ -249,8 +249,8 @@ export default {
       })
           .then((res) => {
             that.followingList = res.data;
-            console.log(res.data)
-            console.log("following list::::::",that.followingList)
+            //console.log(res.data)
+            //console.log("following list::::::",that.followingList)
           })
           .catch((error) => {
             console.log(error);

@@ -81,7 +81,7 @@ export default {
   },
   methods:{
     goView(USER_KEY){
-      console.log("USER_KEY:::::::::",USER_KEY)
+      //console.log("USER_KEY:::::::::",USER_KEY)
         this.$router.push({path:'./style',
           name:'StyleView',
           params:{

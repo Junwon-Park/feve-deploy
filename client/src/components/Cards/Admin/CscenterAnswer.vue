@@ -123,7 +123,7 @@ export default {
     },
   },
   created(){
-    console.log(this.$props.item)
+    //console.log(this.$props.item)
   }
 }
 </script>

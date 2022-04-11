@@ -205,7 +205,7 @@ export default {
       this.$router.go(this.$router.currentRouter);
     },
     secondClassCate( event ){
-      console.log(event.target.value);
+      //console.log(event.target.value);
       let that = this;
       this.$axios.post('http://localhost:8080/category/second', {
         product_brand: event.target.value,

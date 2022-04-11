@@ -51,7 +51,7 @@ export default {
       that.limitStart = start;
       that.limitEnd = end;
       that.currentPage= reqpage;
-      console.log(start, end, reqpage)
+      //console.log(start, end, reqpage)
 
       this.$axios.post('http://localhost:8080/admin/cscenter', {
         limitStart: this.limitStart,
@@ -60,7 +60,7 @@ export default {
       })
           .then(function(res){
             that.items = res.data;
-            console.log(this.items)
+            //console.log(this.items)
           })
           .catch(function(err){
             console.log(err);
@@ -73,7 +73,7 @@ export default {
         .then(function(res){
           that.totalListCount = res.data[0].totalCnt;
           that.pageSize=Math.ceil(that.totalListCount/that.itemPerPage);
-          console.log("페이지 버튼 개수: ",Math.ceil(that.totalListCount/that.itemPerPage))
+          //console.log("페이지 버튼 개수: ",Math.ceil(that.totalListCount/that.itemPerPage))
         })
         .catch(function(err){
           console.log(err);

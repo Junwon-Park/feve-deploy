@@ -238,7 +238,7 @@ export default {
         following_id : this.$route.params.USER_KEY,
       })
           .then((res) => {
-            console.log(res.data)
+            //console.log(res.data)
             this.isfollow = res.data;
           })
           .catch((error) => {

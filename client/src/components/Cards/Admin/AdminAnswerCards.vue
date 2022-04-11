@@ -97,7 +97,7 @@ export default {
     }
   },
   created(){
-    console.log(this.$props.CSCENTER_STATUS)
+    //console.log(this.$props.CSCENTER_STATUS)
   }
 }
 </script>

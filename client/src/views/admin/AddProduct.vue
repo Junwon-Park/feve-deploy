@@ -236,15 +236,15 @@ export default {
       const formData = new FormData();
       formData.append("image", file);
 
-      console.log(file)
+      //console.log(file)
 
       this.$axios.post('http://localhost:8080/uploadImage', formData, {
         headers: {
           'content-type': 'multipart/form-data'
         }
       })
-          .then(function(res){
-            console.log(res)
+          .then(function(){
+            //console.log(res)
           })
           .catch(function(err){
             console.log(err)
@@ -253,7 +253,7 @@ export default {
 
     //중분류 가져오기
     secondClassCate( event ){
-      console.log(event.target.value);
+      //console.log(event.target.value);
       let that = this;
       this.$axios.post('http://localhost:8080/category/second', {
         product_brand: event.target.value,

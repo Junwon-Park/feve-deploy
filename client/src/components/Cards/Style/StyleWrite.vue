@@ -132,7 +132,7 @@ export default {
   methods:{
     sendDialog(){
       this.recDialog = true
-      console.log('aa');
+      //console.log('aa');
     },
     closeDialog(){
       this.dialog=false
@@ -146,7 +146,7 @@ export default {
         hashtag: that.chips
       })
           .then(function( res ){
-            console.log(res.data.POST_KEY)
+            //console.log(res.data.POST_KEY)
             that.post_key=res.data.POST_KEY;
             alert("게시글을 등록했습니다.");
             that.$router.go(that.$router.currentRouter);
@@ -163,8 +163,8 @@ export default {
           'content-type': 'multipart/form-data'
         }
       })
-      .then(function(res){
-        console.log(res)
+      .then(function(){
+        //console.log(res)
       })
       .catch(function(err){
         console.log(err)

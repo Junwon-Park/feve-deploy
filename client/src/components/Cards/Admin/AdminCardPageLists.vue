@@ -212,8 +212,8 @@ export default {
         newProductPic: that.newProductPic,
         newProductDesc: that.newProductDesc,
         newProductOriprice:  that.newProductOriprice,
-      }).then(function (res) {
-        console.log(res)
+      }).then(function () {
+        //console.log(res)
       })
       .catch(function (err) {
         console.log(err);
@@ -224,7 +224,7 @@ export default {
       let requestPage = page;
       let sendStart = (page -1) * this.itemPerPage;
       let sendEnd=page * this.itemPerPage -1;
-      console.log("sendStart: ",sendStart, "sendEnd: ", sendEnd)
+      //console.log("sendStart: ",sendStart, "sendEnd: ", sendEnd)
 
       this.$emit("startend", sendStart, sendEnd, requestPage);
     }

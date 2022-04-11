@@ -118,7 +118,7 @@ export default {
       that.receivedUserid=recU;
       that.receivedUserkey=recUk;
 
-      console.log(that.receivedCscenterKey)
+      //console.log(that.receivedCscenterKey)
 
       this.$axios.post('http://localhost:8080/admin/cscenter/one',{
         sendCscenterKey: that.receivedCscenterKey,
@@ -126,7 +126,7 @@ export default {
         sendUserkey: that.receivedUserkey,
       }).then(function(res){
         that.item=res.data[0];
-        console.log("res", res);
+        //console.log("res", res);
       }).catch(function(err){
         console.log(err);
       });
@@ -139,8 +139,8 @@ export default {
         sendCscenterKey: that.receivedCscenterKey,
         cscenterComment: that.cscenterComment,
         sendUserkey: that.receivedUserkey,
-      }).then(function(res){
-        console.log(res)
+      }).then(function(){
+        //console.log(res)
       })
           .catch(function(err){
             console.log(err);
@@ -148,11 +148,11 @@ export default {
     },
 
     onPageChanged(page){
-      console.log("페이지 버튼 클릭: ", page +"번");
+      //console.log("페이지 버튼 클릭: ", page +"번");
       let requestPage = page;
       let sendStart = (page -1) * this.itemPerPage;
       let sendEnd=page * this.itemPerPage -1;
-      console.log("sendStart: ",sendStart, "sendEnd: ", sendEnd)
+      //console.log("sendStart: ",sendStart, "sendEnd: ", sendEnd)
 
       this.$emit("startend", sendStart, sendEnd, requestPage);
     }
