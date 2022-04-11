@@ -20,12 +20,6 @@ const adminUpdateInspectionRoute = require('./router/admin/updateInspection.js')
 const adminUpdateProductRoute = require('./router/admin/updateProduct.js');
 const adminDeleteProductRoute = require('./router/admin/deleteProduct.js');
 const adminMainChartRoute = require('./router/admin/main.js');
-const styleAddPostRoute = require('./router/style/addPost.js');
-const styleLoadPostRoute = require('./router/style/loadPost.js');
-const styleDeletePostRoute = require('./router/style/deletePost.js');
-const styleAddCommentRoute = require('./router/style/addComment.js');
-const styleLoadCommentRoute = require('./router/style/loadComment.js');
-const styleFollowRoute = require('./router/style/follow.js');
 const categorytRoute = require('./router/common/category.js');
 const shoplistRoute = require('./router/shop/shoplist.js');
 const shopviewRoute = require('./router/shop/shopview.js');
@@ -41,9 +35,7 @@ const mypageSellListRouter = require('./router/mypage/mypageSellList.js');
 const mypageFavoriteListRouter = require('./router/mypage/mypageFavoriteList.js');
 const mypageProfileRouter = require('./router/mypage/mypageProfile.js');
 const imageRouter = require("./image/image.js");
-const imageStyleRouter = require("./image/styleImage.js");
 const uploadImageRouter = require("./image/uploadImage.js");
-const uploadStyleImageRouter = require("./image/uploadStyleImage.js");
 
 const cscenterInsertRoute = require("./router/cscenter/cscenterInsert.js");
 const mainLoadproductRoute = require('./router/main/loadproduct.js');
@@ -100,13 +92,6 @@ app.use('/admin/updateProduct', adminUpdateProductRoute);
 app.use('/admin/deleteProduct', adminDeleteProductRoute);
 app.use('/admin/count', adminMainChartRoute);
 
-app.use('/style/addPost', styleAddPostRoute);
-app.use('/style/loadPost', styleLoadPostRoute);
-app.use('/style/deletePost', styleDeletePostRoute);
-app.use('/style/follow', styleFollowRoute);
-app.use('/style/addComment', styleAddCommentRoute);
-app.use('/style/loadComment', styleLoadCommentRoute);
-
 app.use('/shoplist', shoplistRoute);
 app.use('/shop/shoplist', shoplistRoute);
 app.use('/shop/filterCate', filterCateRouter);
@@ -125,9 +110,7 @@ app.use('/mypage/favoriteList', mypageFavoriteListRouter);
 app.use('/mypage/profile', mypageProfileRouter);
 
 app.use("/getImage", imageRouter);
-app.use("/getStyleImage", imageStyleRouter);
 app.use("/uploadImage", uploadImageRouter);
-app.use("/uploadStyleImage", uploadStyleImageRouter);
 
 app.use("/main/loadproduct", mainLoadproductRoute);
 

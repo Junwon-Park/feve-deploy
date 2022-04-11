@@ -144,8 +144,10 @@
                       <dt>
                         <span class="text-sm" style="color:black">판매 희망가</span>
                       </dt>
-                      <dd class="text-right text-sm" style="color:#222">
-                        <strong>{{sell.SELL_PRICE.toLocaleString('ko-KR')}}원</strong></dd>
+                      <dd class="text-right text-sm" style="color:#222" v-if="!ifNull">
+                        <strong>-</strong></dd>
+                      <dd class="text-right text-sm" style="color:#222" v-else>
+                        <strong>{{sell.SELL_PRICE.toLocaleString('ko-KR')}}원</strong></dd>  
                     </dl>
                   </div>
 
@@ -304,9 +306,8 @@ export default {
     return {
       
       box,
-      maxprice:{
-        BUY_PRICE:0,
-      },
+      ifNull: false,
+      hasMaxPrice:0,
       checksucess: [],
       tab: null,
       legoBg,
@@ -340,36 +341,34 @@ export default {
             PRODUCT_ORIPRICE:'',
           },
 
-    
+
+   
 
     };
   },
   methods: {
+    
     updatebuy() {
+
+        var vms = this;
         this.$axios.post("http://localhost:8080/sell/update",{
           user_key: JSON.parse(localStorage.getItem('userKey')),
           sell_key: this.sell.SELL_KEY
         })
-      .then(function (res) {
-        console.log(typeof res.data[1]);
-        console.log("성공");
-       this.$router.push("http://localhost:3000/sell/complete") 
+        .then(function (res) {
+         console.log(res.data);
+         alert("구매확정되었습니다.");
+         vms.$router.replace("http://localhost:3000")
+       
 
-        if(res.data[1] === 1)
-        {
-          this.$router.push("http://localhost:3000/sell/complete") 
-
-        }
-        else
-        {
-          alert("구매에 실패하셨습니다");
-        this.$router.push("http://localhost:3000/") 
-
-        }
-      }) 
-      .catch(function (err) {
+    
+        }) 
+        .catch(function (err) {
           console.log(err);
         });
+
+       
+
   
 
     }

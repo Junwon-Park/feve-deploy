@@ -24,7 +24,7 @@
           <div
             class="p-8 relative flex flex-col min-w-0 break-words  pd-8 bg-white w-full mb-6 shadow-xl rounded-lg -mt-64">
             <div class="px-6">
-              <h5 class="text-xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2 text-center m-3">즉시 판매 확정</h5>
+              <h5 class="text-xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2 text-center m-3">즉시 구매 확정</h5>
             </div>
             <div>
               <div class="flex flex-wrap items-center mt-5 mb-5 px-6">
@@ -129,8 +129,13 @@
                         <dl style="justify-between items-center">
                           <dt class="text-sm" style="font-weight: 700;
                    letter-spacing: -.01px;">정산 금액</dt>
-                          <dd class="text-right" style="display:block; color: red;     margin-inline-start: 40px;">
+                          <dd class="text-right" style="display:block; color: red;     margin-inline-start: 40px;" v-if="hasMaxPrice === 1">
                             <span class="text-lg">{{buy[0].buy_price.toLocaleString('ko-KR')}}</span>
+                            <span class="text-lg">원</span>
+
+                          </dd>
+                            <dd class="text-right" style="display:block; color: red;     margin-inline-start: 40px;" v-else>
+                            <span class="text-lg">-</span>
                             <span class="text-lg">원</span>
 
                           </dd>
@@ -304,7 +309,7 @@ export default {
     return {
       
       box,
-    
+      hasMaxPrice:0,
       checksucess: [],
       tab: null,
       legoBg,
@@ -346,14 +351,17 @@ export default {
   
     updatebuy() {
       var vm = this;
-      console.log("buy키는~~~~ ",vm.buy.buy_key);
+      console.log("buy키는~~~~ ",vm.buy[0].buy_key);
       this.$axios.post("http://localhost:8080/buy/update", {
           user_key: JSON.parse(localStorage.getItem('userKey')),
-          buy_key: vm.buy.BUY_KEY
+          buy_key: vm.buy[0].buy_key
         })
         .then(function (res) {
           console.log(res);
           console.log("updat성공");
+          alert("구매가 확정 되었습니다!");
+          vm.$router.replace("http://localhost:3000")
+
 
         })
         .catch(function (err) {
@@ -379,7 +387,19 @@ export default {
       .then(function (res) {
         that.buy = res.data;
         console.log(that.buy);
-        console.log(that.buy[0].buy_price); 
+        console.log(that.buy[0].buy_price);
+        if(that.buy === null || that.buy.length == 0 || that.buy[0].buy_price === null)
+         {
+               that.hasMaxPrice = 0;
+               console.log("트루인부분",that.hasMaxPrice);
+         }
+
+        else
+        {
+              that.hasMaxPrice = 1;
+              console.log("fail인 부분",that.hasMaxPrice); 
+
+        } 
       }) 
       .catch(function (err) {
           console.log(err);
@@ -405,6 +425,16 @@ export default {
         .catch(function (err) {
           console.log(err);
         });
+    this.$axios.post("http://localhost:8080/buy/updatefail")
+        .then(function (res) {
+          console.log(res);
+          console.log("update 실패처리 성공");
+        
+
+        })
+        .catch(function (err) {
+          console.log(err);
+        });    
   },
 
 

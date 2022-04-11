@@ -8,7 +8,7 @@
           <div
             class="p-8 relative flex flex-col min-w-0 break-words  pd-8 bg-white w-full mb-6  rounded-lg ">
             <div class="px-6">
-              <h5 class="text-xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2 text-center m-3">구매 하기</h5>
+              <h5 class="text-xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2 text-center m-3">판매 하기</h5>
             </div>
             <div>
               <div class="flex flex-wrap items-center mt-5 mb-5 px-6">
@@ -38,7 +38,8 @@
               <section class="p-5 m-3 border-bottom: 2px solid rgb(235, 235, 235);">
                   <div class="p-4 mx-auto border xl:w-3/12 rounded text-center" >
                        <span class="block text-sm" >ONE SIZE</span>
-                       <span class="block text-xs" style=" color:red;">45000원</span>
+                       <span class="block text-xs" style=" color:green;" v-if="hasMinPrice === 0">-</span>
+                       <span class="block text-xs" style=" color:green;" v-else>{{sell[0].SELL_PRICE}}원</span>
                             <!-- <div  v-else style="margin:auto; max-width:90px;">
                              <span class="block text-sm" style="margin-top:-3px;">ONE SIZE</span>
                              <span class="block text-s" style="color:red">구매 입찰</span>
@@ -48,7 +49,7 @@
             </div>
         
             <div class="text-center mt-6 p-4  xl:w-3/12 bg-black mx-auto rounded-lg" >
-           <a href="http://localhost:3000/buy/" @click="clicked" id="change-button"
+           <a href="http://localhost:3000/sell/sel" @click="clicked" id="change-button"
                 disabled="disabled" style="color: #fafafa !important; ">
                 판매하기
               </a>
@@ -68,19 +69,19 @@ export default {
 
   data() {
     return {
-      
+      hasMinPrice:0,
       checksucess: [],
       tab: null,
       legoBg,
       text: '판매 희망가',
       month:0,
-      buy: {
+      sell: {
         
         product_key:'',
-        BUY_PRICE: 0,
-        buy_sdate: '',
-        buy_edate: '',
-        buy_status:'',
+        SELL_PRICE: 0,
+        SELL_SDATE: '',
+        SELL_EDATE: '',
+        SELL_STATUS:'',
         default: "0"
       },
 
@@ -107,19 +108,35 @@ export default {
   },
 
 
+
   beforeCreate() {
     let that = this;
-    this.$axios.post("http://localhost:8080/buy/comp")
+    this.$axios.post("http://localhost:8080/sell/comp")
       .then(function (res) {
-        that.buy = res.data;
-        console.log(that.buy);
-        console.log(that.buy.BUY_PRICE); 
+        that.sell = res.data;
+        console.log(that.sell);
+        console.log(that.sell[0].SELL_PRICE);
+
+         if(that.sell === null || that.sell.length == 0 || that.sell[0].buy_price === null)
+         {
+               that.hasMinPrice = 0;
+               console.log("트루인부분",that.hasMinPrice);
+         }
+
+        else
+        {
+              that.hasMinPrice = 1;
+              console.log("fail인 부분",that.hasMinPrice); 
+
+        }
+
+
       }) 
       .catch(function (err) {
           console.log(err);
         });
   
-   this.$axios.post("http://localhost:8080/buy/comp/user")
+   this.$axios.post("http://localhost:8080/sell/comp/user")
       .then(function (res) {
         that.user = res.data;
         console.log(that.user.USER_NAME);
@@ -128,7 +145,7 @@ export default {
       .catch(function (err) {
           console.log(err);
         });
-   this.$axios.post('http://localhost:8080/buy')
+   this.$axios.post('http://localhost:8080/sell')
         .then(function (res) {
           console.log(res);
           that.item = res.data;

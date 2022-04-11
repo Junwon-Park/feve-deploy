@@ -5,20 +5,19 @@
       <section class="relative py-16 bg-blueGray-200 mt-12">
 
         <div class="container mx-auto px-4">
-          <div
-            class="p-8 relative flex flex-col min-w-0 break-words  pd-8 bg-white w-full mb-6 shadow-xl rounded-lg ">
+          <div class="p-8 relative flex flex-col min-w-0 break-words  pd-8 bg-white w-full mb-6 shadow-xl rounded-lg ">
 
 
-            <div class=" " style="border-bottom: 3px solid black;">
+            <div  style="border-bottom: 3px solid black;">
               <h5 class="text-xl font-semibold leading-normal mb-2 text-black mb-2 text-left m-3">판매 입찰하기</h5>
             </div>
             <div>
               <div class="flex flex-wrap items-center mt-10 mb-5 px-6">
-               <div style="padding-top: 0px; padding-right: 16px; padding-bottom: 20px; padding-left: 16px;">
+                <div style="padding-top: 0px; padding-right: 16px; padding-bottom: 20px; padding-left: 16px;">
                   <div class="flex items-center" style="width:100% color:#fff">
                     <div class="" style="width:80px; height:80px; flex-shrink: 0; border-radius: 10px; background-clolr: rgb(244,244,244); overflow: hidden;
                 position: relative;">
-                      <img :src="legoBg" alt="..."/> 
+                      <img :src="legoBg" alt="..." />
                     </div>
                     <div style="overflow:hidden; -webkit-box-flex: 1; -ms-flex: 1; flex: 1; padding-left: 16px;">
                       <strong
@@ -38,25 +37,28 @@
               <ul class="flex rounded-tr p-5 items-center px-4">
                 <li class="text-center flex-1 border-r">
                   <p class="text-lg font-semibold">즉시 구매가</p>
-                  <span class="inline-block text-2xl text-right">{{buy[0].buy_price.toLocaleString('ko-KR')}}원</span>
+                  <span class="inline-block text-2xl" v-if="hasMaxPrice === 0">-</span>
+                  <span class="inline-block text-2xl text-right"
+                    v-else>{{buy[0].buy_price.toLocaleString('ko-KR')}}원</span>
                 </li>
                 <li class="text-center flex-1 font-semibold">
                   <p class="text-lg">즉시 판매가</p>
-                  <span class="inline-block text-2xl">{{max.SELL_PRICE.toLocaleString('ko-KR')}}원</span>
+                  <span class="inline-block text-2xl" v-if="hasMinPrice === 0">-</span>
+                  <span class="inline-block text-2xl" v-else>{{max[0].SELL_PRICE.toLocaleString('ko-KR')}}원</span>
+
                 </li>
               </ul>
               <div class="relative p-5" style="width:100%; margin:auto;">
                 <v-card :elevation="0">
-                  <v-tabs v-model="tab" centered  icons-and-text
-                    style=" margin:auto;">
+                  <v-tabs v-model="tab" centered icons-and-text style=" margin:auto;">
                     <v-tabs-slider></v-tabs-slider>
 
                     <v-tab href="#tab-1" style="width: 50%;">
-                      구매 입찰
+                      판매 입찰
                     </v-tab>
 
                     <v-tab href="#tab-2" style="width: 50%;">
-                      즉시 구매
+                      즉시 판매
                     </v-tab>
 
 
@@ -67,7 +69,7 @@
                       <v-card flat>
                         <dl class="p-5 m-3 justify-between flex mb-5 items-center"
                           style="border-bottom: 2px solid #ebebeb;">
-                          <dt class="text-s">구매 희망가</dt>
+                          <dt class="text-s">판매 희망가</dt>
                           <dd class="text-sm"><input type="text"
                               style="adding-left: 2px;
                             line-height: 26px; font-size: 20px;letter-spacing: -.3px;font-weight: 700; text-align:right" autocomplete="off"
@@ -86,6 +88,13 @@
                               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                               placeholder="경매날짜" v-model="sell.sell_edate" />
                           </v-row>
+                        </div>
+                        <div class="text-center mt-6">
+                          <button
+                            class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                            type="button" @click="formSubmit()">
+                            작성하기
+                          </button>
                         </div>
                       </v-card>
                     </v-tab-item>
@@ -96,25 +105,29 @@
                       <v-card flat>
                         <dl class="p-5 m-3 justify-between flex mb-5 items-center"
                           style="border-bottom: 2px solid #ebebeb;">
-                          <dt class="text-s">구매 희망가</dt>
-                          <dd class="text-sm"><input type="text"
-                              style="adding-left: 2px;
-                            line-height: 26px; font-size: 20px;letter-spacing: -.3px;font-weight: 700; text-align:right" autocomplete="off"
-                              placeholder="희망가 입력" v-model="sell.sell_price">
-                            <span class="text-sm">원</span>
+                          <dt class="text-s">즉시 판매가</dt>
+                          <dd class="text-base" v-if="hasMinPrice === 0">
+                           -
+                          </dd>
+                          <dd class="text-base" v-else>
+                            {{max[0].SELL_PRICE.toLocaleString('ko-KR')}}원
                           </dd>
                         </dl>
                         <div class="pt-6 text-xs m-4" style="letter-spacing: -.07px;">
-                          <p class="pt-6 text-sm text-right" style="color:gray">*총 결제 금액은 다음 화면에서 계산됩니다</p>
+                          <p class="pt-6 text-sm text-right" style="color:gray" v-if="hasMinPrice == 1">*총 결제 금액은 다음 화면에서 계산됩니다</p>
+                          <p class="pt-6 text-sm text-right" style="color:gray" v-else></p>
+
                         </div>
                         <div>
-                          <v-row justify="center" class="text-center m-4">
-                            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="출시일">
-                            </label>
-                            <input type="date"
-                              class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                              placeholder="경매날짜" v-model="sell.sell_edate" />
-                          </v-row>
+                          <div style="flex items-center no-underline" v-if="hasMinPrice == 0">
+                            <h3 class="pt-6 text-sm text-center">입찰내역이 없습니다</h3>
+                          </div>
+                          <div style="flex items-center no-underline" v-else>
+                            <a href="http://localhost:3000/sell/proc/com" class="full-image" disabled="disabled"
+                              style="color: #fafafa !important;">
+                              판매 확정하기
+                            </a>
+                          </div>
                         </div>
                       </v-card>
                     </v-tab-item>
@@ -123,16 +136,7 @@
                 </v-card>
               </div>
             </div>
-            
-            <div class="text-center mt-6">
-                    <button
-                        class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                        type="button"
-                        @click="formSubmit()"
-                    >
-                      작성하기
-                    </button>
-                  </div>
+          
           </div>
         </div>
       </section>
@@ -147,6 +151,8 @@ export default {
   data() {
     return {
       anguler,
+      hasMaxPrice:0,
+      hasMinPrice:0,
       checksucess: [],
       legoBg,
       tab: null,
@@ -192,6 +198,8 @@ export default {
 
     };
   },
+
+  
   methods: {
      formSubmit() {
       const curr = new Date();
@@ -214,7 +222,7 @@ export default {
             this.$router.push("http://localhost:3000/");
           })
           .catch((error) => {
-            alert("실패");
+            alert("실패 하셨습니다");
             this.$router.push("http://localhost:3000/");
             console.log(error);
           })
@@ -227,6 +235,18 @@ export default {
         that.buy = res.data;
         console.log(that.buy);
         console.log(that.buy[0].buy_price); 
+        if(that.buy === null || that.buy.length == 0 || that.buy[0].buy_price === null)
+         {
+               that.hasMaxPrice = 0;
+               console.log("트루인부분",that.hasMaxPrice);
+         }
+
+        else
+        {
+              that.hasMaxPrice = 1;
+              console.log("fail인 부분",that.hasMaxPrice); 
+
+        }
       }) 
       .catch(function (err) {
           console.log(err);
@@ -248,6 +268,18 @@ export default {
         that.max = res.data;
         console.log(that.max);
         console.log(that.max.SELL_PRICE); 
+        if(that.max === null || that.max.length == 0 || that.max[0].SELL_PRICE === null)
+         {
+               that.hasMinPrice = 0;
+               console.log("트루인부분",that.hasMinPrice);
+         }
+
+        else
+        {
+              that.hasMinPrice = 1;
+              console.log("fail인 부분",that.hasMinPrice); 
+
+        }
       }) 
       .catch(function (err) {
           console.log(err);

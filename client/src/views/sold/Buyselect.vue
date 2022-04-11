@@ -38,7 +38,8 @@
               <section class="p-5 m-3 border-bottom: 2px solid rgb(235, 235, 235);">
                   <div class="p-4 mx-auto border xl:w-3/12 rounded text-center" >
                        <span class="block text-sm" >ONE SIZE</span>
-                       <span class="block text-xs" style=" color:red;">45000원</span>
+                       <span class="block text-xs" style=" color:red;" v-if="hasMaxPrice === 1">{{buy[0].buy_price.toLocaleString('ko-KR')}}원</span>
+                       <span class="block text-xs" style=" color:red;" v-else>-</span>
                             <!-- <div  v-else style="margin:auto; max-width:90px;">
                              <span class="block text-sm" style="margin-top:-3px;">ONE SIZE</span>
                              <span class="block text-s" style="color:red">구매 입찰</span>
@@ -48,7 +49,7 @@
             </div>
         
             <div class="text-center mt-6 p-4  xl:w-3/12 bg-black mx-auto rounded-lg" >
-           <a href="http://localhost:3000/buy/" @click="clicked" id="change-button"
+           <a href="http://localhost:3000/buy/sel" @click="clicked" id="change-button"
                 disabled="disabled" style="color: #fafafa !important; ">
                 구매하기
               </a>
@@ -68,7 +69,7 @@ export default {
 
   data() {
     return {
-      
+      hasMaxPrice:0,
       checksucess: [],
       tab: null,
       legoBg,
@@ -77,18 +78,14 @@ export default {
       buy: {
         
         product_key:'',
-        BUY_PRICE: 0,
+        buy_price: 0,
         buy_sdate: '',
         buy_edate: '',
         buy_status:'',
         default: "0"
       },
 
-      user: {
-        USER_NAME:'',
-        USER_PHONE:0,
-        USER_ADDRESS1:''
-      },
+      
       item: 
           { 
             PRODUCT_KEY:'0',
@@ -105,6 +102,7 @@ export default {
   methods: {
      
   },
+  
 
 
   beforeCreate() {
@@ -112,23 +110,28 @@ export default {
     this.$axios.post("http://localhost:8080/buy/comp")
       .then(function (res) {
         that.buy = res.data;
-        console.log(that.buy);
-        console.log(that.buy.BUY_PRICE); 
+        if(that.buy === null || that.buy.length == 0 || that.buy[0].buy_price === null)
+         {
+               that.hasMaxPrice = 0;
+               console.log("트루인부분",that.hasMaxPrice);
+         }
+
+        else
+        {
+              that.hasMaxPrice = 1;
+              console.log("fail인 부분",that.hasMaxPrice); 
+
+        }
+        
       }) 
       .catch(function (err) {
           console.log(err);
         });
   
-   this.$axios.post("http://localhost:8080/buy/comp/user")
-      .then(function (res) {
-        that.user = res.data;
-        console.log(that.user.USER_NAME);
-      
-      }) 
-      .catch(function (err) {
-          console.log(err);
-        });
-   this.$axios.post('http://localhost:8080/buy')
+   this.item.PRODUCT_KEY = this.$route.params.PRODUCT_KEY;
+   this.$axios.post('http://localhost:8080/buy',{
+      product_key: this.item.PRODUCT_KEY
+   })
         .then(function (res) {
           console.log(res);
           that.item = res.data;

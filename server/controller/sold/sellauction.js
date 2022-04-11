@@ -1,18 +1,19 @@
 const { Sell } = require('../../models');
-const sequelize = require('sequelize');
-const Op = sequelize.Op;
+const db = require('../../models');
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 
 async function sellauction(req, res, next) {
   // let user = req.body.USER_KEY; 
-  await Sell.findOne({
-    attributes: ['SELL_KEY','SELL_EDATE', 'SELL_SDATE',[sequelize.fn('min', sequelize.col('SELL_PRICE')),'SELL_PRICE']],
-    where: {
-      PRODUCT_KEY: 1,
-      SELL_STATUS:0,
-
-    }
-})
+  await db.sequelize
+    .query(
+    `SELECT SELL_KEY,SELL_EDATE,SELL_SDATE,SELL_PRICE from SELL
+    WHERE sell_price = (select a.b from (SELECT MIN(sell_price) as b FROM sell 
+    where product_key =1 AND sell_status=0) as a);`, {
+        type: Sequelize.QueryTypes.SELECT
+      }
+    )
     .then(result => {
         console.log(result);
         console.log(result.PRODUCT_KEY);

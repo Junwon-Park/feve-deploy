@@ -152,53 +152,56 @@ const routes = [
     component: List2
   },
   {
-    path: '/list3',
-    component: List3
-  },
-  {
     path: '/write',
     component: Write
   },
   {
-    path: '/buy',
-    component: Buy
+    path: '/list3',
+    component: List3
   },
   {
-    path: '/buy/sel',
+    path: '/buy/:PRODUCT_KEY',
+    name: 'Buyselect',
     component: Buyselect
   },
   {
-    path: '/buy/proc',
+    path: '/buy/sel/:PRODUCT_KEY',
+    component: Buy
+  },
+  {
+    path: '/buy/proc/:PRODUCT_KEY',
     component: Buyproc
   },
   {
-    path: '/buy/comp',
+    path: '/buy/proc/com/:PRODUCT_KEY',
     component: Buycomp
   },
   {
-    path: '/buy/complete',
+    path: '/buy/proc/complete/:PRODUCT_KEY',
     component: Buycomplete
   },
   {
     path: '/sell',
-    component: Sell
+    component: Sellselect
   },
   {
     path: '/sell/sel',
-    component: Sellselect
+    component: Sell
   },
   {
     path: '/sell/proc',
     component: Sellproc
   },
   {
-    path: '/sell/comp',
+    path: '/sell/proc/com',
     component: Sellcomp
   },
   {
-    path: '/sell/complete',
+    path: '/buy/proc/complete',
     component: Sellcomplete
   },
+ 
+
 
   {
     path: '/shop',

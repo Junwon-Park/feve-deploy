@@ -4,16 +4,14 @@ const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
 async function buyupdatefail(req, res, next){
-  let user_key = req.body.user_key; //키 받아오기
-  let buy_key = req.body.buy_key; //키받아오기
-  console.log("바이키",buy_key);
-  console.log("유저키",user_key);
+
 
   await db.sequelize
   .query(
      `UPDATE Buy SET
       BUY_STATUS = 2,
-      where BUY_EDATE = now()`
+      BUY_EDATE = now()
+      where BUY_EDATE < now() AND BUY_STATUS=0`
       ,{ type: Sequelize.QueryTypes.UPDATE }
   )
 .then((result) => {

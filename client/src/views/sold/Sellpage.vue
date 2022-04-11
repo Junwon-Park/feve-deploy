@@ -127,7 +127,7 @@
               </div>
             </div>
             <div style="flex items-center no-underline">
-              <a href="http://localhost:3000/sell/proc" @click="clicked" id="change-button" class="full-image"
+              <a href="http://localhost:3000/sell/proc"  class="full-image"
                 disabled="disabled" style="color: #fafafa !important;">
                 동의하기
               </a>
