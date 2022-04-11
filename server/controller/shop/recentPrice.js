@@ -6,9 +6,9 @@ const sequelize = require("sequelize");
 
 async function recentPrice(req, res, next) {
 
-    console.log("**********************recentPrice Query*********************");
+    //console.log("**********************recentPrice Query*********************");
     const product_key = req.body.product_key;
-    console.log(product_key);
+    //console.log(product_key);
 
     await db.sequelize.query(
         '(SELECT \n' +
@@ -25,7 +25,7 @@ async function recentPrice(req, res, next) {
         ') ORDER BY SELL_EDATE DESC ;'
         , { type: sequelize.QueryTypes.SELECT })
         .then(result => {
-            console.log(result);
+            //console.log(result);
             res.json(result);
         })
         .catch(err => console.log(err));

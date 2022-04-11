@@ -6,11 +6,11 @@ const sequelize = require('sequelize');
 async function filterCate(req, res, next) {
   const cate = req.body.cate;
 
-  console.log('*********************');
-  console.log(
-    'body 값 확인 ==>',req.body,
-    ',cate value : ', req.body.cate
-  );
+  //console.log('*********************');
+  // console.log(
+  //   'body 값 확인 ==>',req.body,
+  //   ',cate value : ', req.body.cate
+  // );
 {
     await db.sequelize
       .query(

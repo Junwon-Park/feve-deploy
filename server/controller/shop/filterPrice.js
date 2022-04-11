@@ -6,11 +6,11 @@ const sequelize = require('sequelize');
 async function filterPrice(req, res, next) {
   const price = req.body.price;
 
-  console.log('*********************');
-  console.log(
-    'body 값 확인 ==>',req.body,
-    ',price value : ', req.body.price
-  );
+  // console.log('*********************');
+  // console.log(
+  //   'body 값 확인 ==>',req.body,
+  //   ',price value : ', req.body.price
+  // );
 
     if (price === 'all') {
       await db.sequelize
@@ -35,7 +35,7 @@ async function filterPrice(req, res, next) {
           { type: sequelize.QueryTypes.SELECT }
         )
         .then((result) => {
-          console.log(result);
+          //console.log(result);
           res.json(result);
         })
         .catch((err) => console.log(err));
@@ -62,7 +62,7 @@ async function filterPrice(req, res, next) {
           { type: sequelize.QueryTypes.SELECT }
         )
         .then((result) => {
-          console.log(result);
+          //console.log(result);
           res.json(result);
         })
         .catch((err) => console.log(err));
@@ -90,7 +90,7 @@ async function filterPrice(req, res, next) {
           { type: sequelize.QueryTypes.SELECT }
         )
         .then((result) => {
-          console.log(result);
+          //console.log(result);
           res.json(result);
         })
         .catch((err) => console.log(err));
@@ -118,7 +118,7 @@ async function filterPrice(req, res, next) {
         { type: sequelize.QueryTypes.SELECT }
         )
         .then((result) => {
-          console.log(result);
+          //console.log(result);
           res.json(result);
         })
         .catch((err) => console.log(err));
@@ -146,7 +146,7 @@ async function filterPrice(req, res, next) {
           { type: sequelize.QueryTypes.SELECT }
         )
         .then((result) => {
-          console.log(result);
+          //console.log(result);
           res.json(result);
         })
         .catch((err) => console.log(err));

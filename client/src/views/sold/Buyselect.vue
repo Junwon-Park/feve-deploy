@@ -131,9 +131,8 @@ export default {
         });
   
    this.PRODUCT_KEY = this.$route.params.PRODUCT_KEY;
-   this.$axios.get('http://localhost:8080/buy',{
-      product_key: this.PRODUCT_KEY
-   })
+   console.log(this.PRODUCT_KEY);
+   this.$axios.get(`http://localhost:8080/buy/${this.PRODUCT_KEY}`)
         .then(function (res) {
           console.log(res);
           that.item = res.data;

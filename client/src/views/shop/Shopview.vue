@@ -416,7 +416,8 @@ export default {
           this.$router.push({path:'/auth'});
         }  
         else{
-          this.$router.push({path:'/buy' ,
+          this.$router.push({path:'./buy' ,
+          name:'Buyselect',
           params:{
             PRODUCT_KEY:this.PRODUCT_KEY}
           });
