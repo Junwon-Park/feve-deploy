@@ -31,16 +31,26 @@
             <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
             >
-            <span class="block" onclick="location.href='/cscenterNotice1'">[공지] 안녕하세요. FEVE 점검 안내 입니다.</span>
-              <small>2022-04-01</small>
+            <span class="block" onclick="location.href='/cscenterNotice1'">[이벤트] 6만원 이상 구매시 모든 추가 상품 25%할인!</span>
+              <small>2022-01-01</small>
               <br><br><br>
              
-                  <p>안녕하세요.FEVE 입니다.</p>
-                  <p>보다 안정적인 서비스 환경을 제공해 드리기 위해 서버 점검을 진행할 예정 입니다.</p> 
-                  <p>점검이 진행되는 동안 서비스 이용이 잠시 중단 되오니 고객 여러분의 너른 양해 부탁드립니다.</p> 
-
-                  <p>점검일자:2022.04.01(금)</p>
-                  <p>점검시간:03:00 - 03:30</p>
+            <p>안녕하세요.FEVE 입니다.</p>
+            <p>6만원 이상 구매하시는 고객님 대상으로 </p> 
+            <p>모든 추가 상품 25% 할일 중에 있습니다.</p> 
+            <p>많은 관심 부탁드립니다.</p> 
+            <p>이벤트 기간 : 2022.01.01 - 2022.12.31</p>
+            
+             <img
+                alt="..."
+                class="max-w-full rounded-lg shadow-xl mx-auto"
+                style="
+                transform: scale(1) perspective(1040px) rotateY(-11deg)
+                rotateX(2deg) rotate(2deg);"
+                :src="slide1"
+                />
+                
+                  
              
             </td>
           </tr>
@@ -53,13 +63,14 @@
 import cscenter from "@/assets/img/cscenter.jpg";
 import notice from "@/assets/img/notice.jpg";
 import event from "@/assets/img/event.jpg";
-
+import slide1 from '@/assets/img/slide/main_slide1.png';
 export default {
   data() {
     return {
       cscenter,
       event,
       notice,
+      slide1
     };
   },
   components: {
