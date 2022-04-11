@@ -19,7 +19,7 @@ async function getFavoriteListCount(req, res) {
 async function getFavoriteList(req, res) {
     const userKey = req.body.USER_KEY;
     const limitStart = req.body.LIMIT_START;
-    const limitEnd = req.body.LIMIT_END;
+    const limtCount = req.body.LIMIT_COUNT;
 
     // console.log("limitStart: ", limitStart);
     // console.log("limitEnd: ", limitEnd);
@@ -36,7 +36,7 @@ async function getFavoriteList(req, res) {
           FROM Favorite AS f
           JOIN Product AS p ON f.PRODUCT_KEY = p.PRODUCT_KEY
           WHERE USER_KEY = ${userKey}
-          limit ${limitStart}, ${limitEnd};`
+          limit ${limitStart}, ${limtCount};`
           ,{ type: sequelize.QueryTypes.SELECT }
         )
         .then((result) => {

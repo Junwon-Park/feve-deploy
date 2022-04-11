@@ -36,12 +36,13 @@ import MypageFavoriteListSlot from '../../components/Cards/Mypage/MypageFavorite
         curPage:1,
         totalPage:0,
         slotCountPerPage:10,
-        start:0,
-        end:10,
+        slotStart:0,
+        slotCount:10,
       }
     },
     created(){
       this.getFavoriteListCount();
+      this.getFavoriteList();
     },
     methods: {
       getUserKey()
@@ -59,7 +60,7 @@ import MypageFavoriteListSlot from '../../components/Cards/Mypage/MypageFavorite
           // let aa = result.data / this.slotCountPerPage;  
           // console.log(typeof aa, "aa: ", aa);
           this.totalPage = Math.ceil(result.data / this.slotCountPerPage);  
-          this.getFavoriteList();
+          this.setIndexs();
         })
         .catch((error) => {
           console.log(error);
@@ -67,18 +68,24 @@ import MypageFavoriteListSlot from '../../components/Cards/Mypage/MypageFavorite
       },
 
       setIndexs(){
-        this.start = (this.curPage-1) * this.slotCountPerPage;
-        this.end = this.start + this.slotCountPerPage;
+        this.slotStart = (this.curPage-1) * this.slotCountPerPage;
+      },
+
+      onPageChanged(page){
+        // console.log("onPageChanged.page: ", page);
+        this.curPage = page;
+        this.setIndexs();
+        this.getFavoriteList();
       },
 
       getFavoriteList(){
-        // console.log("this.start : ", this.start);
-        // console.log("this.end : ", this.end);
+        // console.log("this.slotStart : ", this.slotStart);
+        // console.log("this.slotCount : ", this.slotCount);
 
         this.$axios.post(this.$store.getters.ServerUrl + '/mypage/favoriteList', {
           USER_KEY : this.getUserKey(),
-          LIMIT_START : this.start,
-          LIMIT_END : this.end,
+          LIMIT_START : this.slotStart,
+          LIMIT_COUNT : this.slotCount,
         })
         .then((result) => {
           // console.log(result.data);
@@ -97,6 +104,7 @@ import MypageFavoriteListSlot from '../../components/Cards/Mypage/MypageFavorite
         .then(() => {
           this.curPage = 1;
           this.setIndexs();
+          this.getFavoriteListCount();
           this.getFavoriteList();
         })
         .catch((error) => {
@@ -104,12 +112,7 @@ import MypageFavoriteListSlot from '../../components/Cards/Mypage/MypageFavorite
         });
       },
 
-      onPageChanged(page){
-        // console.log("onPageChanged.page: ", page);
-        this.curPage = page;
-        this.setIndexs();
-        this.getFavoriteList();
-      }
+      
     },
   }
 </script>"

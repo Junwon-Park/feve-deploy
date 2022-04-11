@@ -21,7 +21,10 @@
       </v-btn>
     </v-card-actions>
 
-    <mypage-simple-favorite-list :items="favoriteList"/>
+    <mypage-simple-favorite-list :items="favoriteList" v-if="favoriteList.length > 0"/>
+    <div v-else style="text-align:center; margin-top:4rem;">
+      관심상품이 없습니다.
+    </div>
   </div>
 </template>
 
