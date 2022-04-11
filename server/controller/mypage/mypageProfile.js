@@ -28,7 +28,7 @@ async function updateProfile(req, res) {
     const pCode = req.body.POST_CODE;
     console.log(name, password, mail, phone, add1, add2, pCode);
 
-    if(password != null || password !="")
+    if(password == null || password =="")
     {
         let query = `UPDATE User
         SET
