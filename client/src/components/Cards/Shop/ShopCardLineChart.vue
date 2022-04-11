@@ -57,7 +57,7 @@ export default {
             {
               label: "거래 가격",
               backgroundColor: "#4c51bf",
-              borderColor: "#4c51bf",
+              borderColor: "#FFD700",
               data: this.CHART_PRICES,
               fill: false,
             }
