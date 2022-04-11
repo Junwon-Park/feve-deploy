@@ -30,7 +30,7 @@
                    <div class="w-full mb-12 ">
                     <div class="container">
                       <div class="w-full mb-12 xl:mb-0  mt-1" style="min-height: 70vh">
-                          <CscenterFaqList v-bind="items" :items="items" :title="title"/>
+                          <CscenterFaqList2 v-bind="items" :items="items" :title="title"/>
                       </div>
                     </div>
                   </div>
@@ -44,7 +44,8 @@
 </template>
 <script>
 import CscenterSidebar from "@/components/Sidebar/CscenterSidebar.vue";
-import CscenterFaqList from "@/components/Cards/Cscenter/CscenterFaqList.vue";
+
+import CscenterFaqList2 from "@/components/Cards/Cscenter/CscenterFaqList2.vue";
 
 // import Pagination from "@/components/Pagination.vue" ;
 
@@ -69,8 +70,9 @@ export default {
   },
   components: {
     CscenterSidebar,
-    CscenterFaqList,
-  
+    
+    CscenterFaqList2,
+    
     //Pagination,
   },
 
