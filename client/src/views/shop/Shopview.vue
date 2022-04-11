@@ -199,6 +199,10 @@ export default {
     // }, 1000)
       this.getRecentPrice();
     },
+    updated() {
+      this.countLike();
+      this.countLikeTotal();
+    },
     methods:{
       getView:function(){
         var vm = this;

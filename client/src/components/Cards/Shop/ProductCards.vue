@@ -41,12 +41,12 @@
         </p>
         <p class="text-xs text-gray-400">즉시 구매 불가</p>
       </div>
-      <!-- <div v-if="!this.likeStatus" >
-      <v-icon  style="font-size: 20px;" @click="this.$refs.goLike()"> mdi-heart-outline </v-icon> <span class="text-xs">1,156</span>
+      <div v-if="!this.likeStatus" >
+      <v-icon  style="font-size: 20px;" @click="goLike()"> mdi-heart-outline </v-icon> <span class="text-xs">{{likeTotal}}</span>
       </div>
       <div v-else>
-      <v-icon style="font-size: 20px;" @click="this.$refs.goDislike()"> mdi-heart </v-icon> <span class="text-xs">1,156</span>
-      </div> -->
+      <v-icon style="font-size: 20px;" @click="goDislike()"> mdi-heart </v-icon> <span class="text-xs">{{likeTotal}}</span>
+      </div>
     </div>
   </div>
 </template>
@@ -58,6 +58,8 @@ export default {
     return{
       imageUrl : this.$store.getters.ServerUrl + '/getImage?imageName=',
       likeStatus:false,
+      likeTotal:'',
+      user_key:JSON.parse(localStorage.getItem('userKey')),
     }
   },
   props: {
@@ -81,7 +83,15 @@ export default {
     },
     PRODUCT_CATE: {
       default: "3",
-    }
+    },
+  },
+  created(){
+    this.countLike();
+    this.countLikeTotal();
+  },
+  updated() {
+    this.countLike();
+    this.countLikeTotal();
   },
   methods:{
     goView(PRODUCT_KEY){
@@ -94,6 +104,58 @@ export default {
       params:{
         PRODUCT_KEY:this.PRODUCT_KEY}
         });
+    },
+    goLike(){
+      var vm = this;
+        if(this.user_key == null )
+        { 
+          alert("로그인 후 이용해 주세요");
+          this.$router.push({path:'/auth'});
+        }
+        else
+        {  
+        this.$axios.post('http://localhost:8080/shop/shopview/'+ this.PRODUCT_KEY + '/goLike',
+        {product_key: this.PRODUCT_KEY, user_key:this.user_key})
+            .then(function(){
+              vm.likeStatus= !vm.likeStatus;
+            })
+            .catch(function(err){
+              console.log(err);
+            });
+        }
+    },
+    goDislike(){
+       var vm = this;
+        this.$axios.post('http://localhost:8080/shop/shopview/'+ this.PRODUCT_KEY + '/goDislike',
+        {product_key: this.PRODUCT_KEY, user_key:this.user_key})
+            .then(function(){
+              vm.likeStatus = !vm.likeStatus;
+            })
+            .catch(function(err){
+              console.log(err);
+            });
+    },
+    countLike(){
+       var vm = this;
+       this.$axios.post('http://localhost:8080/shop/shopview/'+ this.PRODUCT_KEY + '/countLike',
+        {product_key: this.PRODUCT_KEY, user_key:this.user_key})
+            .then(function(res){
+              vm.likeStatus = res.data>0 ? true: false;
+            })
+            .catch(function(err){
+              console.log(err);
+            });
+    },
+    countLikeTotal(){
+       var vm = this;
+        this.$axios.post('http://localhost:8080/shop/shopview/'+ this.PRODUCT_KEY + '/countLikeTotal',
+        {product_key: this.PRODUCT_KEY})
+            .then(function(res){
+              vm.likeTotal = res.data;
+            })
+            .catch(function(err){
+              console.log(err);
+            });
     }
   }
 };
