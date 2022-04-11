@@ -99,7 +99,7 @@ export default {
                 ticks: {
                   fontColor: "black",
                 },
-                display: false,
+                display: true,
                 scaleLabel: {
                   display: false,
                   labelString: "Month",
