@@ -23,7 +23,7 @@
                     <div class="">
                       <div class="w-full mb-12 xl:mb-0 " style="min-height: 70vh">
                           <CscenterStandardList v-bind="items" :items="items" :title="title"/>
-                          <Pagination />
+                         
                       </div>
 
                     </div>
@@ -40,7 +40,7 @@
 <script>
 import CscenterSidebar from "@/components/Sidebar/CscenterSidebar.vue";
 import CscenterStandardList from "@/components/Cards/Cscenter/CscenterStandardList.vue";
-import Pagination from "@/components/Pagination.vue" ;
+
 
 export default {
   data() {
@@ -64,19 +64,9 @@ export default {
   components: {
     CscenterSidebar,
     CscenterStandardList,
-    Pagination,
+  
   },
 
-  created() {
-    let that = this;
-    this.$axios.get('http://localhost:8080/cscenter')
-        .then(function(res){
-          that.items=res.data;
-        })
-        .catch(function(err){
-          console.log(err);
-        });
-  }
 };
 </script>
 
