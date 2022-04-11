@@ -12,7 +12,7 @@
       class="mt-3 divide-y-b-gray"
     />
 
-    <div class="grid ">
+    <div class="grid" v-if="list.length > 0">
       <mypage-list-slot 
         v-for="item in list" :key="item.SELL_KEY"
         :item="item"
@@ -27,6 +27,9 @@
         color="black"
         class="my-4"
       ></v-pagination>
+    </div>
+    <div v-else style="text-align:center; margin-top:4rem;">
+      검색 결과가 없습니다.
     </div>
   </div>
 </template>

@@ -1,5 +1,5 @@
 <template>
-    <div class="grid ">
+    <div class="grid" v-if="list.length > 0">
       <h1>관심 상품</h1>
       
       <mypage-favorite-list-slot 
@@ -17,6 +17,9 @@
           class="my-4"
         ></v-pagination>
       </div>
+    </div>
+    <div v-else style="text-align:center; margin-top:4rem;">
+      관심상품이 없습니다.
     </div>
 </template>
 
