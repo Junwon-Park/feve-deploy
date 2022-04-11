@@ -23,12 +23,12 @@
             <v-list-item-action class="mt-8" style="height: 4rem; width:10rem;">
               <v-btn
                 class="flex"
-                style="background: #EF6253; border-radius:8px;"
+                style="background: #EF6253; border-radius:8px; height:49px !important; overflow:hidden;"
                 text
                 @click="onBuyButtonClicked"
               >
                 <v-col>
-                  <h5 style="color:white; font-size:1.5rem; font-weight:bold;">
+                  <h5 class="buyB" style="color:white; font-size:1.1rem; font-weight:bold;">
                     구매
                   </h5>
                 </v-col>
@@ -53,6 +53,18 @@
             </v-list-item-action>
           </div>
 </template>
+
+<style>
+h5.buyB::after { 
+  content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 63px;
+    width: 1px;
+    background-color: rgba(34,34,34,.1);
+}
+</style>
 
 <script>
 export default {
