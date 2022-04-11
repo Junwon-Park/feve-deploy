@@ -17,27 +17,34 @@
                 <h5>
                 {{ item.PRODUCT_NAME }}
                 </h5>
-                <h5 class="font-bold mt-1">
-                {{ minPrice }}
-                </h5>
             </div>
-            <!-- <h5 class="text-gray-400" style="font-size: 0.7rem; line-height: 0.75rem; margin-top:-0.2rem">
-              즉시 구매가
-            </h5> -->
+            
             <v-spacer></v-spacer>
-            <v-list-item-action>
+            <v-list-item-action class="mt-8" style="height: 4rem; width:10rem;">
               <v-btn
-                  style="background: #EF6253; color: white;"
-                  rounded
-                  text
-                  @click="onBuyButtonClicked"
+                class="flex"
+                style="background: #EF6253; border-radius:8px;"
+                text
+                @click="onBuyButtonClicked"
               >
-                구매
+                <v-col>
+                  <h5 style="color:white; font-size:1.5rem; font-weight:bold;">
+                    구매
+                  </h5>
+                </v-col>
+                
+                <v-col style="text-align:left;">
+                  <h5 style="color:white;  font-size:1rem; font-weight:bold;">
+                    {{ minPrice }}
+                  </h5>
+                  <h5 style="color:white; font-size:0.7rem; line-height:0.75rem; margin-top:0rem ">
+                    즉시 구매가
+                  </h5>
+                </v-col>
               </v-btn>
 
               <h5 
-              class="text-gray-400" 
-              style="font-size: 0.7rem; line-height: 0.75rem; margin-top:-0.2rem; text-decoration: underline;"
+              style="font-size:0.7rem; line-height:0.75rem; margin-top:0.2rem; text-decoration: underline;"
               type="button"
               @click="onDeleteClicked"
               >
@@ -78,6 +85,7 @@ export default {
       event.stopPropagation();
 
       this.$router.push({path:'/buy',
+        name:"Buyselect",
           params:{
             PRODUCT_KEY:this.item.PRODUCT_KEY
             }
