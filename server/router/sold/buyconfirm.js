@@ -7,7 +7,7 @@ const { buyupdatesucess } = require("../../controller/sold/buyupdatesucess.js");
 const { buyupdatefail } = require("../../controller/sold/buyupdatefail.js");
 const router = express.Router();
 
-router.get('/', buyconfirm);
+router.get('/:PRODUCT_KEY', buyconfirm);
 router.post('/comp' ,buyauction);
 router.post('/comp/user', buyUser);
 router.post('/update',buyupdatesucess);

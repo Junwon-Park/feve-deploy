@@ -95,17 +95,19 @@ export default {
             PRODUCT_CATE:0,
             PRODUCT_ORIPRICE:'',
           },
-    
+      PRODUCT_KEY:0,
 
     };
   },
   methods: {
-     
+     clicked:function(){
+       console.log("clicked");
+     }
   },
   
 
 
-  beforeCreate() {
+  mounted() {
     let that = this;
     this.$axios.post("http://localhost:8080/buy/comp")
       .then(function (res) {
@@ -128,9 +130,9 @@ export default {
           console.log(err);
         });
   
-   this.item.PRODUCT_KEY = this.$route.params.PRODUCT_KEY;
-   this.$axios.post('http://localhost:8080/buy',{
-      product_key: this.item.PRODUCT_KEY
+   this.PRODUCT_KEY = this.$route.params.PRODUCT_KEY;
+   this.$axios.get('http://localhost:8080/buy',{
+      product_key: this.PRODUCT_KEY
    })
         .then(function (res) {
           console.log(res);
