@@ -19,9 +19,9 @@
             <div class="flex flex-wrap mt-5">
               <div class="relative w-full max-w-full flex-grow flex-1 text-right">
                 <div class="text-left">
-                  <v-chip class="ma-2" color="#f4f4f4"> 전체 </v-chip>
-                  <v-chip class="ma-2" color="#f4f4f4"> 레고 </v-chip>
-                  <v-chip class="ma-2" color="#f4f4f4"> 베어브릭 </v-chip>
+                  <v-chip class="ma-2" color="#f4f4f4"> 이용정책 </v-chip>
+                  <v-chip class="ma-2" color="#f4f4f4"> 구매 </v-chip>
+                  <v-chip class="ma-2" color="#f4f4f4"> 판매 </v-chip>
                 </div>
               </div>
             </div>
