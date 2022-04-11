@@ -35,7 +35,7 @@ async function shoplist(req, res, next) {
             'WHERE a.PRODUCT_DELETE = 0)a;'
         , { type: sequelize.QueryTypes.SELECT })
         .then(result => {
-            console.log(result);
+            //console.log(result);
             res.json(result);
         })
         .catch(err => console.log(err));

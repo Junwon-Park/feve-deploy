@@ -3,9 +3,9 @@ const db = require("../../models");
 
 async function countLikeTotal(req, res, next) {
 
-    console.log("****************countliketotal갯수************");
+    //console.log("****************countliketotal갯수************");
     const product_key= req.body.product_key;
-    console.log("product_key의 vale는? ", product_key);
+    //console.log("product_key의 vale는? ", product_key);
 
     await Favorite.count({
         
@@ -14,7 +14,7 @@ async function countLikeTotal(req, res, next) {
         }
     })
         .then(result => {
-            console.log(result);
+            //console.log(result);
             res.json(result);
         })
         .catch(err => console.log(err));

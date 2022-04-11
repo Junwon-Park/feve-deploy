@@ -47,7 +47,7 @@ async function shopview(req, res, next) {
 //           ]
 // })
     .then(result => {
-        console.log(result);
+        //console.log(result);
         res.json(result);
     })
     .catch(err => console.log(err));
