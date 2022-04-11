@@ -33,7 +33,7 @@
                 <v-text-field
                     readonly
                     :label="table[2]"
-                    :value="item.USER_KEY"
+                    :value="item.USER_ID"
                 ></v-text-field>
               </v-col>
               <v-col
@@ -59,6 +59,7 @@
                   md="12"
               >
                 <v-textarea
+                    readonly
                     outlined
                     auto-grow
                     label="답변"
