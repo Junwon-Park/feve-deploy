@@ -44,12 +44,20 @@
 
         <v-col
         cols="12"
+        v-if="!isReadonly"
         >
         <v-text-field
-            label="비밀번호"
+            label="새 비밀번호"
             type="password"
-            v-model="profile.USER_PASSWORD"
-            :readonly="isReadonly"
+            v-model="password"
+            required
+            :rules="formRule.password"
+        ></v-text-field>
+
+        <v-text-field
+            label="비밀번호 확인"
+            type="password"
+            v-model="passwordConfirm"
             required
             :rules="formRule.password"
         ></v-text-field>
@@ -140,6 +148,8 @@ export default {
       valid: false,
       profile:{},
       isReadonly:true,
+      password:'',
+      passwordConfirm:'',
       buttonText:'프로필 수정',
       account,
       formRule:{
@@ -149,7 +159,7 @@ export default {
             v => !/[~!@#$%^&*()_+|<>?:{}]/.test(v) || '이름에는 특수문자를 사용할 수 없습니다.'
         ],
         password: [
-            v => !!v || '패스워드는 필수 입력사항 입니다.',
+            // v => !!v || '패스워드는 필수 입력사항 입니다.',
             v => !(v && v.length >= 30) || '패스워드는 30자 이상 입력할 수 없습니다.',
         ],
         email: [
@@ -215,7 +225,14 @@ export default {
     },
     
     validate () {
-        this.$refs.form.validate()
+
+      if(this.password != this.passwordConfirm)
+      {
+        alert("비밀번호가 맞지 않습니다. 확인해주세요.")
+        return false;
+      }
+
+      this.$refs.form.validate()
     },
     reset () {
         this.$refs.form.reset()
@@ -228,7 +245,7 @@ export default {
         this.$axios.post(this.$store.getters.ServerUrl + '/mypage/profile/save', {
         USER_KEY : this.getUserKey(),
         USER_NAME : this.profile.USER_NAME,
-        USER_PASSWORD : this.profile.USER_PASSWORD,
+        USER_PASSWORD : this.password,
         USER_MAIL : this.profile.USER_MAIL,
         USER_PHONE : this.profile.USER_PHONE,
         USER_ADDRESS1 : this.profile.USER_ADDRESS1,
@@ -237,10 +254,7 @@ export default {
       })
       .then((result) => {
         console.log(result.data);
-        if(result.data == 1 || result.data == 0)    // 1: 성공 0:db 변화없음 (저장하려는 값이 동일할때)
-        {
-            this.changeState(0);
-        }
+        this.changeState(0);
       })
       .catch((error) => {
         console.log(error);

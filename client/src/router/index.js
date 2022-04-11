@@ -46,6 +46,10 @@ import CscenterFaq from '@/views/cscenter/CscenterFaq.vue';
 import CscenterInsert from '@/views/cscenter/CscenterInsert.vue';
 import CscenterStandard from '@/views/cscenter/CscenterStandard.vue';
 import CscenterNotice1 from '@/views/cscenter/CscenterNotice1.vue';
+import CscenterNotice2 from '@/views/cscenter/CscenterNotice2.vue';
+import CscenterNotice3 from '@/views/cscenter/CscenterNotice3.vue';
+import CscenterNotice4 from '@/views/cscenter/CscenterNotice4.vue';
+import CscenterNotice5 from '@/views/cscenter/CscenterNotice5.vue';
 import Buyselect from '@/views/sold/Buyselect.vue';
 import Buycomplete from '@/views/sold/Buycomplete.vue';
 
@@ -247,6 +251,22 @@ const routes = [
   {
     path: '/cscenterNotice1',
     component: CscenterNotice1
+  },
+  {
+    path: '/cscenterNotice2',
+    component: CscenterNotice2
+  },
+  {
+    path: '/cscenterNotice3',
+    component: CscenterNotice3
+  },
+  {
+    path: '/cscenterNotice4',
+    component: CscenterNotice4
+  },
+  {
+    path: '/cscenterNotice5',
+    component: CscenterNotice5
   },
   { path: '/:pathMatch(.*)*', redirect: '/' }
 ];
