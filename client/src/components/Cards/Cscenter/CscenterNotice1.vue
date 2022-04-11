@@ -45,6 +45,9 @@
             </td>
           </tr>
         </tbody>
+        <div class="form-row float-right mt-10">
+        <v-btn depressed color="black" style="color: white !important;;" to="/Cscenter"> 돌아가기 </v-btn>
+      </div>
       </table>
     </div>
   </div>
