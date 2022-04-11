@@ -19,7 +19,7 @@
           <span class="text-sm text-black">
             {{ PRODUCT_NAME}}
           </span>
-          <span class="font-semibold text-sm text-blueGray-700 block" v-if="!ifNull">
+          <span class="font-semibold text-sm text-blueGray-700 block" v-if="ifNull===true">
             -
           </span>
           <span class="font-semibold text-sm text-blueGray-700 block" v-else>
@@ -44,7 +44,7 @@ export default {
     }
   },
   watch:{
-    sellPRice:function(){
+    SELL_PRICE:function(){
       console.log(this.SELL_PRICE)
     }
   },
@@ -83,7 +83,9 @@ export default {
     },
   },
   created(){
-    this.SELL_PRICE === null ? !this.ifNull : this.ifNull
+    this.SELL_PRICE === null ? this.ifNull=true : this.ifNull=false
+    console.log(this.ifNull)
+    console.log(!this.ifNull)
   },
   methods:{
     goView(PRODUCT_KEY){
