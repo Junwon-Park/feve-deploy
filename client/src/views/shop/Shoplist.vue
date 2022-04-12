@@ -99,10 +99,14 @@ export default {
         .catch(function(err){
           console.log(err);
         });
-    //this.getProductList();
+   
   },
   mounted(){
-    let that = this;
+     this.getProductList();
+  },
+  methods:{
+    getProductList:function(){
+      let that = this;
     this.$axios.post('http://localhost:8080/shop/shoplist/productlist', {
       limitStart: 0,
       limitEnd: 8
@@ -127,31 +131,6 @@ export default {
         .catch(function(err){
           console.log(err);
         });
-  },
-  methods:{
-    getProductList:function(){
-      var vm = this;
-      this.$axios.get('http://localhost:8080/shop/shoplist')
-        .then(function(res){
-          //console.log("디비에서 결과 가져옴", res);
-          vm.items = res.data;
-          for(var i=0; i<res.data.length;i++)
-          {  
-            if(res.data[i].PRODUCT_BRAND =='LE')
-              {
-                vm.items[i].PRODUCT_BRAND = "레고";
-                //console.log(vm.items[i].PRODUCT_BRAND);
-              }
-            else
-             {
-              vm.items[i].PRODUCT_BRAND = "베어브릭";
-              //console.log(vm.items[i].PRODUCT_BRAND);
-             }
-          }
-        })
-        .catch(function(err){
-          console.log(err);
-        });
     },
     changeitems(e){
       //console.log("changeitems의 e 값",e);
@@ -161,7 +140,7 @@ export default {
       //console.log("chip 버튼을 누름");
       //console.log(cate);
       this.$axios.post('http://localhost:8080/shop/filterCate',{
-          cate:cate})
+          cate:cate, limitStart: 0, limitEnd: 8 })
       .then( (res) => {			
           //console.log(res.data);
           this.items=res.data;

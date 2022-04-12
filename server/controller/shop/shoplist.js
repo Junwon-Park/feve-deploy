@@ -5,6 +5,8 @@ const sequelize = require("sequelize");
 
 
 async function shoplist(req, res, next) {
+    const start = req.body.limitStart;
+    const end = req.body.limitEnd;
 
     await db.sequelize.query(
         'SELECT \n' +
@@ -32,7 +34,8 @@ async function shoplist(req, res, next) {
             ',a.PRODUCT_WDATE\n' +
             ',a.PRODUCT_CATE\n' +
             'FROM Product a\n'+
-            'WHERE a.PRODUCT_DELETE = 0)a;'
+            'WHERE a.PRODUCT_DELETE = 0)a \n'+
+            'limit '+start+', '+end+';'
         , { type: sequelize.QueryTypes.SELECT })
         .then(result => {
             //console.log(result);
