@@ -7,6 +7,7 @@
     
     <mypage-list-filter
       :filter="curFilter"
+      ref="listFilter"
       @onFilterChanged="onFilterChanged"
       @onOrderClicked="onOrderClicked"
       class="mt-3 divide-y-b-gray"
@@ -150,6 +151,8 @@ import moment from 'moment'
         this.curOrderIdx = -1,
         this.orderColumn ='';
         this.orderDir = 0;
+
+        this.$refs.listFilter.initOrder();
       },
 
       setUrl()
@@ -202,7 +205,7 @@ import moment from 'moment'
           state : this.selectedFilterIdx,
         })
         .then((result) => {
-          console.log(result.data);
+          // console.log(result.data);
           this.totalPage = Math.ceil(result.data / this.slotCountPerPage);  
         })
         .catch((error) => {
@@ -223,7 +226,7 @@ import moment from 'moment'
           orderDir    : this.strOrderDirs[this.orderDir],
         })
         .then((result) => {
-          console.log(result.data);
+          // console.log(result.data);
           this.list = result.data;
           this.initSlotsData();
         })
@@ -306,8 +309,13 @@ import moment from 'moment'
         this.curOrderIdx = idx;
         this.orderColumn = this.curFilter.orderColumn[idx];
 
-        this.goToFirstPage();
-        this.getList();
+        //console.log("buyList.onOrderClicked.list: ", this.list);
+        if(this.list != null && this.list.length > 0)
+        {
+          this.goToFirstPage();
+          this.getListCount();
+          this.getList();
+        }
       },
       
       onFilterChanged(selected){
