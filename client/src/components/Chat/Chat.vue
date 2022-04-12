@@ -55,14 +55,26 @@
                 name=""
                 id="inputText"
                 placeholder="내용을 입력해주세요."
-                style="width: 90%; outline: none; border-color: #ccc"
+                style="width: 80%; outline: none; border-color: #ccc"
                 v-model="inputMessage"
                 v-on:keyup.enter="sendMessage"
                 autocomplete="off"
               />
-              <v-btn small color="orange" dark @click="sendMessage">
-                전송
-              </v-btn>
+              <span>
+                <v-btn
+                  small
+                  color="orange"
+                  dark
+                  @click="sendMessage"
+                  style="
+                    font-size: 20px;
+                    height: 42px;
+                    margin: 0px 0px 5px 20px;
+                  "
+                >
+                  전송
+                </v-btn>
+              </span>
             </v-col>
             <hr />
           </v-container>
