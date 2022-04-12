@@ -233,7 +233,7 @@ export default {
           product_pic2: this.product.product_pic2,
           product_pic3: this.product.product_pic3,
           product_desc: this.product.product_desc,
-          product_oriprice: this.product.product_oriprice,
+          product_oriprice: this.product.product_oriprice.replace(',',''),
           product_wdate: kr_curr,
           product_cate: this.product.product_cate
       })
