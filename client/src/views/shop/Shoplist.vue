@@ -140,7 +140,7 @@ export default {
       //console.log("chip 버튼을 누름");
       //console.log(cate);
       this.$axios.post('http://localhost:8080/shop/filterCate',{
-          cate:cate, limitStart: 0, limitEnd: 8 })
+          cate:cate})
       .then( (res) => {			
           //console.log(res.data);
           this.items=res.data;

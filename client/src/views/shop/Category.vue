@@ -129,9 +129,7 @@ export default{
             show2: false,
             show3: false,
             cate: '',
-            price: '',
-            limitStart:0,
-            limitEnd:0
+            price: ''
         };
     },
     methods:{
@@ -148,7 +146,7 @@ export default{
         getValue(event){
             //console.log(event.target.value);
             this.$axios.post('http://localhost:8080/shop/filterCate',{
-                cate:event.target.value,  limitStart: 0, limitEnd: 8})
+                cate:event.target.value})
             .then( (res) => {			
                 //console.log(res.data);
                 //window.$ref.Shoplist.item =res.data;
@@ -162,8 +160,7 @@ export default{
          getPrice(event) {
            //console.log(event.target.value);
            this.$axios.post('http://localhost:8080/shop/filterPrice', {
-             price: event.target.value,  limitStart: 0, limitEnd: 8
-           })
+             price: event.target.value})
                .then((res) => {
                  //console.log(res);
                  //console.log(res.data);
