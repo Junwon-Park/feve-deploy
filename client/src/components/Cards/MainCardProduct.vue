@@ -19,11 +19,8 @@
           <span class="text-sm text-black">
             {{ PRODUCT_NAME}}
           </span>
-          <span class="font-semibold text-sm text-blueGray-700 block" v-if="ifNull===true">
-            -
-          </span>
-          <span class="font-semibold text-sm text-blueGray-700 block" v-else>
-            {{ SELL_PRICE.toLocaleString('ko-KR') }} 원
+          <span class="font-semibold text-sm text-blueGray-700 block">
+            {{ minPrice }} 원
           </span>
         </div>
       </div>
@@ -39,13 +36,13 @@
 export default {
   data(){
     return{
+      minPrice:'',
       imageUrl : this.$store.getters.ServerUrl + '/getImage?imageName=',
-      ifNull: false,
     }
   },
   watch:{
     SELL_PRICE:function(){
-      console.log(this.SELL_PRICE)
+      this.setMinPrice()
     }
   },
   props:{
@@ -83,19 +80,19 @@ export default {
     },
   },
   created(){
-    this.SELL_PRICE === null ? this.ifNull=true : this.ifNull=false
-    console.log(this.ifNull)
-    console.log(!this.ifNull)
+    this.setMinPrice()
   },
   methods:{
+    setMinPrice(){
+      //console.log("this.item.MIN_PRICE: ", this.item.MIN_PRICE);
+      this.minPrice = (this.SELL_PRICE == null) ? '-' : this.SELL_PRICE.toLocaleString('ko-KR') + "원";
+    },
+
     goView(PRODUCT_KEY){
-      console.log("상세보기");
-      console.log(this.PRODUCT_KEY);
-      console.log(PRODUCT_KEY);
       this.$router.push({path:'./shopview',
         name:'Shopview',
         params:{
-          PRODUCT_KEY:this.PRODUCT_KEY}
+          PRODUCT_KEY: PRODUCT_KEY}
       });
     }
   }
