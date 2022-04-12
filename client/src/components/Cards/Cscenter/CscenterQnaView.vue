@@ -33,7 +33,7 @@
                 <v-text-field
                     readonly
                     :label="table[2]"
-                    :value="item.USER_ID"
+                    :value="item.USER_NAME"
                 ></v-text-field>
               </v-col>
               <v-col

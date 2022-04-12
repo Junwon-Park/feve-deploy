@@ -83,7 +83,7 @@ export default {
     return {
       table: ["번호", "제목", "작성자", "작성시간", "답변여부"],
       receivedCscenterKey:0,
-      receivedUserid:"",
+      receivedUserName:"",
       receivedUserkey:0,
       cscenterComment:0,
       recDialog: false,
@@ -96,7 +96,7 @@ export default {
         CSCENTER_COMMENT:'',
         CSCENTER_COMMENT_WDATE:'',
         USER_KEY:0,
-        USER_ID:'',
+        USER_NAME:'',
 
       }
     }

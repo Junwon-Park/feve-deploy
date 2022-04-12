@@ -113,6 +113,7 @@ export default {
         cscenter_status: '',
         user_key: JSON.parse(localStorage.getItem('userKey')),
         default: "0",
+        user_name:''
       }
     };
   },
@@ -134,6 +135,7 @@ export default {
           cscenter_contents: this.cscenter.cscenter_contents,
           cscenter_wdate: kr_curr,
           cscenter_status: this.cscenter.cscenter_status,
+          user_name:this.cscenter.user_name,
           user_key:this.cscenter.user_key
           
       })
