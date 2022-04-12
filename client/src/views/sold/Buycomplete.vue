@@ -151,9 +151,7 @@ export default {
     console.log(this.item.PRODUCT_KEY);
     this.$axios.get(`http://localhost:8080/buy/${this.item.PRODUCT_KEY}`)
       .then(function (res) {
-        console.log(res);
         that.item = res.data;
-        console.log(that.item);
       })
       .catch(function (err) {
         console.log(err);
@@ -164,8 +162,7 @@ export default {
       })
       .then(function (res) {
         that.buy = res.data;
-        console.log(that.buy);
-        console.log(that.buy[0].buy_key);
+
         
        
       })
@@ -185,8 +182,8 @@ export default {
       buyer_key: that.buy[0].buy_key
     })
     .then(function (res) {
+      console.log(res);
       
-      console.log(res,"udpate됨");
     })
     .catch(function (err) {
       console.log(err);
