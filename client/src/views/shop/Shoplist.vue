@@ -26,6 +26,7 @@
             <div class="flex px-4 mb-5" style="width:25%;">
               <Category ref="category" @changeitems="changeitems($event)"/>
             </div>
+            <div style="width: 75% !important;">
               <ProductCardsList
                   v-bind="items"
                   :totalListCount="totalListCount"
@@ -34,6 +35,7 @@
                   :items="items"
                   @startend="startend"
                   style="min-height: 59vh;" />
+          </div>
           </div>
           </div>
           
