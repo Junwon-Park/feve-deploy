@@ -94,11 +94,11 @@ export default {
     this.countLikeTotal();
   },
   methods:{
-    goView(PRODUCT_KEY){
+    goView(){
      
-      console.log("상세보기");
-      console.log(this.PRODUCT_KEY);
-      console.log(PRODUCT_KEY);
+      //console.log("상세보기");
+      //console.log(this.PRODUCT_KEY);
+      //console.log(PRODUCT_KEY);
       this.$router.push({path:'./shopview',
       name:'Shopview',
       params:{

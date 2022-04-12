@@ -430,7 +430,7 @@ export default {
         }
       },
       goSell:function(){
-        console.log("판매 버튼 클릭");
+        //console.log("판매 버튼 클릭");
         if(this.user_key == null )
         { 
           alert("로그인 후 이용해 주세요");
