@@ -17,6 +17,24 @@ async function getSimpleUserInfo(req, res) {
     .catch((err) => console.log(err));
 }
 
+async function removeAccount(req, res) {
+    await User.update(
+        {
+            USER_DELETE: '1',
+        }, {
+            where:{
+                USER_KEY: req.body.USER_KEY,
+            }
+        }
+    )
+        .then((result) => {
+            console.log("simpleUserInfo has been responsed from db : ",result);
+            res.json(result);
+        })
+        .catch((err) => console.log(err));
+}
+
+
 async function getBuyCounts(req, res) {
     const userKey = req.body.USER_KEY;
     try{
@@ -103,4 +121,4 @@ async function getSimpleFavoriteList(req, res) {
         .catch((err) => console.log(err));
 }
 
-module.exports = { getSimpleUserInfo, getBuyCounts, getSellCounts, getSimpleFavoriteList };
+module.exports = { getSimpleUserInfo, getBuyCounts, getSellCounts, getSimpleFavoriteList, removeAccount };

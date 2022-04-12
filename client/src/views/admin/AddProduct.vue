@@ -97,6 +97,7 @@
                           class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                           placeholder="상품원가"
                           v-model="product.product_oriprice"
+                          @input="e=>product.product_oriprice=changeNum(e.target.value)"
                       />
                     </div>
 
@@ -247,9 +248,9 @@ export default {
 
       let that = this;
 
-      let files = that.uploadServerImg;
-      console.log("file", files)
-      console.log("file", typeof that.uploadServerImgArray)
+     // let files = that.uploadServerImg;
+      // console.log("file", files)
+      // console.log("file", typeof that.uploadServerImgArray)
       const formData = new FormData();
       [].forEach.call(that.uploadServerImg, (files) => {
 
@@ -285,6 +286,22 @@ export default {
           .catch(function(err){
             console.log(err);
           })
+    },
+    changeNum : function(value) {
+      return value = this.comma(this.uncomma(value));
+    },
+    comma(str) {
+      str = String(str);
+      return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+    },
+    uncomma(str) {
+      str = String(str);
+      return str.replace(/[^\d]+/g, '');
+    }
+  },
+  filters:{
+    inputNumberFormat(val){
+      return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
   }
 };

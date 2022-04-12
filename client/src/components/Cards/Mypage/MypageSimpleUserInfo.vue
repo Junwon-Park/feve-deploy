@@ -4,10 +4,9 @@
     outlined
   >
 
-    <v-list three-line class="mt-4">
-        <v-list-item
-        >
-          <v-list-item-avatar>
+    <v-list three-line class="">
+        <v-list-item class="align-center">
+          <v-list-item-avatar style="align-self: center !important;">
             <v-img
                 :src="account"
                 alt="account icon"></v-img>
@@ -26,9 +25,21 @@
                 rounded
                 text
                 @click="onModifyClicked"
+                class="my-1"
             >
               프로필 수정
-            </v-btn></v-list-item-action>
+            </v-btn>
+
+            <v-btn
+                outlined
+                rounded
+                text
+                @click="onWithdrawalClicked"
+                class="my-1"
+            >
+              회원 탈퇴
+            </v-btn>
+          </v-list-item-action>
         </v-list-item>
     </v-list>
 
@@ -50,9 +61,32 @@ export default {
     };
   },
   methods:{
+    getUserKey()
+    {
+      return localStorage.getItem('userKey');
+    },
+
     onModifyClicked(){
       EventBus.$emit("mypageViewStateChange", 4); //4:프로필 수정
-    }
+    },
+    onWithdrawalClicked() {
+      if (confirm("정말로 탈퇴하시겠습니까?")) {
+
+        let that = this;
+        that.$axios.post('http://localhost:8080/mypage/removeAccount', {
+          USER_KEY: this.getUserKey(),
+        })
+            .then(() => {
+              alert("성공적으로 탈퇴하였습니다.")
+              this.$router.push('/');
+            })
+            .catch((error) => {
+              console.log(error);
+            })
+      } else {
+        return
+      }
+    },
   }
 };
 </script>
