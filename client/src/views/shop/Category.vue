@@ -108,7 +108,7 @@
                         </li>
                         <li >
                             <a href="#" >
-                                <input type="radio" name="depth1" id="up" value="above" v-model="price"  @click="getPrice($event)">
+                                <input type="radio" name="depth1" id="above" value="above" v-model="price"  @click="getPrice($event)">
                                 <label for="above" class="ml-1">50만원 초과</label>
                             </a>
                         </li>
