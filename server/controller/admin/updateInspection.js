@@ -14,7 +14,7 @@ async function updateInspection(req, res, next) {
 
       await Inspection.update(
             {
-                INSPECTION_DATE: ('NOW'),
+                INSPECTION_DATE: Sequelize.fn('NOW'),
                 INSPECTION_RDATE: Sequelize.fn('NOW'),
                 INSPECTION_STATUS: sendInspectionStatus,
                 INSPECTION_RESULT: sendInsepctionResult

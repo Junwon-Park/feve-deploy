@@ -132,7 +132,7 @@ export default {
         sendUserkey: that.receivedUserkey,
       }).then(function(res){
         that.item=res.data[0];
-        //console.log("res", res);
+        console.log(that.item.INSPECTION_ADATE)
       }).catch(function(err){
         console.log(err);
       });
