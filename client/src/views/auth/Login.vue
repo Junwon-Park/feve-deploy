@@ -120,13 +120,18 @@ export default {
         });
 
       if (userData) {
-        // Login successed
-        localStorage.setItem('Authorization', userData.data.data.accessToken);
-        localStorage.setItem('isLogin', true);
-        localStorage.setItem('userId', userData.data.data.USER_ID);
-        localStorage.setItem('userAdmin', userData.data.data.USER_ADMIN);
-        localStorage.setItem('userKey', userData.data.data.USER_KEY);
-        return (location.href = `${this.$store.getters.LocalUrl}`);
+        if (!Number(userData.data.data.USER_DELETE)) {
+          // Login successed
+          localStorage.setItem('Authorization', userData.data.data.accessToken);
+          localStorage.setItem('isLogin', true);
+          localStorage.setItem('userId', userData.data.data.USER_ID);
+          localStorage.setItem('userAdmin', userData.data.data.USER_ADMIN);
+          localStorage.setItem('userKey', userData.data.data.USER_KEY);
+          return (location.href = `${this.$store.getters.LocalUrl}`);
+        } else {
+          alert('로그인에 실패했습니다.');
+          return (location.href = `${this.$store.getters.LocalUrl}`);
+        }
       }
     }
   }
