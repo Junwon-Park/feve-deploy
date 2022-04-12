@@ -68,12 +68,16 @@ async function getBuyCounts(req, res) {
 async function getSellCounts(req, res) {
     const userKey = req.body.USER_KEY;
     try{
-        const total = await Sell.count({
+        let total = await Sell.count({
             where: { SELL_SELLER_KEY: userKey },
         });
+        total += await Buy.count({
+            where: { 
+                    BUY_SELLER_KEY: userKey},
+            });
 
         const wait = await Sell.count({
-        where: { SELL_SELLER_KEY: userKey, SELL_STATUS: {[Op.or]:['0', '2']} },
+            where: { SELL_SELLER_KEY: userKey, SELL_STATUS: {[Op.or]:['0', '2']} },
         });
 
         let progress = await Sell.count({
