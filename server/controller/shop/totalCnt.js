@@ -39,7 +39,7 @@ async function totalCnt(req, res, next) {
         res.json(result);
       })
       .catch((err) => console.log(err));
-}
+      }
 
 async function productlist(req, res, next) {
     const start = req.body.limitStart;

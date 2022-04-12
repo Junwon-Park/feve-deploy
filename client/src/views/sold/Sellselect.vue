@@ -37,9 +37,9 @@
 
               <section class="p-5 m-3 border-bottom: 2px solid rgb(235, 235, 235);">
                   <div class="p-4 mx-auto border xl:w-3/12 rounded text-center" >
-                       <span class="block text-sm" >ONE SIZE</span>
+                       <span class="block text-sm" >{{item.PRODUCT_BRAND}}</span>
                        <span class="block text-xs" style=" color:green;" v-if="hasMinPrice === 0">-</span>
-                       <span class="block text-xs" style=" color:green;" v-else>{{sell[0].SELL_PRICE}}원</span>
+                       <span class="block text-xs" style=" color:green;" v-else>{{buy[0].buy_price}}원</span>
                             <!-- <div  v-else style="margin:auto; max-width:90px;">
                              <span class="block text-sm" style="margin-top:-3px;">ONE SIZE</span>
                              <span class="block text-s" style="color:red">구매 입찰</span>
@@ -73,13 +73,13 @@ export default {
       tab: null,
       text: '판매 희망가',
       month:0,
-      sell: {
+      buy: {
         
         product_key:'',
-        SELL_PRICE: 0,
-        SELL_SDATE: '',
-        SELL_EDATE: '',
-        SELL_STATUS:'',
+        buy_price: 0,
+        buy_sdate: '',
+        buy_edate: '',
+        buy_status:'',
         default: "0"
       },
 
@@ -111,7 +111,7 @@ export default {
 
   mounted() {
     let that = this;
-
+    window.scrollTo(0,0);
     this.item.PRODUCT_KEY = this.$route.params.PRODUCT_KEY;
     this.$axios.get(`http://localhost:8080/sell/${this.item.PRODUCT_KEY}`)
       .then(function (res) {
@@ -123,13 +123,13 @@ export default {
         console.log(err);
       });
 
-     this.$axios.post(`http://localhost:8080/sell/comp`,{
+     this.$axios.post(`http://localhost:8080/buy/comp`,{
       productkey:this.$route.params.PRODUCT_KEY
     })
       .then(function (res) {
-        that.sell = res.data;
-        console.log(that.sell);
-        if(that.sell === null || that.sell.length == 0 || that.sell[0].SELL_PRICE === null)
+        that.buy = res.data;
+        console.log(that.buy);
+        if(that.buy === null || that.buy.length == 0 || that.buy[0].buy_price === null)
          {
                that.hasMinPrice = 0;
          }

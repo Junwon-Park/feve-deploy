@@ -5,7 +5,7 @@ const { totalCnt, productlist } = require('../../controller/shop/totalCnt.js');
 
 const router = express.Router();
 
-router.get('/', shoplist);
+router.post('/', shoplist);
 router.post('/totalCnt', totalCnt);
 router.post('/productlist', productlist);
 

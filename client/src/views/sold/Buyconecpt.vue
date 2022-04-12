@@ -130,7 +130,7 @@
                           <dt class="text-sm" style="font-weight: 700;
                    letter-spacing: -.01px;">정산 금액</dt>
                           <dd class="text-right" style="display:block; color: red;     margin-inline-start: 40px;" v-if="hasMaxPrice === 1">
-                            <span class="text-lg">{{buy[0].buy_price.toLocaleString('ko-KR')}}</span>
+                            <span class="text-lg">{{sell[0].SELL_PRICE.toLocaleString('ko-KR')}}</span>
                             <span class="text-lg">원</span>
 
                           </dd>
@@ -150,7 +150,7 @@
                         <span class="text-sm" style="color:black">구매 희망가</span>
                       </dt>
                       <dd class="text-right text-sm" style="color:#222">
-                        <strong v-if="hasMaxPrice === 1">{{buy[0].buy_price.toLocaleString('ko-KR')}}원</strong>
+                        <strong v-if="hasMaxPrice === 1">{{sell[0].SELL_PRICE.toLocaleString('ko-KR')}}원</strong>
                         <strong v-else>0원</strong>
 
                         </dd>
@@ -315,13 +315,13 @@ export default {
       text: '판매 희망가',
       nowDate: new Date(Date.now() - (new Date().getTimezoneOffset() * 60000)),
 
-      buy: {
-        buy_key:0,
-        buy_price:0,
+      sell: {
+        SELL_KEY:0,
+        SELL_PRICE:0,
         product_key:'',
-        buy_sdate: '',
-        buy_edate: '',
-        buy_status:'',
+        SELL_SDATE: '',
+        SELL_EDATE: '',
+        SELL_STATUS:'',
         default: "0"
       },
 
@@ -373,9 +373,9 @@ export default {
   },
 
   beforeCreate() {
-      this.$axios.post("http://localhost:8080/buy/updatefail")
+      this.$axios.post("http://localhost:8080/sell/updatefail")
       .then(function (res) {
-        console.log(res,"update패일시킨거");
+        console.log(res);
       })
       .catch(function (err) {
         console.log(err);
@@ -383,6 +383,7 @@ export default {
   },
 
   mounted() {
+    window.scrollTo(0,0);
     let that = this;
     this.item.PRODUCT_KEY = this.$route.params.PRODUCT_KEY;
     this.$axios.get(`http://localhost:8080/buy/${this.item.PRODUCT_KEY}`)
@@ -395,14 +396,14 @@ export default {
         console.log(err);
       });
 
-    this.$axios.post("http://localhost:8080/buy/comp",{
+    this.$axios.post("http://localhost:8080/sell/comp",{
       productkey:this.$route.params.PRODUCT_KEY
     })
       .then(function (res) {
-        that.buy = res.data;
-        console.log(that.buy);
-        console.log(that.buy[0].buy_price);
-        if (that.buy === null || that.buy.length == 0 || that.buy[0].buy_price === null) {
+        that.sell = res.data;
+        console.log(that.sell);
+        console.log(that.sell[0].buy_price);
+        if (that.sell === null || that.sell.length == 0 || that.sell[0].SELL_PRICE === null) {
           that.hasMaxPrice = 0;
         } else {
           that.hasMaxPrice = 1;

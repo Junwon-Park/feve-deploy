@@ -130,7 +130,7 @@
                           <dt class="text-sm" style="font-weight: 700;
                    letter-spacing: -.01px;">정산 금액</dt>
                           <dd class="text-right" style="display:block; color: #31b46e;     margin-inline-start: 40px;">
-                            <span class="text-lg">{{sell[0].SELL_PRICE.toLocaleString('ko-KR')}}</span>
+                            <span class="text-lg">{{buy[0].buy_price.toLocaleString('ko-KR')}}</span>
                             <span class="text-lg">원</span>
 
                           </dd>
@@ -147,7 +147,7 @@
                       <dd class="text-right text-sm" style="color:#222" v-if="hasMinPrice === 0">
                         <strong>-</strong></dd>
                       <dd class="text-right text-sm" style="color:#222" v-else>
-                        <strong>{{sell[0].SELL_PRICE.toLocaleString('ko-KR')}}원</strong></dd>  
+                        <strong>{{buy[0].buy_price.toLocaleString('ko-KR')}}원</strong></dd>  
                     </dl>
                   </div>
 
@@ -311,13 +311,13 @@ export default {
       month:0,
       nowDate: new Date(Date.now() - (new Date().getTimezoneOffset() * 60000)),
 
-      sell: {
-        SELL_KEY:0,
+      buy: {
+        buy_key:0,
         product_key:0,
-        sell_price: 0,
-        sell_sdate: '',
-        sell_edate: '',
-        sell_status:'',
+        buy_price: 0,
+        buy_edate: '',
+        buy_sdate: '',
+        buy_status:'',
         default: "0"
       },
 
@@ -383,7 +383,7 @@ export default {
   //   }
   // },
   beforeCreate() {
-      this.$axios.post("http://localhost:8080/sell/updatefail")
+      this.$axios.post("http://localhost:8080/buy/updatefail")
       .then(function (res) {
         console.log(res,"update패일시킨거");
       })
@@ -405,12 +405,12 @@ export default {
         console.log(err);
       });
 
-    this.$axios.post("http://localhost:8080/sell/comp", {
+    this.$axios.post("http://localhost:8080/buy/comp", {
         productkey: this.$route.params.PRODUCT_KEY
       })
       .then(function (res) {
-        that.sell = res.data;
-        if (that.sell === null || that.sell.length == 0 || that.sell[0].buy_price === null) {
+        that.buy = res.data;
+        if (that.buy === null || that.buy.length == 0 || that.buy[0].buy_price === null) {
           that.hasMinPrice = 0;
         } else {
           that.hasMinPrice = 1;
@@ -422,7 +422,7 @@ export default {
       });
 
 
-    this.$axios.post("http://localhost:8080/sell/comp/user", {
+    this.$axios.post("http://localhost:8080/buy/comp/user", {
         user_key: JSON.parse(localStorage.getItem('userKey'))
 
       })

@@ -5,12 +5,6 @@ const sequelize = require('sequelize');
 
 async function filterCate(req, res, next) {
   const cate = req.body.cate;
-
-  //console.log('*********************');
-  // console.log(
-  //   'body 값 확인 ==>',req.body,
-  //   ',cate value : ', req.body.cate
-  // );
 {
     await db.sequelize
       .query(
@@ -39,8 +33,8 @@ async function filterCate(req, res, next) {
             ',a.PRODUCT_WDATE\n' +
             ',a.PRODUCT_CATE\n' +
             'FROM Product a\n'+
-            'WHERE a.PRODUCT_DELETE = 0 AND a.PRODUCT_CATE IN ( '+ cate +' )) a;',
-        { type: sequelize.QueryTypes.SELECT }
+            'WHERE a.PRODUCT_DELETE = 0 AND a.PRODUCT_CATE IN ( '+ cate +' )) a;'
+        ,{ type: sequelize.QueryTypes.SELECT }
       )
       .then((result) => {
         console.log(result);

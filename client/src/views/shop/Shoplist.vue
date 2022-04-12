@@ -78,7 +78,7 @@ export default {
       limitStart:0,
       limitEnd:0,
       currentPage: 0,
-      itemPerPage: 10,
+      itemPerPage: 8,
       pageSize: 0,
     };
   },
@@ -99,42 +99,34 @@ export default {
         .catch(function(err){
           console.log(err);
         });
-    this.getProductList();
+   
   },
   mounted(){
-    let that = this;
-    this.$axios.post('http://localhost:8080/shop/shoplist/productlist', {
-      limitStart: 0,
-      limitEnd: 10
-    })
-        .then(function(res){
-          that.items = res.data;
-          console.log("productlist에서 가져온거",res);
-        })
-        .catch(function(err){
-          console.log(err);
-        });
+     this.getProductList();
   },
   methods:{
     getProductList:function(){
-      var vm = this;
-      this.$axios.get('http://localhost:8080/shop/shoplist')
+      let that = this;
+    this.$axios.post('http://localhost:8080/shop/shoplist/productlist', {
+      limitStart: 0,
+      limitEnd: 8
+    })
         .then(function(res){
-          //console.log("디비에서 결과 가져옴", res);
-          vm.items = res.data;
+          that.items = res.data;
           for(var i=0; i<res.data.length;i++)
           {  
             if(res.data[i].PRODUCT_BRAND =='LE')
               {
-                vm.items[i].PRODUCT_BRAND = "레고";
+                that.items[i].PRODUCT_BRAND = "레고";
                 //console.log(vm.items[i].PRODUCT_BRAND);
               }
             else
              {
-              vm.items[i].PRODUCT_BRAND = "베어브릭";
+              that.items[i].PRODUCT_BRAND = "베어브릭";
               //console.log(vm.items[i].PRODUCT_BRAND);
              }
           }
+          console.log("productlist에서 가져온거",res);
         })
         .catch(function(err){
           console.log(err);
@@ -164,7 +156,7 @@ export default {
       that.currentPage= reqpage;
       //console.log(start, end, reqpage);
 
-      this.$axios.post('http://localhost:8080/admin/loadproduct', {
+      this.$axios.post('http://localhost:8080/shop/shoplist/productlist', {
         limitStart: this.limitStart,
         limitEnd: this.limitEnd,
         requestPage: this.currentPage,
