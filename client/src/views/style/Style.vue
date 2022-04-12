@@ -8,20 +8,20 @@
         flat
         prominent
     >
-      <div class="xl:w-4/12 mx-auto">
-      <v-text-field
-          prepend-inner-icon="mdi-pound"
-          class="mx-4"
-          flat
-          outlined
-          background-color="white"
-          dart
-          hide-details
-          label="#검색"
-          solo-inverted
-          append-icon="mdi-magnify"
-      ></v-text-field>
-      </div>
+<!--      <div class="xl:w-4/12 mx-auto">-->
+<!--      <v-text-field-->
+<!--          prepend-inner-icon="mdi-pound"-->
+<!--          class="mx-4"-->
+<!--          flat-->
+<!--          outlined-->
+<!--          background-color="white"-->
+<!--          dart-->
+<!--          hide-details-->
+<!--          label="#검색"-->
+<!--          solo-inverted-->
+<!--          append-icon="mdi-magnify"-->
+<!--      ></v-text-field>-->
+<!--      </div>-->
 
       <template v-slot:extension>
         <v-tabs
