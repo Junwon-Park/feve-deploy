@@ -73,7 +73,7 @@ export default {
       sellCount: 0,
       buyCount: 0,
       color:"",
-      icon:"",
+      icon:"up",
     }
   },
   props:{
@@ -90,59 +90,65 @@ export default {
     CardStats,
   },
   watch: {
-    beforeCountTotalUser(){
-      this.countFunc()
+    beforeCountTotalUser: function(){
+      this.countTotalDealFunc()
     },
-    beforeCountTotalBuy (){
-      this.countFunc()
+    beforeCountTotalBuy : function(){
+      this.countTotalUserFunc()
     },
-    beforeCountTotalSell(){
-      this.countFunc()
+    beforeCountTotalSell: function(){
+      this.countTotalSellFunc()
     },
-    beforeCountTotalDeal (){
-      this.countFunc()
+    beforeCountTotalDeal : function(){
+      this.countTotalBuyFunc()
     }
   },
   methods:{
-    countFunc(){
-      // this.dealRatio= isNaN((this.countTotalDeal/this.beforeCountTotalDeal)*100) ? 0 :( (this.countTotalDeal/this.beforeCountTotalDeal)*100).toString();
-      // this.userRatio=isNaN((this.countTotalUser/this.beforeCountTotalUser)*100) ? 0 : ( (this.countTotalUser/this.beforeCountTotalUser)*100).toString();
-      // this.sellRatio= isNaN((this.countTotalSell/this.beforeCountTotalSell)*100) ? 0 : ((this.countTotalSell/this.beforeCountTotalSell)*100).toString();
-      // this.buyRatio= isNaN((this.countTotalBuy/this.beforeCountTotalBuy)*100) ? 0 : ((this.countTotalBuy/this.beforeCountTotalBuy)*100).toString();
-
-      this.dealCount=this.countTotalDeal-this.beforeCountTotalDeal
-      if( this.dealCount > 0 ) {
-        this.deal=!this.deal;
-        this.color="text-emerald-500"
-        this.icon="up"
+    countTotalDealFunc() {
+      this.dealCount = this.countTotalDeal - this.beforeCountTotalDeal
+      if (this.dealCount > 0) {
+        this.color = "text-emerald-500"
+        this.icon = "up"
       } else {
-        this.color="text-red-500"
-        this.icon="down"
+        this.color = "text-red-500"
+        this.icon = "down"
       }
+    },
 
-      this.userCount=this.countTotalUser-this.beforeCountTotalUser
-      if(this.userCount>0 ){
-        this.deal=!this.deal;
-        this.color="text-emerald-500"
-        this.icon="up"
+    countTotalUserFunc() {
+
+      this.userCount = this.countTotalUser - this.beforeCountTotalUser
+      console.log("a",this.countTotalUser)
+      console.log("b",this.beforeCountTotalUser)
+      if (this.userCount > 0) {
+        console.log('c')
+        this.color = "text-emerald-500"
+        console.log(this.color)
+        console.log(this.icon)
+        this.icon = "up"
+        console.log(this.icon)
       } else {
-        this.color="text-red-500"
-        this.icon="down"
+        console.log('d')
+        this.color = "text-red-500"
+        this.icon = "down"
       }
+    },
 
-      this.sellCount=this.countTotalSell-this.beforeCountTotalSell
-      if(this.sellCount>0 ) {
-        this.deal=!this.deal;
-        this.color="text-emerald-500"
-        this.icon="up"
+    countTotalSellFunc() {
+
+      this.sellCount = this.countTotalSell - this.beforeCountTotalSell
+      if (this.sellCount > 0) {
+        this.color = "text-emerald-500"
+        this.icon = "up"
       } else {
-        this.color="text-red-500"
-        this.icon="down"
+        this.color = "text-red-500"
+        this.icon = "down"
       }
+    },
 
+    countTotalBuyFunc(){
       this.buy=this.countTotalBuy-this.beforeCountTotalBuy
       if( this.buy>0) {
-        this.deal=!this.deal;
         this.color="text-emerald-500"
         this.icon="up"
       } else {
@@ -151,15 +157,11 @@ export default {
       }
     }
   },
-  updated(){
-    // console.log("created", this.beforeCountTotalDeal, this.beforeCountTotalUser, this.beforeCountTotalSell, this.beforeCountTotalBuy);
-    // console.log("created",this.countTotalDeal, this.countTotalUser, this.countTotalSell, this.countTotalBuy);
-
-  },
   created(){
-    // console.log("mounted",this.beforeCountTotalDeal, this.beforeCountTotalUser, this.beforeCountTotalSell, this.beforeCountTotalBuy);
-    // console.log("mounted",this.countTotalDeal, this.countTotalUser, this.countTotalSell, this.countTotalBuy);
-
- }
+    this.countTotalDealFunc()
+    this.countTotalUserFunc()
+    this.countTotalSellFunc()
+    this.countTotalBuyFunc()
+  }
 };
 </script>
