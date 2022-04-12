@@ -69,7 +69,7 @@ async function countBidSell(req, res, next) {
             '                select 4 union all select 5 union all select 6 union all select 7 union all \n' +
             '                select 8 union all  select 9 union all select 10 union all select 11 ) as a\n' +
             ') a\n' +
-            'left outer join (select date_format(sell_edate, \'%Y-%m\') as sdate, count(*) as cnt from Sell  where sell_status="1" or sell_status="0" group by sdate)u on u.sdate = a.date\n' +
+            'left outer join (select date_format(sell_edate, \'%Y-%m\') as sdate, count(*) as cnt from Sell  where sell_status="1" or sell_status="0" or sell_status="3" group by sdate)u on u.sdate = a.date\n' +
             'where a.Date between date_format( DATE_ADD("'+thisYear+'-12-31", INTERVAL - 1 year ), \'%Y-%m\') and date_format("'+thisYear+'-12-31", \'%Y-%m\')  order by a.date asc;',
             { type: Sequelize.QueryTypes.SELECT }
         )
@@ -95,7 +95,7 @@ async function countBidBuy(req, res, next) {
             '                select 4 union all select 5 union all select 6 union all select 7 union all \n' +
             '                select 8 union all  select 9 union all select 10 union all select 11 ) as a\n' +
             ') a\n' +
-            'left outer join (select date_format(buy_edate, \'%Y-%m\') as sdate, count(*) as cnt from Buy  where buy_status="1" or buy_status="0" group by sdate)u on u.sdate = a.date\n' +
+            'left outer join (select date_format(buy_edate, \'%Y-%m\') as sdate, count(*) as cnt from Buy  where buy_status="1" or buy_status="0" or buy_status="3"group by sdate)u on u.sdate = a.date\n' +
             'where a.Date between date_format( DATE_ADD("'+thisYear+'-12-31", INTERVAL - 1 year ), \'%Y-%m\') and date_format("'+thisYear+'-12-31", \'%Y-%m\')  order by a.date asc;',
             { type: Sequelize.QueryTypes.SELECT }
         )

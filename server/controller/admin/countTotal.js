@@ -15,8 +15,7 @@ async function countTotalBuy(req, res, next) {
         .query(
             'select count(*) as cnt \n' +
             'from Buy b \n' +
-            'where buy_status ="1" or buy_status ="0" or buy_status ="2" and \n'+
-            'DAY(buy_edate)="'+thisDate+'";',
+            'where DAY(buy_edate)="'+thisDate+'";',
             { type: Sequelize.QueryTypes.SELECT }
         )
         .then(result => {
@@ -48,8 +47,7 @@ async function countTotalSell(req, res, next) {
         .query(
             'select count(*) as cnt \n' +
             'from Sell  \n' +
-            'where SELL_STATUS ="1" or SELL_STATUS ="0" or  SELL_STATUS ="2" and  \n'+
-            'DAY(SELL_EDATE)="'+thisDate+'";',
+            'where DAY(SELL_EDATE)="'+thisDate+'";',
             { type: Sequelize.QueryTypes.SELECT }
         )
         .then(result => {

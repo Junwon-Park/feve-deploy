@@ -85,7 +85,6 @@
               </v-col>
             </v-row>
           </v-container>
-          <small>*내용을 수정한 뒤 저장버튼을 눌러주세요.</small>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
