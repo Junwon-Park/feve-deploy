@@ -76,17 +76,27 @@ async function getSellCounts(req, res) {
         where: { SELL_SELLER_KEY: userKey, SELL_STATUS: {[Op.or]:['0', '2']} },
         });
 
-        const progress = await Sell.count({
+        let progress = await Sell.count({
             where: { SELL_SELLER_KEY: userKey, SELL_STATUS: '3' },
         });
+        progress += await Buy.count({
+            where: { 
+                    BUY_SELLER_KEY: userKey, BUY_STATUS: '3' },
+            });
         
         //where: { [Op.and]: [ { authorId: 12 }, { status: 'active' } ] }
-        const done = await Sell.count({
+        let done = await Sell.count({
             where: { 
                 SELL_SELLER_KEY: userKey, 
                 SELL_STATUS: {[Op.or]:['1', '4']},
             },
         });
+        done += await Buy.count({
+            where: { 
+                    BUY_SELLER_KEY: userKey,
+                    BUY_STATUS: {[Op.or]:['1', '4']},
+                },
+            });
 
         sellCounts = [total, wait, progress, done]
         console.log("sellCount has been responsed from db : ", sellCounts);
