@@ -15,10 +15,13 @@
 
     <div class="grid" v-if="list.length > 0">
       <mypage-list-slot 
-        v-for="item in list" :key="item.SELL_KEY"
+        v-for="(item, i) in list" :key="i"
         :item="item"
+        :isFromBuy="1"
         :price="item.sell_price"
-        :eDate="item.strEDate"/>
+        :eDate="item.strEDate"
+        @onDeliverClicked="onDeliverClicked"
+      />
 
       <v-pagination
         v-model="curPage"
@@ -205,7 +208,7 @@ import moment from 'moment'
           state : this.selectedFilterIdx,
         })
         .then((result) => {
-          // console.log(result.data);
+          // console.log("getListCount: ", result);
           this.totalPage = Math.ceil(result.data / this.slotCountPerPage);  
         })
         .catch((error) => {
@@ -226,7 +229,7 @@ import moment from 'moment'
           orderDir    : this.strOrderDirs[this.orderDir],
         })
         .then((result) => {
-          // console.log(result.data);
+          console.log(result.data);
           this.list = result.data;
           this.initSlotsData();
         })
@@ -240,7 +243,17 @@ import moment from 'moment'
         for(let slot of this.list)
         {
           slot.strEDate = moment(slot.sell_edate).format('ll');
-
+          
+          if(slot.sell_status != '0' && slot.sell_status !='2')
+          {
+            //temp code - 임시로 data 가공.(직접쿼리 쓴것과 sequelize쓴거랑 데이터 형식이 다르게 옴)
+              slot.Product = {
+                PRODUCT_BRAND: slot.PRODUCT_BRAND,
+                PRODUCT_NAME: slot.PRODUCT_NAME,
+                PRODUCT_PIC: slot.PRODUCT_PIC,
+              };
+          }
+          
           // 0.대기 1.성공(구매확정) 2.실패(기간만료) 3.진행중 4.실패(구매취소:반품)
           switch(slot.sell_status)
           {
@@ -256,18 +269,12 @@ import moment from 'moment'
             }
             //진행중
             case '3':{
-              //temp code - 진행중일때만 임시로 data 가공.
-              slot.Product = {
-                PRODUCT_BRAND: slot.PRODUCT_BRAND,
-                PRODUCT_NAME: slot.PRODUCT_NAME,
-                PRODUCT_PIC: slot.PRODUCT_PIC,
-              };
               //slotStates:["전체", "발송요청", "발송완료", "입고대기", "입고완료", "검수 중", "검수보류","검수합격", "보류", "거래실패"],
               //INSPECTION_STATUS 0:검수 진행중, 1:검수 완료
               if(slot.INSPECTION_STATUS == null) 
               {
-                //STATUS Null일때 입고완료로 처리.
-                slot.strState = this.curFilter.slotStates[4];
+                //INSPECTION_STATUS Null일때 발송요청으로 표시 (이때 슬롯에서 발송완료 버튼생성.)
+                slot.strState = this.curFilter.slotStates[1];
               }
               else if(slot.INSPECTION_STATUS == 0) //검수중
                 slot.strState = this.curFilter.slotStates[5];
@@ -325,6 +332,40 @@ import moment from 'moment'
         this.getListCount();
         this.getList();
       },
+
+      //decision - 0:발송완료, 1:판매취소
+      onDeliverClicked(slot, decision){
+        this.$axios.post(this.$store.getters.ServerUrl + '/mypage/sellList/deliver', {
+          userKey : this.getUserKey(),
+          productKey : slot.product_key,
+          tableName : slot.TABLE_NAME,
+          key : slot.SELL_KEY,
+          decision: decision,
+        })
+        .then((result) => {
+          console.log(result.data);
+          // if(result.data[0] == 1)
+          {
+            if(decision == 0)
+              alert("발송 접수 되었습니다.");
+            else
+              alert("판매 취소 하셨습니다.");
+              
+            this.getSellCounts();
+            this.goToFirstPage();
+            this.getListCount();
+            this.getList();
+          }
+          // else
+          // {
+          //   alert("알 수 없는 에러 발생. 다시 시도 해주세요.");
+          // }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      },
+
     },
   }
 </script>"
