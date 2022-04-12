@@ -13,7 +13,7 @@ const login = async (req, res) => {
   if (!checkUser)
     res.status(403).json({ data: null, message: 'Invalid user!!!' });
   else {
-    const { USER_KEY, USER_ID, USER_MAIL, USER_ADMIN } = checkUser;
+    const { USER_KEY, USER_ID, USER_MAIL, USER_DELETE, USER_ADMIN } = checkUser;
 
     // Decoded hash
     const decodedResult = await bcrypt.compare(
@@ -36,7 +36,14 @@ const login = async (req, res) => {
           maxAge: 72 * 60 * 60 * 10000 // 30d
         })
         .json({
-          data: { accessToken, USER_KEY, USER_ID, USER_MAIL, USER_ADMIN },
+          data: {
+            accessToken,
+            USER_KEY,
+            USER_ID,
+            USER_MAIL,
+            USER_DELETE,
+            USER_ADMIN
+          },
           message: 'Login successed!!!'
         });
     }
