@@ -8,6 +8,8 @@ async function addproduct(req, res, next) {
     const product_cate=req.body.product_cate;
     const product_ldate= req.body.product_ldate;
     const product_pic=req.body.product_pic;
+    const product_pic2=req.body.product_pic2;
+    const product_pic3=req.body.product_pic3;
     const product_oriprice= req.body.product_oriprice;
     const product_desc=req.body.product_desc;
     const  product_wdate= req.body.product_wdate;
@@ -20,6 +22,8 @@ async function addproduct(req, res, next) {
         PRODUCT_MNUM: product_mnum,
         PRODUCT_LDATE: product_ldate,
         PRODUCT_PIC: req.body.product_pic,
+        PRODUCT_PIC2: req.body.product_pic2,
+        PRODUCT_PIC3: req.body.product_pic3,
         PRODUCT_ORIPRICE: product_oriprice,
         PRODUCT_DESC: product_desc,
         PRODUCT_WDATE: product_wdate,

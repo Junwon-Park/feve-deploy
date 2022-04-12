@@ -5,11 +5,10 @@ const storage = multer.diskStorage({
         cb(null, './image/product')
     },
     filename: function (req, file, cb) {
-        console.log(file)
         cb(null, file.originalname)
     }
 })
 
-const upload = multer({ storage: storage }).single("image");
+const upload = multer({ storage: storage }).array("image", 3);
 
 module.exports={ upload }

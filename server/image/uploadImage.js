@@ -5,10 +5,10 @@ var multer = require('multer');
 const {upload} = require('./upload');
 
 router.post('/', upload, (req, res) => {
-    console.log(req.file);
+    console.log("req.file:::::",req.files);
     console.log(upload)
-    const { body, file } = req;
-    console.log(file);
+    const { body, files } = req;
+    console.log("req.files:::::",files);
 });
 
 module.exports = router;

@@ -85,25 +85,6 @@
                       />
                     </div>
 
-                   <div class="relative mb-3  mt-8 w-full lg:w-6/12 pr-3 ">
-                     <form>
-                      <label
-                          class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                          htmlFor="상품사진경로"
-                      >
-                        사진
-                      </label>
-                      <input
-                          type="file"
-                          id="uploadImg"
-                          name="image"
-                          class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                          placeholder="사진경로"
-                          @change="handleImage"
-                      />
-                     </form>
-                  </div>
-
                     <div class="relative mb-3  mt-8 w-full lg:w-6/12 pr-3 ">
                       <label
                           class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
@@ -118,6 +99,27 @@
                           v-model="product.product_oriprice"
                       />
                     </div>
+
+
+                    <div class="relative mb-3  mt-8 w-full lg:w-6/12 pr-3 ">
+                     <form>
+                      <label
+                          class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                          htmlFor="상품사진경로"
+                      >
+                        사진 <small class="text-red-500"> **최대 세 장, 첫 번째 사진이 메인사진입니다.</small>
+                      </label>
+                      <input
+                          type="file"
+                          id="uploadImg"
+                          name="image"
+                          class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                          placeholder="사진경로"
+                          multiple
+                          @change="handleImage"
+                      />
+                     </form>
+                  </div>
 
                   <div class="relative w-full mb-3">
                     <label
@@ -162,7 +164,9 @@ export default {
         product_name: '',
         product_mnum: '',
         product_ldate: '',
-        product_pic: '',
+        product_pic1: '',
+        product_pic2: '',
+        product_pic3: '',
         product_oriprice: '',
         product_desc: '',
         product_wdate:'',
@@ -173,6 +177,7 @@ export default {
         default: "0",
       },
       uploadServerImg:'',
+      uploadServerImgArray: [],
     };
   },
 
@@ -195,15 +200,21 @@ export default {
   methods: {
     handleImage(e){
       this.uploadServerImg = e.target.files;
+      this.uploadServerImgArray = Array.prototype.slice.call(this.uploadServerImg)
+
       let that = this;
-      if(this.uploadServerImg) {
-        that.product.product_pic=this.uploadServerImg[0].name;
+      if(this.uploadServerImg.length <= 3) {
+        that.product.product_pic1=this.uploadServerImgArray[0].name;
+        that.product.product_pic2=this.uploadServerImgArray[1].name;
+        that.product.product_pic3=this.uploadServerImgArray[2].name;
       }
-      else {
+      else if ( this.uploadServerImgArray.length > 3) {
+        alert("사진은 세 장만 등록할 수 있습니다.")
+        document.querySelector('#uploadImg').value='';
+      } else {
         that.product.imgsrc = 'icon_question';
       }
     },
-
     formSubmit() {
       const curr = new Date();
       const utc =curr.getTime() + (curr.getTimezoneOffset() * 60 * 1000);
@@ -217,7 +228,9 @@ export default {
           product_name: this.product.product_name,
           product_mnum: this.product.product_mnum,
           product_ldate: this.product.product_ldate,
-          product_pic: this.product.product_pic,
+          product_pic: this.product.product_pic1,
+          product_pic2: this.product.product_pic2,
+          product_pic3: this.product.product_pic3,
           product_desc: this.product.product_desc,
           product_oriprice: this.product.product_oriprice,
           product_wdate: kr_curr,
@@ -231,24 +244,31 @@ export default {
             console.log(error);
           });
 
-      // let that = this;
-      let file = this.uploadServerImg[0];
-      const formData = new FormData();
-      formData.append("image", file);
 
-      //console.log(file)
+      let that = this;
+
+      let files = that.uploadServerImg;
+      console.log("file", files)
+      console.log("file", typeof that.uploadServerImgArray)
+      const formData = new FormData();
+      [].forEach.call(that.uploadServerImg, (files) => {
+
+        formData.append('image', files);
+
+      });
 
       this.$axios.post('http://localhost:8080/uploadImage', formData, {
         headers: {
           'content-type': 'multipart/form-data'
         }
       })
-          .then(function(){
-            //console.log(res)
+          .then(function(res){
+            console.log(res.data)
           })
           .catch(function(err){
             console.log(err)
           })
+
     },
 
     //중분류 가져오기
