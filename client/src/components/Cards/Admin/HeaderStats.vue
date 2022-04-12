@@ -85,30 +85,40 @@ export default {
     beforeCountTotalBuy: Number,
     beforeCountTotalSell:  Number,
     beforeCountTotalDeal: Number,
+    calcCountDeal: Number,
+    calcCountUser: Number,
+    calcCountSell: Number,
+    calcCountBuy: Number,
   },
   components: {
     CardStats,
   },
   watch: {
-    beforeCountTotalUser: function(){
+    calcCountDeal: function(){
+      this.dealCount=this.calcCountDeal
       this.countTotalDealFunc()
     },
-    beforeCountTotalBuy : function(){
+    calcCountUser : function(){
+      this.userCount= this.calcCountUser
       this.countTotalUserFunc()
     },
-    beforeCountTotalSell: function(){
+    calcCountSell: function(){
+      this.sellCount=this.calcCountSell
       this.countTotalSellFunc()
     },
-    beforeCountTotalDeal : function(){
+    calcCountBuy : function(){
+      this.buyCount=this.calcCountBuy
       this.countTotalBuyFunc()
     }
   },
   methods:{
     countTotalDealFunc() {
-      this.dealCount = this.countTotalDeal - this.beforeCountTotalDeal
       if (this.dealCount > 0) {
         this.color = "text-emerald-500"
         this.icon = "up"
+      } else if( this.dealCount === 0 ){
+        this.color = "text-blueGray-400"
+        this.icon = "down"
       } else {
         this.color = "text-red-500"
         this.icon = "down"
@@ -116,30 +126,25 @@ export default {
     },
 
     countTotalUserFunc() {
-
-      this.userCount = this.countTotalUser - this.beforeCountTotalUser
-      console.log("a",this.countTotalUser)
-      console.log("b",this.beforeCountTotalUser)
       if (this.userCount > 0) {
-        console.log('c')
         this.color = "text-emerald-500"
-        console.log(this.color)
-        console.log(this.icon)
         this.icon = "up"
-        console.log(this.icon)
+      }else if( this.userCount === 0 ){
+        this.color = "text-blueGray-400"
+        this.icon = "down"
       } else {
-        console.log('d')
         this.color = "text-red-500"
         this.icon = "down"
       }
     },
 
     countTotalSellFunc() {
-
-      this.sellCount = this.countTotalSell - this.beforeCountTotalSell
       if (this.sellCount > 0) {
         this.color = "text-emerald-500"
         this.icon = "up"
+      }else if( this.sellCount === 0 ){
+        this.color = "text-blueGray-400"
+        this.icon = "down"
       } else {
         this.color = "text-red-500"
         this.icon = "down"
@@ -147,10 +152,12 @@ export default {
     },
 
     countTotalBuyFunc(){
-      this.buy=this.countTotalBuy-this.beforeCountTotalBuy
-      if( this.buy>0) {
+      if( this.buyCount>0) {
         this.color="text-emerald-500"
         this.icon="up"
+      }else if( this.buyCount === 0 ){
+        this.color = "text-blueGray-400"
+        this.icon = "down"
       } else {
         this.color="text-red-500"
         this.icon="down"
@@ -162,6 +169,6 @@ export default {
     this.countTotalUserFunc()
     this.countTotalSellFunc()
     this.countTotalBuyFunc()
-  }
+  },
 };
 </script>
