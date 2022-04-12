@@ -38,22 +38,36 @@ async function removeAccount(req, res) {
 async function getBuyCounts(req, res) {
     const userKey = req.body.USER_KEY;
     try{
-        const total = await Buy.count({
+        let total = await Buy.count({
             where: { BUY_BUYER_KEY: userKey },
         });
+        total += await Sell.count({
+            where: { 
+                    SELL_BUYER_KEY: userKey},
+            });
 
         const wait = await Buy.count({
         where: { BUY_BUYER_KEY: userKey, BUY_STATUS: {[Op.or]:['0', '2']} },
         });
 
-        const progress = await Buy.count({
-        where: { BUY_BUYER_KEY: userKey, BUY_STATUS: '3' },
+        let progress = await Buy.count({
+            where: { BUY_BUYER_KEY: userKey, BUY_STATUS: '3' },
         });
+        progress += await Sell.count({
+            where: { 
+                SELL_BUYER_KEY: userKey, SELL_STATUS: '3' },
+            });
 
-        const done = await Buy.count({
+        let done = await Buy.count({
             where: { 
                 BUY_BUYER_KEY: userKey, 
                 BUY_STATUS: {[Op.or]:['1', '4']},
+            },
+        });
+        done += await Sell.count({
+            where: { 
+                SELL_BUYER_KEY: userKey,
+                SELL_STATUS: {[Op.or]:['1', '4']},
             },
         });
 
@@ -97,10 +111,10 @@ async function getSellCounts(req, res) {
         });
         done += await Buy.count({
             where: { 
-                    BUY_SELLER_KEY: userKey,
-                    BUY_STATUS: {[Op.or]:['1', '4']},
-                },
-            });
+                BUY_SELLER_KEY: userKey,
+                BUY_STATUS: {[Op.or]:['1', '4']},
+            },
+        });
 
         sellCounts = [total, wait, progress, done]
         console.log("sellCount has been responsed from db : ", sellCounts);
