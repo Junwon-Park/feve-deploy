@@ -37,8 +37,8 @@
 
               <section class="p-5 m-3 border-bottom: 2px solid rgb(235, 235, 235);">
                   <div class="p-4 mx-auto border xl:w-3/12 rounded text-center" >
-                       <span class="block text-sm" >ONE SIZE</span>
-                       <span class="block text-xs" style=" color:red;" v-if="hasMaxPrice === 1">{{buy[0].buy_price.toLocaleString('ko-KR')}}원</span>
+                       <span class="block text-sm" >{{item.PRODUCT_BRAND}}</span>
+                       <span class="block text-xs" style=" color:red;" v-if="hasMaxPrice === 1">{{sell[0].SELL_PRICE.toLocaleString('ko-KR')}}원</span>
                        <span class="block text-xs" style=" color:red;" v-else>-</span>
                             <!-- <div  v-else style="margin:auto; max-width:90px;">
                              <span class="block text-sm" style="margin-top:-3px;">ONE SIZE</span>
@@ -74,13 +74,13 @@ export default {
       tab: null,
       text: '판매 희망가',
       month:0,
-      buy: {
-        buy_key:0,
-        PRODUCT_KEY:'',
-        buy_price: 0,
-        buy_sdate: '',
-        buy_edate: '',
-        buy_status:'',
+      sell: {
+        sell_key:0,
+        PRODUCT_KEY:0,
+        SELL_PRICE: 0,
+        sell_sdate: '',
+        sell_edate: '',
+        sell_status:'',
         default: "0"
       },
 
@@ -91,7 +91,7 @@ export default {
             PRODUCT_PIC:'',
             PRODUCT_NAME: '',
             PRODUCT_BRAND: '',
-            PRODUCT_CATE:0,
+            PRODUCT_CATE:'',
             PRODUCT_ORIPRICE:'',
             PRODUCT_DESC:'',
           },
@@ -114,6 +114,7 @@ export default {
 
 
   mounted() {
+    window.scrollTo(0,0);
     let that = this;
 
     this.item.PRODUCT_KEY = this.$route.params.PRODUCT_KEY;
@@ -127,13 +128,13 @@ export default {
         console.log(err);
       });
 
-     this.$axios.post(`http://localhost:8080/buy/comp`,{
+     this.$axios.post(`http://localhost:8080/sell/comp`,{
       productkey:this.$route.params.PRODUCT_KEY
     })
       .then(function (res) {
-        that.buy = res.data;
-        console.log(that.buy);
-        if(that.buy === null || that.buy.length == 0 || that.buy[0].buy_price === null)
+        that.sell = res.data;
+        console.log(that.sell);
+        if(that.sell === null || that.sell.length == 0 || that.sell[0].SELL_PRICE === null)
          {
                that.hasMaxPrice = 0;
          }

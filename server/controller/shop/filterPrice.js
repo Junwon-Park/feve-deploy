@@ -5,12 +5,8 @@ const sequelize = require('sequelize');
 
 async function filterPrice(req, res, next) {
   const price = req.body.price;
-
-  // console.log('*********************');
-  // console.log(
-  //   'body 값 확인 ==>',req.body,
-  //   ',price value : ', req.body.price
-  // );
+  // const start = req.body.limitStart;
+  // const end = req.body.limitEnd;
 
     if (price === 'all') {
       await db.sequelize
@@ -31,8 +27,8 @@ async function filterPrice(req, res, next) {
         'INNER JOIN Sell b\n'+
         'ON b.PRODUCT_KEY = a.PRODUCT_KEY \n' +
         'AND a.PRODUCT_DELETE = 0\n'+
-        'AND b.SELL_PRICE = (SELECT MIN(SELL_PRICE) FROM Sell WHERE PRODUCT_KEY = a.PRODUCT_KEY AND SELL_STATUS=0);',
-          { type: sequelize.QueryTypes.SELECT }
+        'AND b.SELL_PRICE = (SELECT MIN(SELL_PRICE) FROM Sell WHERE PRODUCT_KEY = a.PRODUCT_KEY AND SELL_STATUS=0);'
+        ,{ type: sequelize.QueryTypes.SELECT }
         )
         .then((result) => {
           //console.log(result);
@@ -58,8 +54,8 @@ async function filterPrice(req, res, next) {
       'INNER JOIN Sell b\n'+
       'ON b.PRODUCT_KEY = a.PRODUCT_KEY \n' +
       'AND a.PRODUCT_DELETE = 0\n'+
-      'AND b.SELL_PRICE < 100000 ;',
-          { type: sequelize.QueryTypes.SELECT }
+      'AND b.SELL_PRICE < 100000;'
+      ,{ type: sequelize.QueryTypes.SELECT }
         )
         .then((result) => {
           //console.log(result);
@@ -86,8 +82,8 @@ async function filterPrice(req, res, next) {
       'ON b.PRODUCT_KEY = a.PRODUCT_KEY \n' +
       'AND a.PRODUCT_DELETE = 0\n'+
       'AND b.SELL_PRICE = (SELECT MIN(SELL_PRICE) FROM Sell WHERE PRODUCT_KEY = a.PRODUCT_KEY AND SELL_STATUS=0)\n'+
-      'AND b.SELL_PRICE BETWEEN 100000 AND 300000;',
-          { type: sequelize.QueryTypes.SELECT }
+      'AND b.SELL_PRICE BETWEEN 100000 AND 300000;'
+      ,{ type: sequelize.QueryTypes.SELECT }
         )
         .then((result) => {
           //console.log(result);
@@ -114,8 +110,8 @@ async function filterPrice(req, res, next) {
       'ON b.PRODUCT_KEY = a.PRODUCT_KEY \n' +
       'AND a.PRODUCT_DELETE = 0\n'+
       'AND b.SELL_PRICE = (SELECT MIN(SELL_PRICE) FROM Sell WHERE PRODUCT_KEY = a.PRODUCT_KEY AND SELL_STATUS=0)\n'+
-      'AND b.SELL_PRICE BETWEEN 300001 AND 500000;',
-        { type: sequelize.QueryTypes.SELECT }
+      'AND b.SELL_PRICE BETWEEN 300001 AND 500000;'
+      ,{ type: sequelize.QueryTypes.SELECT }
         )
         .then((result) => {
           //console.log(result);
@@ -142,8 +138,8 @@ async function filterPrice(req, res, next) {
       'ON b.PRODUCT_KEY = a.PRODUCT_KEY \n' +
       'AND a.PRODUCT_DELETE = 0\n'+
       'AND b.SELL_PRICE = (SELECT MIN(SELL_PRICE) FROM Sell WHERE PRODUCT_KEY = a.PRODUCT_KEY AND SELL_STATUS=0)\n'+
-      'AND b.SELL_PRICE > 500001;',
-          { type: sequelize.QueryTypes.SELECT }
+      'AND b.SELL_PRICE > 500001;'
+      ,{ type: sequelize.QueryTypes.SELECT }
         )
         .then((result) => {
           //console.log(result);

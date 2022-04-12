@@ -74,10 +74,11 @@ export default {
             return (location.href = `${this.$store.getters.LocalUrl}`);
           })
           .catch((error) => {
-            console.log(error);
+            console.error(error);
+            return alert('탈퇴에 실패하였습니다.');
           });
       } else {
-        return;
+        return alert('탈퇴에 실패하였습니다.');
       }
     }
   }

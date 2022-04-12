@@ -167,6 +167,7 @@ export default {
   },
   
   mounted() {
+      window.scrollTo(0,0);
       var vm = this;
       this.item.PRODUCT_KEY = this.$route.params.PRODUCT_KEY;
       console.log(this.item.PRODUCT_KEY);

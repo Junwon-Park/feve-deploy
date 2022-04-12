@@ -37,14 +37,14 @@
               <ul class="flex rounded-tr p-5 items-center px-4">
                 <li class="text-center flex-1 border-r">
                   <p class="text-lg font-semibold">즉시 구매가</p>
-                  <span class="inline-block text-2xl"  v-if="hasMaxPrice === 0">-</span>
+                     <span class="inline-block text-2xl" v-if="hasMinPrice === 0">-</span>
+                  <span class="inline-block text-2xl" v-else>{{sell[0].SELL_PRICE.toLocaleString('ko-KR')}}원</span>
+                </li>
+                <li class="text-center flex-1 ">
+                  <p class="text-lg font-semibold">즉시 판매가</p>
+                   <span class="inline-block text-2xl"  v-if="hasMaxPrice === 0">-</span>
                   <span class="inline-block text-2xl text-right"
                     v-else>{{max[0].buy_price.toLocaleString('ko-KR')}}원</span>
-                </li>
-                <li class="text-center flex-1 font-semibold">
-                  <p class="text-lg">즉시 판매가</p>
-                  <span class="inline-block text-2xl" v-if="hasMinPrice === 0">-</span>
-                  <span class="inline-block text-2xl" v-else>{{sell[0].SELL_PRICE.toLocaleString('ko-KR')}}원</span>
 
                 </li>
               </ul>
@@ -73,14 +73,15 @@
                           <dd class="text-sm"><input type="text"
                               style="adding-left: 2px;
                             line-height: 26px; font-size: 20px;letter-spacing: -.3px;font-weight: 700; text-align:right" autocomplete="off"
-                              placeholder="희망가 입력" v-model="buy.buy_price">
+                              placeholder="희망가 입력" v-model="buy.buy_price"   @input="e=>buy.buy_price=changeNum(e.target.value)">
                             <span class="text-sm">원</span>
                           </dd>
                         </dl>
                         <div class="pt-6 text-xs m-4" style="letter-spacing: -.07px;">
-                          <p class="pt-6 text-sm text-right" style="color:gray">*총 결제 금액은 다음 화면에서 계산됩니다</p>
                         </div>
                         <div>
+                        <p class="pt-6 text-lg text-left m-4" style="color:black"><strong>입찰 마감기한</strong></p>
+
                           <v-row justify="center" class="text-center m-4">
                             <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="출시일">
                             </label>
@@ -105,21 +106,23 @@
                       <v-card flat>
                         <dl class="p-5 m-3 justify-between flex mb-5 items-center"
                           style="border-bottom: 2px solid #ebebeb;">
-                          <dt class="text-s">즉시 구매가</dt>
-                          <dd class="text-base"  v-if="hasMaxPrice === 0">
+                          <dt class="text-s"  v-if="hasMinPrice === 1">즉시 구매가</dt>
+                          <dt class="text-s"  v-else></dt>
+
+                          <dd class="text-base"  v-if="hasMinPrice === 0">
                                 미입찰상태
                           </dd>
                           <dd class="text-base" v-else>
-                            {{max[0].buy_price.toLocaleString('ko-KR')}}원
+                            {{sell[0].SELL_PRICE.toLocaleString('ko-KR')}}원
                           </dd>
                         </dl>
                         <div class="pt-6 text-xs m-4" style="letter-spacing: -.07px;">
-                          <p class="pt-6 text-sm text-right" style="color:gray" v-if="hasMaxPrice === 1">*총 결제 금액은 다음 화면에서 계산됩니다</p>
+                          <p class="pt-6 text-sm text-right" style="color:gray" v-if="hasMinPrice === 1">*총 결제 금액은 다음 화면에서 계산됩니다</p>
                           <p class="pt-6 text-sm text-right" style="color:gray" v-else></p>
 
                         </div>
                         <div>
-                          <div style="flex items-center no-underline" v-if="hasMaxPrice === 0">
+                          <div style="flex items-center no-underline" v-if="hasMinPrice === 0">
                             <h3 class="pt-6 text-lg text-center" style="color:black">입찰내역이 없습니다</h3>
                           </div>
                           <div style="flex items-center no-underline" v-else>
@@ -207,7 +210,7 @@ export default {
       this.$axios.post('http://localhost:8080/buy/proc', {
           buy_buyer_key: vs.buy.buy_buyer_key,
           product_key: vs.item.PRODUCT_KEY,
-          buy_price: vs.buy.buy_price,
+          buy_price: vs.buy.buy_price.replace(/[^0-9]/g,""),
           buy_edate: vs.buy.buy_edate,
           buy_status: 0,
           buy_sdate: kr_curr,
@@ -230,13 +233,38 @@ export default {
         name: 'Buycomp',
         params: {
           PRODUCT_KEY: this.item.PRODUCT_KEY
-        }
+        },
+    
+        
+    
+    
+    
       });
+   
+    },
+    changeNum : function(value) {
+      return value = this.comma(this.uncomma(value));
+    },
+    comma(str) {
+      str = String(str);
+      return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+    },
+    uncomma(str) {
+      str = String(str);
+      return str.replace(/[^\d]+/g, '');
+    },
+  },
 
+   filters:{
+    inputNumberFormat(val){
+      return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
   },
 
   mounted() {
+    window.scrollTo(0,0);
+  
+
      var vm = this;
      this.item.PRODUCT_KEY = this.$route.params.PRODUCT_KEY;
      this.$axios.get(`http://localhost:8080/buy/${this.item.PRODUCT_KEY}`)
