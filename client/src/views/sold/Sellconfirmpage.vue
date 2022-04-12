@@ -144,8 +144,6 @@
   </div>
 </template>
 <script>
-import anguler from "@/assets/img/angular.jpg";
-import legoBg from "@/assets/img/bg-lego5.jpg";
 
 export default {
   data() {
@@ -154,7 +152,6 @@ export default {
       hasMaxPrice:0,
       hasMinPrice:0,
       checksucess: [],
-      legoBg,
       tab: null,
       text: '판매 희망가',
       month:0,
@@ -215,7 +212,7 @@ export default {
           sell_edate: vm.sell.sell_edate,
           sell_status: 0,
           sell_seller_key:vm.sell.sell_seller_key,
-          product_key: vs.item.PRODUCT_KEY, //상품 키 받아와야함
+          product_key: vm.item.PRODUCT_KEY, //상품 키 받아와야함
           sell_sdate: kr_curr,
       })
           .then(() => {

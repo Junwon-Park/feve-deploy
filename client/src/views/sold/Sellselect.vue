@@ -89,7 +89,6 @@ export default {
             PRODUCT_PIC:'',
             PRODUCT_NAME: '',
             PRODUCT_BRAND: '',
-            PRODUCT_PIC:'',
             PRODUCT_CATE:0,
             PRODUCT_ORIPRICE:'',
           },

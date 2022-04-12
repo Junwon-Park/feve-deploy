@@ -4,7 +4,7 @@
     <main class="profile-page">
 
       <section class="relative block h-500-px">
-        <div class="absolute top-0 w-full h-full bg-center bg-cover" :style="{ backgroundImage: `url(${legoBg})` }">
+        <div class="absolute top-0 w-full h-full bg-center bg-cover" >
           <span id="blackOverlay" class="w-full h-full absolute opacity-30 bg-white"></span>
         </div>
         <div class="top-auto bottom-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden h-70-px"
@@ -296,8 +296,6 @@
 </template>
 <script>
 
-import legoBg from "@/assets/img/bg-lego5.jpg";
-import box from "@/assets/img/box.png";
 export default {
 
 
@@ -309,7 +307,6 @@ export default {
       hasMinPrice:0,
       checksucess: [],
       tab: null,
-      legoBg,
       text: '판매 희망가',
       month:0,
       nowDate: new Date(Date.now() - (new Date().getTimezoneOffset() * 60000)),
