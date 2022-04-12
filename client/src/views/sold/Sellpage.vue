@@ -23,17 +23,17 @@
                   <div class="flex items-center" style="width:100% color:#fff">
                     <div class="" style="width:80px; height:80px; flex-shrink: 0; border-radius: 10px; background-clolr: rgb(244,244,244); overflow: hidden;
                 position: relative;">
-                                               <img :src="legoBg" alt="..."/>
+                                       <img :src="imageUrl+ item.PRODUCT_PIC" alt="아이템 사진" crossorigin />
     
                     </div>
                     <div style="overflow:hidden; -webkit-box-flex: 1; -ms-flex: 1; flex: 1; padding-left: 16px;">
                       <strong
-                        style="display: block; line-height: 17px;font-size: 14px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">-</strong>
+                        style="display: block; line-height: 17px;font-size: 14px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{item.PRODUCT_BRAND}}</strong>
                       <p
                         style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; line-height: 17px;margin-top: 1px;font-size: 14px;">
                              {{item.PRODUCT_NAME}} 
                           </p>
-                      <p style="line-height: 16px;font-size: 13px;letter-spacing: -.07px;">{{item.PRODUCT_BRAND}}</p>
+                      <p style="line-height: 16px;font-size: 13px;letter-spacing: -.07px;">{{item.PRODUCT_DESE}}</p>
                     </div>
                   </div>
                 </div>
@@ -127,10 +127,10 @@
               </div>
             </div>
             <div style="flex items-center no-underline">
-              <a href="http://localhost:3000/sell/proc"  class="full-image"
-                disabled="disabled" style="color: #fafafa !important;">
+              <button  @click="clicked" id="change-button" class="full-image"
+                style="color: #fafafa !important;">
                 동의하기
-              </a>
+              </button>
             </div>
           </div>
         </div>
@@ -140,20 +140,18 @@
   </div>
 </template>
 <script>
-import anguler from "@/assets/img/angular.jpg";
-import legoBg from "@/assets/img/bg-lego5.jpg";
+
 import modaltab from "./Modaltab.vue";
 
 
 export default {
   data() {
     return {
-         anguler,
-         checksucess: [],
-         legoBg,
-         item: 
+          imageUrl: this.$store.getters.ServerUrl + '/getImage?imageName=',
+          checksucess: [],
+          item:
           { 
-            PRODUCT_KEY:'0',
+            PRODUCT_KEY:0,
             PRODUCT_PIC:'',
             PRODUCT_NAME: '',
             PRODUCT_BRAND: '',
@@ -163,18 +161,21 @@ export default {
           
     }
   },
+
   
-  beforeCreate() {
-      var vm = this;
-      this.$axios.post('http://localhost:8080/sell')
-        .then(function (res) {
-          console.log(res);
-          vm.item = res.data;
-          console.log(vm.item);
-        })
-        .catch(function (err) {
-          console.log(err);
-        });
+    mounted()
+    {
+       var vm = this;
+       this.item.PRODUCT_KEY = this.$route.params.PRODUCT_KEY;
+       console.log(this.item.PRODUCT_KEY);
+       this.$axios.get(`http://localhost:8080/sell/${this.item.PRODUCT_KEY}`)
+         .then(function (res) {
+           console.log(res.data);
+           vm.item = res.data;
+         })
+         .catch(function (err) {
+           console.log(err);
+         });
     },
     methods: {
       clicked() {
@@ -184,8 +185,14 @@ export default {
         const selectedElementsCnt = selectedElements.length;
 
         if (selectedElementsCnt === 5) {
-          let button = document.getElementById('change-button');
-          button.disabled = "";
+          console.log(this.item.PRODUCT_KEY);
+          this.$router.push({
+            path: './proc',
+            name: 'Sellproc',
+            params: {
+              PRODUCT_KEY: this.item.PRODUCT_KEY
+            }
+          });
         } else {
           alert("체크다하세요");
           event.preventDefault();

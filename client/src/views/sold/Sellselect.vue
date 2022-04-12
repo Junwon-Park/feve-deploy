@@ -16,17 +16,17 @@
                   <div class="flex items-center" style="width:100% color:#fff">
                     <div class="" style="width:80px; height:80px; flex-shrink: 0; border-radius: 10px; background-clolr: rgb(244,244,244); overflow: hidden;
                 position: relative;">
-                                             <img :src="legoBg" alt="..."/>
+                                       <img :src="imageUrl+ item.PRODUCT_PIC" alt="아이템 사진" crossorigin />
 
                     </div>
                     <div style="overflow:hidden; -webkit-box-flex: 1; -ms-flex: 1; flex: 1; padding-left: 16px;">
                       <strong
-                        style="display: block; line-height: 17px;font-size: 14px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">-</strong>
+                        style="display: block; line-height: 17px;font-size: 14px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{item.PRODUCT_BRAND}}</strong>
                       <p
                         style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; line-height: 17px;margin-top: 1px;font-size: 14px;">
                           {{item.PRODUCT_NAME}}  
                       </p>
-                      <p style="line-height: 16px;font-size: 13px;letter-spacing: -.07px;">{{item.PRODUCT_BRAND}}</p>
+                      <p style="line-height: 16px;font-size: 13px;letter-spacing: -.07px;">{{item.PRODUCT_DESC}}</p>
                     </div>
                   </div>
                 </div>
@@ -49,10 +49,10 @@
             </div>
         
             <div class="text-center mt-6 p-4  xl:w-3/12 bg-black mx-auto rounded-lg" >
-           <a href="http://localhost:3000/sell/sel" @click="clicked" id="change-button"
-                disabled="disabled" style="color: #fafafa !important; ">
+           <button @click="clicked" id="change-button"
+                 style="color: #fafafa !important; ">
                 판매하기
-              </a>
+              </button>
             </div>
           </div>
         </div>
@@ -62,7 +62,6 @@
 </template>
 <script>
 
-import legoBg from "@/assets/img/bg-lego5.jpg";
 
 export default {
 
@@ -70,9 +69,8 @@ export default {
   data() {
     return {
       hasMinPrice:0,
-      checksucess: [],
+      imageUrl : this.$store.getters.ServerUrl + '/getImage?imageName=',
       tab: null,
-      legoBg,
       text: '판매 희망가',
       month:0,
       sell: {
@@ -85,77 +83,75 @@ export default {
         default: "0"
       },
 
-      user: {
-        USER_NAME:'',
-        USER_PHONE:0,
-        USER_ADDRESS1:''
-      },
       item: 
           { 
-            PRODUCT_KEY:'0',
+            PRODUCT_KEY:0,
             PRODUCT_PIC:'',
             PRODUCT_NAME: '',
             PRODUCT_BRAND: '',
+            PRODUCT_PIC:'',
             PRODUCT_CATE:0,
             PRODUCT_ORIPRICE:'',
           },
-    
 
     };
   },
   methods: {
-     
+     clicked() {
+      this.$router.push({
+        path: './sel',
+        name: 'Sell',
+        params: {
+          PRODUCT_KEY: this.item.PRODUCT_KEY
+        }
+      });
+    }
   },
 
 
 
-  beforeCreate() {
+  mounted() {
     let that = this;
-    this.$axios.post("http://localhost:8080/sell/comp")
+
+    this.item.PRODUCT_KEY = this.$route.params.PRODUCT_KEY;
+    this.$axios.get(`http://localhost:8080/sell/${this.item.PRODUCT_KEY}`)
+      .then(function (res) {
+        console.log(res);
+        that.item = res.data;
+        console.log(that.item);
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
+
+     this.$axios.post(`http://localhost:8080/sell/comp`,{
+      productkey:this.$route.params.PRODUCT_KEY
+    })
       .then(function (res) {
         that.sell = res.data;
         console.log(that.sell);
-        console.log(that.sell[0].SELL_PRICE);
-
-         if(that.sell === null || that.sell.length == 0 || that.sell[0].buy_price === null)
+        if(that.sell === null || that.sell.length == 0 || that.sell[0].SELL_PRICE === null)
          {
                that.hasMinPrice = 0;
-               console.log("트루인부분",that.hasMinPrice);
          }
-
         else
         {
               that.hasMinPrice = 1;
-              console.log("fail인 부분",that.hasMinPrice); 
+        
 
         }
-
-
+        
       }) 
       .catch(function (err) {
           console.log(err);
         });
   
-   this.$axios.post("http://localhost:8080/sell/comp/user")
-      .then(function (res) {
-        that.user = res.data;
-        console.log(that.user.USER_NAME);
-      
-      }) 
-      .catch(function (err) {
-          console.log(err);
-        });
-   this.$axios.post('http://localhost:8080/sell')
-        .then(function (res) {
-          console.log(res);
-          that.item = res.data;
-          console.log(that.item);
-        })
-        .catch(function (err) {
-          console.log(err);
-        });      
+
+
 
   },
+
+  
 
 
 }

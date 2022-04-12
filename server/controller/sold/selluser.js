@@ -3,11 +3,11 @@ const db = require("../../models");
 const sequelize = require("sequelize");
 
 async function selluser(req, res, next) {
-  // let user = req.body.USER_KEY;
+  let user = req.body.user_key;
   await User.findOne({
     attributes: ['USER_NAME','USER_PHONE', 'USER_ADDRESS1'],
     where: {
-      USER_KEY: 1  //user
+      USER_KEY: user  //user
     }
 })
     .then(result => {

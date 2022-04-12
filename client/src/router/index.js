@@ -177,36 +177,44 @@ const routes = [
     component: Buy
   },
   {
-    path: '/buy/:PRODUCT_KEY/sel/proc',
+    path: '/buy/sel/proc/:PRODUCT_KEY',
+    name: 'Buyproc',
     component: Buyproc
   },
   {
-    path: '/buy/:PRODUCT_KEY/sel/proc/co',
+    path: '/buy/sel/proc/co/:PRODUCT_KEY',
+    name: 'Buycomp',
     component: Buycomp
   },
   {
-    path: '/buy/:PRODUCT_KEY/sel/proc/co/complete',
+    path: '/buy/sel/proc/co/complete/:PRODUCT_KEY',
+    name: 'Buycomplete',
     component: Buycomplete
   },
   {
     path: '/sell/:PRODUCT_KEY',
-    name: 'Buyselect',
+    name: 'Sellselect',
     component: Sellselect
   },
   {
-    path: '/sell/sel',
+    path: '/sell/sel/:PRODUCT_KEY',
+    name:'Sell',
+    
     component: Sell
   },
   {
-    path: '/sell/proc',
+    path: '/sell/sel/proc/:PRODUCT_KEY',
+    name: 'Sellproc',
     component: Sellproc
   },
   {
-    path: '/sell/proc/com',
+    path: '/sell/sel/proc/co/:PRODUCT_KEY',
+    name: 'Sellcomp',
     component: Sellcomp
   },
   {
-    path: '/buy/proc/complete',
+    path: '/sell/sel/proc/co/complete/:PRODUCT_KEY',
+    name: 'Sellcomplete',
     component: Sellcomplete
   },
   {

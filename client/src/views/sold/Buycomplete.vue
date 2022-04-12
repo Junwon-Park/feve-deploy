@@ -7,8 +7,7 @@
         <div style="max-width: 780px; margin:auto" class="">
           <div style="box-shadow:none">
             <div style="border-radius: 10px; padding-top:0; width: 200px; height:200px; margin:auto; ">
-              <img :src="legoBg" alt="..." style="object-fit:cover; width:100%; height:100%; "/>
-
+              <img :src="imageUrl+ item.PRODUCT_PIC" alt="아이템 사진" crossorigin />    
             </div>
             <div>
               <div class="px-6 text-center py-12">
@@ -27,13 +26,16 @@
                   </a>
                 </div>  
                     <p class="text-sm">'구매 내역 > 입찰중' 상태에는 입찰 지우기가 가능합니다.</p>
-               <div class="pt- m-3 ">
+                            <div class="pt- m-3 ">
                     <dl class="flex items-center justify-between" style="min-height: 26px;">
                       <dt>
                         <span class="text-sm" style="color:black">구매 희망가</span>
                       </dt>
                       <dd class="text-right text-sm" style="color:#222">
-                        <strong>{{buy.BUY_PRICE.toLocaleString('ko-KR')}}원</strong></dd>
+                        <strong>{{buy[0].buy_price.toLocaleString('ko-KR')}}원</strong>
+                   
+
+                        </dd>
                     </dl>
                   </div>
 
@@ -76,6 +78,13 @@
                         <strong>무료</strong></dd>
                     </dl>
                   </div>     
+
+                  
+
+
+                 
+
+                  
               </div>
                 
           </div>
@@ -88,25 +97,24 @@
 </template>
 <script>
 
-import legoBg from "@/assets/img/bg-lego5.jpg";
-import box from "@/assets/img/box.png";
+
 
 export default {
 
 
   data() {
     return {
-      box,
+      imageUrl : this.$store.getters.ServerUrl + '/getImage?imageName=',
+      hasMaxPrice:0,
       checksucess: [],
       tab: null,
-      legoBg,
       text: '판매 희망가',
       month:0,
       buy: {
-        
+        buy_key:0,
         product_key:'',
         BUY_PRICE: 0,
-        buy_sdate: '',
+        buy_price: '',
         buy_edate: '',
         buy_status:'',
         default: "0"
@@ -120,10 +128,9 @@ export default {
 
        item: 
           { 
-            PRODUCT_KEY:'0',
+            PRODUCT_KEY:0,
             PRODUCT_PIC:'',
-            
-           PRODUCT_NAME: '',
+            PRODUCT_NAME: '',
             PRODUCT_BRAND: '',
             PRODUCT_CATE:0,
             PRODUCT_ORIPRICE:'',
@@ -133,44 +140,59 @@ export default {
 
     };
   },
-  methods: {
+  methods: { 
      
   },
 
 
-  beforeCreate() {
+  mounted() {
     let that = this;
-    this.$axios.post("http://localhost:8080/buy/comp")
+    this.item.PRODUCT_KEY = this.$route.params.PRODUCT_KEY;
+    console.log(this.item.PRODUCT_KEY);
+    this.$axios.get(`http://localhost:8080/buy/${this.item.PRODUCT_KEY}`)
+      .then(function (res) {
+        console.log(res);
+        that.item = res.data;
+        console.log(that.item);
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
+
+    this.$axios.post("http://localhost:8080/buy/comp", {
+        productkey:  this.item.PRODUCT_KEY 
+      })
       .then(function (res) {
         that.buy = res.data;
         console.log(that.buy);
-        console.log(that.buy.BUY_PRICE); 
-      }) 
+        console.log(that.buy[0].buy_key);
+        
+       
+      })
       .catch(function (err) {
-          console.log(err);
-        });
-  
-   this.$axios.post("http://localhost:8080/buy/comp/user")
-      .then(function (res) {
-        that.user = res.data;
-        console.log(that.user.USER_NAME);
-      
-      }) 
-      .catch(function (err) {
-          console.log(err);
-        });
+        console.log(err);
+      });
+    
+    
 
-      this.$axios.post('http://localhost:8080/buy')
-        .then(function (res) {
-          console.log(res);
-          that.item = res.data;
-          console.log(that.item);
-        })
-        .catch(function (err) {
-           console.log(err);
-        });
+    
   },
 
+  updated() {
+    let that =this;
+    this.$axios.post("http://localhost:8080/buy/update", {
+      user_key: JSON.parse(localStorage.getItem('userKey')),
+      buyer_key: that.buy[0].buy_key
+    })
+    .then(function (res) {
+      
+      console.log(res,"udpate됨");
+    })
+    .catch(function (err) {
+      console.log(err);
+    });
+  },
+  
 
 }
 

@@ -32,18 +32,18 @@
                   <div class="flex items-center" style="width:100% color:#fff">
                     <div class="" style="width:80px; height:80px; flex-shrink: 0; border-radius: 10px; background-color: rgb(244,244,244); overflow: hidden;
                 position: relative;">
-                     <img :src="legoBg" alt="..."/>
+                     <img :src="imageUrl+ item.PRODUCT_PIC" alt="아이템 사진" crossorigin />
 
 
                   </div>
                     <div style="overflow:hidden; -webkit-box-flex: 1; -ms-flex: 1; flex: 1; padding-left: 16px;">
                       <strong
-                        style="display: block; line-height: 17px;font-size: 14px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">-</strong>
+                        style="display: block; line-height: 17px;font-size: 14px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{item.PRODUCT_BRAND}}</strong>
                       <p
                         style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; line-height: 17px;margin-top: 1px;font-size: 14px;">
                         {{item.PRODUCT_NAME}}
                       </p>
-                      <p style="line-height: 16px;font-size: 13px;letter-spacing: -.07px;">{{item.PRODUCT_BRAND}}</p>
+                      <p style="line-height: 16px;font-size: 13px;letter-spacing: -.07px;">{{item.PRODUCT_DESE}}</p>
                     </div>
                   </div>
                 </div>
@@ -91,7 +91,7 @@
                                 연락처
                               </dt>
                               <dd style="overflow: hidden; font-size: 14px;letter-spacing: -.21px;">
-                                  {{user.USER_PHONE.replace(/(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/, "$1-$2-$3")}}
+                                  {{user.USER_PHONE}}
                               </dd>
                             </div>
                           </dl>
@@ -130,7 +130,7 @@
                           <dt class="text-sm" style="font-weight: 700;
                    letter-spacing: -.01px;">정산 금액</dt>
                           <dd class="text-right" style="display:block; color: #31b46e;     margin-inline-start: 40px;">
-                            <span class="text-lg">{{sell.SELL_PRICE.toLocaleString('ko-KR')}}</span>
+                            <span class="text-lg">{{sell[0].SELL_PRICE.toLocaleString('ko-KR')}}</span>
                             <span class="text-lg">원</span>
 
                           </dd>
@@ -144,10 +144,10 @@
                       <dt>
                         <span class="text-sm" style="color:black">판매 희망가</span>
                       </dt>
-                      <dd class="text-right text-sm" style="color:#222" v-if="!ifNull">
+                      <dd class="text-right text-sm" style="color:#222" v-if="hasMinPrice === 0">
                         <strong>-</strong></dd>
                       <dd class="text-right text-sm" style="color:#222" v-else>
-                        <strong>{{sell.SELL_PRICE.toLocaleString('ko-KR')}}원</strong></dd>  
+                        <strong>{{sell[0].SELL_PRICE.toLocaleString('ko-KR')}}원</strong></dd>  
                     </dl>
                   </div>
 
@@ -298,16 +298,15 @@
 
 import legoBg from "@/assets/img/bg-lego5.jpg";
 import box from "@/assets/img/box.png";
-// import moment from 'moment'
 export default {
 
 
   data() {
     return {
       
-      box,
+      imageUrl : this.$store.getters.ServerUrl + '/getImage?imageName=',
       ifNull: false,
-      hasMaxPrice:0,
+      hasMinPrice:0,
       checksucess: [],
       tab: null,
       legoBg,
@@ -334,6 +333,7 @@ export default {
        item: 
           { 
             PRODUCT_KEY:'0',
+            PRODUCT_DESE:'',
             PRODUCT_PIC:'',
             PRODUCT_NAME: '',
             PRODUCT_BRAND: '',
@@ -350,22 +350,24 @@ export default {
     
     updatebuy() {
 
-        var vms = this;
-        this.$axios.post("http://localhost:8080/sell/update",{
-          user_key: JSON.parse(localStorage.getItem('userKey')),
-          sell_key: this.sell.SELL_KEY
-        })
-        .then(function (res) {
-         console.log(res.data);
-         alert("구매확정되었습니다.");
-         vms.$router.replace("http://localhost:3000")
-       
+        const query = 'input[id*="check"]:checked';
+      const selectedElements = document.querySelectorAll(query);
+      const selectedElementsCnt = selectedElements.length;
+       if (selectedElementsCnt === 5) {
+            this.$router.push({
+              path: './complete',
+              name: 'Sellcomplete',
+              params: {
+                PRODUCT_KEY: this.item.PRODUCT_KEY
+              }
+            });
 
-    
-        }) 
-        .catch(function (err) {
-          console.log(err);
-        });
+          } else {
+            alert("체크다하세요");
+            event.preventDefault();
+
+          } 
+     
 
        
 
@@ -383,42 +385,62 @@ export default {
 
   //   }
   // },
-
   beforeCreate() {
+      this.$axios.post("http://localhost:8080/sell/updatefail")
+      .then(function (res) {
+        console.log(res,"update패일시킨거");
+      })
+      .catch(function (err) {
+        console.log(err);
+      });   
+  },
+
+  mounted() {
     let that = this;
-    this.$axios.post("http://localhost:8080/sell/comp")
+    this.item.PRODUCT_KEY = this.$route.params.PRODUCT_KEY;
+    this.$axios.get(`http://localhost:8080/sell/${this.item.PRODUCT_KEY}`)
+      .then(function (res) {
+        console.log(res);
+        that.item = res.data;
+        console.log(that.item);
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
+
+    this.$axios.post("http://localhost:8080/sell/comp", {
+        productkey: this.$route.params.PRODUCT_KEY
+      })
       .then(function (res) {
         that.sell = res.data;
-        console.log(that.sell);
-        console.log(that.sell.SELL_PRICE); 
-      }) 
+        if (that.sell === null || that.sell.length == 0 || that.sell[0].buy_price === null) {
+          that.hasMinPrice = 0;
+        } else {
+          that.hasMinPrice = 1;
+
+        }
+      })
       .catch(function (err) {
-          console.log(err);
-        });
-  
-  
-   this.$axios.post("http://localhost:8080/sell/comp/user")
+        console.log(err);
+      });
+
+
+    this.$axios.post("http://localhost:8080/sell/comp/user", {
+        user_key: JSON.parse(localStorage.getItem('userKey'))
+
+      })
       .then(function (res) {
         that.user = res.data;
         console.log(that.user.USER_NAME);
-      
-      }) 
+
+      })
       .catch(function (err) {
-          console.log(err);
-        });
+        console.log(err);
+      });
 
-      this.$axios.post('http://localhost:8080/sell')
-        .then(function (res) {
-          console.log(res);
-          that.item = res.data;
-          console.log(that.item);
-        })
-        .catch(function (err) {
-          console.log(err);
-        });
-  },
+    },
 
 
-}
+    }
 
 </script>

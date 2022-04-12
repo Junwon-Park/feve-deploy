@@ -23,17 +23,17 @@
                   <div class="flex items-center" style="width:100% color:#fff">
                     <div class="" style="width:80px; height:80px; flex-shrink: 0; border-radius: 10px; background-clolr: rgb(244,244,244); overflow: hidden;
                 position: relative;">
-                                               <img :src="legoBg" alt="..."/>
+                                  <img :src="imageUrl+ item.PRODUCT_PIC" alt="아이템 사진" crossorigin />
     
                     </div>
                     <div style="overflow:hidden; -webkit-box-flex: 1; -ms-flex: 1; flex: 1; padding-left: 16px;">
                       <strong
-                        style="display: block; line-height: 17px;font-size: 14px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">-</strong>
+                        style="display: block; line-height: 17px;font-size: 14px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{item.PRODUCT_BRAND}}</strong>
                       <p
                         style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; line-height: 17px;margin-top: 1px;font-size: 14px;">
                              {{item.PRODUCT_NAME}} 
                           </p>
-                      <p style="line-height: 16px;font-size: 13px;letter-spacing: -.07px;">{{item.PRODUCT_BRAND}}</p>
+                      <p style="line-height: 16px;font-size: 13px;letter-spacing: -.07px;">{{item.PRODUCT_DESC}}</p>
                     </div>
                   </div>
                 </div>
@@ -65,8 +65,9 @@
                         <p class="text-sm"><strong>제조사에서 불량으로 인정하지 않는 기준은 하자로 판단하지 않습니다</strong></p>
 
                         <p class="mt-1 text-xs  ml-auto">박스/패키치와 상품 컨디션에 민감하시다면 검수 기준을 반드시 확인하시기 바랍니다.</p>
-                                              <modaltab/>
-
+                           <a class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-5 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-120" href="http://localhost:3000/CscenterStandard" id="change-button" style="color: #fafafa !important; ">
+                             검수사항
+                           </a>
                       </div>
                       <div class="ml-auto relative ">
                         <input id="check2" class="checkboxconfirm" type="checkbox">
@@ -127,10 +128,11 @@
               </div>
             </div>
             <div style="flex items-center no-underline">
-              <a href="http://localhost:3000/buy/proc" @click="clicked" id="change-button" class="full-image"
-                disabled="disabled" style="color: #fafafa !important;">
+              <button  @click="clicked" id="change-button" class="full-image"
+                 style="color: #fafafa !important;">
                 동의하기
-              </a>
+              </button>
+              
             </div>
           </div>
         </div>
@@ -141,65 +143,72 @@
 </template>
 <script>
 import anguler from "@/assets/img/angular.jpg";
-import legoBg from "@/assets/img/bg-lego5.jpg";
-import modaltab from "./Modaltab.vue";
 
 
 export default {
   data() {
     return {
+         imageUrl : this.$store.getters.ServerUrl + '/getImage?imageName=',  
          anguler,
          checksucess: [],
-         legoBg,
+         
          item: 
           { 
-            PRODUCT_KEY:'0',
+            PRODUCT_KEY:0,
             PRODUCT_PIC:'',
             PRODUCT_NAME: '',
             PRODUCT_BRAND: '',
             PRODUCT_CATE:0,
+            PRODUCT_DESC:'',
           },
         
           
     }
   },
   
-  beforeCreate() {
+  mounted() {
       var vm = this;
-      this.$axios.post('http://localhost:8080/buy')
+      this.item.PRODUCT_KEY = this.$route.params.PRODUCT_KEY;
+      console.log(this.item.PRODUCT_KEY);
+      this.$axios.get(`http://localhost:8080/buy/${this.item.PRODUCT_KEY}`)
         .then(function (res) {
-          console.log(res);
+          console.log(res.data);
           vm.item = res.data;
-          console.log(vm.item);
         })
         .catch(function (err) {
-          console.log(err);
+        console.log(err);
         });
-    },
+      },
     methods: {
       clicked() {
 
         const query = 'input[id*="check"]:checked';
         const selectedElements = document.querySelectorAll(query);
         const selectedElementsCnt = selectedElements.length;
-
+        console.log(selectedElementsCnt);
         if (selectedElementsCnt === 5) {
-          let button = document.getElementById('change-button');
-          button.disabled = "";
+          console.log(this.item.PRODUCT_KEY);
+          this.$router.push({
+            path: './proc',
+            name: 'Buyproc',
+            params: {
+              PRODUCT_KEY: this.item.PRODUCT_KEY
+            }
+          });
+
         } else {
-          alert("체크다하세요");
+          alert("동의사항에 체크 부탁드립니다.");
           event.preventDefault();
 
         }
+      
+     
+
       },
-  
   
 
     },
-         components: {
-           modaltab,
-            
-          },
+        
         };
 
 </script>

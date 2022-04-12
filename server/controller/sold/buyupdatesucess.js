@@ -5,14 +5,14 @@ const Op = Sequelize.Op;
 
 async function buyupdatesucess(req, res, next){
   let user_key = req.body.user_key; //키 받아오기
-  let buy_key = req.body.buy_key; //키받아오기
+  let buy_key = req.body.buyer_key; //키받아오기
   console.log("바이키",buy_key);
   console.log("유저키",user_key);
 
   await db.sequelize
   .query(
      `UPDATE Buy SET
-      BUY_STATUS = 1,
+      BUY_STATUS = 3,
       BUY_SELLER_KEY = ${user_key},
       BUY_EDATE = now()
       where BUY_KEY = ${buy_key}`

@@ -75,8 +75,8 @@ export default {
       text: '판매 희망가',
       month:0,
       buy: {
-        
-        product_key:'',
+        buy_key:0,
+        PRODUCT_KEY:'',
         buy_price: 0,
         buy_sdate: '',
         buy_edate: '',
@@ -93,6 +93,7 @@ export default {
             PRODUCT_BRAND: '',
             PRODUCT_CATE:0,
             PRODUCT_ORIPRICE:'',
+            PRODUCT_DESC:'',
           },
       PRODUCT_KEY:0,
 
@@ -107,22 +108,35 @@ export default {
           PRODUCT_KEY: this.item.PRODUCT_KEY
         }
       });
-      console.log(this.item.PRODUCT_KEY);
-      console.log('fds');
     }
   },
 
 
+
   mounted() {
     let that = this;
-    this.$axios.post("http://localhost:8080/buy/comp")
+
+    this.item.PRODUCT_KEY = this.$route.params.PRODUCT_KEY;
+    this.$axios.get(`http://localhost:8080/buy/${this.item.PRODUCT_KEY}`)
+      .then(function (res) {
+        console.log(res);
+        that.item = res.data;
+        console.log(that.item);
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
+
+     this.$axios.post(`http://localhost:8080/buy/comp`,{
+      productkey:this.$route.params.PRODUCT_KEY
+    })
       .then(function (res) {
         that.buy = res.data;
+        console.log(that.buy);
         if(that.buy === null || that.buy.length == 0 || that.buy[0].buy_price === null)
          {
                that.hasMaxPrice = 0;
          }
-
         else
         {
               that.hasMaxPrice = 1;
@@ -135,19 +149,12 @@ export default {
           console.log(err);
         });
   
-   this.item.PRODUCT_KEY = this.$route.params.PRODUCT_KEY;
-   console.log(this.PRODUCT_KEY);
-   this.$axios.get(`http://localhost:8080/buy/${this.item.PRODUCT_KEY}`)
-        .then(function (res) {
-          console.log(res);
-          that.item = res.data;
-          console.log(that.item);
-        })
-        .catch(function (err) {
-          console.log(err);
-        });      
+
+
 
   },
+
+  
 
 
 }

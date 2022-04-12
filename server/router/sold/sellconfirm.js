@@ -7,7 +7,7 @@ const { sellupdatesucess } = require("../../controller/sold/sellupdatesucess.js"
 const { sellupdatefail }  =  require('../../controller/sold/sellupdatefail.js')
 const router = express.Router();
 
-router.get('/', sellconfirm);
+router.get('/:PRODUCT_KEY', sellconfirm);
 router.post('/comp' ,sellauction);
 router.post('/comp/user', selluser);
 router.post('/update',sellupdatesucess);

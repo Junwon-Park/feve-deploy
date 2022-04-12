@@ -7,7 +7,7 @@
         <div style="max-width: 780px; margin:auto" class="">
           <div style="box-shadow:none">
             <div style="border-radius: 10px; padding-top:0; width: 200px; height:200px; margin:auto; ">
-              <img :src="legoBg" alt="..." style="object-fit:cover; width:100%; height:100%; "/>
+              <img :src="imageUrl+ item.PRODUCT_PIC" alt="아이템 사진" crossorigin />    
 
             </div>
             <div>
@@ -27,13 +27,15 @@
                   </a>
                 </div>  
                     <p class="text-sm">'판매 내역 > 입찰중' 상태에는 입찰 지우기가 가능합니다.</p>
-               <div class="pt- m-3 ">
+                               <div class="pt- m-3 ">
                     <dl class="flex items-center justify-between" style="min-height: 26px;">
                       <dt>
-                        <span class="text-sm" style="color:black">판매 희망가</span>
+                        <span class="text-sm" style="color:black">구매 희망가</span>
                       </dt>
                       <dd class="text-right text-sm" style="color:#222">
-                        <strong>{{sell.SELL_PRICE.toLocaleString('ko-KR')}}원</strong></dd>
+                        <strong>{{sell[0].SELL_PRICE.toLocaleString('ko-KR')}}원</strong>
+
+                        </dd>
                     </dl>
                   </div>
 
@@ -76,6 +78,14 @@
                         <strong>무료</strong></dd>
                     </dl>
                   </div>     
+
+                  
+
+                 
+
+                 
+
+                   
               </div>
                 
           </div>
@@ -88,39 +98,32 @@
 </template>
 <script>
 
-import legoBg from "@/assets/img/bg-lego5.jpg";
-import box from "@/assets/img/box.png";
 
 export default {
 
 
   data() {
     return {
-      box,
-      checksucess: [],
+      imageUrl : this.$store.getters.ServerUrl + '/getImage?imageName=',
       tab: null,
-      legoBg,
+      hasMinPrice:0,
       text: '판매 희망가',
       month:0,
       sell: {
-        
+    
         product_key:'',
-        SELL_PRICE: 0,
-        buy_sdate: '',
-        buy_edate: '',
-        buy_status:'',
+        sell_key:0,
+        sell_price: 0,
+        sell_sdate: '',
+        sell_edate: '',
+        sell_status:'',
         default: "0"
       },
 
-      user: {
-        USER_NAME:'',
-        USER_PHONE:0,
-        USER_ADDRESS1:''
-      },
-
+     
        item: 
           { 
-            PRODUCT_KEY:'0',
+            PRODUCT_KEY:0,
             PRODUCT_PIC:'',    
             PRODUCT_NAME: '',
             PRODUCT_BRAND: '',
@@ -137,28 +140,10 @@ export default {
   },
 
 
-  beforeCreate() {
+  mounted() {
     let that = this;
-    this.$axios.post("http://localhost:8080/sell/comp")
-      .then(function (res) {
-        that.sell = res.data;
-      
-      }) 
-      .catch(function (err) {
-          console.log(err);
-        });
-  
-   this.$axios.post("http://localhost:8080/sell/comp/user")
-      .then(function (res) {
-        that.user = res.data;
-        console.log(that.user.USER_NAME);
-      
-      }) 
-      .catch(function (err) {
-          console.log(err);
-        });
-
-      this.$axios.post('http://localhost:8080/buy')
+    this.item.PRODUCT_KEY = this.$route.params.PRODUCT_KEY;
+    this.$axios.get(`http://localhost:8080/sell/${this.item.PRODUCT_KEY}`)
         .then(function (res) {
           console.log(res);
           that.item = res.data;
@@ -167,8 +152,40 @@ export default {
         .catch(function (err) {
            console.log(err);
         });
-  },
 
+    this.$axios.post("http://localhost:8080/sell/comp",{
+      productkey: this.$route.params.PRODUCT_KEY
+    })
+      .then(function (res) {
+        that.sell = res.data;
+        if (that.sell === null || that.sell.length == 0 || that.sell[0].SELL_PRICE === null) {
+          that.hasMinPrice = 0;
+        } else {
+          that.hasMinPrice = 1;
+
+        }
+      
+      }) 
+      .catch(function (err) {
+          console.log(err);
+        });
+  
+    
+
+     
+  },
+updated() {
+     this.$axios.post("http://localhost:8080/sell/update", {
+        user_key: JSON.parse(localStorage.getItem('userKey')),
+        seller_key: this.sell[0].SELL_KEY
+      })
+      .then(function (res) {
+        console.log(res,"udpate됨");
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
+  }
 
 }
 

@@ -17,16 +17,16 @@
                   <div class="flex items-center" style="width:100% color:#fff">
                     <div class="" style="width:80px; height:80px; flex-shrink: 0; border-radius: 10px; background-clolr: rgb(244,244,244); overflow: hidden;
                 position: relative;">
-                      <img :src="legoBg" alt="..." />
+                     <img :src="imageUrl+ item.PRODUCT_PIC" alt="아이템 사진" crossorigin />
                     </div>
                     <div style="overflow:hidden; -webkit-box-flex: 1; -ms-flex: 1; flex: 1; padding-left: 16px;">
                       <strong
-                        style="display: block; line-height: 17px;font-size: 14px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">-</strong>
+                        style="display: block; line-height: 17px;font-size: 14px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{item.PRODUCT_BRAND}}</strong>
                       <p
                         style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; line-height: 17px;margin-top: 1px;font-size: 14px;">
-                        상품 명
+                        {{item.PRODUCT_NAME}}
                       </p>
-                      <p style="line-height: 16px;font-size: 13px;letter-spacing: -.07px;">상품브랜드</p>
+                      <p style="line-height: 16px;font-size: 13px;letter-spacing: -.07px;">{{item.PRODUCT_DESE}}</p>
                     </div>
                   </div>
                 </div>
@@ -123,10 +123,10 @@
                             <h3 class="pt-6 text-sm text-center">입찰내역이 없습니다</h3>
                           </div>
                           <div style="flex items-center no-underline" v-else>
-                            <a href="http://localhost:3000/sell/proc/com" class="full-image" disabled="disabled"
+                            <button  class="full-image" @click="clicked"
                               style="color: #fafafa !important;">
                               판매 확정하기
-                            </a>
+                            </button>
                           </div>
                         </div>
                       </v-card>
@@ -150,7 +150,7 @@ import legoBg from "@/assets/img/bg-lego5.jpg";
 export default {
   data() {
     return {
-      anguler,
+      imageUrl : this.$store.getters.ServerUrl + '/getImage?imageName=',
       hasMaxPrice:0,
       hasMinPrice:0,
       checksucess: [],
@@ -159,7 +159,6 @@ export default {
       text: '판매 희망가',
       month:0,
      sell: {
-        sell_buyer_key:'',
         product_key:'',
         sell_price: 0,
         sell_sdate: '',
@@ -177,6 +176,7 @@ export default {
       },
 
        max: {
+        sell_seller_key:JSON.parse(localStorage.getItem('userKey')), 
         product_key:'',
         SELL_PRICE: 0,
         SELL_SDATE: '',
@@ -210,27 +210,52 @@ export default {
 
       let vm=this;
       this.$axios.post('http://localhost:8080/sell/proc', {
+
           sell_price: vm.sell.sell_price,
           sell_edate: vm.sell.sell_edate,
           sell_status: 0,
           sell_seller_key:vm.sell.sell_seller_key,
-          product_key: 1, //상품 키 받아와야함
+          product_key: vs.item.PRODUCT_KEY, //상품 키 받아와야함
           sell_sdate: kr_curr,
       })
           .then(() => {
             alert("입찰 되었습니다.");
-            this.$router.push("http://localhost:3000/");
+            this.$router.push("/");
           })
           .catch((error) => {
             alert("실패 하셨습니다");
-            this.$router.push("http://localhost:3000/");
+            this.$router.push("/");
             console.log(error);
           })
     },
+     clicked() {
+      this.$router.push({
+        path: './co',
+        name: 'Sellcomp',
+        params: {
+          PRODUCT_KEY: this.item.PRODUCT_KEY
+        }
+      });
+
+    }
   },
 
-  beforeCreate() {
-    this.$axios.post("http://localhost:8080/buy/comp")
+  mounted() {
+     var vm = this;
+      this.item.PRODUCT_KEY = this.$route.params.PRODUCT_KEY;
+
+      this.$axios.get(`http://localhost:8080/sell/${this.item.PRODUCT_KEY}`)
+        .then(function (res) {
+          console.log(res);
+          vm.item = res.data;
+          console.log(vm.item);
+        })
+        .catch(function (err) {
+          console.log(err);
+        });
+    this.$axios.post("http://localhost:8080/buy/comp",{
+       productkey:this.item.PRODUCT_KEY
+    })
       .then(function (res) {
         that.buy = res.data;
         console.log(that.buy);
@@ -252,22 +277,14 @@ export default {
           console.log(err);
         });
 
-      var vm = this;
-      this.$axios.post('http://localhost:8080/sell')
-        .then(function (res) {
-          console.log(res);
-          vm.item = res.data;
-          console.log(vm.item);
-        })
-        .catch(function (err) {
-          console.log(err);
-        });
+     
   let that = this;
-    this.$axios.post("http://localhost:8080/sell/comp")
+    this.$axios.post("http://localhost:8080/sell/comp",{
+       productkey:this.item.PRODUCT_KEY
+    })
       .then(function (res) {
         that.max = res.data;
-        console.log(that.max);
-        console.log(that.max.SELL_PRICE); 
+          
         if(that.max === null || that.max.length == 0 || that.max[0].SELL_PRICE === null)
          {
                that.hasMinPrice = 0;
@@ -286,13 +303,7 @@ export default {
         });      
     },
 
-  watch:{
-	  buy_price(a){
-      if (isNaN(a) == true){
-        alert('숫자만 입력해주세요');
-      }
-    },
-	}
+ 
 }
 
 </script>

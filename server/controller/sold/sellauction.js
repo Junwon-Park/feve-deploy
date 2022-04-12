@@ -5,12 +5,13 @@ const Op = Sequelize.Op;
 
 
 async function sellauction(req, res, next) {
-  // let user = req.body.USER_KEY; 
+  console.log(req.body.productkey,"*************sell파일");
+  const productkey = req.body.productkey;
   await db.sequelize
     .query(
     `SELECT SELL_KEY,SELL_EDATE,SELL_SDATE,SELL_PRICE from SELL
     WHERE sell_price = (select a.b from (SELECT MIN(sell_price) as b FROM sell 
-    where product_key =1 AND sell_status=0) as a);`, {
+    where product_key =${productkey} AND sell_status=0) as a);`, {
         type: Sequelize.QueryTypes.SELECT
       }
     )
