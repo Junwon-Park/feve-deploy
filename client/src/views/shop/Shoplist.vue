@@ -99,7 +99,7 @@ export default {
         .catch(function(err){
           console.log(err);
         });
-    this.getProductList();
+    //this.getProductList();
   },
   mounted(){
     let that = this;
@@ -109,6 +109,19 @@ export default {
     })
         .then(function(res){
           that.items = res.data;
+          for(var i=0; i<res.data.length;i++)
+          {  
+            if(res.data[i].PRODUCT_BRAND =='LE')
+              {
+                that.items[i].PRODUCT_BRAND = "레고";
+                //console.log(vm.items[i].PRODUCT_BRAND);
+              }
+            else
+             {
+              that.items[i].PRODUCT_BRAND = "베어브릭";
+              //console.log(vm.items[i].PRODUCT_BRAND);
+             }
+          }
           console.log("productlist에서 가져온거",res);
         })
         .catch(function(err){
@@ -164,7 +177,7 @@ export default {
       that.currentPage= reqpage;
       //console.log(start, end, reqpage);
 
-      this.$axios.post('http://localhost:8080/admin/loadproduct', {
+      this.$axios.post('http://localhost:8080/shop/shoplist/productlist', {
         limitStart: this.limitStart,
         limitEnd: this.limitEnd,
         requestPage: this.currentPage,
