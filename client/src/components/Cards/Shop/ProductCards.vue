@@ -1,6 +1,7 @@
 <template>
-  <div
-    class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0"
+
+  <div class="w-full lg:w-6/12 xl:w-3/12 px-4 mb-5" >
+  <div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0"
   >
     <div class="flex-auto p-4" >
       <div class="flex flex-wrap" @click="goView(`${PRODUCT_KEY}`)" style="cursor: pointer;">
@@ -48,6 +49,7 @@
       <v-icon style="font-size: 20px;" @click="goDislike()"> mdi-heart </v-icon> <span class="text-xs">{{likeTotal}}</span>
       </div>
     </div>
+  </div>
   </div>
 </template>
 <script>

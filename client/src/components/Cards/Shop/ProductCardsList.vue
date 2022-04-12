@@ -1,14 +1,16 @@
 <template>
-  <div class="w-full lg:w-6/12 xl:w-3/12 px-4 mb-5" >
+  <div>
+  <div class="w-full px-4 mb-5 flex flex-wrap">
       <ProductCards 
       v-for="(item,i) in items" 
       :key="i" 
       v-bind="item"
       :items="items" />
-      <Pagination
-          :pageSize="pageSize"
-          @onPageChanged="onPageChanged"
-      />
+  </div>
+    <Pagination
+        :pageSize="pageSize"
+        @onPageChanged="onPageChanged"
+    />
   </div>
 </template>
 <script>
