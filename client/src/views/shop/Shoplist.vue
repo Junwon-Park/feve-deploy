@@ -4,7 +4,6 @@
     <main class="profile-page ">
       <section class="relative py-8 bg-white" style="min-height: 100vh;">
         <div class="container">
-          <!-- <v-form ref="form" @submit.prevent="send"> -->
           <div
             class="p-8 relative flex flex-col min-w-0 break-words  pd-8  w-full"
           >
@@ -28,9 +27,14 @@
               <Category ref="category" @changeitems="changeitems($event)"/>
             </div>
             <div class="w-full px-4 mb-5 flex flex-wrap">
-              <div class="w-full lg:w-6/12 xl:w-3/12 px-4 mb-5" v-for="(item,i) in items" :key="i">
-                <ProductCards v-bind="item" />
-              </div>
+              <ProductCardsList
+                  v-bind="items"
+                  :totalListCount="totalListCount"
+                  :pageSize="pageSize"
+                  :itemPerPage="itemPerPage"
+                  :items="items"
+                  @startend="startend"
+                  style="min-height: 59vh;" />
             </div>
           </div>
           </div>
@@ -38,15 +42,17 @@
         </div>
       </section>
     </main>
+    
   </div>
 </template>
 <script>
-import ProductCards from "@/components/Cards/Shop/ProductCards.vue";
+import ProductCardsList from "@/components/Cards/Shop/ProductCardsList.vue";
 import team2 from "@/assets/img/team-2-800x800.jpg";
 import legoBg from "@/assets/img/bg-lego5.jpg";
 import productLego1 from "@/assets/img/product-lego1.jpg";
 import Category from './Category';
 import Slide from '@/components/Cards/Slide.vue';
+
 
 export default {
   data() {
@@ -67,16 +73,47 @@ export default {
       ],
 
       cate:'',
-      price:''
+      price:'',
+      totalListCount:0,
+      limitStart:0,
+      limitEnd:0,
+      currentPage: 0,
+      itemPerPage: 10,
+      pageSize: 0,
     };
   },
   components: {
-    ProductCards,
+    ProductCardsList,
     Category,
     Slide
   },
   created() {
-    this.getProductList()
+    let that = this;
+    this.$axios.post('http://localhost:8080/shop/shoplist/totalCnt')
+        .then(function(res){
+          console.log("totalCnt", res);
+          that.totalListCount = res.data[0].totalCnt;
+          that.pageSize=Math.ceil(that.totalListCount/that.itemPerPage);
+          console.log("페이지 버튼 개수: ",Math.ceil(that.totalListCount/that.itemPerPage));
+        })
+        .catch(function(err){
+          console.log(err);
+        });
+    this.getProductList();
+  },
+  mounted(){
+    let that = this;
+    this.$axios.post('http://localhost:8080/shop/shoplist/productlist', {
+      limitStart: 0,
+      limitEnd: 10
+    })
+        .then(function(res){
+          that.items = res.data;
+          console.log("productlist에서 가져온거",res);
+        })
+        .catch(function(err){
+          console.log(err);
+        });
   },
   methods:{
     getProductList:function(){
@@ -120,6 +157,27 @@ export default {
       console.log(err);
       });
     },
+    startend(start,end,reqpage) {
+      let that = this;
+      that.limitStart = start;
+      that.limitEnd = end;
+      that.currentPage= reqpage;
+      //console.log(start, end, reqpage);
+
+      this.$axios.post('http://localhost:8080/admin/loadproduct', {
+        limitStart: this.limitStart,
+        limitEnd: this.limitEnd,
+        requestPage: this.currentPage,
+      })
+          .then(function(res){
+            that.items = res.data;
+            //console.log(this.items)
+          })
+          .catch(function(err){
+            console.log(err);
+          });
+    }
+   
   }
 
 };
