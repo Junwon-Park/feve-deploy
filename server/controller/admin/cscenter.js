@@ -3,6 +3,7 @@ const { User } = require("../../models");
 const db = require("../../models");
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
+const moment = require('moment');
 
 async function totalcscenter(req, res, next) {
     await db.sequelize
@@ -38,7 +39,10 @@ async function cscenter(req, res, next) {
             ,{ type: Sequelize.QueryTypes.SELECT }
         )
         .then(result => {
-            console.log(result);
+            result.map(x=>{
+                console.log(x.CSCENTER_WDATE)
+                x.CSCENTER_WDATE=moment(x.CSCENTER_WDATE).format('YYYY-MM-DD HH:mm:ss')
+            })
             res.send(result);
         })
         .catch(err => console.log(err));
