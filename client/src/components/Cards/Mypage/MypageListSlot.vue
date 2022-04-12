@@ -96,7 +96,6 @@
 export default {
   props:{
     isFromBuy:Number, //0:BuyList, 1:SellList
-    slotKey:Number,
     item:Object,
     price:Number,
     eDate:String,
@@ -139,7 +138,7 @@ export default {
     },
 
     onFinalizeClicked(decision){
-      this.$emit("onFinalizeClicked", this.slotKey, decision);
+      this.$emit("onFinalizeClicked", this.item, decision);
     },
 
     onDeliverClicked(decision){

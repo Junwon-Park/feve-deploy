@@ -28,10 +28,10 @@ async function getSellCounts(req, res) {
         });
         done += await Buy.count({
             where: { 
-                    BUY_SELLER_KEY: userKey,
-                    BUY_STATUS: {[Op.or]:['1', '4']},
-                },
-            });
+                BUY_SELLER_KEY: userKey,
+                BUY_STATUS: {[Op.or]:['1', '4']},
+            },
+        });
 
         sellCounts = [wait, progress, done]
         console.log("sellCount has been responsed from db : ", sellCounts);
@@ -133,7 +133,7 @@ async function getProgressSellListCount(req, res) {
             ,(Select i.INSPECTION_STATUS from Inspection AS i where s.sell_seller_key = i.USER_KEY AND s.product_key = i.PRODUCT_KEY) AS INSPECTION_STATUS
             ,(Select i.INSPECTION_RESULT from Inspection AS i where s.sell_seller_key = i.USER_KEY AND s.product_key = i.PRODUCT_KEY) AS INSPECTION_RESULT
         FROM Sell s 
-        WHERE s.SELL_SELLER_KEY = ${userKey} AND s.sell_status = 3 AND s.sell_edate BETWEEN '${startDate}' AND '${endDate}'
+        WHERE s.sell_seller_key = ${userKey} AND s.sell_status = 3 AND s.sell_edate BETWEEN '${startDate}' AND '${endDate}'
         UNION
         SELECT 
             b.BUY_KEY
@@ -190,7 +190,7 @@ async function getProgressSellList(req, res) {
             ,(Select i.INSPECTION_RESULT from Inspection AS i where s.sell_seller_key = i.USER_KEY AND s.product_key = i.PRODUCT_KEY) AS INSPECTION_RESULT
         FROM Sell s 
         JOIN Product AS p ON s.product_key = p.PRODUCT_KEY
-        WHERE s.SELL_SELLER_KEY = ${userKey} AND s.sell_status = 3 AND s.sell_edate BETWEEN '${startDate}' AND '${endDate}'
+        WHERE s.sell_seller_key = ${userKey} AND s.sell_status = 3 AND s.sell_edate BETWEEN '${startDate}' AND '${endDate}'
         UNION
         SELECT 
             'Buy' as TABLE_NAME
@@ -247,7 +247,7 @@ function getProgressFilter(state)
 {
     //slotStates:["전체", "발송요청", "발송완료", "입고대기", "입고완료", "검수 중", "검수보류","검수합격", "보류", "거래실패"],
     switch(state){
-    //입고완료
+    //발송요청
         case 1:
             return "WHERE u.INSPECTION_STATUS IS NULL";
         //검수중
@@ -271,8 +271,8 @@ function getProgressFilter(state)
 
 function getProgressOrder(orderDir)
 {
-    //orderDir "ASC" : 입고완료 -> 검수중 -> 보류(불합격) -> 합격
-    //orderDir "DESC" : 합격 -> 보류(불합격) -> 검수중 -> 입고완료
+    //orderDir "ASC" : 발송요청 -> 검수중 -> 보류(불합격) -> 합격
+    //orderDir "DESC" : 합격 -> 보류(불합격) -> 검수중 -> 발송요청
     if(orderDir == "DESC")
     {
         return `ORDER BY u.INSPECTION_RESULT DESC, u.INSPECTION_STATUS DESC`
@@ -294,16 +294,12 @@ async function getDoneSellListCount(req, res) {
         SELECT
             s.SELL_KEY
             ,s.sell_status
-            ,(Select i.INSPECTION_STATUS from Inspection AS i where s.sell_seller_key = i.USER_KEY AND s.product_key = i.PRODUCT_KEY) AS INSPECTION_STATUS
-            ,(Select i.INSPECTION_RESULT from Inspection AS i where s.sell_seller_key = i.USER_KEY AND s.product_key = i.PRODUCT_KEY) AS INSPECTION_RESULT
         FROM Sell s 
         WHERE s.SELL_SELLER_KEY = ${userKey} AND s.sell_edate BETWEEN '${startDate}' AND '${endDate}'
         UNION
         SELECT 
             b.BUY_KEY
             ,b.BUY_STATUS
-            ,(Select i.INSPECTION_STATUS from Inspection AS i where b.BUY_SELLER_KEY = i.USER_KEY AND b.PRODUCT_KEY = i.PRODUCT_KEY) AS INSPECTION_STATUS
-            ,(Select i.INSPECTION_RESULT from Inspection AS i where b.BUY_SELLER_KEY = i.USER_KEY AND b.PRODUCT_KEY = i.PRODUCT_KEY) AS INSPECTION_RESULT
         FROM Buy b 
         WHERE b.BUY_SELLER_KEY = ${userKey} AND b.BUY_EDATE BETWEEN '${startDate}' AND '${endDate}'
         ) AS u
@@ -346,7 +342,7 @@ async function getDoneSellList(req, res) {
             ,p.PRODUCT_DESC
         FROM Sell s 
         JOIN Product AS p ON s.product_key = p.PRODUCT_KEY
-        WHERE s.SELL_SELLER_KEY = ${userKey} AND s.sell_edate BETWEEN '${startDate}' AND '${endDate}'
+        WHERE s.sell_seller_key = ${userKey} AND s.sell_edate BETWEEN '${startDate}' AND '${endDate}'
         UNION
         SELECT 
             'Buy' as TABLE_NAME
