@@ -2,10 +2,10 @@
   <div
       class="relative flex flex-col min-w-0 break-words bg-blueGray-200 w-full mb-6  rounded"
   >
-    <div class="block w-full overflow-x-auto">
+    
       <!-- Projects table -->
           <CscenterStandardCards/>
-    </div>
+    
   </div>
 </template>
 <script>
