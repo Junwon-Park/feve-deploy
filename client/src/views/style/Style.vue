@@ -45,6 +45,7 @@
           <div class="w-full lg:w-6/12 xl:w-3/12 px-4 mb-5" v-for="(item, i) in newitems" :key="i">
             <CardStyle
                 v-bind="item"
+                :isNull="isNull"
                 :items="item"/>
           </div>
         </div>
@@ -56,6 +57,7 @@
               <CardStyle
                   v-bind="item"
                   :items="item"
+                  :isNull="isNull"
               />
             </div>
           </div>
@@ -74,6 +76,7 @@
               <CardStyle
                   v-bind="item"
                   :items="item"
+                  :isNull="isNull"
               />
             </div>
           </div>
@@ -101,6 +104,7 @@ export default {
         USER_MAIL: '',
         USER_KEY: '',
       },
+      isNull: false,
       tabs: null,
       followtabs: null,
       tabTitle: ['NEW','FEED', 'FOLLOW'],
@@ -173,7 +177,13 @@ export default {
         USER_KEY : JSON.parse(localStorage.getItem('userKey'))
       })
           .then((res) => {
+            console.log(res.data)
             this.myitems = res.data;
+            if(res.data.length===0) {
+              this.isNull=true;
+            } else {
+              this.isNull=false;
+            }
             //console.log(res.data)
           })
           .catch((error) => {
@@ -186,7 +196,13 @@ export default {
         USER_KEY : JSON.parse(localStorage.getItem('userKey'))
       })
           .then((res) => {
+            console.log(res.data)
             this.followitems = res.data;
+            if(res.data.length===0) {
+              this.isNull=true;
+            } else {
+              this.isNull=false;
+            }
           })
           .catch((error) => {
             console.log(error);
@@ -199,6 +215,12 @@ export default {
       })
           .then((res) => {
             this.newitems = res.data;
+            console.log(res.data)
+            if(res.data.length===0) {
+              this.isNull=true;
+            } else {
+              this.isNull=false;
+            }
           })
           .catch((error) => {
             console.log(error);

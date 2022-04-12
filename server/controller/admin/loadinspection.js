@@ -51,11 +51,16 @@ async function loadinspection(req, res, next) {
         )
     .then((result) => {
       console.log(result);
-        result.map(x=>{
-            if(x.INSPECTION_DATE != null || x.INSPECTION_ADATE != null  || x.INSPECTION_RDATE != null ) {
-                x.INSPECTION_DATE=moment(x.INSPECTION_DATE).format('YYYY-MM-DD HH:mm:ss')
-                x.INSPECTION_ADATE=moment(x.INSPECTION_ADATE).format('YYYY-MM-DD HH:mm:ss')
-                x.INSPECTION_RDATE=moment(x.INSPECTION_RDATE).format('YYYY-MM-DD HH:mm:ss')
+
+        result.map(x=> {
+            if (x.INSPECTION_DATE != null) {
+                x.INSPECTION_DATE = moment(x.INSPECTION_DATE).format('YYYY-MM-DD HH:mm:ss');
+            }
+            if (x.INSPECTION_ADATE != null) {
+                x.INSPECTION_ADATE = moment(x.INSPECTION_ADATE).format('YYYY-MM-DD HH:mm:ss');
+            }
+            if (x.INSPECTION_RDATE != null) {
+                x.INSPECTION_RDATE = moment(x.INSPECTION_RDATE).format('YYYY-MM-DD HH:mm:ss');
             }
         })
       res.json(result);
@@ -98,10 +103,14 @@ async function loadinspecone(req, res, next) {
             console.log(result);
 
             result.map(x=>{
-                if(x.INSPECTION_DATE != null || x.INSPECTION_ADATE != null  || x.INSPECTION_RDATE != null ) {
-                    x.INSPECTION_DATE=moment(x.INSPECTION_DATE).format('YYYY-MM-DD HH:mm:ss')
-                    x.INSPECTION_ADATE=moment(x.INSPECTION_ADATE).format('YYYY-MM-DD HH:mm:ss')
-                    x.INSPECTION_RDATE=moment(x.INSPECTION_RDATE).format('YYYY-MM-DD HH:mm:ss')
+                if (x.INSPECTION_DATE != null) {
+                    x.INSPECTION_DATE = moment(x.INSPECTION_DATE).format('YYYY-MM-DD HH:mm:ss');
+                }
+                if (x.INSPECTION_ADATE != null) {
+                    x.INSPECTION_ADATE = moment(x.INSPECTION_ADATE).format('YYYY-MM-DD HH:mm:ss');
+                }
+                if (x.INSPECTION_RDATE != null) {
+                    x.INSPECTION_RDATE = moment(x.INSPECTION_RDATE).format('YYYY-MM-DD HH:mm:ss');
                 }
             })
             res.json(result);
@@ -135,10 +144,14 @@ async function loadinspectionLimit(req, res, next) {
         .then((result) => {
             console.log(result);
             result.map(x=>{
-                if(x.INSPECTION_DATE != null || x.INSPECTION_ADATE != null  || x.INSPECTION_RDATE != null ) {
-                    x.INSPECTION_DATE=moment(x.INSPECTION_DATE).format('YYYY-MM-DD HH:mm:ss')
-                    x.INSPECTION_ADATE=moment(x.INSPECTION_ADATE).format('YYYY-MM-DD HH:mm:ss')
-                    x.INSPECTION_RDATE=moment(x.INSPECTION_RDATE).format('YYYY-MM-DD HH:mm:ss')
+                if (x.INSPECTION_DATE != null) {
+                    x.INSPECTION_DATE = moment(x.INSPECTION_DATE).format('YYYY-MM-DD HH:mm:ss');
+                }
+                if (x.INSPECTION_ADATE != null) {
+                    x.INSPECTION_ADATE = moment(x.INSPECTION_ADATE).format('YYYY-MM-DD HH:mm:ss');
+                }
+                if (x.INSPECTION_RDATE != null) {
+                    x.INSPECTION_RDATE = moment(x.INSPECTION_RDATE).format('YYYY-MM-DD HH:mm:ss');
                 }
             })
             res.json(result);

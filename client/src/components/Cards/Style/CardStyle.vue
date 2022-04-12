@@ -4,6 +4,7 @@
       style="background: none !important; border: none;"
       elevation="0"
       @click="goView(`${USER_KEY}`)"
+      v-if="isNull===false"
   >
       <div class="flex flex-col"
          style="background: none !important"
@@ -30,6 +31,9 @@
         </div>
       </div>
   </v-card>
+  <v-card v-else-if="isNull===true">
+    아직 게시물이 없습니다.
+  </v-card>
 </template>
 
 <script>
@@ -42,6 +46,9 @@ export default {
     }
   },
   props:{
+    isNull: {
+      type: Boolean
+    },
     POST_KEY: {
       type: Number,
       default: 0,
