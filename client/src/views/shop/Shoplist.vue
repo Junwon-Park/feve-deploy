@@ -78,7 +78,7 @@ export default {
       limitStart:0,
       limitEnd:0,
       currentPage: 0,
-      itemPerPage: 10,
+      itemPerPage: 8,
       pageSize: 0,
     };
   },
@@ -105,7 +105,7 @@ export default {
     let that = this;
     this.$axios.post('http://localhost:8080/shop/shoplist/productlist', {
       limitStart: 0,
-      limitEnd: 10
+      limitEnd: 8
     })
         .then(function(res){
           that.items = res.data;
