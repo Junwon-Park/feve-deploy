@@ -19,7 +19,7 @@
         class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
         
     >
-      {{ USER_ID }}
+      {{ USER_NAME }}
     </td>
     <td
         class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
@@ -66,7 +66,7 @@ export default {
         type: String,
         default:"2022-03-31"
       },
-    USER_ID:  {
+    USER_NAME:  {
       type: String,
       default: 'aa'
       },

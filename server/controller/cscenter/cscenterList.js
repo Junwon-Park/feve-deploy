@@ -31,7 +31,7 @@ async function cscenter(req, res, next) {
                  ,CSCENTER_COMMENT
                  ,CSCENTER_COMMENT_WDATE
                 ,u.USER_KEY
-                 ,( select USER_ID from User where USER_KEY=c.USER_KEY) as USER_ID
+                 ,( select USER_NAME from User where USER_KEY=c.USER_KEY) as USER_NAME
             from Cscenter c
                      inner join User u on u.USER_KEY = c.USER_KEY `+
             'limit '+start+', '+end+';'
@@ -59,7 +59,7 @@ async function cscenterone(req, res, next) {
        ,CSCENTER_CONTENTS\n\
        ,CSCENTER_COMMENT\n\
        ,CSCENTER_COMMENT_WDATE\n\
-       ,( select USER_ID from User where USER_KEY=c.USER_KEY) as USER_ID\n\
+       ,( select USER_NAME from User where USER_KEY=c.USER_KEY) as USER_NAME\n\
    from Cscenter c\n\
    inner join User u on u.USER_KEY = c.USER_KEY\n\
              where c.CSCENTER_KEY="+sendCscenterKey+" and u.user_key="+receivedUserkey+";",

@@ -62,6 +62,7 @@ export default {
           CSCENTER_COMMENT: '',
           CSCENTER_COMMENT_WDATE: '',
           USER_KEY: '',
+          USER_NAME:''
           
         },
 
