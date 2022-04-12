@@ -6,7 +6,7 @@ const Op = Sequelize.Op;
 async function sellupdatesucess(req, res, next){
   let user_key = req.body.user_key;
   let sellkey = req.body.seller_key;
-  console.log(sellkey,"sellkey입니다러ㅐ더랴ㅐㄷ");
+
   await db.sequelize
     .query(
      `UPDATE Sell SET
