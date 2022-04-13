@@ -144,7 +144,7 @@
 <script>
 export default {
   data: () => ({
-    dialog: false,
+    //dialog: false,
     inspectionStatus: "",
     inspectionStatusList:[
       { name: '검수완료', value: 1 },

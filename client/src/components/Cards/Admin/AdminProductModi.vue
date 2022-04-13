@@ -152,7 +152,7 @@
 <script>
 export default {
   data: () => ({
-    dialog: false,
+    //dialog: false,
       brandStatus: "",
       categoryStatus: "",
       newProductName:"",

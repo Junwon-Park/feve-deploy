@@ -98,7 +98,7 @@
 <script>
 export default {
   data: () => ({
-    dialog: false,
+    //dialog: false,
     cscenterComment:"",
   }),
   props: {
