@@ -8,9 +8,9 @@ async function sellauction(req, res, next) {
   const productkey = req.body.productkey;
   await db.sequelize
     .query(
-    `SELECT SELL_KEY,SELL_EDATE,SELL_SDATE,SELL_PRICE from SELL
-    WHERE sell_price = (select a.b from (SELECT MIN(sell_price) as b FROM sell 
-    where product_key =${productkey} as a)AND sell_status=0);`, {
+      `SELECT SELL_KEY,SELL_EDATE,SELL_SDATE,SELL_PRICE from SELL
+      WHERE SELL_PRICE = (select a.b from (SELECT MIN(SELL_PRICE) as b FROM SELL 
+      where product_key =${productkey} ) as a) and sell_status=0;`, {
         type: Sequelize.QueryTypes.SELECT
       }
     )
