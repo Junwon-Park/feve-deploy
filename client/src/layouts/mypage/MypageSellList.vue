@@ -138,6 +138,7 @@ import moment from 'moment'
         this.totalPage = 0;
         this.goToFirstPage();
         this.setUrl();
+        this.getSellCounts();
       },
 
       goToFirstPage(){
