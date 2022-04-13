@@ -6,10 +6,7 @@
     <router-view />
       <Chat />
     <footer-component
-        :class="{
-          'md:ml-64' :isAdmin, 
-          'md:ml-64' :isMypage, 
-        }" />
+        :class="[{ 'md:ml-64' :isMypage }, {'md:ml-64' :isAdmin}]" />
     </v-main>
   </v-app>
 </template>
