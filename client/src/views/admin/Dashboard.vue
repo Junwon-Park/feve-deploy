@@ -129,7 +129,7 @@ export default {
       this.$axios.get('http://localhost:8080/admin/count/buy/total')
           .then(function(res){
             that.countTotalBuy = res.data[0].cnt;
-            console.log("totalbuy",that.countTotalBuy)
+            //console.log("totalbuy",that.countTotalBuy)
           })
           .catch(function(err){
             console.log(err);

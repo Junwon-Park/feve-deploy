@@ -100,6 +100,7 @@ async function getWaitBuyList(req, res) {
     })
     .then((result) => {
         console.log("getWaitBuyList has been responsed from db : ",result);
+        console.log("getWaitBuyList has been responsed from db : ",result.Product);
         res.json(result);
     })
     .catch((err) => console.log(err));
