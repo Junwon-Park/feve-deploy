@@ -79,7 +79,7 @@ async function getWaitSellListCount(req, res) {
     
     const query = `
         SELECT COUNT(*) FROM Sell s
-        WHERE s.sell_seller_key = ${userKey} AND s.sell_sdate BETWEEN '${startDate}' AND '${endDate}'
+        WHERE s.sell_seller_key = ${userKey} AND DATE(s.sell_sdate) BETWEEN '${startDate}' AND '${endDate}'
         ${ getWaitFilter(state) };`;
 
     await db.sequelize.query(query , { type: sequelize.QueryTypes.SELECT })
@@ -117,7 +117,7 @@ async function getWaitSellList(req, res) {
         ,p.PRODUCT_DESC
     FROM Sell s 
     JOIN Product AS p ON s.product_key = p.PRODUCT_KEY
-    WHERE s.sell_seller_key = ${userKey} AND s.sell_sdate BETWEEN '${startDate}' AND '${endDate}'
+    WHERE s.sell_seller_key = ${userKey} AND DATE(s.sell_sdate) BETWEEN '${startDate}' AND '${endDate}'
     ${ getWaitFilter(state) }
     ${ getWaitOrder(orderColumn, orderDir) }
     LIMIT ${start}, ${count} ;`;
@@ -174,14 +174,14 @@ async function getProgressSellListCount(req, res) {
             ,(Select i.INSPECTION_STATUS from Inspection AS i where s.sell_seller_key = i.USER_KEY AND s.product_key = i.PRODUCT_KEY) AS INSPECTION_STATUS
             ,(Select i.INSPECTION_RESULT from Inspection AS i where s.sell_seller_key = i.USER_KEY AND s.product_key = i.PRODUCT_KEY) AS INSPECTION_RESULT
         FROM Sell s 
-        WHERE s.sell_seller_key = ${userKey} AND s.sell_status = 3 AND s.sell_sdate BETWEEN '${startDate}' AND '${endDate}'
+        WHERE s.sell_seller_key = ${userKey} AND s.sell_status = 3 AND DATE(s.sell_sdate) BETWEEN '${startDate}' AND '${endDate}'
         UNION ALL
         SELECT 
             b.BUY_KEY
             ,(Select i.INSPECTION_STATUS from Inspection AS i where b.BUY_SELLER_KEY = i.USER_KEY AND b.PRODUCT_KEY = i.PRODUCT_KEY) AS INSPECTION_STATUS
             ,(Select i.INSPECTION_RESULT from Inspection AS i where b.BUY_SELLER_KEY = i.USER_KEY AND b.PRODUCT_KEY = i.PRODUCT_KEY) AS INSPECTION_RESULT
         FROM Buy b 
-        WHERE b.BUY_SELLER_KEY = ${userKey} AND b.BUY_STATUS = 3 AND b.BUY_SDATE BETWEEN '${startDate}' AND '${endDate}'
+        WHERE b.BUY_SELLER_KEY = ${userKey} AND b.BUY_STATUS = 3 AND DATE(b.BUY_SDATE) BETWEEN '${startDate}' AND '${endDate}'
         ) AS u
         ${ getProgressFilter(state) } `;
 
@@ -231,7 +231,7 @@ async function getProgressSellList(req, res) {
             ,(Select i.INSPECTION_RESULT from Inspection AS i where s.sell_seller_key = i.USER_KEY AND s.product_key = i.PRODUCT_KEY) AS INSPECTION_RESULT
         FROM Sell s 
         JOIN Product AS p ON s.product_key = p.PRODUCT_KEY
-        WHERE s.sell_seller_key = ${userKey} AND s.sell_status = 3 AND s.sell_sdate BETWEEN '${startDate}' AND '${endDate}'
+        WHERE s.sell_seller_key = ${userKey} AND s.sell_status = 3 AND DATE(s.sell_sdate) BETWEEN '${startDate}' AND '${endDate}'
         UNION ALL
         SELECT 
             'Buy' as TABLE_NAME
@@ -253,7 +253,7 @@ async function getProgressSellList(req, res) {
             ,(Select i.INSPECTION_RESULT from Inspection AS i where b.BUY_SELLER_KEY = i.USER_KEY AND b.PRODUCT_KEY = i.PRODUCT_KEY) AS INSPECTION_RESULT
         FROM Buy b 
         JOIN Product AS p ON b.PRODUCT_KEY = p.PRODUCT_KEY
-        WHERE b.BUY_SELLER_KEY = ${userKey} AND b.BUY_STATUS = 3 AND b.BUY_SDATE BETWEEN '${startDate}' AND '${endDate}'
+        WHERE b.BUY_SELLER_KEY = ${userKey} AND b.BUY_STATUS = 3 AND DATE(b.BUY_SDATE) BETWEEN '${startDate}' AND '${endDate}'
         ) AS u
         ${ getProgressFilter(state) }
         ${ getProgressOrder(orderDir) }
@@ -336,13 +336,13 @@ async function getDoneSellListCount(req, res) {
             s.SELL_KEY
             ,s.sell_status
         FROM Sell s 
-        WHERE s.SELL_SELLER_KEY = ${userKey} AND s.sell_sdate BETWEEN '${startDate}' AND '${endDate}'
+        WHERE s.SELL_SELLER_KEY = ${userKey} AND DATE(s.sell_sdate) BETWEEN '${startDate}' AND '${endDate}'
         UNION ALL
         SELECT 
             b.BUY_KEY
             ,b.BUY_STATUS
         FROM Buy b 
-        WHERE b.BUY_SELLER_KEY = ${userKey} AND b.BUY_SDATE BETWEEN '${startDate}' AND '${endDate}'
+        WHERE b.BUY_SELLER_KEY = ${userKey} AND DATE(b.BUY_SDATE) BETWEEN '${startDate}' AND '${endDate}'
         ) AS u
         ${ getDoneFilter(state) } `;
 
@@ -383,7 +383,7 @@ async function getDoneSellList(req, res) {
             ,p.PRODUCT_DESC
         FROM Sell s 
         JOIN Product AS p ON s.product_key = p.PRODUCT_KEY
-        WHERE s.sell_seller_key = ${userKey} AND s.sell_sdate BETWEEN '${startDate}' AND '${endDate}'
+        WHERE s.sell_seller_key = ${userKey} AND DATE(s.sell_sdate) BETWEEN '${startDate}' AND '${endDate}'
         UNION ALL
         SELECT 
             'Buy' as TABLE_NAME
@@ -402,7 +402,7 @@ async function getDoneSellList(req, res) {
             ,p.PRODUCT_DESC
         FROM Buy b 
         JOIN Product AS p ON b.PRODUCT_KEY = p.PRODUCT_KEY
-        WHERE b.BUY_SELLER_KEY = ${userKey} AND b.BUY_SDATE BETWEEN '${startDate}' AND '${endDate}'
+        WHERE b.BUY_SELLER_KEY = ${userKey} AND DATE(b.BUY_SDATE) BETWEEN '${startDate}' AND '${endDate}'
         ) AS u
         ${ getDoneFilter(state) }
         ${ getDoneOrder(orderColumn, orderDir) }
