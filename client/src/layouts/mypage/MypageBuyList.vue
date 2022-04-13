@@ -120,7 +120,7 @@ export default {
         USER_KEY : this.getUserKey(),
       })
       .then((result) => {
-        //console.log(result.data);
+        console.log(result.data);
         this.counts = result.data;
       })
       .catch((error) => {
@@ -247,7 +247,7 @@ export default {
       {
         slot.strEDate = moment(slot.BUY_EDATE).format('ll');
 
-          if(slot.sell_status != '0' && slot.sell_status !='2')
+          //if(slot.sell_status != '0' && slot.sell_status !='2')
           {
             //temp code - 임시로 data 가공.(직접쿼리 쓴것과 sequelize쓴거랑 데이터 형식이 다르게 옴)
               slot.Product = {

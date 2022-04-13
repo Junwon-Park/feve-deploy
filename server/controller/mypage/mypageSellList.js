@@ -9,29 +9,59 @@ const { Inspection } = require('../../models');
 async function getSellCounts(req, res) {
     const userKey = req.body.USER_KEY;
     try{
-        const wait = await Sell.count({
-        where: { sell_seller_key: userKey, sell_status: {[Op.or]:['0', '2']} },
-        });
+        const waitQuery = `
+        SELECT COUNT(*) FROM Sell
+        WHERE sell_seller_key = ${userKey} AND (sell_status = 0 OR sell_status = 2)`;
 
-        let progress = await Sell.count({
-            where: { sell_seller_key: userKey, sell_status: '3' },
-        });
-        progress += await Buy.count({
-            where: { BUY_SELLER_KEY: userKey, BUY_STATUS: '3' },
-            });
+        let wait=0;
+        await db.sequelize.query(waitQuery , { type: sequelize.QueryTypes.SELECT })
+        .then((result) => {
+            console.log("getSellCounts.wait : ", result);
+            wait = result[0]["COUNT(*)"];
+        })
+        .catch((err) => console.log(err))
 
-        let done = await Sell.count({
-            where: { 
-                sell_seller_key: userKey, 
-                sell_status: {[Op.or]:['1', '4']},
-            },
-        });
-        done += await Buy.count({
-            where: { 
-                BUY_SELLER_KEY: userKey,
-                BUY_STATUS: {[Op.or]:['1', '4']},
-            },
-        });
+        const progressQuery = `
+        SELECT COUNT(*) FROM(
+            SELECT
+                s.SELL_KEY
+            FROM Sell s 
+            WHERE s.sell_seller_key = ${userKey} AND s.sell_status = 3 
+            UNION ALL
+            SELECT 
+                b.BUY_KEY
+            FROM Buy b 
+            WHERE b.BUY_SELLER_KEY = ${userKey} AND b.BUY_STATUS = 3
+            ) u;`;
+
+        let progress=0;
+        await db.sequelize.query(progressQuery , { type: sequelize.QueryTypes.SELECT })
+        .then((result) => {
+            console.log("getSellCounts.progress : ", result);
+            progress = result[0]["COUNT(*)"];
+        })
+        .catch((err) => console.log(err))
+
+        const doneQuery = `
+        SELECT COUNT(*) FROM(
+            SELECT
+                s.SELL_KEY
+            FROM Sell s 
+            WHERE s.sell_seller_key = ${userKey} AND (s.sell_status = 1 OR s.sell_status = 4)
+            UNION ALL
+            SELECT 
+                b.BUY_KEY
+            FROM Buy b 
+            WHERE b.BUY_SELLER_KEY = ${userKey} AND (b.BUY_STATUS = 1 OR b.BUY_STATUS = 4) 
+            ) u;`;
+
+        let done=0;
+        await db.sequelize.query(doneQuery , { type: sequelize.QueryTypes.SELECT })
+        .then((result) => {
+            console.log("getSellCounts.done : ", result);
+            done = result[0]["COUNT(*)"];
+        })
+        .catch((err) => console.log(err))
 
         sellCounts = [wait, progress, done]
         console.log("sellCount has been responsed from db : ", sellCounts);
@@ -47,33 +77,17 @@ async function getWaitSellListCount(req, res) {
     const endDate = req.body.endDate;
     const state = req.body.state; 
     
-    await Sell.count({
-        where:{
-            sell_seller_key: userKey,
-            sell_status: getWaitStatusCondition(state),
-            sell_sdate: {[Op.between]: [startDate, endDate]}
-        },
-    })
+    const query = `
+        SELECT COUNT(*) FROM Sell s
+        WHERE s.sell_seller_key = ${userKey} AND b.sell_edate BETWEEN '${startDate}' AND '${endDate}'
+        ${ getWaitFilter(state) };`;
+
+    await db.sequelize.query(query , { type: sequelize.QueryTypes.SELECT })
     .then((result) => {
-        console.log("getWaitSellListCount has been responsed from db : ",result);
-        res.json(result);
+        console.log("getWaitSellListCount has been responsed from db.Sell : ",result);
+        res.json(result[0]["COUNT(*)"]);
     })
     .catch((err) => console.log(err))
-}
-
-function getWaitStatusCondition(state)
-{
-    switch(state){
-        case 1:{
-            return '0';
-        }
-        case 2:{
-            return '2';
-        }
-        default:{
-            return {[Op.or]:['0', '2']};
-        }
-    }
 }
 
 async function getWaitSellList(req, res) {
@@ -86,19 +100,29 @@ async function getWaitSellList(req, res) {
     const orderColumn = req.body.orderColumn;
     const orderDir = req.body.orderDir;
 
-    await Sell.findAll({
-        where:{
-            sell_seller_key: userKey,
-            sell_status: getWaitStatusCondition(state),
-            sell_sdate: {[Op.between]: [startDate, endDate]}
-        },
-        include:{
-            model:Product,
-            attributes: ['PRODUCT_NAME', 'PRODUCT_BRAND', 'PRODUCT_PIC'],
-        },
-        limit:[start, count],
-        order:getSeqOrderCondition(orderColumn, orderDir),
-    })
+    const query = `
+    SELECT 
+        s.SELL_KEY
+        ,s.product_key
+        ,s.sell_seller_key
+        ,s.sell_price
+        ,s.sell_sdate
+        ,s.sell_edate
+        ,s.sell_status
+        ,s.sell_buyer_key
+        ,p.PRODUCT_CATE
+        ,p.PRODUCT_BRAND
+        ,p.PRODUCT_NAME
+        ,p.PRODUCT_PIC
+        ,p.PRODUCT_DESC
+    FROM Sell s 
+    JOIN Product AS p ON s.product_key = p.PRODUCT_KEY
+    WHERE s.sell_seller_key = ${userKey} AND s.sell_edate BETWEEN '${startDate}' AND '${endDate}'
+    ${ getWaitFilter(state) }
+    ${ getWaitOrder(orderColumn, orderDir) }
+    LIMIT ${start}, ${count} ;`;
+
+    await db.sequelize.query(query , { type: sequelize.QueryTypes.SELECT })
     .then((result) => {
         console.log("getWaitSellList has been responsed from db : ",result);
         res.json(result);
@@ -106,12 +130,29 @@ async function getWaitSellList(req, res) {
     .catch((err) => console.log(err))
 }
 
-function getSeqOrderCondition(orderColumn, orderDir)
+function getWaitFilter(state)
 {
-    if(orderColumn.length == 0)
+    switch(state){
+        case 1:{
+            return 'AND sell_status = 0';
+        }
+        case 2:{
+            return 'AND sell_status = 2';
+        }
+        default:{
+            return "AND (sell_status = 0 OR sell_status = 2)"
+        }
+    }
+}
+
+function getWaitOrder(orderColumn, orderDir)
+{
+    if(orderColumn == null || orderColumn.length ==0)
         return "";
     else
-        return [[orderColumn, orderDir]]
+    {
+        return `ORDER BY ${orderColumn} ${orderDir}`;
+    }
 }
 
 async function getProgressSellListCount(req, res) {
@@ -134,7 +175,7 @@ async function getProgressSellListCount(req, res) {
             ,(Select i.INSPECTION_RESULT from Inspection AS i where s.sell_seller_key = i.USER_KEY AND s.product_key = i.PRODUCT_KEY) AS INSPECTION_RESULT
         FROM Sell s 
         WHERE s.sell_seller_key = ${userKey} AND s.sell_status = 3 AND s.sell_edate BETWEEN '${startDate}' AND '${endDate}'
-        UNION
+        UNION ALL
         SELECT 
             b.BUY_KEY
             ,(Select i.INSPECTION_STATUS from Inspection AS i where b.BUY_SELLER_KEY = i.USER_KEY AND b.PRODUCT_KEY = i.PRODUCT_KEY) AS INSPECTION_STATUS
@@ -191,7 +232,7 @@ async function getProgressSellList(req, res) {
         FROM Sell s 
         JOIN Product AS p ON s.product_key = p.PRODUCT_KEY
         WHERE s.sell_seller_key = ${userKey} AND s.sell_status = 3 AND s.sell_edate BETWEEN '${startDate}' AND '${endDate}'
-        UNION
+        UNION ALL
         SELECT 
             'Buy' as TABLE_NAME
             ,b.BUY_KEY
@@ -296,7 +337,7 @@ async function getDoneSellListCount(req, res) {
             ,s.sell_status
         FROM Sell s 
         WHERE s.SELL_SELLER_KEY = ${userKey} AND s.sell_edate BETWEEN '${startDate}' AND '${endDate}'
-        UNION
+        UNION ALL
         SELECT 
             b.BUY_KEY
             ,b.BUY_STATUS
@@ -343,7 +384,7 @@ async function getDoneSellList(req, res) {
         FROM Sell s 
         JOIN Product AS p ON s.product_key = p.PRODUCT_KEY
         WHERE s.sell_seller_key = ${userKey} AND s.sell_edate BETWEEN '${startDate}' AND '${endDate}'
-        UNION
+        UNION ALL
         SELECT 
             'Buy' as TABLE_NAME
             ,b.BUY_KEY
@@ -429,12 +470,8 @@ async function updateDeliver(req, res) {
         if(tableName == 'Buy')
         {
             await Buy.update(
-                {
-                    BUY_STATUS: '4',
-                }, 
-                {
-                    where: { BUY_KEY:key }
-                }
+                { BUY_STATUS: '4' }, 
+                { where: { BUY_KEY:key } }
             )
             .then((result) => {
                 console.log("updateDeliver has been responsed from db.Buy : ",result);
@@ -446,12 +483,8 @@ async function updateDeliver(req, res) {
         else
         {
             await Sell.update(
-                {
-                    sell_status: '4',
-                }, 
-                {
-                    where: { SELL_KEY:key }
-                }
+                { sell_status: '4' }, 
+                { where: { SELL_KEY:key } }
             )
             .then((result) => {
                 console.log("updateDeliver has been responsed from db.Sell: ",result);
