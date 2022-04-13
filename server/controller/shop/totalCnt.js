@@ -73,7 +73,7 @@ async function productlist(req, res, next) {
         ',a.PRODUCT_CATE\n' +
         'FROM Product a\n'+
         'WHERE a.PRODUCT_DELETE = 0)a\n' +
-        'limit '+start+', '+end+';'
+        'limit '+start+', 8;'
         ,{ type: Sequelize.QueryTypes.SELECT }
     )
     .then((result) => {
