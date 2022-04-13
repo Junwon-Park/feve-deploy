@@ -1,60 +1,59 @@
 <template>
   <div style="padding-bottom: 20vh">
     <div class="flex flex-wrap">
-
       <HeaderStats
-          :countTotalUser="countTotalUser"
-          :countTotalBuy="countTotalBuy"
-          :countTotalSell="countTotalSell"
-          :countTotalDeal="countTotalDeal"
-          :beforeCountTotalUser="beforeCountTotalUser"
-          :beforeCountTotalBuy="beforeCountTotalBuy"
-          :beforeCountTotalSell="beforeCountTotalSell"
-          :beforeCountTotalDeal="beforeCountTotalDeal"
-          :calcCountDeal="calcCountDeal"
-          :calcCountUser="calcCountUser"
-          :calcCountSell="calcCountSell"
-          :calcCountBuy="calcCountBuy"
-          class=" w-full"
+        :countTotalUser="countTotalUser"
+        :countTotalBuy="countTotalBuy"
+        :countTotalSell="countTotalSell"
+        :countTotalDeal="countTotalDeal"
+        :beforeCountTotalUser="beforeCountTotalUser"
+        :beforeCountTotalBuy="beforeCountTotalBuy"
+        :beforeCountTotalSell="beforeCountTotalSell"
+        :beforeCountTotalDeal="beforeCountTotalDeal"
+        :calcCountDeal="calcCountDeal"
+        :calcCountUser="calcCountUser"
+        :calcCountSell="calcCountSell"
+        :calcCountBuy="calcCountBuy"
+        class="w-full"
       />
 
-      <div class="w-full  mb-12 xl:mb-0 px-4 -mt-24">
+      <div class="w-full mb-12 xl:mb-0 px-4 -mt-24">
         <AdminLineChart
-            :countUser="countUser"
-            :userCnt="userCnt"
-            :dealCnt="dealCnt"
-            :title="title"
-            style="min-height: 30vh;"
+          :countUser="countUser"
+          :userCnt="userCnt"
+          :dealCnt="dealCnt"
+          :title="title"
+          style="min-height: 30vh"
         />
       </div>
 
       <div class="w-full mb-12 xl:mb-0 px-4 mt-8">
         <AdminBarChart
-            :bidBuyCnt="bidBuyCnt"
-            :bidSellCnt="bidSellCnt"
-            style="min-height: 30vh;"
+          :bidBuyCnt="bidBuyCnt"
+          :bidSellCnt="bidSellCnt"
+          style="min-height: 30vh"
         />
       </div>
     </div>
   </div>
 </template>
 <script>
-import AdminLineChart from "@/components/Cards/Admin/AdminLineChart.vue";
-import HeaderStats from "@/components/Cards/Admin/HeaderStats.vue";
-import AdminBarChart from "@/components/Cards/Admin/AdminBarChart.vue";
+import AdminLineChart from '@/components/Cards/Admin/AdminLineChart.vue';
+import HeaderStats from '@/components/Cards/Admin/HeaderStats.vue';
+import AdminBarChart from '@/components/Cards/Admin/AdminBarChart.vue';
 
 export default {
-  name: "dashboard-page",
+  name: 'dashboard-page',
   data() {
     return {
-      title: "상품 리스트",
-      title2: "검수 리스트",
-      countUser:[],
-      countDeal:[],
+      title: '상품 리스트',
+      title2: '검수 리스트',
+      countUser: [],
+      countDeal: [],
       userCnt: [],
       dealCnt: [],
-      bidBuyArray:[],
-      bidSellArray:[],
+      bidBuyArray: [],
+      bidSellArray: [],
       bidBuyCnt: [],
       bidSellCnt: [],
       countTotalUser: 0,
@@ -68,8 +67,8 @@ export default {
       calcCountDeal: 0,
       calcCountUser: 0,
       calcCountSell: 0,
-      calcCountBuy: 0,
-    }
+      calcCountBuy: 0
+    };
   },
   components: {
     AdminBarChart,
@@ -77,230 +76,241 @@ export default {
     HeaderStats
   },
   created() {
-    this.countTotalUserFunc()
-    this.countTotalBuyFunc()
-    this.countTotalSellFunc()
-    this.countTotalDealFunc()
+    this.countTotalUserFunc();
+    this.countTotalBuyFunc();
+    this.countTotalSellFunc();
+    this.countTotalDealFunc();
 
-    this.befCountTotalUserFunc()
-    this.befCountTotalBuyFunc()
-    this.befCountTotalSellFunc()
-    this.befCountTotalDealFunc()
+    this.befCountTotalUserFunc();
+    this.befCountTotalBuyFunc();
+    this.befCountTotalSellFunc();
+    this.befCountTotalDealFunc();
 
-    this.countUserFunc()
-    this.countDealFunc()
-    this.bidBuyArrayFunc()
-    this.bidSellArrayFunc()
+    this.countUserFunc();
+    this.countDealFunc();
+    this.bidBuyArrayFunc();
+    this.bidSellArrayFunc();
 
-    this.calcCountDeal= this.countTotalBuy-this.beforeCountTotalBuy;
-    this.calcCountUser= this.countTotalUser-this.beforeCountTotalUser;
-    this.calcCountSell= this.countTotalSell-this.beforeCountTotalSell;
-    this.calcCountBuy= this.countTotalBuy-this.beforeCountTotalBuy;
+    this.calcCountDeal = this.countTotalBuy - this.beforeCountTotalBuy;
+    this.calcCountUser = this.countTotalUser - this.beforeCountTotalUser;
+    this.calcCountSell = this.countTotalSell - this.beforeCountTotalSell;
+    this.calcCountBuy = this.countTotalBuy - this.beforeCountTotalBuy;
   },
-  watch:{
-    countTotalUser: function(){
-      this.calcCountUser= this.countTotalUser-this.beforeCountTotalUser;
+  watch: {
+    countTotalUser: function () {
+      this.calcCountUser = this.countTotalUser - this.beforeCountTotalUser;
     },
-    countTotalBuy: function(){
-      this.calcCountBuy= this.countTotalBuy-this.beforeCountTotalBuy;
+    countTotalBuy: function () {
+      this.calcCountBuy = this.countTotalBuy - this.beforeCountTotalBuy;
     },
-    countTotalSell: function(){
-      this.calcCountSell= this.countTotalSell-this.beforeCountTotalSell;
+    countTotalSell: function () {
+      this.calcCountSell = this.countTotalSell - this.beforeCountTotalSell;
     },
-    countTotalDeal: function(){
-      this.calcCountDeal= this.countTotalDeal-this.beforeCountTotalDeal;
-    },
-  },
-
-  methods:{
-    countTotalUserFunc(){
-      let that = this;
-      this.$axios.get('http://localhost:8080/admin/count/user/total')
-          .then(function(res){
-            that.countTotalUser = res.data[0].cnt;
-          })
-          .catch(function(err){
-            console.log(err);
-          });
-    },
-
-    countTotalBuyFunc(){
-      let that = this;
-      this.$axios.get('http://localhost:8080/admin/count/buy/total')
-          .then(function(res){
-            that.countTotalBuy = res.data[0].cnt;
-            //console.log("totalbuy",that.countTotalBuy)
-          })
-          .catch(function(err){
-            console.log(err);
-          });
-    },
-
-    countTotalSellFunc(){
-      let that = this;
-      this.$axios.get('http://localhost:8080/admin/count/sell/total')
-          .then(function(res){
-            that.countTotalSell = res.data[0].cnt;
-            //console.log(res.data[0].cnt)
-          })
-          .catch(function(err){
-            console.log(err);
-          });
-    },
-
-    countTotalDealFunc(){
-      let that = this;
-
-      this.$axios.get('http://localhost:8080/admin/count/deal/total')
-          .then(function(res){
-            that.countTotalDeal = res.data[0].cnt;
-          })
-          .catch(function(err){
-            console.log(err);
-          });
-    },
-
-    befCountTotalUserFunc(){
-      let that = this;
-      this.$axios.get('http://localhost:8080/admin/count/bef/user/total')
-          .then(function(res){
-            // console.log(res.data);
-            // console.log("usertotal",res.data[0].cnt)
-            that.beforeCountTotalUser = res.data[0].cnt;
-            // console.log("that.beforeCountTotalUser",that.beforeCountTotalUser)
-          })
-          .catch(function(err){
-            console.log(err);
-          });
+    countTotalDeal: function () {
+      this.calcCountDeal = this.countTotalDeal - this.beforeCountTotalDeal;
+    }
   },
 
-    befCountTotalBuyFunc(){
+  methods: {
+    countTotalUserFunc() {
       let that = this;
-
-      this.$axios.get('http://localhost:8080/admin/count/bef/buy/total')
-          .then(function(res){
-            //console.log(res.data);
-            //console.log("buytotal",res.data[0].cnt)
-            that.beforeCountTotalBuy = res.data[0].cnt;
-            //console.log("that.beforeCountTotalBuy",that.beforeCountTotalBuy)
-          })
-          .catch(function(err){
-            console.log(err);
-          });
+      this.$axios
+        .get(`${this.$store.getters.ServerUrl}/admin/count/user/total`)
+        .then(function (res) {
+          that.countTotalUser = res.data[0].cnt;
+        })
+        .catch(function (err) {
+          console.log(err);
+        });
     },
 
-    befCountTotalSellFunc(){
+    countTotalBuyFunc() {
       let that = this;
-
-      this.$axios.get('http://localhost:8080/admin/count/bef/sell/total')
-          .then(function(res){
-            //console.log(res.data);
-            // console.log("selltotal",res.data[0].cnt)
-            that.beforeCountTotalSell = res.data[0].cnt;
-            //console.log("that.beforeCountTotalSell",that.beforeCountTotalSell)
-          })
-          .catch(function(err){
-            console.log(err);
-          });
+      this.$axios
+        .get(`${this.$store.getters.ServerUrl}/admin/count/buy/total`)
+        .then(function (res) {
+          that.countTotalBuy = res.data[0].cnt;
+          //console.log("totalbuy",that.countTotalBuy)
+        })
+        .catch(function (err) {
+          console.log(err);
+        });
     },
 
-    befCountTotalDealFunc(){
+    countTotalSellFunc() {
       let that = this;
-      this.$axios.get('http://localhost:8080/admin/count/bef/deal/total')
-          .then(function(res){
-            //console.log(res.data);
-            //console.log("dealtotal",res.data[0].cnt)
-            that.beforeCountTotalDeal = res.data[0].cnt;
-            //console.log("that.beforeCountTotalDeal",that.beforeCountTotalDeal)
-          })
-          .catch(function(err){
-            console.log(err);
-          });
+      this.$axios
+        .get(`${this.$store.getters.ServerUrl}/admin/count/sell/total`)
+        .then(function (res) {
+          that.countTotalSell = res.data[0].cnt;
+          //console.log(res.data[0].cnt)
+        })
+        .catch(function (err) {
+          console.log(err);
+        });
     },
 
-    countUserFunc(){
+    countTotalDealFunc() {
       let that = this;
 
-      this.$axios.get('http://localhost:8080/admin/count/user')
-          .then(function(res){
-            that.countUser = res.data;
-            for(let i=0; i<that.countUser.length;i++) {
-              if(that.countUser[i].cnt===null) {
-                that.userCnt[i]=0
-              }
-              if(that.countUser[i].cnt !=null) {
-                that.userCnt.push(that.countUser[i].cnt)
-              }
+      this.$axios
+        .get(`${this.$store.getters.ServerUrl}/admin/count/deal/total`)
+        .then(function (res) {
+          that.countTotalDeal = res.data[0].cnt;
+        })
+        .catch(function (err) {
+          console.log(err);
+        });
+    },
+
+    befCountTotalUserFunc() {
+      let that = this;
+      this.$axios
+        .get(`${this.$store.getters.ServerUrl}/admin/count/bef/user/total`)
+        .then(function (res) {
+          // console.log(res.data);
+          // console.log("usertotal",res.data[0].cnt)
+          that.beforeCountTotalUser = res.data[0].cnt;
+          // console.log("that.beforeCountTotalUser",that.beforeCountTotalUser)
+        })
+        .catch(function (err) {
+          console.log(err);
+        });
+    },
+
+    befCountTotalBuyFunc() {
+      let that = this;
+
+      this.$axios
+        .get(`${this.$store.getters.ServerUrl}/admin/count/bef/buy/total`)
+        .then(function (res) {
+          //console.log(res.data);
+          //console.log("buytotal",res.data[0].cnt)
+          that.beforeCountTotalBuy = res.data[0].cnt;
+          //console.log("that.beforeCountTotalBuy",that.beforeCountTotalBuy)
+        })
+        .catch(function (err) {
+          console.log(err);
+        });
+    },
+
+    befCountTotalSellFunc() {
+      let that = this;
+
+      this.$axios
+        .get(`${this.$store.getters.ServerUrl}/admin/count/bef/sell/total`)
+        .then(function (res) {
+          //console.log(res.data);
+          // console.log("selltotal",res.data[0].cnt)
+          that.beforeCountTotalSell = res.data[0].cnt;
+          //console.log("that.beforeCountTotalSell",that.beforeCountTotalSell)
+        })
+        .catch(function (err) {
+          console.log(err);
+        });
+    },
+
+    befCountTotalDealFunc() {
+      let that = this;
+      this.$axios
+        .get(`${this.$store.getters.ServerUrl}/admin/count/bef/deal/total`)
+        .then(function (res) {
+          //console.log(res.data);
+          //console.log("dealtotal",res.data[0].cnt)
+          that.beforeCountTotalDeal = res.data[0].cnt;
+          //console.log("that.beforeCountTotalDeal",that.beforeCountTotalDeal)
+        })
+        .catch(function (err) {
+          console.log(err);
+        });
+    },
+
+    countUserFunc() {
+      let that = this;
+
+      this.$axios
+        .get(`${this.$store.getters.ServerUrl}/admin/count/user`)
+        .then(function (res) {
+          that.countUser = res.data;
+          for (let i = 0; i < that.countUser.length; i++) {
+            if (that.countUser[i].cnt === null) {
+              that.userCnt[i] = 0;
             }
-          })
-          .catch(function(err){
-            console.log(err);
-          });
+            if (that.countUser[i].cnt != null) {
+              that.userCnt.push(that.countUser[i].cnt);
+            }
+          }
+        })
+        .catch(function (err) {
+          console.log(err);
+        });
     },
 
-    countDealFunc(){
+    countDealFunc() {
       let that = this;
 
-      this.$axios.get('http://localhost:8080/admin/count/deal')
-          .then(function(res){
-            that.countDeal = res.data;
+      this.$axios
+        .get(`${this.$store.getters.ServerUrl}/admin/count/deal`)
+        .then(function (res) {
+          that.countDeal = res.data;
 
-            for(let i=0; i<that.countDeal.length;i++) {
-              if(that.countDeal[i].cnt===null) {
-                that.dealCnt[i]=0
-              }
-              if(that.countDeal[i].cnt !=null) {
-                that.dealCnt.push(that.countDeal[i].cnt)
-              }
+          for (let i = 0; i < that.countDeal.length; i++) {
+            if (that.countDeal[i].cnt === null) {
+              that.dealCnt[i] = 0;
             }
-          })
-          .catch(function(err){
-            console.log(err);
-          });
+            if (that.countDeal[i].cnt != null) {
+              that.dealCnt.push(that.countDeal[i].cnt);
+            }
+          }
+        })
+        .catch(function (err) {
+          console.log(err);
+        });
     },
 
-    bidBuyArrayFunc(){
+    bidBuyArrayFunc() {
       let that = this;
 
-      this.$axios.get('http://localhost:8080/admin/count/bid/buy')
-          .then(function(res){
-            that.bidBuyArray = res.data;
+      this.$axios
+        .get(`${this.$store.getters.ServerUrl}/admin/count/bid/buy`)
+        .then(function (res) {
+          that.bidBuyArray = res.data;
 
-            for(let i=0; i<that.bidBuyArray.length;i++) {
-              if(that.bidBuyArray[i].cnt===null) {
-                that.bidBuyCnt[i]=0
-              }
-              if(that.bidBuyArray[i].cnt !=null) {
-                that.bidBuyCnt.push(that.bidBuyArray[i].cnt)
-              }
+          for (let i = 0; i < that.bidBuyArray.length; i++) {
+            if (that.bidBuyArray[i].cnt === null) {
+              that.bidBuyCnt[i] = 0;
             }
-          })
-          .catch(function(err){
-            console.log(err);
-          });
+            if (that.bidBuyArray[i].cnt != null) {
+              that.bidBuyCnt.push(that.bidBuyArray[i].cnt);
+            }
+          }
+        })
+        .catch(function (err) {
+          console.log(err);
+        });
     },
-    bidSellArrayFunc(){
+    bidSellArrayFunc() {
       let that = this;
 
-      this.$axios.get('http://localhost:8080/admin/count/bid/sell')
-          .then(function(res){
-            that.bidSellArray = res.data;
+      this.$axios
+        .get(`${this.$store.getters.ServerUrl}/admin/count/bid/sell`)
+        .then(function (res) {
+          that.bidSellArray = res.data;
 
-            for(let i=0; i<that.bidSellArray.length;i++) {
-              if(that.bidSellArray[i].cnt===null) {
-                that.bidSellCnt[i]=0
-              }
-              if(that.bidSellArray[i].cnt !=null) {
-                that.bidSellCnt.push(that.bidSellArray[i].cnt)
-              }
+          for (let i = 0; i < that.bidSellArray.length; i++) {
+            if (that.bidSellArray[i].cnt === null) {
+              that.bidSellCnt[i] = 0;
             }
-          })
-          .catch(function(err){
-            console.log(err);
-          });
-    },
+            if (that.bidSellArray[i].cnt != null) {
+              that.bidSellCnt.push(that.bidSellArray[i].cnt);
+            }
+          }
+        })
+        .catch(function (err) {
+          console.log(err);
+        });
+    }
   },
-  updated(){
-  }
+  updated() {}
 };
 </script>

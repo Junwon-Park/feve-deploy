@@ -319,7 +319,7 @@ export default {
 
     let that = this;
     this.$axios
-      .get('https://localhost:8080/main/loadproduct')
+      .get(`${this.$store.getters.ServerUrl}/main/loadproduct`)
       .then(function (res) {
         that.items = res.data;
       })
@@ -328,7 +328,7 @@ export default {
       });
 
     this.$axios
-      .get('https://localhost:8080/main/loadproduct/new')
+      .get(`${this.$store.getters.ServerUrl}/main/loadproduct/new`)
       .then(function (res) {
         that.newItems = res.data;
       })

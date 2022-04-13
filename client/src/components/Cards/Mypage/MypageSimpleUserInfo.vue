@@ -61,7 +61,7 @@ export default {
       if (confirm('정말로 탈퇴하시겠습니까?')) {
         let that = this;
         that.$axios
-          .post('http://localhost:8080/mypage/removeAccount', {
+          .post(`${this.$store.getters.ServerUrl}/mypage/removeAccount`, {
             USER_KEY: this.getUserKey()
           })
           .then(() => {
