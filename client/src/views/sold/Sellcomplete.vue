@@ -177,7 +177,7 @@ export default {
 updated() {
      this.$axios.post("http://localhost:8080/buy/update", {
         user_key: JSON.parse(localStorage.getItem('userKey')),
-        buyer_key: this.buy[buy.length-1].buy_key
+        buyer_key: this.buy[-1].buy_key
       })
       .then(function (res) {
         console.log(res,"udpate됨");
