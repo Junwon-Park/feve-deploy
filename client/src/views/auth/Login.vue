@@ -49,6 +49,24 @@
                   로그인
                 </button>
               </div>
+              <div class="text-center mt-6">
+                <button
+                  class="bg-orange-500 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
+                  type="button"
+                  @click="submitGooleLogin"
+                >
+                  Google 로그인
+                </button>
+              </div>
+              <!-- <div class="text-center mt-6">
+                <button
+                  class="bg-orange-500 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
+                  type="button"
+                  @click="submitGooleLogOut"
+                >
+                  Google 로그아웃
+                </button>
+              </div> -->
             </form>
           </div>
         </div>
@@ -121,6 +139,9 @@ export default {
           return (location.href = `${this.$store.getters.LocalUrl}`);
         }
       }
+    },
+    async submitGooleLogin() {
+      window.location.assign(this.$store.getters.googleLoginUrl);
     }
   }
 };

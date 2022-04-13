@@ -26,7 +26,12 @@
               style="height: 500px; overflow-y: scroll; overflow-x: hidden"
               ref="chatContainer"
             >
-              <v-row id="chatMessage" v-for="(chat, i) in chat" :key="i">
+              <v-row
+                id="chatMessage"
+                v-for="(chat, i) in chat"
+                :key="i"
+                style="margin-right: 20px"
+              >
                 <v-col cols="12" sm="12" md="12" v-if="chat.sender">
                   <v-chip> {{ chat.message }} </v-chip>
                   <v-chip class="ma-2" x-small> {{ chat.messageTime }} </v-chip>

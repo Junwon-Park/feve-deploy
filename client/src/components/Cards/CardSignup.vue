@@ -319,6 +319,7 @@ export default {
               'Authorization',
               checkSignUp.data.data.accessToken
             );
+            localStorage.setItem('googleLogin', false);
             localStorage.setItem('userId', checkSignUp.data.data.USER_ID);
             localStorage.setItem('userKey', checkSignUp.data.data.USER_KEY);
             localStorage.setItem('addressLength', null);

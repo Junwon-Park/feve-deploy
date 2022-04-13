@@ -6,6 +6,7 @@ const helmet = require('helmet');
 const fs = require('fs');
 const { Server } = require('socket.io');
 const moment = require('moment');
+const https = require('https');
 
 const { config } = require('./config.js');
 
@@ -31,9 +32,9 @@ const categorytRoute = require('./router/common/category.js');
 const shoplistRoute = require('./router/shop/shoplist.js');
 const shopviewRoute = require('./router/shop/shopview.js');
 const buyconfirmRouter = require('./router/sold/buyconfirm.js');
-const buyRouter = require("./router/sold/buyproduct.js");
+const buyRouter = require('./router/sold/buyproduct.js');
 const sellconfirmRouter = require('./router/sold/sellconfirm.js');
-const sellRouter = require("./router/sold/sellproduct.js");
+const sellRouter = require('./router/sold/sellproduct.js');
 const filterCateRouter = require('./router/shop/filterCate.js');
 const filterPriceRouter = require('./router/shop/filterPrice.js');
 const mypageMainRouter = require('./router/mypage/mypageMain.js');
@@ -46,7 +47,7 @@ const imageStyleRouter = require("./image/styleImage.js");
 const uploadImageRouter = require("./image/uploadImage.js");
 const uploadStyleImageRouter = require("./image/uploadStyleImage.js");
 
-const cscenterInsertRoute = require("./router/cscenter/cscenterInsert.js");
+const cscenterInsertRoute = require('./router/cscenter/cscenterInsert.js');
 const mainLoadproductRoute = require('./router/main/loadproduct.js');
 
 const app = express();
@@ -63,7 +64,7 @@ app.use(
 
 app.use(morgan('tiny'));
 app.use(helmet());
-const whiteListByCors = ['http://localhost:3000'];
+const whiteListByCors = ['https://localhost:3000'];
 const corsOptions = {
   origin: (origin, callback) => {
     if (whiteListByCors.indexOf(origin) !== -1) {
@@ -76,7 +77,7 @@ const corsOptions = {
   optionsSuccessStatus: 200
 };
 const devCors = {
-  origin: 'http://localhost:3000',
+  origin: 'https://localhost:3000',
   credentials: true,
   optionsSuccessStatus: 200
 };
@@ -88,8 +89,8 @@ app.use('/auth', authRouter);
 app.use('/addproduct', addproductRoute);
 app.use('/category', categorytRoute);
 
-app.use("/cscenter/cscenterInsert", cscenterInsertRoute)
-app.use("/getImage", imageRouter);
+app.use('/cscenter/cscenterInsert', cscenterInsertRoute);
+app.use('/getImage', imageRouter);
 
 app.use('/admin/addproduct', addproductRoute);
 app.use('/admin/loadproduct', loadproductRoute);
@@ -114,8 +115,8 @@ app.use('/shop/filterCate', filterCateRouter);
 app.use('/shop/filterPrice', filterPriceRouter);
 app.use('/shop/shopview', shopviewRoute);
 
-app.use('/buy',buyconfirmRouter);
-app.use('/buy/proc',buyRouter);
+app.use('/buy', buyconfirmRouter);
+app.use('/buy/proc', buyRouter);
 app.use('/sell', sellconfirmRouter);
 app.use('/sell/proc', sellRouter);
 
@@ -130,7 +131,7 @@ app.use("/getStyleImage", imageStyleRouter);
 app.use("/uploadImage", uploadImageRouter);
 app.use("/uploadStyleImage", uploadStyleImageRouter);
 
-app.use("/main/loadproduct", mainLoadproductRoute);
+app.use('/main/loadproduct', mainLoadproductRoute);
 
 app.use((req, res, next) => {
   res.sendStatus(404);
@@ -158,7 +159,7 @@ if (fs.existsSync('./certKey/key.pem') && fs.existsSync('./certKey/cert.pem')) {
 
 const io = new Server(server, {
   cors: {
-    origin: 'http://localhost:3000',
+    origin: 'https://localhost:3000',
     credentials: true
   },
   allowEIO3: true

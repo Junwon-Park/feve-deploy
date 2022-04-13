@@ -14,7 +14,7 @@ import axios from 'axios';
 
 // socket.io
 import io from 'socket.io-client';
-const socket = io('http://localhost:8080');
+const socket = io('https://localhost:8080');
 
 Vue.prototype.$socket = socket;
 Vue.config.productionTip = false;

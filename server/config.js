@@ -29,6 +29,16 @@ const config = {
     password: required('DB_PASSWORD'),
     rdbms: required('DB_RDBMS')
   },
+  oAuth: {
+    google: {
+      clientId: required('CLIENT_ID'),
+      clientSecret: required('CLIENT_SECRET'),
+      grantType: required('GRANT_TYPE')
+    },
+    kakao: {},
+    github: {}
+  },
+  redirectUrl: required('REDIRECT_URL'),
   PORT: required('PORT')
 };
 

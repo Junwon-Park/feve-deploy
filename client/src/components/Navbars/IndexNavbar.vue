@@ -46,6 +46,19 @@
               </span>
             </router-link>
           </li>
+          <li
+            class="flex items-center"
+            v-else-if="$store.state.googleLogin === 'true'"
+          >
+            <router-link to="/">
+              <span
+                class="text-blueGray-800 px-3 py-2 flex items-center text-xs uppercase"
+                @click="submitGooleLogOut"
+              >
+                <span class="lg inline-block ml-2"> 로그아웃 </span>
+              </span>
+            </router-link>
+          </li>
           <li class="flex items-center" v-else>
             <router-link to="/">
               <span
@@ -150,17 +163,32 @@ export default {
         .catch((err) => {
           console.error('logoutError', err);
         });
-      const accessToken = logout.data.data;
+      const accessToken = logout.data.data ? logout.data.data : null;
       localStorage.setItem('isLogin', false);
       localStorage.setItem('Authorization', accessToken);
       localStorage.setItem('userId', null);
       localStorage.setItem('userAdmin', null);
       localStorage.setItem('userKey', null);
 
-      location.href = `${this.clientBaseURL}`;
+      location.href = `${this.$store.getters.LocalUrl}`;
     },
     getAdminPage() {
       location.href = `${this.$store.getters.adminPage}`;
+    },
+    async submitGooleLogOut() {
+      const logout = await axios.post(
+        `https://oauth2.googleapis.com/revoke?token=${this.$store.state.accessToken}`
+      );
+      if (logout) {
+        localStorage.setItem('isLogin', false);
+        localStorage.setItem('Authorization', null);
+        localStorage.setItem('userId', null);
+        localStorage.setItem('userAdmin', null);
+        localStorage.setItem('userKey', null);
+        localStorage.setItem('googleLogin', false);
+
+        location.href = `${this.$store.getters.LocalUrl}`;
+      }
     }
   },
   components: {
