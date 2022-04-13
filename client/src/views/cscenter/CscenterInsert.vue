@@ -41,7 +41,7 @@
                           class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                           placeholder="작성자"
                           readonly
-                          v-model="cscenter.user_key"
+                         :value="userInfo.USER_NAME"
                       />
                     </div>
 
@@ -115,7 +115,13 @@ export default {
         user_key: JSON.parse(localStorage.getItem('userKey')),
         default: "0",
         user_name:''
-      }
+      },
+      userInfo: {
+        USER_NAME: '',
+        USER_MAIL: '',
+        USER_KEY: '',
+        USER_ID:'',
+      },
     };
   },
 
@@ -147,7 +153,23 @@ export default {
           .catch((error) => {
             console.log(error);
           }); 
-    }
+    },
+
+    getSimpleUserInfo(){
+      this.$axios.post('http://localhost:8080/mypage/getSimpleUserInfo', {
+        USER_KEY : JSON.parse(localStorage.getItem('userKey'))
+      })
+          .then((result) => {
+            this.userInfo = result.data;
+            console.log(result.data)
+          })
+          .catch((error) => {
+            console.log(error);
+          })
+    },
+  },
+  created(){
+    this.getSimpleUserInfo()()
   }
 };
 </script>
