@@ -269,7 +269,10 @@ export default {
     if (this.$store.state.googleLogin === 'false') {
       this.checkToken();
     }
-    if (this.$store.state.googleLogin === 'false') {
+    if (
+      this.$store.state.googleLogin === 'false' ||
+      !this.$store.state.googleLogin
+    ) {
       const url = new URL(window.location.href);
       const authorizationCode = url.searchParams.get('code');
       if (authorizationCode) {
@@ -327,6 +330,7 @@ export default {
         console.log(err);
       });
   },
+
   components: {
     Slide,
     MainCardProduct,
