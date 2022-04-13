@@ -266,6 +266,14 @@ export default {
     }
   },
   created() {
+    if (!(this.$store.state.googleLogin || this.$store.state.isLogin)) {
+      localStorage.setItem('isLogin', false);
+      localStorage.setItem('Authorization', null);
+      localStorage.setItem('userId', null);
+      localStorage.setItem('userAdmin', null);
+      localStorage.setItem('googleLogin', false);
+    }
+
     if (this.$store.state.googleLogin === 'false') {
       this.checkToken();
     }
@@ -308,8 +316,6 @@ export default {
           });
       }
     }
-
-    // this.checkToken();
 
     let that = this;
     this.$axios
