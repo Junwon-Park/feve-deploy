@@ -110,7 +110,6 @@ export default {
       text: '판매 희망가',
       month:0,
       buy: {
-    
         product_key:0,
         buy_key:0,
         buy_price: 0,
@@ -142,6 +141,7 @@ export default {
 
   mounted() {
     let that = this;
+    window.scrollTo(0,0);
     this.item.PRODUCT_KEY = this.$route.params.PRODUCT_KEY;
     this.$axios.get(`http://localhost:8080/sell/${this.item.PRODUCT_KEY}`)
         .then(function (res) {
@@ -177,7 +177,7 @@ export default {
 updated() {
      this.$axios.post("http://localhost:8080/buy/update", {
         user_key: JSON.parse(localStorage.getItem('userKey')),
-        buyer_key: this.buy[0].buy_key
+        buyer_key: this.buy[buy.length-1].buy_key
       })
       .then(function (res) {
         console.log(res,"udpate됨");
