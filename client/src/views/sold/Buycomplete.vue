@@ -179,7 +179,7 @@ export default {
     let that =this;
     this.$axios.post("http://localhost:8080/sell/update", {
       user_key: JSON.parse(localStorage.getItem('userKey')),
-      sellkey: that.sell[-1].SELL_KEY
+      sellkey: that.sell[0].SELL_KEY
     })
     .then(function (res) {
       console.log(res);
