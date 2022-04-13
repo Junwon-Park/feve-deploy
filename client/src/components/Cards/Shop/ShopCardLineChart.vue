@@ -83,10 +83,8 @@ export default {
             intersect: false,
             callbacks: {
             label: function(data) {
-              //console.log(data.yLabel);
             return data.yLabel.toLocaleString('ko-KR') + "원";
             }
-            
            }
           },
           hover: {
@@ -121,6 +119,9 @@ export default {
                 ticks: {
                   fontColor: "black",
                   beginAtZero: true,
+                  callback: function(value) {
+                    		return value.toLocaleString("ko-KR");
+                     		}    
                 },
                 display: true,
                 scaleLabel: {
@@ -137,6 +138,8 @@ export default {
                   zeroLineBorderDash: [2],
                   zeroLineBorderDashOffset: [2],
                 },
+                
+                
               },
             ],
           },
