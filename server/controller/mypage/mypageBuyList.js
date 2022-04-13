@@ -139,7 +139,7 @@ async function getProgressBuyListCount(req, res) {
             ,(Select i.INSPECTION_STATUS from Inspection AS i where s.sell_seller_key = i.USER_KEY AND s.product_key = i.PRODUCT_KEY) AS INSPECTION_STATUS
             ,(Select i.INSPECTION_RESULT from Inspection AS i where s.sell_seller_key = i.USER_KEY AND s.product_key = i.PRODUCT_KEY) AS INSPECTION_RESULT
         FROM Sell s 
-        WHERE s.sell_buyer_KEY = ${userKey} AND s.sell_status = 3 AND s.sell_edate BETWEEN '${startDate}' AND '${endDate}'
+        WHERE s.sell_buyer_key = ${userKey} AND s.sell_status = 3 AND s.sell_edate BETWEEN '${startDate}' AND '${endDate}'
         ) AS u
         ${ getProgressFilter(state) } `;
     

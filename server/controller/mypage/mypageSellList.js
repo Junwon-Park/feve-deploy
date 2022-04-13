@@ -406,6 +406,7 @@ async function updateDeliver(req, res) {
     const tableName = req.body.tableName;
     const key = req.body.key;
     const decision = req.body.decision;
+    const aDate = req.body.aDate;
     console.log("!!!!!updateDeliver: ", userKey, productKey, tableName, key, decision);
     //decision 0:발송완료-> Inspection에 추가
     //decision 1:판매취소-> Buy/Sell 테이블에 STATUS = 4로 변경.
@@ -415,6 +416,7 @@ async function updateDeliver(req, res) {
             USER_KEY: userKey,
             PRODUCT_KEY: productKey,
             INSPECTION_STATUS: '0',
+            INSPECTION_ADATE:aDate,
             })
             .then(result => {
                 console.log(result);

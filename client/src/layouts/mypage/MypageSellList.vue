@@ -341,6 +341,7 @@ import moment from 'moment'
           tableName : slot.TABLE_NAME,
           key : slot.SELL_KEY,
           decision: decision,
+          aDate:moment(new Date(), 'YYYY-MM-DD').startOf('day'),
         })
         .then((result) => {
           console.log(result.data);
