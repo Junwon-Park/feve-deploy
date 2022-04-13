@@ -11,6 +11,7 @@ router.get('/:PRODUCT_KEY', sellconfirm);
 router.post('/comp' ,sellauction);
 router.post('/comp/user', selluser);
 router.post('/update',sellupdatesucess);
+
 router.post('/updatefail',sellupdatefail);
 
 

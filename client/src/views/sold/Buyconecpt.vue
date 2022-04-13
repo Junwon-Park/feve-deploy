@@ -370,17 +370,18 @@ export default {
        
     },
 
+
   },
 
-  beforeCreate() {
-      this.$axios.post("http://localhost:8080/sell/updatefail")
-      .then(function (res) {
-        console.log(res);
-      })
-      .catch(function (err) {
-        console.log(err);
-      });   
-  },
+  // beforeCreate() {
+  //     this.$axios.post("http://localhost:8080/sell/updatefail")
+  //     .then(function (res) {
+  //       console.log(res);
+  //     })
+  //     .catch(function (err) {
+  //       console.log(err);
+  //     });   
+  // },
 
   mounted() {
     window.scrollTo(0,0);

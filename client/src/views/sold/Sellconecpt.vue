@@ -372,6 +372,7 @@ export default {
 
     }
 
+
   },
 
   // created()
@@ -382,15 +383,15 @@ export default {
 
   //   }
   // },
-  beforeCreate() {
-      this.$axios.post("http://localhost:8080/buy/updatefail")
-      .then(function (res) {
-        console.log(res,"update패일시킨거");
-      })
-      .catch(function (err) {
-        console.log(err);
-      });   
-  },
+  // beforeCreate() {
+  //     this.$axios.post("http://localhost:8080/buy/updatefail")
+  //     .then(function (res) {
+  //       console.log(res,"update패일시킨거");
+  //     })
+  //     .catch(function (err) {
+  //       console.log(err);
+  //     });   
+  // },
 
   mounted() {
     let that = this;
