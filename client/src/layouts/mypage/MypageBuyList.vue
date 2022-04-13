@@ -140,6 +140,7 @@ export default {
       this.totalPage = 0;
       this.goToFirstPage();
       this.setUrl();
+      this.getBuyCounts();
     },
     
     goToFirstPage(){
