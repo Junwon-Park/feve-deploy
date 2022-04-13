@@ -65,9 +65,7 @@
                         <p class="text-sm"><strong>제조사에서 불량으로 인정하지 않는 기준은 하자로 판단하지 않습니다</strong></p>
 
                         <p class="mt-1 text-xs  ml-auto">박스/패키치와 상품 컨디션에 민감하시다면 검수 기준을 반드시 확인하시기 바랍니다.</p>
-                             <a class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-5 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-120" href="http://localhost:3000/CscenterStandard" id="change-button" style="color: #fafafa !important; ">
-                             검수사항
-                           </a>
+                             
                       </div>
                       <div class="ml-auto relative ">
                         <input id="check2" class="checkboxconfirm" type="checkbox">
@@ -166,6 +164,7 @@ export default {
     mounted()
     {
        var vm = this;
+       window.scrollTo(0,0);
        this.item.PRODUCT_KEY = this.$route.params.PRODUCT_KEY;
        console.log(this.item.PRODUCT_KEY);
        this.$axios.get(`http://localhost:8080/sell/${this.item.PRODUCT_KEY}`)

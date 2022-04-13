@@ -8,7 +8,7 @@
           <div
             class="p-8 relative flex flex-col min-w-0 break-words  pd-8 bg-white w-full mb-6  rounded-lg ">
             <div class="px-6">
-              <h5 class="text-xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2 text-center m-3">구매 하기</h5>
+              <h1 class="text-2xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2 text-center m-3">구매 하기</h1>
             </div>
             <div>
               <div class="flex flex-wrap items-center mt-5 mb-5 px-6">

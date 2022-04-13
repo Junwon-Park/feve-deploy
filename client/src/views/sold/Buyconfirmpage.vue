@@ -217,11 +217,11 @@ export default {
       })
           .then(() => {
             alert("입찰 되었습니다.");
-            this.$router.push("/");
+            this.$router.push("/mypage");
           })
           .catch((error) => {
             alert("실패하셨습니다");
-            this.$router.push("/");
+            this.$router.push("/mypage");
             console.log(error);
           })
           
