@@ -52,7 +52,7 @@ export default {
       var config = {
         type: "line",
         data: {
-          labels: this.CHART_DATES,
+          labels: this.CHART_DATES.reverse(),
           datasets: [
             {
               label: "거래 가격",
