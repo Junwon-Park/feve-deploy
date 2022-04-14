@@ -14,7 +14,7 @@ import axios from 'axios';
 
 // socket.io
 import io from 'socket.io-client';
-const socket = io('http://ec2-52-23-226-152.compute-1.amazonaws.com');
+const socket = io('ec2-52-23-226-152.compute-1.amazonaws.com');
 
 Vue.prototype.$socket = socket;
 Vue.config.productionTip = false;
