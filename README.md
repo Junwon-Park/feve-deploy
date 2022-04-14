@@ -26,8 +26,10 @@
 
 
 
-   
+# 프로젝트 구성도
+<img src=https://user-images.githubusercontent.com/88082341/163334835-cf582c4f-a5ab-4f61-80d1-464bd0765657.PNG>
 
+<br>
 
 
 
@@ -37,7 +39,9 @@
 
 
 # 기본 화면🔍
-  <div align=left><h2>1.메인 페이지</h2></div>
+<br>
+
+  <h2>1.메인 페이지</h2>
   <img src=https://user-images.githubusercontent.com/88082341/163315597-6c2e622b-c3b5-47c7-9a85-c8078c87fa1e.PNG>
   <div align=left><h2>2.회원 가입 페이지</h2></div>
   <img src=https://user-images.githubusercontent.com/88082341/163314764-5d90f089-7a59-416c-82fb-b42b2eb85b37.png width="1000">
@@ -47,12 +51,9 @@
   <img src=https://user-images.githubusercontent.com/88082341/163314755-ba240201-c71e-4c7d-8c07-ef306a090a97.png width="1000">
   <div align=left><h2>5.상품 상세페이지</h2></div>
   <img src=https://user-images.githubusercontent.com/88082341/163314757-d544a255-c35e-4841-afa4-99e5caef8092.png width="1000">
-   <div align=left><h2>6.구매 페이지</h2></div>
-  <img src=https://user-images.githubusercontent.com/88082341/163314748-f9aff1ba-1ae9-474d-bf7d-abce3dd414e0.png width="1000">
-    <div align=left><h2>7.스타일 페이지</h2></div>
-  <img src=https://user-images.githubusercontent.com/88082341/163314758-60293a34-34f0-46fc-ab05-ec916a1f578a.png width="1000">
 
 
+<br>
   
 
 
@@ -86,7 +87,7 @@ STYLE 페이지 (NEW, FEED, FOLLOW)
 
 
 </br>
- <div align=center><h1>⛏기술 스택</h1></div>
+ <div><h1>⛏기술 스택</h1></div>
 <div align=center> 
 
 <img src="https://img.shields.io/badge/vue.js-4FC08D?style=for-the-badge&logo=vue.js&logoColor=white ">
@@ -102,8 +103,8 @@ STYLE 페이지 (NEW, FEED, FOLLOW)
   <img src="https://img.shields.io/badge/sequelize-52B0E7?style=for-the-badge&logo=sequelize&logoColor=black">
 <img src="https://img.shields.io/badge/vuetify-1867C0?style=for-the-badge&logo=sequelize&logoColor=black">  
 </div>
-
-# 버전 관리
+<br>
+# 작업 환경
  
    #### 1. node.js 
    > version :14.17.4
@@ -124,10 +125,21 @@ STYLE 페이지 (NEW, FEED, FOLLOW)
   
 # 📅스케줄
 
->2022-03-18~2022-04-15
+>2022-03-18~2022-04-15 
 
+|구분|기간|활동|비교|
+|---|---|---|---|
+|사전 기획|3월18일(금)~3월20일(활)|프로그램 기획 및 주제 선정,기획안 작성|아이디어 선정|
+|요구 사항 분석|3월21일(월)~3월22일(화)|요구 사항 분석|시스템 상세 기능 도출|
+|설계|3월23일(수)~3월24일(목)|데이터 베이스 및 ui 설계|open api를 통한 데이터 수집|
+|구현|3월25일(금)~4월11일(월)|서비스 기능 구현|팀별 중간보고 실시|
+|테스트|4월11일(금)~4월15일(월)|테스트|최적화 오류 수정|
+<br>
 # 시연 영상 
 https://www.youtube.com/watch?v=i8XLeKCKHrc 
+<br>
+
+
 
 # 프로젝트 호스팅 주소
 
