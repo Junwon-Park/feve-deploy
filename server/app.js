@@ -66,7 +66,7 @@ app.use(morgan('tiny'));
 app.use(helmet());
 const whiteListByCors = [
   'https://localhost:3000',
-  'http://s3-project-feve.s3-website.ap-northeast-2.amazonaws.com/:3000'
+  'http://s3-project-feve.s3-website.ap-northeast-2.amazonaws.com'
 ];
 const corsOptions = {
   origin: (origin, callback) => {
@@ -86,7 +86,7 @@ const devCors = {
 };
 app.use(cors(corsOptions));
 
-app.use('/', (req, res) => {
+app.get('/', (req, res) => {
   console.log(req);
   res.status(200).send('connect!!!');
 });
