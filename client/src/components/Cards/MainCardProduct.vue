@@ -20,7 +20,7 @@
             {{ PRODUCT_NAME}}
           </span>
           <span class="font-semibold text-sm text-blueGray-700 block">
-            {{ minPrice }} 원
+            {{ minPrice }} 
           </span>
         </div>
       </div>
