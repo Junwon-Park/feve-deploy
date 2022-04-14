@@ -40,7 +40,11 @@
               <button
                 type="button"
                 @click="onTapClicked(i+1)"
-                class="text-xs uppercase py-3 font-bold block text-blueGray-500 hover:text-black"
+                :class="{'uppercase':true, 'py-3':true,'font-bold':true, 'block':true, 'hover:text-black':true
+                ,'text-blueGray-500':curViewState!=(i+1)
+                ,'text-black':curViewState==(i+1)
+                ,'text-xs':curViewState!=(i+1)
+                ,'text-sm':curViewState==(i+1) }"
                 style="outline:none"
                 ref="tap+i"
               >
@@ -62,17 +66,13 @@ export default {
     return {
       tapTexts: ['구매 내역', '판매 내역', '관심 상품', '프로필 정보'], //, '주소록', '결제 정보', '판매 정산 계좌'],
       tapIcons: ['fas fa-clipboard-list', 'fas fa-clipboard-list', 'fas fa-star', 'fas fa-address-card'], //, 'fas fa-address-book', 'fab fa-cc-visa', 'fas fa-calculator'],
-      tapActive: [false, false, false, false],//, false, false, false],
+      curViewState:0,
     };
   },
   methods: {
     onTapClicked: function(viewState){
+      this.curViewState = viewState;
       this.$emit("onViewStateChanged", viewState);
-      
-      for(let i = 0; i < this.tapActive.length; i++)
-        this.tapActive[i] = false;
-      
-      this.tapActive[viewState] = true;
     },
   },
   components: {
