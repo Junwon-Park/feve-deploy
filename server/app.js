@@ -159,7 +159,7 @@ if (fs.existsSync('./certKey/key.pem') && fs.existsSync('./certKey/cert.pem')) {
 
 const io = new Server(server, {
   cors: {
-    origin: 'https://feve.link',
+    origin: 'https://feve.link:3000',
     credentials: true
   },
   allowEIO3: true
