@@ -65,7 +65,7 @@ app.use(
 app.use(morgan('tiny'));
 app.use(helmet());
 const whiteListByCors = [
-  'https://feve.link:3000',
+  'https://feve.link',
   'http://s3-project-feve.s3-website.ap-northeast-2.amazonaws.com'
 ];
 const corsOptions = {
@@ -166,7 +166,7 @@ if (fs.existsSync('./certKey/key.pem') && fs.existsSync('./certKey/cert.pem')) {
 
 const io = new Server(server, {
   cors: {
-    origin: 'https://feve.link:3000',
+    origin: 'https://feve.link',
     credentials: true
   },
   allowEIO3: true
