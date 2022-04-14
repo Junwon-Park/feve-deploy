@@ -147,6 +147,8 @@ export default {
         sell_sdate: '',
         sell_edate: '',
         sell_status: '',
+        sell_seller_key:0,
+        sell_buyer_key:0,
         default: '0'
       },
 
@@ -164,6 +166,12 @@ export default {
   },
   methods: {
     clicked() {
+       if(this.sell[0].SELL_SELLER_KEY == JSON.parse(localStorage.getItem('userKey')))
+      {
+        alert("자신의 상품을 구매할수 없습니다.");
+        this.$router.push("/shop");
+        return;
+      }
       this.$router.push({
         path: './sel',
         name: 'Buy',

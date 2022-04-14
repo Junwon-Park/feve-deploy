@@ -147,6 +147,8 @@ export default {
         buy_sdate: '',
         buy_edate: '',
         buy_status: '',
+        buy_buyer_key:0,
+        buy_seller_key:0,
         default: '0'
       },
 
@@ -162,6 +164,13 @@ export default {
   },
   methods: {
     clicked() {
+      console.log("클릭드 시작");
+      if(this.buy[0].buy_buyer_key == JSON.parse(localStorage.getItem('userKey')))
+      {
+        alert("자신의 상품을 구매할수 없습니다.");
+        this.$router.push("/shop");
+        return;
+      }
       this.$router.push({
         path: './sel',
         name: 'Sell',
