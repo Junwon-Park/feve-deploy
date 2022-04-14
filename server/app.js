@@ -64,7 +64,10 @@ app.use(
 
 app.use(morgan('tiny'));
 app.use(helmet());
-const whiteListByCors = ['https://localhost:3000', 'https://feve.link'];
+const whiteListByCors = [
+  'https://localhost:3000',
+  'http://s3-project-feve.s3-website.ap-northeast-2.amazonaws.com/:3000'
+];
 const corsOptions = {
   origin: (origin, callback) => {
     if (whiteListByCors.indexOf(origin) !== -1) {
