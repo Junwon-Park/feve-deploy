@@ -21,7 +21,7 @@ const store = new Vuex.Store({
   plugins: [authState],
   getters: {
     LocalUrl() {
-      return 'https://feve.link';
+      return 'http://s3-project-feve.s3-website.ap-northeast-2.amazonaws.com';
     },
     ServerUrl() {
       return 'http://ec2-52-23-226-152.compute-1.amazonaws.com:8080';
