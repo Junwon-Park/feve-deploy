@@ -80,11 +80,11 @@ const corsOptions = {
   optionsSuccessStatus: 200
 };
 const devCors = {
-  origin: 'https://localhost:3000',
+  origin: '*',
   credentials: true,
   optionsSuccessStatus: 200
 };
-app.use(cors(corsOptions));
+app.use(cors(devCors));
 
 app.get('/', (req, res) => {
   console.log(req);
