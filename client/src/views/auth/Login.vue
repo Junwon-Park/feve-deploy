@@ -133,6 +133,7 @@ export default {
           localStorage.setItem('userId', userData.data.data.USER_ID);
           localStorage.setItem('userAdmin', userData.data.data.USER_ADMIN);
           localStorage.setItem('userKey', userData.data.data.USER_KEY);
+          localStorage.setItem('googleLogin', null);
           return (location.href = `${this.$store.getters.LocalUrl}`);
         } else {
           alert('로그인에 실패했습니다.');
