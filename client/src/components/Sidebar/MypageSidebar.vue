@@ -62,6 +62,14 @@
 
 <script>
 export default {
+  props:{
+    currentViewState:Number,
+  },
+  watch:{
+    currentViewState(newState){
+      this.onTapClicked(newState);
+    }
+  },
   data() {
     return {
       tapTexts: ['구매 내역', '판매 내역', '관심 상품', '프로필 정보'], //, '주소록', '결제 정보', '판매 정산 계좌'],
@@ -69,13 +77,14 @@ export default {
       curViewState:0,
     };
   },
+  created(){
+    this.curViewState = this.currentViewState;
+  },
   methods: {
     onTapClicked: function(viewState){
       this.curViewState = viewState;
       this.$emit("onViewStateChanged", viewState);
     },
-  },
-  components: {
   },
 };
 </script>

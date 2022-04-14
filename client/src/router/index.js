@@ -129,7 +129,14 @@ const routes = [
   },
   {
     path: '/mypage',
-    component: Mypage
+    component: Mypage,
+    name:'Mypage'
+  },
+  {
+    path: '/mypage:viewState',
+    component: Mypage,
+    name:'MypageViewState',
+    props:true
   },
   {
     path: '/',

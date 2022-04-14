@@ -120,7 +120,7 @@ export default {
         USER_KEY : this.getUserKey(),
       })
       .then((result) => {
-        console.log(result.data);
+        // console.log(result.data);
         this.counts = result.data;
       })
       .catch((error) => {
@@ -211,7 +211,7 @@ export default {
         state : this.selectedFilterIdx,
       })
       .then((result) => {
-        console.log(result.data);
+        // console.log(result.data);
         this.totalPage = Math.ceil(result.data / this.slotCountPerPage);  
       })
       .catch((error) => {
@@ -232,7 +232,7 @@ export default {
         orderDir    : this.strOrderDirs[this.orderDir],
       })
       .then((result) => {
-        console.log(result.data);
+        // console.log(result.data);
         this.list = result.data;
         this.initSlotsData();
       })
@@ -343,8 +343,8 @@ export default {
         key : slot.BUY_KEY,
         decision: decision,
       })
-      .then((result) => {
-        console.log(result.data);
+      .then(() => {
+        // console.log(result.data);
         //if(result.data[0] == 1)
         {
           if(decision == 0)

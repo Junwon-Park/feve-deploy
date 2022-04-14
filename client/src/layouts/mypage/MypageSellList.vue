@@ -230,7 +230,7 @@ import moment from 'moment'
           orderDir    : this.strOrderDirs[this.orderDir],
         })
         .then((result) => {
-          console.log(result.data);
+          // console.log(result.data);
           this.list = result.data;
           this.initSlotsData();
         })
@@ -344,8 +344,8 @@ import moment from 'moment'
           decision: decision,
           aDate:moment(new Date(), 'YYYY-MM-DD').startOf('day'),
         })
-        .then((result) => {
-          console.log(result.data);
+        .then(() => {
+          // console.log(result.data);
           // if(result.data[0] == 1)
           {
             if(decision == 0)

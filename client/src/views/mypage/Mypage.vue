@@ -16,14 +16,12 @@
 
         <mypage-profile v-else-if= "currentViewState === 4"
         style="margin:auto; max-width:80%; margin-bottom:10%;" />
-        <CardLineChart v-else/>
     </div>
 
   </div>
 </template>
 <script>
 import MypageSidebar from "@/components/Sidebar/MypageSidebar.vue";
-import CardLineChart from "@/components/Cards/CardLineChart.vue";
 import MypageMain from '@/layouts/mypage/MypageMain.vue';
 import MypageBuyList from '@/layouts/mypage/MypageBuyList.vue';
 import MypageSellList from '@/layouts/mypage/MypageSellList.vue';
@@ -32,9 +30,11 @@ import MypageProfile from '../../layouts/mypage/MypageProfile.vue';
 import {EventBus} from "@/common/EventBus.js"
 
 export default {
+  props:{
+    viewState:Number,
+  },
   components: {
     MypageSidebar,
-    CardLineChart,
     MypageMain,
     MypageBuyList,
     MypageSellList,
@@ -48,6 +48,10 @@ export default {
     }
   },
   created(){
+    // console.log("mypage.viewState: ", this.viewState );
+    if(this.viewState!= null && this.currentViewState != this.viewState)
+      this.onViewStateChanged(this.viewState);
+
     EventBus.$on("mypageViewStateChange", this.onViewStateChanged);
   },
   methods:{

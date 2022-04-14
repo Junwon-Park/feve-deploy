@@ -187,7 +187,7 @@ export default {
         USER_KEY : this.getUserKey(),
       })
       .then((result) => {
-        console.log(result.data);
+        // console.log(result.data);
         this.profile = result.data;
       })
       .catch((error) => {
@@ -252,8 +252,8 @@ export default {
         USER_ADDRESS2 : this.profile.USER_ADDRESS2,
         POST_CODE : this.profile.POST_CODE,
       })
-      .then((result) => {
-        console.log(result.data);
+      .then(() => {
+        // console.log(result.data);
         this.changeState(0);
       })
       .catch((error) => {

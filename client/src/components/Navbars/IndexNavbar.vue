@@ -78,7 +78,7 @@
               </span>
             </router-link>
           </li>
-          <li class="flex items-center" v-if="$store.state.isLogin">
+          <li class="flex items-center" v-if="$store.state.isLogin" @click="goMypage" type="button"> 
             <router-link to="/mypage">
               <span
                 class="text-blueGray-800 px-3 py-2 flex items-center text-xs uppercase"
@@ -87,14 +87,12 @@
               </span>
             </router-link>
           </li>
-          <li class="flex items-center" v-if="$store.state.isLogin">
-            <router-link to="/mypage">
+          <li class="flex items-center" v-if="$store.state.isLogin" @click="goFavorite" type="button" >
               <span
                 class="text-blueGray-800 px-3 py-2 flex items-center text-xs uppercase"
               >
                 <span class="lg inline-block ml-2"> 관심상품 </span>
               </span>
-            </router-link>
           </li>
           <li class="flex items-center" v-if="$store.state.isLogin">
             <span class="text-blueGray-800 px-3 py-2 flex items-center text-xs"
@@ -142,6 +140,7 @@
 
 <script>
 import axios from 'axios';
+import {EventBus} from "@/common/EventBus.js"
 //import IndexDropdown from "@/components/Dropdowns/IndexDropdown.vue";
 
 export default {
@@ -189,7 +188,35 @@ export default {
 
         location.href = `${this.$store.getters.LocalUrl}`;
       }
-    }
+    },
+    goMypage(){
+      if(this.$route.name == "Mypage" )
+      {
+        EventBus.$emit("mypageViewStateChange", 0);
+        return;
+      }
+
+      this.$router.push({
+        path: './mypage',
+        name: 'Mypage',
+      }).catch(()=>{});
+    },
+
+    goFavorite(){
+      if(this.$route.name == "Mypage" )
+      {
+        EventBus.$emit("mypageViewStateChange", 3);
+        return;
+      }
+
+      this.$router.push({
+        path: './mypage',
+        name: 'MypageViewState',
+        params: {
+          viewState: 3,
+        }
+      }).catch(()=>{});
+    },
   },
   components: {
     //IndexDropdown,
