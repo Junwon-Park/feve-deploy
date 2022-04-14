@@ -42,10 +42,10 @@ const mypageBuyListRouter = require('./router/mypage/mypageBuyList.js');
 const mypageSellListRouter = require('./router/mypage/mypageSellList.js');
 const mypageFavoriteListRouter = require('./router/mypage/mypageFavoriteList.js');
 const mypageProfileRouter = require('./router/mypage/mypageProfile.js');
-const imageRouter = require("./image/image.js");
-const imageStyleRouter = require("./image/styleImage.js");
-const uploadImageRouter = require("./image/uploadImage.js");
-const uploadStyleImageRouter = require("./image/uploadStyleImage.js");
+const imageRouter = require('./image/image.js');
+const imageStyleRouter = require('./image/styleImage.js');
+const uploadImageRouter = require('./image/uploadImage.js');
+const uploadStyleImageRouter = require('./image/uploadStyleImage.js');
 
 const cscenterInsertRoute = require('./router/cscenter/cscenterInsert.js');
 const mainLoadproductRoute = require('./router/main/loadproduct.js');
@@ -64,7 +64,7 @@ app.use(
 
 app.use(morgan('tiny'));
 app.use(helmet());
-const whiteListByCors = ['https://localhost:3000'];
+const whiteListByCors = ['https://localhost:3000', 'https://feve.link'];
 const corsOptions = {
   origin: (origin, callback) => {
     if (whiteListByCors.indexOf(origin) !== -1) {
@@ -81,7 +81,7 @@ const devCors = {
   credentials: true,
   optionsSuccessStatus: 200
 };
-app.use(cors(devCors));
+app.use(cors(corsOptions));
 
 // To router
 app.use('/auth', authRouter);
@@ -126,10 +126,10 @@ app.use('/mypage/sellList', mypageSellListRouter);
 app.use('/mypage/favoriteList', mypageFavoriteListRouter);
 app.use('/mypage/profile', mypageProfileRouter);
 
-app.use("/getImage", imageRouter);
-app.use("/getStyleImage", imageStyleRouter);
-app.use("/uploadImage", uploadImageRouter);
-app.use("/uploadStyleImage", uploadStyleImageRouter);
+app.use('/getImage', imageRouter);
+app.use('/getStyleImage', imageStyleRouter);
+app.use('/uploadImage', uploadImageRouter);
+app.use('/uploadStyleImage', uploadStyleImageRouter);
 
 app.use('/main/loadproduct', mainLoadproductRoute);
 
@@ -159,7 +159,7 @@ if (fs.existsSync('./certKey/key.pem') && fs.existsSync('./certKey/cert.pem')) {
 
 const io = new Server(server, {
   cors: {
-    origin: 'https://localhost:3000',
+    origin: 'https://feve.link',
     credentials: true
   },
   allowEIO3: true
