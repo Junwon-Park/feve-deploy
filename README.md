@@ -124,10 +124,10 @@ STYLE 페이지 (NEW, FEED, FOLLOW)
   
 # 📅스케줄
 
->2022-02-21~2022-03-17
+>2022-03-18~2022-04-15
 
 # 시연 영상 
-https://www.youtube.com/watch?v=SqijIjMUQMY&t=2s# 
+https://www.youtube.com/watch?v=i8XLeKCKHrc 
 
 # 프로젝트 호스팅 주소
-http://49.50.175.230:8080/mom/
+
