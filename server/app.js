@@ -166,8 +166,7 @@ if (fs.existsSync('./certKey/key.pem') && fs.existsSync('./certKey/cert.pem')) {
 
 const io = new Server(server, {
   cors: {
-    origin:
-      'http://s3-project-feve.s3-website.ap-northeast-2.amazonaws.com/:3000',
+    origin: 'http://s3-project-feve.s3-website.ap-northeast-2.amazonaws.com',
     credentials: true
   },
   allowEIO3: true
