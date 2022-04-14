@@ -86,6 +86,10 @@ const devCors = {
 };
 app.use(cors(corsOptions));
 
+app.use('/', (req, res) => {
+  console.log(req);
+  res.status(200).send('connect!!!');
+});
 // To router
 app.use('/auth', authRouter);
 
