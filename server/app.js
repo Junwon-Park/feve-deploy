@@ -87,7 +87,7 @@ const devCors = {
 app.use(cors(devCors));
 
 app.get('/', (req, res) => {
-  console.log(req);
+  console.log(req.headers);
   res.status(200).send('connect!!!');
 });
 // To router
