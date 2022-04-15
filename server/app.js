@@ -84,7 +84,7 @@ const devCors = {
   credentials: true,
   optionsSuccessStatus: 200
 };
-app.use(cors(corsOptions));
+app.use(cors(devCors));
 
 app.get('/', (req, res) => {
   console.log(req);
