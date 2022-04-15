@@ -14,7 +14,7 @@ import axios from 'axios';
 
 // socket.io
 import io from 'socket.io-client';
-const socket = io('https://feve-server.link:8080');
+const socket = io('https://feve-server.link');
 
 Vue.prototype.$socket = socket;
 Vue.config.productionTip = false;

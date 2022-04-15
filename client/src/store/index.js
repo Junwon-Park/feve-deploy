@@ -24,7 +24,7 @@ const store = new Vuex.Store({
       return 'https://feve.link';
     },
     ServerUrl() {
-      return 'https://feve-server.link:8080';
+      return 'https://feve-server.link';
     },
     googleLoginUrl() {
       return 'https://accounts.google.com/o/oauth2/v2/auth?client_id=237233087109-1v95u6a4qm3htd2a0hlhorhlo64ppj60.apps.googleusercontent.com&response_type=code&redirect_uri=https://localhost:3000&scope=https://www.googleapis.com/auth/userinfo.profile';
