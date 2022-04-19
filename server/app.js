@@ -49,6 +49,7 @@ const uploadStyleImageRouter = require('./image/uploadStyleImage.js');
 
 const cscenterInsertRoute = require('./router/cscenter/cscenterInsert.js');
 const mainLoadproductRoute = require('./router/main/loadproduct.js');
+const { DELETE } = require('sequelize/types/query-types');
 
 const app = express();
 const PORT = config.PORT || 4000;
@@ -77,6 +78,7 @@ const corsOptions = {
       callback(new Error('Not allowed by CORS'));
     }
   },
+  methods: ['OPTIONS', 'GET', 'POST', 'PUT', 'DELETE'],
   credentials: true,
   optionsSuccessStatus: 200
 };
@@ -85,7 +87,8 @@ const devCors = {
   credentials: true,
   optionsSuccessStatus: 200
 };
-app.options('*', cors(corsOptions));
+// app.options('*', cors(corsOptions));
+cors(corsOptions);
 
 app.get('/', (req, res) => {
   console.log(req.headers);
