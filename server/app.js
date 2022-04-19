@@ -78,7 +78,7 @@ const corsOptions = {
       callback(new Error('Not allowed by CORS'));
     }
   },
-  methods: ['OPTIONS', 'GET', 'POST', 'PUT', 'DELETE'],
+  // methods: ['OPTIONS', 'GET', 'POST', 'PUT', 'DELETE'],
   credentials: true,
   optionsSuccessStatus: 200
 };
@@ -87,8 +87,7 @@ const devCors = {
   credentials: true,
   optionsSuccessStatus: 200
 };
-// app.options('*', cors(corsOptions));
-cors(corsOptions);
+app.options('*', cors(corsOptions));
 
 app.get('/', (req, res) => {
   console.log(req.headers);
