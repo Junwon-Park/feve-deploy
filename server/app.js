@@ -85,7 +85,8 @@ const devCors = {
   credentials: true,
   optionsSuccessStatus: 200
 };
-app.options('*', cors(corsOptions));
+// app.options('*', cors(corsOptions));
+cors(corsOptions);
 
 app.get('/', (req, res) => {
   console.log(req.headers);
