@@ -64,6 +64,17 @@ app.use(
 
 app.use(morgan('tiny'));
 app.use(helmet());
+
+const customHeaders = [
+  'seeso-code',
+  'cookie-force',
+  'user-connection-type',
+  'sid',
+  'Content-Type',
+  'Set-Cookie',
+  'sentry-trace'
+];
+
 const whiteListByCors = [
   'https://feve.link',
   'http://s3-project-feve.s3-website.ap-northeast-2.amazonaws.com',
@@ -78,6 +89,7 @@ const corsOptions = {
     }
   },
   // methods: ['OPTIONS', 'GET', 'POST', 'PUT', 'DELETE'],
+  allowHeaders: customHeaders,
   credentials: true,
   optionsSuccessStatus: 200
 };
