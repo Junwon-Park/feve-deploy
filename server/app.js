@@ -49,7 +49,6 @@ const uploadStyleImageRouter = require('./image/uploadStyleImage.js');
 
 const cscenterInsertRoute = require('./router/cscenter/cscenterInsert.js');
 const mainLoadproductRoute = require('./router/main/loadproduct.js');
-const { DELETE } = require('sequelize/types/query-types');
 
 const app = express();
 const PORT = config.PORT || 4000;
