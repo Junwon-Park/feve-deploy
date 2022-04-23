@@ -88,8 +88,8 @@ const corsOptions = {
       callback(new Error('Not allowed by CORS'));
     }
   },
-  // methods: ['OPTIONS', 'GET', 'POST', 'PUT', 'DELETE'],
-  allowHeaders: customHeaders,
+  methods: ['OPTIONS', 'GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: customHeaders,
   credentials: true,
   optionsSuccessStatus: 200
 };
@@ -98,8 +98,8 @@ const devCors = {
   credentials: true,
   optionsSuccessStatus: 200
 };
-app.options('*', cors(corsOptions));
-// app.use(cors(corsOptions));
+// app.options('*', cors(corsOptions));
+app.use(cors(corsOptions));
 
 app.get('/', (req, res) => {
   console.log(req.headers);
