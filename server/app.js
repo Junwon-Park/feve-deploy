@@ -89,7 +89,6 @@ const corsOptions = {
     }
   },
   methods: ['OPTIONS', 'GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: customHeaders,
   credentials: true,
   optionsSuccessStatus: 200
 };
