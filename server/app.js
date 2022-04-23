@@ -81,13 +81,14 @@ const whiteListByCors = [
   'https://aws.amazon.com'
 ];
 const corsOptions = {
-  origin: (origin, callback) => {
-    if (whiteListByCors.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
+  // origin: (origin, callback) => {
+  //   if (whiteListByCors.indexOf(origin) !== -1) {
+  //     callback(null, true);
+  //   } else {
+  //     callback(new Error('Not allowed by CORS'));
+  //   }
+  // },
+  origin: true,
   methods: ['OPTIONS', 'GET', 'POST', 'PUT', 'DELETE'],
   credentials: true,
   optionsSuccessStatus: 200
