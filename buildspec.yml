@@ -16,6 +16,5 @@ phases:
       - aws s3 cp --recursive ./dist s3://s3-project-feve/
 
 artifacts:
-  files:
-    - '**/*'
-  base-directory: client/dist
+  - 'appspec.yml'
+  - 'scripts/*'
