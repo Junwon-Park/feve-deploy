@@ -13,7 +13,7 @@ phases:
       - yarn build
   post_build:
     commands:
-      - aws s3 cp --recursive ./dist s3://s3-project-feve/
+      - aws s3 cp --recursive ./dist s3://feve-deploy-s3-bucket/
 
 artifacts:
   files:
