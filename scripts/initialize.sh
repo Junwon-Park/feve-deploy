@@ -1,8 +1,7 @@
 #!/bin/bash
 cd /home/ubuntu/feve-deploy/server
-sudo npm install -g yarn
-sudo yarn
-sudo yarn global add pm2
+npm install
+npm install pm2@latest -g
 sudo apt-get update
 sudo apt-get install authbind
 sudo service codedeploy-agent restart
