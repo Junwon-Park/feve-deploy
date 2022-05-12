@@ -38,7 +38,6 @@
 
 <br>
 
-
 # 팀원 소개
 
 #### 🙆‍♂️팀장 류중걸
@@ -52,8 +51,8 @@
 #### 💁‍♂️팀원 박준원
 
 > 회원가입
-> 로그인, 로그아웃
-> 채팅
+> 로그인/로그아웃
+> 실시간 채팅
 
 #### 🧏‍팀원 구혜진
 
@@ -80,6 +79,7 @@
 <img src="https://img.shields.io/badge/node.js-339933?style=for-the-badge&logo=Node.js&logoColor=white">
   <img src="https://img.shields.io/badge/express-000000?style=for-the-badge&logo=express&logoColor=white">
   <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
+  <img src="https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens">
 
 </div>
 <div align=center> 
