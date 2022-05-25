@@ -10,9 +10,9 @@
 
 # 프로젝트 목적
 
-- NodeJS(백엔드) 와 Vue.JS(프론트엔드) 사용 해서 서비스 구축
+- NodeJS - Express(백엔드) 와 Vue.JS(프론트엔드) 사용 해서 서비스 구축
 
-- 채팅 서비스 구축 및 API 활용
+- 실시간 채팅 기능 등.. 각종 기능 구현 및 REST API를 통한 클라이언트 - 서버 간의 통신 구현
   <br>
 
 # 프로젝트 구성도
@@ -110,7 +110,7 @@
 > version: vue/cli 5.0.1
 
 </br>
-<h1>💾ERD</h1>
+<h1>💾 DB ERD</h1>
 <br>
   <div align="center">
   <img src=https://user-images.githubusercontent.com/88082341/163323051-cad03c95-1ead-4d0a-8154-6078f0f47f9f.PNG width="1000" height="800"/>
