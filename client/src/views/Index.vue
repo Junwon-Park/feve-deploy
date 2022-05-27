@@ -277,12 +277,15 @@ export default {
     if (this.$store.state.googleLogin === 'false') {
       this.checkToken();
     }
+
+    // 구글 로그인 리디렉션 시 Authorization code 얻어 서버에 토큰 요청하는 부분
     if (
       this.$store.state.googleLogin === 'false' ||
       !this.$store.state.googleLogin
     ) {
-      const url = new URL(window.location.href);
-      const authorizationCode = url.searchParams.get('code');
+      const url = new URL(window.location.href); // 브라우저의 헌져 URL 객체 생성(URL 객체의 searchParams.get 메서드를 사용하기 위함)
+      const authorizationCode = url.searchParams.get('code'); // 전체 URL의 code 인자 값 주출
+
       if (authorizationCode) {
         axios
           .post(
