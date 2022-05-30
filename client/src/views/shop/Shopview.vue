@@ -221,6 +221,7 @@ export default {
   data() {
     return {
       user_key: JSON.parse(localStorage.getItem('userKey')),
+      isLogin: JSON.parse(localStorage.getItem('isLogin')),
       imageUrl: this.$store.getters.ServerUrl + '/getImage?imageName=',
       likeStatus: false,
       box,
@@ -510,12 +511,12 @@ export default {
     goBuy: function () {
       //console.log("구매 버튼 클릭");
       //console.log("product_key 넘어가는지 확인",this.PRODUCT_KEY);
-      if (this.user_key == null) {
+      if (!this.isLogin) {
         alert('로그인 후 이용해 주세요');
         this.$router.push({ path: '/auth' });
       } else {
         this.$router.push({
-          path: './buy',
+          path: '/buy',
           name: 'Buyselect',
           params: {
             PRODUCT_KEY: this.PRODUCT_KEY
@@ -525,7 +526,7 @@ export default {
     },
     goSell: function () {
       //console.log("판매 버튼 클릭");
-      if (this.user_key == null) {
+      if (!this.isLogin) {
         alert('로그인 후 이용해 주세요');
         this.$router.push({ path: '/auth' });
       } else {

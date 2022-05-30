@@ -23,6 +23,7 @@ import InspectionList from '@/views/admin/InspectionList.vue';
 import Login from '@/views/auth/Login.vue';
 import Register from '@/views/auth/Register.vue';
 import FindPassword from '@/views/auth/FindPassword.vue';
+import OauthUserInfo from '@/views/auth/OauthUserInfo';
 
 import Mypage from '@/views/mypage/Mypage.vue';
 
@@ -124,19 +125,20 @@ const routes = [
       {
         path: '/auth/findpassword',
         component: FindPassword
-      }
+      },
+      { path: '/auth/oauthUserInfo', component: OauthUserInfo }
     ]
   },
   {
     path: '/mypage',
     component: Mypage,
-    name:'Mypage'
+    name: 'Mypage'
   },
   {
     path: '/mypage:viewState',
     component: Mypage,
-    name:'MypageViewState',
-    props:true
+    name: 'MypageViewState',
+    props: true
   },
   {
     path: '/',
@@ -205,8 +207,8 @@ const routes = [
   },
   {
     path: '/sell/sel/:PRODUCT_KEY',
-    name:'Sell',
-    
+    name: 'Sell',
+
     component: Sell
   },
   {

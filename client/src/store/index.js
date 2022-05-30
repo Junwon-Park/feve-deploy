@@ -21,19 +21,23 @@ const store = new Vuex.Store({
   plugins: [authState],
   getters: {
     LocalUrl() {
-      return 'https://feve.link';
+      // return 'https://feve.link';
+      return 'https://localhost:3000';
     },
     ServerUrl() {
-      return 'https://feve-server.link';
+      // return 'https://feve-server.link';
+      return 'https://localhost:8080';
     },
     googleLoginUrl() {
-      return 'https://accounts.google.com/o/oauth2/v2/auth?client_id=237233087109-1v95u6a4qm3htd2a0hlhorhlo64ppj60.apps.googleusercontent.com&response_type=code&redirect_uri=https://feve.link&scope=https://www.googleapis.com/auth/userinfo.profile';
+      // return 'https://accounts.google.com/o/oauth2/v2/auth?client_id=237233087109-1v95u6a4qm3htd2a0hlhorhlo64ppj60.apps.googleusercontent.com&response_type=code&redirect_uri=https://feve.link&scope=https://www.googleapis.com/auth/userinfo.profile+https://www.googleapis.com/auth/plus.me+https://www.googleapis.com/auth/userinfo.profile';
+      return 'https://accounts.google.com/o/oauth2/v2/auth?client_id=237233087109-1v95u6a4qm3htd2a0hlhorhlo64ppj60.apps.googleusercontent.com&response_type=code&redirect_uri=https://localhost:3000&scope=https://www.googleapis.com/auth/userinfo.email+https://www.googleapis.com/auth/plus.me+https://www.googleapis.com/auth/userinfo.profile';
     },
     googleLogOutUrl() {
       return `https://oauth2.googleapis.com/revoke?token=`;
     },
     adminPage() {
-      return 'https://feve.link/admin';
+      // return 'https://feve.link/admin';
+      return 'https://localhost:3000/admin';
     }
   }
 });

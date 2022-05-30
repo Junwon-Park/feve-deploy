@@ -15,6 +15,7 @@ const googleOauth = async (req, res) => {
   if (!googleResponse) {
     return res.json({ message: 'Google login is failed!!!' });
   } else {
+    console.log('google user info!!', googleResponse);
     const accessToken = googleResponse.data.access_token;
 
     if (accessToken) {
