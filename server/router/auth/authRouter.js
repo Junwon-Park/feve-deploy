@@ -12,6 +12,7 @@ const { signup } = require('../../controller/auth/signup.js');
 const { findPassword } = require('../../controller/auth/findPassword.js');
 const { checkId } = require('../../controller/auth/checkUserId.js');
 const { googleOauth } = require('../../controller/auth/oauth.js');
+const { saveUserInfo } = require('../../controller/auth/saveUserInfo.js');
 
 router.get('/checktoken', auth);
 router.post('/login', loginValidator, login);
@@ -20,5 +21,6 @@ router.post('/signup', signupValidator, signup);
 router.post('/findpassword', findPassword);
 router.post('/checkuserid', checkId);
 router.post('/google', googleOauth);
+router.post('/saveuserinfo', saveUserInfo);
 
 module.exports = router;

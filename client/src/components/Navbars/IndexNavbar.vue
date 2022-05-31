@@ -78,7 +78,12 @@
               </span>
             </router-link>
           </li>
-          <li class="flex items-center" v-if="$store.state.isLogin" @click="goMypage" type="button"> 
+          <li
+            class="flex items-center"
+            v-if="$store.state.isLogin"
+            @click="goMypage"
+            type="button"
+          >
             <router-link to="/mypage">
               <span
                 class="text-blueGray-800 px-3 py-2 flex items-center text-xs uppercase"
@@ -87,12 +92,17 @@
               </span>
             </router-link>
           </li>
-          <li class="flex items-center" v-if="$store.state.isLogin" @click="goFavorite" type="button" >
-              <span
-                class="text-blueGray-800 px-3 py-2 flex items-center text-xs uppercase"
-              >
-                <span class="lg inline-block ml-2"> 관심상품 </span>
-              </span>
+          <li
+            class="flex items-center"
+            v-if="$store.state.isLogin"
+            @click="goFavorite"
+            type="button"
+          >
+            <span
+              class="text-blueGray-800 px-3 py-2 flex items-center text-xs uppercase"
+            >
+              <span class="lg inline-block ml-2"> 관심상품 </span>
+            </span>
           </li>
           <li class="flex items-center" v-if="$store.state.isLogin">
             <span class="text-blueGray-800 px-3 py-2 flex items-center text-xs"
@@ -140,7 +150,7 @@
 
 <script>
 import axios from 'axios';
-import {EventBus} from "@/common/EventBus.js"
+import { EventBus } from '@/common/EventBus.js';
 //import IndexDropdown from "@/components/Dropdowns/IndexDropdown.vue";
 
 export default {
@@ -182,41 +192,46 @@ export default {
         localStorage.setItem('isLogin', false);
         localStorage.setItem('Authorization', null);
         localStorage.setItem('userId', null);
+        localStorage.setItem('userMail', null);
         localStorage.setItem('userAdmin', null);
         localStorage.setItem('userKey', null);
         localStorage.setItem('googleLogin', false);
 
         location.href = `${this.$store.getters.LocalUrl}`;
+      } else {
+        console.error('Logout failed!!!');
       }
     },
-    goMypage(){
-      if(this.$route.name == "Mypage" )
-      {
-        EventBus.$emit("mypageViewStateChange", 0);
+    goMypage() {
+      if (this.$route.name == 'Mypage') {
+        EventBus.$emit('mypageViewStateChange', 0);
         return;
       }
 
-      this.$router.push({
-        path: './mypage',
-        name: 'Mypage',
-      }).catch(()=>{});
+      this.$router
+        .push({
+          path: './mypage',
+          name: 'Mypage'
+        })
+        .catch(() => {});
     },
 
-    goFavorite(){
-      if(this.$route.name == "Mypage" )
-      {
-        EventBus.$emit("mypageViewStateChange", 3);
+    goFavorite() {
+      if (this.$route.name == 'Mypage') {
+        EventBus.$emit('mypageViewStateChange', 3);
         return;
       }
 
-      this.$router.push({
-        path: './mypage',
-        name: 'MypageViewState',
-        params: {
-          viewState: 3,
-        }
-      }).catch(()=>{});
-    },
+      this.$router
+        .push({
+          path: './mypage',
+          name: 'MypageViewState',
+          params: {
+            viewState: 3
+          }
+        })
+        .catch(() => {});
+    }
   },
   components: {
     //IndexDropdown,

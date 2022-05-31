@@ -270,6 +270,7 @@ export default {
       localStorage.setItem('isLogin', false);
       localStorage.setItem('Authorization', null);
       localStorage.setItem('userId', null);
+      localStorage.setItem('userMail', null);
       localStorage.setItem('userAdmin', null);
       localStorage.setItem('googleLogin', false);
     }
@@ -295,6 +296,7 @@ export default {
           .then((data) => {
             console.log(data.data.data.accessToken);
             console.log(data.data.data.userInfo.name);
+            console.log(data.data.data.userInfo.email);
 
             // if (!data.data) {
             //   alert('로그인에 실패했습니다.');
@@ -302,13 +304,16 @@ export default {
             //   return location.reload();
             // } else {
             const userName = data.data.data.userInfo.name;
+            const userMail = data.data.data.userInfo.email;
             const accessToken = data.data.data.accessToken;
-            localStorage.setItem('isLogin', true);
+
+            // localStorage.setItem('isLogin', true);
+            // localStorage.setItem('googleLogin', true);
             localStorage.setItem('Authorization', accessToken);
             localStorage.setItem('userId', userName);
+            localStorage.setItem('userMail', userMail);
             localStorage.setItem('userAdmin', 0);
-            localStorage.setItem('googleLogin', true);
-            return location.reload();
+            return (location.href = `${this.$store.getters.LocalUrl}/auth/oauthuserinfo`);
             // }
           })
           .catch((err) => {

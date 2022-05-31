@@ -17,6 +17,7 @@ const signup = async (req, res) => {
     USER_ADDRESS2,
     POST_CODE
   } = req.body;
+
   console.log(
     USER_ID,
     USER_PASSWORD,

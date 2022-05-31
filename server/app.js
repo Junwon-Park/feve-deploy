@@ -68,7 +68,8 @@ app.use(helmet());
 const whiteListByCors = [
   'https://feve.link',
   'http://s3-project-feve.s3-website.ap-northeast-2.amazonaws.com',
-  'https://aws.amazon.com'
+  'https://aws.amazon.com',
+  'https://localhost:3000'
 ];
 const corsOptions = {
   // origin: (origin, callback) => {
@@ -89,7 +90,7 @@ const devCors = {
   optionsSuccessStatus: 200
 };
 // app.options('*', cors(corsOptions));
-app.use(cors(devCors));
+app.use(cors(corsOptions));
 
 app.get('/', (req, res) => {
   console.log(req.headers);

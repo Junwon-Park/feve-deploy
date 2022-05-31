@@ -6,87 +6,29 @@
       >
         <div class="rounded-t bg-white mb-0 px-6 py-6">
           <div class="text-center flex justify-between">
-            <h6 class="text-blueGray-700 text-xl font-bold">회원가입</h6>
+            <h6 class="text-blueGray-700 text-xl font-bold">추가 정보</h6>
+            <h6
+              class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase"
+              style="margin-bottom: 12px !important"
+            >
+              물품 배송 시 필요한 정보를 추가로 입력합니다.
+            </h6>
             <button
               class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
               type="button"
-              @click="submitSignUp"
+              @click="submitSaveUserInfo"
             >
-              가입하기
+              저장하기
             </button>
           </div>
         </div>
         <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
           <form>
             <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
-              회원정보 입력
+              추가 회원정보 입력
             </h6>
             <div class="flex flex-wrap">
-              <v-col cols="12" style="margin-left: 15px">
-                <v-btn
-                  elevation="2"
-                  large
-                  color="primary"
-                  style="margin-top: 10px"
-                  @click="checkUserId"
-                  >아이디 중복 검사</v-btn
-                >
-              </v-col>
-
               <div class="w-full lg:w-6/12 px-4">
-                <v-col cols="12">
-                  <v-text-field
-                    label="아이디"
-                    :rules="validationRules.id"
-                    v-model="USER_ID"
-                    placeholder="사용할 아이디를 입력하세요."
-                    @change="changeId"
-                    required
-                  ></v-text-field>
-                </v-col>
-
-                <v-col cols="12">
-                  <v-text-field
-                    label="비밀번호"
-                    type="password"
-                    :rules="validationRules.password"
-                    v-model="USER_PASSWORD"
-                    placeholder="사용할 비밀번호를 입력하세요."
-                    required
-                  ></v-text-field>
-                </v-col>
-
-                <v-col cols="12">
-                  <v-text-field
-                    label="비밀번호 확인"
-                    :rules="validationRules.passwordCheck"
-                    type="password"
-                    placeholder="입력한 비밀번호를 확인하세요."
-                    required
-                  ></v-text-field>
-                </v-col>
-              </div>
-              <div class="w-full lg:w-6/12 px-4">
-                <v-col cols="12">
-                  <v-text-field
-                    label="이름"
-                    :rules="validationRules.name"
-                    v-model="USER_NAME"
-                    placeholder="홍길동"
-                    required
-                  ></v-text-field>
-                </v-col>
-
-                <v-col cols="12">
-                  <v-text-field
-                    label="이메일"
-                    :rules="validationRules.email"
-                    v-model="USER_MAIL"
-                    placeholder="abc123@feve.com"
-                    required
-                  ></v-text-field>
-                </v-col>
-
                 <v-col cols="12">
                   <v-text-field
                     label="전화번호"
@@ -181,10 +123,6 @@ import axios from 'axios';
 export default {
   data() {
     return {
-      USER_ID: '',
-      USER_PASSWORD: '',
-      USER_NAME: '',
-      USER_MAIL: '',
       USER_PHONE: '',
       USER_ADDRESS1: '',
       USER_ADDRESS2: '',
@@ -193,39 +131,6 @@ export default {
       addressLength: 0,
       postCodeLength: 0,
       validationRules: {
-        id: [
-          (v) => !!v || '아이디는 필수 입력사항입니다.',
-          (v) =>
-            /^[a-zA-Z0-9]*$/.test(v) || '아이디는 영문+숫자만 입력 가능합니다.',
-          (v) =>
-            !(v && v.length > 12) || '아이디는 12자 이상 입력할 수 없습니다.',
-          (v) => !(v && v.length < 8) || '아이디는 8자 미만일 수 없습니다.'
-        ],
-        name: [
-          (v) => !!v || '이름은 필수 입력사항 입니다.',
-          (v) =>
-            !(v && v.length > 10) || '이름은 10자 이상 입력할 수 없습니다.',
-          (v) =>
-            !/[~!@#$%^&*()_+|<>?:{}]/.test(v) ||
-            '이름에는 특수문자를 사용할 수 없습니다.'
-        ],
-        password: [
-          (v) => !!v || '패스워드는 필수 입력사항 입니다.',
-          (v) =>
-            !(v && v.length > 20) || '패스워드는 20자 이상 입력할 수 없습니다.',
-          (v) => !(v && v.length < 10) || '패스워드는 10자 미만일 수 없습니다.'
-        ],
-        passwordCheck: [
-          (v) => !!v || '패스워드는 필수 입력사항입니다.',
-          (v) =>
-            !(v && v.length >= 30) ||
-            '패스워드는 30자 이상 입력할 수 없습니다.',
-          (v) => v === this.USER_PASSWORD || '패스워드가 일치하지 않습니다.'
-        ],
-        email: [
-          (v) => !!v || '이메일은 필수 입력사항 입니다.',
-          (v) => /.+@.+/.test(v) || '이메일 형식이 아닙니다.'
-        ],
         phone: [
           (v) => !!v || '핸드폰번호는 필수 입력사항 입니다.',
           (v) =>
@@ -277,57 +182,58 @@ export default {
         }
       }).open();
     },
-    async submitSignUp() {
+    async submitSaveUserInfo() {
       const userAddress = document.querySelector('.address');
       const postCode = document.querySelector('.postCode');
       const validate = this.$refs.form.validate();
       const addressLength = JSON.parse(localStorage.getItem('addressLength'));
       const postCodeLength = JSON.parse(localStorage.getItem('postCodeLength'));
 
-      if (!this.checkId) return alert('아이디 중복 확인을 하세요.');
-      else {
-        if (
-          !validate ||
-          addressLength === 0 ||
-          this.USER_ADDRESS2.length === 0 ||
-          postCodeLength === 0
-        ) {
-          return alert('입력하신 내용을 다시 확인하세요.');
-        } else {
-          const checkSignUp = await axios
-            .post(
-              `${this.$store.getters.ServerUrl}/auth/signup`,
-              {
-                USER_ID: this.USER_ID,
-                USER_PASSWORD: this.USER_PASSWORD,
-                USER_NAME: this.USER_NAME,
-                USER_MAIL: this.USER_MAIL,
-                USER_PHONE: this.USER_PHONE,
-                USER_ADDRESS1: userAddress.value,
-                USER_ADDRESS2: this.USER_ADDRESS2,
-                POST_CODE: postCode.value
-              },
-              { withCredentials: true }
-            )
-            .catch((err) => {
-              console.log('Sign up failed!!!', err);
-            });
+      if (
+        // validate(유효성 검사)가 false 이거나 주소를 입력하지 않은 경우
+        !validate ||
+        addressLength === 0 ||
+        this.USER_ADDRESS2.length === 0 ||
+        postCodeLength === 0
+      ) {
+        return alert('입력하신 내용을 다시 확인하세요.');
+      } else {
+        // 유효성 검사를 통과(true)하고 주소를 입력한 경우
+        const USER_NAME = localStorage.getItem('userId');
+        const USER_MAIL = localStorage.getItem('userMail');
 
-          if (checkSignUp) {
-            localStorage.setItem('isLogin', true);
-            localStorage.setItem(
-              'Authorization',
-              checkSignUp.data.data.accessToken
-            );
-            localStorage.setItem('googleLogin', false);
-            localStorage.setItem('userId', checkSignUp.data.data.USER_ID);
-            localStorage.setItem('userKey', checkSignUp.data.data.USER_KEY);
-            localStorage.setItem('addressLength', null);
-            localStorage.setItem('postCodeLength', null);
-            alert('회원가입이 완료되었습니다.');
-          }
-          return (location.href = `${this.$store.getters.LocalUrl}`);
+        const checkSaveUserInfo = await axios
+          .post(
+            `${this.$store.getters.ServerUrl}/auth/saveuserinfo`,
+            {
+              USER_NAME,
+              USER_MAIL,
+              USER_PHONE: this.USER_PHONE,
+              USER_ADDRESS1: userAddress.value,
+              USER_ADDRESS2: this.USER_ADDRESS2,
+              POST_CODE: postCode.value
+            },
+            { withCredentials: true }
+          )
+          .catch((err) => {
+            console.log('Save user infomation failed!!!', err);
+          });
+
+        if (checkSaveUserInfo) {
+          localStorage.setItem('isLogin', true);
+          localStorage.setItem(
+            'Authorization',
+            checkSaveUserInfo.data.data.accessToken
+          );
+          localStorage.setItem('googleLogin', true);
+          localStorage.setItem('userId', checkSaveUserInfo.data.data.USER_ID);
+          localStorage.setItem('userKey', checkSaveUserInfo.data.data.USER_KEY);
+          localStorage.setItem('userMail', null);
+          localStorage.setItem('addressLength', null);
+          localStorage.setItem('postCodeLength', null);
+          alert('추가 정보가 저장되었습니다.');
         }
+        return (location.href = `${this.$store.getters.LocalUrl}`);
       }
     }
   }
