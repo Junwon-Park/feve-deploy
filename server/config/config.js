@@ -7,7 +7,7 @@ const development = {
   database: env.DB_DATABASE,
   host: env.DB_HOST,
   dialect: env.DB_RDBMS,
-  timezone: 'Asia/Seoul'
+  timezone: '+09:00'
 };
 
 const production = {

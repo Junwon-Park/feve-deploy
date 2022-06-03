@@ -315,7 +315,19 @@ export default {
             localStorage.setItem('userId', userName);
             localStorage.setItem('userMail', userMail);
             localStorage.setItem('userAdmin', 0);
-            return (location.href = `${this.$store.getters.LocalUrl}/auth/oauthuserinfo`);
+
+            const checkGoogleId = axios.post(
+              `${this.$store.getters.ServerUrl}/auth/checkuserid`,
+              {
+                USER_ID: localStorage.getItem('userMail')
+              }
+            );
+            console.log(checkGoogleId);
+            if (!checkGoogleId) {
+              return (location.href = `${this.$store.getters.LocalUrl}`);
+            } else {
+              return (location.href = `${this.$store.getters.LocalUrl}/auth/oauthuserinfo`);
+            }
             // }
           })
           .catch((err) => {
