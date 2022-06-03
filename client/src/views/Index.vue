@@ -267,6 +267,7 @@ export default {
   },
   created() {
     if (!(this.$store.state.googleLogin || this.$store.state.isLogin)) {
+      console.log('Create!!!');
       localStorage.setItem('isLogin', false);
       localStorage.setItem('Authorization', null);
       localStorage.setItem('userId', null);
@@ -280,10 +281,11 @@ export default {
     }
     if (
       this.$store.state.googleLogin === 'false' ||
-      !this.$store.state.googleLogin
+      this.$store.state.googleLogin === 'false'
     ) {
       const url = new URL(window.location.href);
       const authorizationCode = url.searchParams.get('code');
+      console.log('auth code!!!', authorizationCode);
       if (authorizationCode) {
         axios
           .post(

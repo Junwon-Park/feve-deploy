@@ -140,33 +140,6 @@ export default {
     };
   },
   methods: {
-    changeId() {
-      this.checkId = false;
-      console.log('체인지', this.checkId);
-    },
-    async checkUserId() {
-      if (this.USER_ID.length === 0 || this.USER_ID.length < 8)
-        return alert('아이디를 정확히 입력하세요.');
-      else {
-        const userInfo = await this.$axios.post(
-          `${this.$store.getters.ServerUrl}/auth/checkuserid`,
-          { USER_ID: this.USER_ID },
-          {
-            withCredentials: true
-          }
-        );
-
-        if (!userInfo) {
-          this.checkId = false;
-          console.log('존재하는 아이디', this.checkId);
-          return alert('이미 존재하는 아이디 입니다.');
-        } else {
-          this.checkId = true;
-          console.log('사용 가능한 아이디', this.checkId);
-          return alert('사용 가능한 아이디 입니다.');
-        }
-      }
-    },
     postCode() {
       new window.daum.Postcode({
         oncomplete: function (data) {
@@ -201,7 +174,8 @@ export default {
         // 유효성 검사를 통과(true)하고 주소를 입력한 경우
         const USER_NAME = localStorage.getItem('userId');
         const USER_MAIL = localStorage.getItem('userMail');
-
+        const accessToken = localStorage.getItem('Authorization');
+        console.log('check!!!', checkSaveUserInfo);
         const checkSaveUserInfo = await axios
           .post(
             `${this.$store.getters.ServerUrl}/auth/saveuserinfo`,
@@ -211,7 +185,8 @@ export default {
               USER_PHONE: this.USER_PHONE,
               USER_ADDRESS1: userAddress.value,
               USER_ADDRESS2: this.USER_ADDRESS2,
-              POST_CODE: postCode.value
+              POST_CODE: postCode.value,
+              accessToken
             },
             { withCredentials: true }
           )

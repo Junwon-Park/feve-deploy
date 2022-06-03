@@ -37,7 +37,13 @@
             </router-link>
           </li>
 
-          <li class="flex items-center" v-if="!$store.state.isLogin">
+          <li
+            class="flex items-center"
+            v-if="
+              $store.state.isLogin === 'false' ||
+              $store.state.googleLogin === 'false'
+            "
+          >
             <router-link to="/auth/login">
               <span
                 class="text-blueGray-800 px-3 py-2 flex items-center text-xs uppercase"
@@ -69,7 +75,13 @@
               </span>
             </router-link>
           </li>
-          <li class="flex items-center" v-if="!$store.state.isLogin">
+          <li
+            class="flex items-center"
+            v-if="
+              $store.state.isLogin === 'false' ||
+              $store.state.googleLogin === 'false'
+            "
+          >
             <router-link to="/auth/register">
               <span
                 class="text-blueGray-800 px-3 py-2 flex items-center text-xs uppercase"
@@ -80,7 +92,10 @@
           </li>
           <li
             class="flex items-center"
-            v-if="$store.state.isLogin"
+            v-if="
+              $store.state.isLogin === 'true' ||
+              $store.state.googleLogin === 'true'
+            "
             @click="goMypage"
             type="button"
           >
@@ -94,7 +109,10 @@
           </li>
           <li
             class="flex items-center"
-            v-if="$store.state.isLogin"
+            v-if="
+              $store.state.isLogin === 'true' ||
+              $store.state.googleLogin === 'true'
+            "
             @click="goFavorite"
             type="button"
           >
@@ -104,7 +122,13 @@
               <span class="lg inline-block ml-2"> 관심상품 </span>
             </span>
           </li>
-          <li class="flex items-center" v-if="$store.state.isLogin">
+          <li
+            class="flex items-center"
+            v-if="
+              $store.state.isLogin === 'true' ||
+              $store.state.googleLogin === 'true'
+            "
+          >
             <span class="text-blueGray-800 px-3 py-2 flex items-center text-xs"
               ><span style="font-weight: bold; font-size: 1rem">{{
                 $store.state.userId
@@ -195,6 +219,8 @@ export default {
         localStorage.setItem('userMail', null);
         localStorage.setItem('userAdmin', null);
         localStorage.setItem('userKey', null);
+        localStorage.setItem('postCodeLength', null);
+        localStorage.setItem('addressLength', null);
         localStorage.setItem('googleLogin', false);
 
         location.href = `${this.$store.getters.LocalUrl}`;

@@ -9,7 +9,8 @@ const saveUserInfo = async (req, res) => {
     USER_PHONE,
     USER_ADDRESS1,
     USER_ADDRESS2,
-    POST_CODE
+    POST_CODE,
+    accessToken
   } = req.body;
   console.log('usermail!!!', req.body);
   bcrypt.hash(USER_MAIL, config.bcrypt.saltRounds, async (err, hashed) => {
@@ -40,7 +41,9 @@ const saveUserInfo = async (req, res) => {
       else {
         const { USER_KEY, USER_ID, USER_MAIL } = user;
 
-        res.status(201).json({ data: { USER_KEY, USER_ID, USER_MAIL } });
+        res
+          .status(201)
+          .json({ data: { USER_KEY, USER_ID, USER_MAIL, accessToken } });
       }
     }
   });
