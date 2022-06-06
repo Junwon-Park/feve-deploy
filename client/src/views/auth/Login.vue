@@ -122,6 +122,7 @@ export default {
           localStorage.setItem('Authorization', null);
           localStorage.setItem('isLogin', false);
           localStorage.setItem('userKey', null);
+          localStorage.setItem('googleLogin', false);
           return location.reload();
         });
 
@@ -130,10 +131,10 @@ export default {
           // Login successed
           localStorage.setItem('Authorization', userData.data.data.accessToken);
           localStorage.setItem('isLogin', true);
+          localStorage.setItem('googleLogin', false);
           localStorage.setItem('userId', userData.data.data.USER_ID);
           localStorage.setItem('userAdmin', userData.data.data.USER_ADMIN);
           localStorage.setItem('userKey', userData.data.data.USER_KEY);
-          localStorage.setItem('googleLogin', null);
           return (location.href = `${this.$store.getters.LocalUrl}`);
         } else {
           alert('로그인에 실패했습니다.');

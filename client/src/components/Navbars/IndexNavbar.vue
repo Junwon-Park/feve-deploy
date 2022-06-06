@@ -40,7 +40,7 @@
           <li
             class="flex items-center"
             v-if="
-              $store.state.isLogin === 'false' ||
+              $store.state.isLogin === 'false' &&
               $store.state.googleLogin === 'false'
             "
           >
@@ -54,7 +54,10 @@
           </li>
           <li
             class="flex items-center"
-            v-else-if="$store.state.googleLogin === 'true'"
+            v-else-if="
+              $store.state.googleLogin === 'true' &&
+              $store.state.isLogin === 'false'
+            "
           >
             <router-link to="/">
               <span
@@ -65,7 +68,13 @@
               </span>
             </router-link>
           </li>
-          <li class="flex items-center" v-else>
+          <li
+            class="flex items-center"
+            v-else-if="
+              $store.state.googleLogin === 'false' &&
+              $store.state.isLogin === 'true'
+            "
+          >
             <router-link to="/">
               <span
                 class="text-blueGray-800 px-3 py-2 flex items-center text-xs uppercase"
@@ -198,10 +207,12 @@ export default {
         });
       const accessToken = logout.data.data ? logout.data.data : null;
       localStorage.setItem('isLogin', false);
+      localStorage.setItem('googleLogin', false);
       localStorage.setItem('Authorization', accessToken);
       localStorage.setItem('userId', null);
       localStorage.setItem('userAdmin', null);
       localStorage.setItem('userKey', null);
+      localStorage.setItem('userMail', null);
 
       location.href = `${this.$store.getters.LocalUrl}`;
     },
